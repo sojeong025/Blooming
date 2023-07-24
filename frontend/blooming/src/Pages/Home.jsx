@@ -1,8 +1,14 @@
+
 function Home() {
   return (
-    <div>
-      Home
-    </div>
+    <>
+      <div>
+        디데이
+        그림
+        팁
+        예약
+      </div>
+    </>
   )
 }
 
