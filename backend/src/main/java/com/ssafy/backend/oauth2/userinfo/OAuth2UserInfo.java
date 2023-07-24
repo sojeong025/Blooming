@@ -12,6 +12,8 @@ public abstract class OAuth2UserInfo {
 
     public abstract String getId(); // 카카오 - "id"
 
+    public abstract String getEmail();
+
     public abstract String getNickname();
 
     public abstract String getGender();
