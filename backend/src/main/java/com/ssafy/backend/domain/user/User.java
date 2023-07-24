@@ -1,5 +1,6 @@
 package com.ssafy.backend.domain.user;
 
+import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -42,6 +43,14 @@ public class User {
     }
 
     //== 유저 필드 업데이트 ==//
+    public void update(UserSignUpDto userSignUpDto) {
+        this.email = userSignUpDto.getEmail();
+        this.name = userSignUpDto.getName();
+        this.nickname = userSignUpDto.getNickname();
+        this.phoneNumber = userSignUpDto.getPhoneNumber();
+        this.gender = userSignUpDto.getGender();
+    }
+
     public void updateNickname(String updateNickname) {
         this.nickname = updateNickname;
     }
@@ -56,5 +65,21 @@ public class User {
 
     public void updateRefreshToken(String updateRefreshToken) {
         this.refreshToken = updateRefreshToken;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", gender='" + gender + '\'' +
+                ", role=" + role +
+                ", socialId='" + socialId + '\'' +
+                ", refreshToken='" + refreshToken + '\'' +
+                '}';
     }
 }
