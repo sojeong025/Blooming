@@ -14,6 +14,11 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/oauth2/sign-up")
+    public String signUpForm() {
+        return "sign-up";
+    }
+
     @PostMapping("/sign-up")
     public String signUp(@RequestBody UserSignUpDto userSignUpDto) throws Exception {
         userService.signUp(userSignUpDto);
