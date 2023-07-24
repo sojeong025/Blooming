@@ -5,7 +5,9 @@ import Splash from './Pages/Splash'
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Schedule from './Pages/Schedule';
+import Join from './Pages/Join'
 import { NavLink } from 'react-router-dom';
+
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
           <Route path="/" element={<Splash />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/Login" element={<Login />} />
+          <Route path='/Join' element={<Join />} />
           <Route path="/Schedule" element={<Schedule />} />
         </Routes>
       </RecoilRoot>

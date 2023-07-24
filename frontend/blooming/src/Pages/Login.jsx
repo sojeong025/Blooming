@@ -1,8 +1,15 @@
+import Preview from "../components/Login/Preview"
+import LoginButton from "../components/Login/LoginButton"
+import { NavLink } from "react-router-dom"
+
 function Login() {
   return (
-    <div>
-      Login  
-    </div>
+    <>
+      <Preview />
+      <NavLink to={"/Join"}>
+        <LoginButton />
+      </NavLink>
+    </>
   )
 }
 
