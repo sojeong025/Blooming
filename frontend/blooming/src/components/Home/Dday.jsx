@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
-export const dDay = () {
+export const Dday = () => {
   return (
     <>
-      <h1>여긴 디데이다</h1>
+      <div>여긴 디데이</div>
     </>
-  )
-}
+  );
+};
+
+export default Dday;
