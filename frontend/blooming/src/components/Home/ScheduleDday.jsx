@@ -41,11 +41,11 @@ const ScheduleDday = () => {
   };
 
   const today = dayjs().format("YYYY-MM-DD");
-  const tmp = dayjs("2023-07-26").diff(today, "day");
+  const tmp = dayjs("2023-07-25").diff(today, "day");
 
   return (
     <>
-      <div>{tmp}</div>
+      <div>임시 디데이는 뜨는뎅 포맷을 다 바꿔야하낭? {tmp}</div>
       <div>
         {earliestUpcomingSchedule ? (
           <>
