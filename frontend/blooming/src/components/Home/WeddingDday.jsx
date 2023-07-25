@@ -15,7 +15,7 @@ export const WeddingDday = () => {
       const weddingDiff = weddingDdayDate.diff(todayDate, "day"); // day 차이 구하기
 
       if (weddingDiff === 0) {
-        setWeddingDday("오늘"); // 차이가 0
+        setWeddingDday("Dday"); // 차이가 0
       } else if (weddingDiff > 0) {
         setWeddingDday(`D-${weddingDiff}`); // D-
       } else {
