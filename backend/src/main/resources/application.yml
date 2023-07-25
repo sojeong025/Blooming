@@ -22,5 +22,5 @@ spring:
 
 project:
   properties:
-    firebase-create-scoped: "https://developers.google.com/identity/protocols/oauth2/scopes" #"https://www.googleapis.com/auth/firebase.messaging"
+    firebase-create-scoped: "https://www.googleapis.com/auth/firebase.messaging"
     firebase-topic: "diet_record_notification"
