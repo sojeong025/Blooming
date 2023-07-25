@@ -11,7 +11,7 @@ function Home() {
         <WeddingDateInput />
         <WeddingDday />
 
-        {/* <ScheduleDday /> */}
+        <ScheduleDday />
 
         <MainImage />
         {/* 팁 예약 */}
