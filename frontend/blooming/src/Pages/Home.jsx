@@ -1,6 +1,7 @@
 import WeddingDday from "../components/Home/WeddingDday";
 import WeddingDateInput from "../components/Home/WeddingDateInput";
 import ScheduleDday from "../components/Home/ScheduleDday";
+import MainImage from "../components/Home/MainImage";
 
 function Home() {
   return (
@@ -11,7 +12,9 @@ function Home() {
         <WeddingDday />
 
         {/* <ScheduleDday /> */}
-        {/* 그림 팁 예약 */}
+
+        <MainImage />
+        {/* 팁 예약 */}
       </div>
     </>
   );
