@@ -2,6 +2,7 @@ import WeddingDday from "../components/Home/WeddingDday";
 import WeddingDateInput from "../components/Home/WeddingDateInput";
 import ScheduleDday from "../components/Home/ScheduleDday";
 import MainImage from "../components/Home/MainImage";
+import Tips from "../components/Home/Tips";
 
 function Home() {
   return (
@@ -14,7 +15,9 @@ function Home() {
         <ScheduleDday />
 
         <MainImage />
-        {/* 팁 예약 */}
+
+        <Tips />
+        {/* 예약, 좋아요 */}
       </div>
     </>
   );
