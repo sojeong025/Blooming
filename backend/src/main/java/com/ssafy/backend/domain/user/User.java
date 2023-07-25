@@ -30,6 +30,7 @@ public class User {
 
     private String socialId;
 
+    @Column(length = 500)
     private String refreshToken; // 리프레시 토큰
 
     // 유저 권한 설정 메소드

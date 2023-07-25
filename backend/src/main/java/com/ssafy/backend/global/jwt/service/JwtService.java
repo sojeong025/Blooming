@@ -2,6 +2,7 @@ package com.ssafy.backend.global.jwt.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -156,11 +157,15 @@ public class JwtService {
      * RefreshToken DB 저장(업데이트)
      */
     public void updateRefreshToken(String email, String refreshToken) {
-        userRepository.findByEmail(email)
-                .ifPresentOrElse(
-                        member -> member.updateRefreshToken(refreshToken),
-                        () -> new Exception("일치하는 회원이 없습니다.")
-                );
+        User findUser = userRepository.findByEmail(email)
+            .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+        // .ifPresentOrElse(
+                //         user -> user.updateRefreshToken(refreshToken),
+                //         () -> new Exception("일치하는 회원이 없습니다.")
+                // );
+        findUser.updateRefreshToken(refreshToken);
+        System.out.println("findUser = " + findUser);
+        userRepository.saveAndFlush(findUser);
     }
 
     public boolean isTokenValid(String token) {
