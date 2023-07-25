@@ -14,7 +14,9 @@ export const WeddingDday = () => {
       const weddingDdayDate = dayjs(weddingDate); // weddingDate 포맷팅
       const weddingDiff = weddingDdayDate.diff(todayDate, "day"); // day 차이 구하기
 
-      if (weddingDiff === 0) {
+      if (!weddingDiff) {
+        setWeddingDday("아직 D-Day가 없어용");
+      } else if (weddingDiff === 0) {
         setWeddingDday("Dday"); // 차이가 0
       } else if (weddingDiff > 0) {
         setWeddingDday(`D-${weddingDiff}`); // D-
