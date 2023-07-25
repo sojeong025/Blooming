@@ -1,5 +1,5 @@
-import Preview from "../components/Login/Preview"
-import LoginButton from "../components/Login/LoginButton"
+import Preview from "../../components/Login/Preview"
+import Button from "../../components/Login/Button"
 import { NavLink } from "react-router-dom"
 
 function Login() {
@@ -7,7 +7,7 @@ function Login() {
     <>
       <Preview />
       <NavLink to={"/Join"}>
-        <LoginButton />
+        <Button text="카카오톡으로 로그인하기" />
       </NavLink>
     </>
   )
