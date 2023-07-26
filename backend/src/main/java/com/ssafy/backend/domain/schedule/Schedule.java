@@ -53,4 +53,20 @@ public class Schedule extends CreatedBaseEntity {
 		this.couple = couple;
 		couple.getSchedules().add(this);
 	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setScheduleDate(LocalDate scheduleDate) {
+		this.scheduleDate = scheduleDate;
+	}
+
+	public void setScheduleTime(LocalTime scheduleTime) {
+		this.scheduleTime = scheduleTime;
+	}
+
+	public void setScheduledBy(ScheduledBy scheduledBy) {
+		this.scheduledBy = scheduledBy;
+	}
 }

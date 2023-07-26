@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -14,5 +16,31 @@ public class ScheduleService {
 
     public void registSchedule(Schedule schedule) {
         scheduleRepository.save(schedule);
+    }
+
+    public List<Schedule> getAllSchedule(Long coupleId) {
+        return scheduleRepository.findAllByCoupleId(coupleId);
+    }
+
+    public int modifySchedule(Schedule schedule) {
+        //jpa.. 이용해서 해당 스케줄 아이디로 스케줄 객체 찾아서 set으로 변경? -- 이게맞나
+        Schedule originalSchedule = getOneSchedule(schedule.getId());
+
+        //변경 가능한 것 : title, scheduleDate, scheduleTime, scheduledBy
+        originalSchedule.setTitle(schedule.getTitle());
+        originalSchedule.setScheduleDate(schedule.getScheduleDate());
+        originalSchedule.setScheduleTime(schedule.getScheduleTime());
+        originalSchedule.setScheduledBy(schedule.getScheduledBy());
+        return 1; //일단
+    }
+
+    public int deleteSchedule(Long scheduleId) {
+        scheduleRepository.deleteById(scheduleId);
+        return 1; //일단
+    }
+
+    public Schedule getOneSchedule(Long scheduleId) {
+        return scheduleRepository.findById(scheduleId)
+                .orElseThrow(() -> new IllegalArgumentException("일정 아이디에 해당하는 일정이 없습니다."));
     }
 }
