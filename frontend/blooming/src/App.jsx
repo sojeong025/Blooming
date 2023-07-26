@@ -10,6 +10,7 @@ import Question from './Pages/Login/Question'
 import DecideWedding from './Pages/Login/DecideWedding';
 import ChooseWedding from './Pages/Login/ChooseWedding';
 import Share from './Pages/Login/Share';
+import AllNotice from './Pages/Notice/AllNotice';
 import { NavLink } from 'react-router-dom';
 
 
@@ -22,6 +23,7 @@ function App() {
           <li><NavLink to="/Home">Home</NavLink></li>
           <li><NavLink to="/Login">Login</NavLink></li>
           <li><NavLink to="/Schedule">Schedule</NavLink></li>
+          <li><NavLink to="/AllNotice">AllNotice</NavLink></li>
         </ul>
         <Routes>
           <Route path="/" element={<Splash />} />
@@ -33,6 +35,7 @@ function App() {
           <Route path='/ChooseWedding' element={<ChooseWedding />} />
           <Route path='/Share' element={<Share />} />
           <Route path="/Schedule" element={<Schedule />} />
+          <Route path="/AllNotice" element={<AllNotice />} />
         </Routes>
       </RecoilRoot>
     </Router>

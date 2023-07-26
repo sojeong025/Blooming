@@ -1,5 +1,7 @@
 import CopyToClipboardButton from "../../components/Login/CopyToClipboardButton";
 import KakaoShareButton from "../../components/Login/KakaoShareButton";
+import { NavLink } from "react-router-dom";
+import Button from "../../components/Login/Button";
 
 export default function Share() {
   
@@ -11,9 +13,9 @@ export default function Share() {
       <div>이미지</div>
       <CopyToClipboardButton text={verifyCode} />
       <KakaoShareButton />
-      <button>
-        메인으로 이동하기
-      </button>
+      <NavLink to="/Home">
+        <Button text="메인으로 이동하기" />
+      </NavLink>
     </>
   )
 }
