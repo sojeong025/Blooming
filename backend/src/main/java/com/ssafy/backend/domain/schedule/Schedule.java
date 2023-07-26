@@ -3,13 +3,12 @@ package com.ssafy.backend.domain.schedule;
 import static javax.persistence.FetchType.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -37,8 +36,10 @@ public class Schedule extends CreatedBaseEntity {
 	private Long id;
 
 	private String title;
-	@Column(name = "SCHEDULED_AT")
-	private LocalDateTime scheduleDateTime;
+	@Column(name = "SCHEDULED_DATE")
+	private LocalDate scheduleDate;
+	@Column(name = "SCHEDULED_TIME")
+	private LocalTime scheduleTime;
 	@Enumerated(EnumType.STRING)
 	private ScheduledBy scheduledBy;
 
