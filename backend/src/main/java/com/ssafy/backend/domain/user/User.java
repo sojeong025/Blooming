@@ -19,6 +19,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "USERS")
 public class User extends CreatedAndUpdatedBaseEntity {
 
     @Id

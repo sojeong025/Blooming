@@ -39,6 +39,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
         /**
+         * userRequest에서 registrationId 추출 후 registrationId으로 SocialType 저장
+         * http://localhost:8080/oauth2/authorization/kakao에서 /oauth2/authorization는 security가 제공, kakao가 registrationId
          * userNameAttributeName은 이후에 nameAttributeKey로 설정된다.
          */
         String userNameAttributeName = userRequest.getClientRegistration()
