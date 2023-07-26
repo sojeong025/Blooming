@@ -1,5 +1,7 @@
 package com.ssafy.backend.domain.user.service;
 
+import com.ssafy.backend.domain.couple.Couple;
+import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.repository.UserRepository;
@@ -15,6 +17,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CoupleRepository coupleRepository;
 
     public void signUp(UserSignUpDto userSignUpDto, String userEmail) throws Exception {
 
@@ -29,9 +32,17 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 
         findUser.update(userSignUpDto);
-        findUser.authorizeUser(); // TODO: 해당 시점에 추가 정보가 입력되므로 커플 연결용 코드 생성
+        findUser.authorizeUser();
 
-//        User user = User.builder()
+        String coupleCode = "123ABCabc";// TODO: 커플코드 생성 함수 만들기
+        Couple couple = Couple.builder()
+            .coupleCode(coupleCode)
+            .build();
+
+        findUser.setCouple(couple);
+        coupleRepository.save(couple);
+
+        //        User user = User.builder()
 //                .email(userSignUpDto.getEmail())
 //                .password(userSignUpDto.getPassword())
 //                .name(userSignUpDto.getName())
