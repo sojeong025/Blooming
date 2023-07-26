@@ -56,7 +56,7 @@ public class NotificationScheduler {
 
     //시간에 맞게 푸시 알림을 스케줄링하는 코드
     @Scheduled(cron = "* * * * * ?")
-    public void pushMorningDietAlarm() throws FirebaseMessagingException{
+    public void pushMorningDietAlarm() {
         log.info("매 시 매 초 알림");
 
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
@@ -100,29 +100,47 @@ findByScheduleAt(30일 후)
         List<Schedule> schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(30));
         for (Schedule s : schedules){
             System.out.println(s);
+
+            Long targetId = 1L;
+            String subject = "30일 후 일정이 있습니다";
+            String content = "일정 내용은 머시기";
+
+
+            //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
+            String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, subject, content)); // 첫 번째로 넣은 유저
+            log.info(result);
         }
 
         System.out.println("10일 후");
         schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(10));
         for (Schedule s : schedules){
             System.out.println(s);
+
+            Long targetId = 1L;
+            String subject = "10일 후 일정이 있습니다";
+            String content = "일정 내용은 머시기";
+
+
+            //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
+            String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, subject, content)); // 첫 번째로 넣은 유저
+            log.info(result);
         }
 
         System.out.println("오늘");
         schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(0));
         for (Schedule s : schedules){
             System.out.println(s);
+
+            Long targetId = 1L;
+            String subject = "오늘 일정이 있습니다";
+            String content = "일정 내용은 머시기";
+
+
+            //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
+            String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, subject, content)); // 첫 번째로 넣은 유저
+            log.info(result);
         }
 
-        Long targetId = 1L;
-        String subject = "30일 후 일정이 있습니다";
-        String content = "일정 내용은 머시기";
-
-
-        //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
-        String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, subject, content)); // 첫 번째로 넣은 유저
-        log.info(result);
-//        pushAlarm(MORNING_DIET);
 
     }
 
