@@ -20,7 +20,12 @@ spring:
     org.hibernate.SQL: debug
     org.hibernate.type: trace # ??? ?? 2.x, hibernate5
 
-project:
-  properties:
-    firebase-create-scoped: "https://www.googleapis.com/auth/firebase.messaging"
-    firebase-topic: "diet_record_notification"
+springdoc:
+  packages-to-scan: com.ssafy.backend.domain.user.controller
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: /swagger-ui
+    disable-swagger-default-url: true
+    display-request-duration: true
+    operations-sorter: alpha
