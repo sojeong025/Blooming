@@ -7,7 +7,6 @@ function Home() {
   return (
     <>
       <div>
-        <h1>메인페이지다</h1>
         <WeddingDday />
 
         <ScheduleDday />

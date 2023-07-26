@@ -24,12 +24,14 @@ const Tips = () => {
 
   return (
     <>
-      {weddingDate !== "" && (
-        <div>
-          {/* <span>{nextPlan.leftDay}일 전에 하면 좋을</span> */}
-          <span>{nextPlan.title} 하셨나요?</span>
-        </div>
-      )}
+      {weddingDate !== "" &&
+        (weddingDday > 0 ? (
+          <>
+            <span>{nextPlan.title} 하셨나요?</span>
+          </>
+        ) : (
+          <p>결혼 축하해</p>
+        ))}
     </>
   );
 };
