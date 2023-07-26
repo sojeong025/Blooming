@@ -5,3 +5,8 @@ export const weddingDateState = atom({
   key: "weddingDateState",
   default: "",
 });
+
+export const weddingDdayState = atom({
+  key: "weddingDdayState",
+  default: "",
+});
