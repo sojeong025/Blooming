@@ -23,10 +23,6 @@ public class Alarm {
 //    @OneToMany(mappedBy = "userId")
 //    private List<Alarm> alarms =new ArrayList<>();
 
-    private Long scheduleId; //일정 수정 및 삭제 시 필요.
-
-    private Date alarmDate; //일정마다 총 4 번의 알림. 일정 추가 시 알림 추가할 때 이용.
-
     private boolean readOrNot;
 
     private String type;
