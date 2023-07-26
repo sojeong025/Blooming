@@ -12,6 +12,7 @@ import Login from "./Pages/Login";
 import Schedule from "./Pages/Schedule";
 
 import BottomNav from "./components/Common/BottomNav";
+import TopAppBar from "./components/Common/TopAppBar";
 
 function App() {
   // Nav를 숨길 페이지 path
@@ -22,6 +23,7 @@ function App() {
 
     return (
       <>
+        <TopAppBar />
         <Routes>
           <Route path='/splash' element={<Splash />} />
           <Route path='/login' element={<Login />} />
