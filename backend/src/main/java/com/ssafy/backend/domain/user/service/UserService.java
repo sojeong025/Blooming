@@ -35,11 +35,10 @@ public class UserService {
         findUser.authorizeUser();
 
         String coupleCode = "123ABCabc";// TODO: 커플코드 생성 함수 만들기
-        Couple couple = Couple.builder()
-            .coupleCode(coupleCode)
-            .build();
+        Couple couple = Couple.createCouple(coupleCode);
 
         findUser.setCouple(couple);
+
         coupleRepository.save(couple);
 
         //        User user = User.builder()
