@@ -29,18 +29,6 @@ export const WeddingDday = () => {
       } else if (weddingDiff) {
         setWeddingDday(weddingDiff);
       }
-
-      // setWeddingDday(weddingDiff);
-      // if (weddingDday === 0) {
-      //   scriptDday = "D-day"; // 차이가 0
-      // }
-      // } else if (weddingDday > 0) {
-      //   setWeddingDday(`D-${weddingDday}`); // D-
-      // } else if (weddingDday < 0) {
-      //   setWeddingDday(`D+${Math.abs(weddingDday)}`); // D+
-      // } else {
-      //   setWeddingDday("아직 D-Day가 없어용");
-      // }
     };
 
     updateWeddingDday();
@@ -57,11 +45,25 @@ export const WeddingDday = () => {
 
   // console.log(weddingDate, weddingDday);
 
+  const renderScript = () => {
+    if (!weddingDate) {
+      return "아직 D-Day가 없어용";
+    }
+
+    if (weddingDday === 0) {
+      return "D-day";
+    } else if (weddingDday > 0) {
+      return `D-${weddingDday}`;
+    } else {
+      return `D+${Math.abs(weddingDday)}`;
+    }
+  };
+
   return (
     <>
       <input type='date' value={weddingDate} onChange={handleChange} />
 
-      <p>D-{weddingDday}</p>
+      <p>{renderScript()}</p>
     </>
   );
 };
