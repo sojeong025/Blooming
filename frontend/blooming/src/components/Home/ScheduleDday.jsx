@@ -11,7 +11,7 @@ dayjs.extend(isSameOrAfter);
 const ScheduleDday = () => {
   const schedules = useRecoilValue(schedulesState);
 
-  const todayDate = dayjs(); // 오늘 날짜
+  const todayDate = dayjs().format("YYYY-MM-DD"); // 오늘 날짜만
 
   // 다가오는 가장 빠른 일정
   const [earliestUpcomingSchedule, setEarliestUpcomingSchedule] =
@@ -37,15 +37,12 @@ const ScheduleDday = () => {
   const calculateDday = (targetDate) => {
     const target = dayjs(targetDate);
     const diff = target.diff(todayDate, "day");
-    return Math.ceil(diff);
+    // return Math.ceil(diff);
+    return diff;
   };
-
-  const today = dayjs().format("YYYY-MM-DD");
-  const tmp = dayjs("2023-07-25").diff(today, "day");
 
   return (
     <>
-      <div>임시 디데이는 뜨는뎅 포맷을 다 바꿔야하낭? {tmp}</div>
       <div>
         {earliestUpcomingSchedule ? (
           <>
@@ -55,7 +52,6 @@ const ScheduleDday = () => {
               <p>날짜: {earliestUpcomingSchedule.date}</p>
               <p>유형: {earliestUpcomingSchedule.type}</p>
               <p>D-{calculateDday(earliestUpcomingSchedule.date)}</p>
-              {/* 내일인데 왜 D-0임?>>?? */}
             </div>
           </>
         ) : (

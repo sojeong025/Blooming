@@ -20,7 +20,7 @@ export const schedulesState = atom({
     {
       id: 3,
       title: "임시3",
-      date: "2024-07-26",
+      date: "2024-07-28",
       type: "공통",
     },
   ],
