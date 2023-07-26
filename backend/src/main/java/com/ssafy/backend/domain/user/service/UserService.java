@@ -34,12 +34,18 @@ public class UserService {
         findUser.update(userSignUpDto);
         findUser.authorizeUser();
 
-        String coupleCode = "123ABCabc";// TODO: 커플코드 생성 함수 만들기
-        Couple couple = Couple.createCouple(coupleCode);
+        if (userSignUpDto.getCoupleCode() == null) {
+            String coupleCode = "123ABCabc";// TODO: 커플코드 생성 함수 만들기
+            Couple couple = Couple.createCouple(coupleCode);
 
-        findUser.setCouple(couple);
+            findUser.setCouple(couple);
+            coupleRepository.save(couple);
+        } else {
+            Couple couple = coupleRepository.findByCoupleCode(userSignUpDto.getCoupleCode())
+                .orElseThrow(() -> new IllegalArgumentException("입력한 커플 코드에 맞는 커플이 없습니다."));
 
-        coupleRepository.save(couple);
+            findUser.setCouple(couple);
+        }
 
         //        User user = User.builder()
 //                .email(userSignUpDto.getEmail())
