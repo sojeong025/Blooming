@@ -8,7 +8,7 @@ import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 import com.ssafy.backend.domain.schedule.Schedule;
-import com.ssafy.backend.domain.schedule.ScheduleRepository;
+import com.ssafy.backend.domain.schedule.repository.ScheduleRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +55,7 @@ public class NotificationScheduler {
     }
 
     //시간에 맞게 푸시 알림을 스케줄링하는 코드
-    @Scheduled(cron = "* * * * * ?")
+    @Scheduled(cron = "* * 10 * * ?")
     public void pushMorningDietAlarm() {
         log.info("매 시 매 초 알림");
 
