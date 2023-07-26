@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -70,6 +71,8 @@ public class NotificationScheduler {
 
          일단은 한 사람에게 같은 메시지 보내기
 
+insert into
+
 insert into schedule (schedule_id, category, couple_id, schedule_at, title, content)
 values (1, '공통', 1, NOW(), '알림제목', '알림내용');
 
@@ -91,11 +94,25 @@ findByScheduleAt(30일 후)
          */
 
         //일단은 쿼리로 짜보자
-        List<Schedule> schedules = scheduleRepository.findByDate(0);
-        System.out.println(schedules);
 
-        List test = scheduleRepository.getDate();
-        System.out.println(test);
+        //근데 이건 다 돼야 할 수 있을듯. 커플이랑 이런거
+        System.out.println("30일 후");
+        List<Schedule> schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(30));
+        for (Schedule s : schedules){
+            System.out.println(s);
+        }
+
+        System.out.println("10일 후");
+        schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(10));
+        for (Schedule s : schedules){
+            System.out.println(s);
+        }
+
+        System.out.println("오늘");
+        schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(0));
+        for (Schedule s : schedules){
+            System.out.println(s);
+        }
 
         Long targetId = 1L;
         String subject = "30일 후 일정이 있습니다";
