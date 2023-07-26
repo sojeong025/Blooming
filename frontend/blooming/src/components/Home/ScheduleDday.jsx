@@ -43,21 +43,19 @@ const ScheduleDday = () => {
 
   return (
     <>
-      <div>
-        {earliestUpcomingSchedule ? (
-          <>
-            <h2>오늘 이후 일정 중 가장 빨리 시작하는 일정의 D-Day</h2>
-            <div>
-              <p>{earliestUpcomingSchedule.title}</p>
-              <p>날짜: {earliestUpcomingSchedule.date}</p>
-              <p>유형: {earliestUpcomingSchedule.type}</p>
-              <p>D-{calculateDday(earliestUpcomingSchedule.date)}</p>
-            </div>
-          </>
-        ) : (
-          <h2>오늘 이후 일정이 없습니다.</h2>
-        )}
-      </div>
+      {earliestUpcomingSchedule ? (
+        <>
+          <h2>다음 일정</h2>
+          <div>
+            <p>{earliestUpcomingSchedule.title}</p>
+            <span>{earliestUpcomingSchedule.date} | </span>
+            <span>{earliestUpcomingSchedule.type} 일정 | </span>
+            <span>D-{calculateDday(earliestUpcomingSchedule.date)}</span>
+          </div>
+        </>
+      ) : (
+        <h2>오늘 이후 일정이 없어용.</h2>
+      )}
     </>
   );
 };
