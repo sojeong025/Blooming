@@ -1,6 +1,9 @@
 package com.ssafy.backend.domain.schedule.controller;
 
 import com.ssafy.backend.domain.schedule.Schedule;
+import com.ssafy.backend.domain.schedule.dto.ScheduleModifyDto;
+import com.ssafy.backend.domain.schedule.dto.ScheduleRegistDto;
+import com.ssafy.backend.domain.schedule.dto.ScheduleResultDto;
 import com.ssafy.backend.domain.schedule.service.ScheduleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -20,44 +23,44 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @Operation(summary = "일정 하나 등록하기", description = "캘린더에서 새로운 일정을 등록합니다.")
-    @Parameter(name = "Schedule", description = "일정 이름, 날짜, 시간, 카테고리(공통, 신랑, 신부)를 넘겨주세요")
+    @Parameter(name = "ScheduleRegistDto", description = "일정 이름, 내용, 날짜, 시간, 카테고리(공통, 신랑, 신부)를 넘겨주세요")
     @PostMapping("/schedule")
-    public ResponseEntity<?> registSchedule(@RequestBody Schedule schedule){
-        int cnt = scheduleService.registSchedule(schedule);
+    public ResponseEntity<?> registSchedule(@RequestBody ScheduleRegistDto scheduleRegistDto){
+        int cnt = scheduleService.registSchedule(scheduleRegistDto);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @Operation(summary = "일정 전체 조회하기", description = "캘린더로 모든 일정을 불러옵니다.")
-    @Parameter(name = "user.coupleId", description = "로그인한 회원의 커플 아이디를 넘겨주세요")
-    @GetMapping("/schedule/{coupleId}")
-    public ResponseEntity<?> getAllSchedule(@PathVariable Long coupleId){
-        List<Schedule> scheduleList = scheduleService.getAllSchedule(coupleId);
+    @Parameter(name = "없음", description = "없음")
+    @GetMapping("/schedule")
+    public ResponseEntity<?> getAllSchedule(){
+        List<ScheduleResultDto> scheduleList = scheduleService.getAllSchedule();
         if (scheduleList == null){
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         else{
-            return new ResponseEntity<List<Schedule>>(scheduleList, HttpStatus.OK);
+            return new ResponseEntity<List<ScheduleResultDto>>(scheduleList, HttpStatus.OK);
         }
     }
 
     @Operation(summary = "일정 하나 조회하기", description = "상세 일정 하나를 불러옵니다.")
     @Parameter(name = "schedule.id", description = "상세 조회할 일정 아이디 하나를 넘겨주세요")
-    @GetMapping("/schedule/{scheduleId}")
+    @GetMapping("/schedule/{schedule-id}")
     public ResponseEntity<?> getOneSchedule(@PathVariable Long scheduleId){
-        Schedule schedule = scheduleService.getOneSchedule(scheduleId);
-        if (schedule == null){
+        ScheduleResultDto scheduleResultDto = scheduleService.getOneSchedule(scheduleId);
+        if (scheduleResultDto == null){
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         }
         else{
-            return new ResponseEntity<Schedule>(schedule, HttpStatus.OK);
+            return new ResponseEntity<ScheduleResultDto>(scheduleResultDto, HttpStatus.OK);
         }
     }
 
     @Operation(summary = "일정 하나 수정하기", description = "특정 일정을 수정합니다.")
-    @Parameter(name = "Schedule", description = "변경 가능한 것 : title, scheduleDate, scheduleTime, scheduledBy(일정 이름, 날짜, 시간, 카테고리)")
+    @Parameter(name = "ScheduleModifyDto", description = "변경 가능한 것 : title, content, scheduleTime")
     @PutMapping("/schedule")
-    public ResponseEntity<?> modifySchedule(@RequestBody Schedule schedule){
-        int cnt = scheduleService.modifySchedule(schedule);
+    public ResponseEntity<?> modifySchedule(@RequestBody ScheduleModifyDto scheduleModifyDto){
+        int cnt = scheduleService.modifySchedule(scheduleModifyDto);
 //        if (cnt == 0){
 //            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 //        }
@@ -68,7 +71,7 @@ public class ScheduleController {
 
     @Operation(summary = "일정 하나 삭제하기", description = "특정 일정을 삭제합니다.")
     @Parameter(name = "schedule.id", description = "삭제할 일정의 id를 넘겨주세요")
-    @DeleteMapping("/schedule/{scheduleId}")
+    @DeleteMapping("/schedule/{schedule-id}")
     public ResponseEntity<?> deleteSchedule(@PathVariable Long scheduleId){
         int cnt = scheduleService.deleteSchedule(scheduleId);
 //        if (cnt == 0){
