@@ -32,6 +32,21 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
+
+    // oauth 라이브러리
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // jwt 라이브러리
+    implementation 'com.auth0:java-jwt:4.4.0'
+
+    // springdoc swagger
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
+
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    //firebase sdk
+    implementation 'com.google.firebase:firebase-admin:7.1.0'
 }
 
 tasks.named('test') {

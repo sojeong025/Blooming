@@ -15,6 +15,27 @@ import { NavLink } from 'react-router-dom';
 
 
 function App() {
+  // Nav를 숨길 페이지 path
+  const hiddenPaths = ["/splash", "/login"];
+
+  const Routing = () => {
+    const location = useLocation();
+
+    return (
+      <>
+        <TopAppBar />
+        <Routes>
+          <Route path='/splash' element={<Splash />} />
+          <Route path='/login' element={<Login />} />
+
+          <Route path='/' element={<Home />} />
+          <Route path='/schedule' element={<Schedule />} />
+        </Routes>
+        {!hiddenPaths.includes(location.pathname) && <BottomNav />}
+      </>
+    );
+  };
+
   return (
     <Router>
       <RecoilRoot>
@@ -39,7 +60,7 @@ function App() {
         </Routes>
       </RecoilRoot>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
