@@ -1,0 +1,7 @@
+.container {
+  background-image: url('../assets/logo.png'); 
+  background-size: contain; 
+  background-repeat: no-repeat; 
+  width: 300px;
+  height: 300px; 
+}

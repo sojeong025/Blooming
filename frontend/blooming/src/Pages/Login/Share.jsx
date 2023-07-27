@@ -13,7 +13,7 @@ export default function Share() {
       <div>이미지</div>
       <CopyToClipboardButton text={verifyCode} />
       <KakaoShareButton />
-      <NavLink to="/Home">
+      <NavLink to="/home">
         <Button text="메인으로 이동하기" />
       </NavLink>
     </>
