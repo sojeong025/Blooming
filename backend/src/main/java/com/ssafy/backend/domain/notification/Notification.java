@@ -47,4 +47,12 @@ public class Notification extends CreatedBaseEntity {
 		user.getNotifications().add(this);
 	}
 
+	public Notification(ReadStatus readStatus, NotificationType notificationType) {
+		this.readStatus = readStatus;
+		this.notificationType = notificationType;
+	}
+
+	public void updateReadStatus(){
+		this.readStatus = ReadStatus.READ;
+	}
 }

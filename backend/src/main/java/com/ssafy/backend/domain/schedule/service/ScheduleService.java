@@ -54,7 +54,7 @@ public class ScheduleService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
-        Long coupleId = user.getCouple().getId();
+        Long coupleId = user.getCouple().getId(); //여기 커플에서 바로 얻기 가능
         //결과값도 dto로 바꿔주기
         List<Schedule> schedules = scheduleRepository.findAllByCoupleId(coupleId);
         List<ScheduleResultDto> result = new ArrayList<>();
