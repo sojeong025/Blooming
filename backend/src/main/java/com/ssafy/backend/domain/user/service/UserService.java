@@ -20,14 +20,6 @@ public class UserService {
     private final CoupleRepository coupleRepository;
 
     public void signUp(UserSignUpDto userSignUpDto, String userEmail) throws Exception {
-
-//        if (userRepository.findByEmail(userSignUpDto.getEmail()).isPresent()) {
-//            throw new Exception("이미 존재하는 이메일입니다.");
-//        }
-
-//        if (userRepository.findByNickname(userSignUpDto.getNickname()).isPresent()) {
-//            throw new Exception("이미 존재하는 닉네임입니다.");
-//        }
         User findUser = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 
@@ -36,7 +28,8 @@ public class UserService {
 
         if (userSignUpDto.getCoupleCode() == null) {
             String coupleCode = "123ABCabc";// TODO: 커플코드 생성 함수 만들기
-            Couple couple = Couple.createCouple(coupleCode);
+
+            Couple couple = Couple.createCouple();
 
             findUser.setCouple(couple);
             coupleRepository.save(couple);
@@ -46,18 +39,5 @@ public class UserService {
 
             findUser.setCouple(couple);
         }
-
-        //        User user = User.builder()
-//                .email(userSignUpDto.getEmail())
-//                .password(userSignUpDto.getPassword())
-//                .name(userSignUpDto.getName())
-//                .nickname(userSignUpDto.getNickname())
-//                .phoneNumber(userSignUpDto.getPhoneNumber())
-//                .gender(userSignUpDto.getGender())
-//                .role(Role.USER)
-//                .build();
-//
-//        user.passwordEncode(passwordEncoder);
-//        userRepository.save(user);
     }
 }
