@@ -18,7 +18,7 @@ public class ScheduleRegistDto {
     private String content;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate scheduleDate;
-    @DateTimeFormat(pattern = "kk:mm")
+    @DateTimeFormat(pattern = "kk:mm:ss")
     private LocalTime scheduleTime;
     private ScheduledBy scheduledBy; //공통 or 개별(등록자 본인의 role)
 }

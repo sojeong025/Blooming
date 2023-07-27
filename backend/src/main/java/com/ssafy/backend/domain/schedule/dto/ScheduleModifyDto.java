@@ -14,8 +14,8 @@ public class ScheduleModifyDto {
     private Long id;
     private String title;
     private String content;
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    private LocalDate scheduleDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate scheduleDate;
     @DateTimeFormat(pattern = "kk:mm")
     private LocalTime scheduleTime;
 //    private ScheduledBy scheduledBy; //공통 or 개별(등록자 본인의 role)

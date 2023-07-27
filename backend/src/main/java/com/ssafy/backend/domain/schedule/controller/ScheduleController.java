@@ -45,7 +45,7 @@ public class ScheduleController {
 
     @Operation(summary = "일정 하나 조회하기", description = "상세 일정 하나를 불러옵니다.")
     @Parameter(name = "schedule.id", description = "상세 조회할 일정 아이디 하나를 넘겨주세요")
-    @GetMapping("/schedule/{schedule-id}")
+    @GetMapping("/schedule/{scheduleId}")
     public ResponseEntity<?> getOneSchedule(@PathVariable Long scheduleId){
         ScheduleResultDto scheduleResultDto = scheduleService.getOneSchedule(scheduleId);
         if (scheduleResultDto == null){
@@ -71,7 +71,7 @@ public class ScheduleController {
 
     @Operation(summary = "일정 하나 삭제하기", description = "특정 일정을 삭제합니다.")
     @Parameter(name = "schedule.id", description = "삭제할 일정의 id를 넘겨주세요")
-    @DeleteMapping("/schedule/{schedule-id}")
+    @DeleteMapping("/schedule/{scheduleId}")
     public ResponseEntity<?> deleteSchedule(@PathVariable Long scheduleId){
         int cnt = scheduleService.deleteSchedule(scheduleId);
 //        if (cnt == 0){

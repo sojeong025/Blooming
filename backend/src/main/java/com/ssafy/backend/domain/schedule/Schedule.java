@@ -43,7 +43,7 @@ public class Schedule extends CreatedBaseEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate scheduleDate;
 	@Column(name = "SCHEDULED_TIME")
-	@DateTimeFormat(pattern = "kk:mm")
+	@DateTimeFormat(pattern = "kk:mm:ss")
 	private LocalTime scheduleTime;
 	@Enumerated(EnumType.STRING)
 	private ScheduledBy scheduledBy;
