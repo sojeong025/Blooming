@@ -7,6 +7,11 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
+import com.ssafy.backend.domain.notification.NotificationType;
+import com.ssafy.backend.domain.notification.ReadStatus;
+import com.ssafy.backend.domain.notification.dto.NotificationRegistDto;
+import com.ssafy.backend.domain.notification.repository.NotificationRepository;
+import com.ssafy.backend.domain.notification.service.NotificationService;
 import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.schedule.repository.ScheduleRepository;
 import com.ssafy.backend.domain.user.User;
@@ -40,6 +45,8 @@ public class NotificationScheduler {
     private UserRepository userRepository;
     @Autowired
     private ScheduleRepository scheduleRepository;
+    @Autowired
+    private NotificationService notificationService;
 
 
     @PostConstruct
@@ -56,9 +63,8 @@ public class NotificationScheduler {
 
     //시간에 맞게 푸시 알림을 스케줄링하는 코드
 //    @Scheduled(cron = "* * * * * ?")
-    @Scheduled(fixedDelay = 3000)
+    @Scheduled(cron = "0 * 9 * * ?")
     public void pushMorningDietAlarm() {
-        log.info("매 시 매 초 알림");
 
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
         //나중에 지난 일정은 삭제? 해도 될듯
@@ -72,67 +78,46 @@ public class NotificationScheduler {
 
          일단은 한 사람에게 같은 메시지 보내기
          */
+        
+        //일단 임시
+        for (int day : new int[]{0, 1, 7, 30}){
+            System.out.println(day + "일 후 알림");
 
-        //일단은 쿼리로 짜보자
+            //day일 후 스케줄을 일단 읽어옴 -> 푸시 알림 보내기 + 알림 로그 테이블에 저장
+            List<Schedule> schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(day));
+            for (Schedule schedule : schedules){
+                System.out.println(schedule);
 
-        //근데 이건 다 돼야 할 수 있을듯. 커플이랑 이런거
-        System.out.println("30일 후");
-        List<Schedule> schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(30));
-        for (Schedule s : schedules){
-            System.out.println(s);
 
-            Long targetId = 1L;
-            String subject = "30일 후 일정이 있습니다";
-            String content = "일정 내용은 머시기";
-            System.out.println(subject);
+                //1. 푸시 알림 보내기
+                Long targetId = 1L; //나중에 알림 커플 유저 두 명에게 각각 보내느 걸로 수정
+                String title = schedule.getTitle();
+                String content = schedule.getContent();
+                log.info(title + content);
 
-            //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
-            String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, subject, content)); // 첫 번째로 넣은 유저
-            log.info(result);
+                //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
+                String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, title, content)); // 첫 번째로 넣은 유저
+                log.info(result);
+
+                //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장. - 파라미터는 임시. 수정 필요
+                notificationService.registNotification(new NotificationRegistDto(
+                        ReadStatus.UNREAD,
+                        NotificationType.SCHEDULE,
+                        title,
+                        content,
+                        targetId
+                        ));
+            }
+
         }
-
-//        System.out.println("10일 후");
-//        schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(10));
-//        for (Schedule s : schedules){
-//            System.out.println(s);
-//
-//            Long targetId = 1L;
-//            String subject = "10일 후 일정이 있습니다";
-//            String content = "일정 내용은 머시기";
-//            System.out.println(subject);
-//
-//
-//            //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
-//            String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, subject, content)); // 첫 번째로 넣은 유저
-//            log.info(result);
-//        }
-
-        System.out.println("오늘");
-        schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(0));
-        for (Schedule s : schedules){
-            System.out.println(s);
-
-            Long targetId = 1L;
-            String subject = "오늘 일정이 있습니다";
-            String content = "일정 내용은 머시기";
-            System.out.println(subject);
-
-
-            //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
-            String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, subject, content)); // 첫 번째로 넣은 유저
-            log.info(result);
-        }
-
-
     }
 
-
-    /////1
 
     private String sendNotificationByToken(FCMNotificationRequestDto fcmDto) {
         Optional<User> user = userRepository.findById(fcmDto.getTargetUserId());
 
         if (user.isPresent()) {
+            //나중에 토큰 받아오는 걸로 수정
             String token = "eKbKoD7ETfqRiIKFF_4Zom:APA91bHbzIq11sl8_qbv1yE7-RFqjXnywPVo5u13FMC9kqIjJTrHkXIfqWODhBYvTS3EOGlOLQzlXUvJNwXn4EFbgoAC_WZzylV9yo5KOGLj96agM68p8qPc8bCPODgRk9aP_TNeKiLn";
 //            token = user.get().getFirebaseToken();
             if (token != null) {
@@ -160,22 +145,4 @@ public class NotificationScheduler {
             return "해당 유저 없음 " + fcmDto.getTargetUserId();
         }
     }
-
-
-//    푸시 알림을 보내는 코드
-//    private void pushAlarm(RequestPushMessage data) throws FirebaseMessagingException{
-//        Message message = getMessage(data);
-//        System.out.println(sendMessage(message));
-//    }
-//
-//    private Message getMessage(RequestPushMessage data){
-//        Notification notification = Notification.builder().setTitle(data.getTitle()).setBody(data.getBody()).build();
-//        Message.Builder builder = Message.builder();
-//        Message message = builder.setTopic(topic).setNotification(notification).build();
-//        return message;
-//    }
-//
-//    public String sendMessage(Message message) throws FirebaseMessagingException{
-//        return this.firebaseMessaging.send(message);
-//    }
 }
