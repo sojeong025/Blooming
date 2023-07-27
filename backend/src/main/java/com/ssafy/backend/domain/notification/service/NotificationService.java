@@ -60,7 +60,9 @@ public class NotificationService {
             NotificationResultDto notificationResultDto = new NotificationResultDto(
                     notification.getId(),
                     notification.getReadStatus(),
-                    notification.getNotificationType()
+                    notification.getNotificationType(),
+                    notification.getTitle(),
+                    notification.getContent()
             );
             result.add(notificationResultDto);
         }
