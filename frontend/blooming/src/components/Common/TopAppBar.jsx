@@ -9,7 +9,7 @@ const TopAppBar = () => {
     <header className='header'>
       <img src='' alt='Logo' className='logo' />
       {/* <div className='spacer' /> */}
-      <NavLink to='/notice'>알림</NavLink>
+      <NavLink to='/AllNotice'>알림</NavLink>
     </header>
   );
 };

@@ -5,7 +5,7 @@ const BottomNav = () => {
   return (
     <nav className='bottom-nav'>
       <div>
-        <NavLink to='/'>홈</NavLink>
+        <NavLink to='/home'>홈</NavLink>
       </div>
       <div>
         <NavLink to='/info'>정보</NavLink>
