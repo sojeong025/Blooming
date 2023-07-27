@@ -13,4 +13,6 @@ public class NotificationResultDto {
     private Long id;
     private ReadStatus readStatus;
     private NotificationType notificationType;
+    private String title;
+    private String content;
 }
