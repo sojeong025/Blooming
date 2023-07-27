@@ -22,14 +22,14 @@ public class NotificationController {
 
     private final NotificationService notificationService;
 
-    //알림 등록 : 아이디, 읽음처리, 알림타입
-    @Operation(summary = "알림 하나 등록하기", description = "알림 등록")
-    @Parameter(name = "NotificationDto", description = "아이디, 읽음처리, 알림타입")
-    @PostMapping("/notification")
-    public ResponseEntity<?> registNotification(@RequestBody NotificationRegistDto notificationRegistDto){
-        int cnt = notificationService.registNotification(notificationRegistDto);
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
+    //알림 등록 : 아이디, 읽음처리, 알림타입 - 서버에서만 필요
+//    @Operation(summary = "알림 하나 등록하기", description = "알림 등록")
+//    @Parameter(name = "NotificationDto", description = "아이디, 읽음처리, 알림타입")
+//    @PostMapping("/notification")
+//    public ResponseEntity<?> registNotification(@RequestBody NotificationRegistDto notificationRegistDto){
+//        int cnt = notificationService.registNotification(notificationRegistDto);
+//        return new ResponseEntity<Void>(HttpStatus.OK);
+//    }
 
     //알림 전체 조회 : 아이디, 읽음처리, 알림타입
     @Operation(summary = "알림 전체 조회하기", description = "모든 알림을 불러옵니다.")

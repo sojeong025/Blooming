@@ -32,6 +32,7 @@ public class Notification extends CreatedBaseEntity {
 	@Column(name = "NOTIFICATION_ID")
 	private Long id;
 
+
 	@Enumerated(EnumType.STRING)
 	private ReadStatus readStatus;
 
@@ -42,14 +43,20 @@ public class Notification extends CreatedBaseEntity {
 	@JoinColumn(name = "USER_ID")
 	private User user;
 
+	//알림 로그를 위해 추가
+	private String title;
+	private String content;
+
 	public void setUser(User user) {
 		this.user = user;
 		user.getNotifications().add(this);
 	}
 
-	public Notification(ReadStatus readStatus, NotificationType notificationType) {
+	public Notification(ReadStatus readStatus, NotificationType notificationType, String title, String content) {
 		this.readStatus = readStatus;
 		this.notificationType = notificationType;
+		this.title = title;
+		this.content = content;
 	}
 
 	public void updateReadStatus(){
