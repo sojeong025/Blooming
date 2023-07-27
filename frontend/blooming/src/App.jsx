@@ -17,14 +17,14 @@ import BottomNav from './components/Common/BottomNav';
 
 function App() {
   // Nav를 숨길 페이지 path
-  const hiddenPaths = ["/splash", "/login", "/join", "/Question", "/DecideWedding", "/ChooseWedding", "/Share", "/AllNotice"];
+  const hiddenPaths = ["/", "/login", "/join", "/Question", "/DecideWedding", "/ChooseWedding", "/Share", "/AllNotice"];
 
   const Routing = () => {
     const location = useLocation();
 
     return (
       <>
-        <TopAppBar />
+        {!hiddenPaths.includes(location.pathname) && <TopAppBar />}
         <Routes>
           <Route path='/' element={<Splash />} />
           <Route path='/login' element={<Login />} />
