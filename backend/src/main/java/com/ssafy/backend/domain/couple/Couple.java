@@ -58,4 +58,8 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
 		SecureRandom random = new SecureRandom();
 		return random.nextInt(100000000);
 	}
+
+	public void changeWeddingDate(LocalDate weddingDate) {
+		this.weddingDate = weddingDate;
+	}
 }
