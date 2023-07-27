@@ -14,8 +14,9 @@ import java.util.List;
 public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
 
-    public void registSchedule(Schedule schedule) {
+    public int registSchedule(Schedule schedule) {
         scheduleRepository.save(schedule);
+        return 1;
     }
 
     public List<Schedule> getAllSchedule(Long coupleId) {
@@ -26,11 +27,8 @@ public class ScheduleService {
         //jpa.. 이용해서 해당 스케줄 아이디로 스케줄 객체 찾아서 set으로 변경? -- 이게맞나
         Schedule originalSchedule = getOneSchedule(schedule.getId());
 
-        //변경 가능한 것 : title, scheduleDate, scheduleTime, scheduledBy
-        originalSchedule.setTitle(schedule.getTitle());
-        originalSchedule.setScheduleDate(schedule.getScheduleDate());
-        originalSchedule.setScheduleTime(schedule.getScheduleTime());
-        originalSchedule.setScheduledBy(schedule.getScheduledBy());
+        //맞나
+        originalSchedule.update(schedule);
         return 1; //일단
     }
 

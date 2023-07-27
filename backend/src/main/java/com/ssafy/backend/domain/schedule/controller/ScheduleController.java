@@ -22,9 +22,9 @@ public class ScheduleController {
     @Operation(summary = "일정 하나 등록하기", description = "캘린더에서 새로운 일정을 등록합니다.")
     @Parameter(name = "Schedule", description = "일정 이름, 날짜, 시간, 카테고리(공통, 신랑, 신부)를 넘겨주세요")
     @PostMapping("/schedule")
-    public String registSchedule(@RequestBody Schedule schedule){
-        scheduleService.registSchedule(schedule);
-        return "일정 등록 성공";
+    public ResponseEntity<?> registSchedule(@RequestBody Schedule schedule){
+        int cnt = scheduleService.registSchedule(schedule);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @Operation(summary = "일정 전체 조회하기", description = "캘린더로 모든 일정을 불러옵니다.")
@@ -41,7 +41,7 @@ public class ScheduleController {
     }
 
     @Operation(summary = "일정 하나 조회하기", description = "상세 일정 하나를 불러옵니다.")
-    @Parameter(name = "scheduleId", description = "상세 조회할 일정 아이디 하나를 넘겨주세요")
+    @Parameter(name = "schedule.id", description = "상세 조회할 일정 아이디 하나를 넘겨주세요")
     @GetMapping("/schedule/{scheduleId}")
     public ResponseEntity<?> getOneSchedule(@PathVariable Long scheduleId){
         Schedule schedule = scheduleService.getOneSchedule(scheduleId);
@@ -54,7 +54,7 @@ public class ScheduleController {
     }
 
     @Operation(summary = "일정 하나 수정하기", description = "특정 일정을 수정합니다.")
-    @Parameter(name = "Schedule", description = "변경 가능한 것 : title, scheduleDate, scheduleTime, scheduledBy")
+    @Parameter(name = "Schedule", description = "변경 가능한 것 : title, scheduleDate, scheduleTime, scheduledBy(일정 이름, 날짜, 시간, 카테고리)")
     @PutMapping("/schedule")
     public ResponseEntity<?> modifySchedule(@RequestBody Schedule schedule){
         int cnt = scheduleService.modifySchedule(schedule);
@@ -67,8 +67,8 @@ public class ScheduleController {
     }
 
     @Operation(summary = "일정 하나 삭제하기", description = "특정 일정을 삭제합니다.")
-    @Parameter(name = "scheduleId", description = "삭제할 일정의 id를 넘겨주세요")
-    @PutMapping("/schedule/{scheduleId}")
+    @Parameter(name = "schedule.id", description = "삭제할 일정의 id를 넘겨주세요")
+    @DeleteMapping("/schedule/{scheduleId}")
     public ResponseEntity<?> deleteSchedule(@PathVariable Long scheduleId){
         int cnt = scheduleService.deleteSchedule(scheduleId);
 //        if (cnt == 0){

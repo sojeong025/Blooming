@@ -54,19 +54,11 @@ public class Schedule extends CreatedBaseEntity {
 		couple.getSchedules().add(this);
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public void setScheduleDate(LocalDate scheduleDate) {
-		this.scheduleDate = scheduleDate;
-	}
-
-	public void setScheduleTime(LocalTime scheduleTime) {
-		this.scheduleTime = scheduleTime;
-	}
-
-	public void setScheduledBy(ScheduledBy scheduledBy) {
-		this.scheduledBy = scheduledBy;
+	public void update(Schedule schedule){
+		//변경 가능한 것 : title, scheduleDate, scheduleTime, scheduledBy
+		this.title = schedule.title;
+		this.scheduleDate = schedule.scheduleDate;
+		this.scheduleTime = schedule.scheduleTime;
+		this.scheduledBy = schedule.scheduledBy;
 	}
 }
