@@ -39,7 +39,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 				response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
 				response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken);
 
-				response.sendRedirect("/oauth2/sign-up"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
+				response.sendRedirect("http://localhost:5173/join"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
 
 				jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
 				jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
@@ -61,7 +61,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 		String refreshToken = jwtService.createRefreshToken();
 		response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
 		response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken);
-		response.sendRedirect("/oauth2/sign-up");
+		response.sendRedirect("http://localhost:5173/home");
 
 		// jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
 		jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
