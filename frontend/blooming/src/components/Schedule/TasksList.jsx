@@ -2,10 +2,18 @@ import classes from './TasksList.module.css';
 import NewTask from "./NewTask";
 import Task from './Task';
 import Modal from './Modal';
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { ScheduleTaskState } from '../../recoil/SchduleTaskStateAtom';
+import { ScheduleState } from '../../recoil/ScheduleStateAtom';
 
 function TasksList({isPosting, onStopPosting}) {
-  const [tasks, setTasks ]= useState([]);
+  const [tasks, setTasks ]= useRecoilState(ScheduleTaskState);
+  const [selectedDate, setSelectedDate] = useRecoilState(ScheduleState)
+
+  const formatDate = (date) => {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(date).toLocaleDateString(undefined, options);
+  };
 
   function addTaskHandler(taskData) {
     setTasks((existingTasks) => [taskData, ...existingTasks]);
@@ -20,11 +28,14 @@ function TasksList({isPosting, onStopPosting}) {
     )}
     {tasks.length > 0 && (
       <ul className={ classes.posts } >
-        {tasks.map((task) => <Task key={task.body} date={task.date} body={task.body} />)}
+          {tasks.map((task) => {
+            if (formatDate(selectedDate) === formatDate(task.date)) {
+              return (
+                <Task key={task.body} date={task.date} body={task.body} />
+              )
+            }
+          })}
       </ul>
-    )}
-    {tasks.length === 0 && (
-      <p>오늘은 일정이 없슴다</p>
     )}
     </>
   )

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRecoilState } from 'recoil'
+import { ScheduleState } from '../../recoil/ScheduleStateAtom';
 import Calendar from 'react-calendar';
 import './CalendarComponent.css';
 
@@ -13,7 +14,7 @@ function CalendarHeader({ date }) {
 }
 
 function CalendarComponent() {
-  const [selectedDate, onDateChange] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useRecoilState(ScheduleState);
 
   const formatDate = (date) => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -22,8 +23,7 @@ function CalendarComponent() {
 
   const tileClassName = ({ date, view }) => {
     if (view === 'month') {
-      // Check if the day is Saturday or Sunday
-      if (date.getDay() === 0 /* Sunday */ || date.getDay() === 6 /* Saturday */) {
+      if (date.getDay() === 0 || date.getDay() === 6) {
         return 'weekend-day';
       }
     }
@@ -42,7 +42,7 @@ function CalendarComponent() {
   return (
     <>
       <Calendar
-        onChange={onDateChange}
+        onChange={setSelectedDate}
         value={selectedDate}
         calendarType="gregory"
         tileClassName={tileClassName}

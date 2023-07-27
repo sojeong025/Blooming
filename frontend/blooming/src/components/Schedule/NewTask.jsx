@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import { useRecoilState } from 'recoil'
+import { ScheduleState } from '../../recoil/ScheduleStateAtom';
 import DatePicker from 'react-datepicker'
 import './DatePicker.css'
 import classes from './NewTask.module.css';
 
 function NewTask({onCancel, onAddTask, selectedDate}) {
   const [ enteredBody, setEnteredBody ] = useState('');
-  const [ enteredDate, setEnteredDate ] = useState(selectedDate || new Date());
+  const [ enteredDate, setEnteredDate ] = useRecoilState(ScheduleState);
 
-  console.log(selectedDate)
   function bodyChangeHandler(event) {
     setEnteredBody(event.target.value);
   }
@@ -28,7 +29,7 @@ function NewTask({onCancel, onAddTask, selectedDate}) {
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
-      <p>
+      <div>
         <label htmlFor="date">날짜 선택</label>
         <DatePicker
           showPopperArrow={false}
@@ -38,15 +39,15 @@ function NewTask({onCancel, onAddTask, selectedDate}) {
           dateFormat="yyyy-MM-dd"
           required
         />
-      </p>
-      <p>
+      </div>
+      <div>
         <label htmlFor="body">일정이 뭐냐</label>
         <textarea id="body" required rows={3} onChange={bodyChangeHandler} placeholder='일정을 입력하세요.' />
-      </p>
-      <p className={classes.actions}>
+      </div>
+      <div className={classes.actions}>
         <button type='button' onClick={onCancel}>취소</button>
         <button>추가</button>
-      </p>
+      </div>
     </form>
   );
 }

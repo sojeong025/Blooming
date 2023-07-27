@@ -1,8 +1,8 @@
 import { useState } from "react";
-
 import CalendarComponent from "../components/Schedule/CalendarComponent"
 import TasksList from "../components/Schedule/TasksList"
 import ScheduleBody from "../components/Schedule/ScheduleBody"
+
 
 function Schedule() {
   const [ modalIsVisible, setModalIsVisible ] = useState(false);

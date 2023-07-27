@@ -17,7 +17,7 @@ import BottomNav from './components/Common/BottomNav';
 
 function App() {
   // Nav를 숨길 페이지 path
-  const hiddenPaths = ["/", "/login", "/join", "/Question", "/DecideWedding", "/ChooseWedding", "/Share", "/AllNotice"];
+  const hiddenPaths = ["/", "/login", "/join", "/Question", "/DecideWedding", "/ChooseWedding", "/Share"];
 
   const Routing = () => {
     const location = useLocation();
