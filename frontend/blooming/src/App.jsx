@@ -1,31 +1,48 @@
-import './App.css'
-import { RecoilRoot } from 'recoil';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
-import Splash from './Pages/Splash'
-import Home from './Pages/Home'
-import Login from './Pages/Login'
-import Schedule from './Pages/Schedule';
-import { NavLink } from 'react-router-dom';
+import "./App.css";
+import { RecoilRoot } from "recoil";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
+import Splash from "./Pages/Splash";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Schedule from "./Pages/Schedule";
+
+import BottomNav from "./components/Common/BottomNav";
+import TopAppBar from "./components/Common/TopAppBar";
 
 function App() {
+  // Nav를 숨길 페이지 path
+  const hiddenPaths = ["/splash", "/login"];
+
+  const Routing = () => {
+    const location = useLocation();
+
+    return (
+      <>
+        <TopAppBar />
+        <Routes>
+          <Route path='/splash' element={<Splash />} />
+          <Route path='/login' element={<Login />} />
+
+          <Route path='/' element={<Home />} />
+          <Route path='/schedule' element={<Schedule />} />
+        </Routes>
+        {!hiddenPaths.includes(location.pathname) && <BottomNav />}
+      </>
+    );
+  };
+
   return (
     <Router>
       <RecoilRoot>
-        <ul>
-          <li><NavLink to="/">Splash</NavLink></li>
-          <li><NavLink to="/Home">Home</NavLink></li>
-          <li><NavLink to="/Login">Login</NavLink></li>
-          <li><NavLink to="/Schedule">Schedule</NavLink></li>
-        </ul>
-        <Routes>
-          <Route path="/" element={<Splash />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Schedule" element={<Schedule />} />
-        </Routes>
+        <Routing />
       </RecoilRoot>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
