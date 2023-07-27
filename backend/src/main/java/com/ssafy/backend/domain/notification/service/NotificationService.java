@@ -1,0 +1,72 @@
+package com.ssafy.backend.domain.notification.service;
+
+import com.ssafy.backend.domain.notification.Notification;
+import com.ssafy.backend.domain.notification.dto.NotificationRegistDto;
+import com.ssafy.backend.domain.notification.dto.NotificationResultDto;
+import com.ssafy.backend.domain.notification.repository.NotificationRepository;
+import com.ssafy.backend.domain.schedule.Schedule;
+import com.ssafy.backend.domain.schedule.dto.ScheduleResultDto;
+import com.ssafy.backend.domain.user.User;
+import com.ssafy.backend.domain.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@Transactional
+@RequiredArgsConstructor
+public class NotificationService {
+
+    private final NotificationRepository notificationRepository;
+    private final UserRepository userRepository;
+
+
+    public int registNotification(NotificationRegistDto notificationRegistDto){
+        Notification notification = new Notification(
+                notificationRegistDto.getReadStatus(),
+                notificationRegistDto.getNotificationType()
+        );
+        //유저 등록
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+
+        notification.setUser(user);
+
+        //일정 등록
+        notificationRepository.save(notification);
+
+        return 1;
+    }
+
+    public List<NotificationResultDto> getAllNotification() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+        //유저의 notification 얻기
+        List<Notification> notifications = user.getNotifications();
+        //결과값도 dto로 바꿔주기
+        List<NotificationResultDto> result = new ArrayList<>();
+        for (Notification notification : notifications){
+            NotificationResultDto notificationResultDto = new NotificationResultDto(
+                    notification.getId(),
+                    notification.getReadStatus(),
+                    notification.getNotificationType()
+            );
+            result.add(notificationResultDto);
+        }
+        return result;
+    }
+
+    public int modifyNotification(Long notificationId){
+        Notification notification = notificationRepository.findById(notificationId)
+                .orElseThrow(() -> new IllegalArgumentException("아이디에 해당하는 알림이 없습니다."));
+        notification.updateReadStatus();
+        return 1;
+    }
+}
