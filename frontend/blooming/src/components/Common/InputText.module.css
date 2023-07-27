@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.inputLabel {
+  position: absolute;
+  left: 0.5rem;
+  top: -0.75rem;
+  color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  font-size: 0.875rem;
+  background-color: white;
+  padding: 0 0.3125rem;
+}
+
+.inputField {
+  font-size: 1rem;
+  padding: 0.4375rem 0.4375rem 0.4375rem 0.5rem;
+  width: 100%;
+  outline: none;
+  background-color: white;
+  border: 0.0625rem solid rgba(0, 0, 0, 0.6);
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+}
+
+/* 포커스 */
+.inputField:focus {
+  border-color: #2196F3;
+  box-shadow: 0 0 0.3125rem rgba(98, 0, 238, 0.2);
+}
+
+.inputField:focus ~ .inputLabel,
+.inputField:not(:placeholder-shown) ~ .inputLabel {
+  transform: translate(0.25rem, -1.5rem) scale(0.8);
+  color: #2196F3;
+}
