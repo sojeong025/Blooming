@@ -29,13 +29,17 @@ public class NotificationService {
     public int registNotification(NotificationRegistDto notificationRegistDto){
         Notification notification = new Notification(
                 notificationRegistDto.getReadStatus(),
-                notificationRegistDto.getNotificationType()
+                notificationRegistDto.getNotificationType(),
+                notificationRegistDto.getTitle(),
+                notificationRegistDto.getContent()
         );
-        //유저 등록
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByEmail(authentication.getName())
-                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+        //유저 등록 - dto를 통해 받은 유저를 등록
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        User user = userRepository.findByEmail(authentication.getName())
+//                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
 
+        User user = userRepository.findById(notificationRegistDto.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 아이디에 해당하는 회원이 없습니다."));
         notification.setUser(user);
 
         //일정 등록
