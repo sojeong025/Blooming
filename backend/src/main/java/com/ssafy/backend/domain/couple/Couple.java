@@ -1,8 +1,10 @@
 package com.ssafy.backend.domain.couple;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +35,7 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
 	private Long id;
 
 	private LocalDate weddingDate;
-	private String coupleCode;
+	private int coupleCode;
 
 	@OneToMany(mappedBy = "couple")
 	private List<User> users = new ArrayList<>();
@@ -41,12 +43,23 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
 	@OneToMany(mappedBy = "couple")
 	private List<Schedule> schedules = new ArrayList<>();
 
-	public void setCoupleCode(String coupleCode) {
+	public void setCoupleCode(int coupleCode) {
 		this.coupleCode = coupleCode;
 	}
-	public static Couple createCouple(String coupleCode) {
+	public static Couple createCouple() {
 		Couple couple = new Couple();
+		int coupleCode = couple.generateCoupleCode();
 		couple.setCoupleCode(coupleCode);
+		System.out.println("coupleCode = " + coupleCode);
 		return couple;
+	}
+
+	public int generateCoupleCode() {
+		SecureRandom random = new SecureRandom();
+		return random.nextInt(100000000);
+	}
+
+	public void changeWeddingDate(LocalDate weddingDate) {
+		this.weddingDate = weddingDate;
 	}
 }
