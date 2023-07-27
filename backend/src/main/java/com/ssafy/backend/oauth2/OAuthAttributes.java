@@ -40,8 +40,7 @@ public class OAuthAttributes {
 
 	/**
 	 * of메소드로 OAuthAttributes 객체가 생성되어, 유저 정보들이 담긴 OAuth2UserInfo가 소셜 타입별로 주입된 상태
-	 * OAuth2UserInfo에서 socialId(식별값), nickname을 가져와서 build
-	 * email에는 UUID로 중복 없는 랜덤 값 생성
+	 * OAuth2UserInfo에서 socialId(식별값), nickname, eamil, gender를 가져와서 build
 	 * role은 GUEST로 설정
 	 */
 	public User toEntity(OAuth2UserInfo oauth2UserInfo) {

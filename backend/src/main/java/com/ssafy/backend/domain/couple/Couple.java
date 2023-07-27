@@ -40,4 +40,13 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
 
 	@OneToMany(mappedBy = "couple")
 	private List<Schedule> schedules = new ArrayList<>();
+
+	public void setCoupleCode(String coupleCode) {
+		this.coupleCode = coupleCode;
+	}
+	public static Couple createCouple(String coupleCode) {
+		Couple couple = new Couple();
+		couple.setCoupleCode(coupleCode);
+		return couple;
+	}
 }
