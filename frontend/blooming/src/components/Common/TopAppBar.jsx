@@ -1,15 +1,30 @@
 import { NavLink } from "react-router-dom";
 
-import "./TopAppBar.css";
-// import logo from "./logo.png"; // 로고 이미지 파일 경로로 변경해 주세요
-// import notificationsIcon from "./notifications.png"; // 알림 아이콘 파일 경로로 변경해 주세요
+import classes from "./TopAppBar.module.css";
+
+import noticeBase from "../../assets/Nav/notice_base.svg";
+import noticeActive from "../../assets/Nav/notice_active.svg";
 
 const TopAppBar = () => {
   return (
-    <header className='header'>
-      <img src='' alt='Logo' className='logo' />
-      {/* <div className='spacer' /> */}
-      <NavLink to='/AllNotice'>알림</NavLink>
+    <header className={classes.header}>
+      <img src='' alt='Logo' className={classes.logo} />
+
+      <NavLink to='/AllNotice' className={classes.rightLink}>
+        <div className={classes.navBlock}>
+          <img
+            className={classes.navIcon}
+            // activeClassName에 의해 이미지 소스 변경
+            src={
+              window.location.pathname === "/AllNotice"
+                ? noticeActive
+                : noticeBase
+            }
+            alt=''
+          />
+          <div className={classes.navTitle}>알림</div>
+        </div>
+      </NavLink>
     </header>
   );
 };
