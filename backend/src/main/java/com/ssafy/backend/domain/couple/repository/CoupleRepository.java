@@ -1,13 +1,11 @@
 package com.ssafy.backend.domain.couple.repository;
 
-import java.util.Optional;
-
+import com.ssafy.backend.domain.couple.Couple;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ssafy.backend.domain.couple.Couple;
-import com.ssafy.backend.domain.user.User;
+import java.util.Optional;
 
 public interface CoupleRepository extends JpaRepository<Couple, Long> {
 
-	Optional<Couple> findByCoupleCode(String coupleCode);
+    Optional<Couple> findByCoupleCode(String coupleCode);
 }

@@ -1,6 +1,5 @@
 package com.ssafy.backend.domain.schedule.dto;
 
-import com.ssafy.backend.domain.schedule.ScheduledBy;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;

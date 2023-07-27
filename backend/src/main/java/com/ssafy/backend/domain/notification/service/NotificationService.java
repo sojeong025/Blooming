@@ -4,8 +4,6 @@ import com.ssafy.backend.domain.notification.Notification;
 import com.ssafy.backend.domain.notification.dto.NotificationRegistDto;
 import com.ssafy.backend.domain.notification.dto.NotificationResultDto;
 import com.ssafy.backend.domain.notification.repository.NotificationRepository;
-import com.ssafy.backend.domain.schedule.Schedule;
-import com.ssafy.backend.domain.schedule.dto.ScheduleResultDto;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +24,7 @@ public class NotificationService {
     private final UserRepository userRepository;
 
 
-    public int registNotification(NotificationRegistDto notificationRegistDto){
+    public int registNotification(NotificationRegistDto notificationRegistDto) {
         Notification notification = new Notification(
                 notificationRegistDto.getReadStatus(),
                 notificationRegistDto.getNotificationType(),
@@ -56,7 +54,7 @@ public class NotificationService {
         List<Notification> notifications = user.getNotifications();
         //결과값도 dto로 바꿔주기
         List<NotificationResultDto> result = new ArrayList<>();
-        for (Notification notification : notifications){
+        for (Notification notification : notifications) {
             NotificationResultDto notificationResultDto = new NotificationResultDto(
                     notification.getId(),
                     notification.getReadStatus(),
@@ -69,7 +67,7 @@ public class NotificationService {
         return result;
     }
 
-    public int modifyNotification(Long notificationId){
+    public int modifyNotification(Long notificationId) {
         Notification notification = notificationRepository.findById(notificationId)
                 .orElseThrow(() -> new IllegalArgumentException("아이디에 해당하는 알림이 없습니다."));
         notification.updateReadStatus();

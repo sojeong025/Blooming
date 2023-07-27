@@ -1,17 +1,17 @@
 package com.ssafy.backend.domain.notification.controller;
 
-import com.ssafy.backend.domain.notification.dto.NotificationRegistDto;
 import com.ssafy.backend.domain.notification.dto.NotificationResultDto;
 import com.ssafy.backend.domain.notification.service.NotificationService;
-import com.ssafy.backend.domain.schedule.dto.ScheduleModifyDto;
-import com.ssafy.backend.domain.schedule.dto.ScheduleResultDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -35,12 +35,11 @@ public class NotificationController {
     @Operation(summary = "알림 전체 조회하기", description = "모든 알림을 불러옵니다.")
     @Parameter(name = "없음", description = "없음")
     @GetMapping("/notification")
-    public ResponseEntity<?> getAllNotification(){
+    public ResponseEntity<?> getAllNotification() {
         List<NotificationResultDto> notificationList = notificationService.getAllNotification();
-        if (notificationList == null){
+        if (notificationList == null) {
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-        }
-        else{
+        } else {
             return new ResponseEntity<List<NotificationResultDto>>(notificationList, HttpStatus.OK);
         }
     }
@@ -49,7 +48,7 @@ public class NotificationController {
     @Operation(summary = "알림 하나 수정하기", description = "알림을 읽음 처리 합니다.")
     @Parameter(name = "notificationId", description = "변경 가능한 것 : 호출 시 읽음 처리")
     @PutMapping("/notification/{notificationId}")
-    public ResponseEntity<?> modifyNotification(@PathVariable Long notificationId){
+    public ResponseEntity<?> modifyNotification(@PathVariable Long notificationId) {
         int cnt = notificationService.modifyNotification(notificationId);
 //        if (cnt == 0){
 //            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

@@ -10,7 +10,6 @@ import com.ssafy.backend.domain.schedule.repository.ScheduleRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -35,7 +33,7 @@ public class ScheduleService {
                 scheduleRegistDto.getScheduleDate(),
                 scheduleRegistDto.getScheduleTime(),
                 scheduleRegistDto.getScheduledBy()
-                );
+        );
         //커플도 등록 : 해당 유저 id -> couple id -> couple 찾기 X
         //아 유저 찾으면 커플 찾을수 잇음. 양방향 -- 맞나
         //JWT 토큰 이용 == 맞나
@@ -58,7 +56,7 @@ public class ScheduleService {
         //결과값도 dto로 바꿔주기
         List<Schedule> schedules = scheduleRepository.findAllByCoupleId(coupleId);
         List<ScheduleResultDto> result = new ArrayList<>();
-        for (Schedule schedule : schedules){
+        for (Schedule schedule : schedules) {
             ScheduleResultDto scheduleDto = new ScheduleResultDto(
                     schedule.getId(),
                     schedule.getTitle(),
@@ -66,7 +64,7 @@ public class ScheduleService {
                     schedule.getScheduleDate(),
                     schedule.getScheduleTime(),
                     schedule.getScheduledBy()
-                    );
+            );
             result.add(scheduleDto);
         }
         return result;

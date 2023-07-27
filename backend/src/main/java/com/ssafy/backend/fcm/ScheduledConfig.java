@@ -10,7 +10,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 public class ScheduledConfig {
     private final int POOL_SIZE = 10; //한 번에 처리할 수 있는 건수
 
-    public TaskScheduler scheduler(){
+    public TaskScheduler scheduler() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
         scheduler.setPoolSize(POOL_SIZE);
         return scheduler;

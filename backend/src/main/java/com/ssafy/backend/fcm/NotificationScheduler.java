@@ -10,7 +10,6 @@ import com.google.firebase.messaging.Notification;
 import com.ssafy.backend.domain.notification.NotificationType;
 import com.ssafy.backend.domain.notification.ReadStatus;
 import com.ssafy.backend.domain.notification.dto.NotificationRegistDto;
-import com.ssafy.backend.domain.notification.repository.NotificationRepository;
 import com.ssafy.backend.domain.notification.service.NotificationService;
 import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.schedule.repository.ScheduleRepository;
@@ -78,14 +77,14 @@ public class NotificationScheduler {
 
          일단은 한 사람에게 같은 메시지 보내기
          */
-        
+
         //일단 임시
-        for (int day : new int[]{0, 1, 7, 30}){
+        for (int day : new int[]{0, 1, 7, 30}) {
             System.out.println(day + "일 후 알림");
 
             //day일 후 스케줄을 일단 읽어옴 -> 푸시 알림 보내기 + 알림 로그 테이블에 저장
             List<Schedule> schedules = scheduleRepository.findAllByScheduleDate(LocalDate.now().plusDays(day));
-            for (Schedule schedule : schedules){
+            for (Schedule schedule : schedules) {
                 System.out.println(schedule);
 
 
@@ -106,7 +105,7 @@ public class NotificationScheduler {
                         title,
                         content,
                         targetId
-                        ));
+                ));
             }
 
         }
@@ -141,7 +140,7 @@ public class NotificationScheduler {
             } else {
                 return "서버에 유저 firebase token 없음";
             }
-        } else{
+        } else {
             return "해당 유저 없음 " + fcmDto.getTargetUserId();
         }
     }

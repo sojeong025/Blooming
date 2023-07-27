@@ -4,7 +4,6 @@ import com.ssafy.backend.domain.notification.NotificationType;
 import com.ssafy.backend.domain.notification.ReadStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Getter

@@ -158,11 +158,11 @@ public class JwtService {
      */
     public void updateRefreshToken(String email, String refreshToken) {
         User findUser = userRepository.findByEmail(email)
-            .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
         // .ifPresentOrElse(
-                //         user -> user.updateRefreshToken(refreshToken),
-                //         () -> new Exception("일치하는 회원이 없습니다.")
-                // );
+        //         user -> user.updateRefreshToken(refreshToken),
+        //         () -> new Exception("일치하는 회원이 없습니다.")
+        // );
         findUser.updateRefreshToken(refreshToken);
         System.out.println("findUser = " + findUser);
         userRepository.saveAndFlush(findUser);

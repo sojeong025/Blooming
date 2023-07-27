@@ -1,13 +1,10 @@
 package com.ssafy.backend.domain.schedule.dto;
 
-import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.schedule.ScheduledBy;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
