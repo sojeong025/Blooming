@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  width: 100%;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  height: 56px;
+  
+}
+
+.logo {
+  width: 120px; /* 로고 이미지 크기 조절 */
+  height: auto; 
+}
+
+.navBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 0rem 1rem 0rem;
+}
+
+.navIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+.navTitle {
+  align-self: stretch;
+  text-align: center;
+  /* 글씨체 수정 */
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem; /* 133.333% */
+  letter-spacing: 0.03125rem;
+}
+
+.rightLink {
+  position: absolute;
+  right: 1rem;
+}
