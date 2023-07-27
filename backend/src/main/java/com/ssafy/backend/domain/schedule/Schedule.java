@@ -17,11 +17,13 @@ import javax.persistence.ManyToOne;
 import com.ssafy.backend.domain.common.CreatedBaseEntity;
 import com.ssafy.backend.domain.couple.Couple;
 
+import com.ssafy.backend.domain.schedule.dto.ScheduleModifyDto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Getter
@@ -36,9 +38,12 @@ public class Schedule extends CreatedBaseEntity {
 	private Long id;
 
 	private String title;
+	private String content;
 	@Column(name = "SCHEDULED_DATE")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate scheduleDate;
 	@Column(name = "SCHEDULED_TIME")
+	@DateTimeFormat(pattern = "kk:mm")
 	private LocalTime scheduleTime;
 	@Enumerated(EnumType.STRING)
 	private ScheduledBy scheduledBy;
@@ -54,11 +59,18 @@ public class Schedule extends CreatedBaseEntity {
 		couple.getSchedules().add(this);
 	}
 
-	public void update(Schedule schedule){
-		//변경 가능한 것 : title, scheduleDate, scheduleTime, scheduledBy
-		this.title = schedule.title;
-		this.scheduleDate = schedule.scheduleDate;
-		this.scheduleTime = schedule.scheduleTime;
-		this.scheduledBy = schedule.scheduledBy;
+	public void update(ScheduleModifyDto scheduleModifyDto){
+		//변경 가능한 것 : title, content, scheduleTime
+		this.title = scheduleModifyDto.getTitle();
+		this.content = scheduleModifyDto.getContent();
+		this.scheduleTime = scheduleModifyDto.getScheduleTime();
+	}
+
+	public Schedule(String title, String content, LocalDate scheduleDate, LocalTime scheduleTime, ScheduledBy scheduledBy) {
+		this.title = title;
+		this.content = content;
+		this.scheduleDate = scheduleDate;
+		this.scheduleTime = scheduleTime;
+		this.scheduledBy = scheduledBy;
 	}
 }
