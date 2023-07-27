@@ -12,4 +12,8 @@ import lombok.NoArgsConstructor;
 public class WeddingDateDto {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate weddingDate;
+
+	public WeddingDateDto(LocalDate weddingDate) {
+		this.weddingDate = weddingDate;
+	}
 }

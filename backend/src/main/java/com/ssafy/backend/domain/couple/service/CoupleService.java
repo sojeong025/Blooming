@@ -18,10 +18,17 @@ public class CoupleService {
 	private final UserRepository userRepository;
 
 	@Transactional
-	public void setWeddingDate(LocalDate weddingDate, String userEmail) {
+	public void registerWeddingDate(LocalDate weddingDate, String userEmail) {
 		User findUser = userRepository.findByEmail(userEmail)
 			.orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 
 		findUser.getCouple().changeWeddingDate(weddingDate);
+	}
+
+	public LocalDate getWeddingDate(String userEmail) {
+		User findUser = userRepository.findByEmail(userEmail)
+			.orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+
+		return findUser.getCouple().getWeddingDate();
 	}
 }
