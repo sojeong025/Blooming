@@ -61,6 +61,7 @@ public class NotificationScheduler {
     }
 
     //시간에 맞게 푸시 알림을 스케줄링하는 코드
+//    @Scheduled(cron = "* * 1 * * ?")
     @Scheduled(cron = "0 0 1 * * ?")
 //    @Scheduled(cron = "0 * 9 * * ?")
     public void pushMorningDietAlarm() {

@@ -73,4 +73,8 @@ public class NotificationService {
         notification.updateReadStatus();
         return 1;
     }
+
+    public void deleteNotification(Long notificationId) {
+        notificationRepository.deleteById(notificationId);
+    }
 }

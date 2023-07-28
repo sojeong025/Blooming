@@ -26,7 +26,7 @@ public class ScheduleService {
     private final CoupleRepository coupleRepository;
     private final UserRepository userRepository;
 
-    public int registSchedule(ScheduleRegistDto scheduleRegistDto) {
+    public void registSchedule(ScheduleRegistDto scheduleRegistDto) {
         Schedule schedule = new Schedule(
                 scheduleRegistDto.getTitle(),
                 scheduleRegistDto.getContent(),
@@ -46,7 +46,6 @@ public class ScheduleService {
         schedule.setCouple(couple);
 
         scheduleRepository.save(schedule);
-        return 1;
     }
 
     public List<ScheduleResultDto> getAllSchedule() {
