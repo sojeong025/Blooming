@@ -1,0 +1,39 @@
+.tipContainer {  
+  position:relative; 
+  margin: 0px;
+  height:5vh;
+  width: auto;
+  background:pink; 
+  border-radius: 10px;
+
+  /* 가운데 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+ }
+
+ p {
+  margin: 0;
+  /* flex: 1; */
+ }
+
+ .mainImg {
+  width: 330px;
+  height: auto;
+ }
+
+ .textBold {
+  font-weight: bolder;
+ }
+
+ /* .tipContainer:after { 
+  border-top:0px solid transparent; 
+  border-left: 10px solid transparent; 
+  border-right: 10px solid transparent; 
+  border-bottom: 10px solid pink; 
+  content:""; 
+  position:absolute;
+  top:-10px;
+  left:200px;  
+ } */
