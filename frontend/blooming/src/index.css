@@ -12,8 +12,7 @@
 }
 
 
-:root {
-  font-family: 'SUITE-Regular', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+/* :root {
   line-height: 1.5;
   font-weight: 400;
 
@@ -26,7 +25,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-}
+} */
 
 a {
   font-weight: 500;
@@ -38,10 +37,11 @@ a:hover {
 }
 
 body {
+  font-family: 'SUITE-Regular', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  /* place-items: center; */
+  min-width: 100vw;
   min-height: 100vh;
   background-color: #EEEDDE;
 }
