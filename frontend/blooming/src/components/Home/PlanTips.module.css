@@ -1,10 +1,10 @@
 .tipContainer {  
   position:relative; 
   margin: 0px;
-  height:5vh;
   width: auto;
   background:pink; 
   border-radius: 10px;
+  padding: 20px;
 
   /* 가운데 정렬 */
   display: flex;

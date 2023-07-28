@@ -6,6 +6,7 @@ import {
 import { weddingPlanState } from "../../recoil/PlanTipsAtom";
 import classes from "./PlanTips.module.css";
 import { useEffect, useState } from "react";
+// import ReactHtmlParser from "react-html-parser";
 
 const Tips = () => {
   const weddingDate = useRecoilValue(weddingDateState);
@@ -61,6 +62,7 @@ const Tips = () => {
                 <b className={classes.textBold}>{nextPlan.title}</b> 일정을 앞둔
                 지금!
               </p>
+              {/* <p>{ReactHtmlParser(randomComment)}</p> */}
               <p>{randomComment}</p>
             </div>
           </>
