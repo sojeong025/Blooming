@@ -32,7 +32,8 @@ public class ScheduleService {
                 scheduleRegistDto.getContent(),
                 scheduleRegistDto.getScheduleDate(),
                 scheduleRegistDto.getScheduleTime(),
-                scheduleRegistDto.getScheduledBy()
+                scheduleRegistDto.getScheduledBy(),
+                scheduleRegistDto.getCategory()
         );
         //커플도 등록 : 해당 유저 id -> couple id -> couple 찾기 X
         //아 유저 찾으면 커플 찾을수 잇음. 양방향 -- 맞나
@@ -63,7 +64,8 @@ public class ScheduleService {
                     schedule.getContent(),
                     schedule.getScheduleDate(),
                     schedule.getScheduleTime(),
-                    schedule.getScheduledBy()
+                    schedule.getScheduledBy(),
+                    schedule.getCategory()
             );
             result.add(scheduleDto);
         }
@@ -95,7 +97,8 @@ public class ScheduleService {
                 schedule.getContent(),
                 schedule.getScheduleDate(),
                 schedule.getScheduleTime(),
-                schedule.getScheduledBy()
+                schedule.getScheduledBy(),
+                schedule.getCategory()
         );
         return scheduleDto;
     }

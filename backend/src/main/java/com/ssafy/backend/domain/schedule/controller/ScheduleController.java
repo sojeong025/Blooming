@@ -22,7 +22,7 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @Operation(summary = "일정 하나 등록하기", description = "캘린더에서 새로운 일정을 등록합니다.")
-    @Parameter(name = "ScheduleRegistDto", description = "일정 이름, 내용, 날짜, 시간, 카테고리(공통, 신랑, 신부)를 넘겨주세요")
+    @Parameter(name = "ScheduleRegistDto", description = "일정 이름, 내용, 날짜, 시간, 담당자(공통, 신랑, 신부), 카테고리(스드메, 웨딩홀..)를 넘겨주세요")
     @PostMapping("/schedule")
     public ResponseEntity<?> registSchedule(@RequestBody ScheduleRegistDto scheduleRegistDto) {
         int cnt = scheduleService.registSchedule(scheduleRegistDto);

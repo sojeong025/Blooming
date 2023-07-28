@@ -8,7 +8,7 @@ import noticeActive from "../../assets/Nav/notice_active.svg";
 const TopAppBar = () => {
   return (
     <header className={classes.header}>
-      <img src='' alt='Logo' className={classes.logo} />
+      <img src='src/assets/Nav/word.png' alt='Logo' className={classes.logo} />
 
       <NavLink to='/AllNotice' className={classes.rightLink}>
         <div className={classes.navBlock}>
