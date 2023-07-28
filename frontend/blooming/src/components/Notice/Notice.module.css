@@ -1,8 +1,9 @@
 .noticeContainer {
-  list-style: none;
-  padding: 0;
+  padding: 10vh 0;
   width: 80vw;
   /* position: absolute; */
+  /* display: flex; */
+
   top: 0;
   /* margin: 1rem 0; */
 }
