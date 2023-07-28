@@ -58,8 +58,7 @@ const Tips = () => {
               className={classes.mainImg}
             />
             <div className={classes.tipContainer} onClick={updateRandomComment}>
-              <p>
-                <b className={classes.textBold}>{nextPlan.title}</b> 일정을 앞둔
+              <p className={classes.textBold}>{nextPlan.title}일정을 앞둔
                 지금!
               </p>
               {/* <p>{ReactHtmlParser(randomComment)}</p> */}
