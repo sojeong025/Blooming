@@ -1,18 +1,19 @@
-import Notice from "../../components/Notice/Notice";
-import NoticeLibrary from "../../components/Notice/Notice_library";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import NoticeList from "../../components/Notice/NoticeSwipeable";
 
 export default function AllNotice() {
-  const navigate = useNavigate();
-  const handleHistory = () => {
-    navigate(-1);
-  };
+  const [notices, setNotices] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users/1/todos")
+      .then((response) => response.json())
+      .then((json) => setNotices(json));
+  }, []);
+  // console.log(notices);
 
   return (
-    <>
-      <div onClick={handleHistory}>엑스버튼</div>
-      <Notice />
-      <NoticeLibrary />
-    </>
+    <div style={{ padding: "60px 0" }}>
+      <NoticeList />
+    </div>
   );
 }
