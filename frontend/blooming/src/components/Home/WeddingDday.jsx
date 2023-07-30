@@ -64,7 +64,7 @@ export const WeddingDday = () => {
   };
 
   return (
-    <div className='topContainer'>
+    <div>
       <input type='date' value={weddingDate} onChange={handleChange} readOnly />
       <p>{renderScript()}</p>
     </div>
