@@ -11,6 +11,19 @@
   font-style: normal;
 }
 
+:root {
+  --vh: 100%;
+}
+
+#root {
+  /* height: calc(var(--vh, 1vh) * 100);  */
+}
+
+.mainContainer {
+  padding: 60px 16px; 
+  /* width: 100%; */
+  /* box-sizing: border-box; */
+} 
 
 /* :root {
   line-height: 1.5;
@@ -40,6 +53,7 @@ body {
   font-family: 'SUITE-Regular', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
   display: flex;
+  /* justify-content: center; */
   /* place-items: center; */
   min-width: 100vw;
   min-height: 100vh;

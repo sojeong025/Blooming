@@ -20,6 +20,9 @@ const BottomNav = () => {
     setActiveTab(tab);
   };
 
+  // 1. 아이콘 밑에 글씨 넣기
+  // 2. 아이콘만 넣고 페이지 명은 위에 적어주기
+
   return (
     <nav className={classes.navContainer}>
       <NavLink to='/home'>
@@ -34,7 +37,7 @@ const BottomNav = () => {
             src={activeTab === "home" ? homeActive : homeBase}
             alt=''
           />
-          <div className={classes.navTitle}>홈</div>
+          {/* <div className={classes.navTitle}>홈</div> */}
         </div>
       </NavLink>
       <NavLink to='/info'>

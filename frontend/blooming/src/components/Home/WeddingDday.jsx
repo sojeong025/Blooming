@@ -64,11 +64,10 @@ export const WeddingDday = () => {
   };
 
   return (
-    <>
+    <div>
       <input type='date' value={weddingDate} onChange={handleChange} readOnly />
-
       <p>{renderScript()}</p>
-    </>
+    </div>
   );
 };
 

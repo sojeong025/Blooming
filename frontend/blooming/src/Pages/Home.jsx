@@ -5,20 +5,18 @@ import PlanTips from "../components/Home/PlanTips";
 
 function Home() {
   return (
-    <>
-      <div style={{ margin: "60px 0" }}>
-        <WeddingDday />
+    <div className='mainContainer'>
+      <WeddingDday />
 
-        {/* PlanTips랑 합침 */}
-        {/* <MainImage /> */}
+      {/* PlanTips랑 합침 */}
+      {/* <MainImage /> */}
 
-        <PlanTips />
+      <PlanTips />
 
-        {/* <ScheduleDday /> */}
+      {/* <ScheduleDday /> */}
 
-        {/* 예약, 좋아요 */}
-      </div>
-    </>
+      {/* 예약, 좋아요 */}
+    </div>
   );
 }
 
