@@ -17,6 +17,7 @@ import Share from "./Pages/Login/Share";
 import AllNotice from "./Pages/Notice/AllNotice";
 import TopAppBar from "./components/Common/TopAppBar";
 import BottomNav from "./components/Common/BottomNav";
+import { useEffect } from "react";
 
 function App() {
   // Nav를 숨길 페이지 path
@@ -31,11 +32,19 @@ function App() {
   ];
 
   const Routing = () => {
-    const location = useLocation();
+    function setScreenSize() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    }
+    useEffect(() => {
+      setScreenSize();
+    });
 
+    const location = useLocation();
     return (
       <>
         {!hiddenPaths.includes(location.pathname) && <TopAppBar />}
+
         <Routes>
           <Route path='/' element={<Splash />} />
           <Route path='/login' element={<Login />} />
@@ -44,10 +53,12 @@ function App() {
           <Route path='/DecideWedding' element={<DecideWedding />} />
           <Route path='/ChooseWedding' element={<ChooseWedding />} />
           <Route path='/Share' element={<Share />} />
+
           <Route path='/AllNotice' element={<AllNotice />} />
           <Route path='/home' element={<Home />} />
           <Route path='/schedule' element={<Schedule />} />
         </Routes>
+
         {!hiddenPaths.includes(location.pathname) && <BottomNav />}
       </>
     );

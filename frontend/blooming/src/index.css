@@ -11,7 +11,13 @@
   font-style: normal;
 }
 
+:root {
+  --vh: 100%;
+}
 
+.mainContainer {
+  height: calc(var(--vh, 1vh) * 100);
+} 
 /* :root {
   line-height: 1.5;
   font-weight: 400;
