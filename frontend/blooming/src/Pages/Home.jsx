@@ -5,7 +5,7 @@ import PlanTips from "../components/Home/PlanTips";
 
 function Home() {
   return (
-    <>
+    <div className='mainContainer'>
       <div style={{ margin: "60px 0" }}>
         <WeddingDday />
 
@@ -18,7 +18,7 @@ function Home() {
 
         {/* 예약, 좋아요 */}
       </div>
-    </>
+    </div>
   );
 }
 
