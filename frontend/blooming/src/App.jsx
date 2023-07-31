@@ -22,6 +22,8 @@ import Info from "./Pages/Info/Info";
 import AllNotice from "./Pages/Notice/AllNotice";
 import TopAppBar from "./components/Common/TopAppBar";
 import BottomNav from "./components/Common/BottomNav";
+
+import Error from "./Pages/Error";
 import { useEffect } from "react";
 
 function App() {
@@ -49,7 +51,6 @@ function App() {
     return (
       <>
         {!hiddenPaths.includes(location.pathname) && <TopAppBar />}
-
         <Routes>
           <Route path='/' element={<Splash />} />
           <Route path='/login' element={<Login />} />
@@ -66,6 +67,9 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/schedule' element={<Schedule />} />
           <Route path='/MobileInvitation' element={<MobileInvitation />} />
+
+          {/* NotFound */}
+          <Route path='*' element={<Error />} />
         </Routes>
 
         {!hiddenPaths.includes(location.pathname) && <BottomNav />}
