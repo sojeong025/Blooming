@@ -68,7 +68,7 @@ export const WeddingDday = () => {
       <input style={{ visibility: "hidden" }} type='date' value={weddingDate} onChange={handleChange} readOnly />
 
       <p>{renderScript()}</p>
-    </div>
+    </>
   );
 };
 
