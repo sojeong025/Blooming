@@ -15,14 +15,16 @@ function Splash() {
   }, [navigate]);
 
   return (
-    <motion.div
-      className={classes.container}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 2.0 }}
-    >
-      {/* 로딩 중일 때의 내용 */}
-    </motion.div>
+    <div className={classes.div}>
+      <motion.div
+        className={classes.container}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 2.0 }}
+      >
+        {/* 로딩 중일 때의 내용 */}
+      </motion.div>
+    </div>
   );
 }
 

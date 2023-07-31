@@ -6,18 +6,20 @@ import { NavLink } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { imageListState } from '../../recoil/PreviewAtom'
 import { useState } from "react";
+import axios from "axios";
 
-const CustomDot = ({ onClick, isActive }) => {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`${classes["custom-dot"]} ${isActive ? classes["active"] : ""}`}
-    />
-  );
-};
+
 
 function Preview() {
+  const CustomDot = ({ onClick, isActive }) => {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className={`${classes["custom-dot"]} ${isActive ? classes["active"] : ""}`}
+      />
+    );
+  };
 
   const imageList = useRecoilValue(imageListState);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -38,7 +40,7 @@ function Preview() {
 
 
   return (
-    <>
+    <div className={classes.div}>
     <Carousel
       infiniteLoop
       showThumbs={false}
@@ -49,13 +51,13 @@ function Preview() {
       className={classes["image-carousel"]}
       onChange={handleCarouselChange}
       selectedItem={currentImageIndex}
-        renderIndicator={(onClickHandler, isSelected, index, label) => (
-          <CustomDot
-            key={index}
-            onClick={onClickHandler}
-            isActive={isSelected}
-          />
-        )}
+      renderIndicator={(onClickHandler, isSelected, index, label) => (
+      <CustomDot
+        key={index}
+        onClick={onClickHandler}
+        isActive={isSelected}
+      />
+      )}
     >
       {imageList.map((image, index) => (
         <div key={index}>
@@ -64,15 +66,15 @@ function Preview() {
       ))}
     </Carousel>
     {currentImageIndex === 2 ?
-      <NavLink to={"/join"}>
+      <a href="http://192.168.30.143:8080/oauth2/authorization/kakao" >
         <Button text="카카오톡으로 로그인하기" />
-      </NavLink> :
+      </a> :
       <div className={classes.btn}>
         <button className={classes.pre} onClick={handlePrevClick}>건너뛰기</button>
         <button className={classes.next} onClick={handleNextClick}>다음</button>
       </div>
     }    
-  </>
+  </div>
   );
 }
 
