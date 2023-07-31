@@ -3,6 +3,7 @@ package com.ssafy.backend.domain.user;
 import com.ssafy.backend.domain.common.CreatedAndUpdatedBaseEntity;
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.notification.Notification;
+import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,11 +62,18 @@ public class User extends CreatedAndUpdatedBaseEntity {
     // TODO: 생성메서드 만들기
 
     //== 유저 필드 업데이트 ==//
-    public void update(UserSignUpDto userSignUpDto) {
+    public void updateFirst(UserSignUpDto userSignUpDto) {
         this.name = userSignUpDto.getName();
         this.nickname = userSignUpDto.getNickname();
         this.phoneNumber = userSignUpDto.getPhoneNumber();
         this.gender = userSignUpDto.getGender();
+    }
+
+    public void updateProfile(UserDto userDto) {
+        this.name = userDto.getName();
+        this.nickname = userDto.getNickname();
+        this.phoneNumber = userDto.getPhoneNumber();
+        this.gender = userDto.getGender();
     }
 
     // 유저 권한 설정 메소드
