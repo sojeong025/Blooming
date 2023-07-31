@@ -18,7 +18,8 @@ import Share from "./Pages/Login/Share";
 import MyPage from "./Pages/MyPage/MyPage";
 import Diary from "./Pages/Diary/DIary";
 import Info from "./Pages/Info/Info";
-import MobileInvitation from "./Pages/MobileInvitation";
+import MobileInvitation from "./Pages/Info/MobileInvitation";
+import Create from "./Pages/Info/Create";
 import AllNotice from "./Pages/Notice/AllNotice";
 import TopAppBar from "./components/Common/TopAppBar";
 import BottomNav from "./components/Common/BottomNav";
@@ -66,6 +67,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/schedule' element={<Schedule />} />
           <Route path='/MobileInvitation' element={<MobileInvitation />} />
+          <Route path='/Create' element={<Create />} />
         </Routes>
 
         {!hiddenPaths.includes(location.pathname) && <BottomNav />}
