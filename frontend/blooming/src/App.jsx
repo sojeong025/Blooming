@@ -18,7 +18,7 @@ import Share from "./Pages/Login/Share";
 import MyPage from "./Pages/MyPage/MyPage";
 import Diary from "./Pages/Diary/DIary";
 import Info from "./Pages/Info/Info";
-import MobileInvitation from "./Pages/Info/MobileInvitation";
+import MobileInvitation from "./Pages/MobileInvitation";
 import AllNotice from "./Pages/Notice/AllNotice";
 import TopAppBar from "./components/Common/TopAppBar";
 import BottomNav from "./components/Common/BottomNav";
