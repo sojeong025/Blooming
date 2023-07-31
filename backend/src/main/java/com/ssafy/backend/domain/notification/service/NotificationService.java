@@ -7,6 +7,7 @@ import com.ssafy.backend.domain.notification.repository.NotificationRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -46,12 +47,13 @@ public class NotificationService {
         return 1;
     }
 
-    public List<NotificationResultDto> getAllNotification() {
+    public List<NotificationResultDto> getAllNotification(Pageable pageable) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+
         //유저의 notification 얻기
-        List<Notification> notifications = user.getNotifications();
+        List<Notification> notifications = notificationRepository.findByUserOrderByIdDesc(user, pageable);
         //결과값도 dto로 바꿔주기
         List<NotificationResultDto> result = new ArrayList<>();
         for (Notification notification : notifications) {
