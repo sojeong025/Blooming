@@ -3,9 +3,11 @@ import classes from './Common.module.css';
 function Main() {
   return(
     <div className={classes.container}>
-      메인
+      <p className={classes.header}>메인</p>
       <hr />
-      <div>사진 (필수)</div>
+      <div className={classes.thumbnail}>
+        <p>메인 사진 (필수)</p>
+      </div>
     </div>  
   )
 }
