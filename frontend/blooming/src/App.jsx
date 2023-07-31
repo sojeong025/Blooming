@@ -17,7 +17,7 @@ import DecideWedding from "./Pages/Login/DecideWedding";
 import ChooseWedding from "./Pages/Login/ChooseWedding";
 import Share from "./Pages/Login/Share";
 import MyPage from "./Pages/MyPage/MyPage";
-import Diary from "./Pages/Diary/DIary";
+import Diary from "./Pages/Diary/Diary";
 import Info from "./Pages/Info/Info";
 import AllNotice from "./Pages/Notice/AllNotice";
 import TopAppBar from "./components/Common/TopAppBar";
