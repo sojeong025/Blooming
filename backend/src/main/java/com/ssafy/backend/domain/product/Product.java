@@ -19,12 +19,12 @@ public class Product {
 
     //상품 정보
     private ProductType productType;
-    private String productName;
+    private String name;
     private String thumbnail; //대표이미지 -- 미정
     private String description;
 
     //업체 정보
-    private String companyName;
+//    private String companyName; //보통 상품 이름이 업체 이름
     private String phoneNumber;
     private String address;
     private LocalTime startTime;
