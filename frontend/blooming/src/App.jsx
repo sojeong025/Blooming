@@ -9,6 +9,7 @@ import Splash from "./Pages/Splash";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login/Login";
 import Schedule from "./Pages/Schedule";
+import MobileInvitation from "./Pages/MobileInvitation";
 import Join from "./Pages/Login/Join";
 import Question from "./Pages/Login/Question";
 import DecideWedding from "./Pages/Login/DecideWedding";
@@ -57,6 +58,7 @@ function App() {
           <Route path='/AllNotice' element={<AllNotice />} />
           <Route path='/home' element={<Home />} />
           <Route path='/schedule' element={<Schedule />} />
+          <Route path='/MobileInvitation' element={<MobileInvitation />} />
         </Routes>
 
         {!hiddenPaths.includes(location.pathname) && <BottomNav />}

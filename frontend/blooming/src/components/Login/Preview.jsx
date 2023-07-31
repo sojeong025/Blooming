@@ -7,17 +7,18 @@ import { useRecoilValue } from "recoil";
 import { imageListState } from '../../recoil/PreviewAtom'
 import { useState } from "react";
 
-const CustomDot = ({ onClick, isActive }) => {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`${classes["custom-dot"]} ${isActive ? classes["active"] : ""}`}
-    />
-  );
-};
+
 
 function Preview() {
+  const CustomDot = ({ onClick, isActive }) => {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className={`${classes["custom-dot"]} ${isActive ? classes["active"] : ""}`}
+      />
+    );
+  };
 
   const imageList = useRecoilValue(imageListState);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -38,7 +39,7 @@ function Preview() {
 
 
   return (
-    <>
+    <div className={classes.div}>
     <Carousel
       infiniteLoop
       showThumbs={false}
@@ -49,13 +50,13 @@ function Preview() {
       className={classes["image-carousel"]}
       onChange={handleCarouselChange}
       selectedItem={currentImageIndex}
-        renderIndicator={(onClickHandler, isSelected, index, label) => (
-          <CustomDot
-            key={index}
-            onClick={onClickHandler}
-            isActive={isSelected}
-          />
-        )}
+      renderIndicator={(onClickHandler, isSelected, index, label) => (
+      <CustomDot
+        key={index}
+        onClick={onClickHandler}
+        isActive={isSelected}
+      />
+      )}
     >
       {imageList.map((image, index) => (
         <div key={index}>
@@ -72,7 +73,7 @@ function Preview() {
         <button className={classes.next} onClick={handleNextClick}>다음</button>
       </div>
     }    
-  </>
+  </div>
   );
 }
 
