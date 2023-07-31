@@ -16,7 +16,6 @@ function Home() {
       {/* <ScheduleDday /> */}
 
       {/* 예약, 좋아요 */}
-      <button>나와라모듈</button>
     </div>
   );
 }

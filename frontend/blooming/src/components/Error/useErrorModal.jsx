@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ErrorComponent from "./ErrorComponent";
+import ErrorModal from "./ErrorModal";
 
 const useErrorModal = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -13,10 +13,7 @@ const useErrorModal = () => {
   };
 
   const ErrorModal = () => (
-    <ErrorComponent
-      errorMessage={errorMessage}
-      onClose={handleCloseErrorModal}
-    />
+    <ErrorModal errorMessage={errorMessage} onClose={handleCloseErrorModal} />
   );
 
   return [ErrorModal, handleError];

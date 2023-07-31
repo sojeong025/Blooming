@@ -1,4 +1,6 @@
-const ErrorComponent = ({ errorMessage, onClose }) => {
+// import classes from "./Modal.module.css";
+
+const ErrorModal = ({ errorMessage, onClose }) => {
   if (!errorMessage) {
     return null;
   }
@@ -15,4 +17,4 @@ const ErrorComponent = ({ errorMessage, onClose }) => {
   );
 };
 
-export default ErrorComponent;
+export default ErrorModal;

@@ -72,7 +72,6 @@ export default function Join() {
     } catch (error) {
       // 에러 처리
       console.error("API 요청 에러:", error);
-      handleError("데이터 요청 에러");
     }
   };
 
@@ -81,7 +80,6 @@ export default function Join() {
       <div className={classes.header}>
         <h2>추가 정보 입력</h2>
       </div>
-      <ErrorModal />
       <div className={classes.container}>
         <form onSubmit={joinSubmit}>
           {/* 카카오 아이디 */}
