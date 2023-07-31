@@ -1,3 +1,10 @@
+.div{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
 .container {
   background-image: url('../assets/logo.png'); 
   background-size: contain; 

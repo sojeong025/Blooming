@@ -1,46 +1,43 @@
 .header {
+  /* 색 바꾸기 */
+  background-color: #f8f9fa;
+
   display: flex;
   align-items: center;
-  justify-content: center;
-  top: 0;
+  justify-content: space-between;
+  position: fixed;
+  top: 0px;
   left: 0;
   right: 0;
-  position: fixed;
+
   width: 100%;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #dee2e6;
   height: 56px;
-  
+  /* 너무 높으면 48 */
+  z-index: 1;
 }
 
-.logo {
-  width: 120px; /* 로고 이미지 크기 조절 */
-  height: auto; 
+/* 타이틀 */
+.pageTitleContainer p {
+  font-size: 20px;
+  letter-spacing: 0.1rem;
 }
 
-.navBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.75rem 0rem 1rem 0rem;
+/* 로고 */
+.pageTitleContainer img {
+  width: 15vb;
+  height: auto;
 }
 
 .navIcon {
-  width: 1.5rem;
-  height: 1.5rem;
   flex-shrink: 0;
-}
-.navTitle {
-  align-self: stretch;
-  text-align: center;
-  /* 글씨체 수정 */
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1rem; /* 133.333% */
-  letter-spacing: 0.03125rem;
+  width: 24px;
+  height: 24px;
 }
 
-.rightLink {
-  position: absolute;
-  right: 1rem;
+.navRight {
+  margin: 16px 16px 16px 0px;
+}
+
+.navLeft {
+  margin: 16px 0px 16px 16px;
 }

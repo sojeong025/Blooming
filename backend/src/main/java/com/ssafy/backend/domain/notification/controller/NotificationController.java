@@ -1,5 +1,6 @@
 package com.ssafy.backend.domain.notification.controller;
 
+import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.notification.dto.NotificationResultDto;
 import com.ssafy.backend.domain.notification.service.NotificationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,11 +9,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Tag(name = "알림 API", description = "알림 추가 API")
@@ -37,11 +36,22 @@ public class NotificationController {
     @GetMapping("/notification")
     public ResponseEntity<?> getAllNotification() {
         List<NotificationResultDto> notificationList = notificationService.getAllNotification();
+        BasicResponse basicResponse;
         if (notificationList == null) {
-            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+            basicResponse = BasicResponse.builder()
+                    .code(HttpStatus.NO_CONTENT.value())
+                    .httpStatus(HttpStatus.NO_CONTENT)
+                    .message("전체 알림 조회 실패")
+                    .count(0).build();
         } else {
-            return new ResponseEntity<List<NotificationResultDto>>(notificationList, HttpStatus.OK);
+            basicResponse = BasicResponse.builder()
+                    .code(HttpStatus.OK.value())
+                    .httpStatus(HttpStatus.OK)
+                    .message("전체 알림 조회 성공")
+                    .count(notificationList.size())
+                    .result(Collections.singletonList(notificationList)).build();
         }
+        return new ResponseEntity<BasicResponse>(basicResponse, basicResponse.getHttpStatus());
     }
 
     //알림 수정 : put으로 보내기
@@ -49,13 +59,28 @@ public class NotificationController {
     @Parameter(name = "notificationId", description = "변경 가능한 것 : 호출 시 읽음 처리")
     @PutMapping("/notification/{notificationId}")
     public ResponseEntity<?> modifyNotification(@PathVariable Long notificationId) {
-        int cnt = notificationService.modifyNotification(notificationId);
-//        if (cnt == 0){
-//            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-//        }
-//        else{
-        return new ResponseEntity<Void>(HttpStatus.OK);
-//        }
+        notificationService.modifyNotification(notificationId);
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("알림 수정 성공").build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
+
+    @Operation(summary = "알림 하나 삭제하기", description = "알림을 삭제합니다.")
+    @Parameter(name = "notificationId", description = "삭제할 알림 아이디를 보내주세요")
+    @DeleteMapping("/notification/{notificationId}")
+    public ResponseEntity<?> deleteNotification(@PathVariable Long notificationId) {
+        notificationService.deleteNotification(notificationId);
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("알림 삭제 성공").build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
 }

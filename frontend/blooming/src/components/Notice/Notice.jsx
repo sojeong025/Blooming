@@ -1,7 +1,8 @@
 import { useState } from "react";
 import classes from "./Notice.module.css";
 
-const SwipeableList = () => {
+const SwipeableList = ({ notice }) => {
+  // const { id, title, completed } = notice;
   const [listItems, setListItems] = useState([
     { id: 1, text: "Item 1", x: 0, showButtons: false },
     { id: 2, text: "Item 2", x: 0, showButtons: false },

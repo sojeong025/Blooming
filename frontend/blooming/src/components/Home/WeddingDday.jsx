@@ -17,7 +17,7 @@ export const WeddingDday = () => {
     setWeddingDate(newWeddingDate);
   };
 
-   useEffect(() => {
+  useEffect(() => {
     const updateWeddingDday = () => {
       const todayDate = dayjs().format("YYYY-MM-DD");
       const myWeddingDate = dayjs(weddingDate);
@@ -36,7 +36,9 @@ export const WeddingDday = () => {
       if (weddingDday === 0 || weddingDday === -1) {
         clearInterval(timer);
       } else {
-        setWeddingDate((prevState) => dayjs(prevState).add(-2, "day").format("YYYY-MM-DD"));
+        // setWeddingDate((prevState) =>
+        //   dayjs(prevState).add(-1, "day").format("YYYY-MM-DD"),
+        // );
       }
     }, 500);
 
@@ -66,7 +68,7 @@ export const WeddingDday = () => {
       <input style={{ visibility: "hidden" }} type='date' value={weddingDate} onChange={handleChange} readOnly />
 
       <p>{renderScript()}</p>
-    </>
+    </div>
   );
 };
 
