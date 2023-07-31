@@ -1,6 +1,6 @@
 package com.ssafy.backend.domain.schedule.dto;
 
-import com.ssafy.backend.domain.schedule.Category;
+import com.ssafy.backend.domain.schedule.scheduleType;
 import com.ssafy.backend.domain.schedule.ScheduledBy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,5 +20,5 @@ public class ScheduleResultDto {
     @DateTimeFormat(pattern = "kk:mm:ss")
     private LocalTime scheduleTime;
     private ScheduledBy scheduledBy; //공통 or 개별(등록자 본인의 role)
-    private Category category;
+    private scheduleType scheduleType;
 }
