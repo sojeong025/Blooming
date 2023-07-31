@@ -1,8 +1,16 @@
+.div{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
 .image-carousel {
   max-width: 300px;
-  height: 60vh;
+  max-height: 500px;
   margin: auto;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   align-items: center;
 }
 
@@ -34,12 +42,14 @@
 }
 
 .custom-dot {
-  width: 5px;
-  height: 5px;
+  width: 1px;
+  height: 1px;
   border-radius: 50%;
   background-color: #FFF1F2;
   margin: 0 20px;
+  padding: 5px;
   cursor: pointer;
+  
 }
 
 /* 활성화된 페이지의 스타일을 정의합니다. */
@@ -49,19 +59,23 @@
 }
 
 .btn {
+  /* border: 1px solid black; */
+  width: 100vw;
   display: flex;
   justify-content: space-between;
-  margin: 2rem 0 0;
+  margin: 50px;
   font-size: 20px;
 }
 
 .pre {
+  margin-left: 50px;
   /* border: 1px solid black; */
   color: rgb(139, 136, 136);
   background-color: transparent;
 }
 
 .next {
+  margin-right: 50px;
   /* border: 1px solid black; */
   color: #FF647C;
   font-weight: bold;
