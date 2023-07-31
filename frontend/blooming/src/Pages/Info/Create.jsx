@@ -1,3 +1,4 @@
+import { useState } from "react";
 import classes from './Create.module.css';
 
 import Main from "../../components/MobileInvitation/Create/Main";
@@ -7,7 +8,8 @@ import Invitation from '../../components/MobileInvitation/Create/Invitation';
 import WeddingDay from '../../components/MobileInvitation/Create/WeddingDay';
 import WeddingHall from "../../components/MobileInvitation/Create/WeddingHall";
 
-function Create() {
+function Create({  }) {
+
   return(
     <div className='mainContainer'>
       <Main />
