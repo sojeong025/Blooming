@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { imageListState } from '../../recoil/PreviewAtom'
 import { useState } from "react";
+import axios from "axios";
 
 
 
@@ -65,9 +66,9 @@ function Preview() {
       ))}
     </Carousel>
     {currentImageIndex === 2 ?
-      <NavLink to={"/join"}>
+      <a href="http://192.168.30.143:8080/oauth2/authorization/kakao" >
         <Button text="카카오톡으로 로그인하기" />
-      </NavLink> :
+      </a> :
       <div className={classes.btn}>
         <button className={classes.pre} onClick={handlePrevClick}>건너뛰기</button>
         <button className={classes.next} onClick={handleNextClick}>다음</button>

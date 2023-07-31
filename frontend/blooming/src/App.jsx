@@ -8,6 +8,7 @@ import {
 import Splash from "./Pages/Splash";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login/Login";
+import KakaoLogin from "./Pages/Login/KakaoLogin";
 import Schedule from "./Pages/Schedule";
 import MobileInvitation from "./Pages/MobileInvitation";
 import Join from "./Pages/Login/Join";
@@ -49,6 +50,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Splash />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/kakaologin' element={<KakaoLogin />} />
           <Route path='/join' element={<Join />} />
           <Route path='/Question' element={<Question />} />
           <Route path='/DecideWedding' element={<DecideWedding />} />

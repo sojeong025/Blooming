@@ -33,14 +33,14 @@ export const WeddingDday = () => {
     updateWeddingDday();
 
     const timer = setInterval(() => {
-      if (weddingDday === 1 || weddingDday === 0) {
+      if (weddingDday === 0 || weddingDday === -1) {
         clearInterval(timer);
       } else {
         // setWeddingDate((prevState) =>
         //   dayjs(prevState).add(-1, "day").format("YYYY-MM-DD"),
         // );
       }
-    }, 100);
+    }, 500);
 
     return () => {
       clearInterval(timer);
@@ -64,8 +64,9 @@ export const WeddingDday = () => {
   };
 
   return (
-    <div>
-      <input type='date' value={weddingDate} onChange={handleChange} readOnly />
+    <>
+      <input style={{ visibility: "hidden" }} type='date' value={weddingDate} onChange={handleChange} readOnly />
+
       <p>{renderScript()}</p>
     </div>
   );
