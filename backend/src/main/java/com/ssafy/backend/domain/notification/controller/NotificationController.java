@@ -7,10 +7,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+//import java.awt.print.Pageable;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,23 +33,46 @@ public class NotificationController {
 //    }
 
     //알림 전체 조회 : 아이디, 읽음처리, 알림타입
-    @Operation(summary = "알림 전체 조회하기", description = "모든 알림을 불러옵니다.")
-    @Parameter(name = "없음", description = "없음")
+//    @Operation(summary = "알림 전체 조회하기", description = "모든 알림을 불러옵니다.")
+//    @Parameter(name = "없음", description = "없음")
+//    @GetMapping("/notification")
+//    public ResponseEntity<?> getAllNotification() {
+//        List<NotificationResultDto> notificationList = notificationService.getAllNotification();
+//        BasicResponse basicResponse;
+//        if (notificationList == null) {
+//            basicResponse = BasicResponse.builder()
+//                    .code(HttpStatus.NO_CONTENT.value())
+//                    .httpStatus(HttpStatus.NO_CONTENT)
+//                    .message("전체 알림 조회 실패")
+//                    .count(0).build();
+//        } else {
+//            basicResponse = BasicResponse.builder()
+//                    .code(HttpStatus.OK.value())
+//                    .httpStatus(HttpStatus.OK)
+//                    .message("전체 알림 조회 성공")
+//                    .count(notificationList.size())
+//                    .result(Collections.singletonList(notificationList)).build();
+//        }
+//        return new ResponseEntity<BasicResponse>(basicResponse, basicResponse.getHttpStatus());
+//    }
+
+    @Operation(summary = "알림 한 페이지 조회하기", description = "페이징 정보에 해당하는 모든 알림을 불러옵니다.")
+    @Parameter(name = "/notification?page=1&size=3", description = "page : 페이지 번호, size : 페이지당 알림 개수 . 최근 알림 size개 가져옴")
     @GetMapping("/notification")
-    public ResponseEntity<?> getAllNotification() {
-        List<NotificationResultDto> notificationList = notificationService.getAllNotification();
+    public ResponseEntity<?> getAllNotification(Pageable pageable) { //pageNumber, pageSize, offset
+        List<NotificationResultDto> notificationList = notificationService.getAllNotification(pageable);
         BasicResponse basicResponse;
         if (notificationList == null) {
             basicResponse = BasicResponse.builder()
                     .code(HttpStatus.NO_CONTENT.value())
                     .httpStatus(HttpStatus.NO_CONTENT)
-                    .message("전체 알림 조회 실패")
+                    .message("한 페이지 알림 조회 실패")
                     .count(0).build();
         } else {
             basicResponse = BasicResponse.builder()
                     .code(HttpStatus.OK.value())
                     .httpStatus(HttpStatus.OK)
-                    .message("전체 알림 조회 성공")
+                    .message("한 페이지 알림 조회 성공")
                     .count(notificationList.size())
                     .result(Collections.singletonList(notificationList)).build();
         }
