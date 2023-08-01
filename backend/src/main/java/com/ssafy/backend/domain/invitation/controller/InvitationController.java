@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.invitation.controller;
 
 import com.ssafy.backend.domain.common.BasicResponse;
+import com.ssafy.backend.domain.invitation.Invitation;
 import com.ssafy.backend.domain.invitation.dto.InvitationRegistDto;
 import com.ssafy.backend.domain.invitation.dto.InvitationResultDto;
 import com.ssafy.backend.domain.invitation.service.InvitationService;
@@ -36,10 +37,29 @@ public class InvitationController {
     }
 
     @Operation(summary = "모바일 청첩장 하나 가져오기", description = "모바일 청찹장을 DB에서 가져옵니다.")
-    @Parameter(name = "없음", description = "")
     @GetMapping("/invitation")
     public ResponseEntity<BasicResponse> getInvitation() {
-        InvitationResultDto invitationResultDto = invitationService.getInvitation();
+        Invitation invitation = invitationService.getInvitation();
+
+        InvitationResultDto invitationResultDto = new InvitationResultDto(
+            invitation.getId(),
+            invitation.getThumbnail(),
+            invitation.getGroomFatherName(),
+            invitation.getGroomFatherPhone(),
+            invitation.getGroomMotherName(),
+            invitation.getGroomMotherPhone(),
+            invitation.getBrideFatherName(),
+            invitation.getBrideFatherPhone(),
+            invitation.getBrideMotherName(),
+            invitation.getBrideMotherPhone(),
+            invitation.getTitle(),
+            invitation.getContent(),
+            invitation.getWeddingHallName(),
+            invitation.getFloor(),
+            invitation.getAddress(),
+            invitation.getDate(),
+            invitation.getTime()
+        );
 
         BasicResponse basicResponse;
         if (invitationResultDto == null) {
@@ -56,7 +76,7 @@ public class InvitationController {
                     .count(1)
                     .result(Collections.singletonList(invitationResultDto)).build();
         }
-        return new ResponseEntity<BasicResponse>(basicResponse, basicResponse.getHttpStatus());
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
     @Operation(summary = "모바일 청첩장 수정하기", description = "모바일 청첩장을 수정합니다.")
