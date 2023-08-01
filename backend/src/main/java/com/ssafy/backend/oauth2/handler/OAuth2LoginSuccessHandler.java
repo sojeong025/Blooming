@@ -41,7 +41,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
 				response.sendRedirect(
 					"http://43.200.254.50/kakaologin?" + "access_token=Bearer " + accessToken + "&refresh_token="
-						+ "Bearer " + refreshToken); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
+						+ "Bearer " + refreshToken+ "&is_user=F"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
 
 				jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
 				jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
@@ -65,7 +65,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 		response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken);
 		response.sendRedirect(
 			"http://43.200.254.50/kakaologin?" + "access_token=Bearer " + accessToken + "&refresh_token="
-				+ "Bearer " + refreshToken);
+				+ "Bearer " + refreshToken + "&is_user=T");
 
 		// jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
 		jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
