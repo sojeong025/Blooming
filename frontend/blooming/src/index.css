@@ -6,7 +6,19 @@
 }
 @font-face {
   font-family: 'SUITE-Regular';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-ExtraBold.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
 }
@@ -41,7 +53,7 @@
 } */
 
 body {
-  font-family: 'SUITE-Regular', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'SUITE-Regular', 'SUITE-SemiBold', 'SUITE-Bold', 'SUITE-ExtraBold', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
 
   min-width: 100vw;

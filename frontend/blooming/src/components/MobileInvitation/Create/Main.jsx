@@ -1,13 +1,16 @@
 import classes from './Common.module.css';
+import UploadImage from './UploadImage';
 
 function Main() {
-  return(
+  return (
     <div className={classes.container}>
-      메인
+      <p className={classes.header}>메인</p>
       <hr />
-      <div>사진 (필수)</div>
-    </div>  
-  )
+      <div>
+        <UploadImage />
+      </div>
+    </div>
+  );
 }
 
 export default Main;
