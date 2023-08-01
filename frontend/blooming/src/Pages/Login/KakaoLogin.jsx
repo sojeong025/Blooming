@@ -27,11 +27,11 @@ function KakaoLogin() {
   useEffect(() => {
     if (refreshToken) {
       setRefresh(refreshToken)
-      localStorage.setItem('refreshToken')
+      localStorage.setItem('refreshToken', refreshToken)
     }
     if (accessToken) {
       setAccess(accessToken);
-      localStorage.setItem('accessToken')
+      localStorage.setItem('accessToken', accessToken)
     }
   }, [accessToken]);
 
