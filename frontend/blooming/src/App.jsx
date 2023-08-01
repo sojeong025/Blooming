@@ -19,9 +19,12 @@ import MyPage from "./Pages/MyPage/MyPage";
 import Diary from "./Pages/Diary/DIary";
 import Info from "./Pages/Info/Info";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
+import Create from "./Pages/Info/Create";
 import AllNotice from "./Pages/Notice/AllNotice";
 import TopAppBar from "./components/Common/TopAppBar";
 import BottomNav from "./components/Common/BottomNav";
+
+import Error from "./Pages/Error";
 import { useEffect } from "react";
 
 function App() {
@@ -49,7 +52,6 @@ function App() {
     return (
       <>
         {!hiddenPaths.includes(location.pathname) && <TopAppBar />}
-
         <Routes>
           <Route path='/' element={<Splash />} />
           <Route path='/login' element={<Login />} />
@@ -66,6 +68,11 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/schedule' element={<Schedule />} />
           <Route path='/MobileInvitation' element={<MobileInvitation />} />
+          <Route path='/Create' element={<Create />} />
+
+          {/* NotFound */}
+          <Route path='*' element={<Error />} />
+
         </Routes>
 
         {!hiddenPaths.includes(location.pathname) && <BottomNav />}

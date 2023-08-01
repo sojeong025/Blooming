@@ -19,7 +19,7 @@ const TopAppBar = () => {
   }, [location]);
 
   // 뒤로가기 필요하면 여기 넣기
-  const backIcon = ["/AllNotice"];
+  const backIcon = ["/AllNotice" , "/mobileinvitation"];
   const navigate = useNavigate();
   const handleHistory = () => {
     navigate(-1);

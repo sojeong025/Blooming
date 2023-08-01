@@ -2,9 +2,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import classes from "./Join.module.css";
 import InputForm from "../../components/Common/InputText";
 import { useRecoilState } from "recoil";
-import { UserInfoName, UserInfoNickname, UserInfoPhone, UserInfoGender } from "../../recoil/UserInfoAtom";
+import {
+  UserInfoName,
+  UserInfoNickname,
+  UserInfoPhone,
+  UserInfoGender,
+} from "../../recoil/UserInfoAtom";
 import { tokenState } from "../../recoil/TokenAtom";
 import axios from "axios";
+// 에러 모달
+import useErrorModal from "../../components/Error/useErrorModal";
 
 export default function Join() {
   const navigate = useNavigate();
@@ -12,7 +19,10 @@ export default function Join() {
   const [nickname, setNickname] = useRecoilState(UserInfoNickname);
   const [phoneNumber, setPhoneNumber] = useRecoilState(UserInfoPhone);
   const [gender, setGender] = useRecoilState(UserInfoGender);
-  const [token, setToken] = useRecoilState(tokenState)
+  const [token, setToken] = useRecoilState(tokenState);
+
+  // 에러 모달
+  const [ErrorModal, handleError] = useErrorModal();
 
   const handlerChangeName = (event) => {
     setName(event.target.value);
@@ -35,7 +45,7 @@ export default function Join() {
   // 제출 버튼 클릭 시 처리할 함수
   const joinSubmit = async (event) => {
     event.preventDefault();
-    console.log(token)
+    console.log(token);
 
     const url = "http://192.168.30.143:8080/sign-up";
 
@@ -66,11 +76,10 @@ export default function Join() {
   };
 
   return (
-    <>
+    <div className='mainContainer'>
       <div className={classes.header}>
         <h2>추가 정보 입력</h2>
       </div>
-
       <div className={classes.container}>
         <form onSubmit={joinSubmit}>
           {/* 카카오 아이디 */}
@@ -126,12 +135,24 @@ export default function Join() {
           {/* gender */}
           <div className={`${classes.genderSelect}`}>
             <div className={`${classes.genderButton} radio_male`}>
-              <input id='gender-1' type='radio' name='gender' value='MALE' onChange={handlerChangeGender} />
+              <input
+                id='gender-1'
+                type='radio'
+                name='gender'
+                value='MALE'
+                onChange={handlerChangeGender}
+              />
               <label htmlFor='gender-1'>신랑</label>
             </div>
 
             <div className={`${classes.genderButton} radio_male`}>
-              <input id='gender-2' type='radio' name='gender' value='FEMALE' onChange={handlerChangeGender} />
+              <input
+                id='gender-2'
+                type='radio'
+                name='gender'
+                value='FEMALE'
+                onChange={handlerChangeGender}
+              />
               <label htmlFor='gender-2'>신부</label>
             </div>
           </div>
@@ -153,6 +174,6 @@ export default function Join() {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }

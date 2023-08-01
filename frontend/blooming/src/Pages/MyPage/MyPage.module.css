@@ -1,0 +1,21 @@
+.IconContainer {
+  display: flex;
+  height: 10vh;
+  justify-content: space-between;
+  margin-bottom: 1vh;
+  box-sizing: border-box;
+}
+
+.SettingContainer {
+  display: flex;
+  flex-direction: column;
+  
+}
+.SettingContainer div {
+  display: flex;
+  align-items: center;
+  
+  height: 6vh;
+  padding: 1vh 0;
+  border: 1px solid green
+}
