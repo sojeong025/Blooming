@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.couple;
 
 import com.ssafy.backend.domain.common.CreatedAndUpdatedBaseEntity;
+import com.ssafy.backend.domain.invitation.Invitation;
 import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.user.User;
 import lombok.*;
@@ -31,6 +32,13 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
 
     @OneToMany(mappedBy = "couple")
     private List<Schedule> schedules = new ArrayList<>();
+
+    @OneToOne(mappedBy = "couple")
+    private Invitation invitation = new Invitation();
+
+    public void setInvitation(Invitation invitation) {
+        this.invitation = invitation;
+    }
 
     public void setCoupleCode(int coupleCode) {
         this.coupleCode = coupleCode;
