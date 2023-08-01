@@ -14,7 +14,7 @@ import { useEffect } from "react";
 function MyPage() {
   const setUserState = useSetRecoilState(userState);
   // 일단 마이페이지에 들어왔을 때, 유저 데이터 조회
-  const userData = useRecoilValue(fetchUserState);
+  // const userData = useRecoilValue(fetchUserState);
   // 에러 모달
   // const setErrorModalVisible = useSetRecoilState(errorModalState);
   // const [isDataFetched, setIsDataFetched] = useState(false);
@@ -50,9 +50,9 @@ function MyPage() {
       <Profile />
       {/* 아이콘 컴포넌트 */}
       <div className={classes.IconContainer}>
-        <IconBox icon={"icon1"} name={"찜목록"} />
-        <IconBox icon={"icon3"} name={"예약현황"} />
-        <IconBox icon={"icon2"} name={"내후기"} />
+        <IconBox icon={"back"} name={"찜목록"} />
+        <IconBox icon={"back"} name={"예약현황"} />
+        <IconBox icon={"back"} name={"내후기"} />
       </div>
       내 데이터: 찜한업체, 예약한업체, 후기쓴거, 남의후기도움되는거, 정보수정,
       알림설정( 이 되나? ), 커플 등록
