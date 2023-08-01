@@ -1,21 +1,28 @@
 .IconContainer {
   display: flex;
+  justify-content: space-around;
+
   height: 10vh;
-  justify-content: space-between;
   margin-bottom: 1vh;
   box-sizing: border-box;
 }
 
 .SettingContainer {
-  display: flex;
-  flex-direction: column;
-  
+  /* display: flex;
+  flex-direction: column; */
 }
+
 .SettingContainer div {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+
+  height: 5vh;
+  padding: 1vh 16px;
   
-  height: 6vh;
-  padding: 1vh 0;
-  border: 1px solid green
+
+  /* 색깔 수정 */
+  background-color: white;
+  
+  border-bottom: 1px solid gray;
 }
