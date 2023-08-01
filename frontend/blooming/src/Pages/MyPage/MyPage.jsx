@@ -61,7 +61,7 @@ function MyPage() {
           <div>
             <p>설정</p>
             {/* 아이콘으로 바꾸기 */}
-            <div>></div>
+            <div>화살표로바꿈</div>
           </div>
         </NavLink>
       </div>
