@@ -1,10 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { tokenState } from "../../recoil/TokenAtom";
+import { accessTokenState, refreshTokenState } from "../../recoil/TokenAtom";
 import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 
 function KakaoLogin() {
-  const [token, setToken] = useRecoilState(tokenState)
+  const [access, setAccess] = useRecoilState(accessTokenState)
+  const [refresh, setRefresh] = useRecoilState(refreshTokenState)
   const location = useLocation();
   const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
@@ -12,6 +13,7 @@ function KakaoLogin() {
   // Access Token과 Refresh Token 추출
   const accessTokenParam = searchParams.get("access_token");
   const refreshTokenParam = searchParams.get("refresh_token");
+  const isUser = searchParams.get("is_user");
 
   // Access Token과 Refresh Token에서 "Bearer " 부분을 제거하고, 공백을 제거
   const accessToken = accessTokenParam ? accessTokenParam.replace("Bearer ", "").trim() : null;
@@ -22,18 +24,28 @@ function KakaoLogin() {
   console.log("Refresh Token:", refreshToken);
 
   // accessToken이 있는 경우 /join 페이지로 이동
-
   useEffect(() => {
+    if (refreshToken) {
+      setRefresh(refreshToken)
+      localStorage.setItem('refreshToken')
+    }
     if (accessToken) {
-      setToken(accessToken);
+      setAccess(accessToken);
+      localStorage.setItem('accessToken')
     }
   }, [accessToken]);
 
   useEffect(() => {
-    if (token) {
-      navigate("/join");
+    // access
+    console.log(isUser)
+    if (access) {
+      if (isUser === 'T') {
+        navigate("/home")
+      } else if (isUser === 'F') {
+        navigate("/join");
+      }
     }
-  }, [token]);
+  }, [access]);
 }
 
 export default KakaoLogin;
