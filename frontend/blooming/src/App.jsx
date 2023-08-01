@@ -18,7 +18,7 @@ import Share from "./Pages/Login/Share";
 import MyPage from "./Pages/MyPage/MyPage";
 import SettingPage from "./Pages/MyPage/SettingPage";
 import EditProfile from "./Pages/MyPage/EditProfile";
-import Diary from "./Pages/Diary/DIary";
+import Diary from "./Pages/Diary/Diary";
 import Info from "./Pages/Info/Info";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
 import Create from "./Pages/Info/Create";
