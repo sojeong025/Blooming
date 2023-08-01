@@ -63,7 +63,6 @@ public class User extends CreatedAndUpdatedBaseEntity {
 
     //== 유저 필드 업데이트 ==//
     public void updateFirst(UserSignUpDto userSignUpDto) {
-        this.email = userSignUpDto.getEmail();
         this.name = userSignUpDto.getName();
         this.nickname = userSignUpDto.getNickname();
         this.phoneNumber = userSignUpDto.getPhoneNumber();
@@ -107,7 +106,6 @@ public class User extends CreatedAndUpdatedBaseEntity {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", nickname='" + nickname + '\'' +
