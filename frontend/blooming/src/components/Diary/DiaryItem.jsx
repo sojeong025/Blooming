@@ -1,18 +1,20 @@
-export default function DiaryItem ({ title, content, date, image }) {
+import { NavLink } from "react-router-dom"
+
+export default function DiaryItem({ title, content, date, image }) {
+
+  const styleBackImage = { backgroundImage: `url("${ image }")`, width: '200px', height: '300px'}
+
 
   return (
-    <div>
-      <div>
-        {title}
-      </div>
-      <div>
-        {content}
-      </div>
-      <div>
-        {date}
-      </div>
-      <img src={image} alt="사진 없다" width='100' height='100' />
-    </div>
+    <li className="cd-item" style={styleBackImage}>
+      <NavLink to={"/"}>
+        <div>
+          <h2>{title}</h2>
+          <p>{content}</p>
+          <b>view More</b>
+        </div>
+      </NavLink>
+    </li>
   );
 }
 
