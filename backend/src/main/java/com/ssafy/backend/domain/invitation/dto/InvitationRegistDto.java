@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 public class InvitationRegistDto {
@@ -31,6 +33,8 @@ public class InvitationRegistDto {
     private String floor;
     private String address; //일단
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime dateTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime time;
 }

@@ -9,6 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -43,8 +44,10 @@ public class Invitation {
     private String floor;
     private String address; //일단
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime dateTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime time;
 
     //맞나
     @OneToOne(fetch = LAZY)
@@ -58,7 +61,7 @@ public class Invitation {
         couple.setInvitation(this);
     }
 
-    public Invitation(String thumbnail, String groomFatherName, String groomFatherPhone, String groomMotherName, String groomMotherPhone, String brideFatherName, String brideFatherPhone, String brideMotherName, String brideMotherPhone, String title, String content, String weddingHallName, String floor, String address, LocalDateTime dateTime) {
+    public Invitation(String thumbnail, String groomFatherName, String groomFatherPhone, String groomMotherName, String groomMotherPhone, String brideFatherName, String brideFatherPhone, String brideMotherName, String brideMotherPhone, String title, String content, String weddingHallName, String floor, String address, LocalDate date, LocalTime time) {
         this.thumbnail = thumbnail;
         this.groomFatherName = groomFatherName;
         this.groomFatherPhone = groomFatherPhone;
@@ -73,7 +76,8 @@ public class Invitation {
         this.weddingHallName = weddingHallName;
         this.floor = floor;
         this.address = address;
-        this.dateTime = dateTime;
+        this.date = date;
+        this.time = time;
     }
 
     public Invitation() {
@@ -94,6 +98,7 @@ public class Invitation {
         this.weddingHallName = invitationRegistDto.getWeddingHallName();
         this.floor = invitationRegistDto.getFloor();
         this.address = invitationRegistDto.getAddress();
-        this.dateTime = invitationRegistDto.getDateTime();
+        this.date = invitationRegistDto.getDate();
+        this.time = invitationRegistDto.getTime();
     }
 }

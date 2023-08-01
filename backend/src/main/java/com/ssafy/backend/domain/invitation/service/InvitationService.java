@@ -37,7 +37,8 @@ public class InvitationService {
                 invitationRegistDto.getWeddingHallName(),
                 invitationRegistDto.getFloor(),
                 invitationRegistDto.getAddress(),
-                invitationRegistDto.getDateTime()
+                invitationRegistDto.getDate(),
+                invitationRegistDto.getTime()
         );
         
         //유저 찾기
@@ -77,7 +78,8 @@ public class InvitationService {
                 invitation.getWeddingHallName(),
                 invitation.getFloor(),
                 invitation.getAddress(),
-                invitation.getDateTime()
+                invitation.getDate(),
+                invitation.getTime()
         );
 
         return invitationResultDto;
