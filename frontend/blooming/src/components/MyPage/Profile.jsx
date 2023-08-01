@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userState } from "../../recoil/ProfileAtom";
 // import { useRecoilValueLoadable } from "recoil";
 // import { fetchUserState } from "../../recoil/ProfileAtom";

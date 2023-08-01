@@ -16,17 +16,12 @@ function MyPage() {
       {/* 아이콘 컴포넌트 */}
       <div className={classes.IconContainer}>
         <IconBox icon={"icon1"} name={"찜목록"} />
-        <IconBox icon={"icon2"} name={"내후기"} />
         <IconBox icon={"icon3"} name={"예약현황"} />
+        <IconBox icon={"icon2"} name={"내후기"} />
       </div>
       내 데이터: 찜한업체, 예약한업체, 후기쓴거, 남의후기도움되는거, 정보수정,
-      알림설정, 커플 코드
+      알림설정, 커플등록
       <div className={classes.SettingContainer}>
-        <div>
-          <p>정보 수정</p>
-          {/* 아이콘으로 바꾸기 */}
-          <div>></div>
-        </div>
         <NavLink to='/setting'>
           <div>
             <p>설정</p>
