@@ -35,13 +35,6 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
     @OneToMany(mappedBy = "couple")
     private List<Schedule> schedules = new ArrayList<>();
 
-    @OneToOne(mappedBy = "couple", fetch = LAZY)
-    private Invitation invitation = new Invitation();
-
-    public void setInvitation(Invitation invitation) {
-        this.invitation = invitation;
-    }
-
     public void setCoupleCode(int coupleCode) {
         this.coupleCode = coupleCode;
     }
