@@ -53,7 +53,7 @@ public class InvitationService {
         invitationRepository.save(invitation);
     }
 
-    public InvitationResultDto getInvitation() {
+    public Invitation getInvitation() {
         //유저 찾기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
@@ -61,28 +61,10 @@ public class InvitationService {
         Couple couple = user.getCouple();
 
         //커플에 해당하는 청첩장 반환
-        Invitation invitation = couple.getInvitation();
-        InvitationResultDto invitationResultDto = new InvitationResultDto(
-                invitation.getId(),
-                invitation.getThumbnail(),
-                invitation.getGroomFatherName(),
-                invitation.getGroomFatherPhone(),
-                invitation.getGroomMotherName(),
-                invitation.getGroomMotherPhone(),
-                invitation.getBrideFatherName(),
-                invitation.getBrideFatherPhone(),
-                invitation.getBrideMotherName(),
-                invitation.getBrideMotherPhone(),
-                invitation.getTitle(),
-                invitation.getContent(),
-                invitation.getWeddingHallName(),
-                invitation.getFloor(),
-                invitation.getAddress(),
-                invitation.getDate(),
-                invitation.getTime()
-        );
+        Invitation findInvitation = invitationRepository.findByCouple(couple)
+            .orElseThrow(() -> new IllegalArgumentException("만든 청첩장이 없습니다."));
 
-        return invitationResultDto;
+        return findInvitation;
     }
 
     public void modifyInvitation(Long invitationId, InvitationRegistDto invitationRegistDto) {
