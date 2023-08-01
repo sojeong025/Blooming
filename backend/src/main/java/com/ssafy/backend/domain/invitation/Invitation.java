@@ -19,7 +19,7 @@ public class Invitation {
 
     @Id
     @GeneratedValue
-    @Column(name = "invitation_id")
+    @Column(name = "INVITATION_ID")
     private Long id;
 
     //이미지 - 일단 string으로 저장
@@ -50,7 +50,7 @@ public class Invitation {
     private LocalTime time;
 
     //맞나
-    @OneToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "COUPLE_ID")
     private Couple couple;
 
