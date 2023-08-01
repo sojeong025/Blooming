@@ -1,7 +1,6 @@
+/* Profile */
 .profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: block;
   height: 30vh;
 }
 
@@ -9,8 +8,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   
   padding-bottom: 1vh;
+  
   height: 50%;
 }
 
@@ -22,28 +23,16 @@
   overflow: hidden;
 }
 
-.profileImg img
-{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .weddingContainer {
-  height: 50%;
-  margin-bottom: 1vh;
+  display: flex;
+  justify-content: center;
 
+  height: 40%;
+  margin-bottom: 1vh;
 }
 
+/* IconBox */
 .icon {
   width: 48px;
   height: 48px;
-}
-
-.textCenter {
-  display: flex;
-  align-items: center;
 }
