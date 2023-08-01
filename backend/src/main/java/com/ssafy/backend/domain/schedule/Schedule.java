@@ -34,7 +34,7 @@ public class Schedule extends CreatedBaseEntity {
     private LocalTime scheduleTime;
     @Enumerated(EnumType.STRING)
     private ScheduledBy scheduledBy;
-    private Category category;
+    private scheduleType scheduleType;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "COUPLE_ID")
@@ -54,12 +54,12 @@ public class Schedule extends CreatedBaseEntity {
         this.scheduleTime = scheduleModifyDto.getScheduleTime();
     }
 
-    public Schedule(String title, String content, LocalDate scheduleDate, LocalTime scheduleTime, ScheduledBy scheduledBy, Category category) {
+    public Schedule(String title, String content, LocalDate scheduleDate, LocalTime scheduleTime, ScheduledBy scheduledBy, scheduleType scheduleType) {
         this.title = title;
         this.content = content;
         this.scheduleDate = scheduleDate;
         this.scheduleTime = scheduleTime;
         this.scheduledBy = scheduledBy;
-        this.category = category;
+        this.scheduleType = scheduleType;
     }
 }

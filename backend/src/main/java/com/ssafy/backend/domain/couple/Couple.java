@@ -1,6 +1,9 @@
 package com.ssafy.backend.domain.couple;
 
+import static javax.persistence.FetchType.*;
+
 import com.ssafy.backend.domain.common.CreatedAndUpdatedBaseEntity;
+import com.ssafy.backend.domain.invitation.Invitation;
 import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.user.User;
 import lombok.*;

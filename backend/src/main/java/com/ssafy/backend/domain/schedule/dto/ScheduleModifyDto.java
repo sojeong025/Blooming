@@ -1,11 +1,9 @@
 package com.ssafy.backend.domain.schedule.dto;
 
-import com.ssafy.backend.domain.schedule.Category;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.net.CacheRequest;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

@@ -1,0 +1,13 @@
+.EditContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileImg > img {
+  background-color: white;
+  width: 10vh;
+  height: 10vh;
+  border-radius: 50%; 
+  object-fit: cover;
+}

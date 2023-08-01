@@ -3,6 +3,7 @@ package com.ssafy.backend.domain.user.service;
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.user.User;
+import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class UserService {
         User findUser = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 
-        findUser.update(userSignUpDto);
+        findUser.updateFirst(userSignUpDto);
         findUser.authorizeUser();
 
         if (userSignUpDto.getCoupleCode() == null) {
@@ -35,5 +36,24 @@ public class UserService {
 
             findUser.setCouple(couple);
         }
+    }
+
+    public User getUserProfile(String userEmail) throws Exception {
+        return userRepository.findByEmail(userEmail)
+            .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+    }
+
+    public void modifyUserProfile(UserDto userDto, String userEmail) {
+        User findUser = userRepository.findByEmail(userEmail)
+            .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+
+        findUser.updateProfile(userDto);
+    }
+
+    public void withdrawal(String userEmail) {
+        User findUser = userRepository.findByEmail(userEmail)
+            .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+
+        userRepository.delete(findUser);
     }
 }

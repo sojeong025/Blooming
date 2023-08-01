@@ -66,7 +66,7 @@ function Preview() {
       ))}
     </Carousel>
     {currentImageIndex === 2 ?
-      <a href="http://192.168.30.143:8080/oauth2/authorization/kakao" >
+      <a href="http://43.200.254.50:8080/oauth2/authorization/kakao" >
         <Button text="카카오톡으로 로그인하기" />
       </a> :
       <div className={classes.btn}>

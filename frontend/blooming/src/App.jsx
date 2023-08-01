@@ -10,18 +10,23 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login/Login";
 import KakaoLogin from "./Pages/Login/KakaoLogin";
 import Schedule from "./Pages/Schedule";
-import MobileInvitation from "./Pages/MobileInvitation";
 import Join from "./Pages/Login/Join";
 import Question from "./Pages/Login/Question";
 import DecideWedding from "./Pages/Login/DecideWedding";
 import ChooseWedding from "./Pages/Login/ChooseWedding";
 import Share from "./Pages/Login/Share";
 import MyPage from "./Pages/MyPage/MyPage";
+import SettingPage from "./Pages/MyPage/SettingPage";
+import EditProfile from "./Pages/MyPage/EditProfile";
 import Diary from "./Pages/Diary/Diary";
 import Info from "./Pages/Info/Info";
+import MobileInvitation from "./Pages/Info/MobileInvitation";
+import Create from "./Pages/Info/Create";
 import AllNotice from "./Pages/Notice/AllNotice";
 import TopAppBar from "./components/Common/TopAppBar";
 import BottomNav from "./components/Common/BottomNav";
+
+import Error from "./Pages/Error";
 import { useEffect } from "react";
 
 function App() {
@@ -49,7 +54,6 @@ function App() {
     return (
       <>
         {!hiddenPaths.includes(location.pathname) && <TopAppBar />}
-
         <Routes>
           <Route path='/' element={<Splash />} />
           <Route path='/login' element={<Login />} />
@@ -62,10 +66,17 @@ function App() {
           <Route path='/Info' element={<Info />} />
           <Route path='/Diary' element={<Diary />} />
           <Route path='/MyPage' element={<MyPage />} />
+          <Route path='/setting' element={<SettingPage />} />
+          <Route path='/edit-profile' element={<EditProfile />} />
+
           <Route path='/AllNotice' element={<AllNotice />} />
           <Route path='/home' element={<Home />} />
           <Route path='/schedule' element={<Schedule />} />
           <Route path='/MobileInvitation' element={<MobileInvitation />} />
+          <Route path='/Create' element={<Create />} />
+
+          {/* NotFound */}
+          <Route path='*' element={<Error />} />
         </Routes>
 
         {!hiddenPaths.includes(location.pathname) && <BottomNav />}
