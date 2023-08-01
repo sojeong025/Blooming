@@ -4,6 +4,7 @@ import classes from "./TopAppBar.module.css";
 
 import noticeBase from "../../assets/Nav/notice_base.svg";
 import noticeActive from "../../assets/Nav/notice_active.svg";
+import { ReactComponent as BackSvg } from "../../assets/Nav/back.svg";
 import { useEffect, useState } from "react";
 
 const TopAppBar = () => {
@@ -19,7 +20,7 @@ const TopAppBar = () => {
   }, [location]);
 
   // 뒤로가기 필요하면 여기 넣기
-  const backIcon = ["/AllNotice" , "/mobileinvitation"];
+  const backIcon = ["/AllNotice", "/mobileinvitation"];
   const navigate = useNavigate();
   const handleHistory = () => {
     navigate(-1);
@@ -29,7 +30,7 @@ const TopAppBar = () => {
     <header className={classes.header}>
       <div className={`${classes.navIcon} ${classes.navLeft}`}>
         <div onClick={handleHistory}>
-          {backIcon.includes(location.pathname) && <img src='' alt='뒤' />}
+          {backIcon.includes(location.pathname) && <BackSvg />}
         </div>
       </div>
 

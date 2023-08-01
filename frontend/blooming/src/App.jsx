@@ -16,7 +16,10 @@ import DecideWedding from "./Pages/Login/DecideWedding";
 import ChooseWedding from "./Pages/Login/ChooseWedding";
 import Share from "./Pages/Login/Share";
 import MyPage from "./Pages/MyPage/MyPage";
-import Diary from "./Pages/Diary/DIary";
+import SettingPage from "./Pages/MyPage/SettingPage";
+import EditProfile from "./Pages/MyPage/EditProfile";
+import Diary from "./Pages/Diary/Diary";
+import DiaryDetails from './Pages/Diary/DiaryDetails'
 import Info from "./Pages/Info/Info";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
 import Create from "./Pages/Info/Create";
@@ -63,7 +66,10 @@ function App() {
           <Route path='/Share' element={<Share />} />
           <Route path='/Info' element={<Info />} />
           <Route path='/Diary' element={<Diary />} />
+          <Route path='/Diary/:id' element={<DiaryDetails />} />
           <Route path='/MyPage' element={<MyPage />} />
+          <Route path='/setting' element={<SettingPage />} />
+          <Route path='/edit-profile' element={<EditProfile />} />
           <Route path='/AllNotice' element={<AllNotice />} />
           <Route path='/home' element={<Home />} />
           <Route path='/schedule' element={<Schedule />} />
@@ -72,7 +78,6 @@ function App() {
 
           {/* NotFound */}
           <Route path='*' element={<Error />} />
-
         </Routes>
 
         {!hiddenPaths.includes(location.pathname) && <BottomNav />}

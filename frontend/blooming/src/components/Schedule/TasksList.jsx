@@ -28,13 +28,13 @@ function TasksList({isPosting, onStopPosting}) {
     )}
     {tasks.length > 0 && (
       <ul className={ classes.posts } >
-          {tasks.map((task) => {
-            if (formatDate(selectedDate) === formatDate(task.date)) {
-              return (
-                <Task key={task.body} date={task.date} body={task.body} />
-              )
-            }
-          })}
+        {tasks.map((task) => {
+          if (formatDate(selectedDate) === formatDate(task.date)) {
+            return (
+              <Task key={task.body} date={task.date} body={task.body} />
+            )
+          }
+        })}
       </ul>
     )}
     </>

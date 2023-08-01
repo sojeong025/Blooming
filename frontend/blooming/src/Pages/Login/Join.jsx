@@ -47,7 +47,7 @@ export default function Join() {
     event.preventDefault();
     console.log(token);
 
-    const url = "http://192.168.30.143:8080/sign-up";
+    const url = "http://43.200.254.50:8080/sign-up";
 
     const headers = {
       Authorization: `Bearer ${token}`,
