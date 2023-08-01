@@ -58,7 +58,6 @@ public class Invitation {
     // 양방향 세팅 시 객체의 데이터 무결성 보장
     public void setCouple(Couple couple) {
         this.couple = couple;
-        couple.setInvitation(this);
     }
 
     public Invitation(String thumbnail, String groomFatherName, String groomFatherPhone, String groomMotherName, String groomMotherPhone, String brideFatherName, String brideFatherPhone, String brideMotherName, String brideMotherPhone, String title, String content, String weddingHallName, String floor, String address, LocalDate date, LocalTime time) {
