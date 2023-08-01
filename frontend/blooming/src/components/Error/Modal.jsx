@@ -1,15 +1,17 @@
 // 모달
 import classes from "./Modal.module.css";
 
-function Modal({ isOpen, children, closeModal }) {
+function Modal({ show, children, buttonText, onClose }) {
   return (
-    <div style={{ display: isOpen ? "block" : "none" }}>
-      <div className={classes.back}></div>
-      <div className={classes.modal}>
-        <div>{children}</div>
-        <button onClick={closeModal}>Close</button>
-      </div>
-    </div>
+    show && (
+      <>
+        <div className={classes.back}></div>
+        <div className={classes.modal}>
+          <div>{children}</div>
+          <button onClick={onClose}>{buttonText}</button>
+        </div>
+      </>
+    )
   );
 }
 
