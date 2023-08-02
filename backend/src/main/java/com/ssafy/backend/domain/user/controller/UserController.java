@@ -48,7 +48,8 @@ public class UserController {
 			userProfile.getName(),
 			userProfile.getNickname(),
 			userProfile.getPhoneNumber(),
-			userProfile.getGender()
+			userProfile.getGender(),
+			userProfile.getCouple().getCoupleCode()
 		);
 
 		BasicResponse basicResponse = BasicResponse.builder()
@@ -138,7 +139,8 @@ public class UserController {
 			myFiance.getName(),
 			myFiance.getNickname(),
 			myFiance.getPhoneNumber(),
-			myFiance.getGender()
+			myFiance.getGender(),
+			myFiance.getCouple().getCoupleCode()
 		);
 
 		BasicResponse basicResponse = BasicResponse.builder()

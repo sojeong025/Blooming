@@ -11,4 +11,5 @@ public class UserDto {
 	private String nickname;
 	private String phoneNumber;
 	private String gender;
+	private int coupleCode;
 }
