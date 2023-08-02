@@ -46,13 +46,11 @@ function Splash() {
           try {
             // 유저 정보 조회
             const res = axios.get(url, { headers });
-            if (res.data) {
-              setUserState(res.data.result[0]);
-              console.log(res.data);
-              navigate("/home");
-            }
+            setUserState(res.data.result[0]);
+            console.log(res.data);
+            navigate("/home");
           } catch (error) {
-            // 유저 정보 초기회
+            // 유저 정보 초기화
             resetUserState();
             console.error("유저 정보 API 요청 에러:", error);
           }
