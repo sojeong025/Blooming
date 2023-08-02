@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ssafy.backend.domain.user.Role;
 import com.ssafy.backend.domain.user.User;
+import com.ssafy.backend.domain.user.dto.KakaoUserDto;
 import com.ssafy.backend.global.jwt.service.JwtService;
 import com.ssafy.backend.oauth2.CustomOAuth2User;
 
@@ -47,7 +48,12 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
 				ObjectMapper objectMapper = new ObjectMapper();
 				objectMapper.registerModule(new JavaTimeModule());
-				String userJson = objectMapper.writeValueAsString(user);
+				KakaoUserDto userDto = new KakaoUserDto(
+					user.getEmail(),
+					user.getNickname(),
+					user.getGender()
+				);
+				String userJson = objectMapper.writeValueAsString(userDto);
 
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
