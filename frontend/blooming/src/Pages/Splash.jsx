@@ -10,6 +10,7 @@ function Splash() {
   const navigate = useNavigate();
   const [isRendered, setIsRendered] = useState(false)
   const url = "http://43.200.254.50:8080/profile";
+  const localAccessToken = localStorage.getItem('accessToken');
   const localRefreshToken = localStorage.getItem('refreshToken');
   const [accessToken, setAcceesToken] = useRecoilState(accessTokenState)
   const [refreshToken, setRefreshToken] = useRecoilState(refreshTokenState)
@@ -20,12 +21,13 @@ function Splash() {
       // 여기서 서버에 로그인 요청을 보내고 로그인이 유효한 경우 home으로 이동한다
       // 로그인이 실패하면 accessToken이 만료된 것으로 간주하고 refreshToken을 사용하여 accessToken을 다시 가져온 뒤 로컬에 저장한다.
       let headers = {
+        Authorization: `Bearer ${localAccessToken}`,
         Authorization_Refresh: `Bearer ${localRefreshToken}`,
       };
       try {
         // 헤더 포함하여 GET 요청 보내기
         const response = axios.get(url, { headers });
-        
+        console.log(response)
         if (response.headers['Authorization'] & response.headers['Authorization_refresh']) {
           setAcceesToken(response.headers['Authorization'])
           setRefreshToken(response.headers['Authorization_refresh'])
