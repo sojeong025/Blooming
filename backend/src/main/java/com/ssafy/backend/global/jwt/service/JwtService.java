@@ -147,6 +147,7 @@ public class JwtService {
      */
     public void setAccessTokenHeader(HttpServletResponse response, String accessToken) {
         response.setHeader(accessHeader, accessToken);
+        log.info(accessHeader + accessToken);
     }
 
     /**
@@ -154,6 +155,7 @@ public class JwtService {
      */
     public void setRefreshTokenHeader(HttpServletResponse response, String refreshToken) {
         response.setHeader(refreshHeader, refreshToken);
+        log.info(refreshHeader + refreshToken);
     }
 
     /**
