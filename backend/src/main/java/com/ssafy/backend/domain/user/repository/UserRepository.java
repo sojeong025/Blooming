@@ -1,7 +1,10 @@
 package com.ssafy.backend.domain.user.repository;
 
+import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
@@ -11,6 +14,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByNickname(String nickname);
 
     Optional<User> findByRefreshToken(String refreshToken);
+
+    @Query("select u from User u where u.couple = :couple AND u.id <> :currentUserId")
+    Optional<User> findUserByCouple(@Param("couple") Couple couple, @Param("currentUserId") Long currentUserId);
 
     /**
      * 소셜의 식별값으로 회원 찾는 메소드
