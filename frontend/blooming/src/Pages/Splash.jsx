@@ -1,19 +1,24 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import classes from './Splash.module.css';
-import axios from 'axios';
-import { useRecoilState } from 'recoil';
-import { accessTokenState, refreshTokenState } from '../recoil/TokenAtom';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import classes from "./Splash.module.css";
+import axios from "axios";
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
+import { accessTokenState, refreshTokenState } from "../recoil/TokenAtom";
+import { customAxios } from "../lib/axios";
+import { userState } from "../recoil/ProfileAtom";
 
 function Splash() {
   const navigate = useNavigate();
-  const [isRendered, setIsRendered] = useState(false)
+  const [isRendered, setIsRendered] = useState(false);
   const url = "http://43.200.254.50:8080/profile";
-  const localRefreshToken = localStorage.getItem('refreshToken');
-  const [accessToken, setAcceesToken] = useRecoilState(accessTokenState)
-  const [refreshToken, setRefreshToken] = useRecoilState(refreshTokenState)
-  
+  const localRefreshToken = localStorage.getItem("refreshToken");
+  const [accessToken, setAcceesToken] = useRecoilState(accessTokenState);
+  const [refreshToken, setRefreshToken] = useRecoilState(refreshTokenState);
+
+  // 유저 정보를 저장
+  const setUserState = useSetRecoilState(userState);
+  const resetUserState = useResetRecoilState(userState);
 
   useEffect(() => {
     if (localRefreshToken) {
@@ -25,26 +30,33 @@ function Splash() {
       try {
         // 헤더 포함하여 GET 요청 보내기
         const response = axios.get(url, { headers });
-        
-        if (response.headers['Authorization'] & response.headers['Authorization_refresh']) {
-          setAcceesToken(response.headers['Authorization'])
-          setRefreshToken(response.headers['Authorization_refresh'])
-          localStorage.setItem('accessToken', accessToken)
-          localStorage.setItem('refreshToken', refreshToken)
+
+        if (
+          response.headers["Authorization"] &
+          response.headers["Authorization_refresh"]
+        ) {
+          // 토큰 저장 후 headers 변경
+          setAcceesToken(response.headers["Authorization"]);
+          setRefreshToken(response.headers["Authorization_refresh"]);
+          localStorage.setItem("accessToken", accessToken);
+          localStorage.setItem("refreshToken", refreshToken);
           headers = {
-            Authorization: `Bearer ${accessToken}`
-          }
+            Authorization: `Bearer ${accessToken}`,
+          };
           try {
+            // 유저 정보 조회
             const res = axios.get(url, { headers });
             if (res.data) {
-              // 여기서 유저 정보 저장해서 home으로 보낼건데 정보 저장되고 나서 보내야함 async await 이런거 쓰셈
-              navigate('/home')
+              setUserState(res.data.result[0]);
+              navigate("/home");
             }
           } catch (error) {
-            console.error("API 요청 에러:", error);
+            // 유저 정보 초기회
+            resetUserState();
+            console.error("유저 정보 API 요청 에러:", error);
           }
         } else {
-          navigate('/login')
+          navigate("/login");
         }
       } catch (error) {
         // 에러 처리
@@ -59,7 +71,7 @@ function Splash() {
   useEffect(() => {
     if (isRendered) {
       const timer = setTimeout(() => {
-        navigate('/login');
+        navigate("/login");
       }, 3500);
 
       return () => clearTimeout(timer);
