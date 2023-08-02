@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
+import { useRecoilState } from 'recoil';
+import { mobileInvitationState } from '../../../recoil/MobileInvitationAtom';
+
 
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
@@ -15,8 +18,10 @@ const beforeUpload = (file) => {
   return isJpgOrPng;
 };
 const UploadImage = () => {
+  const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState(invitation.main.thumbnail);
+
   const handleChange = (info) => {
     if (info.file.status === 'uploading') {
       setLoading(true);
@@ -27,6 +32,13 @@ const UploadImage = () => {
       getBase64(info.file.originFileObj, (url) => {
         setLoading(false);
         setImageUrl(url);
+
+        setInvitation((prevInvitation) => ({
+          ...prevInvitation,
+          main: {
+            thumbnail: url,
+          },
+        }));
       });
     }
   };
