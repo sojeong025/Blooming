@@ -122,6 +122,36 @@ public class UserController {
 		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
 	}
 
+	@Operation(summary = "내 약혼자 확인", description = "나와 커플 관계인 약혼자를 확인합니다.")
+	@GetMapping("/my-fiance")
+	public ResponseEntity<BasicResponse> getMyFiance() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		if (authentication == null || authentication.getName() == null) {
+			throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
+		}
+
+		User myFiance = userService.getMyFiance(authentication.getName());
+
+		UserDto userDto = new UserDto(
+			myFiance.getEmail(),
+			myFiance.getName(),
+			myFiance.getNickname(),
+			myFiance.getPhoneNumber(),
+			myFiance.getGender()
+		);
+
+		BasicResponse basicResponse = BasicResponse.builder()
+			.code(HttpStatus.OK.value())
+			.httpStatus(HttpStatus.OK)
+			.message("내 약혼자 조회 성공")
+			.count(1)
+			.result(Collections.singletonList(userDto))
+			.build();
+
+		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+	}
+
 	@Hidden
 	@GetMapping("/jwt-test")
 	public String jwtTest() {

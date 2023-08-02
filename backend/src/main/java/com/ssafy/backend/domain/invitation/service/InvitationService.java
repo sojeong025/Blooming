@@ -1,5 +1,7 @@
 package com.ssafy.backend.domain.invitation.service;
 
+import java.util.Optional;
+
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.invitation.Invitation;
 import com.ssafy.backend.domain.invitation.dto.InvitationRegistDto;
@@ -53,7 +55,7 @@ public class InvitationService {
         invitationRepository.save(invitation);
     }
 
-    public Invitation getInvitation() {
+    public Optional<Invitation> getInvitation() {
         //유저 찾기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
@@ -61,8 +63,7 @@ public class InvitationService {
         Couple couple = user.getCouple();
 
         //커플에 해당하는 청첩장 반환
-        Invitation findInvitation = invitationRepository.findByCouple(couple)
-            .orElseThrow(() -> new IllegalArgumentException("만든 청첩장이 없습니다."));
+        Optional<Invitation> findInvitation = invitationRepository.findByCouple(couple);
 
         return findInvitation;
     }

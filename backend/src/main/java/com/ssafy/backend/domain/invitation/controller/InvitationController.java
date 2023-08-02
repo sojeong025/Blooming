@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Tag(name = "모바일청첩장 API", description = "모바일 청첩장 CRU API")
 @RestController
@@ -39,43 +40,46 @@ public class InvitationController {
     @Operation(summary = "모바일 청첩장 하나 가져오기", description = "모바일 청찹장을 DB에서 가져옵니다.")
     @GetMapping("/invitation")
     public ResponseEntity<BasicResponse> getInvitation() {
-        Invitation invitation = invitationService.getInvitation();
-
-        InvitationResultDto invitationResultDto = new InvitationResultDto(
-            invitation.getId(),
-            invitation.getThumbnail(),
-            invitation.getGroomFatherName(),
-            invitation.getGroomFatherPhone(),
-            invitation.getGroomMotherName(),
-            invitation.getGroomMotherPhone(),
-            invitation.getBrideFatherName(),
-            invitation.getBrideFatherPhone(),
-            invitation.getBrideMotherName(),
-            invitation.getBrideMotherPhone(),
-            invitation.getTitle(),
-            invitation.getContent(),
-            invitation.getWeddingHallName(),
-            invitation.getFloor(),
-            invitation.getAddress(),
-            invitation.getDate(),
-            invitation.getTime()
-        );
+        Optional<Invitation> findInvitation = invitationService.getInvitation();
 
         BasicResponse basicResponse;
-        if (invitationResultDto == null) {
+        if (findInvitation == null) {
             basicResponse = BasicResponse.builder()
-                    .code(HttpStatus.NO_CONTENT.value())
-                    .httpStatus(HttpStatus.NO_CONTENT)
-                    .message("내 청첩장 조회 실패")
-                    .count(0).build();
+                .code(HttpStatus.NO_CONTENT.value())
+                .httpStatus(HttpStatus.NO_CONTENT)
+                .message("내 청첩장 없음")
+                .count(0).build();
         } else {
+            Invitation invitation = findInvitation.get();
+            InvitationResultDto invitationResultDto = new InvitationResultDto(
+                invitation.getId(),
+                invitation.getThumbnail(),
+                invitation.getGroomFatherName(),
+                invitation.getGroomFatherPhone(),
+                invitation.getGroomMotherName(),
+                invitation.getGroomMotherPhone(),
+                invitation.getBrideFatherName(),
+                invitation.getBrideFatherPhone(),
+                invitation.getBrideMotherName(),
+                invitation.getBrideMotherPhone(),
+                invitation.getTitle(),
+                invitation.getContent(),
+                invitation.getWeddingHallName(),
+                invitation.getFloor(),
+                invitation.getAddress(),
+                invitation.getDate(),
+                invitation.getTime()
+            );
+
             basicResponse = BasicResponse.builder()
-                    .code(HttpStatus.OK.value())
-                    .httpStatus(HttpStatus.OK)
-                    .message("내 청첩장 조회 성공")
-                    .count(1)
-                    .result(Collections.singletonList(invitationResultDto)).build();
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("내 청첩장 조회 성공")
+                .count(1)
+                .result(Collections.singletonList(invitationResultDto)).build();
         }
+
+
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
