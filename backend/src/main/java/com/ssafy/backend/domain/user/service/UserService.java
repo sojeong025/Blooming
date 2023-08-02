@@ -56,4 +56,12 @@ public class UserService {
 
         userRepository.delete(findUser);
     }
+
+    public User getMyFiance(String userEmail) {
+        User findUser = userRepository.findByEmail(userEmail)
+            .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+
+        return userRepository.findUserByCouple(findUser.getCouple(), findUser.getId())
+            .orElseThrow(() -> new IllegalArgumentException("연결되어 있는 유저가 없습니다."));
+    }
 }
