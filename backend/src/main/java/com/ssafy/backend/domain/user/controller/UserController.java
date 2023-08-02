@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.user.User;
+import com.ssafy.backend.domain.user.dto.KakaoUserDto;
 import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.service.UserService;
@@ -32,6 +33,33 @@ public class UserController {
 
 	private final UserService userService;
 
+	@Operation(summary = "카카오 회원 정보 가져오기", description = "")
+	@GetMapping("/kakao-profile")
+	public ResponseEntity<BasicResponse> getKakaoProfile() throws Exception {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null || authentication.getName() == null) {
+			throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
+		}
+
+		User userProfile = userService.getUserProfile(authentication.getName());
+
+		KakaoUserDto kakaoUserDto = new KakaoUserDto(
+			userProfile.getEmail(),
+			userProfile.getNickname(),
+			userProfile.getGender()
+		);
+
+		BasicResponse basicResponse = BasicResponse.builder()
+			.code(HttpStatus.OK.value())
+			.httpStatus(HttpStatus.OK)
+			.message("카카오에서 받은 유저 정보 조회 성공")
+			.count(1)
+			.result(Collections.singletonList(kakaoUserDto))
+			.build();
+
+		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+	}
+
 	@Operation(summary = "내 정보 조회", description = "회원가입 시 입력한 내 정보를 조회합니다.")
 	@GetMapping("/profile")
 	public ResponseEntity<BasicResponse> getProfile() throws Exception {
@@ -48,7 +76,8 @@ public class UserController {
 			userProfile.getName(),
 			userProfile.getNickname(),
 			userProfile.getPhoneNumber(),
-			userProfile.getGender()
+			userProfile.getGender(),
+			userProfile.getCouple().getCoupleCode()
 		);
 
 		BasicResponse basicResponse = BasicResponse.builder()
@@ -138,7 +167,8 @@ public class UserController {
 			myFiance.getName(),
 			myFiance.getNickname(),
 			myFiance.getPhoneNumber(),
-			myFiance.getGender()
+			myFiance.getGender(),
+			myFiance.getCouple().getCoupleCode()
 		);
 
 		BasicResponse basicResponse = BasicResponse.builder()

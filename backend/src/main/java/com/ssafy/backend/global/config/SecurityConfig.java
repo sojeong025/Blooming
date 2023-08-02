@@ -10,6 +10,9 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.backend.domain.user.repository.UserRepository;
@@ -40,6 +43,7 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.cors().configurationSource(corsConfigurationSource());
 		http
 			.formLogin().disable() // 기본 제공되는 FormLogin 사용 X
 			.httpBasic().disable() // httpBasic 사용 X
@@ -80,6 +84,28 @@ public class SecurityConfig {
 		//        http.addFilterBefore(jwtAuthenticationProcessingFilter(), CustomJsonUsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+
+		//허용할 url 설정
+		configuration.addAllowedOrigin("http://43.200.254.50");
+		//허용할 헤더 설정
+		configuration.addAllowedHeader("*");
+		//허용할 http method
+		configuration.addAllowedMethod("*");
+		// 클라이언트가 접근 할 수 있는 서버 응답 헤더
+		configuration.addExposedHeader("Authorization");
+		configuration.addExposedHeader("Authorization_refresh");
+		//사용자 자격 증명이 지원되는지 여부
+		configuration.setAllowCredentials(true);
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+
 	}
 
 	@Bean

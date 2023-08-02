@@ -42,7 +42,11 @@ public class InvitationService {
                 invitationRegistDto.getFloor(),
                 invitationRegistDto.getAddress(),
                 invitationRegistDto.getDate(),
-                invitationRegistDto.getTime()
+                invitationRegistDto.getTime(),
+                invitationRegistDto.getGroomName(),
+                invitationRegistDto.getGroomPhone(),
+                invitationRegistDto.getBrideName(),
+                invitationRegistDto.getBridePhone()
         );
         
         //유저 찾기

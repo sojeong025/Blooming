@@ -10,7 +10,7 @@ function WeddingDay() {
 
   return (
     <div className={classes.container}>
-      예식일
+      <p className={classes.header}>예식일</p>
       <hr />
       <div>
         <label htmlFor="date">예식일</label><br />

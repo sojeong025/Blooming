@@ -11,12 +11,16 @@ export const mobileInvitationState = atom({
       groomFatherPhone: '',
       groomMotherName: '',
       groomMotherPhone: '',
+      groomName:'',
+      groomPhone:'',
     },
     brider: {
       briderFatherName: '',
       briderFatherPhone: '',
       briderMotherName: '',
       briderMotherPhone: '',
+      briderName:'',
+      briderPhone:'',
     },
     invitation: {
       title: '',
