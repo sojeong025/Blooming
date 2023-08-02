@@ -11,6 +11,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ssafy.backend.domain.user.Role;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.global.jwt.service.JwtService;
@@ -45,7 +46,9 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 				User user = jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
 
 				ObjectMapper objectMapper = new ObjectMapper();
+				objectMapper.registerModule(new JavaTimeModule());
 				String userJson = objectMapper.writeValueAsString(user);
+
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(userJson);
