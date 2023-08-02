@@ -6,6 +6,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import static javax.persistence.FetchType.LAZY;
 
 @Entity
@@ -26,10 +29,15 @@ public class Diary extends CreatedAndUpdatedBaseEntity {
 
     private String title;
     private String content; // TEXT 형식 변경 필요
-    private String date; // 날짜 지정을 어떻게 할건지.
+    private String diarydate; // 날짜 지정을 어떻게 할건지.
 
     private String image; // 이미지 주소로 할건지 변경 필요
 
 
-
+    public Diary(String title, String content, String image, String diarydate) {
+        this.title = title;
+        this.content = content;
+        this.image = image;
+        this.diarydate = diarydate;
+    }
 }
