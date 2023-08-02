@@ -6,6 +6,8 @@ import com.ssafy.backend.domain.reservation.dto.ReservationRegistDto;
 import com.ssafy.backend.domain.reservation.dto.ReservationResultDto;
 import com.ssafy.backend.domain.reservation.repository.ReservationRepository;
 import com.ssafy.backend.domain.reservation.service.ReservationService;
+import com.ssafy.backend.domain.schedule.dto.ScheduleRegistDto;
+import com.ssafy.backend.domain.schedule.service.ScheduleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,6 +34,7 @@ public class ReservationController {
     @Parameter(name = "ReservationRegistDto", description = "예약 등록")
     @PostMapping("/reservation")
     public ResponseEntity<BasicResponse> registerReservation(@RequestBody ReservationRegistDto reservationRegistDto){
+        //예약하기
         reservationService.registerReservation(reservationRegistDto);
 
         BasicResponse basicResponse = BasicResponse.builder()
