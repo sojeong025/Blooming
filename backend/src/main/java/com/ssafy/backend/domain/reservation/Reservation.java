@@ -3,9 +3,11 @@ package com.ssafy.backend.domain.reservation;
 import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.user.User;
 import lombok.Getter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -15,7 +17,10 @@ public class Reservation {
     @Column(name = "reservation_id")
     private Long id;
 
-    private LocalDate reservedAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate reservedDate;
+    @DateTimeFormat(pattern = "kk:mm")
+    private LocalTime reservedTime;
 
     //연관: 회원 : 다대일 양방향!!
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,8 +46,8 @@ public class Reservation {
         this.product = product;
     }
 
-    public Reservation(LocalDate reservedAt) {
-        this.reservedAt = reservedAt;
+    public Reservation(LocalDate reservedDate, LocalTime reservedTime) {
+        this.reservedDate = reservedDate;
+        this.reservedTime = reservedTime;
     }
-
 }
