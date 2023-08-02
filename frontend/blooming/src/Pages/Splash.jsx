@@ -40,12 +40,15 @@ function Splash() {
               Authorization: `Bearer ${accessToken}`,
             };
             
+            console.log(accessToken, refreshToken)
             try {
               // 유저 정보 조회
               const res = await axios.get(url, { headers });
+              console.log(res)
               if (res.data) {
-                setUserState(res.data.result[0]);
                 console.log(res.data);
+                console.log(res.data.result[0])
+                setUserState(res.data.result[0]);
                 navigate("/home");
               }
             } catch (error) {
