@@ -1,5 +1,5 @@
 .modalContainer {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -12,9 +12,5 @@
 }
 
 .form {
-  /* 모달의 콘텐츠 스타일을 추가/수정합니다. */
-  /* background-color: #fff; */
-  padding: 20px;
-  border-radius: 8px;
-  color: #000;
+  margin-top: 50px;
 }

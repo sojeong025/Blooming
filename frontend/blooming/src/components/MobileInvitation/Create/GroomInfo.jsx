@@ -61,6 +61,26 @@ function GroomInfo() {
         value={invitation.groom.groomMotherPhone}
         onChange={handleInputChange}
       />
+
+      <label htmlFor="groomName">신랑</label>
+      <input
+        className={classes.inputField}
+        type="text"
+        id="groomName"
+        placeholder="이름"
+        value={invitation.groom.groomName}
+        onChange={handleInputChange}
+      />
+      <input
+        className={classes.inputField}
+        type="tel"
+        id="groomPhone"
+        name="groomPhone"
+        placeholder="전화번호"
+        pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+        value={invitation.groom.groomPhone}
+        onChange={handleInputChange}
+      />
     </div>
   );
 }
