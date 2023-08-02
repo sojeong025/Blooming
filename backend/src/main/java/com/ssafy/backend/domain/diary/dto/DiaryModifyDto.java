@@ -10,7 +10,7 @@ public class DiaryModifyDto {
     private Long id;
     private String title;
     private String content;
-    private String diarydate;
+    private String date;
     private String image;
 
 }

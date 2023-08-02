@@ -6,9 +6,6 @@ import com.ssafy.backend.domain.diary.dto.DiaryModifyDto;
 import com.ssafy.backend.domain.diary.dto.DiaryRegistDto;
 import com.ssafy.backend.domain.diary.dto.DiaryResultDto;
 import com.ssafy.backend.domain.diary.repository.DiaryRepository;
-import com.ssafy.backend.domain.schedule.Schedule;
-import com.ssafy.backend.domain.schedule.dto.ScheduleRegistDto;
-import com.ssafy.backend.domain.schedule.dto.ScheduleResultDto;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,8 +29,17 @@ public class DiaryService {
                 diaryRegistDto.getTitle(),
                 diaryRegistDto.getContent(),
                 diaryRegistDto.getImage(),
-                diaryRegistDto.getDiarydate()
+                diaryRegistDto.getDate()
         );
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName()); //이메일
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+        diary.setUser(user);
+
+        diaryRepository.save(diary);
+
     }
 
     public List<DiaryResultDto> getAllDiary(){
@@ -48,7 +54,7 @@ public class DiaryService {
                     diary.getId(),
                     diary.getTitle(),
                     diary.getContent(),
-                    diary.getDiarydate(),
+                    diary.getDate(),
                     diary.getImage()
             );
             result.add(diaryResultDto);
@@ -58,12 +64,17 @@ public class DiaryService {
     }
 
     public int modifyDiary(DiaryModifyDto diaryModifyDto){
+        //jpa.. 이용해서 해당 스케줄 아이디로 스케줄 객체 찾아서 set으로 변경? -- 이게맞나
+        Diary originalDiary = diaryRepository.findById(diaryModifyDto.getId())
+                .orElseThrow(() -> new IllegalArgumentException("다이어리 아이디에 해당하는 다이어리가 없습니다."));
 
-
+        //맞나
+        originalDiary.update(diaryModifyDto);
         return 1;
     }
 
     public int deleteDiary(Long diaryId){
+        diaryRepository.deleteById(diaryId);
         return 1;
 
     }
@@ -72,14 +83,12 @@ public class DiaryService {
         Diary diary = diaryRepository.findById(diaryId)
                 .orElseThrow(() -> new IllegalArgumentException("다이어리 아이디에 해당하는 다이어리가 없습니다."));
 
-        DiaryResultDto diaryResultDto = new DiaryResultDto(
+        return new DiaryResultDto(
                 diary.getId(),
                 diary.getTitle(),
                 diary.getContent(),
-                diary.getDiarydate(),
+                diary.getDate(),
                 diary.getImage()
         );
-
-        return diaryResultDto;
     }
 }

@@ -1,13 +1,10 @@
 package com.ssafy.backend.domain.diary;
 
-import com.ssafy.backend.domain.common.CreatedAndUpdatedBaseEntity;
+import com.ssafy.backend.domain.diary.dto.DiaryModifyDto;
 import com.ssafy.backend.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -16,7 +13,7 @@ import static javax.persistence.FetchType.LAZY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Diary extends CreatedAndUpdatedBaseEntity {
+public class Diary{
 
     @Id
     @GeneratedValue
@@ -29,15 +26,28 @@ public class Diary extends CreatedAndUpdatedBaseEntity {
 
     private String title;
     private String content; // TEXT 형식 변경 필요
-    private String diarydate; // 날짜 지정을 어떻게 할건지.
+    private String date; // 날짜 지정을 어떻게 할건지.
 
     private String image; // 이미지 주소로 할건지 변경 필요
 
 
-    public Diary(String title, String content, String image, String diarydate) {
+    public Diary(String title, String content, String image, String date) {
         this.title = title;
         this.content = content;
         this.image = image;
-        this.diarydate = diarydate;
+        this.date = date;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void update(DiaryModifyDto diaryModifyDto) {
+        this.title = diaryModifyDto.getTitle();
+        this.content = diaryModifyDto.getContent();
+        this.date = diaryModifyDto.getDate();
+        this.image = diaryModifyDto.getImage();
+
+    }
+
 }

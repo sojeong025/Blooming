@@ -86,7 +86,7 @@ public class DiaryController {
     }
 
     @Operation(summary = "다이어리 하나 수정하기", description = "특정 다이어리를 수정합니다.")
-    @Parameter(name = "DiaryModifyDto", description = "변경 가능한 것 : title, content, diarydate, image")
+    @Parameter(name = "DiaryModifyDto", description = "변경 가능한 것 : title, content, date, image")
     @PutMapping("/diary")
     public ResponseEntity<BasicResponse> modifyDiary(@RequestBody DiaryModifyDto diaryModifyDto) {
         diaryService.modifyDiary(diaryModifyDto);
