@@ -1,28 +1,31 @@
 import PropTypes from "prop-types";
 import classes from "./InputText.module.css";
 
-const InputText = ({ id, label, value, required, disabled, autoFocus }) => {
+const LabelInputComponent = ({
+  label,
+  name,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+  autoFocus,
+  required = false,
+}) => {
   return (
-    <div className={classes.container}>
-      <label htmlFor={id} className={classes.inputLabel}>
-        {label}
-      </label>
+    <div className='label-input'>
+      <label htmlFor={name}>{label}</label>
       <input
-        className={classes.inputField}
-        type='text'
-        id={id}
+        type={type}
+        name={name}
+        id={name}
         value={value}
-        required={required}
-        disabled={disabled}
+        onChange={onChange}
+        placeholder={placeholder}
         autoFocus={autoFocus}
-        placeholder=''
+        required={required}
       />
     </div>
   );
 };
 
-// InputForm.propTypes = {
-//   text: PropTypes.string.isRequired,
-// };
-
-export default InputText;
+export default LabelInputComponent;

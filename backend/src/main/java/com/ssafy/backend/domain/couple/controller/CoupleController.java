@@ -3,6 +3,8 @@ package com.ssafy.backend.domain.couple.controller;
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.couple.dto.WeddingDateDto;
 import com.ssafy.backend.domain.couple.service.CoupleService;
+import com.ssafy.backend.domain.user.User;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -48,7 +50,6 @@ public class CoupleController {
     }
 
     @Operation(summary = "결혼식 예정 날짜 조회", description = "커플의 결혼식 예정 날짜를 조회합니다.")
-    @Parameter(name = "weddingDateDto", description = "결혼식 예정 날짜 dto")
     @GetMapping("/wedding-date")
     public ResponseEntity<BasicResponse> getWeddingDate() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

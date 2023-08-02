@@ -11,6 +11,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.ssafy.backend.domain.user.Role;
+import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.global.jwt.service.JwtService;
 import com.ssafy.backend.oauth2.CustomOAuth2User;
 
@@ -39,12 +40,12 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 				response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
 				response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken);
 
-				response.sendRedirect(
-					"http://43.200.254.50/kakaologin?" + "access_token=Bearer " + accessToken + "&refresh_token="
-						+ "Bearer " + refreshToken+ "&is_user=F"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
-
 				jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
 				jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
+
+				response.sendRedirect(
+					"http://43.200.254.50/kakaologin?" + "access_token=Bearer " + accessToken + "&refresh_token="
+						+ "Bearer " + refreshToken + "&is_user=F"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
 				//                User findUser = userRepository.findByEmail(oAuth2User.getEmail())
 				//                                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 				//                findUser.authorizeUser();

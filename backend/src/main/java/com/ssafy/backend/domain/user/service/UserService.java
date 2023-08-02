@@ -11,13 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final CoupleRepository coupleRepository;
 
+    @Transactional
     public void signUp(UserSignUpDto userSignUpDto, String userEmail) throws Exception {
         User findUser = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
@@ -43,6 +44,7 @@ public class UserService {
             .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
     }
 
+    @Transactional
     public void modifyUserProfile(UserDto userDto, String userEmail) {
         User findUser = userRepository.findByEmail(userEmail)
             .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
@@ -50,10 +52,19 @@ public class UserService {
         findUser.updateProfile(userDto);
     }
 
+    @Transactional
     public void withdrawal(String userEmail) {
         User findUser = userRepository.findByEmail(userEmail)
             .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 
         userRepository.delete(findUser);
+    }
+
+    public User getMyFiance(String userEmail) {
+        User findUser = userRepository.findByEmail(userEmail)
+            .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+
+        return userRepository.findUserByCouple(findUser.getCouple(), findUser.getId())
+            .orElseThrow(() -> new IllegalArgumentException("연결되어 있는 유저가 없습니다."));
     }
 }

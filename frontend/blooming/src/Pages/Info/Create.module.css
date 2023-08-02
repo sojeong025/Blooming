@@ -1,0 +1,29 @@
+.btn {
+  position: fixed;
+  margin-bottom: 53px;
+  bottom: 0;
+  left: 0;
+  height: 45px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pre, .save {
+  padding: 0;
+  width: 50%;
+  height: 40px;
+  font-size: 15px;
+  font-family: 'SUITE-Regular';
+}
+.pre{
+  background-color: #FF647C;
+  color: white;
+  border: none;
+}
+.save {
+  background-color: transparent;
+  color: #FF647C;
+  border: 1px solid #FF647C;
+}
