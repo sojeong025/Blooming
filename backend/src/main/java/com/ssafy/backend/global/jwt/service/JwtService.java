@@ -93,6 +93,9 @@ public class JwtService {
 
         setAccessTokenHeader(response, accessToken);
         setRefreshTokenHeader(response, refreshToken);
+        // response.sendRedirect(
+        //     "http://43.200.254.50/kakaologin?" + "access_token=Bearer " + accessToken + "&refresh_token="
+        //         + "Bearer " + refreshToken + "&is_user=T");
         log.info("Access Token, Refresh Token 헤더 설정 완료");
     }
 

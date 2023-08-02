@@ -44,6 +44,7 @@ public class UserController {
 		User userProfile = userService.getUserProfile(authentication.getName());
 
 		UserDto userDto = new UserDto(
+			userProfile.getEmail(),
 			userProfile.getName(),
 			userProfile.getNickname(),
 			userProfile.getPhoneNumber(),

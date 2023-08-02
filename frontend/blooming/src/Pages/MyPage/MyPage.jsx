@@ -13,6 +13,7 @@ import axios from "axios";
 
 // 헤더 알림 아이콘 자리에 설정으로 바꾸기
 function MyPage() {
+  // 유저 정보 넣기
   const setUserState = useSetRecoilState(userState);
 
   const [errorModal, setErrorModal] = useRecoilState(errorState);
