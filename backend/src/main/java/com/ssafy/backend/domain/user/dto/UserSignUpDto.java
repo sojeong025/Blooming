@@ -10,5 +10,5 @@ public class UserSignUpDto {
     private String nickname;
     private String phoneNumber;
     private String gender;
-    private String coupleCode;
+    private Integer coupleCode;
 }
