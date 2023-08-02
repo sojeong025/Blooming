@@ -39,4 +39,10 @@ public class InvitationResultDto {
     private LocalDate date;
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime time;
+
+    //신랑 신부 정보 추가
+    private String groomName;
+    private String groomPhone;
+    private String brideName;
+    private String bridePhone;
 }
