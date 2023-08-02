@@ -23,6 +23,8 @@ import { ReactComponent as Wedding } from "../../assets/Icons/Wedding.svg";
 import { ReactComponent as Icon1 } from "../../assets/Icons/Icon1.svg";
 import { ReactComponent as Cam } from "../../assets/Icons/Cam.svg";
 import { ReactComponent as Lock } from "../../assets/Icons/Lock.svg";
+import { ReactComponent as Heart } from "../../assets/Icons/Heart.svg";
+import { ReactComponent as Close } from "../../assets/Icons/Close.svg";
 
 const IconBox = () => {
   return (
@@ -52,6 +54,8 @@ const IconBox = () => {
       <Icon1 width='48px' height='48px' />
       <Cam width='48px' height='48px' />
       <Lock width='48px' height='48px' />
+      <Heart width='48px' height='48px' />
+      <Close width='48px' height='48px' />
     </div>
   );
 };
