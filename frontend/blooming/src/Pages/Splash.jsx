@@ -30,7 +30,7 @@ function Splash() {
           // 헤더 포함하여 GET 요청 보내기
           const response = await axios.get(url, { headers });
           console.log(response)
-          if (response.headers['authorization'] & response.headers['authorization_refresh']) {
+          if (response.headers['authorization'] && response.headers['authorization_refresh']) {
             setAcceesToken(response.headers['authorization'])
             setRefreshToken(response.headers['authorization_refresh'])
             localStorage.setItem('accessToken', accessToken)
