@@ -36,29 +36,33 @@ public class InvitationController {
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
-    @Operation(summary = "모바일 청첩장 하나 가져오기", description = "모바일 청찹장을 DB에서 가져옵니다.")
+    @Operation(summary = "모바일 청첩장 하나 가져오기", description = "본인의 모바일 청찹장을 DB에서 가져옵니다.")
     @GetMapping("/invitation")
     public ResponseEntity<BasicResponse> getInvitation() {
         Invitation invitation = invitationService.getInvitation();
 
         InvitationResultDto invitationResultDto = new InvitationResultDto(
-            invitation.getId(),
-            invitation.getThumbnail(),
-            invitation.getGroomFatherName(),
-            invitation.getGroomFatherPhone(),
-            invitation.getGroomMotherName(),
-            invitation.getGroomMotherPhone(),
-            invitation.getBrideFatherName(),
-            invitation.getBrideFatherPhone(),
-            invitation.getBrideMotherName(),
-            invitation.getBrideMotherPhone(),
-            invitation.getTitle(),
-            invitation.getContent(),
-            invitation.getWeddingHallName(),
-            invitation.getFloor(),
-            invitation.getAddress(),
-            invitation.getDate(),
-            invitation.getTime()
+                invitation.getId(),
+                invitation.getThumbnail(),
+                invitation.getGroomFatherName(),
+                invitation.getGroomFatherPhone(),
+                invitation.getGroomMotherName(),
+                invitation.getGroomMotherPhone(),
+                invitation.getBrideFatherName(),
+                invitation.getBrideFatherPhone(),
+                invitation.getBrideMotherName(),
+                invitation.getBrideMotherPhone(),
+                invitation.getTitle(),
+                invitation.getContent(),
+                invitation.getWeddingHallName(),
+                invitation.getFloor(),
+                invitation.getAddress(),
+                invitation.getDate(),
+                invitation.getTime(),
+                invitation.getGroomName(),
+                invitation.getGroomPhone(),
+                invitation.getBrideName(),
+                invitation.getBridePhone()
         );
 
         BasicResponse basicResponse;

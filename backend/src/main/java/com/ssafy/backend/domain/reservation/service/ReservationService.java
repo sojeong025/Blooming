@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ReservationService {
 
@@ -31,6 +31,7 @@ public class ReservationService {
     private final ProductRepository productRepository;
     private final ScheduleService scheduleService;
 
+    @Transactional
     public void registerReservation(ReservationRegistDto reservationRegistDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication.getName() == null) {

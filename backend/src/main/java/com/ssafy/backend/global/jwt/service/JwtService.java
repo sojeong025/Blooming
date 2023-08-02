@@ -147,7 +147,6 @@ public class JwtService {
      */
     public void setAccessTokenHeader(HttpServletResponse response, String accessToken) {
         response.setHeader(accessHeader, accessToken);
-        log.info(accessHeader + accessToken);
     }
 
     /**
@@ -155,13 +154,12 @@ public class JwtService {
      */
     public void setRefreshTokenHeader(HttpServletResponse response, String refreshToken) {
         response.setHeader(refreshHeader, refreshToken);
-        log.info(refreshHeader + refreshToken);
     }
 
     /**
      * RefreshToken DB 저장(업데이트)
      */
-    public void updateRefreshToken(String email, String refreshToken) {
+    public User updateRefreshToken(String email, String refreshToken) {
         User findUser = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
         // .ifPresentOrElse(
@@ -170,7 +168,7 @@ public class JwtService {
         // );
         findUser.updateRefreshToken(refreshToken);
         System.out.println("findUser = " + findUser);
-        userRepository.saveAndFlush(findUser);
+        return userRepository.saveAndFlush(findUser);
     }
 
     public boolean isTokenValid(String token) {
