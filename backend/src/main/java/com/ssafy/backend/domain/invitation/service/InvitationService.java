@@ -1,19 +1,21 @@
 package com.ssafy.backend.domain.invitation.service;
 
-import java.util.Optional;
-
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.invitation.Invitation;
 import com.ssafy.backend.domain.invitation.dto.InvitationRegistDto;
 import com.ssafy.backend.domain.invitation.dto.InvitationResultDto;
+import com.ssafy.backend.domain.invitation.exception.InvitationNotFoundException;
 import com.ssafy.backend.domain.invitation.repository.InvitationRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @Transactional
@@ -55,17 +57,20 @@ public class InvitationService {
         invitationRepository.save(invitation);
     }
 
-    public Optional<Invitation> getInvitation() {
-        //유저 찾기
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByEmail(authentication.getName())
+    public Invitation getInvitation() {
+        try {
+            //유저 찾기
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
-        Couple couple = user.getCouple();
+            Couple couple = user.getCouple();
 
-        //커플에 해당하는 청첩장 반환
-        Optional<Invitation> findInvitation = invitationRepository.findByCouple(couple);
-
-        return findInvitation;
+            //커플에 해당하는 청첩장 반환
+            return invitationRepository.findByCouple(couple)
+                .orElseThrow(() -> new InvitationNotFoundException("만든 청첩장이 없습니다."));
+        } catch (IllegalArgumentException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+        }
     }
 
     public void modifyInvitation(Long invitationId, InvitationRegistDto invitationRegistDto) {
