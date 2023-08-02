@@ -1,4 +1,4 @@
-package com.ssafy.backend.domain.user.exception;
+package com.ssafy.backend.domain.common.advice;
 
 import com.ssafy.backend.domain.common.BasicResponse;
 import org.springframework.http.HttpStatus;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class UserExceptionHandler {
+public class ExceptionAdvice {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<BasicResponse> ExceptionHandler(Exception e) {
