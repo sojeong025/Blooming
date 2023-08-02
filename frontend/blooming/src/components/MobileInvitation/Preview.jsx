@@ -8,7 +8,7 @@ function Preview({ onClose }) {
 
   return (
     <div className={classes.form}>
-      <button onClick={onClose}>X</button>
+      미리보기 <button onClick={onClose}>X</button>
 
       <div>
         <h3>Main</h3>

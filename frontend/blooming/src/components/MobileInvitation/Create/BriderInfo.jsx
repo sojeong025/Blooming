@@ -61,6 +61,26 @@ function BriderInfo() {
         value={invitation.brider.briderMotherPhone}
         onChange={handleInputChange}
       />
+
+      <label htmlFor="briderName">신부</label>
+      <input
+        className={classes.inputField}
+        type="text"
+        id="briderName"
+        placeholder="이름"
+        value={invitation.brider.briderName}
+        onChange={handleInputChange}
+      />
+      <input
+        className={classes.inputField}
+        type="tel"
+        id="briderPhone"
+        name="briderPhone"
+        placeholder="전화번호"
+        pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+        value={invitation.brider.briderPhone}
+        onChange={handleInputChange}
+      />
     </div>
   );
 }
