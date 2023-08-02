@@ -49,6 +49,12 @@ public class Invitation {
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime time;
 
+    //신랑 신부 정보 추가
+    private String groomName;
+    private String groomPhone;
+    private String brideName;
+    private String bridePhone;
+
     //맞나
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "COUPLE_ID")
@@ -60,7 +66,7 @@ public class Invitation {
         this.couple = couple;
     }
 
-    public Invitation(String thumbnail, String groomFatherName, String groomFatherPhone, String groomMotherName, String groomMotherPhone, String brideFatherName, String brideFatherPhone, String brideMotherName, String brideMotherPhone, String title, String content, String weddingHallName, String floor, String address, LocalDate date, LocalTime time) {
+    public Invitation(String thumbnail, String groomFatherName, String groomFatherPhone, String groomMotherName, String groomMotherPhone, String brideFatherName, String brideFatherPhone, String brideMotherName, String brideMotherPhone, String title, String content, String weddingHallName, String floor, String address, LocalDate date, LocalTime time, String groomName, String groomPhone, String brideName, String bridePhone) {
         this.thumbnail = thumbnail;
         this.groomFatherName = groomFatherName;
         this.groomFatherPhone = groomFatherPhone;
@@ -77,6 +83,10 @@ public class Invitation {
         this.address = address;
         this.date = date;
         this.time = time;
+        this.groomName = groomName;
+        this.groomPhone = groomPhone;
+        this.brideName = brideName;
+        this.bridePhone = bridePhone;
     }
 
     public Invitation() {
@@ -99,5 +109,11 @@ public class Invitation {
         this.address = invitationRegistDto.getAddress();
         this.date = invitationRegistDto.getDate();
         this.time = invitationRegistDto.getTime();
+
+        //신랑신부 추가
+        this.groomName = invitationRegistDto.getGroomName();
+        this.groomPhone = invitationRegistDto.getGroomPhone();
+        this.brideName = invitationRegistDto.getBrideName();
+        this.bridePhone = invitationRegistDto.getBridePhone();
     }
 }
