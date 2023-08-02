@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import classes from "./Splash.module.css";
 import axios from "axios";
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
-import { accessTokenState, refreshTokenState } from "../recoil/TokenAtom";
 import { customAxios } from "../lib/axios";
 import { userState } from "../recoil/ProfileAtom";
 
@@ -13,8 +12,6 @@ function Splash() {
   const [isRendered, setIsRendered] = useState(false);
   const url = "http://43.200.254.50:8080/profile";
   const localRefreshToken = localStorage.getItem('refreshToken');
-  const [accessToken, setAcceesToken] = useRecoilState(accessTokenState)
-  const [refreshToken, setRefreshToken] = useRecoilState(refreshTokenState)
   
   // 유저 정보를 저장
   const setUserState = useSetRecoilState(userState);
@@ -31,16 +28,12 @@ function Splash() {
           const response = await axios.get(url, { headers });
           console.log(response)
           if (response.headers['authorization'] && response.headers['authorization_refresh']) {
-            setAcceesToken(response.headers['authorization'])
-            setRefreshToken(response.headers['authorization_refresh'])
-            localStorage.setItem('accessToken', accessToken)
-            localStorage.setItem('refreshToken', refreshToken)
-            
+            console.log(response.headers['authorization'], response.headers['authorization_refresh'])
+            localStorage.setItem('accessToken', response.headers['authorization'])
+            localStorage.setItem('refreshToken', response.headers['authorization_refresh'])
             headers = {
-              Authorization: `Bearer ${accessToken}`,
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             };
-            
-            console.log(accessToken, refreshToken)
             try {
               // 유저 정보 조회
               const res = await axios.get(url, { headers });
