@@ -3,6 +3,7 @@ package com.ssafy.backend.domain.user;
 import com.ssafy.backend.domain.common.CreatedAndUpdatedBaseEntity;
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.notification.Notification;
+import com.ssafy.backend.domain.reservation.Reservation;
 import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import lombok.*;
@@ -50,6 +51,9 @@ public class User extends CreatedAndUpdatedBaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Notification> notifications = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Reservation> reservations = new ArrayList<>();
 
     //==연관관계 메서드==//
     // 양방향 세팅 시 객체의 데이터 무결성 보장
