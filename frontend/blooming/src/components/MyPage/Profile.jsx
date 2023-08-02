@@ -14,11 +14,11 @@ const ProfileBox = () => {
       <div className={classes.user} style={{ border: "1px solid black" }}>
         {/* 연결했을 때는 두 명 안했으면 추가하라고 */}
         {/* 프로필 이미지 */}
-        {/* <img
+        <img
           className={classes.profileImg}
           src={userData.profileImg}
           alt='profile'
-        /> */}
+        />
         {/* 가져온 유저 정보 */}
         <div>{userData.email}</div>
         <div>{userData.gender}</div>

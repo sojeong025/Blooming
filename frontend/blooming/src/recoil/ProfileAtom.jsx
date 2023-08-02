@@ -9,6 +9,7 @@ export const userState = atom({
     name: "",
     nickname: "",
     phoneNumber: "",
+    profileImg: "",
   },
 });
 

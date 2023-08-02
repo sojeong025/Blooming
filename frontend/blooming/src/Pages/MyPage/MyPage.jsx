@@ -24,6 +24,8 @@ function MyPage() {
       name: "더미",
       nickname: "더미",
       phoneNumber: "11",
+      profileImg:
+        "https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427_1280.jpg",
     });
 
   const resetUserState = useResetRecoilState(userState);
