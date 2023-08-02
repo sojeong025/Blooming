@@ -19,16 +19,20 @@ public class Product {
 
     //상품 정보
     private ProductType productType;
-    private String name;
-    private String thumbnail; //대표이미지 -- 미정
-    private String description;
+    private String itemName;
+    private String brief;
+    private String detail;
+
+    //이미지 정보-- 미정
+    private String thumbnail; //대표이미지
+    private String detailImage1;
+    private String detailImage2;
+    private String detailImage3;
 
     //업체 정보
-//    private String companyName; //보통 상품 이름이 업체 이름
-    private String phoneNumber;
-    private String address;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private String company;
+    private String companyTime;
+    private String companyAddress;
     
     //연관관계는 만들면서 하나씩 추가
 }
