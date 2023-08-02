@@ -31,6 +31,7 @@ function Create() {
 
   function handlePreviewClick() {
     setPreviewModalVisible(true);
+    // document.body.style.overflow="hidden";
   }
 
   // function handleSaveClick() {
