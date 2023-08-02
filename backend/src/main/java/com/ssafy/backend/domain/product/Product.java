@@ -35,4 +35,5 @@ public class Product {
     private String companyAddress;
     
     //연관관계는 만들면서 하나씩 추가
+
 }
