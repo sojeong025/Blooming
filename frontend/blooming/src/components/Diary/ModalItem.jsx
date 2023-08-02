@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useParams, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { diaryState } from '../../recoil/DiaryStateAtom';
 import DatePicker from 'react-datepicker'
 import './DatePicker.css'
 import classes from './ModalItem.module.css'
+import { customAxios } from "../../lib/axios";
 
 function CreateItem({ hide, item }) {
   const [diaries, setDiaries] = useRecoilState(diaryState)
@@ -12,6 +13,7 @@ function CreateItem({ hide, item }) {
   const [ content, setContent ] = useState('');
   const [image, setImage] = useState('');
   const [isEditMode, setIsEditMode] = useState(false)
+  const { id } = useParams();
   
   useEffect(() => {
     if (item) {
@@ -48,31 +50,48 @@ function CreateItem({ hide, item }) {
     reader.readAsDataURL(file);
   }
 
+  const ItemData = {
+    title: title,
+    content: content,
+    date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
+    image: image
+  };
+
   function submitHandler(event) {
     event.preventDefault();
     if (!isEditMode) {
-      const ItemData = {
-        id: diaries.length+1,
-        title: title,
-        content: content,
-        date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
-        image: image
-      };
-      setDiaries((existingData) => [ItemData, ...existingData]); // 아이템 만들기
-    } else {
-      setDiaries(diaries.map((diary) => {
-        if (diary.id === item.id) {
-          const ItemData = {
-            id: diary.id,
-            title: title,
-            content: content,
-            date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
-            image: image
-          }
-          return ItemData
+      const createDiary = async () => {
+        try {
+          await customAxios.post("diary", ItemData);
+          setDiaries((existingData) => [ItemData, ...existingData]); // 아이템 만들기
+        } catch (error) {
+          console.error(error);
         }
-        return diary
-      }));
+      };
+      createDiary();
+      
+    } else {
+      const updateDiary = async () => {
+        try {
+          await customAxios.put("diary", id);
+          setDiaries(diaries.map((diary) => {
+            if (diary.id === item.id) {
+              const ItemData = {
+                id: diary.id,
+                title: title,
+                content: content,
+                date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
+                image: image
+              }
+              return ItemData
+            }
+            return diary
+          }));
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      updateDiary();
     }
     hide();
   }

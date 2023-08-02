@@ -1,13 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {useRecoilState} from "recoil"
 import { diaryState } from '../../recoil/DiaryStateAtom'
 import CreateItem from "../../components/Diary/ModalItem";
+import { customAxios } from "../../lib/axios";
 
 const Diary = () => {
   const [diaries, setDiaries] = useRecoilState(diaryState)
 
   const [ modalIsVisible, setModalIsVisible ] = useState(false);
+
+  const fetchData = async () => {
+    try {
+      const response = await customAxios.get("diary");
+      // 유저 정보 저장
+      setDiaries(response.data.result[0]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function hideModalHandler() {
     setModalIsVisible(false);

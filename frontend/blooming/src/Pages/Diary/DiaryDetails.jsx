@@ -1,19 +1,19 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { diaryState } from "../../recoil/DiaryStateAtom";
 import { useState } from "react";
 import CreateItem from "../../components/Diary/ModalItem";
 
 const DiaryDetails = () => {
 
-  const [diaries, setDiaries] = useRecoilState(diaryState)
+  const diaries = useRecoilValue(diaryState);
   const navigate = useNavigate();
   const { id } = useParams();
   const [ modalIsVisible, setModalIsVisible ] = useState(false);
 
   const diary = diaries.find((diary) => {
-    if (`${diary.id}` === id) {
+    if (diary.id === id) {
       return diary
     }
   })
