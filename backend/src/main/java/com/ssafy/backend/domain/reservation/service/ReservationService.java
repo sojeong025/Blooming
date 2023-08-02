@@ -8,6 +8,7 @@ import com.ssafy.backend.domain.reservation.dto.ReservationResultDto;
 import com.ssafy.backend.domain.reservation.repository.ReservationRepository;
 import com.ssafy.backend.domain.schedule.ScheduleType;
 import com.ssafy.backend.domain.schedule.ScheduledBy;
+import com.ssafy.backend.domain.schedule.dto.ReservationScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.dto.ScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.service.ScheduleService;
 import com.ssafy.backend.domain.user.User;
@@ -54,6 +55,8 @@ public class ReservationService {
         reservationRepository.save(reservation);
 
         //예약 시 스케줄 자동 등록
+        //등록한 예약의 id 가져오기 : 그 1차캐시로.. 바로 되려나 아래처럼
+        
         //스케줄 타입 결정
         ScheduleType scheduleType = null;
         switch(product.getProductType()){
@@ -64,13 +67,14 @@ public class ReservationService {
             case 메이크업:
                 scheduleType = ScheduleType.스드메; break;
         }
-        scheduleService.registSchedule(new ScheduleRegistDto(
+        scheduleService.registReservationSchedule(new ReservationScheduleRegistDto(
                 product.getItemName() + " 예약",
                 product.getCompany() + " 에 방문해주세요",
                 reservationRegistDto.getReservedDate(),
                 reservationRegistDto.getReservedTime(),
                 ScheduledBy.COMMON,
-                scheduleType
+                scheduleType,
+                reservation.getId()
         ));
     }
 
@@ -101,7 +105,7 @@ public class ReservationService {
     public void deleteReservation(Long reservationId) {
         reservationRepository.deleteById(reservationId);
 
-        //예약 취소하면 일정도 삭제.. 어케하노
-
+        //예약 취소하면 일정도 삭제..
+        scheduleService.deleteReservationSchedule(reservationId);
     }
 }

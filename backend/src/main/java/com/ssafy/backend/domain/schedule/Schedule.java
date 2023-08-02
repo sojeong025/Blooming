@@ -36,6 +36,9 @@ public class Schedule extends CreatedBaseEntity {
     private ScheduledBy scheduledBy;
     private ScheduleType scheduleType;
 
+    //예약 id 추가
+    private Long reservationId;
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "COUPLE_ID")
     private Couple couple;
@@ -54,6 +57,7 @@ public class Schedule extends CreatedBaseEntity {
         this.scheduleTime = scheduleModifyDto.getScheduleTime();
     }
 
+    //사용자 직접 일정 등록을 위한 생성자
     public Schedule(String title, String content, LocalDate scheduleDate, LocalTime scheduleTime, ScheduledBy scheduledBy, ScheduleType scheduleType) {
         this.title = title;
         this.content = content;
@@ -61,5 +65,16 @@ public class Schedule extends CreatedBaseEntity {
         this.scheduleTime = scheduleTime;
         this.scheduledBy = scheduledBy;
         this.scheduleType = scheduleType;
+    }
+
+    //예약 시 일정 등록을 위한 생성자
+    public Schedule(String title, String content, LocalDate scheduleDate, LocalTime scheduleTime, ScheduledBy scheduledBy, ScheduleType scheduleType, Long reservationId) {
+        this.title = title;
+        this.content = content;
+        this.scheduleDate = scheduleDate;
+        this.scheduleTime = scheduleTime;
+        this.scheduledBy = scheduledBy;
+        this.scheduleType = scheduleType;
+        this.reservationId = reservationId;
     }
 }

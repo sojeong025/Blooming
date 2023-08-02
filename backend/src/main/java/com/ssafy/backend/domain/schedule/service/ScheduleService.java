@@ -2,7 +2,10 @@ package com.ssafy.backend.domain.schedule.service;
 
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
+import com.ssafy.backend.domain.reservation.Reservation;
+import com.ssafy.backend.domain.reservation.service.ReservationService;
 import com.ssafy.backend.domain.schedule.Schedule;
+import com.ssafy.backend.domain.schedule.dto.ReservationScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.dto.ScheduleModifyDto;
 import com.ssafy.backend.domain.schedule.dto.ScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.dto.ScheduleResultDto;
@@ -100,5 +103,33 @@ public class ScheduleService {
                 schedule.getScheduleType()
         );
         return scheduleDto;
+    }
+
+    public void registReservationSchedule(ReservationScheduleRegistDto reservationScheduleRegistDto) {
+        Schedule schedule = new Schedule(
+                reservationScheduleRegistDto.getTitle(),
+                reservationScheduleRegistDto.getContent(),
+                reservationScheduleRegistDto.getScheduleDate(),
+                reservationScheduleRegistDto.getScheduleTime(),
+                reservationScheduleRegistDto.getScheduledBy(),
+                reservationScheduleRegistDto.getScheduleType(),
+                reservationScheduleRegistDto.getReservationId()
+        );
+
+        //커플도 등록
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getName()); //이메일
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+        Couple couple = user.getCouple();
+
+        schedule.setCouple(couple);
+        scheduleRepository.save(schedule);
+    }
+
+    public void deleteReservationSchedule(Long reservationId) {
+        //??
+        Schedule schedule = scheduleRepository.findByReservationId(reservationId);
+        scheduleRepository.delete(schedule);
     }
 }
