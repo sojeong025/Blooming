@@ -48,6 +48,7 @@ function Splash() {
             const res = axios.get(url, { headers });
             if (res.data) {
               setUserState(res.data.result[0]);
+              console.log(res.data);
               navigate("/home");
             }
           } catch (error) {
