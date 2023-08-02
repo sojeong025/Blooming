@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { RecoilRoot } from "recoil";
 import {
   BrowserRouter as Router,
@@ -5,30 +6,38 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
+
+// Pages
 import Splash from "./Pages/Splash";
-import Home from "./Pages/Home";
+// login
 import Login from "./Pages/Login/Login";
 import KakaoLogin from "./Pages/Login/KakaoLogin";
-import Schedule from "./Pages/Schedule";
 import Join from "./Pages/Login/Join";
 import Question from "./Pages/Login/Question";
 import DecideWedding from "./Pages/Login/DecideWedding";
 import ChooseWedding from "./Pages/Login/ChooseWedding";
 import Share from "./Pages/Login/Share";
+// common
+import TopAppBar from "./components/Common/TopAppBar";
+import BottomNav from "./components/Common/BottomNav";
+import Home from "./Pages/Home";
+// schedule
+import Schedule from "./Pages/Schedule";
+// my-page
 import MyPage from "./Pages/MyPage/MyPage";
 import SettingPage from "./Pages/MyPage/SettingPage";
 import EditProfile from "./Pages/MyPage/EditProfile";
+// diary
 import Diary from "./Pages/Diary/Diary";
-import DiaryDetails from './Pages/Diary/DiaryDetails'
+import DiaryDetails from "./Pages/Diary/DiaryDetails";
+// info
 import Info from "./Pages/Info/Info";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
 import Create from "./Pages/Info/Create";
+// notice
 import AllNotice from "./Pages/Notice/AllNotice";
-import TopAppBar from "./components/Common/TopAppBar";
-import BottomNav from "./components/Common/BottomNav";
-
+// err
 import Error from "./Pages/Error";
-import { useEffect } from "react";
 
 function App() {
   // Nav를 숨길 페이지 path

@@ -8,7 +8,7 @@ import {
   UserInfoPhone,
   UserInfoGender,
 } from "../../recoil/UserInfoAtom";
-import { tokenState } from "../../recoil/TokenAtom";
+import { accessTokenState, refreshTokenState } from "../../recoil/TokenAtom";
 import axios from "axios";
 // 에러 모달
 import useErrorModal from "../../components/Error/useErrorModal";
@@ -19,7 +19,7 @@ export default function Join() {
   const [nickname, setNickname] = useRecoilState(UserInfoNickname);
   const [phoneNumber, setPhoneNumber] = useRecoilState(UserInfoPhone);
   const [gender, setGender] = useRecoilState(UserInfoGender);
-  const [token, setToken] = useRecoilState(tokenState);
+  const [access, setAccess] = useRecoilState(accessTokenState);
 
   // 에러 모달
   const [ErrorModal, handleError] = useErrorModal();
@@ -45,12 +45,12 @@ export default function Join() {
   // 제출 버튼 클릭 시 처리할 함수
   const joinSubmit = async (event) => {
     event.preventDefault();
-    console.log(token);
+    console.log(access);
 
     const url = "http://43.200.254.50:8080/sign-up";
 
     const headers = {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${access}`,
     };
 
     const data = {
