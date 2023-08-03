@@ -14,6 +14,7 @@ const DiaryDetails = () => {
   const [ modalIsVisible, setModalIsVisible ] = useState(false);
 
   const diary = diaries.find((diary) => {
+    console.log(diary.id, id)
     if (diary.id === id) {
       return diary
     }
@@ -49,14 +50,16 @@ const DiaryDetails = () => {
 
   return (
     <motion.div initial="initial" animate="visible" variants={pageTransition} style={{marginTop:"56px"}}>
-      {modalIsVisible ? <CreateItem hide={hideModalHandler} item={diary} /> :<><h2>{diary.title}</h2>
-      <p>{diary.content}</p>
-      <br />
-      <p>{diary.date}</p>
-      <button onClick={showModalHandler}>수정하기</button>
-      <button onClick={handleDelete}>삭제하기</button>
-      <button onClick={handleGoBack}>뒤로가기</button></>}
-      
+      {modalIsVisible ? <CreateItem hide={hideModalHandler} item={diary} /> :
+        <>
+          <h2>{diary.title}</h2>
+          <p>{diary.content}</p>
+          <br />
+          <p>{diary.date}</p>
+          <button onClick={showModalHandler}>수정하기</button>
+          <button onClick={handleDelete}>삭제하기</button>
+          <button onClick={handleGoBack}>뒤로가기</button>
+        </>}
     </motion.div>
   );
 };
