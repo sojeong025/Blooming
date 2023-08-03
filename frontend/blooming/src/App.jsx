@@ -12,6 +12,7 @@ import Splash from "./Pages/Splash";
 // login
 import Login from "./Pages/Login/Login";
 import KakaoLogin from "./Pages/Login/KakaoLogin";
+import Gojoin from "./Pages/Login/Gojoin";
 import Join from "./Pages/Login/Join";
 
 import Question from "./Pages/Login/Question";
@@ -69,6 +70,7 @@ function App() {
           <Route path='/' element={<Splash />} />
           <Route path='/login' element={<Login />} />
           <Route path='/kakaologin' element={<KakaoLogin />} />
+          <Route path='/GoJoin' element={<Gojoin />} />
           <Route path='/join' element={<Join />} />
           <Route path='/Question' element={<Question />} />
           <Route path='/DecideWedding' element={<DecideWedding />} />
