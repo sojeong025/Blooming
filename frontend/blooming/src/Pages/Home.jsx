@@ -5,11 +5,11 @@ import PlanTips from "../components/Home/PlanTips";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
 import { customAxios } from "../lib/axios";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function Home() {
-  const navigate = Navigate();
+  const navigate = useNavigate();
 
   const [user, setUser] = useRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
