@@ -27,18 +27,17 @@ export default function Join() {
   const getKakaoProfile = async () => {
     try {
       const response = await customAxios.get("kakao-profile");
-      console.log(response.data.result[0]);
+      // console.log(response.data.result[0]);
       const kakaoData = response.data.result[0];
-
       setFormData({ ...formData, ...kakaoData });
     } catch (error) {
       console.log("카카오 유저 정보 에러: ", error);
     }
   };
+
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken"),
   );
-
   useEffect(() => {
     const syncToken = () => {
       setAccessToken(localStorage.getItem("accessToken"));
@@ -53,6 +52,7 @@ export default function Join() {
   useEffect(() => {
     if (accessToken) {
       getKakaoProfile();
+      console.log(userData);
     }
   }, [accessToken]);
 
@@ -64,9 +64,9 @@ export default function Join() {
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
     try {
-      const response = await customAxios.post("sign-up", formData);
-      console.log(response);
-      setUserData({ ...formData });
+      setUserData({ ...userData, ...formData });
+      await customAxios.post("sign-up", userData);
+      // console.log(response);
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
     }
@@ -75,8 +75,6 @@ export default function Join() {
   // 제출 버튼 클릭
   const joinSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
-    setUserData({ ...formData });
     // window.flutter_inappwebview
     //   .callHandler("handleFoo")
     //   .then(function (result) {
@@ -86,16 +84,15 @@ export default function Join() {
     //     fcmtext.value = result.fcmT;
     //   });
     handleSignUp();
-    navigate("/Question");
-  };
 
-  const setCouple = () => {};
+    navigate("/DecideWedding", {
+      state: { pageTitle: "회원가입" },
+    });
+  };
 
   return (
     <div className='mainContainer'>
-      <div className={classes.header}>
-        <h2>추가 정보 입력</h2>
-      </div>
+      <h3>추가 정보를 입력하세요</h3>
       {/* <input type='text' id='fcminput'></input> */}
 
       <div className={classes.container}>
@@ -152,15 +149,6 @@ export default function Join() {
               <label htmlFor='gender-2'>신부</label>
             </div>
           </div>
-
-          {/* 추천인 코드 */}
-          <InputForm
-            label='약혼자 코드'
-            name='coupleCode'
-            value={formData.coupleCode}
-            onChange={handleChange}
-          />
-          <button onClick={setCouple}>인증</button>
 
           <button type='submit' className={classes.submitButton}>
             제출

@@ -12,9 +12,9 @@ import Splash from "./Pages/Splash";
 // login
 import Login from "./Pages/Login/Login";
 import KakaoLogin from "./Pages/Login/KakaoLogin";
-import Gojoin from "./Pages/Login/Gojoin";
+import GoJoin from "./Pages/Login/GoJoin";
+import JoinCode from "./Pages/Login/JoinCode";
 import Join from "./Pages/Login/Join";
-
 import Question from "./Pages/Login/Question";
 import DecideWedding from "./Pages/Login/DecideWedding";
 import ChooseWedding from "./Pages/Login/ChooseWedding";
@@ -43,15 +43,7 @@ import Error from "./Pages/Error";
 
 function App() {
   // Nav를 숨길 페이지 path
-  const hiddenPaths = [
-    "/",
-    "/login",
-    "/join",
-    "/Question",
-    "/DecideWedding",
-    "/ChooseWedding",
-    "/Share",
-  ];
+  const hiddenPaths = ["/", "/login", "/GoJoin", "/Question", "/Share"];
 
   const Routing = () => {
     function setScreenSize() {
@@ -70,7 +62,9 @@ function App() {
           <Route path='/' element={<Splash />} />
           <Route path='/login' element={<Login />} />
           <Route path='/kakaologin' element={<KakaoLogin />} />
-          <Route path='/GoJoin' element={<Gojoin />} />
+          <Route path='/GoJoin' element={<GoJoin />} />
+          <Route path='/join-code' element={<JoinCode />} />
+
           <Route path='/join' element={<Join />} />
           <Route path='/Question' element={<Question />} />
           <Route path='/DecideWedding' element={<DecideWedding />} />
