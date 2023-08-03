@@ -1,11 +1,7 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-const Button = ({ text }) => {
-  return (
-    <button>
-      { text }
-    </button>
-  );
+const Button = ({ text, onClick }) => {
+  return <button onClick={onClick}>{text}</button>;
 };
 
 Button.propTypes = {
