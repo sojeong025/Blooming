@@ -1,16 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import classes from "./Join.module.css";
+// 에러 모달
+import useErrorModal from "../../components/Error/useErrorModal";
 // Label Input Component
 import InputForm from "../../components/Common/InputText";
-
 import { useRecoilState } from "recoil";
-import {
-  UserInfoName,
-  UserInfoNickname,
-  UserInfoPhone,
-  UserInfoGender,
-} from "../../recoil/UserInfoAtom";
-// 에러 모달
 import useErrorModal from "../../components/Error/useErrorModal";
 import { userState } from "../../recoil/ProfileAtom";
 import { useEffect, useState } from "react";
@@ -41,12 +35,12 @@ export default function Join() {
     } catch (error) {
       console.log("카카오 유저 정보 에러: ", error);
       // 더미 넣기
-      // const kakaoData = {
-      //   email: "lotus0028@kakao.com",
-      //   nickname: "ㅎㅇ",
-      //   gender: "FEMALE",
-      // };
-      // setFormData({ ...formData, ...kakaoData });
+      const kakaoData = {
+        email: "lotus0028@kakao.com",
+        nickname: "ㅎㅇ",
+        gender: "FEMALE",
+      };
+      setFormData({ ...formData, ...kakaoData });
     }
   };
 
@@ -83,7 +77,7 @@ export default function Join() {
     } catch (error) {
       console.log(error);
       // 더미 넣기
-      // setUserData({ ...formData });
+      setUserData({ ...userData, ...formData });
     }
   };
 

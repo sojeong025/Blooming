@@ -5,11 +5,11 @@ export const userState = atom({
   key: "userState",
   default: {
     email: "",
-    gender: "",
-    name: "",
+    name: "나는더미다",
     nickname: "",
     phoneNumber: "",
-    profileImg: "",
+    gender: "",
+    coupleCode: 0,
   },
 });
 
