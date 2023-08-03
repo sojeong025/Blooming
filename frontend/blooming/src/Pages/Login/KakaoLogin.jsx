@@ -42,7 +42,7 @@ function KakaoLogin() {
       if (isUser === 'T') {
         navigate("/home")
       } else if (isUser === 'F') {
-        navigate("/login");
+        navigate("/join");
       }
     }
   }, [access]);
