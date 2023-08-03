@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import classes from "./Splash.module.css";
 import axios from "axios";
 import { useResetRecoilState, useSetRecoilState } from "recoil";
+import { customAxios } from "../lib/axios";
 
 import { userState } from "../recoil/ProfileAtom";
 
@@ -20,7 +21,7 @@ function Splash() {
   useEffect(() => {
     const fetchData = async () => {
       if (localRefreshToken) {
-        let headers = {
+        const headers = {
           Authorization_Refresh: `Bearer ${localRefreshToken}`,
         };
         try {
@@ -43,17 +44,11 @@ function Splash() {
               "refreshToken",
               response.headers["authorization_refresh"],
             );
-            headers = {
-              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            };
             try {
               // 유저 정보 조회
-              const res = await axios.get(url, { headers });
-              console.log(res);
+              const res = await customAxios('profile');
               if (res.data) {
-                console.log(res.data.result[0]);
                 setUserState({ ...res.data.result[0] });
-                console.log(userState);
                 navigate("/home");
               }
             } catch (error) {

@@ -6,7 +6,8 @@ const accessToken = localStorage.getItem('accessToken')
 export const customAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}`,
   headers: {
-    Authorization: `Bearer ${accessToken}`,
+    'Authorization' : `Bearer ${accessToken}`,
+    'Content-Type' : 'application/json',
   },
 });
 
