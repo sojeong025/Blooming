@@ -19,13 +19,14 @@ public class UserService {
     private final CoupleRepository coupleRepository;
 
     @Transactional
-    public void signUp(UserSignUpDto userSignUpDto, String userEmail) throws Exception {
+    public void signUp(UserSignUpDto userSignUpDto, String userEmail) {
         User findUser = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+            .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 
         findUser.updateFirst(userSignUpDto);
         findUser.authorizeUser();
 
+        // TODO: coupleCode 검증하는 api를 하나 만들자.(프론트에서 인증버튼이 있으니까..) 그러면 null이 아닐 때 무조건 setCouple하면 된다.
         if (userSignUpDto.getCoupleCode() == null) {
             Couple couple = Couple.createCouple();
 
@@ -33,13 +34,13 @@ public class UserService {
             coupleRepository.save(couple);
         } else {
             Couple couple = coupleRepository.findByCoupleCode(userSignUpDto.getCoupleCode())
-                    .orElseThrow(() -> new IllegalArgumentException("입력한 커플 코드에 맞는 커플이 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("입력한 커플 코드에 맞는 커플이 없습니다."));
 
             findUser.setCouple(couple);
         }
     }
 
-    public User getUserProfile(String userEmail) throws Exception {
+    public User getUserProfile(String userEmail) {
         return userRepository.findByEmail(userEmail)
             .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
     }
@@ -60,11 +61,24 @@ public class UserService {
         userRepository.delete(findUser);
     }
 
-    public User getMyFiance(String userEmail) {
+    public UserDto getMyFiance(String userEmail) {
         User findUser = userRepository.findByEmail(userEmail)
             .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 
-        return userRepository.findUserByCouple(findUser.getCouple(), findUser.getId())
-            .orElseThrow(() -> new IllegalArgumentException("연결되어 있는 유저가 없습니다."));
+        User user = userRepository.findUserByCouple(findUser.getCouple(), findUser.getId())
+            .orElse(null);
+
+        if (user == null) {
+            return null;
+        }
+
+        return new UserDto(
+            user.getEmail(),
+            user.getName(),
+            user.getNickname(),
+            user.getPhoneNumber(),
+            user.getGender(),
+            user.getCouple().getCoupleCode()
+        );
     }
 }
