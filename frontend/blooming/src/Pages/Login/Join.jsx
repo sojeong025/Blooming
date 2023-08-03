@@ -10,8 +10,6 @@ import {
   UserInfoPhone,
   UserInfoGender,
 } from "../../recoil/UserInfoAtom";
-import { accessTokenState, refreshTokenState } from "../../recoil/TokenAtom";
-import axios from "axios";
 // 에러 모달
 import useErrorModal from "../../components/Error/useErrorModal";
 import { userState } from "../../recoil/ProfileAtom";
@@ -51,10 +49,25 @@ export default function Join() {
       // setFormData({ ...formData, ...kakaoData });
     }
   };
+
+  const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
+
   useEffect(() => {
-    getKakaoProfile();
-    console.log(formData);
+    const syncToken = () => {
+      setAccessToken(localStorage.getItem('accessToken'));
+    };
+
+    window.addEventListener("storage", syncToken);
+    return () => {
+      window.removeEventListener("storage", syncToken);
+    };
   }, []);
+
+  useEffect(() => {
+    if (accessToken) {
+      getKakaoProfile();
+    }
+  }, [accessToken]);
 
   // 추가 정보 입력
   const handleChange = (event) => {
