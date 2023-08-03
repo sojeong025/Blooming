@@ -89,7 +89,16 @@ export default function Join() {
     navigate("/Question");
   };
 
-  const setCouple = () => {};
+  // 인증코드 확인
+  const setCouple = async () => {
+    try {
+      const response = await customAxios.post("sign-up", formData);
+      console.log(response);
+      setUserData({ ...formData });
+    } catch (error) {
+      console.log("추가 정보 POST 에러:", error);
+    }
+  };
 
   return (
     <div className='mainContainer'>
