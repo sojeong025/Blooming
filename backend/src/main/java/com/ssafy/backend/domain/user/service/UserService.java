@@ -1,8 +1,11 @@
 package com.ssafy.backend.domain.user.service;
 
+import java.util.List;
+
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.user.User;
+import com.ssafy.backend.domain.user.dto.CoupleCodeDto;
 import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.repository.UserRepository;
@@ -80,5 +83,20 @@ public class UserService {
             user.getGender(),
             user.getCouple().getCoupleCode()
         );
+    }
+
+    public void certificationCouple(CoupleCodeDto coupleCodeDto) {
+        Couple couple = coupleRepository.findByCoupleCode(coupleCodeDto.getCoupleCode())
+            .orElseThrow(() -> new IllegalArgumentException("입력한 커플 코드에 맞는 커플이 없습니다."));
+
+        if (couple.getUsers().size() >= 2) {
+            throw new IllegalArgumentException("이미 커플 연결이 완료된 사용자입니다.");
+        }
+
+        User findUser = couple.getUsers().get(0);
+        // 찾은 유저가 내 약혼자 이름과 다르다면 예외처리
+        if (!(findUser.getName().equals(coupleCodeDto.getName()))) {
+            throw new IllegalArgumentException("커플 연결할 수 없는 코드입니다.");
+        }
     }
 }
