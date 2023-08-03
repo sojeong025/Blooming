@@ -24,7 +24,7 @@ public class DiaryService {
     private final DiaryRepository diaryRepository;
     private final UserRepository userRepository;
 
-    public void registDiary(DiaryRegistDto diaryRegistDto) {
+    public Long registDiary(DiaryRegistDto diaryRegistDto) {
         Diary diary = new Diary(
                 diaryRegistDto.getTitle(),
                 diaryRegistDto.getContent(),
@@ -38,8 +38,8 @@ public class DiaryService {
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
         diary.setUser(user);
 
-        diaryRepository.save(diary);
-
+        Diary savedDiary = diaryRepository.save(diary);
+        return savedDiary.getId();
     }
 
     public List<DiaryResultDto> getAllDiary(){

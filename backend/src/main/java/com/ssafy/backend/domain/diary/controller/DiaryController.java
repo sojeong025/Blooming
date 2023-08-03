@@ -29,12 +29,14 @@ public class DiaryController {
     @Parameter(name = "DiaryRegistDto", description = "dto에 해당하는 정보를 넘겨주세요. 비어있어도 저장 가능.")
     @PostMapping("/diary")
     public ResponseEntity<BasicResponse> registDiary(@RequestBody DiaryRegistDto diaryRegistDto) {
-        diaryService.registDiary(diaryRegistDto);
+        Long diaryId = diaryService.registDiary(diaryRegistDto);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
-                .message("다이어리 등록 성공").build();
+                .message("다이어리 등록 성공")
+                .count(1)
+                .result(Collections.singletonList(diaryId)).build();
 
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
