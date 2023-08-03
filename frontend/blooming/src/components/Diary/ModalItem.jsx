@@ -13,7 +13,6 @@ function CreateItem({ hide, item }) {
   const [ content, setContent ] = useState('');
   const [image, setImage] = useState('');
   const [isEditMode, setIsEditMode] = useState(false)
-  const { id } = useParams();
   
   useEffect(() => {
     if (item) {
@@ -73,7 +72,7 @@ function CreateItem({ hide, item }) {
     } else {
       const updateDiary = async () => {
         try {
-          await customAxios.put("diary", id);
+          await customAxios.put("diary", item.id);
           setDiaries(diaries.map((diary) => {
             if (diary.id === item.id) {
               const ItemData = {
