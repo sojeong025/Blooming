@@ -7,7 +7,8 @@
 }
 .header{
   font-weight: bold;
-  font-size: 17px;
+  font-size: 18px;
+  padding-bottom: 6px;
 }
 .thumbnail{
   display: flex;
@@ -21,10 +22,28 @@
 .inputField {
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 90%;
+  width: 94%;
   padding: 10px;
   margin: 10px 0 10px;
   height: 15px;
+}
+.inputField:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.textField {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 94%;
+  padding: 10px;
+  margin: 10px 0 10px;
+  font-family: 'SUITE-Regular';
+  letter-spacing: 3px;
+  font-size: 18px;
+}
+.textField:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 .required {
   color: rgb(236, 103, 103);
