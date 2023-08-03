@@ -15,7 +15,7 @@ const DiaryDetails = () => {
 
   const diary = diaries.find((diary) => {
     console.log(diary.id, id)
-    if (diary.id === id) {
+    if (`${diary.id}` === id) {
       return diary
     }
   })
