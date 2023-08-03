@@ -79,7 +79,7 @@ function CreateItem({ hide, item }) {
     } else {
       const updateDiary = async () => {
         try {
-          await customAxios.put("diary", Number(item.id));
+          await customAxios.put("diary");
           setDiaries(diaries.map((diary) => {
             if (diary.id === Number(item.id)) {
               const ItemData = {
