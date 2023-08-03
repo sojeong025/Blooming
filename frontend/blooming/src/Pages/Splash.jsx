@@ -62,7 +62,7 @@ function Splash() {
               resetUserState();
               console.error("유저 정보 API 요청 에러: 추가 정보 미입력", error);
               // 추가정보 페이지로 이동
-              navigate("/join");
+              navigate("/login");
             }
           } else {
             navigate("/login");
