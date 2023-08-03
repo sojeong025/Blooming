@@ -38,43 +38,39 @@ export default function Join() {
       const response = await customAxios.get("kakao-profile");
       console.log(response.data.result[0]);
       const kakaoData = response.data.result[0];
-      // const kakaoData = {
-      //   email: "lotus0028@kakao.com",
-      //   nickname: "1",
-      //   gender: "FEMALE",
-      // };
+
       setFormData({ ...formData, ...kakaoData });
     } catch (error) {
-      console.log("카카오 유저 정보 에러:", error);
+      console.log("카카오 유저 정보 에러: ", error);
+      // 더미 넣기
+      // const kakaoData = {
+      //   email: "lotus0028@kakao.com",
+      //   nickname: "ㅎㅇ",
+      //   gender: "FEMALE",
+      // };
+      // setFormData({ ...formData, ...kakaoData });
     }
   };
-
   useEffect(() => {
     getKakaoProfile();
     console.log(formData);
   }, []);
 
-  useEffect(() => {
-    console.log(localStorage.getItem("accessToken"));
-    // console.log(userData);
-    // console.log(formData);
-  }, [userData]);
-
-  // 폼에서 입력받아 제출버튼을 누르면, 유저 데이터에 저장하고
-  // 추가 정보도 입력하기
-  // 폼데이터 수정
+  // 추가 정보 입력
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
-
-  // 추가 정보 작성 POST 요청
+  // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
     try {
       const response = await customAxios.post("sign-up", formData);
       console.log(response.data.result);
+      setUserData({ ...formData });
     } catch (error) {
       console.log(error);
+      // 더미 넣기
+      // setUserData({ ...formData });
     }
   };
 
@@ -91,6 +87,7 @@ export default function Join() {
     //     // fcm_token: 얘가 value
     //     fcmtext.value = result.fcmT;
     //   });
+
     handleSignUp();
     navigate("/Question");
   };
