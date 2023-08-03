@@ -3,7 +3,7 @@ import UploadImage from './UploadImage';
 
 function Main() {
   return (
-    <div className={classes.container}>
+    <div className={classes.container } style={{ marginTop: '70px' }}>
       <p className={classes.header}>메인</p>
       <hr />
       <div>
