@@ -43,6 +43,7 @@ const DiaryDetails = () => {
           setDiaries(diaries.filter((diary) => 
             diary.id !== id
           ));
+          navigate('/diary')
         } catch (error) {
           console.error(error);
         }
