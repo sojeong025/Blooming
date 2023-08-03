@@ -35,7 +35,6 @@ function MyPage() {
   const fetchData = async () => {
     try {
       const response = await customAxios.get("profile");
-
       console.log(response.data.result[0]);
       // 유저 정보 저장
       setUserState(response.data.result[0]);

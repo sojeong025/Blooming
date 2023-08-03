@@ -1,54 +1,52 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Login/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userState } from "../../recoil/ProfileAtom";
-import {
-  weddingDateState,
-  weddingDdayState,
-} from "../../recoil/WeddingDdayAtom";
-import { useEffect } from "react";
-import dayjs from "dayjs";
+import { weddingDateState } from "../../recoil/WeddingDdayAtom";
+import { useState } from "react";
 import { customAxios } from "../../lib/axios";
 
 export default function ChooseWedding() {
   const userData = useRecoilValue(userState);
+  const navigate = useNavigate();
+
+  // 약혼자 확인
+  const isFiance = async () => {
+    try {
+      const response = await customAxios.get("is-fiance");
+      console.log(response);
+      navigate("/home");
+    } catch (error) {
+      console.log("약혼자 없음");
+      navigate("/share");
+    }
+  };
 
   const [weddingDate, setWeddingDate] = useRecoilState(weddingDateState);
-  const [weddingDday, setWeddingDday] = useRecoilState(weddingDdayState);
-
+  const [resWeddingDate, setResWeddingDate] = useState({ weddingDate: "" });
   // 웨딩 정보 변경
   const handleChange = (e) => {
     const newWeddingDate = e.target.value;
     setWeddingDate(newWeddingDate);
+    setResWeddingDate({
+      weddingDate: { newWeddingDate },
+    });
   };
-
-  // 웨딩 정보 보내기
-  const submitWeddingDate = async () => {
+  // 웨딩 정보 POST 요청
+  const saveWeddingDate = async () => {
     try {
-      const response = await customAxios.post("wedding-date", {
-        ...setWeddingDate,
-      });
+      const response = await customAxios.post("wedding-date", resWeddingDate);
       console.log(response);
     } catch (error) {
       console.log("웨딩 정보 POST 에러: ", error);
     }
   };
 
-  useEffect(() => {
-    const updateWeddingDday = () => {
-      const todayDate = dayjs().format("YYYY-MM-DD");
-      const myWeddingDate = dayjs(weddingDate);
-      const weddingDiff = myWeddingDate.diff(todayDate, "day");
-
-      if (weddingDiff === 0) {
-        setWeddingDday(0);
-      } else if (weddingDiff) {
-        setWeddingDday(weddingDiff);
-      }
-    };
-
-    updateWeddingDday();
-  }, [weddingDate]);
+  // 버튼 클릭 시 웨딩 정보 보내기
+  const submitWeddingDate = () => {
+    saveWeddingDate();
+    isFiance();
+  };
 
   return (
     <>
@@ -58,11 +56,16 @@ export default function ChooseWedding() {
 
       <div>
         <p>{weddingDate}가 맞나요?</p>
-        <NavLink to={"/Share"}>
-          <Button text='네' onClick={submitWeddingDate} />
-        </NavLink>
+        <Button text='네' onClick={submitWeddingDate} />
       </div>
-      {weddingDday}
+
+      <Button
+        text='날짜 입력 건너뛰기'
+        onClick={() => {
+          setWeddingDate("");
+          isFiance();
+        }}
+      />
     </>
   );
 }

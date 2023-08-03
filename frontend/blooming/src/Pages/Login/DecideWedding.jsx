@@ -12,6 +12,7 @@ export default function DecideWedding() {
       <NavLink to={"/ChooseWedding"}>
         <Button text='네, 정해졌습니다.' />
       </NavLink>
+
       <NavLink to={"/home"}>
         <Button text='아니요' />
       </NavLink>
