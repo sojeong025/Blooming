@@ -13,7 +13,6 @@ function CreateItem({ hide, item }) {
   const [ content, setContent ] = useState('');
   const [image, setImage] = useState('');
   const [isEditMode, setIsEditMode] = useState(false)
-  const { id } = useParams();
   
   useEffect(() => {
     if (item) {
@@ -59,11 +58,19 @@ function CreateItem({ hide, item }) {
 
   function submitHandler(event) {
     event.preventDefault();
+    
     if (!isEditMode) {
       const createDiary = async () => {
         try {
-          await customAxios.post("diary", ItemData);
-          setDiaries((existingData) => [ItemData, ...existingData]); // 아이템 만들기
+          const response = await customAxios.post("diary", ItemData);
+          const customItemData = {
+            id: response.data.result[0],
+            title: ItemData.title,
+            content: ItemData.content,
+            date: ItemData.date,
+            image: ItemData.image
+          }
+          setDiaries((existingData) => [customItemData, ...existingData]); // 아이템 만들기
         } catch (error) {
           console.error(error);
         }
@@ -73,17 +80,17 @@ function CreateItem({ hide, item }) {
     } else {
       const updateDiary = async () => {
         try {
-          await customAxios.put("diary", id);
+          const customItemData = {
+            id: Number(item.id),
+            title: title,
+            content: content,
+            date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
+            image: image
+          }
+          await customAxios.put("diary", customItemData);
           setDiaries(diaries.map((diary) => {
-            if (diary.id === item.id) {
-              const ItemData = {
-                id: diary.id,
-                title: title,
-                content: content,
-                date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
-                image: image
-              }
-              return ItemData
+            if (diary.id === Number(item.id)) {
+              return customItemData
             }
             return diary
           }));

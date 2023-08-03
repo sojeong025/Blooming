@@ -1,19 +1,21 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { diaryState } from "../../recoil/DiaryStateAtom";
 import { useState } from "react";
 import CreateItem from "../../components/Diary/ModalItem";
+import { customAxios } from "../../lib/axios";
 
 const DiaryDetails = () => {
 
-  const diaries = useRecoilValue(diaryState);
+  const [diaries, setDiaries] = useRecoilState(diaryState);
   const navigate = useNavigate();
   const { id } = useParams();
   const [ modalIsVisible, setModalIsVisible ] = useState(false);
 
   const diary = diaries.find((diary) => {
-    if (diary.id === id) {
+    console.log(diary.id, id)
+    if (`${diary.id}` === id) {
       return diary
     }
   })
@@ -23,27 +25,42 @@ const DiaryDetails = () => {
     visible: { opacity: 1, x: 0, transition: { duration: 1 } },
   };
 
+  const hideModalHandler = () => {
+    setModalIsVisible(false);
+  }
+  
+  const showModalHandler = () => {
+    setModalIsVisible(true);
+  }
+
   const handleGoBack = () => {
     navigate(-1);
   };
 
-  function hideModalHandler() {
-    setModalIsVisible(false);
-  }
-
-  function showModalHandler() {
-    setModalIsVisible(true);
+  const handleDelete = async () => {
+    try {
+          await customAxios.delete(`diary/${id}`,);
+          setDiaries(diaries.filter((diary) => 
+            diary.id !== id
+          ));
+          navigate('/diary')
+        } catch (error) {
+          console.error(error);
+        }
   }
 
   return (
     <motion.div initial="initial" animate="visible" variants={pageTransition} style={{marginTop:"56px"}}>
-      {modalIsVisible ? <CreateItem hide={hideModalHandler} item={diary} /> :<><h2>{diary.title}</h2>
-      <p>{diary.content}</p>
-      <br />
-      <p>{diary.date}</p>
-      <button onClick={showModalHandler}>update</button>
-      <button onClick={handleGoBack}>X</button></>}
-      
+      {modalIsVisible ? <CreateItem hide={hideModalHandler} item={diary} /> :
+        <>
+          <h2>{diary.title}</h2>
+          <p>{diary.content}</p>
+          <br />
+          <p>{diary.date}</p>
+          <button onClick={showModalHandler}>수정하기</button>
+          <button onClick={handleDelete}>삭제하기</button>
+          <button onClick={handleGoBack}>뒤로가기</button>
+        </>}
     </motion.div>
   );
 };

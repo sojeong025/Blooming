@@ -35,13 +35,12 @@ function Invitation() {
         /><br/>
 
         <label htmlFor="content">내용 <span className={classes.required}>(필수)</span></label><br/>
-        <button>샘플 인사말</button><br/>
+        {/* <button>샘플 인사말</button><br/> */}
         <textarea
-          className={classes.inputField}
+          className={classes.textField}
           name="content"
           id="content"
-          cols="30"
-          rows="10"
+          rows='10'
           value={invitation.invitation.content}
           onChange={handleInputChange}
         ></textarea>

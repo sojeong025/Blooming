@@ -1,9 +1,6 @@
 package com.ssafy.backend.domain.couple;
 
-import static javax.persistence.FetchType.*;
-
 import com.ssafy.backend.domain.common.CreatedAndUpdatedBaseEntity;
-import com.ssafy.backend.domain.invitation.Invitation;
 import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.user.User;
 import lombok.*;
@@ -43,7 +40,6 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
         Couple couple = new Couple();
         int coupleCode = couple.generateCoupleCode();
         couple.setCoupleCode(coupleCode);
-        System.out.println("coupleCode = " + coupleCode);
         return couple;
     }
 
