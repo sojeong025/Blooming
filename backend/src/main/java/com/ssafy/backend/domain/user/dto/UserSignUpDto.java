@@ -11,4 +11,5 @@ public class UserSignUpDto {
     private String phoneNumber;
     private String gender;
     private Integer coupleCode;
+    private String fcmToken;
 }
