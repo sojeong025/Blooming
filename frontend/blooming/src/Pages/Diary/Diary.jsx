@@ -15,7 +15,11 @@ const Diary = () => {
       try {
         const response = await customAxios.get("diary");
         // 유저 정보 저장
+        console.log(diaries)
+        console.log(response.date.result)
         setDiaries(response.data.result);
+        console.log(diaries)
+        console.log(response.date.result)
       } catch (error) {
         console.error(error);
       }
@@ -51,16 +55,20 @@ const Diary = () => {
 
   return (
     <div style={{ marginTop: "56px" }}>
-      {modalIsVisible ? <CreateItem hide={hideModalHandler} /> : <><button onClick={showModalHandler} style={buttonStyle}>
-        &nbsp;+&nbsp;
-      </button><div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gridGap: "16px" }}>
-          {diaries.map((diary) => (
-            <Link key={diary.id} to={`/diary/${diary.id}`}>
-              <h2>{diary.title}</h2>
-              <p>{diary.date}</p>
-            </Link>
-          ))}
-        </div></>}
+      {modalIsVisible ? <CreateItem hide={hideModalHandler} /> :
+        <>
+          <button onClick={showModalHandler} style={buttonStyle}>
+            &nbsp;+&nbsp;
+          </button>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gridGap: "16px" }}>
+            {diaries.map((diary) => (
+              <Link key={diary.id} to={`/diary/${diary.id}`}>
+                <h2>{diary.title}</h2>
+                <p>{diary.date}</p>
+              </Link>
+            ))}
+          </div>
+        </>}
     </div>
   );
 };
