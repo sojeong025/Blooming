@@ -20,7 +20,25 @@ const TopAppBar = () => {
   }, [location]);
 
   // 뒤로가기 필요하면 여기 넣기
-  const backIcon = ["/AllNotice", "/mobileinvitation", "/Create"];
+  const backIcon = [
+    "/AllNotice",
+    "/mobileinvitation",
+    "/Create",
+    "/join-code",
+    "/join",
+    "/DecideWedding",
+    "/ChooseWedding",
+    "/share",
+  ];
+  // 알림버튼 없애려면 여기 넣기
+  const noNotice = [
+    "/join-code",
+    "/join",
+    "/DecideWedding",
+    "/ChooseWedding",
+    "/share",
+  ];
+
   const navigate = useNavigate();
   const handleHistory = () => {
     navigate(-1);
@@ -41,18 +59,22 @@ const TopAppBar = () => {
       </div>
 
       {/* 알림창으로 이동 */}
-      <NavLink to='/AllNotice' state={{ pageTitle: "알림" }}>
-        {/* 알림 아이콘 24x24에 맞춰 넣기 */}
-        <img
-          className={`${classes.navIcon} ${classes.navRight}`}
-          src={
-            window.location.pathname === "/AllNotice"
-              ? noticeActive
-              : noticeBase
-          }
-          alt='알림'
-        />
-      </NavLink>
+      {noNotice.includes(location.pathname) ? (
+        <div className={`${classes.navIcon} ${classes.navRight}`} />
+      ) : (
+        <NavLink to='/AllNotice' state={{ pageTitle: "알림" }}>
+          {/* 알림 아이콘 24x24에 맞춰 넣기 */}
+          <img
+            className={`${classes.navIcon} ${classes.navRight}`}
+            src={
+              window.location.pathname === "/AllNotice"
+                ? noticeActive
+                : noticeBase
+            }
+            alt='알림'
+          />
+        </NavLink>
+      )}
     </header>
   );
 };

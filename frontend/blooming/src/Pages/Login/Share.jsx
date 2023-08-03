@@ -36,22 +36,21 @@ export default function Share() {
     fetchData();
   }, []);
 
-  const verifyCode = userData.coupleCode;
+  const verifyCode = userData.coupleCode.toString();
 
   return (
-    <>
-      {weddingDate}
+    <div className='mainContainer'>
       <h3>{userData.name}님의 약혼자를 연결해주세요</h3>
       <h4>등록은 한명만</h4>
       <p>상대방 코드 등록</p>
       <InputForm label='약혼자코드' name='' />
       <Button text='인증요청' />
       <hr />
-      <p>내 코드 전달</p>
+      <p>내 코드: {verifyCode}</p>
       <CopyToClipboardButton text={verifyCode} />
       <KakaoShareButton />
 
       <Button text='완료' onClick={() => navigate("/home")} />
-    </>
+    </div>
   );
 }

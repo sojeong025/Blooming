@@ -18,7 +18,7 @@ export default function ChooseWedding() {
       navigate("/home");
     } catch (error) {
       console.log("약혼자 없음");
-      navigate("/share");
+      navigate("/share", { state: { pageTitle: "회원가입" } });
     }
   };
 
@@ -44,8 +44,8 @@ export default function ChooseWedding() {
       console.log(resWeddingDate);
     } catch (error) {
       console.log("웨딩 정보 POST 에러: ", error);
-      console.log("res", resWeddingDate);
-      console.log(weddingDate);
+      // console.log("res", resWeddingDate);
+      // console.log(weddingDate);
     }
   };
 
@@ -56,16 +56,18 @@ export default function ChooseWedding() {
   };
 
   return (
-    <>
+    <div className='mainContainer'>
       <h3>{userData.name}님의 결혼식 날짜는 언제인가요?</h3>
       {/* 달력 바꿔줘 소정아 */}
       <input type='date' value={weddingDate} onChange={handleChange} />
 
-      <div>
-        <p>{weddingDate}가 맞나요?</p>
-        <Button text='네' onClick={submitWeddingDate} />
-      </div>
-
+      {weddingDate && (
+        <div>
+          <p>{weddingDate}가 맞나요?</p>
+          <Button text='네' onClick={submitWeddingDate} />
+        </div>
+      )}
+      <br />
       <Button
         text='날짜 입력 건너뛰기'
         onClick={() => {
@@ -73,6 +75,6 @@ export default function ChooseWedding() {
           isFiance();
         }}
       />
-    </>
+    </div>
   );
 }
