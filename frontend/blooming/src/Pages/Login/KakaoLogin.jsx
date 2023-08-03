@@ -1,10 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { accessTokenState, refreshTokenState } from "../../recoil/TokenAtom";
-import { useRecoilState } from "recoil";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function KakaoLogin() {
-  const [access, setAccess] = useRecoilState(accessTokenState)
+  const [access, setAccess] = useState('')
   // const [refresh, setRefresh] = useRecoilState(refreshTokenState)
   const location = useLocation();
   const navigate = useNavigate();
