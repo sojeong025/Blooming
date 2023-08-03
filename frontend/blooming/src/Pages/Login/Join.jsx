@@ -5,6 +5,7 @@ import useErrorModal from "../../components/Error/useErrorModal";
 // Label Input Component
 import InputForm from "../../components/Common/InputText";
 import { useRecoilState } from "recoil";
+import useErrorModal from "../../components/Error/useErrorModal";
 import { userState } from "../../recoil/ProfileAtom";
 import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
@@ -42,10 +43,25 @@ export default function Join() {
       setFormData({ ...formData, ...kakaoData });
     }
   };
+
+  const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
+
   useEffect(() => {
-    getKakaoProfile();
-    console.log(formData);
+    const syncToken = () => {
+      setAccessToken(localStorage.getItem('accessToken'));
+    };
+
+    window.addEventListener("storage", syncToken);
+    return () => {
+      window.removeEventListener("storage", syncToken);
+    };
   }, []);
+
+  useEffect(() => {
+    if (accessToken) {
+      getKakaoProfile();
+    }
+  }, [accessToken]);
 
   // 추가 정보 입력
   const handleChange = (event) => {
