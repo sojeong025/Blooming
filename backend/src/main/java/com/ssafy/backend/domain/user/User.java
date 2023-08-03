@@ -71,6 +71,7 @@ public class User extends CreatedAndUpdatedBaseEntity {
         this.nickname = userSignUpDto.getNickname();
         this.phoneNumber = userSignUpDto.getPhoneNumber();
         this.gender = userSignUpDto.getGender();
+        this.fcmToken = userSignUpDto.getFcmToken();
     }
 
     public void updateProfile(UserDto userDto) {
