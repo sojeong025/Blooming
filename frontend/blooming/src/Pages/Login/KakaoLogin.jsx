@@ -42,7 +42,7 @@ function KakaoLogin() {
 
   useEffect(() => {
     goTo()
-  }, []);
+  }, [navigate, access]);
 }
 
 export default KakaoLogin;
