@@ -61,8 +61,15 @@ function CreateItem({ hide, item }) {
     if (!isEditMode) {
       const createDiary = async () => {
         try {
-          await customAxios.post("diary", ItemData);
-          setDiaries((existingData) => [ItemData, ...existingData]); // 아이템 만들기
+          const response = await customAxios.post("diary", ItemData);
+          const customItemData = {
+            id: response.data.result[0].id,
+            title: ItemData.title,
+            content: ItemData.content,
+            date: ItemData.date,
+            image: ItemData.image
+          }
+          setDiaries((existingData) => [customItemData, ...existingData]); // 아이템 만들기
         } catch (error) {
           console.error(error);
         }
