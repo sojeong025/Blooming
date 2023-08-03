@@ -58,6 +58,7 @@ function CreateItem({ hide, item }) {
 
   function submitHandler(event) {
     event.preventDefault();
+    
     if (!isEditMode) {
       const createDiary = async () => {
         try {
@@ -79,17 +80,17 @@ function CreateItem({ hide, item }) {
     } else {
       const updateDiary = async () => {
         try {
-          await customAxios.put("diary");
+          const customItemData = {
+            id: Number(item.id),
+            title: title,
+            content: content,
+            date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
+            image: image
+          }
+          await customAxios.put("diary", customItemData);
           setDiaries(diaries.map((diary) => {
             if (diary.id === Number(item.id)) {
-              const ItemData = {
-                id: diary.id,
-                title: title,
-                content: content,
-                date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
-                image: image
-              }
-              return ItemData
+              return customItemData
             }
             return diary
           }));
