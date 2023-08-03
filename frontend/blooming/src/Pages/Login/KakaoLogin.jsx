@@ -1,6 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { accessTokenState, refreshTokenState } from "../../recoil/TokenAtom";
-import { useRecoilState } from "recoil";
 import { useEffect } from "react";
 
 function KakaoLogin() {
