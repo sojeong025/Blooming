@@ -35,14 +35,14 @@ export default function Join() {
   // 카카오 유저 정보 받아오기
   const getKakaoProfile = async () => {
     try {
-      // const response = await customAxios.get("kakao-profile");
-      // console.log(response.data.result[0]);
-      // const kakaoData = response.data.result[0]
-      const kakaoData = {
-        email: "lotus0028@kakao.com",
-        nickname: "1",
-        gender: "FEMALE",
-      };
+      const response = await customAxios.get("kakao-profile");
+      console.log(response.data.result[0]);
+      const kakaoData = response.data.result[0];
+      // const kakaoData = {
+      //   email: "lotus0028@kakao.com",
+      //   nickname: "1",
+      //   gender: "FEMALE",
+      // };
       setFormData({ ...formData, ...kakaoData });
     } catch (error) {
       console.log("카카오 유저 정보 에러:", error);
@@ -92,6 +92,7 @@ export default function Join() {
     //     fcmtext.value = result.fcmT;
     //   });
     handleSignUp();
+    navigate("/Question");
   };
 
   return (
