@@ -14,7 +14,7 @@ const Diary = () => {
     try {
       const response = await customAxios.get("diary");
       // 유저 정보 저장
-      console.log(response.date.result)
+      console.log(response.data.result)
       setDiaries(response.data.result);
     } catch (error) {
       console.error(error);
