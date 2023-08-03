@@ -12,8 +12,8 @@ function Splash() {
   const navigate = useNavigate();
   const [isRendered, setIsRendered] = useState(false);
   const url = "http://43.200.254.50:8080/profile";
-  const localRefreshToken = localStorage.getItem('refreshToken');
-  
+  const localRefreshToken = localStorage.getItem("refreshToken");
+
   // 유저 정보를 저장
   const setUserState = useSetRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
@@ -27,28 +27,42 @@ function Splash() {
         try {
           // 헤더 포함하여 GET 요청 보내기
           const response = await axios.get(url, { headers });
-          console.log(response)
-          if (response.headers['authorization'] && response.headers['authorization_refresh']) {
-            console.log(response.headers['authorization'], response.headers['authorization_refresh'])
-            localStorage.setItem('accessToken', response.headers['authorization'])
-            localStorage.setItem('refreshToken', response.headers['authorization_refresh'])
+          console.log(response);
+          if (
+            response.headers["authorization"] &&
+            response.headers["authorization_refresh"]
+          ) {
+            console.log(
+              response.headers["authorization"],
+              response.headers["authorization_refresh"],
+            );
+            localStorage.setItem(
+              "accessToken",
+              response.headers["authorization"],
+            );
+            localStorage.setItem(
+              "refreshToken",
+              response.headers["authorization_refresh"],
+            );
             headers = {
-              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
             };
             try {
               // 유저 정보 조회
               const res = await axios.get(url, { headers });
-              console.log(res)
+              console.log(res);
               if (res.data) {
                 console.log(res.data);
-                console.log(res.data.result[0])
+                console.log(res.data.result[0]);
                 setUserState(res.data.result[0]);
                 navigate("/home");
               }
             } catch (error) {
-              // 유저 정보 초기회
+              // 유저 정보 초기화
               resetUserState();
-              console.error("유저 정보 API 요청 에러:", error);
+              console.error("유저 정보 API 요청 에러: 추가 정보 미입력", error);
+              // 추가정보 페이지로 이동
+              navigate("/join");
             }
           } else {
             navigate("/login");
@@ -62,7 +76,6 @@ function Splash() {
         setIsRendered(true);
       }
     };
-
     fetchData();
   }, []);
 
