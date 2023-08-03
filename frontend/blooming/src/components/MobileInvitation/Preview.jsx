@@ -10,7 +10,8 @@ function Preview({ onClose }) {
 
   return (
     <div className={classes.total}>
-      미리보기 <button onClick={onClose}>X</button>
+      <p className={classes.pre}>미리보기</p> 
+      <button onClick={onClose}>X</button>
 
       {/* 진짜 내용 들어간다~ */}
       <div className={classes.form}>

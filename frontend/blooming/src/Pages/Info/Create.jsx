@@ -59,7 +59,7 @@ function Create() {
       <WeddingHall formData={formData} setFormData={setFormData} />
       <div className={classes.btn}>
         <button className={classes.pre} onClick={handlePreviewClick}>미리보기</button>
-        {/* <button className={classes.save} onClick={handleSaveClick}>저장</button> */}
+        <button className={classes.save}>저장</button>
       </div>
 
       {previewModalVisible && (

@@ -21,7 +21,7 @@ function WeddingHall() {
   };
 
   return (
-    <div className={classes.container}>
+    <div className={classes.container}  style={{ marginBottom: '110px' }}>
       <p className={classes.header}>예식장소</p>
       <hr />
       <div>
