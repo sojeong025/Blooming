@@ -26,9 +26,7 @@ function Preview() {
   const totalImages = imageList.length;
 
   const handlePrevClick = () => {
-    setCurrentImageIndex(
-      (prevIndex) => (prevIndex - 1 + totalImages) % totalImages,
-    );
+    setCurrentImageIndex(totalImages-1);
   };
 
   const handleNextClick = () => {
