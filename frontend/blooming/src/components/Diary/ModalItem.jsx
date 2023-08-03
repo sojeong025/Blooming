@@ -81,6 +81,7 @@ function CreateItem({ hide, item }) {
         try {
           await customAxios.put("diary", item.id);
           setDiaries(diaries.map((diary) => {
+            console.log(diary.id, item.id)
             if (diary.id === item.id) {
               const ItemData = {
                 id: diary.id,
