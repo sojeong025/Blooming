@@ -23,22 +23,29 @@ export default function ChooseWedding() {
   };
 
   const [weddingDate, setWeddingDate] = useRecoilState(weddingDateState);
-  const [resWeddingDate, setResWeddingDate] = useState({ weddingDate: "" });
+  const [resWeddingDate, setResWeddingDate] = useState();
+
   // 웨딩 정보 변경
   const handleChange = (e) => {
     const newWeddingDate = e.target.value;
     setWeddingDate(newWeddingDate);
     setResWeddingDate({
-      weddingDate: { newWeddingDate },
+      weddingDate,
     });
   };
+
   // 웨딩 정보 POST 요청
   const saveWeddingDate = async () => {
     try {
-      const response = await customAxios.post("wedding-date", resWeddingDate);
+      const response = await customAxios.post("wedding-date", {
+        weddingDate,
+      });
       console.log(response);
+      console.log(resWeddingDate);
     } catch (error) {
       console.log("웨딩 정보 POST 에러: ", error);
+      console.log("res", resWeddingDate);
+      console.log(weddingDate);
     }
   };
 

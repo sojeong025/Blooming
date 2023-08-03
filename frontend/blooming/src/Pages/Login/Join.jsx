@@ -33,16 +33,8 @@ export default function Join() {
       setFormData({ ...formData, ...kakaoData });
     } catch (error) {
       console.log("카카오 유저 정보 에러: ", error);
-      // 더미 넣기
-      // const kakaoData = {
-      //   email: "lotus0028@kakao.com",
-      //   nickname: "ㅎㅇ",
-      //   gender: "FEMALE",
-      // };
-      // setFormData({ ...formData, ...kakaoData });
     }
   };
-
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken"),
   );
@@ -77,8 +69,6 @@ export default function Join() {
       setUserData({ ...formData });
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
-      // 더미 넣기
-      // setUserData({ ...userData, ...formData });
     }
   };
 
@@ -98,6 +88,8 @@ export default function Join() {
     handleSignUp();
     navigate("/Question");
   };
+
+  const setCouple = () => {};
 
   return (
     <div className='mainContainer'>
@@ -168,7 +160,7 @@ export default function Join() {
             value={formData.coupleCode}
             onChange={handleChange}
           />
-          <button type='submit'>인증</button>
+          <button onClick={setCouple}>인증</button>
 
           <button type='submit' className={classes.submitButton}>
             제출
