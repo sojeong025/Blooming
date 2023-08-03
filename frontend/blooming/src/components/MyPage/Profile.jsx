@@ -26,7 +26,7 @@ const ProfileBox = () => {
         <div>{userData.nickname}</div>
         <div>{userData.phoneNumber}</div>
 
-        <NavLink to='/edit-profile'>
+        <NavLink to='/edit-profile' state={{ pageTitle: "정보 수정" }}>
           <div>정보수정</div>
         </NavLink>
 
