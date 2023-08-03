@@ -7,11 +7,13 @@ import com.ssafy.backend.domain.user.dto.KakaoUserDto;
 import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.service.UserService;
+import com.ssafy.backend.global.jwt.service.JwtService;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -26,6 +28,7 @@ import java.util.Collections;
 public class UserController {
 
     private final UserService userService;
+    private final JwtService jwtService;
 
     @Operation(summary = "카카오 회원 정보 가져오기", description = "카카오톡에서 제공하는 회원 정보를 가지고 와서 추가 정보칸에 제공하기 위한 API입니다.")
     @GetMapping("/kakao-profile")
@@ -116,7 +119,17 @@ public class UserController {
             .httpStatus(HttpStatus.OK)
             .message("회원 가입 성공").build();
 
-        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+        String accessToken = jwtService.createAccessToken(authentication.getName());
+        String refreshToken = jwtService.createRefreshToken();
+
+        // 헤더에 토큰 정보 추가
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + accessToken);
+        headers.add("Authorization_refresh", refreshToken);
+
+        jwtService.updateRefreshToken(authentication.getName(), refreshToken);
+
+        return new ResponseEntity<>(basicResponse, headers, basicResponse.getHttpStatus());
     }
 
     @Operation(summary = "내 정보 수정", description = "조회된 내 정보를 수정합니다.")
