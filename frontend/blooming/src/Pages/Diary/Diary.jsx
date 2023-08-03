@@ -7,23 +7,26 @@ import { customAxios } from "../../lib/axios";
 
 const Diary = () => {
   const [diaries, setDiaries] = useRecoilState(diaryState)
-
+  const [loading, setLoading] = useState(true)
   const [ modalIsVisible, setModalIsVisible ] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      const response = await customAxios.get("diary");
-      // 유저 정보 저장
-      console.log(response.data.result)
-      setDiaries(response.data.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await customAxios.get("diary");
+        // 유저 정보 저장
+        setDiaries(response.data.result);
+      } catch (error) {
+        console.error(error);
+      }
+      setLoading(false)
+    };
     fetchData();
   }, []);
+
+  if (loading) {
+    return <div>로딩중...</div>
+  }
 
   function hideModalHandler() {
     setModalIsVisible(false);
