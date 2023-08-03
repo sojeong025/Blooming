@@ -15,10 +15,10 @@ import { customAxios } from "../../lib/axios";
 // 헤더 알림 아이콘 자리에 설정으로 바꾸기
 function MyPage() {
   // 유저 정보 넣기
-  const setUserState = useSetRecoilState(userState);
+  const [userData, setUserData] = useRecoilState(userState);
   // 더미 데이터 넣기
   const setDummy = () =>
-    setUserState({
+    setUserData({
       email: "더미@kakao.com",
       gender: "FEMALE",
       name: "더미",
@@ -28,7 +28,7 @@ function MyPage() {
         "https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427_1280.jpg",
     });
 
-  const resetUserState = useResetRecoilState(userState);
+  const resetUserData = useResetRecoilState(userState);
 
   const [errorModal, setErrorModal] = useRecoilState(errorState);
 
@@ -37,7 +37,7 @@ function MyPage() {
       const response = await customAxios.get("profile");
       console.log(response.data.result[0]);
       // 유저 정보 저장
-      setUserState(response.data.result[0]);
+      setUserData(response.data.result[0]);
     } catch (error) {
       console.error(error);
       setErrorModal(true);
@@ -45,9 +45,9 @@ function MyPage() {
   };
 
   useEffect(() => {
-    resetUserState();
+    // resetUserState();
     // 마이페이지에 들어왔을 때 정보가 없으면 API 조회
-    if (!userState || !userState.id) {
+    if (!userData.name) {
       fetchData();
     }
   }, []);

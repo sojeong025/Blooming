@@ -10,6 +10,7 @@ const LabelInputComponent = ({
   placeholder,
   autoFocus,
   required = false,
+  readOnly = false,
 }) => {
   return (
     <div className='label-input'>
@@ -23,6 +24,7 @@ const LabelInputComponent = ({
         placeholder={placeholder}
         autoFocus={autoFocus}
         required={required}
+        readOnly={readOnly}
       />
     </div>
   );
