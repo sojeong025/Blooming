@@ -2,6 +2,7 @@ package com.ssafy.backend.domain.user.controller;
 
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.user.User;
+import com.ssafy.backend.domain.user.dto.CoupleCodeDto;
 import com.ssafy.backend.domain.user.dto.KakaoUserDto;
 import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
@@ -80,6 +81,20 @@ public class UserController {
             .count(1)
             .result(Collections.singletonList(userDto))
             .build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
+
+    @Operation(summary = "커플 코드 인증", description = "추가 정보 입력 시 커플 코드가 있을 시 생성되어있는 커플이 있는 지 인증합니다.")
+    @Parameter(name = "userSignDto", description = "회원가입이 추가로 필요한 개인정보 Dto")
+    @PostMapping("/couple-certification")
+    public ResponseEntity<BasicResponse> certificationCouple(@RequestBody CoupleCodeDto coupleCodeDto) {
+        userService.certificationCouple(coupleCodeDto);
+
+        BasicResponse basicResponse = BasicResponse.builder()
+            .code(HttpStatus.OK.value())
+            .httpStatus(HttpStatus.OK)
+            .message("커플 인증 성공").build();
 
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
