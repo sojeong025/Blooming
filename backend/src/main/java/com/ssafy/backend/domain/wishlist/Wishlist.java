@@ -1,7 +1,6 @@
 package com.ssafy.backend.domain.wishlist;
 
 import com.ssafy.backend.domain.common.CreatedBaseEntity;
-import com.ssafy.backend.domain.diary.dto.DiaryModifyDto;
 import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.user.User;
 import lombok.*;
