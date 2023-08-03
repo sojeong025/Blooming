@@ -63,7 +63,7 @@ function CreateItem({ hide, item }) {
         try {
           const response = await customAxios.post("diary", ItemData);
           const customItemData = {
-            id: response.data.result[0].id,
+            id: response.data.result[0],
             title: ItemData.title,
             content: ItemData.content,
             date: ItemData.date,
