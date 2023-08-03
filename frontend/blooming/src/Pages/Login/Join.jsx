@@ -5,7 +5,6 @@ import useErrorModal from "../../components/Error/useErrorModal";
 // Label Input Component
 import InputForm from "../../components/Common/InputText";
 import { useRecoilState } from "recoil";
-import useErrorModal from "../../components/Error/useErrorModal";
 import { userState } from "../../recoil/ProfileAtom";
 import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
