@@ -30,17 +30,19 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
 
             // User의 Role이 GUEST일 경우 처음 요청한 회원이므로 회원가입 페이지로 리다이렉트
             if (oAuth2User.getRole() == Role.GUEST) {
-                String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
-                String refreshToken = jwtService.createRefreshToken();
-                response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
-                response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken);
+                // String accessToken = jwtService.createAccessToken(oAuth2User.getEmail());
+                // String refreshToken = jwtService.createRefreshToken();
+                // response.addHeader(jwtService.getAccessHeader(), "Bearer " + accessToken);
+                // response.addHeader(jwtService.getRefreshHeader(), "Bearer " + refreshToken);
 
-                jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
-                jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
+                // jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
+                // jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
 
+                // response.sendRedirect(
+                //     "http://43.200.254.50/kakaologin?" + "access_token=Bearer " + accessToken + "&refresh_token="
+                //         + "Bearer " + refreshToken + "&is_user=F"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
                 response.sendRedirect(
-                    "http://43.200.254.50/kakaologin?" + "access_token=Bearer " + accessToken + "&refresh_token="
-                        + "Bearer " + refreshToken + "&is_user=F"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
+                    "http://43.200.254.50/join"); // 프론트의 회원가입 추가 정보 입력 폼으로 리다이렉트
                 //                User findUser = userRepository.findByEmail(oAuth2User.getEmail())
                 //                                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
                 //                findUser.authorizeUser();
