@@ -25,7 +25,7 @@ function KakaoLogin() {
 
   // accessToken이 있는 경우 /join 페이지로 이동
   const goTo = async () => {
-    if (refreshToken && accessToken) {
+    if (accessToken) {
       await localStorage.setItem('accessToken', accessToken)
       setAccess(accessToken)
       // await localStorage.setItem('refreshToken', refreshToken)
