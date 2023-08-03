@@ -64,7 +64,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             "http://43.200.254.50/kakaologin?" + "access_token=Bearer " + accessToken + "&refresh_token="
                 + "Bearer " + refreshToken + "&is_user=T");
 
-        // jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
+//         jwtService.sendAccessAndRefreshToken(response, accessToken, refreshToken);
         jwtService.updateRefreshToken(oAuth2User.getEmail(), refreshToken);
     }
 }
