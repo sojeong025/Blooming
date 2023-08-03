@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class Product {
     @Id
     @GeneratedValue
-    @Column(name = "product_id")
+    @Column(name = "PRODUCT_ID")
     private Long id;
     //지역은 일단 뺌
 
