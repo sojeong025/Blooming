@@ -59,6 +59,7 @@ const Diary = () => {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gridGap: "16px" }}>
             {diaries.map((diary) => (
               <Link key={diary.id} to={`/diary/${diary.id}`}>
+                <h2>{diary.id}</h2>
                 <h2>{diary.title}</h2>
                 <p>{diary.date}</p>
               </Link>

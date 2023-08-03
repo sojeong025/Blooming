@@ -5,7 +5,7 @@ export const userState = atom({
   key: "userState",
   default: {
     email: "",
-    name: "나는더미다",
+    name: "나",
     nickname: "",
     phoneNumber: "",
     gender: "",

@@ -34,20 +34,22 @@ export default function Join() {
     } catch (error) {
       console.log("카카오 유저 정보 에러: ", error);
       // 더미 넣기
-      const kakaoData = {
-        email: "lotus0028@kakao.com",
-        nickname: "ㅎㅇ",
-        gender: "FEMALE",
-      };
-      setFormData({ ...formData, ...kakaoData });
+      // const kakaoData = {
+      //   email: "lotus0028@kakao.com",
+      //   nickname: "ㅎㅇ",
+      //   gender: "FEMALE",
+      // };
+      // setFormData({ ...formData, ...kakaoData });
     }
   };
 
-  const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
+  const [accessToken, setAccessToken] = useState(
+    localStorage.getItem("accessToken"),
+  );
 
   useEffect(() => {
     const syncToken = () => {
-      setAccessToken(localStorage.getItem('accessToken'));
+      setAccessToken(localStorage.getItem("accessToken"));
     };
 
     window.addEventListener("storage", syncToken);
@@ -71,20 +73,20 @@ export default function Join() {
   const handleSignUp = async () => {
     try {
       const response = await customAxios.post("sign-up", formData);
-      console.log(response.data.result);
+      console.log(response);
       setUserData({ ...formData });
     } catch (error) {
-      console.log(error);
+      console.log("추가 정보 POST 에러:", error);
       // 더미 넣기
-      setUserData({ ...userData, ...formData });
+      // setUserData({ ...userData, ...formData });
     }
   };
 
   // 제출 버튼 클릭
   const joinSubmit = async (event) => {
-    console.log(formData);
     event.preventDefault();
-
+    console.log(formData);
+    setUserData({ ...formData });
     // window.flutter_inappwebview
     //   .callHandler("handleFoo")
     //   .then(function (result) {
@@ -93,7 +95,6 @@ export default function Join() {
     //     // fcm_token: 얘가 value
     //     fcmtext.value = result.fcmT;
     //   });
-
     handleSignUp();
     navigate("/Question");
   };
