@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import classes from './Home.module.css'
 
 function Home() {
-
   const navigate = useNavigate();
 
   const [user, setUser] = useRecoilState(userState);
@@ -18,7 +17,7 @@ function Home() {
   const updateUser = async () => {
     try {
       // 유저 정보 조회
-      const res = await customAxios.get('profile');
+      const res = await customAxios.get("profile");
       if (res.data) {
         setUser(res.data.result[0]);
       }
@@ -28,12 +27,11 @@ function Home() {
       console.error("유저 정보 API 요청 에러", error);
       // navigate("/");
     }
-  }
+  };
 
   useEffect(() => {
     updateUser();
-  }, [user])
-
+  }, [user]);
 
   return (
     <div className={classes.top}>

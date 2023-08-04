@@ -17,9 +17,10 @@
 }
 
 /* 타이틀 */
-.pageTitleContainer p {
+.pageTitleContainer {
   font-size: 20px;
   letter-spacing: 0.1rem;
+  font-weight: 500;
 }
 
 /* 로고 */

@@ -9,7 +9,6 @@ import { useRecoilState } from "recoil";
 import axios from "axios";
 import { errorState } from "../recoil/ErrorAtom";
 
-import CustomButton from "../components/Common/AntButton";
 const Error = () => {
   // 에러 모달
   // const [ErrorModal, handleError] = useErrorModal();
