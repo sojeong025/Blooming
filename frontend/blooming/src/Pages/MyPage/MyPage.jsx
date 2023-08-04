@@ -2,7 +2,7 @@ import Profile from "../../components/MyPage/Profile";
 import IconBox from "../../components/MyPage/IconBox";
 import classes from "./MyPage.module.css";
 import { useEffect } from "react";
-import { userState } from "../../recoil/ProfileAtom";
+import { userCoupleState, userState } from "../../recoil/ProfileAtom";
 
 import { NavLink } from "react-router-dom";
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
@@ -15,10 +15,12 @@ import { customAxios } from "../../lib/axios";
 // 헤더 알림 아이콘 자리에 설정으로 바꾸기
 function MyPage() {
   // 유저 정보 넣기
-  const setUserState = useSetRecoilState(userState);
+  const [userData, setUserData] = useRecoilState(userState);
+  const [coupleData, setCoupleData] = useRecoilState(userCoupleState);
+
   // 더미 데이터 넣기
   const setDummy = () =>
-    setUserState({
+    setUserData({
       email: "더미@kakao.com",
       gender: "FEMALE",
       name: "더미",
@@ -28,7 +30,7 @@ function MyPage() {
         "https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427_1280.jpg",
     });
 
-  const resetUserState = useResetRecoilState(userState);
+  const resetUserData = useResetRecoilState(userState);
 
   const [errorModal, setErrorModal] = useRecoilState(errorState);
 
@@ -37,19 +39,28 @@ function MyPage() {
       const response = await customAxios.get("profile");
       console.log(response.data.result[0]);
       // 유저 정보 저장
-      setUserState(response.data.result[0]);
+      setUserData(response.data.result[0]);
     } catch (error) {
       console.error(error);
       setErrorModal(true);
     }
   };
 
-  useEffect(() => {
-    resetUserState();
-    // 마이페이지에 들어왔을 때 정보가 없으면 API 조회
-    if (!userState || !userState.id) {
-      fetchData();
+  const fetchCouple = async () => {
+    try {
+      // 커플이 있는 지 확인
+      const response = await customAxios.get("my-fiance");
+      setCoupleData(response.data.result[0]);
+    } catch (error) {
+      console.log("약혼자 없음");
     }
+  };
+
+  useEffect(() => {
+    // resetUserState();
+    // 마이페이지에 들어왔을 때 API 조회
+    fetchData();
+    fetchCouple();
   }, []);
 
   return (
