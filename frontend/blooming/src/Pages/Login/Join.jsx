@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import classes from "./Join.module.css";
 // 에러 모달
 import useErrorModal from "../../components/Error/useErrorModal";
@@ -49,7 +49,6 @@ export default function Join() {
   const getKakaoProfile = async () => {
     try {
       const response = await customAxios.get("kakao-profile");
-      // console.log(response.data.result[0]);
       const kakaoData = response.data.result[0];
       setFormData({ ...formData, ...kakaoData });
     } catch (error) {
@@ -76,7 +75,6 @@ export default function Join() {
   useEffect(() => {
     if (accessToken) {
       getKakaoProfile();
-      console.log(userData);
     }
   }, [accessToken]);
 
@@ -89,20 +87,19 @@ export default function Join() {
   const handleSignUp = async () => {
     const currentFcmToken = await getToken();
     let customData = formData
+    console.log('여기가 중요', userData, userData.coupleCode)
     if (userData.coupleCode) {
       customData = {
         ...formData,
-        coupleCode: userData.coupleCode,
-        fcmToken: currentFcmToken
+        coupleCode: userData.coupleCode
       }
     } else {
       customData = {
-        ...formData,
-        fcmToken: currentFcmToken
+        ...formData
       }
     }
     try {
-      const updatedFormData = fcmToken ? customData : formData;
+      const updatedFormData = fcmToken ? { ...customData, fcmToken: currentFcmToken } : customData;
       const response = await customAxios.post("sign-up", updatedFormData);
       if (
         response.headers["authorization"] &&
@@ -120,9 +117,9 @@ export default function Join() {
       }
       setUserData(formData);
       console.log(response);
-      // navigate("/DecideWedding", {
-      //   state: { pageTitle: "회원가입" },
-      // });
+      navigate("/DecideWedding", {
+        state: { pageTitle: "회원가입" },
+      });
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
       navigate("/");

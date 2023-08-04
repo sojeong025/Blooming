@@ -18,9 +18,9 @@ function Home() {
   const updateUser = async () => {
     try {
       // 유저 정보 조회
-      const res = await customAxios('profile');
+      const res = await customAxios.get('profile');
       if (res.data) {
-        setUser({ ...res.data.result[0] });
+        setUser(res.data.result[0]);
       }
     } catch (error) {
       // 유저 정보 초기화

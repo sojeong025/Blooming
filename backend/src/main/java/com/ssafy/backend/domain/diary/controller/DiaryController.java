@@ -29,13 +29,15 @@ public class DiaryController {
 	@Parameter(name = "DiaryRegistDto", description = "dto에 해당하는 정보를 넘겨주세요. 비어있어도 저장 가능.")
 	@PostMapping("/diary")
 	public ResponseEntity<BasicResponse> registDiary(@RequestBody DiaryRegistDto diaryRegistDto) {
-		diaryService.registDiary(diaryRegistDto);
+		long diaryId = diaryService.registDiary(diaryRegistDto);
 
 		BasicResponse basicResponse = BasicResponse.builder()
-			.code(HttpStatus.OK.value())
-			.httpStatus(HttpStatus.OK)
-			.message("다이어리 등록 성공")
-			.build();
+				.code(HttpStatus.OK.value())
+				.httpStatus(HttpStatus.OK)
+				.message("다이어리 등록 성공")
+				.count(1)
+				.result(Collections.singletonList(diaryId))
+				.build();
 
 		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
 	}
@@ -48,17 +50,17 @@ public class DiaryController {
 		BasicResponse basicResponse;
 		if (diaryList.size() == 0) {
 			basicResponse = BasicResponse.builder()
-				.code(HttpStatus.NO_CONTENT.value())
-				.httpStatus(HttpStatus.NO_CONTENT)
-				.message("작성한 다이어리가 없습니다.")
-				.build();
+					.code(HttpStatus.NO_CONTENT.value())
+					.httpStatus(HttpStatus.NO_CONTENT)
+					.message("작성한 다이어리가 없습니다.")
+					.build();
 		} else {
 			basicResponse = BasicResponse.builder()
-				.code(HttpStatus.OK.value())
-				.httpStatus(HttpStatus.OK)
-				.message("전체 다이어리 조회 성공")
-				.count(diaryList.size())
-				.result(Collections.singletonList(diaryList)).build();
+					.code(HttpStatus.OK.value())
+					.httpStatus(HttpStatus.OK)
+					.message("전체 다이어리 조회 성공")
+					.count(diaryList.size())
+					.result(Collections.singletonList(diaryList)).build();
 		}
 		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
 	}
@@ -71,17 +73,17 @@ public class DiaryController {
 		BasicResponse basicResponse;
 		if (diaryResultDto == null) {
 			basicResponse = BasicResponse.builder()
-				.code(HttpStatus.NOT_FOUND.value())
-				.httpStatus(HttpStatus.NOT_FOUND)
-				.message("유효한 다이어리 정보가 없습니다.")
-				.build();
+					.code(HttpStatus.NOT_FOUND.value())
+					.httpStatus(HttpStatus.NOT_FOUND)
+					.message("유효한 다이어리 정보가 없습니다.")
+					.build();
 		} else {
 			basicResponse = BasicResponse.builder()
-				.code(HttpStatus.OK.value())
-				.httpStatus(HttpStatus.OK)
-				.message("다이어리 상세 조회 성공")
-				.count(1)
-				.result(Collections.singletonList(diaryResultDto)).build();
+					.code(HttpStatus.OK.value())
+					.httpStatus(HttpStatus.OK)
+					.message("다이어리 상세 조회 성공")
+					.count(1)
+					.result(Collections.singletonList(diaryResultDto)).build();
 		}
 		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
 	}
@@ -93,9 +95,9 @@ public class DiaryController {
 		diaryService.modifyDiary(diaryModifyDto);
 
 		BasicResponse basicResponse = BasicResponse.builder()
-			.code(HttpStatus.OK.value())
-			.httpStatus(HttpStatus.OK)
-			.message("다이어리 수정 성공").build();
+				.code(HttpStatus.OK.value())
+				.httpStatus(HttpStatus.OK)
+				.message("다이어리 수정 성공").build();
 
 		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
 	}
@@ -107,9 +109,9 @@ public class DiaryController {
 		diaryService.deleteDiary(diaryId);
 
 		BasicResponse basicResponse = BasicResponse.builder()
-			.code(HttpStatus.OK.value())
-			.httpStatus(HttpStatus.OK)
-			.message("다이어리 삭제 성공").build();
+				.code(HttpStatus.OK.value())
+				.httpStatus(HttpStatus.OK)
+				.message("다이어리 삭제 성공").build();
 
 		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
 	}

@@ -5,20 +5,21 @@ import ConceptsList from "../../components/MobileInvitation/ConceptsList";
 import { useEffect, useState } from "react";
 import classes from './MobileInvitation.module.css'
 import { useRecoilValue } from "recoil";
-import { Link } from "react-router-dom";
-
 
 function MobileInvitation() {
   const mobileInvitationData = useRecoilValue(mobileInvitationState);
+  const [count, setCount] = useState('')
 
   const fetchData = async () => {
     try {
       const response = await customAxios.get("invitation");
+      setCount(response.data.count)
       console.log('가져오기 성공!')
-      console.log(response.data.result[0]);
+      console.log(setCount)
     } catch (error) {
       console.error(error);
       console.log('가져오기 실패!')
+      console.log(setCount)
     }
   };
 
@@ -35,7 +36,7 @@ function MobileInvitation() {
         <ConceptsList />
         <hr />
         
-        {mobileInvitationData ? (
+        {count===0 ? (
           <NavLink to="/MobileInvitationDetail">
             <button className={classes.btn}>나의 청첩장 보기</button>
           </NavLink>
