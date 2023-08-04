@@ -100,24 +100,24 @@ public class NotificationScheduler {
                         break;
                 }
 
-                //1. 푸시 알림 보내기
-                Long targetId = 1L; //나중에 알림 커플 유저 두 명에게 각각 보내는 걸로 수정
-                String title = schedule.getTitle();
-                String content = schedule.getContent();
-                log.info(title + content);
-
-                //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
-                String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, title, content)); // 첫 번째로 넣은 유저
-                log.info(result);
-
-                //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장. - 파라미터는 임시. 수정 필요
-                notificationService.registNotification(new NotificationRegistDto(
-                        ReadStatus.UNREAD,
-                        NotificationType.SCHEDULE,
-                        title,
-                        content,
-                        targetId
-                ));
+//                //1. 푸시 알림 보내기
+//                Long targetId = 1L; //나중에 알림 커플 유저 두 명에게 각각 보내는 걸로 수정
+//                String title = schedule.getTitle();
+//                String content = schedule.getContent();
+//                log.info(title + content);
+//
+//                //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
+//                String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, title, content)); // 첫 번째로 넣은 유저
+//                log.info(result);
+//
+//                //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장. - 파라미터는 임시. 수정 필요
+//                notificationService.registNotification(new NotificationRegistDto(
+//                        ReadStatus.UNREAD,
+//                        NotificationType.SCHEDULE,
+//                        title,
+//                        content,
+//                        targetId
+//                ));
             }
         }
     }
