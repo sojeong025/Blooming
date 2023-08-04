@@ -11,8 +11,8 @@ const CopyToClipboardButton = ({ text, children }) => {
   return <div onClick={handleCopy}>{children}</div>;
 };
 
-CopyToClipboardButton.propTypes = {
-  text: PropTypes.string.isRequired,
-};
+// CopyToClipboardButton.propTypes = {
+//   text: PropTypes.string.isRequired,
+// };
 
 export default CopyToClipboardButton;
