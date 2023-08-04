@@ -49,7 +49,6 @@ export default function Join() {
   const getKakaoProfile = async () => {
     try {
       const response = await customAxios.get("kakao-profile");
-      // console.log(response.data.result[0]);
       const kakaoData = response.data.result[0];
       setFormData({ ...formData, ...kakaoData });
     } catch (error) {
@@ -76,7 +75,6 @@ export default function Join() {
   useEffect(() => {
     if (accessToken) {
       getKakaoProfile();
-      console.log(userData);
     }
   }, [accessToken]);
 
@@ -89,7 +87,7 @@ export default function Join() {
   const handleSignUp = async () => {
     const currentFcmToken = await getToken();
     let customData = formData
-    console.log(userData)
+    console.log('여기가 중요', userData, userData.coupleCode)
     if (userData.coupleCode) {
       customData = {
         ...formData,
