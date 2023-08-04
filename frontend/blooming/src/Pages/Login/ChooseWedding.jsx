@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Login/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { userState } from "../../recoil/ProfileAtom";
+import { userCoupleState, userState } from "../../recoil/ProfileAtom";
 import { weddingDateState } from "../../recoil/WeddingDdayAtom";
 import { useState } from "react";
 import { customAxios } from "../../lib/axios";
@@ -10,11 +10,13 @@ export default function ChooseWedding() {
   const userData = useRecoilValue(userState);
   const navigate = useNavigate();
 
+  const [userCouple, setUserCouple] = useRecoilState(userCoupleState);
+
   // 약혼자 확인
   const isFiance = async () => {
     try {
-      const response = await customAxios.get("is-fiance");
-      console.log(response);
+      const response = await customAxios.get("my-fiance");
+      setUserCouple(response.data.result[0]);
       navigate("/home");
     } catch (error) {
       console.log("약혼자 없음");

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 import InputForm from "../../components/Common/InputText";
 import { useNavigate } from "react-router-dom";
+import { responsiveArray } from "antd/es/_util/responsiveObserver";
 
 const EditProfile = () => {
   const [userData, setUserData] = useRecoilState(userState);
@@ -49,6 +50,15 @@ const EditProfile = () => {
     updateUserData();
   };
 
+  const deleteProfile = async () => {
+    try {
+      await customAxios.delete("profile");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={`mainContainer ${classes.EditContainer}`}>
       <div className={classes.profileImg}>
@@ -80,6 +90,7 @@ const EditProfile = () => {
           제출
         </button>
       </form>
+      <button onClick={deleteProfile}>회원탈퇴</button>
     </div>
   );
 };
