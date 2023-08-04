@@ -49,21 +49,21 @@ public class LikedController {
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
-
-    @Operation(summary = "상품 후기 도움 돼요 개수 출력", description = "해당 상품 후기의 도움 돼요 개수를 리턴합니다")
-    @Parameter(name = "reviewId", description = "상품 후기 ID 를 넘겨주세요")
-    @GetMapping("/liked/{reviewId}")
-    public ResponseEntity<BasicResponse> getLikdedCount(@PathVariable Long reviewId) {
-        Long count = likedService.getLikedCount(reviewId);
-
-        BasicResponse basicResponse = BasicResponse.builder()
-                .code(HttpStatus.OK.value())
-                .httpStatus(HttpStatus.OK)
-                .message("다이어리 삭제 성공")
-                .count(1)
-                .result(Collections.singletonList(count)).build();
-
-        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
-    }
+//
+//    @Operation(summary = "상품 후기 도움 돼요 개수 출력", description = "해당 상품 후기의 도움 돼요 개수를 리턴합니다")
+//    @Parameter(name = "reviewId", description = "상품 후기 ID 를 넘겨주세요")
+//    @GetMapping("/liked/{reviewId}")
+//    public ResponseEntity<BasicResponse> getLikdedCount(@PathVariable Long reviewId) {
+//        Long count = likedService.getLikedCount(reviewId);
+//
+//        BasicResponse basicResponse = BasicResponse.builder()
+//                .code(HttpStatus.OK.value())
+//                .httpStatus(HttpStatus.OK)
+//                .message("다이어리 삭제 성공")
+//                .count(1)
+//                .result(Collections.singletonList(count)).build();
+//
+//        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+//    }
 
 }
