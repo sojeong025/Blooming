@@ -10,29 +10,26 @@ function WeddingDay() {
   const startDate = invitation.weddingDate.date;
 
   const handleDateChange = (date) => {
+
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const seconds = date.getSeconds();
-  
-    setInvitation((preInvitation) => {
-      const updatedInvitation = {
-        ...preInvitation,
-        weddingDate: {
-          ...preInvitation.weddingDate,
-          date,
-          time: {
-            ...preInvitation.weddingDate.time,
-            hour: hours,
-            minute: minutes,
-            second: seconds,
-          },
-        },
-      };
-      console.log("Updated invitation:", updatedInvitation);
-      return updatedInvitation;
-    });
+
+    setInvitation((preInvitation) => ({
+      ...preInvitation,
+      weddingDate: {
+        ...preInvitation.weddingDate,
+        date,
+        time: {
+        ...preInvitation.weddingDate.time,
+        hour: hours,
+        minute: minutes,
+        second: seconds,
+      },
+      },
+    }));
   };
-  
+
   return (
     <div className={classes.container}>
       <p className={classes.header}>예식일</p>
@@ -47,7 +44,7 @@ function WeddingDay() {
           timeFormat="HH:mm"
           timeIntervals={15}
           timeCaption="time"
-          dateFormat="yyyy-MM-dd hh:mm aa"
+          dateFormat="yyyy-MM-dd HH:mm"
         />
       </div>
     </div>
