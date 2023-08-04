@@ -2,10 +2,7 @@ package com.ssafy.backend.domain.product;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalTime;
 
 @Entity
@@ -18,6 +15,7 @@ public class Product {
     //지역은 일단 뺌
 
     //상품 정보
+    @Enumerated(EnumType.STRING)
     private ProductType productType;
     private String itemName;
     private String brief;

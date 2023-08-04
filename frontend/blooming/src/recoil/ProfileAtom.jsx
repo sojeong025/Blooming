@@ -9,7 +9,6 @@ export const userState = atom({
     nickname: "",
     phoneNumber: "",
     gender: "",
-    coupleCode: 0,
   },
 });
 
