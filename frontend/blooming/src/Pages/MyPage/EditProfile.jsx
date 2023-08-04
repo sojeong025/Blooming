@@ -32,7 +32,7 @@ const EditProfile = () => {
         { ...formData },
       );
       setUserData({ ...formData });
-      navigate("/mypage");
+      navigate("/my-page");
       // console.log(response);
     } catch (error) {
       console.log(error);

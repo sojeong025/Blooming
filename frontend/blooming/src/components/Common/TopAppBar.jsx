@@ -21,21 +21,21 @@ const TopAppBar = () => {
 
   // 뒤로가기 필요하면 여기 넣기
   const backIcon = [
-    "/AllNotice",
-    "/mobileinvitation",
-    "/Create",
+    "/all-notice",
+    "/mobile-invitation",
+    "/invitation-create",
     "/join-code",
     "/join",
-    "/DecideWedding",
-    "/ChooseWedding",
+    "/decide-wedding",
+    "/choose-wedding",
     "/share",
   ];
   // 알림버튼 없애려면 여기 넣기
   const noNotice = [
     "/join-code",
     "/join",
-    "/DecideWedding",
-    "/ChooseWedding",
+    "/decide-wedding",
+    "/choose-wedding",
     "/share",
   ];
 
@@ -62,12 +62,12 @@ const TopAppBar = () => {
       {noNotice.includes(location.pathname) ? (
         <div className={`${classes.navIcon} ${classes.navRight}`} />
       ) : (
-        <NavLink to='/AllNotice' state={{ pageTitle: "알림" }}>
+        <NavLink to='/all-notice' state={{ pageTitle: "알림" }}>
           {/* 알림 아이콘 24x24에 맞춰 넣기 */}
           <img
             className={`${classes.navIcon} ${classes.navRight}`}
             src={
-              window.location.pathname === "/AllNotice"
+              window.location.pathname === "/all-notice"
                 ? noticeActive
                 : noticeBase
             }

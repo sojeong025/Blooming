@@ -22,7 +22,7 @@ export default function Question() {
         <p>이미지</p>
       </div>
       <div className={classes.btn}>
-        <NavLink to={"/DecideWedding"}>
+        <NavLink to={"/decide-wedding"}>
           <Button text='시작하기' />
         </NavLink>
       </div>

@@ -13,7 +13,7 @@ export default function DecideWedding() {
 
       <Button
         onClick={() => {
-          navigate("/ChooseWedding", {
+          navigate("/choose-wedding", {
             state: { pageTitle: "회원가입" },
           });
         }}
