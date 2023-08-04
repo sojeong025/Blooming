@@ -10,6 +10,9 @@ import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -98,5 +101,23 @@ public class UserService {
         if (!(findUser.getName().equals(coupleCodeDto.getName()))) {
             throw new IllegalArgumentException("커플 연결할 수 없는 코드입니다.");
         }
+    }
+
+    @Transactional
+    public void updateCouple(CoupleCodeDto coupleCodeDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication.getName() == null) {
+            throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
+        }
+
+        Couple couple = coupleRepository.findByCoupleCode(coupleCodeDto.getCoupleCode())
+                .orElseThrow(() -> new IllegalArgumentException("정상적인 커플코드가 아닙니다."));
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+
+        user.setCouple(couple);
+
+        // 상대방 커플로 연결됐으므로 내 커플 정보는 삭제
+        coupleRepository.delete(couple);
     }
 }
