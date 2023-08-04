@@ -5,6 +5,8 @@ import ConceptsList from "../../components/MobileInvitation/ConceptsList";
 import { useEffect, useState } from "react";
 import classes from './MobileInvitation.module.css'
 import { useRecoilValue } from "recoil";
+import { Link } from "react-router-dom";
+
 
 function MobileInvitation() {
   const mobileInvitationData = useRecoilValue(mobileInvitationState);
@@ -34,7 +36,9 @@ function MobileInvitation() {
         <hr />
         
         {mobileInvitationData ? (
-          <button className={classes.btn}>나의 청첩장 보기</button>
+          <NavLink to="/MobileInvitationDetail">
+            <button className={classes.btn}>나의 청첩장 보기</button>
+          </NavLink>
         ) : (
           <NavLink to="/Create">
             <button className={classes.btn}>제작하기</button>
