@@ -14,52 +14,45 @@ import WeddingHall from "../../components/MobileInvitation/Create/WeddingHall";
 
 import { customAxios } from '../../lib/axios'
 import { useRecoilValue } from 'recoil';
-import { weddingDateState } from "../../recoil/WeddingDdayAtom"
+import { mobileInvitationState } from "../../recoil/MobileInvitationAtom"
 
 function Create() {
   const navigate = useNavigate();
 
   const [previewModalVisible, setPreviewModalVisible] = useState(false);
-  const [formData, setFormData] = useState({
-    main: {},
-    groom: {},
-    brider: {},
-    invitation: {},
-    weddingDay: useRecoilValue(weddingDateState),
-    weddingHall: {},
-  });
+  const formData = useRecoilValue(mobileInvitationState);
 
   function handlePreviewClick() {
     setPreviewModalVisible(true);
-    // document.body.style.overflow="hidden";
   }
+  
+  function handleSaveClick() {
+    customAxios.post("invitation",formData)
+      .then(response => {
+        console.log("저장이 완료되었습니다.");
+        console.log(response.data);
 
-  // function handleSaveClick() {
-  //   // 서버에 데이터 전송 (POST 요청)
-  //   customAxios.post("invitation", formData)
-  //     .then(response => {
-  //       console.log("저장이 완료되었습니다.");
-  //       console.log(response.data);
+        navigate("/MobileInvitation");
+      })
+      .catch(error => {
+        console.error("저장에 실패하였습니다.");
+        console.log(formData)
 
-  //       navigate("/MobileInvitation");
-  //     })
-  //     .catch(error => {
-  //       console.error("저장에 실패하였습니다.");
-  //       console.error(error);
-  //     });
-  // }
+        console.error(error);
+      });
+  }
 
   return(
     <div className='mainContainer'>
-      <Main formData={formData} setFormData={setFormData} />
-      <GroomInfo formData={formData} setFormData={setFormData} />
-      <BriderInfo formData={formData} setFormData={setFormData} />
-      <Invitation formData={formData} setFormData={setFormData} />
-      <WeddingDay formData={formData} setFormData={setFormData} />
-      <WeddingHall formData={formData} setFormData={setFormData} />
+      <Main />
+      <GroomInfo />
+      <BriderInfo />
+      <Invitation />
+      <WeddingDay />
+      <WeddingHall />
       <div className={classes.btn}>
         <button className={classes.pre} onClick={handlePreviewClick}>미리보기</button>
-        <button className={classes.save}>저장</button>
+        <button className={classes.save} onClick={handleSaveClick}>저장</button>
       </div>
 
       {previewModalVisible && (

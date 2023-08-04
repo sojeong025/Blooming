@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { customAxios } from '../../lib/axios'
 import ConceptsList from "../../components/MobileInvitation/ConceptsList";
 import { useEffect, useState } from "react";
+import classes from './MobileInvitation.module.css'
 
 function MobileInvitation() {
   const [mobileInvitationData, setMobileInvitationData] = useState(null);
@@ -22,19 +23,21 @@ function MobileInvitation() {
 
   return (
     <div className='mainContainer'>
-      <h1>모바일 청첩장</h1>
-      <p>심플하지만 임팩트 있는, 간편하게 제작하는 모바일청첩장</p>
-      <hr />
-      <ConceptsList>일단 여기는 컨셉 박스로 들어갈 거임</ConceptsList>
-      <hr />
-      
-      {mobileInvitationData ? (
-        <button>나의 청첩장 보기</button>
-      ) : (
-        <NavLink to="/Create">
-          <button>제작하기</button>
-        </NavLink>
-      )}
+      <div className={classes.container}>
+        <h1>Mobile Wedding Invitation</h1>
+        <p>어디서나 간편하게 <br/>  완벽한 청첩장을 만들어보세요. <br/>우리의 모바일 청첩장 서비스로 손쉽게 결혼식 초대를 준비해보세요.</p>
+        <hr />
+        <ConceptsList />
+        <hr />
+        
+        {mobileInvitationData ? (
+          <button className={classes.btn}>나의 청첩장 보기</button>
+        ) : (
+          <NavLink to="/Create">
+            <button className={classes.btn}>제작하기</button>
+          </NavLink>
+        )}
+      </div>
     </div>
   );
 };

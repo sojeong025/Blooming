@@ -30,6 +30,14 @@ export const mobileInvitationState = atom({
       weddingHallName: '',
       floor: '',
       address: '',
-    }
+    },
+    weddingDate: {
+      date: new Date(),
+      time: {
+        hour: 0,
+        minute: 0,
+        second: 0,
+      },
+    },
   },
 });

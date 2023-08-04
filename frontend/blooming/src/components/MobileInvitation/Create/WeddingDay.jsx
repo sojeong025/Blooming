@@ -1,13 +1,23 @@
-import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { useRecoilState } from 'recoil';
-import { weddingDateState } from '../../../recoil/WeddingDdayAtom';
+import { mobileInvitationState } from '../../../recoil/MobileInvitationAtom';
 import { ko } from "date-fns/esm/locale";
 
 import classes from './Common.module.css';
 
 function WeddingDay() {
-  const [startDate, setStartDate] = useRecoilState(weddingDateState);
+  const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
+  const startDate = invitation.weddingDate.date;
+
+  const handleDateChange = (date) => {
+    setInvitation((preInvitation) => ({
+      ...preInvitation,
+      weddingDate: {
+        ...preInvitation.weddingDate,
+        date,
+      },
+    }));
+  };
 
   return (
     <div className={classes.container}>
@@ -18,7 +28,7 @@ function WeddingDay() {
         <DatePicker
           selected={startDate}
           locale={ko} 
-          onChange={(date) => setStartDate(date)}
+          onChange={handleDateChange}
           showTimeSelect
           timeFormat="HH:mm"
           timeIntervals={15}
