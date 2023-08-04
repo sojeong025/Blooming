@@ -11,13 +11,13 @@ import { customAxios } from "../../lib/axios";
 
 export default function Join() {
   // fcmToken 받아오기
-  let fcmToken = '';
+  let fcmToken = "";
   if (window.flutter_inappwebview) {
     window.flutter_inappwebview
       .callHandler("handleFoo")
       .then(function (result) {
-        fcmToken = result.fcmT
-        console.log('이건 fcm', fcmToken)
+        fcmToken = result.fcmT;
+        console.log("이건 fcm", fcmToken);
       });
   }
   // 에러 모달
@@ -32,12 +32,6 @@ export default function Join() {
     phoneNumber: "",
     gender: "",
   });
-
-
-
-  
-  
-  
 
   // 카카오 유저 정보 받아오기
   const getKakaoProfile = async () => {
@@ -91,31 +85,26 @@ export default function Join() {
           response.headers["authorization"],
           response.headers["authorization_refresh"],
         );
-        localStorage.setItem(
-          "accessToken",
-          response.headers["authorization"],
-        );
+        localStorage.setItem("accessToken", response.headers["authorization"]);
         localStorage.setItem(
           "refreshToken",
           response.headers["authorization_refresh"],
         );
       }
-      
       // console.log(response);
+      navigate("/DecideWedding", {
+        state: { pageTitle: "회원가입" },
+      });
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
+      navigate("/");
     }
   };
 
   // 제출 버튼 클릭
   const joinSubmit = async (event) => {
     event.preventDefault();
-    
     handleSignUp();
-
-    navigate("/DecideWedding", {
-      state: { pageTitle: "회원가입" },
-    });
   };
 
   return (
