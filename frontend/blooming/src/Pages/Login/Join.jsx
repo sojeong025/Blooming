@@ -11,15 +11,18 @@ import { customAxios } from "../../lib/axios";
 
 export default function Join() {
   // fcmToken 받아오기
-  let fcmToken = "";
-  if (window.flutter_inappwebview) {
-    window.flutter_inappwebview
-      .callHandler("handleFoo")
+  const [fcmToken, setFcmToken] = useState('')
+
+  const getToken = function (){
+    window.flutter_inappwebview.callHandler('handleFoo')
       .then(function (result) {
-        fcmToken = result.fcmT;
-        console.log("이건 fcm", fcmToken);
+        setFcmToken(JSON.stringify(result.fcmT))
       });
   }
+
+  useEffect(() => {
+    getToken()
+  }, [])
   // 에러 모달
   const [ErrorModal, handleError] = useErrorModal();
   const navigate = useNavigate();
