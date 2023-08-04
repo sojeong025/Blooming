@@ -56,7 +56,7 @@ public class Invitation {
     private String bridePhone;
 
     //맞나
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "COUPLE_ID")
     private Couple couple;
 
