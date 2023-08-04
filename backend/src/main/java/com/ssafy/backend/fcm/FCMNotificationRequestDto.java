@@ -1,5 +1,6 @@
 package com.ssafy.backend.fcm;
 
+import com.ssafy.backend.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder
 public class FCMNotificationRequestDto {
-    private Long targetUserId;
+    private User user;
     private String title;
     private String body;
 }

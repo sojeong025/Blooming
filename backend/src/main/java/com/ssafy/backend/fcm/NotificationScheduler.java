@@ -87,16 +87,14 @@ public class NotificationScheduler {
                 switch(schedule.getScheduledBy()){
                     case COMMON:
                         //두 명에게 같은 알림 전송
-                        Long groomId = groom.getId();
-                        Long brideId = bride.getId();
-
                         String title = schedule.getScheduleDate() + " " + schedule.getTitle();
                         String content = "내일은 두 분이 " + schedule.getContent() + "하는 날이에요. 클릭해서 팁을 알아보세요!";
 
-                        sendNotificationByToken(new FCMNotificationRequestDto(groomId, title, content));
-                        sendNotificationByToken(new FCMNotificationRequestDto(brideId, title, content));
+                        sendNotificationByToken(new FCMNotificationRequestDto(groom, title, content));
+                        sendNotificationByToken(new FCMNotificationRequestDto(bride, title, content));
                         break;
                     case MALE:
+
                         break;
                     case FEMALE:
                         break;
@@ -126,8 +124,7 @@ public class NotificationScheduler {
 
 
     private String sendNotificationByToken(FCMNotificationRequestDto fcmDto) {
-        User user = userRepository.findById(fcmDto.getTargetUserId())
-                .orElse(null);
+        User user = fcmDto.getUser();
 
         if (user != null) {
             //토큰 받아오는 걸로 수정
