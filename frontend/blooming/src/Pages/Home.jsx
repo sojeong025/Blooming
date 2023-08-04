@@ -11,20 +11,15 @@ import { useEffect, useState } from "react";
 function Home() {
 
   const [fcmToken, setFcmToken] = useState('없음')
+  const [re, setRe] = useState('그냥 result')
 
-  useEffect(() => {
-    // register a function to handle FCM token in the window object
-    window.handleFcmToken = (token) => {
-      console.log("FCM Token from Flutter:", token);
-      setFcmToken(token)
-      // 이제 웹 페이지에 token을 사용하거나 서버로 전송할 수 있습니다.
-    };
-
-    // unregister the handleFcmToken function once the component is dismounted
-    return () => {
-      window.handleFcmToken = null;
-    };
-  }, []);
+  const getToken = function (){
+    window.flutter_inappwebview.callHandler('handleFoo')
+      .then(function (result) {
+        setRe(JSON.stringify(result))
+        setFcmToken(JSON.stringify(result.fcmT))
+      });
+  }
 
   const navigate = useNavigate();
 
@@ -54,7 +49,12 @@ function Home() {
   return (
     <div className='mainContainer'>
       <WeddingDday />
-      <div>{fcmToken} 나는 토큰이다.</div>
+      <button onClick={getToken}>
+        fcm내놔
+      </button>
+      <div>{ re } 이건 result값</div>
+      <div>{ fcmToken } 이거 토큰임</div>
+
       {/* PlanTips랑 합침 */}
       {/* <MainImage /> */}
 
