@@ -8,6 +8,7 @@ import { useRecoilValue } from "recoil";
 
 function MobileInvitation() {
   const mobileInvitationData = useRecoilValue(mobileInvitationState);
+  const [count, setCount] = useState('')
 
   const isEmpty = (obj) => {
     return Object.keys(obj).length === 0;
@@ -16,8 +17,8 @@ function MobileInvitation() {
   const fetchData = async () => {
     try {
       const response = await customAxios.get("invitation");
+      setCount(response.count)
       console.log('가져오기 성공!')
-      console.log(response.data.result[0]);
     } catch (error) {
       console.error(error);
       console.log('가져오기 실패!')
@@ -37,7 +38,7 @@ function MobileInvitation() {
         <ConceptsList />
         <hr />
         
-        {!isEmpty(mobileInvitationData) ? (
+        {!count ? (
           <NavLink to="/MobileInvitationDetail">
             <button className={classes.btn}>나의 청첩장 보기</button>
           </NavLink>
