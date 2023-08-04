@@ -17,14 +17,11 @@ export default function Join() {
     if (window.flutter_inappwebview) {
       window.flutter_inappwebview.callHandler('handleFoo')
         .then(function (result) {
-          setFcmToken(JSON.stringify(result.fcmT))
+          setFcmToken(result.fcmT)
         });
     }
   }
 
-  useEffect(() => {
-    getToken()
-  }, [])
   // 에러 모달
   const [ErrorModal, handleError] = useErrorModal();
   const navigate = useNavigate();
@@ -101,9 +98,9 @@ export default function Join() {
       }
       setUserData(formData);
       console.log(response);
-      // navigate("/DecideWedding", {
-      //   state: { pageTitle: "회원가입" },
-      // });
+      navigate("/DecideWedding", {
+        state: { pageTitle: "회원가입" },
+      });
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
       navigate("/");
