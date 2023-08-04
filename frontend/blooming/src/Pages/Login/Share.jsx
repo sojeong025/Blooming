@@ -36,7 +36,7 @@ export default function Share() {
     fetchData();
   }, []);
 
-  const verifyCode = userData.coupleCode.toString();
+  const verifyCode = userData.coupleCode;
 
   return (
     <div className='mainContainer'>
