@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+// import { format } from "date-fns";
 import DatePicker from "react-datepicker";
 import { useRecoilState } from "recoil";
 import { mobileInvitationState } from "../../../recoil/MobileInvitationAtom";
@@ -61,7 +61,7 @@ function WeddingDay() {
           showTimeSelectOnly
           timeIntervals={15}
           timeCaption="시간"
-          dateFormat="yyyy-MM-dd HH:mm"
+          dateFormat="HH:mm"
           locale={ko}
         />
       </div>
