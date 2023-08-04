@@ -1,4 +1,4 @@
-gimport classes from "./Question.module.css";
+import classes from "./Question.module.css";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Login/Button";
 
