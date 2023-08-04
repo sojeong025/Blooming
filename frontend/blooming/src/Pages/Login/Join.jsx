@@ -78,7 +78,7 @@ export default function Join() {
       console.log("userData", userData)
       console.log("formData", formData)
       console.log("fcmT", fcmToken)
-      await setUserData({ ...userData, ...formData, fcmToken: fcmToken });
+      setUserData({ ...userData, ...formData, fcmToken: fcmToken });
       console.log("post요청후 userData",userData)
       const response = await customAxios.post("sign-up", userData);
       if (
