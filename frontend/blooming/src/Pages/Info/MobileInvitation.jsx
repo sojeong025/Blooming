@@ -40,7 +40,7 @@ function MobileInvitation() {
         <ConceptsList />
         <hr />
         
-        {count ? (
+        {count===0 ? (
           <NavLink to="/MobileInvitationDetail">
             <button className={classes.btn}>나의 청첩장 보기</button>
           </NavLink>
