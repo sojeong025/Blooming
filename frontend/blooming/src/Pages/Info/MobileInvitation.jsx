@@ -1,19 +1,21 @@
 import { NavLink } from "react-router-dom";
 import { customAxios } from '../../lib/axios'
+import { mobileInvitationState } from '../../recoil/MobileInvitationAtom';
 import ConceptsList from "../../components/MobileInvitation/ConceptsList";
 import { useEffect, useState } from "react";
 import classes from './MobileInvitation.module.css'
 
 function MobileInvitation() {
-  const [mobileInvitationData, setMobileInvitationData] = useState(null);
+  const mobileInvitationData = useRecoilValue(mobileInvitationState);
 
   const fetchData = async () => {
     try {
       const response = await customAxios.get("invitation");
-
+      console.log('가져오기 성공!')
       console.log(response.data.result[0]);
     } catch (error) {
       console.error(error);
+      console.log('가져오기 실패!')
     }
   };
 
