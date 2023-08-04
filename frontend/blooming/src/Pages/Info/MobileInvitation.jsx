@@ -4,18 +4,17 @@ import { mobileInvitationState } from '../../recoil/MobileInvitationAtom';
 import ConceptsList from "../../components/MobileInvitation/ConceptsList";
 import { useEffect, useState } from "react";
 import classes from './MobileInvitation.module.css'
-import { useRecoilValue } from "recoil";
-import { Link } from "react-router-dom";
-
+import { useRecoilState } from "recoil";
 
 function MobileInvitation() {
-  const mobileInvitationData = useRecoilValue(mobileInvitationState);
-
+  const [mobileInvitationData, setMobileInvitationData] = useRecoilState(mobileInvitationState);
+  const [isInvitation, setIsInvitation] = useState(false)
   const fetchData = async () => {
     try {
       const response = await customAxios.get("invitation");
       console.log('가져오기 성공!')
-      console.log(response.data.result[0]);
+      setIsInvitation(true)
+      setMobileInvitationData(response.data.result[0])
     } catch (error) {
       console.error(error);
       console.log('가져오기 실패!')
@@ -35,7 +34,7 @@ function MobileInvitation() {
         <ConceptsList />
         <hr />
         
-        {mobileInvitationData ? (
+        {isInvitation ? (
           <NavLink to="/MobileInvitationDetail">
             <button className={classes.btn}>나의 청첩장 보기</button>
           </NavLink>

@@ -34,6 +34,5 @@ export const mobileInvitationState = atom({
     weddingDate: {
       date: '',
       time: '',
-    },
-  },
+  },},
 });
