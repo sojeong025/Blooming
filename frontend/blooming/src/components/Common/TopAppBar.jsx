@@ -48,7 +48,10 @@ const TopAppBar = () => {
 
   const isAllNotice = location.pathname === "/all-notice";
   // 색깔 바꿔줘
-  const currentFill = isAllNotice ? "#ff0000" : "#000000";
+  const currentFill = isAllNotice ? "#FF647C" : "#000000";
+
+  // 알림이 있으면 true 없으면 false
+  const isNotice = useState(false);
 
   return (
     <header className={classes.header}>
@@ -69,17 +72,17 @@ const TopAppBar = () => {
         <div className={`${classes.navIcon} ${classes.navRight}`} />
       ) : (
         <NavLink to='/all-notice' state={{ pageTitle: "알림" }}>
-          {/* 알림 아이콘 24x24에 맞춰 넣기 */}
-          {/* 알림 없음 */}
-          <NoticeSvg
-            fill={currentFill}
-            className={`${classes.navIcon} ${classes.navRight}`}
-          />
-          {/* 알림 있음 */}
-          {/* <NoticeOSvg
-            fill='#000000'
-            className={`${classes.navIcon} ${classes.navRight}`}
-          /> */}
+          {!isNotice ? (
+            <NoticeSvg
+              fill={currentFill}
+              className={`${classes.navIcon} ${classes.navRight}`}
+            />
+          ) : (
+            <NoticeOSvg
+              fill={currentFill}
+              className={`${classes.navIcon} ${classes.navRight}`}
+            />
+          )}
         </NavLink>
       )}
     </header>
