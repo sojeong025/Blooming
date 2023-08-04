@@ -9,9 +9,17 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function Home() {
-  window.flutter_inappwebview.callHandler('handleFoo').then(function(result) {
-      console.log("FCM Token: " + result.fcmT);
-  });
+
+  useEffect(() => {
+    if (typeof window.flutter_inappwebview !== 'undefined') {
+      window.flutter_inappwebview.callHandler('handleFoo').then((result) => {
+        console.log('FCM Token:', result.fcmT);
+        // 이제 웹 페이지에 token을 사용하거나 서버로 전송할 수 있습니다.
+      });
+    } else {
+      console.log('window.flutter_inappwebview is not available');
+    }
+  }, []);
 
   const navigate = useNavigate();
 
