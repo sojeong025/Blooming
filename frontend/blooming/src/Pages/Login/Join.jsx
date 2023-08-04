@@ -75,7 +75,11 @@ export default function Join() {
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
     try {
+      console.log("userData", ...userData)
+      console.log("formData", ...formData)
+      console.log("fcmT", ...fcmToken)
       await setUserData({ ...userData, ...formData, fcmToken: fcmToken });
+      console.log("post요청후 userData",userData)
       const response = await customAxios.post("sign-up", userData);
       if (
         response.headers["authorization"] &&
