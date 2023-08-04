@@ -11,14 +11,16 @@ import { useEffect } from "react";
 function Home() {
 
   useEffect(() => {
-    if (typeof window.flutter_inappwebview !== 'undefined') {
-      window.flutter_inappwebview.callHandler('handleFoo').then((result) => {
-        console.log('FCM Token:', result.fcmT);
-        // 이제 웹 페이지에 token을 사용하거나 서버로 전송할 수 있습니다.
-      });
-    } else {
-      console.log('window.flutter_inappwebview is not available');
-    }
+    // register a function to handle FCM token in the window object
+    window.handleFcmToken = (token) => {
+      console.log("FCM Token from Flutter:", token);
+      // 이제 웹 페이지에 token을 사용하거나 서버로 전송할 수 있습니다.
+    };
+
+    // unregister the handleFcmToken function once the component is dismounted
+    return () => {
+      window.handleFcmToken = null;
+    };
   }, []);
 
   const navigate = useNavigate();
