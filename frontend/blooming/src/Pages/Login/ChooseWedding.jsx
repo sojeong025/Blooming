@@ -13,7 +13,7 @@ export default function ChooseWedding() {
   // 약혼자 확인
   const isFiance = async () => {
     try {
-      const response = await customAxios.get("is-fiance");
+      const response = await customAxios.get("my-fiance");
       console.log(response);
       navigate("/home");
     } catch (error) {
