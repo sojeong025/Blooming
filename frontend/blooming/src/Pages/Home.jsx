@@ -21,6 +21,10 @@ function Home() {
       });
   }
 
+  useEffect(() => {
+    getToken()
+  }, [])
+
   const navigate = useNavigate();
 
   const [user, setUser] = useRecoilState(userState);
