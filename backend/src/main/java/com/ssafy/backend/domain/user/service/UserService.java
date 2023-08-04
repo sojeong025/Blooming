@@ -120,10 +120,11 @@ public class UserService {
         if (originCouple != null) {
             user.setCouple(null);
             coupleRepository.delete(originCouple);
+            userRepository.saveAndFlush(user);
         }
 
-        // 새로운 커플 정보로 연결
+        // 상대방 커플 코드의 커플을 연결
         user.setCouple(couple);
-        userRepository.save(user);
+        userRepository.save(user); // saveAndFlush()를 사용하여 변경사항을 즉시 동기화
     }
 }
