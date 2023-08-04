@@ -10,6 +10,16 @@ import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 
 export default function Join() {
+  // fcmToken 받아오기
+  let fcmToken = '';
+  if (window.flutter_inappwebview) {
+    window.flutter_inappwebview
+      .callHandler("handleFoo")
+      .then(function (result) {
+        fcmToken = result.fcmT
+        console.log('이건 fcm', fcmToken)
+      });
+  }
   // 에러 모달
   const [ErrorModal, handleError] = useErrorModal();
   const navigate = useNavigate();
@@ -17,11 +27,17 @@ export default function Join() {
   const [userData, setUserData] = useRecoilState(userState);
   // 추가정보 데이터 넣기
   const [formData, setFormData] = useState({
-    nickname: "",
-    gender: "",
     name: "",
+    nickname: "",
     phoneNumber: "",
+    gender: "",
   });
+
+
+
+  
+  
+  
 
   // 카카오 유저 정보 받아오기
   const getKakaoProfile = async () => {
@@ -38,6 +54,7 @@ export default function Join() {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken"),
   );
+
   useEffect(() => {
     const syncToken = () => {
       setAccessToken(localStorage.getItem("accessToken"));
@@ -64,8 +81,26 @@ export default function Join() {
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
     try {
-      setUserData({ ...userData, ...formData });
-      await customAxios.post("sign-up", userData);
+      await setUserData({ ...userData, ...formData, fcmToken: fcmToken });
+      const response = await customAxios.post("sign-up", userData);
+      if (
+        response.headers["authorization"] &&
+        response.headers["authorization_refresh"]
+      ) {
+        console.log(
+          response.headers["authorization"],
+          response.headers["authorization_refresh"],
+        );
+        localStorage.setItem(
+          "accessToken",
+          response.headers["authorization"],
+        );
+        localStorage.setItem(
+          "refreshToken",
+          response.headers["authorization_refresh"],
+        );
+      }
+      
       // console.log(response);
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
@@ -75,14 +110,7 @@ export default function Join() {
   // 제출 버튼 클릭
   const joinSubmit = async (event) => {
     event.preventDefault();
-    // window.flutter_inappwebview
-    //   .callHandler("handleFoo")
-    //   .then(function (result) {
-    //     console.log(JSON.stringify(result));
-    //     let fcmtext = document.getElementById("fcminput");
-    //     // fcm_token: 얘가 value
-    //     fcmtext.value = result.fcmT;
-    //   });
+    
     handleSignUp();
 
     navigate("/DecideWedding", {
