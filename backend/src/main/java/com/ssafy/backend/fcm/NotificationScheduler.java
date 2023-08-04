@@ -62,8 +62,8 @@ public class NotificationScheduler {
 
     //시간에 맞게 푸시 알림을 스케줄링하는 코드
 //    @Scheduled(cron = "* * 1 * * ?")
-    @Scheduled(cron = "0 0 1 * * ?")
-//    @Scheduled(fixedDelay = 5000)
+//    @Scheduled(cron = "0 0 1 * * ?")
+    @Scheduled(fixedDelay = 10000)
     public void pushMorningDietAlarm() {
 
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
@@ -115,8 +115,8 @@ public class NotificationScheduler {
                 }
 
                 //처리한 내용을 알림 전송(신랑, 신부)
-                sendNotificationByToken(new FCMNotificationRequestDto(groom, title, contentGroom));
-                sendNotificationByToken(new FCMNotificationRequestDto(bride, title, contentBride));
+                log.info(sendNotificationByToken(new FCMNotificationRequestDto(groom, title, contentGroom)));
+                log.info(sendNotificationByToken(new FCMNotificationRequestDto(bride, title, contentBride)));
 
                 //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장. - 파라미터는 임시. 수정 필요
                 notificationService.registNotification(new NotificationRegistDto(
