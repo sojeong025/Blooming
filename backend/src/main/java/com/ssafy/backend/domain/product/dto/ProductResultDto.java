@@ -1,22 +1,19 @@
-package com.ssafy.backend.domain.product;
+package com.ssafy.backend.domain.product.dto;
 
+import com.ssafy.backend.domain.product.ProductType;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.persistence.*;
-import java.time.LocalTime;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
-@Entity
 @Getter
-public class Product {
-    @Id
-    @GeneratedValue
-    @Column(name = "PRODUCT_ID")
+@AllArgsConstructor
+public class ProductResultDto {
+
     private Long id;
-    //지역은 일단 뺌
 
     //상품 정보
-    @Enumerated(EnumType.STRING)
-    private ProductType productType;
     private String itemName;
     private String brief;
 //    private String detail;
@@ -31,7 +28,4 @@ public class Product {
     private String company;
     private String companyTime;
     private String companyAddress;
-    
-    //연관관계는 만들면서 하나씩 추가
-
 }

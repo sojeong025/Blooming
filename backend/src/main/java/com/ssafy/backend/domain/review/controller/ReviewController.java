@@ -39,7 +39,7 @@ public class ReviewController {
     }
 
     @Operation(summary = "상품 후기 한 페이지 조회하기", description = "상품 아이디와 페이징 정보에 해당하는 모든 후기를 불러옵니다.")
-    @Parameter(name = "/review?page=1&size=3&productId", description = "page : 페이지 번호, size : 페이지당 후기 개수 . 해당 상품 아이디")
+    @Parameter(name = "/review/productId?page=1&size=3", description = "page : 페이지 번호, size : 페이지당 후기 개수 . 해당 상품 아이디")
     @GetMapping("/review/{productId}")
     public ResponseEntity<?> getAllProductReview(Pageable pageable, @PathVariable Long productId) { //pageNumber, pageSize, offset
         List<ReviewResultDto> reviewList = reviewService.getAllProductReview(pageable, productId);
