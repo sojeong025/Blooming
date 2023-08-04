@@ -19,9 +19,11 @@ function MobileInvitation() {
       const response = await customAxios.get("invitation");
       setCount(response.count)
       console.log('가져오기 성공!')
+      console.log(setCount)
     } catch (error) {
       console.error(error);
       console.log('가져오기 실패!')
+      console.log(setCount)
     }
   };
 
@@ -38,7 +40,7 @@ function MobileInvitation() {
         <ConceptsList />
         <hr />
         
-        {!count ? (
+        {count ? (
           <NavLink to="/MobileInvitationDetail">
             <button className={classes.btn}>나의 청첩장 보기</button>
           </NavLink>
