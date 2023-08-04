@@ -12,7 +12,7 @@ import Splash from "./Pages/Splash";
 // login
 import Login from "./Pages/Login/Login";
 import KakaoLogin from "./Pages/Login/KakaoLogin";
-import GoJoin from "./Pages/Login/GoJoin";
+import GoJoin from "./Pages/Login/Gojoin";
 import JoinCode from "./Pages/Login/JoinCode";
 import Join from "./Pages/Login/Join";
 import Question from "./Pages/Login/Question";
