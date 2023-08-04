@@ -1,14 +1,10 @@
 import { styled } from "styled-components";
-import PreviewAnt from "../../components/Login/PreviewAnt";
 import Preview from "../../components/Login/Preview";
-import { PageIndicator } from "antd-mobile";
 
 export default function Login() {
   return (
     <>
       <Wrapper>
-        {/* 프리뷰 */}
-        {/* <PreviewAnt /> */}
         <Preview />
       </Wrapper>
     </>
