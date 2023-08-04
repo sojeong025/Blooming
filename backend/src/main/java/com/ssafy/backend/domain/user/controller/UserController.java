@@ -218,6 +218,21 @@ public class UserController {
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
+    @Operation(summary = "상대방 커플코드로 연결", description = "회원가입 후 상대방의 커플코드로 커플 연결 시 사용하는 API")
+    @Parameter(name = "coupleCodeDto", description = "상대방의 이름, 상대방 커플 코드를 입력하는 dto")
+    @PutMapping("/couple")
+    public ResponseEntity<BasicResponse> modifyProfile(@RequestBody CoupleCodeDto coupleCodeDto) {
+        userService.updateCouple(coupleCodeDto);
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("커플 연결 성공")
+                .build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
+
     @Hidden
     @GetMapping("/jwt-test")
     public String jwtTest() {
