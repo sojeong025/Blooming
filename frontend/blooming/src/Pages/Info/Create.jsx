@@ -27,21 +27,45 @@ function Create() {
   }
   
   function handleSaveClick() {
-    customAxios.post("invitation",formData)
+    const finalFormData = {
+      thumbnail: formData.main.thumbnail,
+      groomFatherName: formData.groom.groomFatherName,
+      groomFatherPhone: formData.groom.groomFatherPhone,
+      groomMotherName: formData.groom.groomMotherName,
+      groomMotherPhone: formData.groom.groomMotherPhone,
+      groomName: formData.groom.groomName,
+      groomPhone: formData.groom.groomPhone,
+      brideFatherName: formData.brider.briderFatherName,
+      brideFatherPhone: formData.brider.briderFatherPhone,
+      brideMotherName: formData.brider.briderMotherName,
+      brideMotherPhone: formData.brider.briderMotherPhone,
+      brideName: formData.brider.briderName,
+      bridePhone: formData.brider.briderPhone,
+      title: formData.invitation.title,
+      content: formData.invitation.content,
+      weddingHallName: formData.weddingHall.weddingHallName,
+      floor: formData.weddingHall.floor,
+      address: formData.weddingHall.address,
+      date: formData.weddingDate.date,
+      time: formData.weddingDate.time
+    };
+  
+    customAxios.post("invitation",finalFormData)
       .then(response => {
-        console.log(formData)
+        console.log(finalFormData)
         console.log('성공했다~')
         console.log(response.data);
-
+  
         navigate("/MobileInvitation");
       })
       .catch(error => {
         console.log("저장에 실패하였습니다.");
-        console.log(formData)
-
+        console.log(finalFormData)
+  
         console.error(error);
       });
   }
+  
 
   return(
     <div className='mainContainer'>
