@@ -24,6 +24,7 @@ const CoupleCode = () => {
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
       setCoupled("잘못된 코드입니다");
+      setUserData({ ...userData, coupleCode: 0 });
     }
   };
 
