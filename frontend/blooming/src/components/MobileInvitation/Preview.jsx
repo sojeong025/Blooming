@@ -1,12 +1,11 @@
 import { useRecoilValue } from 'recoil';
 import { mobileInvitationState } from '../../recoil/MobileInvitationAtom';
-import { weddingDateState } from "../../recoil/WeddingDdayAtom"
 
 import Ring from '../../../src/assets/Icons/Ring4.svg'
 import classes from './Preview.module.css';
 
 function Preview({ onClose }) {
-  const invitationData = useRecoilValue(mobileInvitationState, weddingDateState);
+  const invitationData = useRecoilValue(mobileInvitationState);
 
   return (
     <div className={classes.total}>
