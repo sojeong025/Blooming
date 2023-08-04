@@ -87,9 +87,22 @@ export default function Join() {
   };
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
-     const currentFcmToken = await getToken();
+    const currentFcmToken = await getToken();
+    let customData = formData
+    if (userData.coupleCode) {
+      customData = {
+        ...formData,
+        coupleCode: userData.coupleCode,
+        fcmToken: currentFcmToken
+      }
+    } else {
+      customData = {
+        ...formData,
+        fcmToken: currentFcmToken
+      }
+    }
     try {
-      const updatedFormData = fcmToken ? { ...formData, fcmToken: currentFcmToken } : formData;
+      const updatedFormData = fcmToken ? customData : formData;
       const response = await customAxios.post("sign-up", updatedFormData);
       if (
         response.headers["authorization"] &&
