@@ -54,6 +54,7 @@ export default function Join() {
       setFormData({ ...formData, ...kakaoData });
     } catch (error) {
       console.log("카카오 유저 정보 에러: ", error);
+      // location.reload();
     }
   };
 
