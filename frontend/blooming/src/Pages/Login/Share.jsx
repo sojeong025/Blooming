@@ -40,17 +40,30 @@ export default function Share() {
 
   return (
     <div className='mainContainer'>
-      <h3>{userData.name}님의 약혼자를 연결해주세요</h3>
-      <h4>등록은 한명만</h4>
-      <p>상대방 코드 등록</p>
-      <InputForm label='약혼자코드' name='' />
-      <Button text='인증요청' />
-      <hr />
-      <p>내 코드: {verifyCode}</p>
-      <CopyToClipboardButton text={verifyCode} />
-      <KakaoShareButton />
+      <h3>{userData.name}님의 약혼자를 연결 후 블루밍을 시작해보세요.</h3>
 
-      <Button text='완료' onClick={() => navigate("/home")} />
+      <div>
+        <CopyToClipboardButton text={verifyCode}>
+          <div style={{ padding: "10px" }}>
+            <p>나의 코드 복사</p>
+            <p style={{ textDecoration: "underline" }}>{verifyCode}</p>
+          </div>
+        </CopyToClipboardButton>
+
+        <KakaoShareButton />
+      </div>
+      <p>or</p>
+      <hr />
+      <div>
+        <p>상대방 코드로 연결하기</p>
+        <form>
+          <InputForm label='약혼자 이름' />
+          <InputForm label='코드' />
+          <Button type='submit' text='인증요청' />
+        </form>
+      </div>
+      <br />
+      <Button text='홈으로' onClick={() => navigate("/home")} />
     </div>
   );
 }
