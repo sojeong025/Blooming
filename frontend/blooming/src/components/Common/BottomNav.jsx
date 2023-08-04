@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import classes from "./BottomNav.module.css";
 
 import homeBase from "../../assets/Nav/home_base.svg";
@@ -13,16 +13,24 @@ import diaryActive from "../../assets/Nav/diary_active.svg";
 import myPageBase from "../../assets/Nav/mypage_base.svg";
 import myPageActive from "../../assets/Nav/mypage_active.svg";
 
+import { useRecoilState } from "recoil";
+import { localStorageNavState } from "../../recoil/NavAtom";
+
 const BottomNav = () => {
-  const [activeTab, setActiveTab] = useState("home");
+  const [navTab, setNavTab] = useRecoilState(localStorageNavState);
+  const [activeTab, setActiveTab] = useState();
 
   const handleTabClick = (tab) => {
+    setNavTab(tab);
     setActiveTab(tab);
   };
 
+  useEffect(() => {
+    setActiveTab(localStorage.getItem("activeTab"));
+  }, []);
+
   // 1. 아이콘 밑에 글씨 넣기
   // 2. 아이콘만 넣고 페이지 명은 위에 적어주기
-
   return (
     <nav className={classes.navContainer}>
       <NavLink to='/home'>
@@ -37,9 +45,10 @@ const BottomNav = () => {
             src={activeTab === "home" ? homeActive : homeBase}
             alt=''
           />
-          {/* <div className={classes.navTitle}>홈</div> */}
+          <div className={classes.navTitle}>홈</div>
         </div>
       </NavLink>
+
       <NavLink to='/info'>
         <div
           onClick={() => handleTabClick("info")}

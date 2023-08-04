@@ -1,17 +1,28 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import classes from "./BottomNav.module.css";
-import home from "../../assets/Nav/home.svg";
-import info from "../../assets/Nav/info.svg";
-import schedule from "../../assets/Nav/schedule.svg";
-import diary from "../../assets/Nav/diary.svg";
-import myPage from "../../assets/Nav/mypage.svg";
+import { ReactComponent as HomeSvg } from "../../assets/Nav/home.svg";
+
+import home from "../../assets/Nav/home_base.svg";
+import info from "../../assets/Nav/info_base.svg";
+import schedule from "../../assets/Nav/schedule_base.svg";
+import diary from "../../assets/Nav/diary_base.svg";
+import myPage from "../../assets/Nav/mypage_base.svg";
 
 const BottomNav = () => {
+  const location = useLocation();
+
+  // 해당 페이지 속에 파생된 모든 페이지 넣어야함
+
+  const isHome = location.pathname === "/home";
+  // // 색깔 바꿔줘
+  const currentFill = isHome ? "#FF647C" : "#000000";
+
   return (
     <nav className={classes.navContainer}>
       <div className={classes.navBlock}>
         <NavLink to='/home'>
-          <img className={classes.navIcon} src={home} alt='' />
+          <HomeSvg className={classes.navIcon} fill={currentFill} />
+          {/* <img className={classes.navIcon} src={home} alt='' /> */}
           <div className={classes.navTitle}>홈</div>
         </NavLink>
       </div>
@@ -34,7 +45,7 @@ const BottomNav = () => {
         </NavLink>
       </div>
       <div className={classes.navBlock}>
-        <NavLink to='/myPage'>
+        <NavLink to='/my-page'>
           <img className={classes.navIcon} src={myPage} alt='' />
           <div className={classes.navTitle}>내정보</div>
         </NavLink>
