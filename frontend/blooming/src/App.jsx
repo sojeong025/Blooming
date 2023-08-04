@@ -44,7 +44,7 @@ import Error from "./Pages/Error";
 
 function App() {
   // Nav를 숨길 페이지 path
-  const hiddenPaths = ["/", "/login", "/GoJoin", "/Question", "/Share"];
+  const hiddenPaths = ["/", "/login", "/go-join", "/question", "/share"];
 
   const Routing = () => {
     function setScreenSize() {
@@ -61,28 +61,40 @@ function App() {
         {!hiddenPaths.includes(location.pathname) && <TopAppBar />}
         <Routes>
           <Route path='/' element={<Splash />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/kakaologin' element={<KakaoLogin />} />
-          <Route path='/GoJoin' element={<GoJoin />} />
-          <Route path='/join-code' element={<JoinCode />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/all-notice' element={<AllNotice />} />
 
+          {/* login */}
+          <Route path='/login' element={<Login />} />
+          <Route path='/kakao-login' element={<KakaoLogin />} />
+          <Route path='/go-join' element={<GoJoin />} />
+          <Route path='/join-code' element={<JoinCode />} />
           <Route path='/join' element={<Join />} />
-          <Route path='/Question' element={<Question />} />
-          <Route path='/DecideWedding' element={<DecideWedding />} />
-          <Route path='/ChooseWedding' element={<ChooseWedding />} />
-          <Route path='/Share' element={<Share />} />
-          <Route path='/Info' element={<Info />} />
-          <Route path='/Diary' element={<Diary />} />
-          <Route path='/Diary/:id' element={<DiaryDetails />} />
-          <Route path='/MyPage' element={<MyPage />} />
+          <Route path='/question' element={<Question />} />
+          <Route path='/decide-wedding' element={<DecideWedding />} />
+          <Route path='/choose-wedding' element={<ChooseWedding />} />
+          <Route path='/share' element={<Share />} />
+
+          {/* 웨딩정보 */}
+          <Route path='/info' element={<Info />} />
+          <Route path='/mobile-invitation' element={<MobileInvitation />} />
+          <Route
+            path='/mobile-invitation-detail'
+            element={<MobileInvitationDetail />}
+          />
+          <Route path='/invitation-create' element={<Create />} />
+
+          {/* 다이어리 */}
+          <Route path='/diary' element={<Diary />} />
+          <Route path='/diary/:id' element={<DiaryDetails />} />
+
+          {/* 마이페이지 */}
+          <Route path='/my-page' element={<MyPage />} />
           <Route path='/setting' element={<SettingPage />} />
           <Route path='/edit-profile' element={<EditProfile />} />
-          <Route path='/AllNotice' element={<AllNotice />} />
-          <Route path='/home' element={<Home />} />
+
+          {/* 스케줄 */}
           <Route path='/schedule' element={<Schedule />} />
-          <Route path='/MobileInvitation' element={<MobileInvitation />} />
-          <Route path='/MobileInvitationDetail' element={<MobileInvitationDetail />} />
-          <Route path='/Create' element={<Create />} />
 
           {/* NotFound */}
           <Route path='*' element={<Error />} />
