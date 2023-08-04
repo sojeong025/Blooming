@@ -66,7 +66,7 @@ function App() {
 
           {/* login */}
           <Route path='/login' element={<Login />} />
-          <Route path='/kakao-login' element={<KakaoLogin />} />
+          <Route path='/kakaologin' element={<KakaoLogin />} />
           <Route path='/go-join' element={<GoJoin />} />
           <Route path='/join-code' element={<JoinCode />} />
           <Route path='/join' element={<Join />} />
