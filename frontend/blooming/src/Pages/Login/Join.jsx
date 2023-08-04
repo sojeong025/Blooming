@@ -11,7 +11,7 @@ import { customAxios } from "../../lib/axios";
 
 export default function Join() {
   // fcmToken 받아오기
-  const [fcmToken, setFcmToken] = useState('')
+  const [fcmToken, setFcmToken] = useState("");
 
   const getToken = function () {
     return new Promise((resolve) => {
@@ -28,10 +28,9 @@ export default function Join() {
     });
   };
 
-
   useEffect(() => {
-    getToken()
-  }, [])
+    getToken();
+  }, []);
   // 에러 모달
   const [ErrorModal, handleError] = useErrorModal();
   const navigate = useNavigate();
@@ -86,20 +85,22 @@ export default function Join() {
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
     const currentFcmToken = await getToken();
-    let customData = formData
-    console.log('여기가 중요', userData, userData.coupleCode)
+    let customData = formData;
+    console.log("여기가 중요", userData, userData.coupleCode);
     if (userData.coupleCode) {
       customData = {
         ...formData,
-        coupleCode: userData.coupleCode
-      }
+        coupleCode: userData.coupleCode,
+      };
     } else {
       customData = {
-        ...formData
-      }
+        ...formData,
+      };
     }
     try {
-      const updatedFormData = fcmToken ? { ...customData, fcmToken: currentFcmToken } : customData;
+      const updatedFormData = fcmToken
+        ? { ...customData, fcmToken: currentFcmToken }
+        : customData;
       const response = await customAxios.post("sign-up", updatedFormData);
       if (
         response.headers["authorization"] &&
@@ -117,7 +118,7 @@ export default function Join() {
       }
       setUserData(formData);
       console.log(response);
-      navigate("/DecideWedding", {
+      navigate("/decide-wedding", {
         state: { pageTitle: "회원가입" },
       });
     } catch (error) {

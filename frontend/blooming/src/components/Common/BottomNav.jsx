@@ -85,7 +85,7 @@ const BottomNav = () => {
           <div className={classes.navTitle}>다이어리</div>
         </div>
       </NavLink>
-      <NavLink to='/mypage'>
+      <NavLink to='/my-page'>
         <div
           onClick={() => handleTabClick("mypage")}
           className={`${classes.navBlock} ${

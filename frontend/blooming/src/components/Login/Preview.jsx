@@ -1,14 +1,21 @@
+//
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import classes from "./Preview.module.css";
+
 import Button from "./Button";
-import { NavLink } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+
 import { imageListState } from "../../recoil/PreviewAtom";
+import { useRecoilValue } from "recoil";
 import { useState } from "react";
-import axios from "axios";
+
+import { PageIndicator } from "antd-mobile";
 
 function Preview() {
+  // 카카오버튼
+  const KakaoBtn = "src/assets/kakao.png";
+
   const CustomDot = ({ onClick, isActive }) => {
     return (
       <button
@@ -26,7 +33,7 @@ function Preview() {
   const totalImages = imageList.length;
 
   const handlePrevClick = () => {
-    setCurrentImageIndex(totalImages-1);
+    setCurrentImageIndex(totalImages - 1);
   };
 
   const handleNextClick = () => {
@@ -63,9 +70,11 @@ function Preview() {
           </div>
         ))}
       </Carousel>
+
       {currentImageIndex === 2 ? (
+        // 카카오 버튼
         <a href='http://43.200.254.50:8080/oauth2/authorization/kakao'>
-          <Button text='카카오톡으로 로그인하기' />
+          <img src='src/assets/kakao.png' />
         </a>
       ) : (
         <div className={classes.btn}>
