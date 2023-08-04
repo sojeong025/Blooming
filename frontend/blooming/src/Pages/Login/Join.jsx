@@ -175,7 +175,6 @@ export default function Join() {
               <label htmlFor='gender-2'>신부</label>
             </div>
           </div>
-          <div>{fcmToken}</div>
           <button type='submit' className={classes.submitButton}>
             제출
           </button>
