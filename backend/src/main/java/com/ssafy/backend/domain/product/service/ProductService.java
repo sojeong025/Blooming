@@ -15,7 +15,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public List<Product> getTypeProduct(Long productType) {
+    public List<Product> getTypeProduct(String productType) {
         return productRepository.findByProductType(productType);
     }
 }
