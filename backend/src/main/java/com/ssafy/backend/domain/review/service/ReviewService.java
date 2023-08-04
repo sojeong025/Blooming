@@ -98,8 +98,8 @@ public class ReviewService {
     public void modifyReview(Long reviewId, ReviewModifyDto reviewModifyDto) throws Throwable {
         //리뷰 엔티티를 찾아서 update
         //왜 이건 그냥 안되지.. 에러처리
-        Review review = (Review) reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new IllegalArgumentException("리뷰 아이디에 해당하는 리뷰가 없습니다."));
 
         review.update(reviewModifyDto);
     }
