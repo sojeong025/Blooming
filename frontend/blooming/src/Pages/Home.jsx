@@ -6,14 +6,17 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
 import { customAxios } from "../lib/axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Home() {
+
+  const [fcmToken, setFcmToken] = useState('없음')
 
   useEffect(() => {
     // register a function to handle FCM token in the window object
     window.handleFcmToken = (token) => {
       console.log("FCM Token from Flutter:", token);
+      setFcmToken(token)
       // 이제 웹 페이지에 token을 사용하거나 서버로 전송할 수 있습니다.
     };
 
@@ -51,7 +54,7 @@ function Home() {
   return (
     <div className='mainContainer'>
       <WeddingDday />
-
+      <div>{fcmToken} 나는 토큰이다.</div>
       {/* PlanTips랑 합침 */}
       {/* <MainImage /> */}
 
