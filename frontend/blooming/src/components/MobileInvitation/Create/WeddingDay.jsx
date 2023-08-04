@@ -1,31 +1,37 @@
-import DatePicker from 'react-datepicker';
-import { useRecoilState } from 'recoil';
-import { mobileInvitationState } from '../../../recoil/MobileInvitationAtom';
-import { ko } from "date-fns/esm/locale";
+import { format } from "date-fns";
+import DatePicker from "react-datepicker";
+import { useRecoilState } from "recoil";
+import { mobileInvitationState } from "../../../recoil/MobileInvitationAtom";
+import ko from "date-fns/locale/ko";
 
-import classes from './Common.module.css';
+import classes from "./Common.module.css";
 
 function WeddingDay() {
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
-  const startDate = invitation.weddingDate.date;
+  const weddingDate = invitation.weddingDate.date;
 
   const handleDateChange = (date) => {
-
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-
     setInvitation((preInvitation) => ({
       ...preInvitation,
       weddingDate: {
         ...preInvitation.weddingDate,
         date,
-        time: {
-        ...preInvitation.weddingDate.time,
-        hour: hours,
-        minute: minutes,
-        second: seconds,
       },
+    }));
+  };
+
+  const timeFormatter = new Intl.DateTimeFormat(ko, {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  });
+
+  const handleTimeChange = (time) => {
+    setInvitation((preInvitation) => ({
+      ...preInvitation,
+      weddingDate: {
+        ...preInvitation.weddingDate,
+        time: timeFormatter.format(time),
       },
     }));
   };
@@ -35,16 +41,28 @@ function WeddingDay() {
       <p className={classes.header}>예식일</p>
       <hr />
       <div>
-        <label htmlFor="date">예식일</label><br />
+        <label htmlFor="date">예식일</label>
+        <br />
         <DatePicker
-          selected={startDate}
-          locale={ko} 
+          selected={weddingDate}
+          dateFormat="yyyy-MM-dd"
+          locale={ko}
           onChange={handleDateChange}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="time">예식 시간</label>
+        <br />
+        <DatePicker
+          selected={weddingDate}
+          onChange={handleTimeChange}
           showTimeSelect
-          timeFormat="HH:mm"
+          showTimeSelectOnly
           timeIntervals={15}
-          timeCaption="time"
+          timeCaption="시간"
           dateFormat="yyyy-MM-dd HH:mm"
+          locale={ko}
         />
       </div>
     </div>
