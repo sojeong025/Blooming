@@ -152,7 +152,7 @@ public class NotificationScheduler {
                 return "서버에 유저 firebase token 없음";
             }
         } else {
-            return "해당 유저 없음 " + fcmDto.getTargetUserId();
+            return "해당 유저 없음 " + fcmDto.getUser();
         }
     }
 }
