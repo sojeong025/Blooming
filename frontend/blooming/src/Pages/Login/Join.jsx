@@ -75,7 +75,6 @@ export default function Join() {
   useEffect(() => {
     if (accessToken) {
       getKakaoProfile();
-      console.log(userData);
     }
   }, [accessToken]);
 
@@ -88,7 +87,7 @@ export default function Join() {
   const handleSignUp = async () => {
     const currentFcmToken = await getToken();
     let customData = formData
-    console.log(userData)
+    console.log('여기가 중요', userData.coupleCode)
     if (userData.coupleCode) {
       customData = {
         ...formData,
