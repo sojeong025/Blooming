@@ -31,13 +31,9 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Review() {
-
-    }
+    public Review() {}
 
     //==연관관계 : 근데 단방향이니까..
-
-
     public void setProduct(Product product) {
         this.product = product;
     }
