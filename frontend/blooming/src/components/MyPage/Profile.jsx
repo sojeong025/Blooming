@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { userState } from "../../recoil/ProfileAtom";
+import { userCoupleState, userState } from "../../recoil/ProfileAtom";
 // import { useRecoilValueLoadable } from "recoil";
 // import { fetchUserState } from "../../recoil/ProfileAtom";
 import classes from "./MyPageComponents.module.css";
@@ -8,30 +8,49 @@ import { NavLink } from "react-router-dom";
 
 const ProfileBox = () => {
   const userData = useRecoilValue(userState);
+  const coupleData = useRecoilValue(userCoupleState);
 
   return (
     <div className={classes.profile}>
       <div className={classes.user} style={{ border: "1px solid black" }}>
         {/* 연결했을 때는 두 명 안했으면 추가하라고 */}
-        {/* 프로필 이미지 */}
-        <img
-          className={classes.profileImg}
-          src={userData.profileImg}
-          alt='profile'
-        />
-        {/* 가져온 유저 정보 */}
-        <div>{userData.email}</div>
-        <div>{userData.gender}</div>
-        <div>{userData.name}</div>
-        <div>{userData.nickname}</div>
-        <div>{userData.phoneNumber}</div>
+        <div className={classes.me}>
+          {/* 프로필 이미지 */}
+          <img
+            className={classes.profileImg}
+            src={userData.profileImg}
+            alt='profile'
+          />
+          {/* 가져온 유저 정보 */}
+          <div>{userData.nickname}</div>
+        </div>
 
-        <NavLink to='/edit-profile' state={{ pageTitle: "정보 수정" }}>
-          <div>정보수정</div>
-        </NavLink>
-
-        <button>초대안했으면 초대해 버튼</button>
+        {/* 커플 유저 정보 */}
+        {coupleData.name ? (
+          <div className={classes.couple}>
+            <img
+              className={classes.profileImg}
+              src={userData.profileImg}
+              alt='profile'
+            />
+            <div>{coupleData.nickname}</div>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
+
+      <div>
+        {!coupleData.name ? (
+          <NavLink to='/share'>상대방 연결해</NavLink>
+        ) : (
+          <></>
+        )}
+      </div>
+
+      <NavLink to='/edit-profile' state={{ pageTitle: "정보 수정" }}>
+        정보수정
+      </NavLink>
 
       <div
         className={`${classes.weddingContainer}`}

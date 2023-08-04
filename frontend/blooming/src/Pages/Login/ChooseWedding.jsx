@@ -39,11 +39,9 @@ export default function ChooseWedding() {
   // 웨딩 정보 POST 요청
   const saveWeddingDate = async () => {
     try {
-      const response = await customAxios.post("wedding-date", {
+      await customAxios.post("wedding-date", {
         weddingDate,
       });
-      console.log(response);
-      console.log(resWeddingDate);
     } catch (error) {
       console.log("웨딩 정보 POST 에러: ", error);
       // console.log("res", resWeddingDate);
