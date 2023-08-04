@@ -123,4 +123,17 @@ public class InvitationController {
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
+    @Operation(summary = "모바일 청첩장 삭제하기", description = "모바일 청첩장을 삭제합니다.")
+    @Parameter(name = "invitationId", description = "삭제할 청첩장 ID를 보내주세요")
+    @DeleteMapping("/invitation/{invitationId}")
+    public ResponseEntity<BasicResponse> deleteInvitation(@PathVariable Long invitationId) {
+        invitationService.deleteInvitation(invitationId);
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("청첩장 삭제 성공").build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
 }
