@@ -30,7 +30,7 @@ const CoupleCode = () => {
   // 계속 버튼을 누르면 이동
   const goNext = () => {
     if (userData.coupleCode.toString().length === 8) {
-      navigate("join", {
+      navigate("/join", {
         state: { pageTitle: "회원가입" },
       });
     }
