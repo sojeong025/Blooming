@@ -57,4 +57,13 @@ public class Review {
         this.image = reviewModifyDto.getImage();
         this.content = reviewModifyDto.getContent();
     }
+
+    public void addCount() {
+        this.likeCnt++;
+    }
+
+    public void subCount(){
+        this.likeCnt--;
+
+    }
 }

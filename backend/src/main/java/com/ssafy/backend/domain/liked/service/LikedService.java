@@ -31,6 +31,7 @@ public class LikedService {
         Liked liked = new Liked(user, review);
 
         likedRepository.save(liked);
+        review.addCount();
     }
 
     public void deleteLiked(Long reviewId) {
@@ -38,11 +39,16 @@ public class LikedService {
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
         likedRepository.deleteByUserIdAndReviewId(user.getId(), reviewId);
+
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(()-> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+
+        review.subCount();
     }
 
-    public Long getLikedCount(Long reviewId){
-        return likedRepository.countByReviewId(reviewId);
-    }
+//    public Long getLikedCount(Long reviewId){
+//        return likedRepository.countByReviewId(reviewId);
+//    }
 
 
 
