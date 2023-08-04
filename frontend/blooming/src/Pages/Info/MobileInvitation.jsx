@@ -26,7 +26,7 @@ function MobileInvitation() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [count]);
 
   return (
     <div className='mainContainer'>
