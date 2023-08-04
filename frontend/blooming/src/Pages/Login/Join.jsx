@@ -14,13 +14,20 @@ export default function Join() {
   const [fcmToken, setFcmToken] = useState('')
 
   const getToken = function () {
-    if (window.flutter_inappwebview) {
-      window.flutter_inappwebview.callHandler('handleFoo')
-        .then(function (result) {
-          setFcmToken(JSON.stringify(result.fcmT).slice(1,-1))
-        });
-    }
-  }
+    return new Promise((resolve) => {
+      if (window.flutter_inappwebview) {
+        window.flutter_inappwebview
+          .callHandler("handleFoo")
+          .then(function (result) {
+            setFcmToken(JSON.stringify(result.fcmT).slice(1, -1));
+            resolve(JSON.stringify(result.fcmT).slice(1, -1));
+          });
+      } else {
+        resolve(null);
+      }
+    });
+  };
+
 
   useEffect(() => {
     getToken()
@@ -79,12 +86,10 @@ export default function Join() {
   };
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
-    await getToken()
+     const currentFcmToken = await getToken();
     try {
-      if (fcmToken) {
-        setFormData({ ...formData, fcmToken: fcmToken})
-      }
-      const response = await customAxios.post("sign-up", formData);
+      const updatedFormData = fcmToken ? { ...formData, fcmToken: currentFcmToken } : formData;
+      const response = await customAxios.post("sign-up", updatedFormData);
       if (
         response.headers["authorization"] &&
         response.headers["authorization_refresh"]

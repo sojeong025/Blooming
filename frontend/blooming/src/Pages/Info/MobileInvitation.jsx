@@ -4,6 +4,7 @@ import { mobileInvitationState } from '../../recoil/MobileInvitationAtom';
 import ConceptsList from "../../components/MobileInvitation/ConceptsList";
 import { useEffect, useState } from "react";
 import classes from './MobileInvitation.module.css'
+import { useRecoilValue } from "recoil";
 
 function MobileInvitation() {
   const mobileInvitationData = useRecoilValue(mobileInvitationState);

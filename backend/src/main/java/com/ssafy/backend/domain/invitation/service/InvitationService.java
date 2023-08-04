@@ -48,4 +48,10 @@ public class InvitationService {
 				.orElseThrow(() -> new IllegalArgumentException("invitationId에 해당하는 청첩장이 없습니다."));
 		invitation.update(invitationRegistDto);
 	}
+
+	public void deleteInvitation(Long invitationId) {
+		Invitation invitation = invitationRepository.findById(invitationId)
+				.orElseThrow(() -> new IllegalArgumentException("invitationId에 해당하는 청첩장이 없습니다."));
+		invitationRepository.delete(invitation);
+	}
 }

@@ -10,4 +10,5 @@ public class ReviewResultDto {
     private int star;
     private String image;
     private String content;
+    private int likeCnt;
 }
