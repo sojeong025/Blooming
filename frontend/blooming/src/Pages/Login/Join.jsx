@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import classes from "./Join.module.css";
 // 에러 모달
 import useErrorModal from "../../components/Error/useErrorModal";
@@ -92,17 +92,15 @@ export default function Join() {
     if (userData.coupleCode) {
       customData = {
         ...formData,
-        coupleCode: userData.coupleCode,
-        fcmToken: currentFcmToken
+        coupleCode: userData.coupleCode
       }
     } else {
       customData = {
-        ...formData,
-        fcmToken: currentFcmToken
+        ...formData
       }
     }
     try {
-      const updatedFormData = fcmToken ? customData : formData;
+      const updatedFormData = fcmToken ? { ...customData, fcmToken: currentFcmToken } : customData;
       const response = await customAxios.post("sign-up", updatedFormData);
       if (
         response.headers["authorization"] &&
@@ -120,9 +118,9 @@ export default function Join() {
       }
       setUserData(formData);
       console.log(response);
-      // navigate("/DecideWedding", {
-      //   state: { pageTitle: "회원가입" },
-      // });
+      navigate("/DecideWedding", {
+        state: { pageTitle: "회원가입" },
+      });
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
       navigate("/");
