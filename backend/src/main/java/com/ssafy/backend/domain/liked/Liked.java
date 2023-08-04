@@ -28,4 +28,9 @@ public class Liked  extends CreatedBaseEntity {
     @JoinColumn(name="REVIEW_ID")
     private Review review;
 
+    public  Liked(User user, Review review){
+        this.user = user;
+//        this.
+    }
+
 }
