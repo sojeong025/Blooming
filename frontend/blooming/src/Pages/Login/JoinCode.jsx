@@ -9,6 +9,7 @@ const CoupleCode = () => {
   const [formData, setFormData] = useState({ name: "", coupleCode: "" });
   const [userData, setUserData] = useRecoilState(userState);
   const [coupled, setCoupled] = useState();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,6 +22,7 @@ const CoupleCode = () => {
       await customAxios.post("couple-certification", formData);
       setCoupled(`${formData.name}님과 연결되었습니다.`);
       setUserData({ ...userData, coupleCode: formData.coupleCode });
+      console.log(userData)
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
       setCoupled("잘못된 코드입니다");
@@ -36,7 +38,7 @@ const CoupleCode = () => {
     }
   };
 
-  const navigate = useNavigate();
+  
 
   return (
     <div className='mainContainer'>
