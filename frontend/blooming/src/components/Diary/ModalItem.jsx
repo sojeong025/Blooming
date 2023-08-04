@@ -52,7 +52,7 @@ function CreateItem({ hide, item }) {
   const ItemData = {
     title: title,
     content: content,
-    date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
+    date: `${date.getFullYear()}-${(date.getMonth()+1).padStart(2, '0')}-${date.getDate().padStart(2, '0')}`,
     image: image
   };
 
@@ -84,7 +84,7 @@ function CreateItem({ hide, item }) {
             id: Number(item.id),
             title: title,
             content: content,
-            date: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
+            date: `${date.getFullYear()}-${(date.getMonth()+1).padStart(2, '0')}-${date.getDate().padStart(2, '0')}`,
             image: image
           }
           await customAxios.put("diary", customItemData);
