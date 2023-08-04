@@ -19,7 +19,7 @@ export default function ChooseWedding() {
       setUserCouple(response.data.result[0]);
       navigate("/home");
     } catch (error) {
-      console.log("약혼자 없음");
+      console.log("약혼자 없음", error);
       navigate("/share", { state: { pageTitle: "회원가입" } });
     }
   };
