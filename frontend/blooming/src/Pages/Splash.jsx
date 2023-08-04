@@ -27,7 +27,7 @@ function Splash() {
         try {
           // 헤더 포함하여 GET 요청 보내기
           const response = await axios.get(url, { headers });
-          console.log(response);
+          // console.log(response);
           if (
             response.headers["authorization"] &&
             response.headers["authorization_refresh"]
@@ -46,7 +46,7 @@ function Splash() {
             );
             try {
               // 유저 정보 조회
-              const res = await customAxios('profile');
+              const res = await customAxios("profile");
               if (res.data) {
                 setUserState({ ...res.data.result[0] });
                 navigate("/home");

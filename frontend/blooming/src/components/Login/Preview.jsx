@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import classes from "./Preview.module.css";
 
-import Button from "./Button";
+// import Button from "./Button";
 
 import { imageListState } from "../../recoil/PreviewAtom";
 import { useRecoilValue } from "recoil";
@@ -14,7 +14,6 @@ import { PageIndicator } from "antd-mobile";
 
 function Preview() {
   // 카카오버튼
-  const KakaoBtn = "src/assets/kakao.png";
 
   const CustomDot = ({ onClick, isActive }) => {
     return (
@@ -56,13 +55,7 @@ function Preview() {
         className={classes["image-carousel"]}
         onChange={handleCarouselChange}
         selectedItem={currentImageIndex}
-        renderIndicator={(onClickHandler, isSelected, index, label) => (
-          <CustomDot
-            key={index}
-            onClick={onClickHandler}
-            isActive={isSelected}
-          />
-        )}
+        renderIndicator={() => {}}
       >
         {imageList.map((image, index) => (
           <div key={index}>
@@ -70,11 +63,25 @@ function Preview() {
           </div>
         ))}
       </Carousel>
+      <PageIndicator
+        total={totalImages}
+        current={currentImageIndex}
+        style={{
+          "--dot-color": "rgba(0, 0, 0, 0.4)",
+          "--active-dot-color": "#ffc0cb",
+          "--dot-size": "10px",
+          "--active-dot-size": "30px",
+          "--dot-border-radius": "50%",
+          "--active-dot-border-radius": "15px",
+          "--dot-spacing": "8px",
+        }}
+      />
 
       {currentImageIndex === 2 ? (
         // 카카오 버튼
         <a href='http://43.200.254.50:8080/oauth2/authorization/kakao'>
           <img src='src/assets/kakao.png' />
+          {/* 300 * 45 */}
         </a>
       ) : (
         <div className={classes.btn}>

@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function Home() {
-
   const navigate = useNavigate();
 
   const [user, setUser] = useRecoilState(userState);
@@ -18,7 +17,7 @@ function Home() {
   const updateUser = async () => {
     try {
       // 유저 정보 조회
-      const res = await customAxios.get('profile');
+      const res = await customAxios.get("profile");
       if (res.data) {
         setUser(res.data.result[0]);
       }
@@ -26,14 +25,13 @@ function Home() {
       // 유저 정보 초기화
       resetUserState();
       console.error("유저 정보 API 요청 에러", error);
-      navigate("/");
+      // navigate("/");
     }
-  }
+  };
 
   useEffect(() => {
     updateUser();
-  }, [user])
-
+  }, [user]);
 
   return (
     <div className='mainContainer'>
