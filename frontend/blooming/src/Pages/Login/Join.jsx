@@ -13,11 +13,13 @@ export default function Join() {
   // fcmToken 받아오기
   const [fcmToken, setFcmToken] = useState('')
 
-  const getToken = function (){
-    window.flutter_inappwebview.callHandler('handleFoo')
-      .then(function (result) {
-        setFcmToken(JSON.stringify(result.fcmT))
-      });
+  const getToken = function () {
+    if (window.flutter_inappwebview) {
+      window.flutter_inappwebview.callHandler('handleFoo')
+        .then(function (result) {
+          setFcmToken(JSON.stringify(result.fcmT))
+        });
+    }
   }
 
   useEffect(() => {
