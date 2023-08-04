@@ -30,7 +30,7 @@ public class Liked  extends CreatedBaseEntity {
 
     public  Liked(User user, Review review){
         this.user = user;
-//        this.
+        this.review = review;
     }
 
 }
