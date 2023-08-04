@@ -75,9 +75,9 @@ export default function Join() {
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
     try {
-      console.log("userData", ...userData)
-      console.log("formData", ...formData)
-      console.log("fcmT", ...fcmToken)
+      console.log("userData", userData)
+      console.log("formData", formData)
+      console.log("fcmT", fcmToken)
       await setUserData({ ...userData, ...formData, fcmToken: fcmToken });
       console.log("post요청후 userData",userData)
       const response = await customAxios.post("sign-up", userData);
@@ -95,7 +95,7 @@ export default function Join() {
           response.headers["authorization_refresh"],
         );
       }
-      // console.log(response);
+      console.log(response);
       navigate("/DecideWedding", {
         state: { pageTitle: "회원가입" },
       });
