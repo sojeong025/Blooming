@@ -6,24 +6,9 @@ import { useRecoilState, useResetRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
 import { customAxios } from "../lib/axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function Home() {
-
-  const [fcmToken, setFcmToken] = useState('없음')
-  const [re, setRe] = useState('그냥 result')
-
-  const getToken = function (){
-    window.flutter_inappwebview.callHandler('handleFoo')
-      .then(function (result) {
-        setRe(JSON.stringify(result))
-        setFcmToken(JSON.stringify(result.fcmT))
-      });
-  }
-
-  useEffect(() => {
-    getToken()
-  }, [])
 
   const navigate = useNavigate();
 
@@ -53,11 +38,6 @@ function Home() {
   return (
     <div className='mainContainer'>
       <WeddingDday />
-      <button onClick={getToken}>
-        fcm내놔
-      </button>
-      <div>{ re } 이건 result값</div>
-      <div>{ fcmToken } 이거 토큰임</div>
 
       {/* PlanTips랑 합침 */}
       {/* <MainImage /> */}
