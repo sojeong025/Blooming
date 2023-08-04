@@ -75,12 +75,10 @@ export default function Join() {
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
     try {
-      console.log("userData", userData)
-      console.log("formData", formData)
-      console.log("fcmT", fcmToken)
-      setUserData({ ...userData, ...formData, fcmToken: fcmToken });
-      console.log("post요청후 userData",userData)
-      const response = await customAxios.post("sign-up", userData);
+      if (fcmToken) {
+        setFormData({ ...formData, fcmToken: fcmToken})
+      }
+      const response = await customAxios.post("sign-up", formData);
       if (
         response.headers["authorization"] &&
         response.headers["authorization_refresh"]
@@ -95,6 +93,7 @@ export default function Join() {
           response.headers["authorization_refresh"],
         );
       }
+      setUserData(formData);
       console.log(response);
       navigate("/DecideWedding", {
         state: { pageTitle: "회원가입" },
