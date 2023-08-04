@@ -29,7 +29,6 @@ function WeddingHall() {
         <input
           className={classes.inputField}
           id="weddingHallName"
-          required
           placeholder="웨딩 컨벤션"
           value={invitation.weddingHall.weddingHallName}
           onChange={handleInputChange}
@@ -40,7 +39,6 @@ function WeddingHall() {
         <input
           className={classes.inputField}
           id="floor"
-          required
           placeholder="1층 그레이트홀"
           value={invitation.weddingHall.floor}
           onChange={handleInputChange}
@@ -51,7 +49,6 @@ function WeddingHall() {
         <input
           className={classes.inputField}
           id="address"
-          required
           placeholder="선택시 주소 검색창이 노출됩니다."
           value={invitation.weddingHall.address}
           onChange={handleInputChange}
