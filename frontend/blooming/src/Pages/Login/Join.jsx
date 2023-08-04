@@ -89,6 +89,7 @@ export default function Join() {
   const handleSignUp = async () => {
     const currentFcmToken = await getToken();
     let customData = formData
+    console.log(userData)
     if (userData.coupleCode) {
       customData = {
         ...formData,
