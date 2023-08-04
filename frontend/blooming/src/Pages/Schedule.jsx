@@ -2,6 +2,7 @@ import { useState } from "react";
 import CalendarComponent from "../components/Schedule/CalendarComponent"
 import TasksList from "../components/Schedule/TasksList"
 import ScheduleBody from "../components/Schedule/ScheduleBody"
+import classes from './Schedule.module.css'
 
 
 function Schedule() {
@@ -16,7 +17,7 @@ function Schedule() {
   }
 
   return (
-    <div>
+    <div className={classes.mainContainer}>
       <CalendarComponent /><hr />
       <ScheduleBody onCreatePost={showModalHandler}/><hr />
       <TasksList isPosting={modalIsVisible} onStopPosting={hideModalHandler}/>
@@ -24,4 +25,4 @@ function Schedule() {
   )
 }
 
-export default Schedule
+export default Schedule;

@@ -6,6 +6,7 @@ import {
   weddingDdayState,
 } from "../../recoil/WeddingDdayAtom";
 // import "dayjs/locale/ko"; // 한국어 가져오기
+import classes from './WeddingDday.module.css'
 
 export const WeddingDday = () => {
   const [weddingDate, setWeddingDate] = useRecoilState(weddingDateState);
@@ -64,11 +65,10 @@ export const WeddingDday = () => {
   };
 
   return (
-    <>
+    <div className={classes.dday}>
       <input style={{ visibility: "hidden" }} type='date' value={weddingDate} onChange={handleChange} readOnly />
-
       <p>{renderScript()}</p>
-    </>
+    </div>
   );
 };
 
