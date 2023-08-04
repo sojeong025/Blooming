@@ -1,16 +1,22 @@
 package com.ssafy.backend.domain.invitation.controller;
 
 import com.ssafy.backend.domain.common.BasicResponse;
+import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.invitation.Invitation;
 import com.ssafy.backend.domain.invitation.dto.InvitationRegistDto;
 import com.ssafy.backend.domain.invitation.dto.InvitationResultDto;
+import com.ssafy.backend.domain.invitation.repository.InvitationRepository;
 import com.ssafy.backend.domain.invitation.service.InvitationService;
+import com.ssafy.backend.domain.user.User;
+import com.ssafy.backend.domain.user.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -21,17 +27,37 @@ import java.util.Collections;
 public class InvitationController {
 
     private final InvitationService invitationService;
+    private final UserRepository userRepository;
+    private final InvitationRepository invitationRepository;
 
     @Operation(summary = "모바일 청첩장 하나 등록하기", description = "모바일 청찹장을 DB에 등록합니다.")
     @Parameter(name = "InvitationRegistDto", description = "dto에 해당하는 정보를 넘겨주세요. 비어있어도 저장 가능.")
     @PostMapping("/invitation")
     public ResponseEntity<BasicResponse> registInvitation(@RequestBody InvitationRegistDto invitationRegistDto) {
-        invitationService.registInvitation(invitationRegistDto);
+        //유저 찾기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+        Couple couple = user.getCouple();
 
-        BasicResponse basicResponse = BasicResponse.builder()
-                .code(HttpStatus.OK.value())
-                .httpStatus(HttpStatus.OK)
-                .message("청첩장 등록 성공").build();
+        BasicResponse basicResponse;
+        Invitation invitation = invitationRepository.findByCouple(couple).orElse(null);
+        if (invitation == null){
+            //새로운 청첩장 생성 가능
+            invitationService.registInvitation(invitationRegistDto, couple);
+
+            basicResponse = BasicResponse.builder()
+                    .code(HttpStatus.OK.value())
+                    .httpStatus(HttpStatus.OK)
+                    .message("청첩장 등록 성공").build();
+        }
+        else{
+            //이미 만든 청첩장 존재
+            basicResponse = BasicResponse.builder()
+                    .code(HttpStatus.NO_CONTENT.value())
+                    .httpStatus(HttpStatus.NO_CONTENT)
+                    .message("이미 만든 청첩장 존재").build();
+        }
 
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }

@@ -21,15 +21,9 @@ public class InvitationService {
 	private final InvitationRepository invitationRepository;
 	private final UserRepository userRepository;
 
-	public void registInvitation(InvitationRegistDto invitationRegistDto) {
+	public void registInvitation(InvitationRegistDto invitationRegistDto, Couple couple) {
 		// dto -> entity 변환
 		Invitation invitation = new Invitation(invitationRegistDto);
-
-		//유저 찾기
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = userRepository.findByEmail(authentication.getName())
-				.orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
-		Couple couple = user.getCouple();
 
 		//커플 매핑
 		invitation.setCouple(couple);
