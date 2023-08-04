@@ -10,15 +10,29 @@ function WeddingDay() {
   const startDate = invitation.weddingDate.date;
 
   const handleDateChange = (date) => {
-    setInvitation((preInvitation) => ({
-      ...preInvitation,
-      weddingDate: {
-        ...preInvitation.weddingDate,
-        date,
-      },
-    }));
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+  
+    setInvitation((preInvitation) => {
+      const updatedInvitation = {
+        ...preInvitation,
+        weddingDate: {
+          ...preInvitation.weddingDate,
+          date,
+          time: {
+            ...preInvitation.weddingDate.time,
+            hour: hours,
+            minute: minutes,
+            second: seconds,
+          },
+        },
+      };
+      console.log("Updated invitation:", updatedInvitation);
+      return updatedInvitation;
+    });
   };
-
+  
   return (
     <div className={classes.container}>
       <p className={classes.header}>예식일</p>
