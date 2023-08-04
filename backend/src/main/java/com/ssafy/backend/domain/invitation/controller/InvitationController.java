@@ -41,38 +41,38 @@ public class InvitationController {
     public ResponseEntity<BasicResponse> getInvitation() {
         Invitation invitation = invitationService.getInvitation();
 
-        InvitationResultDto invitationResultDto = new InvitationResultDto(
-                invitation.getId(),
-                invitation.getThumbnail(),
-                invitation.getGroomFatherName(),
-                invitation.getGroomFatherPhone(),
-                invitation.getGroomMotherName(),
-                invitation.getGroomMotherPhone(),
-                invitation.getBrideFatherName(),
-                invitation.getBrideFatherPhone(),
-                invitation.getBrideMotherName(),
-                invitation.getBrideMotherPhone(),
-                invitation.getTitle(),
-                invitation.getContent(),
-                invitation.getWeddingHallName(),
-                invitation.getFloor(),
-                invitation.getAddress(),
-                invitation.getDate(),
-                invitation.getTime(),
-                invitation.getGroomName(),
-                invitation.getGroomPhone(),
-                invitation.getBrideName(),
-                invitation.getBridePhone()
-        );
-
         BasicResponse basicResponse;
-        if (invitationResultDto == null) {
+        if (invitation == null) {
             basicResponse = BasicResponse.builder()
                     .code(HttpStatus.NO_CONTENT.value())
                     .httpStatus(HttpStatus.NO_CONTENT)
                     .message("내 청첩장 조회 실패")
                     .count(0).build();
         } else {
+            InvitationResultDto invitationResultDto = new InvitationResultDto(
+                    invitation.getId(),
+                    invitation.getThumbnail(),
+                    invitation.getGroomFatherName(),
+                    invitation.getGroomFatherPhone(),
+                    invitation.getGroomMotherName(),
+                    invitation.getGroomMotherPhone(),
+                    invitation.getBrideFatherName(),
+                    invitation.getBrideFatherPhone(),
+                    invitation.getBrideMotherName(),
+                    invitation.getBrideMotherPhone(),
+                    invitation.getTitle(),
+                    invitation.getContent(),
+                    invitation.getWeddingHallName(),
+                    invitation.getFloor(),
+                    invitation.getAddress(),
+                    invitation.getDate(),
+                    invitation.getTime(),
+                    invitation.getGroomName(),
+                    invitation.getGroomPhone(),
+                    invitation.getBrideName(),
+                    invitation.getBridePhone()
+            );
+
             basicResponse = BasicResponse.builder()
                     .code(HttpStatus.OK.value())
                     .httpStatus(HttpStatus.OK)

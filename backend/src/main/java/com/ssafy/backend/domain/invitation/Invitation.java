@@ -66,27 +66,27 @@ public class Invitation {
         this.couple = couple;
     }
 
-    public Invitation(String thumbnail, String groomFatherName, String groomFatherPhone, String groomMotherName, String groomMotherPhone, String brideFatherName, String brideFatherPhone, String brideMotherName, String brideMotherPhone, String title, String content, String weddingHallName, String floor, String address, LocalDate date, LocalTime time, String groomName, String groomPhone, String brideName, String bridePhone) {
-        this.thumbnail = thumbnail;
-        this.groomFatherName = groomFatherName;
-        this.groomFatherPhone = groomFatherPhone;
-        this.groomMotherName = groomMotherName;
-        this.groomMotherPhone = groomMotherPhone;
-        this.brideFatherName = brideFatherName;
-        this.brideFatherPhone = brideFatherPhone;
-        this.brideMotherName = brideMotherName;
-        this.brideMotherPhone = brideMotherPhone;
-        this.title = title;
-        this.content = content;
-        this.weddingHallName = weddingHallName;
-        this.floor = floor;
-        this.address = address;
-        this.date = date;
-        this.time = time;
-        this.groomName = groomName;
-        this.groomPhone = groomPhone;
-        this.brideName = brideName;
-        this.bridePhone = bridePhone;
+    public Invitation(InvitationRegistDto invitationRegistDto) {
+        this.thumbnail = invitationRegistDto.getThumbnail();
+        this.groomFatherName = invitationRegistDto.getGroomFatherName();
+        this.groomFatherPhone = invitationRegistDto.getGroomFatherPhone();
+        this.groomMotherName = invitationRegistDto.getGroomMotherName();
+        this.groomMotherPhone = invitationRegistDto.getGroomMotherPhone();
+        this.brideFatherName = invitationRegistDto.getBrideFatherName();
+        this.brideFatherPhone = invitationRegistDto.getBrideFatherPhone();
+        this.brideMotherName = invitationRegistDto.getBrideMotherName();
+        this.brideMotherPhone = invitationRegistDto.getBrideMotherPhone();
+        this.title = invitationRegistDto.getTitle();
+        this.content = invitationRegistDto.getContent();
+        this.weddingHallName = invitationRegistDto.getWeddingHallName();
+        this.floor = invitationRegistDto.getFloor();
+        this.address = invitationRegistDto.getAddress();
+        this.date = invitationRegistDto.getDate();
+        this.time = invitationRegistDto.getTime();
+        this.groomName = invitationRegistDto.getGroomName();
+        this.groomPhone = invitationRegistDto.getGroomPhone();
+        this.brideName = invitationRegistDto.getBrideName();
+        this.bridePhone = invitationRegistDto.getBridePhone();
     }
 
     public Invitation() {
