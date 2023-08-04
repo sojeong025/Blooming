@@ -70,15 +70,6 @@ public class NotificationScheduler {
         //나중에 지난 일정은 삭제? 해도 될듯
         //일정 repository에서 day를 매개변수로 넘겨주면서, 30일, 21일, 7일, 1일, 0일 을 인자로 해서 date 비교해서 해당되는거 가져옴. 알림 보내고 테이블에 추가.
 
-        /*
-         30일 후
-         현재 날짜 + 30일 해서 해당 날짜의 일정인 경우, 일정 테이블에서 (커플 아이디, 카테고리, 일정 이름, 내용) DTO을 가져옴
-         카테고리에 따라 처리.
-         일단 공통으로 치면: 신랑 아이디와 신부 아이디를 유저 테이블에서 가져와서 (join) 해당 id를 타겟으로 서로 다른 메시지를 보냄
-
-         일단은 한 사람에게 같은 메시지 보내기
-         */
-
         //일단 임시
         for (int day : new int[]{0, 1, 7, 30}) {
             System.out.println(day + "일 후 알림");
@@ -88,9 +79,31 @@ public class NotificationScheduler {
             for (Schedule schedule : schedules) {
                 System.out.println(schedule);
 
+                //커플 아이디에 해당하는 유저 두 명을 찾는다. 남자는 신랑, 여자는 신부로 매핑한다.
+                User groom = userRepository.findByCoupleAndGender(schedule.getCouple(), "MALE");
+                User bride = userRepository.findByCoupleAndGender(schedule.getCouple(), "FEMALE");
+
+                //스케쥴 타입에 따라 다르게 처리한다.
+                switch(schedule.getScheduledBy()){
+                    case COMMON:
+                        //두 명에게 같은 알림 전송
+                        Long groomId = groom.getId();
+                        Long brideId = bride.getId();
+
+                        String title = schedule.getScheduleDate() + " " + schedule.getTitle();
+                        String content = "내일은 두 분이 " + schedule.getContent() + "하는 날이에요. 클릭해서 팁을 알아보세요!";
+
+                        sendNotificationByToken(new FCMNotificationRequestDto(groomId, title, content));
+                        sendNotificationByToken(new FCMNotificationRequestDto(brideId, title, content));
+                        break;
+                    case MALE:
+                        break;
+                    case FEMALE:
+                        break;
+                }
 
                 //1. 푸시 알림 보내기
-                Long targetId = 1L; //나중에 알림 커플 유저 두 명에게 각각 보내느 걸로 수정
+                Long targetId = 1L; //나중에 알림 커플 유저 두 명에게 각각 보내는 걸로 수정
                 String title = schedule.getTitle();
                 String content = schedule.getContent();
                 log.info(title + content);
@@ -108,18 +121,18 @@ public class NotificationScheduler {
                         targetId
                 ));
             }
-
         }
     }
 
 
     private String sendNotificationByToken(FCMNotificationRequestDto fcmDto) {
-        Optional<User> user = userRepository.findById(fcmDto.getTargetUserId());
+        User user = userRepository.findById(fcmDto.getTargetUserId())
+                .orElse(null);
 
-        if (user.isPresent()) {
-            //나중에 토큰 받아오는 걸로 수정
-            String token = "eKbKoD7ETfqRiIKFF_4Zom:APA91bHbzIq11sl8_qbv1yE7-RFqjXnywPVo5u13FMC9kqIjJTrHkXIfqWODhBYvTS3EOGlOLQzlXUvJNwXn4EFbgoAC_WZzylV9yo5KOGLj96agM68p8qPc8bCPODgRk9aP_TNeKiLn";
-//            token = user.get().getFirebaseToken();
+        if (user != null) {
+            //토큰 받아오는 걸로 수정
+//            String token = "eKbKoD7ETfqRiIKFF_4Zom:APA91bHbzIq11sl8_qbv1yE7-RFqjXnywPVo5u13FMC9kqIjJTrHkXIfqWODhBYvTS3EOGlOLQzlXUvJNwXn4EFbgoAC_WZzylV9yo5KOGLj96agM68p8qPc8bCPODgRk9aP_TNeKiLn";
+            String token = user.getFcmToken();
             if (token != null) {
                 Notification notification = Notification.builder()
                         .setTitle(fcmDto.getTitle())
