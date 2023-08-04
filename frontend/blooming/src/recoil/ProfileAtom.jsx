@@ -4,12 +4,11 @@ import { atom } from "recoil";
 export const userState = atom({
   key: "userState",
   default: {
-    email: "lotus0028@kakao.com",
-    name: "gdgd",
-    nickname: "희영",
-    phoneNumber: "12334",
-    gender: "FEMALE",
-    coupleCode: 0,
+    email: "",
+    name: "",
+    nickname: "",
+    phoneNumber: "",
+    gender: "",
   },
 });
 
