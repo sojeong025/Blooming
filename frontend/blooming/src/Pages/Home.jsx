@@ -9,6 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function Home() {
+  window.flutter_inappwebview.callHandler('handleFoo').then(function(result) {
+      console.log("FCM Token: " + result.fcmT);
+  });
+
   const navigate = useNavigate();
 
   const [user, setUser] = useRecoilState(userState);
