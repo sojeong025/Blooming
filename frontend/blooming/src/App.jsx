@@ -35,6 +35,7 @@ import DiaryDetails from "./Pages/Diary/DiaryDetails";
 // info
 import Info from "./Pages/Info/Info";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
+import MobileInvitationDetail from "./Pages/Info/MobileInvitationDetail";
 import Create from "./Pages/Info/Create";
 // notice
 import AllNotice from "./Pages/Notice/AllNotice";
@@ -80,6 +81,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/schedule' element={<Schedule />} />
           <Route path='/MobileInvitation' element={<MobileInvitation />} />
+          <Route path='/MobileInvitationDetail' element={<MobileInvitationDetail />} />
           <Route path='/Create' element={<Create />} />
 
           {/* NotFound */}
