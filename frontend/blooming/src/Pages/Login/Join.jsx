@@ -77,6 +77,7 @@ export default function Join() {
   };
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
+    await getToken()
     try {
       if (fcmToken) {
         setFormData({ ...formData, fcmToken: fcmToken})
@@ -98,9 +99,9 @@ export default function Join() {
       }
       setUserData(formData);
       console.log(response);
-      navigate("/DecideWedding", {
-        state: { pageTitle: "회원가입" },
-      });
+      // navigate("/DecideWedding", {
+      //   state: { pageTitle: "회원가입" },
+      // });
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
       navigate("/");
@@ -172,7 +173,7 @@ export default function Join() {
               <label htmlFor='gender-2'>신부</label>
             </div>
           </div>
-
+          <div>{fcmToken}</div>
           <button type='submit' className={classes.submitButton}>
             제출
           </button>
