@@ -2,7 +2,7 @@ import Profile from "../../components/MyPage/Profile";
 import IconBox from "../../components/MyPage/IconBox";
 import classes from "./MyPage.module.css";
 import { useEffect } from "react";
-import { userState } from "../../recoil/ProfileAtom";
+import { userCoupleState, userState } from "../../recoil/ProfileAtom";
 
 import { NavLink } from "react-router-dom";
 import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
@@ -16,6 +16,8 @@ import { customAxios } from "../../lib/axios";
 function MyPage() {
   // 유저 정보 넣기
   const [userData, setUserData] = useRecoilState(userState);
+  const [coupleData, setCoupleData] = useRecoilState(userCoupleState);
+
   // 더미 데이터 넣기
   const setDummy = () =>
     setUserData({
@@ -44,10 +46,21 @@ function MyPage() {
     }
   };
 
+  const fetchCouple = async () => {
+    try {
+      // 커플이 있는 지 확인
+      const response = await customAxios.get("my-fiance");
+      setCoupleData(response.data.result[0]);
+    } catch (error) {
+      console.log("약혼자 없음");
+    }
+  };
+
   useEffect(() => {
     // resetUserState();
     // 마이페이지에 들어왔을 때 API 조회
     fetchData();
+    fetchCouple();
   }, []);
 
   return (
