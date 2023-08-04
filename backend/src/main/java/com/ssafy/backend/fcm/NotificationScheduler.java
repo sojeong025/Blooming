@@ -80,44 +80,60 @@ public class NotificationScheduler {
                 System.out.println(schedule);
 
                 //커플 아이디에 해당하는 유저 두 명을 찾는다. 남자는 신랑, 여자는 신부로 매핑한다.
-                User groom = userRepository.findByCoupleAndGender(schedule.getCouple(), "MALE");
-                User bride = userRepository.findByCoupleAndGender(schedule.getCouple(), "FEMALE");
+                User groom = null;
+                User bride = null;
+                List<User> users = schedule.getCouple().getUsers();
+                for (User user : users){
+                    if (user.getGender().equals("MALE")){
+                        groom = user;
+                    }
+                    else if(user.getGender().equals("FEMALE")){
+                        bride = user;
+                    }
+                }
 
-                //스케쥴 타입에 따라 다르게 처리한다.
+                //스케쥴 타입에 따라 다르게 알림 내용 처리
+                String title = schedule.getScheduleDate() + " " + schedule.getTitle(); //알림 제목은 일단 같게
+                String contentGroom = "";
+                String contentBride = "";
                 switch(schedule.getScheduledBy()){
                     case COMMON:
                         //두 명에게 같은 알림 전송
-                        String title = schedule.getScheduleDate() + " " + schedule.getTitle();
-                        String content = "내일은 두 분이 " + schedule.getContent() + "하는 날이에요. 클릭해서 팁을 알아보세요!";
-
-                        sendNotificationByToken(new FCMNotificationRequestDto(groom, title, content));
-                        sendNotificationByToken(new FCMNotificationRequestDto(bride, title, content));
+                        contentGroom = "내일은 두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = "내일은 두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         break;
                     case MALE:
-
+                        //신랑 일정.
+                        contentGroom = "내일은 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = "내일은 " + bride.getNickname() + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         break;
                     case FEMALE:
+                        //신부 일정.
+                        contentGroom = "내일은 " + groom.getNickname() + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = "내일은 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         break;
                 }
 
-//                //1. 푸시 알림 보내기
-//                Long targetId = 1L; //나중에 알림 커플 유저 두 명에게 각각 보내는 걸로 수정
-//                String title = schedule.getTitle();
-//                String content = schedule.getContent();
-//                log.info(title + content);
-//
-//                //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
-//                String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, title, content)); // 첫 번째로 넣은 유저
-//                log.info(result);
-//
-//                //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장. - 파라미터는 임시. 수정 필요
-//                notificationService.registNotification(new NotificationRegistDto(
-//                        ReadStatus.UNREAD,
-//                        NotificationType.SCHEDULE,
-//                        title,
-//                        content,
-//                        targetId
-//                ));
+                //처리한 내용을 알림 전송(신랑, 신부)
+                sendNotificationByToken(new FCMNotificationRequestDto(groom, title, contentGroom));
+                sendNotificationByToken(new FCMNotificationRequestDto(bride, title, contentBride));
+
+                //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장. - 파라미터는 임시. 수정 필요
+                notificationService.registNotification(new NotificationRegistDto(
+                        ReadStatus.UNREAD,
+                        NotificationType.SCHEDULE,
+                        title,
+                        contentGroom,
+                        groom.getId()
+                ));
+                notificationService.registNotification(new NotificationRegistDto(
+                        ReadStatus.UNREAD,
+                        NotificationType.SCHEDULE,
+                        title,
+                        contentBride,
+                        bride.getId()
+                ));
+
             }
         }
     }
