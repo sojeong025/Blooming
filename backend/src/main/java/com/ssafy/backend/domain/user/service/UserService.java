@@ -115,10 +115,15 @@ public class UserService {
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 
-        user.setCouple(couple);
-        userRepository.saveAndFlush(user); // saveAndFlush()를 사용하여 변경사항을 즉시 동기화
+        // 나한테 있던 커플 정보 삭제
+        Couple originCouple = user.getCouple();
+        if (originCouple != null) {
+            user.setCouple(null);
+            coupleRepository.delete(originCouple);
+        }
 
-        // 상대방 커플로 연결됐으므로 내 커플 정보는 삭제
-        coupleRepository.delete(couple);
+        // 새로운 커플 정보로 연결
+        user.setCouple(couple);
+        userRepository.save(user);
     }
 }
