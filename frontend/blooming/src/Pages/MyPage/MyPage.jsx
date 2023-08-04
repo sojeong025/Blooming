@@ -46,10 +46,8 @@ function MyPage() {
 
   useEffect(() => {
     // resetUserState();
-    // 마이페이지에 들어왔을 때 정보가 없으면 API 조회
-    if (!userData.name) {
-      fetchData();
-    }
+    // 마이페이지에 들어왔을 때 API 조회
+    fetchData();
   }, []);
 
   return (
