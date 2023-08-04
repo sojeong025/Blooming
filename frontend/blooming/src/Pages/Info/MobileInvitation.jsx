@@ -10,14 +10,10 @@ function MobileInvitation() {
   const mobileInvitationData = useRecoilValue(mobileInvitationState);
   const [count, setCount] = useState('')
 
-  const isEmpty = (obj) => {
-    return Object.keys(obj).length === 0;
-  };
-
   const fetchData = async () => {
     try {
       const response = await customAxios.get("invitation");
-      setCount(response.count)
+      setCount(response.data.count)
       console.log('가져오기 성공!')
       console.log(setCount)
     } catch (error) {
