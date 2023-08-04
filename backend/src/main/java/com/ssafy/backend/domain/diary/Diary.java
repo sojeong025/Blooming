@@ -2,6 +2,7 @@ package com.ssafy.backend.domain.diary;
 
 import com.ssafy.backend.domain.common.CreatedAndUpdatedBaseEntity;
 import com.ssafy.backend.domain.diary.dto.DiaryModifyDto;
+import com.ssafy.backend.domain.diary.dto.DiaryRegistDto;
 import com.ssafy.backend.domain.user.User;
 import lombok.*;
 
@@ -34,11 +35,11 @@ public class Diary extends CreatedAndUpdatedBaseEntity {
     private String image; // 이미지 주소로 할건지 변경 필요
 
 
-    public Diary(String title, String content, String image, LocalDate date) {
-        this.title = title;
-        this.content = content;
-        this.image = image;
-        this.date = date;
+    public Diary(DiaryRegistDto diaryRegistDto) {
+        this.title = diaryRegistDto.getTitle();
+        this.content = diaryRegistDto.getContent();
+        this.image = diaryRegistDto.getImage();
+        this.date = diaryRegistDto.getDate();
     }
 
     public void setUser(User user) {
