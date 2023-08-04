@@ -29,13 +29,14 @@ function Create() {
   function handleSaveClick() {
     customAxios.post("invitation",formData)
       .then(response => {
-        console.log("저장이 완료되었습니다.");
+        console.log(formData)
+        console.log('성공했다~')
         console.log(response.data);
 
         navigate("/MobileInvitation");
       })
       .catch(error => {
-        console.error("저장에 실패하였습니다.");
+        console.log("저장에 실패하였습니다.");
         console.log(formData)
 
         console.error(error);
