@@ -116,6 +116,7 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
 
         user.setCouple(couple);
+        userRepository.saveAndFlush(user); // saveAndFlush()를 사용하여 변경사항을 즉시 동기화
 
         // 상대방 커플로 연결됐으므로 내 커플 정보는 삭제
         coupleRepository.delete(couple);
