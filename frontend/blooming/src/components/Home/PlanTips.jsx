@@ -58,11 +58,10 @@ const Tips = () => {
               className={classes.mainImg}
             />
             <div className={classes.tipContainer} onClick={updateRandomComment}>
-              <p className={classes.textBold}>{nextPlan.title}일정을 앞둔
-                지금!
+              <p className={classes.textBold}>{nextPlan.title}
               </p>
               {/* <p>{ReactHtmlParser(randomComment)}</p> */}
-              <p>{randomComment}</p>
+              <p className={classes.tip}>{randomComment}</p>
             </div>
           </>
         ) : (
@@ -72,7 +71,7 @@ const Tips = () => {
               className={classes.mainImg}
             />
             <div className={classes.tipContainer}>
-              <p>결혼 축하해</p>
+              <p className={classes.tip}>결혼 축하해</p>
             </div>
           </>
         )
@@ -83,7 +82,7 @@ const Tips = () => {
             className={classes.mainImg}
           />
           <div className={classes.tipContainer}>
-            <p>결혼 일정을 등록하고 추천 팁을 받아보세용</p>
+            <p className={classes.tip}>결혼 일정을 등록하고 추천 팁을 받아보세용</p>
           </div>
         </>
       )}

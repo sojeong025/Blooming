@@ -1,6 +1,6 @@
 import WeddingDday from "../components/Home/WeddingDday";
-// import ScheduleDday from "../components/Home/ScheduleDday";
 import PlanTips from "../components/Home/PlanTips";
+import Tipbox from "../components/Home/TipBox"
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
 import { customAxios } from "../lib/axios";
@@ -37,6 +37,9 @@ function Home() {
     <div className={classes.top}>
       <WeddingDday />
       <PlanTips />
+      <p className={classes.word}> Wedding Tips</p>
+      <hr className={classes.hr} />
+      <Tipbox /> 
     </div>
   );
 }

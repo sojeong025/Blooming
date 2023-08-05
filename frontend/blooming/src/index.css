@@ -22,6 +22,12 @@
   font-weight: 800;
   font-style: normal;
 }
+@font-face {
+  font-family: 'LeferiPoint-SpecialItalicA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialItalicA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
   --vh: 100%;
@@ -58,7 +64,7 @@ body {
 
   min-width: 100vw;
   min-height: 100vh;
-  background-color: #EEEDDE;
+  background-color: #FFFAF4;
 }
 
 a{
