@@ -17,6 +17,6 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public List<Product> getTypeProduct(ProductType productType) {
-        return productRepository.findByProductType(String.valueOf(productType));
+        return productRepository.findByProductType(productType);
     }
 }
