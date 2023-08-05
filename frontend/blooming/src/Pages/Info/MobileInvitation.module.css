@@ -6,8 +6,9 @@
 
 .container h1{
   text-align: center;
-  margin: 30px 10px;
-  font-size: 30px;
+  margin: 50px 10px 30px;
+  font-size: 28px;
+  font-family: 'LeferiPoint-SpecialItalicA';
 }
 
 .container p {

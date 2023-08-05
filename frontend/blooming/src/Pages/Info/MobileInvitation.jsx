@@ -32,10 +32,6 @@ function MobileInvitation() {
     <div className='mainContainer'>
       <div className={classes.container}>
         <h1>Mobile Wedding Invitation</h1>
-        <p>
-          어디서나 간편하게 <br /> 완벽한 청첩장을 만들어보세요. <br />
-          우리의 모바일 청첩장 서비스로 손쉽게 결혼식 초대를 준비해보세요.
-        </p>
         <hr />
         <ConceptsList />
         <hr />
