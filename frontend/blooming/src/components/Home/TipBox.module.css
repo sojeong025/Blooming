@@ -1,0 +1,15 @@
+.box {
+  width: 100px;
+  height: 100px;
+  border: solid 1px black;
+}
+
+.content {
+  height: 120px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  user-select: none;
+}

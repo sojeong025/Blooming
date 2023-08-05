@@ -3,14 +3,45 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  margin-top:120px;
+  margin-top: 80px;
   position: absolute;
   top: 0;
-  left: 2.5%;
-  right: 2.5%;
-  width: 95%;
+  left: 10%;
+  right: 10%;
+  width: 80%;
   box-shadow: 0 -5px 5px -5px #7d7c60,
   -5px 0 5px -5px #7d7c60, 
   5px 0 5px -5px #7d7c60;
   border-radius: 100px/ 98px;
+  background-image: url('../assets/back6.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+}
+
+/* 신부버전 */
+/* .word {
+  font-family: 'LeferiPoint-SpecialItalicA';
+  font-size: 27px;
+  color: #FF98A8;
+  margin-bottom: 0;
+}
+
+.hr {
+  border-top: 3px double #FF98A8;
+  width: 80vw;
+} */
+
+/* 신랑버전 */
+.word {
+  font-family: 'LeferiPoint-SpecialItalicA';
+  font-size: 27px;
+  color: #343D63;
+  margin-bottom: 0;
+}
+
+.hr {
+  border-top: 3px double #343D63;
+  width: 84vw;
+  margin: 0;
 }
