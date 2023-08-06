@@ -2,12 +2,14 @@ package com.ssafy.backend.domain.product.controller;
 
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.product.Product;
+import com.ssafy.backend.domain.product.ProductType;
 import com.ssafy.backend.domain.product.dto.ProductResultDto;
 import com.ssafy.backend.domain.product.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,10 +30,9 @@ public class ProductController {
     private final ProductService productService;
 
     @Operation(summary = "상품 타입별로 상품 한 페이지 조회하기", description = "지정된 타입의 상품을 한 페이지만큼 가져옵니다.")
-    @Parameter(name = "/product/{productType}?page=1&size=3", description = "page : 페이지 번호, size : 페이지당 후기 개수 . 상품 타입")
     @GetMapping("/product/{productType}")
-    public ResponseEntity<BasicResponse> getTypeProduct(@PathVariable String productType){
-        List<Product> products = productService.getTypeProduct(productType);
+    public ResponseEntity<BasicResponse> getTypeProduct(@PathVariable ProductType productType, Pageable pageable){
+        List<Product> products = productService.getTypeProduct(productType, pageable);
 
         BasicResponse basicResponse;
         if (products == null){

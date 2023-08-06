@@ -3,6 +3,7 @@ import { mobileInvitationState } from '../../recoil/MobileInvitationAtom';
 
 import Ring from '../../../src/assets/Icons/Ring4.svg'
 import classes from './Preview.module.css';
+import { Calendar } from 'antd-mobile';
 
 function Preview({ onClose }) {
   const invitationData = useRecoilValue(mobileInvitationState);
@@ -67,6 +68,11 @@ function Preview({ onClose }) {
           </div>
 
         </div>
+      </div>
+
+      {/* 캘린더 - 수정해야함 */}
+      <div className={classes.calendar}>
+        <Calendar />
       </div>
     </div>
     </div>

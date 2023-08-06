@@ -138,3 +138,9 @@
   display: flex;
   justify-content: space-around;
 }
+
+/* --------캘린더--------- */
+.calendar {
+  width: 300px;
+  background-color: white;
+}
