@@ -1,17 +1,12 @@
 import Profile from "../../components/MyPage/Profile";
-import IconBox from "../../components/MyPage/IconBox";
+import AppContainer from "../../components/MyPage/AppContainer";
+import SettingList from "../../components/MyPage/SettingList";
 import classes from "./MyPage.module.css";
 import { useEffect, useState } from "react";
 import { userCoupleState, userState } from "../../recoil/ProfileAtom";
-import { weddingDateState, weddingDdayCal } from "../../recoil/WeddingDdayAtom";
+import { weddingDateState } from "../../recoil/WeddingDdayAtom";
 
-import { NavLink } from "react-router-dom";
-import {
-  useRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useSetRecoilState,
-} from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import ErrorModal from "../../components/Error/Modal";
 import { errorState } from "../../recoil/ErrorAtom";
@@ -28,7 +23,7 @@ function MyPage() {
   const setWeddingDate = useSetRecoilState(weddingDateState);
 
   const [isCouple, setIsCouple] = useState(false);
-  const [isChooseDate, setIsChooseDate] = useState(false);
+  const [isChooseDate, setIsChooseDate] = useState(true);
 
   // 더미 데이터 넣기
   const setDummy = () =>
@@ -107,27 +102,11 @@ function MyPage() {
           더미데이터넣기
         </button>
       </ErrorModal>
-      {/* 프로필 박스 */}
+      {/* 프로필 */}
       <Profile isCouple={isCouple} isChooseDate={isChooseDate} />
-      {/* 아이콘 컴포넌트 */}
-      {/* <div className={classes.IconContainer}>
-        <IconBox icon={"back"} name={"찜목록"} />
-        <IconBox icon={"back"} name={"예약현황"} />
-        <IconBox icon={"back"} name={"내후기"} />
-      </div>
-      내 데이터: 찜한업체, 예약한업체, 후기쓴거, 남의후기도움되는거, 정보수정,
-      알림설정( 이 되나? ), 커플 등록
-      <div className={classes.SettingContainer}>
-        <NavLink to='/edit-profile' state={{ pageTitle: "정보 수정" }}>
-          <div>내 정보 관리</div>
-        </NavLink>
-        <NavLink to='/setting'>
-          <div>
-            <p>설정</p>
-            <div>화살표로바꿈</div>
-          </div>
-        </NavLink>
-      </div> */}
+      {/* 아이콘 */}
+      <AppContainer />
+      <SettingList />
     </div>
   );
 }
