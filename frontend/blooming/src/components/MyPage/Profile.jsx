@@ -1,64 +1,75 @@
 import { useRecoilValue } from "recoil";
-import { userCoupleState, userState } from "../../recoil/ProfileAtom";
-// import { useRecoilValueLoadable } from "recoil";
-// import { fetchUserState } from "../../recoil/ProfileAtom";
+import {
+  coupleRoleState,
+  userCoupleState,
+  userRoleState,
+  userState,
+} from "../../recoil/ProfileAtom";
 import classes from "./MyPageComponents.module.css";
 
-import { NavLink } from "react-router-dom";
-
-const ProfileBox = () => {
+const ProfileBox = ({ isCouple }) => {
   const userData = useRecoilValue(userState);
+  const userRole = useRecoilValue(userRoleState);
   const coupleData = useRecoilValue(userCoupleState);
+  const coupleRole = useRecoilValue(coupleRoleState);
 
   return (
     <div className={classes.profile}>
-      <div className={classes.user} style={{ border: "1px solid black" }}>
-        {/* 연결했을 때는 두 명 안했으면 추가하라고 */}
-        <div className={classes.me}>
-          {/* 프로필 이미지 */}
-          <img
-            className={classes.profileImg}
-            src={userData.profileImg}
-            alt='profile'
-          />
-          {/* 가져온 유저 정보 */}
-          <div>{userData.nickname}</div>
-        </div>
-
-        {/* 커플 유저 정보 */}
-        {coupleData.name ? (
-          <div className={classes.couple}>
+      {/* 프로필 사진이랑 이름 */}
+      {isCouple ? (
+        // 커플
+        <div className={`${classes.profileContainer} ${classes.Couple}`}>
+          <div>
             <img
-              className={classes.profileImg}
-              src={userData.profileImg}
+              className={classes.ProfileImg}
+              src={
+                userData.profileImg
+                  ? userData.profileImg
+                  : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${userData.name}`
+              }
               alt='profile'
             />
-            <div>{coupleData.nickname}</div>
+            <img
+              className={`${classes.ProfileImg} ${classes.coupleProfile}`}
+              src={
+                coupleData.profileImg
+                  ? coupleData.profileImg
+                  : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${coupleData.name}`
+              }
+              alt='profile'
+            />
           </div>
-        ) : (
-          <></>
-        )}
-      </div>
 
-      <div>
-        {!coupleData.name ? (
-          <NavLink to='/share'>상대방 연결해</NavLink>
-        ) : (
-          <></>
-        )}
-      </div>
-
-      <NavLink to='/edit-profile' state={{ pageTitle: "정보 수정" }}>
-        정보수정
-      </NavLink>
-
-      <div
-        className={`${classes.weddingContainer}`}
-        style={{ border: "1px solid blue" }}
-      >
-        {/* 결혼식 관련 */}
-        <div>결혼식날짜랑 디데이</div>
-      </div>
+          <div className={classes.profileName}>
+            <span>
+              {userData.nickname}
+              <br />
+              {userRole}
+            </span>
+            <span>
+              {coupleData.nickname}
+              <br />
+              {coupleRole}
+            </span>
+          </div>
+        </div>
+      ) : (
+        // 혼자
+        <div className={`${classes.profileContainer} ${classes.Alone}`}>
+          <img
+            className={classes.ProfileImg}
+            src={
+              userData.profileImg
+                ? userData.profileImg
+                : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${userData.name}`
+            }
+            alt='profile'
+          />
+          <div className={classes.profileName}>
+            {userData.nickname} {userRole}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

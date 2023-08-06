@@ -1,5 +1,3 @@
-import classes from "./MyPage.module.css";
-
 const SettingPage = () => {
   return (
     <div className='mainContainer'>
