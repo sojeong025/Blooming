@@ -43,8 +43,19 @@ import AllNotice from "./Pages/Notice/AllNotice";
 import Error from "./Pages/Error";
 
 function App() {
-  // Nav를 숨길 페이지 path
-  const hiddenPaths = [
+  // BottomNav를 숨길 페이지 path
+  const hiddenTopPaths = [
+    "/",
+    "/kakaologin",
+    "/login",
+    "/go-join",
+    "/join-code",
+    "/question",
+    "/decide-wedding",
+    "/choose-wedding",
+  ];
+  // BottomNav를 숨길 페이지 path
+  const hiddenBottomPaths = [
     "/",
     "/kakaologin",
     "/login",
@@ -68,7 +79,7 @@ function App() {
     const location = useLocation();
     return (
       <>
-        {!hiddenPaths.includes(location.pathname) && <TopAppBar />}
+        {!hiddenTopPaths.includes(location.pathname) && <TopAppBar />}
         <Routes>
           <Route path='/' element={<Splash />} />
           <Route path='/home' element={<Home />} />
@@ -110,7 +121,7 @@ function App() {
           <Route path='*' element={<Error />} />
         </Routes>
 
-        {!hiddenPaths.includes(location.pathname) && <BottomNav />}
+        {!hiddenBottomPaths.includes(location.pathname) && <BottomNav />}
       </>
     );
   };

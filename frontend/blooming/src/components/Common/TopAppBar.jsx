@@ -31,6 +31,7 @@ const TopAppBar = () => {
     "/decide-wedding",
     "/choose-wedding",
     "/share",
+    "/edit-profile",
   ];
 
   // 알림버튼 없애려면 여기 넣기
@@ -48,12 +49,10 @@ const TopAppBar = () => {
   };
 
   const isAllNotice = location.pathname === "/all-notice";
-  // 색깔
+  // 알림창 활성화 색
   const currentFill = isAllNotice ? "#FF647C" : "#000000";
-
   // 알림이 있으면 true 없으면 false
   const [isNotice, setIsNotice] = useState(false);
-
   // 알림 있는 지 조회
   useEffect(() => {
     const fetchNotice = async () => {

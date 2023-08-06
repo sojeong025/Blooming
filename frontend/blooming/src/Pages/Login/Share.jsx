@@ -14,12 +14,7 @@ import { customAxios } from "../../lib/axios";
 
 export default function Share() {
   const navigate = useNavigate();
-
-  // const weddingDdayCal = useRecoilValue(weddingDdayCal);
-  const [weddingDate, setWeddingDate] = useRecoilState(weddingDateState);
-
   const [userData, setUserData] = useRecoilState(userState);
-
   // 유저 정보 가져오기
   const fetchData = async () => {
     try {
@@ -48,25 +43,36 @@ export default function Share() {
   };
 
   // 인증코드 확인
-  const [coupled, setCoupled] = useState();
+  const [coupled, setCoupled] = useState(false);
   const [description, setDescription] = useState();
   const setCouple = async (event) => {
     event.preventDefault();
     try {
       await customAxios.post("couple-certification", formData);
       setDescription(`${formData.name}님이 맞나요?`);
-      setCoupled(`${formData.name}님이 맞나요?`);
+      setCoupled(true);
 
       console.log(userData);
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
-      setDescription(`잘못된 코드입니다`);
+      setDescription(error.response.data.message);
+    }
+  };
+
+  // 상대방 연결
+  const connectCouple = async (event) => {
+    event.preventDefault();
+    try {
+      await customAxios.put("couple", formData);
+      // 연결완료 모달이라도 띄워줄까.?
+    } catch (error) {
+      console.log("상대방 연결 에러:", error);
     }
   };
 
   return (
     <div className='mainContainer'>
-      <h3>{userData.name}님의 약혼자를 연결 후 블루밍을 시작해보세요.</h3>
+      <h3>{userData.name}님의 약혼자를 연결해주세요.</h3>
 
       <div>
         <CopyToClipboardButton text={verifyCode}>
@@ -100,13 +106,21 @@ export default function Share() {
             onChange={handleChange}
             required
           />
-          <Button type='submit' text='인증' />
+          {/* 위에 input 다 쳐야 인증 버튼 활성화 시키고 싶음 */}
+          <button type='submit'>인증</button>
         </form>
-        {coupled}
-        {description}
       </div>
+      <p>{description}</p>
+      {coupled && (
+        <>
+          <form onSubmit={connectCouple}>
+            <button type='submit'>연결하기</button>
+          </form>
+        </>
+      )}
+
       <br />
-      <Button text='홈으로' onClick={() => navigate("/home")} />
+      <a onClick={() => navigate("/home")}>메인 페이지로</a>
     </div>
   );
 }
