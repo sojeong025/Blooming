@@ -3,10 +3,12 @@ import { AiOutlineRight } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
 const SettingList = () => {
+  // 일단 share, choose-wedding 쓰던 페이지 재활용 하는데,
+  // 맘에 안들면 그냥 만들기
   const settingLists = [
     { id: 1, name: "내 정보 수정", goTo: "edit-profile" },
-    { id: 2, name: "상대방 연결", goTo: "connect-couple" },
-    { id: 3, name: "결혼식 날짜 수정", goTo: "edit-wedding" },
+    { id: 2, name: "상대방 연결", goTo: "share" },
+    { id: 3, name: "결혼식 날짜 수정", goTo: "choose-wedding" },
     { id: 4, name: "알림 설정", goTo: "setting-notice" },
   ];
 
@@ -14,7 +16,11 @@ const SettingList = () => {
     <div className={classes.wrapper}>
       <ul className={classes.settingList}>
         {settingLists.map((item) => (
-          <NavLink to={`/${item.goTo}`} key={item.id}>
+          <NavLink
+            to={`/${item.goTo}`}
+            state={{ pageTitle: `${item.name}` }}
+            key={item.id}
+          >
             <li className={classes.settingItem}>
               {item.name}
               <span className={classes.settingIcon}>

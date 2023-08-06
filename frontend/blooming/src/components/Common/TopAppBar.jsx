@@ -5,6 +5,7 @@ import { ReactComponent as NoticeOSvg } from "../../assets/Nav/bellO.svg";
 import { ReactComponent as BackSvg } from "../../assets/Nav/back.svg";
 
 import classes from "./TopAppBar.module.css";
+import { customAxios } from "../../lib/axios";
 
 import { useEffect, useState } from "react";
 
@@ -30,6 +31,8 @@ const TopAppBar = () => {
     "/decide-wedding",
     "/choose-wedding",
     "/share",
+    "/edit-profile",
+    "/setting-notice",
   ];
 
   // 알림버튼 없애려면 여기 넣기
@@ -47,11 +50,27 @@ const TopAppBar = () => {
   };
 
   const isAllNotice = location.pathname === "/all-notice";
-  // 색깔 바꿔줘
+  // 알림창 활성화 색
   const currentFill = isAllNotice ? "#FF647C" : "#000000";
-
   // 알림이 있으면 true 없으면 false
-  const isNotice = useState(false);
+  const [isNotice, setIsNotice] = useState(false);
+  // 알림 있는 지 조회
+  useEffect(() => {
+    const fetchNotice = async () => {
+      try {
+        const response = await customAxios.get("notification/unread-cnt");
+        console.log(response.data.result);
+
+        if (response.data.result[0] > 0) {
+          setIsNotice(true);
+        }
+      } catch (error) {
+        console.log("안 읽은 알림 에러", error);
+      }
+    };
+
+    fetchNotice();
+  }, []);
 
   return (
     <header className={classes.header}>
@@ -72,13 +91,13 @@ const TopAppBar = () => {
         <div className={`${classes.navIcon} ${classes.navRight}`} />
       ) : (
         <NavLink to='/all-notice' state={{ pageTitle: "알림" }}>
-          {!isNotice ? (
-            <NoticeSvg
+          {isNotice ? (
+            <NoticeOSvg
               fill={currentFill}
               className={`${classes.navIcon} ${classes.navRight}`}
             />
           ) : (
-            <NoticeOSvg
+            <NoticeSvg
               fill={currentFill}
               className={`${classes.navIcon} ${classes.navRight}`}
             />
