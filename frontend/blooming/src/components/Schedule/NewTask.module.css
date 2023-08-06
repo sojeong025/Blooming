@@ -1,8 +1,8 @@
 .form {
-	background-color: rgb(211, 207, 207);
-	padding: 1rem;
+	background-color: #FFFAF4;
+	/* padding: 1rem;
 	width: 100vw;
-	height: 100vh;
+	height: 100vh; */
 }
 
 .form label {
