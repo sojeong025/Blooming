@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import classes from "./BottomNav.module.css";
 
@@ -13,16 +13,27 @@ import diaryActive from "../../assets/Nav/diary_active.svg";
 import myPageBase from "../../assets/Nav/mypage_base.svg";
 import myPageActive from "../../assets/Nav/mypage_active.svg";
 
+import { useRecoilState } from "recoil";
+import { navStateAtom } from "../../recoil/NavAtom";
+
 const BottomNav = () => {
-  const [activeTab, setActiveTab] = useState("home");
+  // 모든 페이지 다 설정하고 나면
+  // location state에 activeTab을 넣어서 그거 맞춰서 해도 될듯
+  // 그러면 네브 탭 내부로 접근해도 active 유지
+  const [navState, setNavState] = useRecoilState(navStateAtom);
+  const [activeTab, setActiveTab] = useState();
 
   const handleTabClick = (tab) => {
-    setActiveTab(tab);
+    setNavState(tab);
   };
+
+  useEffect(() => {
+    setActiveTab(navState);
+    // console.log(navState);
+  }, [navState]);
 
   // 1. 아이콘 밑에 글씨 넣기
   // 2. 아이콘만 넣고 페이지 명은 위에 적어주기
-
   return (
     <nav className={classes.navContainer}>
       <NavLink to='/home'>
@@ -37,9 +48,10 @@ const BottomNav = () => {
             src={activeTab === "home" ? homeActive : homeBase}
             alt=''
           />
-          {/* <div className={classes.navTitle}>홈</div> */}
+          <div className={classes.navTitle}>홈</div>
         </div>
       </NavLink>
+
       <NavLink to='/info'>
         <div
           onClick={() => handleTabClick("info")}

@@ -11,9 +11,13 @@
   background:#E0DDAA; 
 
   display: flex;
+  flex-direction: space-around;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+}
+
+.tipContainer p{
+  margin: 30px;
 }
 
 .mainImg {
