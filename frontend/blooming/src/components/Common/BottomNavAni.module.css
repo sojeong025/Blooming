@@ -1,0 +1,110 @@
+
+input[type=radio] {
+  display: none;
+}
+input[type=radio]:checked + label:before {
+  transform: translateY(0) scale(1);
+  transition: transform 200ms 100ms ease;
+}
+input[type=radio]:checked + label span {
+  animation: scaleanim 200ms ease;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  /* 총 56px */
+  height: 46px;
+  padding-bottom: 10px;
+
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background: #FF647C;
+
+}
+nav label {
+  height: 52px;
+  width: 52px;
+  text-align: center;
+  transform: translateY(-6px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  position: relative;
+  cursor: pointer;
+}
+nav label:before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  background: #FF647C;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform: translateY(16px) scale(0);
+}
+nav span {
+  font-size: 20px;
+}
+
+/* #FFFAF4 */
+.cursor {
+  position: absolute;
+  top: -12px;
+  left: 0px;
+  height: 64px;
+  width: 64px;
+  background: #FFFAF4;
+  border-radius: 0 0 100% 100%;
+  z-index: 1;
+  transition: transform 300ms ease;
+}
+.cursor svg {
+  position: absolute;
+  top: 12px;
+  fill: #FFFAF4;
+}
+.cursor svg:first-child {
+  right: calc(100% - 1px);
+  transform: scaleX(-1);
+}
+.cursor svg:last-child {
+  left: calc(100% - 1px);
+}
+
+.item1:checked ~ .cursor {
+  transform: translateX(calc(10vw - 32px));
+}
+.item2:checked ~ .cursor {
+  transform: translateX(calc(30vw - 32px));
+}
+.item3:checked ~ .cursor {
+  transform: translateX(calc(50vw - 32px));
+}
+.item4:checked ~ .cursor {
+  transform: translateX(calc(70vw - 32px));
+}
+.item5:checked ~ .cursor {
+  transform: translateX(calc(90vw - 32px));
+}
+
+@keyframes scaleanim {
+  0%, 100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+}

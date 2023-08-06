@@ -1,12 +1,14 @@
 package com.ssafy.backend.domain.notification.service;
 
 import com.ssafy.backend.domain.notification.Notification;
+import com.ssafy.backend.domain.notification.ReadStatus;
 import com.ssafy.backend.domain.notification.dto.NotificationRegistDto;
 import com.ssafy.backend.domain.notification.dto.NotificationResultDto;
 import com.ssafy.backend.domain.notification.repository.NotificationRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.engine.jdbc.env.internal.NormalizingIdentifierHelperImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -78,5 +80,14 @@ public class NotificationService {
 
     public void deleteNotification(Long notificationId) {
         notificationRepository.deleteById(notificationId);
+    }
+
+    public int getUnreadCnt() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+
+        List<Notification> notifications = notificationRepository.findByUserAndReadStatus(user, ReadStatus.UNREAD);
+        return notifications.size();
     }
 }
