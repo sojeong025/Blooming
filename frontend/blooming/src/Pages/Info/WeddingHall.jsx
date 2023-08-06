@@ -4,7 +4,7 @@ import { weddingHallState } from "../../recoil/ProductAtom";
 import ErrorModal from "../../components/Error/Modal";
 import { errorState } from "../../recoil/ErrorAtom";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductItem from "../../components/Info/ProductItem";
 
@@ -15,13 +15,10 @@ export default function WeddingHall() {
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleNavigation = (product) => {
-    history.push({
-      pathname: `/wedding-hall/${product.id}`,
-      state: { product },
-    });
+    navigate(`/wedding-hall/${product.id}`, { state: { product } });
   };
 
   const fetchData = async () => {

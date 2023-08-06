@@ -1,33 +1,30 @@
 import { customAxios } from "../../lib/axios";
 import { useRecoilState } from "recoil";
-import { weddingHallState } from "../../recoil/ProductAtom";
+import { makeUpState } from "../../recoil/ProductAtom";
 import ErrorModal from "../../components/Error/Modal";
 import { errorState } from "../../recoil/ErrorAtom";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductItem from "../../components/Info/ProductItem";
 
 export default function WeddingHall() {
   
   const [errorModal, setErrorModal] = useRecoilState(errorState);
-  const [weddingHall, setWeddingHall] = useRecoilState(weddingHallState)
+  const [weddingHall, setWeddingHall] = useRecoilState(makeUpState)
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleNavigation = (product) => {
-    history.push({
-      pathname: `/dress/${product.id}`,
-      state: { product },
-    });
+    navigate(`/make-up/${product.id}`, { state: { product } });
   };
 
   const fetchData = async () => {
     try {
       const nextPage = currentPage + 1;
-      const response = await customAxios.get("product/드레스", { params: {page: nextPage, size: 4, sort: 'asc'} });
+      const response = await customAxios.get("product/스튜디오", { params: {page: nextPage, size: 4, sort: 'asc'} });
       
       if (response.data.result.length === 0) {
         setHasMore(false);

@@ -1,27 +1,24 @@
 import { customAxios } from "../../lib/axios";
 import { useRecoilState } from "recoil";
-import { weddingHallState } from "../../recoil/ProductAtom";
+import { studioState } from "../../recoil/ProductAtom";
 import ErrorModal from "../../components/Error/Modal";
 import { errorState } from "../../recoil/ErrorAtom";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductItem from "../../components/Info/ProductItem";
 
 export default function WeddingHall() {
   
   const [errorModal, setErrorModal] = useRecoilState(errorState);
-  const [weddingHall, setWeddingHall] = useRecoilState(weddingHallState)
+  const [weddingHall, setWeddingHall] = useRecoilState(studioState)
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleNavigation = (product) => {
-    history.push({
-      pathname: `/studio/${product.id}`,
-      state: { product },
-    });
+    navigate(`/studio/${product.id}`, { state: { product } });
   };
 
   const fetchData = async () => {
