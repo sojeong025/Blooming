@@ -44,7 +44,17 @@ import Error from "./Pages/Error";
 
 function App() {
   // Nav를 숨길 페이지 path
-  const hiddenPaths = ["/", "/login", "/go-join", "/question", "/share"];
+  const hiddenPaths = [
+    "/",
+    "/kakaologin",
+    "/login",
+    "/go-join",
+    "/join-code",
+    "/question",
+    "/decide-wedding",
+    "/choose-wedding",
+    "/share",
+  ];
 
   const Routing = () => {
     function setScreenSize() {
