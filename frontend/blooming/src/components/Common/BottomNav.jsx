@@ -97,7 +97,7 @@ const BottomNav = () => {
             src={activeTab === "mypage" ? myPageActive : myPageBase}
             alt=''
           />
-          <div className={classes.navTitle}>내정보</div>
+          <div className={classes.navTitle}>내정보.</div>
         </div>
       </NavLink>
     </nav>
