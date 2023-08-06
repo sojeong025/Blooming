@@ -108,4 +108,18 @@ public class NotificationController {
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
+    @Operation(summary = "안 읽은 알림 수 가져오기", description = "로그인한 사용자의 안 읽은 알림 수를 가져옵니다.")
+//    @Parameter(name = "/notification/unread-cnt", description = "page : 페이지 번호, size : 페이지당 알림 개수 . 최근 알림 size개 가져옴")
+    @GetMapping("/notification/unread-cnt")
+    public ResponseEntity<?> getUnreadCnt() { //pageNumber, pageSize, offset
+        int cnt = notificationService.getUnreadCnt();
+        BasicResponse basicResponse;
+        basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("안 읽은 알림 수 가져오기 성공")
+                .count(1)
+                .result(Collections.singletonList(cnt)).build();
+        return new ResponseEntity<BasicResponse>(basicResponse, basicResponse.getHttpStatus());
+    }
 }
