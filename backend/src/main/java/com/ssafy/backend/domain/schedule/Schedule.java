@@ -34,6 +34,7 @@ public class Schedule extends CreatedBaseEntity {
     private LocalTime scheduleTime;
     @Enumerated(EnumType.STRING)
     private ScheduledBy scheduledBy;
+    @Enumerated(EnumType.STRING)
     private ScheduleType scheduleType;
 
     //예약 id 추가

@@ -12,9 +12,9 @@ import Splash from "./Pages/Splash";
 // login
 import Login from "./Pages/Login/Login";
 import KakaoLogin from "./Pages/Login/KakaoLogin";
-import Gojoin from "./Pages/Login/Gojoin";
+import GoJoin from "./Pages/Login/Gojoin";
+import JoinCode from "./Pages/Login/JoinCode";
 import Join from "./Pages/Login/Join";
-
 import Question from "./Pages/Login/Question";
 import DecideWedding from "./Pages/Login/DecideWedding";
 import ChooseWedding from "./Pages/Login/ChooseWedding";
@@ -35,6 +35,7 @@ import DiaryDetails from "./Pages/Diary/DiaryDetails";
 // info
 import Info from "./Pages/Info/Info";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
+import MobileInvitationDetail from "./Pages/Info/MobileInvitationDetail";
 import Create from "./Pages/Info/Create";
 // notice
 import AllNotice from "./Pages/Notice/AllNotice";
@@ -43,15 +44,7 @@ import Error from "./Pages/Error";
 
 function App() {
   // Nav를 숨길 페이지 path
-  const hiddenPaths = [
-    "/",
-    "/login",
-    "/join",
-    "/Question",
-    "/DecideWedding",
-    "/ChooseWedding",
-    "/Share",
-  ];
+  const hiddenPaths = ["/", "/login", "/go-join", "/question", "/share"];
 
   const Routing = () => {
     function setScreenSize() {
@@ -68,25 +61,40 @@ function App() {
         {!hiddenPaths.includes(location.pathname) && <TopAppBar />}
         <Routes>
           <Route path='/' element={<Splash />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/all-notice' element={<AllNotice />} />
+
+          {/* login */}
           <Route path='/login' element={<Login />} />
           <Route path='/kakaologin' element={<KakaoLogin />} />
-          <Route path='/GoJoin' element={<Gojoin />} />
+          <Route path='/go-join' element={<GoJoin />} />
+          <Route path='/join-code' element={<JoinCode />} />
           <Route path='/join' element={<Join />} />
-          <Route path='/Question' element={<Question />} />
-          <Route path='/DecideWedding' element={<DecideWedding />} />
-          <Route path='/ChooseWedding' element={<ChooseWedding />} />
-          <Route path='/Share' element={<Share />} />
-          <Route path='/Info' element={<Info />} />
-          <Route path='/Diary' element={<Diary />} />
-          <Route path='/Diary/:id' element={<DiaryDetails />} />
-          <Route path='/MyPage' element={<MyPage />} />
+          <Route path='/question' element={<Question />} />
+          <Route path='/decide-wedding' element={<DecideWedding />} />
+          <Route path='/choose-wedding' element={<ChooseWedding />} />
+          <Route path='/share' element={<Share />} />
+
+          {/* 웨딩정보 */}
+          <Route path='/info' element={<Info />} />
+          <Route path='/mobile-invitation' element={<MobileInvitation />} />
+          <Route
+            path='/mobile-invitation-detail'
+            element={<MobileInvitationDetail />}
+          />
+          <Route path='/invitation-create' element={<Create />} />
+
+          {/* 다이어리 */}
+          <Route path='/diary' element={<Diary />} />
+          <Route path='/diary/:id' element={<DiaryDetails />} />
+
+          {/* 마이페이지 */}
+          <Route path='/my-page' element={<MyPage />} />
           <Route path='/setting' element={<SettingPage />} />
           <Route path='/edit-profile' element={<EditProfile />} />
-          <Route path='/AllNotice' element={<AllNotice />} />
-          <Route path='/home' element={<Home />} />
+
+          {/* 스케줄 */}
           <Route path='/schedule' element={<Schedule />} />
-          <Route path='/MobileInvitation' element={<MobileInvitation />} />
-          <Route path='/Create' element={<Create />} />
 
           {/* NotFound */}
           <Route path='*' element={<Error />} />

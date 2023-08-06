@@ -1,9 +1,12 @@
+import classes from './TipBox.module.css';
+
 function Tipbox() {
+
   return (
-    <div>
-      정소정 바보
+    <div className={classes.box}>
+      test
     </div>
-  )
+  );
 }
 
 export default Tipbox;

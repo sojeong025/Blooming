@@ -62,22 +62,13 @@ public class NotificationScheduler {
 
     //시간에 맞게 푸시 알림을 스케줄링하는 코드
 //    @Scheduled(cron = "* * 1 * * ?")
-    @Scheduled(cron = "0 0 1 * * ?")
-//    @Scheduled(fixedDelay = 5000)
+//    @Scheduled(cron = "0 0 1 * * ?")
+    @Scheduled(fixedDelay = 10000)
     public void pushMorningDietAlarm() {
 
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
         //나중에 지난 일정은 삭제? 해도 될듯
         //일정 repository에서 day를 매개변수로 넘겨주면서, 30일, 21일, 7일, 1일, 0일 을 인자로 해서 date 비교해서 해당되는거 가져옴. 알림 보내고 테이블에 추가.
-
-        /*
-         30일 후
-         현재 날짜 + 30일 해서 해당 날짜의 일정인 경우, 일정 테이블에서 (커플 아이디, 카테고리, 일정 이름, 내용) DTO을 가져옴
-         카테고리에 따라 처리.
-         일단 공통으로 치면: 신랑 아이디와 신부 아이디를 유저 테이블에서 가져와서 (join) 해당 id를 타겟으로 서로 다른 메시지를 보냄
-
-         일단은 한 사람에게 같은 메시지 보내기
-         */
 
         //일단 임시
         for (int day : new int[]{0, 1, 7, 30}) {
@@ -88,38 +79,73 @@ public class NotificationScheduler {
             for (Schedule schedule : schedules) {
                 System.out.println(schedule);
 
+                //커플 아이디에 해당하는 유저 두 명을 찾는다. 남자는 신랑, 여자는 신부로 매핑한다.
+                User groom = null;
+                User bride = null;
+                List<User> users = schedule.getCouple().getUsers();
+                for (User user : users){
+                    if (user.getGender().equals("MALE")){
+                        groom = user;
+                    }
+                    else if(user.getGender().equals("FEMALE")){
+                        bride = user;
+                    }
+                }
 
-                //1. 푸시 알림 보내기
-                Long targetId = 1L; //나중에 알림 커플 유저 두 명에게 각각 보내느 걸로 수정
-                String title = schedule.getTitle();
-                String content = schedule.getContent();
-                log.info(title + content);
+                //스케쥴 타입에 따라 다르게 알림 내용 처리
+                String title = schedule.getScheduleDate() + " " + schedule.getTitle(); //알림 제목은 일단 같게
+                String contentGroom = "";
+                String contentBride = "";
+                switch(schedule.getScheduledBy()){
+                    case COMMON:
+                        //두 명에게 같은 알림 전송
+                        contentGroom = "내일은 두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = "내일은 두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        break;
+                    case MALE:
+                        //신랑 일정.
+                        contentGroom = "내일은 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = "내일은 " + bride.getNickname() + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        break;
+                    case FEMALE:
+                        //신부 일정.
+                        contentGroom = "내일은 " + groom.getNickname() + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = "내일은 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        break;
+                }
 
-                //토큰, 일정 이름(Title), 상세 내용(body)을 보냄
-                String result = sendNotificationByToken(new FCMNotificationRequestDto(targetId, title, content)); // 첫 번째로 넣은 유저
-                log.info(result);
+                //처리한 내용을 알림 전송(신랑, 신부)
+                log.info(sendNotificationByToken(new FCMNotificationRequestDto(groom, title, contentGroom)));
+                log.info(sendNotificationByToken(new FCMNotificationRequestDto(bride, title, contentBride)));
 
                 //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장. - 파라미터는 임시. 수정 필요
                 notificationService.registNotification(new NotificationRegistDto(
                         ReadStatus.UNREAD,
                         NotificationType.SCHEDULE,
                         title,
-                        content,
-                        targetId
+                        contentGroom,
+                        groom.getId()
                 ));
-            }
+                notificationService.registNotification(new NotificationRegistDto(
+                        ReadStatus.UNREAD,
+                        NotificationType.SCHEDULE,
+                        title,
+                        contentBride,
+                        bride.getId()
+                ));
 
+            }
         }
     }
 
 
     private String sendNotificationByToken(FCMNotificationRequestDto fcmDto) {
-        Optional<User> user = userRepository.findById(fcmDto.getTargetUserId());
+        User user = fcmDto.getUser();
 
-        if (user.isPresent()) {
-            //나중에 토큰 받아오는 걸로 수정
-            String token = "eKbKoD7ETfqRiIKFF_4Zom:APA91bHbzIq11sl8_qbv1yE7-RFqjXnywPVo5u13FMC9kqIjJTrHkXIfqWODhBYvTS3EOGlOLQzlXUvJNwXn4EFbgoAC_WZzylV9yo5KOGLj96agM68p8qPc8bCPODgRk9aP_TNeKiLn";
-//            token = user.get().getFirebaseToken();
+        if (user != null) {
+            //토큰 받아오는 걸로 수정
+//            String token = "eKbKoD7ETfqRiIKFF_4Zom:APA91bHbzIq11sl8_qbv1yE7-RFqjXnywPVo5u13FMC9kqIjJTrHkXIfqWODhBYvTS3EOGlOLQzlXUvJNwXn4EFbgoAC_WZzylV9yo5KOGLj96agM68p8qPc8bCPODgRk9aP_TNeKiLn";
+            String token = user.getFcmToken();
             if (token != null) {
                 Notification notification = Notification.builder()
                         .setTitle(fcmDto.getTitle())
@@ -142,7 +168,7 @@ public class NotificationScheduler {
                 return "서버에 유저 firebase token 없음";
             }
         } else {
-            return "해당 유저 없음 " + fcmDto.getTargetUserId();
+            return "해당 유저 없음 " + fcmDto.getUser();
         }
     }
 }

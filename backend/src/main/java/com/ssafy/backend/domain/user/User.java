@@ -62,6 +62,11 @@ public class User extends CreatedAndUpdatedBaseEntity {
         couple.getUsers().add(this);
     }
 
+    public void removeCouple() {
+        this.couple.getUsers().remove(this);
+        this.couple = null;
+    }
+
     //==생성 메서드==//
     // TODO: 생성메서드 만들기
 

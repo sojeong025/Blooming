@@ -1,43 +1,56 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*--------------- 신부버전---------------- */
 .tipContainer {  
   position:relative; 
   margin: 0px;
-  width: auto;
-  background:#E0DDAA; 
-  border-radius: 10px;
-  padding: 20px;
+  width: 90vw;
+  height: 150px;
+  background:#FF98A8; 
 
-  /* 가운데 정렬 */
   display: flex;
+  flex-direction: space-around;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
-p {
-margin: 0;
-/* flex: 1; */
+/* --------------신랑버전---------------- */
+.tipContainer {  
+  position:relative; 
+  margin: 0px;
+  width: 90vw;
+  height: 150px;
+  background:#343D63; 
+
+  display: flex;
+  flex-direction: space-around;
+  justify-content: center;
+  align-items: center;
 }
+/* -------------------------------------- */
 
 .mainImg {
-width: 330px;
-height: auto;
-margin: 30px 0 15px;
+  width: 350px;
+  height: auto;
+  margin: 30px 0 10px;
 }
 
 .textBold {
-color: black;
-font-weight: bold;
-font-size: 18px;
-padding-bottom: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  width: 30%;
+  text-align: center;
+  word-break: keep-all;
+  margin: 20px;
 }
-
-/* .tipContainer:after { 
-border-top:0px solid transparent; 
-border-left: 10px solid transparent; 
-border-right: 10px solid transparent; 
-border-bottom: 10px solid pink; 
-content:""; 
-position:absolute;
-top:-10px;
-left:200px;  
-} */
+.tip{
+  width: 70%;
+  color: white;
+  font-size: 18px;
+  margin: 20px;
+  word-break: keep-all;
+}

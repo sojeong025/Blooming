@@ -30,6 +30,10 @@ public class ScheduleService {
     private final UserRepository userRepository;
 
     public void registSchedule(ScheduleRegistDto scheduleRegistDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+
         Schedule schedule = new Schedule(
                 scheduleRegistDto.getTitle(),
                 scheduleRegistDto.getContent(),
@@ -38,13 +42,6 @@ public class ScheduleService {
                 scheduleRegistDto.getScheduledBy(),
                 scheduleRegistDto.getScheduleType()
         );
-        //커플도 등록 : 해당 유저 id -> couple id -> couple 찾기 X
-        //아 유저 찾으면 커플 찾을수 잇음. 양방향 -- 맞나
-        //JWT 토큰 이용 == 맞나
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getName()); //이메일
-        User user = userRepository.findByEmail(authentication.getName())
-                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
         Couple couple = user.getCouple();
         schedule.setCouple(couple);
 

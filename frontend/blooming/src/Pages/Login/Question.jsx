@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import classes from "./Question.module.css";
 import { useRecoilValue } from "recoil";
 import { userState } from "../../recoil/ProfileAtom";
+import { useEffect } from "react";
 
 export default function Question() {
   const userData = useRecoilValue(userState);
@@ -21,7 +22,7 @@ export default function Question() {
         <p>이미지</p>
       </div>
       <div className={classes.btn}>
-        <NavLink to={"/DecideWedding"}>
+        <NavLink to={"/decide-wedding"}>
           <Button text='시작하기' />
         </NavLink>
       </div>

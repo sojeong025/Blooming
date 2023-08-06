@@ -2,10 +2,16 @@ import Profile from "../../components/MyPage/Profile";
 import IconBox from "../../components/MyPage/IconBox";
 import classes from "./MyPage.module.css";
 import { useEffect } from "react";
-import { userState } from "../../recoil/ProfileAtom";
+import { userCoupleState, userState } from "../../recoil/ProfileAtom";
+import { weddingDateState, weddingDdayCal } from "../../recoil/WeddingDdayAtom";
 
 import { NavLink } from "react-router-dom";
-import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState,
+} from "recoil";
 
 import ErrorModal from "../../components/Error/Modal";
 import { errorState } from "../../recoil/ErrorAtom";
@@ -15,10 +21,13 @@ import { customAxios } from "../../lib/axios";
 // 헤더 알림 아이콘 자리에 설정으로 바꾸기
 function MyPage() {
   // 유저 정보 넣기
-  const setUserState = useSetRecoilState(userState);
+  const setUserData = useSetRecoilState(userState);
+  const setCoupleData = useSetRecoilState(userCoupleState);
+  const setWeddingDate = useSetRecoilState(weddingDateState);
+
   // 더미 데이터 넣기
   const setDummy = () =>
-    setUserState({
+    setUserData({
       email: "더미@kakao.com",
       gender: "FEMALE",
       name: "더미",
@@ -28,28 +37,49 @@ function MyPage() {
         "https://cdn.pixabay.com/photo/2020/05/17/20/21/cat-5183427_1280.jpg",
     });
 
-  const resetUserState = useResetRecoilState(userState);
+  const resetUserData = useResetRecoilState(userState);
 
   const [errorModal, setErrorModal] = useRecoilState(errorState);
 
+  // 유저 정보 조회
   const fetchData = async () => {
     try {
       const response = await customAxios.get("profile");
-      console.log(response.data.result[0]);
       // 유저 정보 저장
-      setUserState(response.data.result[0]);
+      setUserData(response.data.result[0]);
     } catch (error) {
-      console.error(error);
+      console.error("유저 정보 조회 에러:", error);
       setErrorModal(true);
     }
   };
 
-  useEffect(() => {
-    resetUserState();
-    // 마이페이지에 들어왔을 때 정보가 없으면 API 조회
-    if (!userState || !userState.id) {
-      fetchData();
+  // 커플 정보 조회
+  const fetchCouple = async () => {
+    try {
+      const response = await customAxios.get("my-fiance");
+      setCoupleData(response.data.result[0]);
+    } catch (error) {
+      console.log("약혼자 없음");
     }
+  };
+
+  // 결혼식 날짜 조회
+  const fetchWeddingDate = async () => {
+    try {
+      const response = await customAxios.get("wedding-date");
+      // console.log(response.data.result[0]);
+      setWeddingDate(response.data.result[0].weddingDate);
+    } catch (error) {
+      console.log("결혼식 날짜 없음");
+    }
+  };
+
+  useEffect(() => {
+    // resetUserState();
+    // 마이페이지에 들어왔을 때 API 조회
+    fetchData();
+    fetchWeddingDate();
+    fetchCouple();
   }, []);
 
   return (

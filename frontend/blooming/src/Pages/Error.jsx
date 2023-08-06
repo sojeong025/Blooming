@@ -8,6 +8,7 @@ import { useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import { errorState } from "../recoil/ErrorAtom";
+
 const Error = () => {
   // 에러 모달
   // const [ErrorModal, handleError] = useErrorModal();

@@ -10,6 +10,9 @@ import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -98,5 +101,40 @@ public class UserService {
         if (!(findUser.getName().equals(coupleCodeDto.getName()))) {
             throw new IllegalArgumentException("커플 연결할 수 없는 코드입니다.");
         }
+    }
+
+    @Transactional
+    public void updateCouple(CoupleCodeDto coupleCodeDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication.getName() == null) {
+            throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
+        }
+
+        Couple couple = coupleRepository.findByCoupleCode(coupleCodeDto.getCoupleCode())
+                .orElseThrow(() -> new IllegalArgumentException("정상적인 커플코드가 아닙니다."));
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+        Couple originCouple = coupleRepository.findByCoupleCode(user.getCouple().getCoupleCode())
+                .orElseThrow(() -> new IllegalArgumentException("커플코드가 없는 회원입니다. 잘못된 회원!"));
+
+        user.removeCouple();
+        // 기존에 내가 가지고 있던 커플을 지우기
+        System.out.println("=====================");
+        System.out.println(originCouple.getUsers().size());
+        System.out.println("=====================");
+        if (originCouple.getUsers().size() == 0) {
+            coupleRepository.delete(originCouple);
+        }
+        // // 나한테 있던 커플 정보 삭제
+        // Couple originCouple = user.getCouple();
+        // if (originCouple != null) {
+        //     user.setCouple(null);
+        //     originCouple.getUsers().remove(user);
+        //     coupleRepository.delete(originCouple);
+        //     userRepository.saveAndFlush(user);
+        // }
+
+        // 상대방 커플 코드의 커플을 연결
+        user.setCouple(couple);
     }
 }

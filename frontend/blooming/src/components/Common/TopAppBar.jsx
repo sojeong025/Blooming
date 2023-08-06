@@ -1,10 +1,11 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
+import { ReactComponent as NoticeSvg } from "../../assets/Nav/bell.svg";
+import { ReactComponent as NoticeOSvg } from "../../assets/Nav/bellO.svg";
+import { ReactComponent as BackSvg } from "../../assets/Nav/back.svg";
+
 import classes from "./TopAppBar.module.css";
 
-import noticeBase from "../../assets/Nav/notice_base.svg";
-import noticeActive from "../../assets/Nav/notice_active.svg";
-import { ReactComponent as BackSvg } from "../../assets/Nav/back.svg";
 import { useEffect, useState } from "react";
 
 const TopAppBar = () => {
@@ -20,11 +21,37 @@ const TopAppBar = () => {
   }, [location]);
 
   // 뒤로가기 필요하면 여기 넣기
-  const backIcon = ["/AllNotice", "/mobileinvitation", "/Create"];
+  const backIcon = [
+    "/all-notice",
+    "/mobile-invitation",
+    "/invitation-create",
+    "/join-code",
+    "/join",
+    "/decide-wedding",
+    "/choose-wedding",
+    "/share",
+  ];
+
+  // 알림버튼 없애려면 여기 넣기
+  const noNotice = [
+    "/join-code",
+    "/join",
+    "/decide-wedding",
+    "/choose-wedding",
+    "/share",
+  ];
+
   const navigate = useNavigate();
   const handleHistory = () => {
     navigate(-1);
   };
+
+  const isAllNotice = location.pathname === "/all-notice";
+  // 색깔 바꿔줘
+  const currentFill = isAllNotice ? "#FF647C" : "#000000";
+
+  // 알림이 있으면 true 없으면 false
+  const isNotice = useState(false);
 
   return (
     <header className={classes.header}>
@@ -37,22 +64,27 @@ const TopAppBar = () => {
       {/* 가운데 로고 또는 페이지타이틀 */}
       <div className={classes.pageTitleContainer}>
         {!pageTitle && <img src='src/assets/Nav/word.png' alt='Logo' />}
-        <p>{pageTitle}</p>
+        {pageTitle}
       </div>
 
       {/* 알림창으로 이동 */}
-      <NavLink to='/AllNotice' state={{ pageTitle: "알림" }}>
-        {/* 알림 아이콘 24x24에 맞춰 넣기 */}
-        <img
-          className={`${classes.navIcon} ${classes.navRight}`}
-          src={
-            window.location.pathname === "/AllNotice"
-              ? noticeActive
-              : noticeBase
-          }
-          alt='알림'
-        />
-      </NavLink>
+      {noNotice.includes(location.pathname) ? (
+        <div className={`${classes.navIcon} ${classes.navRight}`} />
+      ) : (
+        <NavLink to='/all-notice' state={{ pageTitle: "알림" }}>
+          {!isNotice ? (
+            <NoticeSvg
+              fill={currentFill}
+              className={`${classes.navIcon} ${classes.navRight}`}
+            />
+          ) : (
+            <NoticeOSvg
+              fill={currentFill}
+              className={`${classes.navIcon} ${classes.navRight}`}
+            />
+          )}
+        </NavLink>
+      )}
     </header>
   );
 };
