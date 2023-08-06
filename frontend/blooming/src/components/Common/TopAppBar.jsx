@@ -32,6 +32,7 @@ const TopAppBar = () => {
     "/choose-wedding",
     "/share",
     "/edit-profile",
+    "/setting-notice",
   ];
 
   // 알림버튼 없애려면 여기 넣기

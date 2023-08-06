@@ -27,7 +27,7 @@ import Home from "./Pages/Home";
 import Schedule from "./Pages/Schedule";
 // my-page
 import MyPage from "./Pages/MyPage/MyPage";
-import SettingPage from "./Pages/MyPage/SettingPage";
+import SettingNotice from "./Pages/MyPage/SettingNotice";
 import EditProfile from "./Pages/MyPage/EditProfile";
 // diary
 import Diary from "./Pages/Diary/Diary";
@@ -36,8 +36,8 @@ import DiaryDetails from "./Pages/Diary/DiaryDetails";
 import Info from "./Pages/Info/Info";
 import WeddingHall from "./Pages/Info/WeddingHall";
 import Studio from "./Pages/Info/Studio";
-import Dress from "./Pages/Info/Dress"
-import MakeUp from "./Pages/Info/MakeUp"
+import Dress from "./Pages/Info/Dress";
+import MakeUp from "./Pages/Info/MakeUp";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
 import MobileInvitationDetail from "./Pages/Info/MobileInvitationDetail";
 import Create from "./Pages/Info/Create";
@@ -48,22 +48,14 @@ import Error from "./Pages/Error";
 
 function App() {
   // BottomNav를 숨길 페이지 path
-  const hiddenTopPaths = [
-    "/",
-    "/kakaologin",
-    "/login",
-    "/go-join",
-    "/join-code",
-    "/question",
-    "/decide-wedding",
-    "/choose-wedding",
-  ];
+  const hiddenTopPaths = ["/", "/kakaologin", "/login"];
   // BottomNav를 숨길 페이지 path
   const hiddenBottomPaths = [
     "/",
     "/kakaologin",
     "/login",
     "/go-join",
+    "/join",
     "/join-code",
     "/question",
     "/decide-wedding",
@@ -119,7 +111,7 @@ function App() {
 
           {/* 마이페이지 */}
           <Route path='/my-page' element={<MyPage />} />
-          <Route path='/setting' element={<SettingPage />} />
+          <Route path='/setting-notice' element={<SettingNotice />} />
           <Route path='/edit-profile' element={<EditProfile />} />
 
           {/* 스케줄 */}
