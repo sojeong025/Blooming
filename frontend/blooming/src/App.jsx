@@ -34,6 +34,10 @@ import Diary from "./Pages/Diary/Diary";
 import DiaryDetails from "./Pages/Diary/DiaryDetails";
 // info
 import Info from "./Pages/Info/Info";
+import WeddingHall from "./Pages/Info/WeddingHall";
+import Studio from "./Pages/Info/Studio";
+import Dress from "./Pages/Info/Dress"
+import MakeUp from "./Pages/Info/MakeUp"
 import MobileInvitation from "./Pages/Info/MobileInvitation";
 import MobileInvitationDetail from "./Pages/Info/MobileInvitationDetail";
 import Create from "./Pages/Info/Create";
@@ -87,6 +91,10 @@ function App() {
 
           {/* 웨딩정보 */}
           <Route path='/info' element={<Info />} />
+          <Route path='/wedding-hall' element={<WeddingHall />} />
+          <Route path='/studio' element={<Studio />} />
+          <Route path='/dress' element={<Dress />} />
+          <Route path='/make-up' element={<MakeUp />} />
           <Route path='/mobile-invitation' element={<MobileInvitation />} />
           <Route
             path='/mobile-invitation-detail'
