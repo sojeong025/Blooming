@@ -1,7 +1,6 @@
 import Profile from "../../components/MyPage/Profile";
 import AppContainer from "../../components/MyPage/AppContainer";
 import SettingList from "../../components/MyPage/SettingList";
-import classes from "./MyPage.module.css";
 import { useEffect, useState } from "react";
 import { userCoupleState, userState } from "../../recoil/ProfileAtom";
 import { weddingDateState } from "../../recoil/WeddingDdayAtom";
@@ -106,7 +105,7 @@ function MyPage() {
       <Profile isCouple={isCouple} isChooseDate={isChooseDate} />
       {/* 아이콘 */}
       <AppContainer />
-      <SettingList />
+      <SettingList isChooseDate={isChooseDate} />
     </div>
   );
 }

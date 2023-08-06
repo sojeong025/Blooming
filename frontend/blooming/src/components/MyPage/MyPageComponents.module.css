@@ -1,7 +1,4 @@
 /* Profile */
-.profile {
-  display: block;
-}
 
 .profileContainer {
   display: flex;
@@ -11,34 +8,43 @@
   background-color: #f8f8f8;
   padding: 1.5rem 0;
 }
-.profileImg {
+
+.Alone .profileImg {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
   margin-right: 1rem;
 }
-.profileName {
-  font-size: 1.8rem;
+.Alone .profileName {
+  font-size: 1.6rem;
   font-weight: bold;
   color: #333;
 }
 
-
-.weddingContainer {
-  display: block;
-  justify-content: center;
-
-  /* height: 40%; */
-  margin-bottom: 1vh;
+.Couple .profileImg {
+  border-radius:50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  position: relative;
 }
-.weddingMsg {
-  /* 16px */
-  /* font-size: 1rem; */
-    /* 18px */
-    font-size: 1.125rem;
+.coupleProfile {
+  width: 48px;
+  height: 48px;
+  margin-left: -10px;
 }
 
+.Couple .profileName {
+  display: flex;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+.Couple .profileName span {
+  padding: 0 10px;
+  text-align: end;
+}
 
 /* AppContainer */
 .wrapper {

@@ -1,33 +1,61 @@
 import { useRecoilValue } from "recoil";
 import {
+  coupleRoleState,
   userCoupleState,
   userRoleState,
   userState,
 } from "../../recoil/ProfileAtom";
 import classes from "./MyPageComponents.module.css";
 
-import { NavLink } from "react-router-dom";
-import { weddingDateState, weddingDdayCal } from "../../recoil/WeddingDdayAtom";
-
-const ProfileBox = ({ isCouple, isChooseDate }) => {
+const ProfileBox = ({ isCouple }) => {
   const userData = useRecoilValue(userState);
-  const coupleData = useRecoilValue(userCoupleState);
   const userRole = useRecoilValue(userRoleState);
-
-  const WeddingDate = useRecoilValue(weddingDateState);
-  const WeddingDday = useRecoilValue(weddingDdayCal);
+  const coupleData = useRecoilValue(userCoupleState);
+  const coupleRole = useRecoilValue(coupleRoleState);
 
   return (
     <div className={classes.profile}>
       {/* 프로필 사진이랑 이름 */}
       {isCouple ? (
         // 커플
-        <div className={classes.profileContainer}>
-          <h1>커플 {isCouple.toString()}</h1>
+        <div className={`${classes.profileContainer} ${classes.Couple}`}>
+          <div>
+            <img
+              className={classes.ProfileImg}
+              src={
+                userData.profileImg
+                  ? userData.profileImg
+                  : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${userData.name}`
+              }
+              alt='profile'
+            />
+            <img
+              className={`${classes.ProfileImg} ${classes.coupleProfile}`}
+              src={
+                coupleData.profileImg
+                  ? coupleData.profileImg
+                  : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${coupleData.name}`
+              }
+              alt='profile'
+            />
+          </div>
+
+          <div className={classes.profileName}>
+            <span>
+              {userData.nickname}
+              <br />
+              {userRole}
+            </span>
+            <span>
+              {coupleData.nickname}
+              <br />
+              {coupleRole}
+            </span>
+          </div>
         </div>
       ) : (
         // 혼자
-        <div className={classes.profileContainer}>
+        <div className={`${classes.profileContainer} ${classes.Alone}`}>
           <img
             className={classes.ProfileImg}
             src={
