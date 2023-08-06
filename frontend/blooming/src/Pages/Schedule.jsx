@@ -18,8 +18,8 @@ function Schedule() {
 
   return (
     <div className={classes.mainContainer}>
-      <CalendarComponent /><hr />
-      <ScheduleBody onCreatePost={showModalHandler}/><hr />
+      <CalendarComponent />
+      <ScheduleBody onCreatePost={showModalHandler}/>
       <TasksList isPosting={modalIsVisible} onStopPosting={hideModalHandler}/>
     </div>
   )

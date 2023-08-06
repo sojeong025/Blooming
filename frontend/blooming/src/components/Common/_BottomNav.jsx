@@ -1,55 +1,117 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import classes from "./BottomNav.module.css";
-import { ReactComponent as HomeSvg } from "../../assets/Nav/home.svg";
 
-import home from "../../assets/Nav/home_base.svg";
-import info from "../../assets/Nav/info_base.svg";
-import schedule from "../../assets/Nav/schedule_base.svg";
-import diary from "../../assets/Nav/diary_base.svg";
-import myPage from "../../assets/Nav/mypage_base.svg";
+import homeBase from "../../assets/Nav/home_base.svg";
+import homeActive from "../../assets/Nav/home_active.svg";
+import infoBase from "../../assets/Nav/info_base.svg";
+import infoActive from "../../assets/Nav/info_active.svg";
+import scheduleBase from "../../assets/Nav/schedule_base.svg";
+import scheduleActive from "../../assets/Nav/schedule_active.svg";
+import diaryBase from "../../assets/Nav/diary_base.svg";
+import diaryActive from "../../assets/Nav/diary_active.svg";
+import myPageBase from "../../assets/Nav/mypage_base.svg";
+import myPageActive from "../../assets/Nav/mypage_active.svg";
+
+import { useRecoilState } from "recoil";
+import { navStateAtom } from "../../recoil/NavAtom";
 
 const BottomNav = () => {
-  const location = useLocation();
+  // 모든 페이지 다 설정하고 나면
+  // location state에 activeTab을 넣어서 그거 맞춰서 해도 될듯
+  // 그러면 네브 탭 내부로 접근해도 active 유지
+  const [navState, setNavState] = useRecoilState(navStateAtom);
+  const [activeTab, setActiveTab] = useState();
 
-  // 해당 페이지 속에 파생된 모든 페이지 넣어야함
+  const handleTabClick = (tab) => {
+    setNavState(tab);
+  };
 
-  const isHome = location.pathname === "/home";
-  // // 색깔 바꿔줘
-  const currentFill = isHome ? "#FF647C" : "#000000";
+  useEffect(() => {
+    setActiveTab(navState);
+    // console.log(navState);
+  }, [navState]);
 
+  // 1. 아이콘 밑에 글씨 넣기
+  // 2. 아이콘만 넣고 페이지 명은 위에 적어주기
   return (
     <nav className={classes.navContainer}>
-      <div className={classes.navBlock}>
-        <NavLink to='/home'>
-          <HomeSvg className={classes.navIcon} fill={currentFill} />
-          {/* <img className={classes.navIcon} src={home} alt='' /> */}
+      <NavLink to='/home'>
+        <div
+          onClick={() => handleTabClick("home")}
+          className={`${classes.navBlock} ${
+            activeTab === "home" ? classes.active : ""
+          }`}
+        >
+          <img
+            className={classes.navIcon}
+            src={activeTab === "home" ? homeActive : homeBase}
+            alt=''
+          />
           <div className={classes.navTitle}>홈</div>
-        </NavLink>
-      </div>
-      <div className={classes.navBlock}>
-        <NavLink to='/info'>
-          <img className={classes.navIcon} src={info} alt='' />
-          <div className={classes.navTitle}>정보</div>
-        </NavLink>
-      </div>
-      <div className={classes.navBlock}>
-        <NavLink to='/schedule'>
-          <img className={classes.navIcon} src={schedule} alt='' />
-          <div className={classes.navTitle}>캘린더</div>
-        </NavLink>
-      </div>
-      <div className={classes.navBlock}>
-        <NavLink to='/diary'>
-          <img className={classes.navIcon} src={diary} alt='' />
+        </div>
+      </NavLink>
+
+      <NavLink to='/info'>
+        <div
+          onClick={() => handleTabClick("info")}
+          className={`${classes.navBlock} ${
+            activeTab === "info" ? classes.active : ""
+          }`}
+        >
+          <img
+            className={classes.navIcon}
+            src={activeTab === "info" ? infoActive : infoBase}
+            alt=''
+          />
+          <div className={classes.navTitle}>웨딩정보</div>
+        </div>
+      </NavLink>
+      <NavLink to='/schedule'>
+        <div
+          onClick={() => handleTabClick("schedule")}
+          className={`${classes.navBlock} ${
+            activeTab === "schedule" ? classes.active : ""
+          }`}
+        >
+          <img
+            className={classes.navIcon}
+            src={activeTab === "schedule" ? scheduleActive : scheduleBase}
+            alt=''
+          />
+          <div className={classes.navTitle}>스케줄</div>
+        </div>
+      </NavLink>
+      <NavLink to='/diary'>
+        <div
+          onClick={() => handleTabClick("diary")}
+          className={`${classes.navBlock} ${
+            activeTab === "diary" ? classes.active : ""
+          }`}
+        >
+          <img
+            className={classes.navIcon}
+            src={activeTab === "diary" ? diaryActive : diaryBase}
+            alt=''
+          />
           <div className={classes.navTitle}>다이어리</div>
-        </NavLink>
-      </div>
-      <div className={classes.navBlock}>
-        <NavLink to='/my-page'>
-          <img className={classes.navIcon} src={myPage} alt='' />
-          <div className={classes.navTitle}>내정보</div>
-        </NavLink>
-      </div>
+        </div>
+      </NavLink>
+      <NavLink to='/my-page'>
+        <div
+          onClick={() => handleTabClick("mypage")}
+          className={`${classes.navBlock} ${
+            activeTab === "mypage" ? classes.active : ""
+          }`}
+        >
+          <img
+            className={classes.navIcon}
+            src={activeTab === "mypage" ? myPageActive : myPageBase}
+            alt=''
+          />
+          <div className={classes.navTitle}>내정보.</div>
+        </div>
+      </NavLink>
     </nav>
   );
 };
