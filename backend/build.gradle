@@ -48,6 +48,9 @@ dependencies {
 
     //firebase sdk
     implementation 'com.google.firebase:firebase-admin:7.1.0'
+
+    // aws S3
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
 
 tasks.named('test') {
