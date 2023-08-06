@@ -33,7 +33,7 @@ abbr[title] {
   text-decoration: none;
   color: #090909;
   padding: 10px 0px;
-  border-bottom: solid 1px black;
+  border-bottom: solid 1px #666;
   font-weight: bold;
   font-size: 18px;
 }
@@ -55,6 +55,7 @@ abbr[title] {
   border: none;
   font-size: 17px;
   height: 52px;
+  font-family: 'SUITE-Regular';
 }
 
 .react-calendar__tile:enabled:hover,
@@ -70,19 +71,31 @@ abbr[title] {
 
 /* 오늘날짜 */
 .react-calendar__tile--now {
-  background-color: #FF647C;
+  background-color: #D8D8D8;
   color: white;
   border-radius: 50%;
 }
-
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  color: black;
+  color: white;
+}
+/* 선택된 날짜 */
+.selected-day {
+  background-color: #FF647C;
+  color: white;
+  border-radius: 50%;
+}
+
+.selected-day:enabled:hover,
+.selected-day:enabled:focus {
+  background-color: #FF647C;
+  color: white;
 }
 
 .react-calendar__navigation__label{
   font-size: 40px;
 }
+
