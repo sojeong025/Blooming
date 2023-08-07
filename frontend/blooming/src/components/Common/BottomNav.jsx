@@ -71,7 +71,7 @@ const BottomNav = () => {
         }
         className={classes.item2}
       />
-      <label htmlFor='item-2' onClick={() => handleNavigation("/info")}>
+      <label htmlFor='item-2' onClick={() => handleNavigation("/info/wedding-hall")}>
         <span>
           <Info />
         </span>

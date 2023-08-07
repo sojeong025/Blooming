@@ -18,7 +18,7 @@ export default function WeddingHall() {
   const navigate = useNavigate();
 
   const handleNavigation = (product) => {
-    navigate(`/make-up/${product.id}`, { state: { product } });
+    navigate(`/info/${product.id}`, { state: { product } });
   };
 
   const fetchData = async () => {
@@ -44,7 +44,7 @@ export default function WeddingHall() {
   }, [])
 
   return (
-    <div>
+    <div style={{top:'102px'}}>
       <ErrorModal
         buttonText={"다시시도"}
         show={errorModal}
@@ -59,7 +59,7 @@ export default function WeddingHall() {
           onClick={() => {
             setErrorModal(false);
           }}
-        >
+        >X
         </button>
       </ErrorModal>
       <InfiniteScroll

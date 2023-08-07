@@ -38,6 +38,7 @@ import WeddingHall from "./Pages/Info/WeddingHall";
 import Studio from "./Pages/Info/Studio";
 import Dress from "./Pages/Info/Dress";
 import MakeUp from "./Pages/Info/MakeUp";
+import InfoDetail from "./Pages/Info/InfoDetail";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
 import MobileInvitationDetail from "./Pages/Info/MobileInvitationDetail";
 import Create from "./Pages/Info/Create";
@@ -98,6 +99,7 @@ function App() {
             <Route path='studio' element={<Studio />} />
             <Route path='dress' element={<Dress />} />
             <Route path='make-up' element={<MakeUp />} />
+            <Route path=":id" element={<InfoDetail />} />
             <Route path='mobile-invitation' element={<MobileInvitation />} />
           </Route>
           <Route
