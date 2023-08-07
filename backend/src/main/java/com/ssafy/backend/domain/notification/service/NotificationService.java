@@ -64,7 +64,8 @@ public class NotificationService {
                     notification.getReadStatus(),
                     notification.getNotificationType(),
                     notification.getTitle(),
-                    notification.getContent()
+                    notification.getContent(),
+                    notification.getCreatedDate()
             );
             result.add(notificationResultDto);
         }

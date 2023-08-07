@@ -5,6 +5,8 @@ import com.ssafy.backend.domain.notification.ReadStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @Getter
 public class NotificationResultDto {
@@ -14,4 +16,5 @@ public class NotificationResultDto {
     private NotificationType notificationType;
     private String title;
     private String content;
+    private LocalDateTime createdAt;
 }
