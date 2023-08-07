@@ -80,7 +80,7 @@ public class WishlistService {
         System.out.println("위시리스트 커플 사이즈 출력");
         System.out.println(userList.size());
 
-        List<Wishlist> wishlists = null;
+        List<Wishlist> wishlists = new ArrayList<>();
         for(User u : userList) {
             if (!Objects.equals(user.getId(), u.getId())) {
                 wishlists = wishlistRepository.findAllByUserId(u.getId());
