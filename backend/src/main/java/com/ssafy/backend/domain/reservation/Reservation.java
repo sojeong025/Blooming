@@ -24,9 +24,9 @@ public class Reservation {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
 //    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate reservedDate;
-    @DateTimeFormat(pattern = "kk:mm")
-    @JsonSerialize(using = LocalTimeSerializer.class)
-    @JsonDeserialize(using = LocalTimeDeserializer.class)
+//    @DateTimeFormat(pattern = "kk:mm")
+//    @JsonSerialize(using = LocalTimeSerializer.class)
+//    @JsonDeserialize(using = LocalTimeDeserializer.class)
     private LocalTime reservedTime;
 
     //연관: 회원 : 다대일 양방향!!
