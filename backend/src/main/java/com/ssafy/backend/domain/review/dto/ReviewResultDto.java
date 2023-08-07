@@ -11,4 +11,8 @@ public class ReviewResultDto {
     private String image;
     private String content;
     private int likeCnt;
+
+    //상품 조회 추가
+    private Long productId;
+    private String productName;
 }
