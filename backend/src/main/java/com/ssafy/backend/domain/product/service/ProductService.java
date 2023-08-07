@@ -31,7 +31,7 @@ public class ProductService {
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
 
 
-        List<ProductResultDto> result = productRepository.getProductWithWish(user, productType, pageable);
+        List<ProductResultDto> result = productRepository.getProductWithWish(user.getId(), productType, pageable);
         System.out.println("product wish Before sort");
         System.out.println(result);
         Collections.sort(result, new Comparator<ProductResultDto>() {
