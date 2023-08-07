@@ -16,14 +16,13 @@ import { customAxios } from "../../lib/axios";
 
 const NoticeSwipeable = () => {
   const [fullSwipe] = useState(true);
-
   const [notice, setNotice] = useState([]);
-
   const [page, setPage] = useState(0);
+
   const fetchNotice = async () => {
     const params = { page, size: 20 };
     try {
-      const response = customAxios.get("notification", { params });
+      const response = await customAxios.get("notification", { params });
       console.log(response);
       // setNotice(response.data.result[0]);
       setPage(page + 1);
