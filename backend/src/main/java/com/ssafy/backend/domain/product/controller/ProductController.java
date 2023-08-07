@@ -29,8 +29,9 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @Operation(summary = "상품 타입별로 상품 한 페이지 조회하기", description = "지정된 타입의 상품을 한 페이지만큼 가져옵니다.")
+    @Operation(summary = "상품 타입별로 상품 한 페이지(4개씩) 조회하기", description = "지정된 타입의 상품을 한 페이지만큼 가져옵니다.")
     @GetMapping("/product/{productType}")
+    @Parameter(name = "페이지 번호")
     public ResponseEntity<BasicResponse> getTypeProduct(@PathVariable ProductType productType, Pageable pageable){
         List<Product> products = productService.getTypeProduct(productType, pageable);
 
@@ -57,8 +58,5 @@ public class ProductController {
         }
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
-
-
-
 
 }
