@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -76,16 +77,21 @@ public class WishlistService {
         // 커플 가져와서 커플의 아이디로 검색
         Couple couple = user.getCouple();
         List<User> userList = couple.getUsers();
+        System.out.println("위시리스트 커플 사이즈 출력");
+        System.out.println(userList.size());
 
         List<Wishlist> wishlists = null;
         for(User u : userList) {
-            if (user.getId() != u.getId()) {
+            if (!Objects.equals(user.getId(), u.getId())) {
                 wishlists = wishlistRepository.findAllByUserId(u.getId());
             }
         }
+
         List<Long> result = new ArrayList<>();
-        for (Wishlist wish : wishlists){
-            result.add(wish.getProduct().getId());
+        if(!wishlists.isEmpty()){
+            for(Wishlist wish : wishlists){
+                result.add(wish.getProduct().getId());
+            }
         }
         return result;
     }
