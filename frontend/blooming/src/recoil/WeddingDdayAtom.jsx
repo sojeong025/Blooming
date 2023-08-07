@@ -27,3 +27,18 @@ export const weddingDdayCal = selector({
     return null;
   },
 });
+
+// 웨딩 날짜 이전 여부 판별
+export const isWeddingDatePast = selector({
+  key: "isWeddingDatePast",
+  get: ({ get }) => {
+    const todayDate = dayjs().startOf("day");
+    const weddingDate = get(weddingDateState);
+
+    if (weddingDate) {
+      const myWeddingDate = dayjs(weddingDate).startOf("day");
+      return myWeddingDate.isBefore(todayDate);
+    }
+    return null;
+  },
+});

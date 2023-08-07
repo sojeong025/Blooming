@@ -29,36 +29,34 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @Operation(summary = "상품 타입별로 상품 한 페이지 조회하기", description = "지정된 타입의 상품을 한 페이지만큼 가져옵니다.")
+    @Operation(summary = "상품 타입별로 상품 한 페이지(4개씩) 조회하기", description = "지정된 타입의 상품을 한 페이지만큼 가져옵니다.")
     @GetMapping("/product/{productType}")
+    @Parameter(name = "페이지 번호")
     public ResponseEntity<BasicResponse> getTypeProduct(@PathVariable ProductType productType, Pageable pageable){
-        List<Product> products = productService.getTypeProduct(productType, pageable);
+        List<ProductResultDto> products = productService.getTypeProduct(productType, pageable);
 
         BasicResponse basicResponse;
         if (products == null){
             basicResponse = BasicResponse.builder()
-                    .code(HttpStatus.NO_CONTENT.value())
-                    .httpStatus(HttpStatus.NO_CONTENT)
+                    .code(HttpStatus.BAD_REQUEST.value())
+                    .httpStatus(HttpStatus.BAD_REQUEST)
                     .message("상품 타입에 대한 한 페이지 상품 조회 실패")
                     .count(0).build();
         }
         else{
             //dto로 변환
-            List<ProductResultDto> productResultDtoList = products.stream()
-                    .map(product -> new ProductResultDto(product.getId(), product.getItemName(), product.getBrief(), product.getThumbnail(), product.getDetailImage1(), product.getDetailImage2(), product.getDetailImage3(), product.getCompany(), product.getCompanyTime(), product.getCompanyAddress()))
-                    .collect(Collectors.toList());
+//            List<ProductResultDto> productResultDtoList = products.stream()
+//                    .map(product -> new ProductResultDto(product.getId(), product.getItemName(), product.getBrief(), product.getThumbnail(), product.getDetailImage1(), product.getDetailImage2(), product.getDetailImage3(), product.getCompany(), product.getCompanyTime(), product.getCompanyAddress()))
+//                    .collect(Collectors.toList());
 
             basicResponse = BasicResponse.builder()
                     .code(HttpStatus.OK.value())
                     .httpStatus(HttpStatus.OK)
                     .message("상품 타입에 대한 한 페이지 상품 조회 성공")
-                    .count(productResultDtoList.size())
-                    .result(Collections.singletonList(productResultDtoList)).build();
+                    .count(products.size())
+                    .result(Collections.singletonList(products)).build();
         }
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
-
-
-
 
 }

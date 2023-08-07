@@ -66,7 +66,9 @@ public class ReviewService {
                     review.getStar(),
                     review.getImage(),
                     review.getContent(),
-                    review.getLikeCnt()
+                    review.getLikeCnt(),
+                    review.getProduct().getId(),
+                    review.getProduct().getItemName()
             ));
         }
 
@@ -90,7 +92,9 @@ public class ReviewService {
                     review.getStar(),
                     review.getImage(),
                     review.getContent(),
-                    review.getLikeCnt()
+                    review.getLikeCnt(),
+                    review.getProduct().getId(),
+                    review.getProduct().getItemName()
             ));
         }
 

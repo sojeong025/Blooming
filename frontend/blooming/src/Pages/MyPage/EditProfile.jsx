@@ -5,37 +5,29 @@ import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 import InputForm from "../../components/Common/InputText";
 import { useNavigate } from "react-router-dom";
-import { responsiveArray } from "antd/es/_util/responsiveObserver";
 
 const EditProfile = () => {
-  const [userData, setUserData] = useRecoilState(userState);
-
-  const [formData, setFormData] = useState({
-    email: "",
-    name: "",
-    nickname: "",
-    phoneNumber: "",
-    gender: "",
-    coupleCode: 0,
-  });
   const navigate = useNavigate();
 
+  const [userData, setUserData] = useRecoilState(userState);
+  const [formData, setFormData] = useState({});
+
+  // 기존 데이터 채우기
   useEffect(() => {
     setFormData({ ...userData });
   }, []);
 
   const updateUserData = async () => {
     try {
-      const response = await customAxios.put(
+      await customAxios.put(
         "profile",
         // 수정할 데이터
         { ...formData },
       );
       setUserData({ ...formData });
       navigate("/my-page");
-      // console.log(response);
     } catch (error) {
-      console.log(error);
+      console.log("정보수정 에러", error);
     }
   };
 
@@ -45,7 +37,7 @@ const EditProfile = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const putSubmit = async (event) => {
+  const submitUpdate = async (event) => {
     event.preventDefault();
     updateUserData();
   };
@@ -61,10 +53,7 @@ const EditProfile = () => {
 
   return (
     <div className={`mainContainer ${classes.EditContainer}`}>
-      <div className={classes.profileImg}>
-        <img src={userData.profileImg} alt='' />
-      </div>
-      <form onSubmit={putSubmit}>
+      <form onSubmit={submitUpdate}>
         <InputForm
           label='이름'
           name='name'
@@ -77,6 +66,7 @@ const EditProfile = () => {
           name='nickname'
           value={formData.nickname}
           onChange={handleChange}
+          required
         />
         <InputForm
           label='전화번호'
@@ -87,10 +77,11 @@ const EditProfile = () => {
           required
         />
         <button type='submit' className={classes.submitButton}>
-          제출
+          수정
         </button>
       </form>
-      <button onClick={deleteProfile}>회원탈퇴</button>
+
+      <a onClick={deleteProfile}>회원탈퇴</a>
     </div>
   );
 };

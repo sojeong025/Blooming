@@ -42,3 +42,12 @@
 
   padding-top: 1vh;
 }
+
+/* 읽음 */
+.read {
+  color: gray;
+}
+/* 안읽음 */
+.unread{
+  color: black;
+}

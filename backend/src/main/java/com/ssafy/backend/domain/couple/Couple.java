@@ -26,7 +26,7 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
     private LocalDate weddingDate;
     private int coupleCode;
 
-    @OneToMany(mappedBy = "couple")
+    @OneToMany(mappedBy = "couple", fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "couple")

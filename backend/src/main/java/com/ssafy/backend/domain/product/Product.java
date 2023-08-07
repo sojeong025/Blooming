@@ -23,9 +23,9 @@ public class Product {
 
     //이미지 정보-- 미정
     private String thumbnail; //대표이미지
-    private String detailImage1;
-    private String detailImage2;
-    private String detailImage3;
+    // private String detailImage1;
+    // private String detailImage2;
+    // private String detailImage3;
 
     //업체 정보
     private String company;

@@ -27,13 +27,21 @@ import Home from "./Pages/Home";
 import Schedule from "./Pages/Schedule";
 // my-page
 import MyPage from "./Pages/MyPage/MyPage";
-import SettingPage from "./Pages/MyPage/SettingPage";
+import SettingNotice from "./Pages/MyPage/SettingNotice";
 import EditProfile from "./Pages/MyPage/EditProfile";
+import MyReservation from "./components/MyPage/MyReservation";
+import MyReview from "./components/MyPage/MyReview";
+import MyWishlist from "./components/MyPage/MyWishlist";
 // diary
 import Diary from "./Pages/Diary/Diary";
 import DiaryDetails from "./Pages/Diary/DiaryDetails";
 // info
 import Info from "./Pages/Info/Info";
+import WeddingHall from "./Pages/Info/WeddingHall";
+import Studio from "./Pages/Info/Studio";
+import Dress from "./Pages/Info/Dress";
+import MakeUp from "./Pages/Info/MakeUp";
+import InfoDetail from "./Pages/Info/InfoDetail";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
 import MobileInvitationDetail from "./Pages/Info/MobileInvitationDetail";
 import Create from "./Pages/Info/Create";
@@ -43,8 +51,21 @@ import AllNotice from "./Pages/Notice/AllNotice";
 import Error from "./Pages/Error";
 
 function App() {
-  // Nav를 숨길 페이지 path
-  const hiddenPaths = ["/", "/login", "/go-join", "/question", "/share"];
+  // BottomNav를 숨길 페이지 path
+  const hiddenTopPaths = ["/", "/kakaologin", "/login"];
+  // BottomNav를 숨길 페이지 path
+  const hiddenBottomPaths = [
+    "/",
+    "/kakaologin",
+    "/login",
+    "/go-join",
+    "/join",
+    "/join-code",
+    "/question",
+    "/decide-wedding",
+    "/choose-wedding",
+    "/share",
+  ];
 
   const Routing = () => {
     function setScreenSize() {
@@ -58,7 +79,7 @@ function App() {
     const location = useLocation();
     return (
       <>
-        {!hiddenPaths.includes(location.pathname) && <TopAppBar />}
+        {!hiddenTopPaths.includes(location.pathname) && <TopAppBar />}
         <Routes>
           <Route path='/' element={<Splash />} />
           <Route path='/home' element={<Home />} />
@@ -76,8 +97,14 @@ function App() {
           <Route path='/share' element={<Share />} />
 
           {/* 웨딩정보 */}
-          <Route path='/info' element={<Info />} />
-          <Route path='/mobile-invitation' element={<MobileInvitation />} />
+          <Route path='/info' element={<Info />}>
+            <Route path='wedding-hall' element={<WeddingHall />} />
+            <Route path='studio' element={<Studio />} />
+            <Route path='dress' element={<Dress />} />
+            <Route path='make-up' element={<MakeUp />} />
+            <Route path=":id" element={<InfoDetail />} />
+            <Route path='mobile-invitation' element={<MobileInvitation />} />
+          </Route>
           <Route
             path='/mobile-invitation-detail'
             element={<MobileInvitationDetail />}
@@ -90,9 +117,12 @@ function App() {
 
           {/* 마이페이지 */}
           <Route path='/my-page' element={<MyPage />} />
-          <Route path='/setting' element={<SettingPage />} />
+          <Route path='/setting-notice' element={<SettingNotice />} />
           <Route path='/edit-profile' element={<EditProfile />} />
-
+          <Route path='/my-wishlist' element={<MyWishlist />} />
+          <Route path='/my-review' element={<MyReview />} />
+          <Route path='/my-reservation' element={<MyReservation />} />
+          
           {/* 스케줄 */}
           <Route path='/schedule' element={<Schedule />} />
 
@@ -100,7 +130,7 @@ function App() {
           <Route path='*' element={<Error />} />
         </Routes>
 
-        {!hiddenPaths.includes(location.pathname) && <BottomNav />}
+        {!hiddenBottomPaths.includes(location.pathname) && <BottomNav />}
       </>
     );
   };

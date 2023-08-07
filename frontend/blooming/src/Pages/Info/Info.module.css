@@ -1,0 +1,19 @@
+.navContainer {
+  top: 56px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 0px;
+}
+
+.navContainer div {
+  font-size: 18px;
+  font-weight: 600;
+  color: #555;
+}
+
+.navContainer div:hover {
+  color: #000;
+}
