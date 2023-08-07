@@ -94,11 +94,11 @@ function App() {
 
           {/* 웨딩정보 */}
           <Route path='/info' element={<Info />}>
-            <Route path='/wedding-hall' element={<WeddingHall />} />
-            <Route path='/studio' element={<Studio />} />
-            <Route path='/dress' element={<Dress />} />
-            <Route path='/make-up' element={<MakeUp />} />
-            <Route path='/mobile-invitation' element={<MobileInvitation />} />
+            <Route path='wedding-hall' element={<WeddingHall />} />
+            <Route path='studio' element={<Studio />} />
+            <Route path='dress' element={<Dress />} />
+            <Route path='make-up' element={<MakeUp />} />
+            <Route path='mobile-invitation' element={<MobileInvitation />} />
           </Route>
           <Route
             path='/mobile-invitation-detail'
