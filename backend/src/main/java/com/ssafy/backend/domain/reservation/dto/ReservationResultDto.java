@@ -17,9 +17,7 @@ public class ReservationResultDto {
     private Long reservationId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reservedDate;
-//    @JsonSerialize(using = LocalTimeSerializer.class)
-//    @JsonDeserialize(using = LocalTimeDeserializer.class)
-//    @DateTimeFormat(pattern = "kk:mm")
+    @DateTimeFormat(pattern = "kk:mm")
     private LocalTime reservedTime;
     private Long productId;
 }

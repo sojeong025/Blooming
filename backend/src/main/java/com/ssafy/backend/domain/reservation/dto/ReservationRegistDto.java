@@ -1,5 +1,6 @@
 package com.ssafy.backend.domain.reservation.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
@@ -16,10 +17,8 @@ public class ReservationRegistDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reservedDate;
-//    @JsonSerialize(using = LocalTimeSerializer.class)
-//    @JsonDeserialize(using = LocalTimeDeserializer.class)
-//    @DateTimeFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
-    private String reservedTime;
+    @DateTimeFormat(pattern = "kk:mm")
+    private LocalTime reservedTime;
     private Long product_id;
 
 }
