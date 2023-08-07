@@ -1,5 +1,6 @@
 package com.ssafy.backend.domain.wishlist;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ssafy.backend.domain.common.CreatedBaseEntity;
 import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.user.User;
@@ -25,6 +26,7 @@ public class Wishlist extends CreatedBaseEntity {
     private User user;
 
     @ManyToOne(fetch = LAZY)
+    @JsonIgnore
     @JoinColumn(name="PRODUCT_ID")
     private Product product;
 
