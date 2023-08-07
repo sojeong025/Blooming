@@ -24,13 +24,13 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    public Slice<ProductResultDto> getTypeProduct(ProductType productType, Pageable pageable) {
+    public Slice<ProductResultDto> getTypeProduct(ProductType productType, int page, int size) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
 
 //        List<ProductResultDto> result = productRepository.getProductWithWish(user.getId(), productType, pageable);
-        PageRequest pageRequest = PageRequest.of((int) pageable.getOffset(), pageable.getPageSize(), Sort.by(Sort.Direction.ASC));
+        PageRequest pageRequest = PageRequest.of(page, size);
 
         //        //타입에 맞는 상품 받아옴
 //        List<Product> products = productRepository.findByProductType(productType, pageable);
