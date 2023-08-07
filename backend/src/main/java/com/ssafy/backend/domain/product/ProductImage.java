@@ -9,10 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProductImage {
 
 	@Id
@@ -25,4 +28,8 @@ public class ProductImage {
 	private Product product;
 
 	private String image;
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 }
