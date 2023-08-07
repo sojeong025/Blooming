@@ -14,17 +14,84 @@
   overflow: hidden;
   z-index: 21;
 }
+/* ----------------top 자리------------------- */
+.actions {
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 56px;
+  background-color: #FFFAF4;
+}
+.datePickerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55vw;
+  z-index: 1000;
+}
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: #FF647C;;
+  color: white;
+  font-size: 20px;
+  padding: 0 25px;
+}
+
+/* 일단은 동일하게 해놓기..? */
+.actions button:hover {
+  background-color: #FF647C;
+  color: white;
+}
+
+.actions button[type='button'] {
+  background-color: transparent;
+  color: #666;
+}
+
+
+
+
+
 /* --------------사진자리----------- */
 .imageContainer {
   width: 100vw;
+  height: 45vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 .imageContainer img {
   width: 100vw;
-  height: 30vh;
+  height: 45vh;
   object-fit: cover;
   overflow: hidden;
-  z-index: 10;
+  z-index: 2;
 }
+.imageContainer input {
+  width: 200px;
+}
+.label {
+  font-size: 30px;
+  padding: 20px 25px;
+  color: #fff;
+  position: absolute;
+  z-index: 5;
+  font-family: 'SUITE-regular';
+  background-color: #a1a0a0;
+}
+
+
 
 /* --------------내용자리----------- */
 .text {
@@ -71,42 +138,4 @@
 }
 .context:focus{
   outline: none;
-}
-/* -------------------------------- */
-
-
-/* top 자리 */
-.actions {
-  /* border: 1px solid black; */
-  display: flex;
-  justify-content: space-between;
-  width: 100vw;
-  height: 56px;
-  background-color: #FFFAF4;
-}
-.datePickerContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 55vw;
-}
-.actions button {
-  cursor: pointer;
-  font: inherit;
-  border: none;
-  background-color: #FF647C;;
-  color: white;
-  font-size: 20px;
-  padding: 0 25px;
-}
-
-/* 일단은 동일하게 해놓기..? */
-.actions button:hover {
-  background-color: #FF647C;
-  color: white;
-}
-
-.actions button[type='button'] {
-  background-color: transparent;
-  color: #666;
 }
