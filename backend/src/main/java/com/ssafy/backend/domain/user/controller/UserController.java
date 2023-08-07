@@ -126,7 +126,7 @@ public class UserController {
         // 헤더에 토큰 정보 추가
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
-        headers.add("Authorization_refresh", refreshToken);
+        headers.add("Authorization_refresh", "Bearer " + refreshToken);
 
         jwtService.updateRefreshToken(authentication.getName(), refreshToken);
 
