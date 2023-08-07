@@ -40,7 +40,7 @@ public class Schedule extends CreatedBaseEntity {
     //예약 id 추가
     private Long reservationId;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne//(fetch = LAZY)
     @JoinColumn(name = "COUPLE_ID")
     private Couple couple;
 
