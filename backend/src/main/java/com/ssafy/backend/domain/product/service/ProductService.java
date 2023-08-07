@@ -29,6 +29,7 @@ public class ProductService {
 
 
         List<Object[]> result = productRepository.getProductWithWish(user, productType, pageable);
+        System.out.println("product wish");
         System.out.println(result);
 
         return null;
