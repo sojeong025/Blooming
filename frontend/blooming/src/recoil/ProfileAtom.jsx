@@ -9,7 +9,7 @@ export const userState = atom({
     name: "나이름",
     nickname: "나",
     phoneNumber: "11",
-    profileImg: "",
+    profileImage: "",
   },
 });
 export const userCoupleState = atom({
@@ -20,7 +20,7 @@ export const userCoupleState = atom({
     name: "너이름",
     nickname: "너",
     phoneNumber: "11",
-    profileImg: "",
+    profileImage: "",
   },
 });
 
