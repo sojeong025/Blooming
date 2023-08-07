@@ -65,7 +65,7 @@ export default function InfoDetail() {
   }
 
   return (
-    <div>
+    <div style={{marginTop: '102px', marginBottom: '80px'}}>
       <p>{product.id}</p>
       <p>{product.itemName}</p>
       <p>{product.brief}</p>
