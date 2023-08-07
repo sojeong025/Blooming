@@ -9,7 +9,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Getter
-@AllArgsConstructor
+//@AllArgsConstructor
 public class ProductResultDto {
 
     private Long id;
