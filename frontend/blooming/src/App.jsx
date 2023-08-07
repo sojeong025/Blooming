@@ -38,6 +38,7 @@ import WeddingHall from "./Pages/Info/WeddingHall";
 import Studio from "./Pages/Info/Studio";
 import Dress from "./Pages/Info/Dress";
 import MakeUp from "./Pages/Info/MakeUp";
+import InfoDetail from "./Pages/Info/InfoDetail";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
 import MobileInvitationDetail from "./Pages/Info/MobileInvitationDetail";
 import Create from "./Pages/Info/Create";
@@ -93,12 +94,14 @@ function App() {
           <Route path='/share' element={<Share />} />
 
           {/* 웨딩정보 */}
-          <Route path='/info' element={<Info />} />
-          <Route path='/wedding-hall' element={<WeddingHall />} />
-          <Route path='/studio' element={<Studio />} />
-          <Route path='/dress' element={<Dress />} />
-          <Route path='/make-up' element={<MakeUp />} />
-          <Route path='/mobile-invitation' element={<MobileInvitation />} />
+          <Route path='/info' element={<Info />}>
+            <Route path='wedding-hall' element={<WeddingHall />} />
+            <Route path='studio' element={<Studio />} />
+            <Route path='dress' element={<Dress />} />
+            <Route path='make-up' element={<MakeUp />} />
+            <Route path=":id" element={<InfoDetail />} />
+            <Route path='mobile-invitation' element={<MobileInvitation />} />
+          </Route>
           <Route
             path='/mobile-invitation-detail'
             element={<MobileInvitationDetail />}

@@ -69,12 +69,13 @@ public class UserController {
         User userProfile = userService.getUserProfile(authentication.getName());
 
         UserDto userDto = new UserDto(
-            userProfile.getEmail(),
-            userProfile.getName(),
-            userProfile.getNickname(),
-            userProfile.getPhoneNumber(),
-            userProfile.getGender(),
-            userProfile.getCouple().getCoupleCode()
+                userProfile.getProfileImage(),
+                userProfile.getEmail(),
+                userProfile.getName(),
+                userProfile.getNickname(),
+                userProfile.getPhoneNumber(),
+                userProfile.getGender(),
+                userProfile.getCouple().getCoupleCode()
         );
 
         BasicResponse basicResponse = BasicResponse.builder()
@@ -126,7 +127,7 @@ public class UserController {
         // 헤더에 토큰 정보 추가
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + accessToken);
-        headers.add("Authorization_refresh", refreshToken);
+        headers.add("Authorization_refresh", "Bearer " + refreshToken);
 
         jwtService.updateRefreshToken(authentication.getName(), refreshToken);
 

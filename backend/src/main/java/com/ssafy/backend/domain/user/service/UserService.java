@@ -79,12 +79,13 @@ public class UserService {
         }
 
         return new UserDto(
-            user.getEmail(),
-            user.getName(),
-            user.getNickname(),
-            user.getPhoneNumber(),
-            user.getGender(),
-            user.getCouple().getCoupleCode()
+                user.getProfileImage(),
+                user.getEmail(),
+                user.getName(),
+                user.getNickname(),
+                user.getPhoneNumber(),
+                user.getGender(),
+                user.getCouple().getCoupleCode()
         );
     }
 
