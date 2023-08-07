@@ -1,12 +1,16 @@
 package com.ssafy.backend.domain.product;
 
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product {
     @Id
     @GeneratedValue
@@ -31,7 +35,14 @@ public class Product {
     private String company;
     private String companyTime;
     private String companyAddress;
-    
+
     //연관관계는 만들면서 하나씩 추가
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductImage> productImages = new ArrayList<>();
+
+    public void setImage(ProductImage image) {
+        this.getProductImages().add(image);
+        image.setProduct(this);
+    }
 
 }
