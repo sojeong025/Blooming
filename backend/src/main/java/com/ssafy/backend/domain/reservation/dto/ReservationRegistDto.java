@@ -16,10 +16,10 @@ public class ReservationRegistDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate reservedDate;
-    @JsonSerialize(using = LocalTimeSerializer.class)
-    @JsonDeserialize(using = LocalTimeDeserializer.class)
-    @DateTimeFormat(pattern = "kk:mm")
-    private LocalTime reservedTime;
+//    @JsonSerialize(using = LocalTimeSerializer.class)
+//    @JsonDeserialize(using = LocalTimeDeserializer.class)
+//    @DateTimeFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
+    private String reservedTime;
     private Long product_id;
 
 }

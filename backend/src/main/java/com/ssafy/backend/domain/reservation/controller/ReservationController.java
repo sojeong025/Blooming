@@ -1,5 +1,7 @@
 package com.ssafy.backend.domain.reservation.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.Http;
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.reservation.dto.ReservationRegistDto;
@@ -18,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,9 +36,11 @@ public class ReservationController {
     @Operation(summary = "상품 예약하기", description = "상품 상세보기에서 예약 가능")
     @Parameter(name = "ReservationRegistDto", description = "예약 등록")
     @PostMapping("/reservation")
-    public ResponseEntity<BasicResponse> registerReservation(@RequestBody ReservationRegistDto reservationRegistDto){
+    public ResponseEntity<BasicResponse> registerReservation(@RequestBody ReservationRegistDto reservationRegistDto) throws JsonProcessingException {
         //예약하기
-        reservationService.registerReservation(reservationRegistDto);
+        ObjectMapper objectMapper = new ObjectMapper();
+        LocalTime localTime = objectMapper.readValue(reservationRegistDto.getReservedTime(), LocalTime.class);
+        reservationService.registerReservation(reservationRegistDto, localTime);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
