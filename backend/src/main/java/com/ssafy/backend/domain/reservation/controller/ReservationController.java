@@ -37,10 +37,8 @@ public class ReservationController {
     @Parameter(name = "ReservationRegistDto", description = "예약 등록")
     @PostMapping("/reservation")
     public ResponseEntity<BasicResponse> registerReservation(@RequestBody ReservationRegistDto reservationRegistDto) throws JsonProcessingException {
-        //예약하기
-        ObjectMapper objectMapper = new ObjectMapper();
-        LocalTime localTime = objectMapper.readValue(reservationRegistDto.getReservedTime(), LocalTime.class);
-        reservationService.registerReservation(reservationRegistDto, localTime);
+
+        reservationService.registerReservation(reservationRegistDto);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())

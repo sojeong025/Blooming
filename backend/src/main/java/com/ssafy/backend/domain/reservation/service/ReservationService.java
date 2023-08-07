@@ -34,7 +34,7 @@ public class ReservationService {
     private final ScheduleService scheduleService;
 
     @Transactional
-    public void registerReservation(ReservationRegistDto reservationRegistDto, LocalTime localTime) {
+    public void registerReservation(ReservationRegistDto reservationRegistDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication.getName() == null) {
             throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
@@ -48,7 +48,7 @@ public class ReservationService {
                 .orElseThrow(() -> new IllegalArgumentException("아이디에 해당하는 상품이 없습니다."));
 
         //예약 객체 생성
-        Reservation reservation = new Reservation(reservationRegistDto.getReservedDate(), localTime);
+        Reservation reservation = new Reservation(reservationRegistDto.getReservedDate(), reservationRegistDto.getReservedTime());
         reservation.setUser(findUser);
         reservation.setProduct(product);
 
@@ -72,7 +72,7 @@ public class ReservationService {
                 product.getItemName() + " 예약",
                 product.getCompany() + " 에 방문해주세요",
                 reservationRegistDto.getReservedDate(),
-                localTime,
+                reservationRegistDto.getReservedTime(),
                 ScheduledBy.COMMON,
                 scheduleType,
                 reservation.getId()
