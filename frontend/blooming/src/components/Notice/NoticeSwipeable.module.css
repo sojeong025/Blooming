@@ -4,20 +4,24 @@
   background-color: red;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 8px;
-  box-sizing: border-box;
+  justify-content: center;
 }
-.Icon {
-  width: 32px;
-  height: 32px;
-  align-self: center;
+.logo {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+.delete {
+  color: white;
+  font-size: 1rem;
 }
 
 .ItemBox {
   max-height: 10vh;
   width: 100%;
-  padding: 1vh 2vh;
+  padding: 1vh 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   display: flex;
@@ -26,28 +30,31 @@
 
 .ItemTitle {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1rem;
+  padding-bottom: 0.5vh;
+  margin: 0;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .ItemContent {
-  font-size: 14px;
+  margin: 0;
+  padding-bottom: 1vh;
+  font-size: 0.875rem;
+  max-height: 1.75rem;
+
+  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+
   /* 2줄이상 말줄임 */
   display:-webkit-box;
   -webkit-box-orient:vertical;
-  overflow:hidden;
   -webkit-line-clamp:2;
+  overflow: hidden;
 }
 .ItemTime {
   font-size: 12px;
   color: gray;
-
   padding-top: 1vh;
-}
-
-/* 읽음 */
-.read {
-  color: gray;
-}
-/* 안읽음 */
-.unread{
-  color: black;
 }
