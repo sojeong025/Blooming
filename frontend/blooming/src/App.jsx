@@ -29,6 +29,9 @@ import Schedule from "./Pages/Schedule";
 import MyPage from "./Pages/MyPage/MyPage";
 import SettingNotice from "./Pages/MyPage/SettingNotice";
 import EditProfile from "./Pages/MyPage/EditProfile";
+import MyReservation from "./components/MyPage/MyReservation";
+import MyReview from "./components/MyPage/MyReview";
+import MyWishlist from "./components/MyPage/MyWishlist";
 // diary
 import Diary from "./Pages/Diary/Diary";
 import DiaryDetails from "./Pages/Diary/DiaryDetails";
@@ -116,7 +119,10 @@ function App() {
           <Route path='/my-page' element={<MyPage />} />
           <Route path='/setting-notice' element={<SettingNotice />} />
           <Route path='/edit-profile' element={<EditProfile />} />
-
+          <Route path='/my-wishlist' element={<MyWishlist />} />
+          <Route path='/my-review' element={<MyReview />} />
+          <Route path='/my-reservation' element={<MyReservation />} />
+          
           {/* 스케줄 */}
           <Route path='/schedule' element={<Schedule />} />
 

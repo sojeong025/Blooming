@@ -24,7 +24,7 @@ export default function WeddingHall() {
   const fetchData = async () => {
     try {
       const nextPage = currentPage + 1;
-      const response = await customAxios.get("product/드레스", { params: {page: nextPage, size: 4, sort: 'asc'} });
+      const response = await customAxios.get("product/DRESS", { params: {page: nextPage, size: 4, sort: 'asc'} });
       
       if (response.data.result.length === 0) {
         setHasMore(false);
