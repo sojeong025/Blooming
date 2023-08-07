@@ -19,3 +19,8 @@ export const makeUpState = atom({
   key: "makeUpState",
   default: [],
 });
+
+export const reviewState = atom({
+  key: "reviewState",
+  default: [],
+})
