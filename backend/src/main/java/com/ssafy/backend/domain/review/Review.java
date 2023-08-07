@@ -22,7 +22,7 @@ public class Review {
 
     //연관관계
     // 일단 단방향
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//(fetch = FetchType.LAZY) //일단 해제
     @JoinColumn(name = "product_id")
     private Product product;
 

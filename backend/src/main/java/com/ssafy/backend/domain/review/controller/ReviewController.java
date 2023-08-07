@@ -46,8 +46,8 @@ public class ReviewController {
         BasicResponse basicResponse;
         if (reviewList == null) {
             basicResponse = BasicResponse.builder()
-                    .code(HttpStatus.NO_CONTENT.value())
-                    .httpStatus(HttpStatus.NO_CONTENT)
+                    .code(HttpStatus.BAD_REQUEST.value())
+                    .httpStatus(HttpStatus.BAD_REQUEST)
                     .message("상품에 대한 한 페이지 리뷰 조회 실패")
                     .count(0).build();
         } else {
@@ -69,8 +69,8 @@ public class ReviewController {
         BasicResponse basicResponse;
         if (reviewList == null) {
             basicResponse = BasicResponse.builder()
-                    .code(HttpStatus.NO_CONTENT.value())
-                    .httpStatus(HttpStatus.NO_CONTENT)
+                    .code(HttpStatus.BAD_REQUEST.value())
+                    .httpStatus(HttpStatus.BAD_REQUEST)
                     .message("회원에 대한 한 페이지 리뷰 조회 실패")
                     .count(0).build();
         } else {
