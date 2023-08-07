@@ -3,8 +3,7 @@ import NewTask from "./NewTask";
 import Task from './Task';
 import Modal from './Modal';
 import { useRecoilState } from 'recoil';
-import { ScheduleTaskState } from '../../recoil/SchduleTaskStateAtom';
-import { ScheduleState } from '../../recoil/ScheduleStateAtom';
+import { ScheduleState, ScheduleTaskState } from '../../recoil/ScheduleStateAtom';
 
 function TasksList({isPosting, onStopPosting}) {
   const [tasks, setTasks ]= useRecoilState(ScheduleTaskState);
