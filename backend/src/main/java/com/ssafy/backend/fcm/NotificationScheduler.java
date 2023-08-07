@@ -96,6 +96,10 @@ public class NotificationScheduler {
                 String title = schedule.getScheduleDate() + " " + schedule.getTitle(); //알림 제목은 일단 같게
                 String contentGroom = "";
                 String contentBride = "";
+
+                //null 참조 방지를 위해 닉네임 미리 받기
+                String groomNickname = (groom != null) ? groom.getNickname() : "예비신랑";
+                String brideNickname = (bride != null) ? bride.getNickname() : "예비신부";
                 switch(schedule.getScheduledBy()){
                     case COMMON:
                         //두 명에게 같은 알림 전송
@@ -105,11 +109,11 @@ public class NotificationScheduler {
                     case MALE:
                         //신랑 일정.
                         contentGroom = "내일은 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = "내일은 " + bride.getNickname() + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = "내일은 " + groomNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         break;
                     case FEMALE:
                         //신부 일정.
-                        contentGroom = "내일은 " + groom.getNickname() + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = "내일은 " + brideNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         contentBride = "내일은 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         break;
                 }
@@ -117,23 +121,6 @@ public class NotificationScheduler {
                 //처리한 내용을 알림 전송(신랑, 신부)
                 log.info(sendNotificationByToken(new FCMNotificationRequestDto(groom, title, contentGroom)));
                 log.info(sendNotificationByToken(new FCMNotificationRequestDto(bride, title, contentBride)));
-
-                //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장. - 파라미터는 임시. 수정 필요
-                notificationService.registNotification(new NotificationRegistDto(
-                        ReadStatus.UNREAD,
-                        NotificationType.SCHEDULE,
-                        title,
-                        contentGroom,
-                        groom.getId()
-                ));
-                notificationService.registNotification(new NotificationRegistDto(
-                        ReadStatus.UNREAD,
-                        NotificationType.SCHEDULE,
-                        title,
-                        contentBride,
-                        bride.getId()
-                ));
-
             }
         }
     }
@@ -159,6 +146,15 @@ public class NotificationScheduler {
 
                 try {
                     firebaseMessaging.send(message);
+
+                    //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장.
+                    notificationService.registNotification(new NotificationRegistDto(
+                            ReadStatus.UNREAD,
+                            NotificationType.SCHEDULE,
+                            fcmDto.getTitle(),
+                            fcmDto.getBody(),
+                            fcmDto.getUser().getId()
+                    ));
                     return "알림 전송 성공";
                 } catch (FirebaseMessagingException e) {
                     e.printStackTrace();
