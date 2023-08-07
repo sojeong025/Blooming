@@ -1,5 +1,9 @@
 package com.ssafy.backend.domain.reservation;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.user.User;
 import lombok.Getter;
@@ -18,8 +22,11 @@ public class Reservation {
     private Long id;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate reservedDate;
     @DateTimeFormat(pattern = "kk:mm")
+    @JsonSerialize(using = LocalTimeSerializer.class)
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
     private LocalTime reservedTime;
 
     //연관: 회원 : 다대일 양방향!!
