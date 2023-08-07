@@ -23,13 +23,14 @@ const NoticeSwipeable = () => {
     const params = { page, size: 20 };
     try {
       const response = await customAxios.get("notification", { params });
+      setNotice(response.data.result[0]);
       console.log(response);
-      // setNotice(response.data.result[0]);
       setPage(page + 1);
     } catch (error) {
       console.log("알림 조회 에러", error);
     }
   };
+
   useEffect(() => {
     fetchNotice();
     // setNotice([
