@@ -14,76 +14,56 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { customAxios } from "../../lib/axios";
 
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ko";
+
+import InfiniteScroll from "react-infinite-scroll-component";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+
 const NoticeSwipeable = () => {
   const [fullSwipe] = useState(true);
   const [notice, setNotice] = useState([]);
   const [page, setPage] = useState(0);
 
+  // infiniteScroll
+  const [hasMore, setHasMore] = useState(true);
+
   const fetchNotice = async () => {
     const params = { page, size: 20 };
-    try {
-      const response = await customAxios.get("notification", { params });
-      setNotice(response.data.result[0]);
-      console.log(response);
-      setPage(page + 1);
-    } catch (error) {
-      console.log("알림 조회 에러", error);
+    if (hasMore) {
+      try {
+        const response = await customAxios.get("notification", { params });
+        setNotice((prevNotice) => [...prevNotice, ...response.data.result[0]]);
+        // console.log(response);
+        setPage(page + 1);
+      } catch (error) {
+        console.log("알림 조회 에러", error);
+        setHasMore(false);
+      }
     }
   };
 
   useEffect(() => {
     fetchNotice();
-    // setNotice([
-    //   {
-    //     id: 523,
-    //     readStatus: "UNREAD",
-    //     notificationType: "SCHEDULE",
-    //     title: "2023-08-08 알림제목이다",
-    //     content:
-    //       "내일은 두 분이 알림내용이다 하는 날이에요. 클릭해서 팁을 알아보세요!",
-    //   },
-    //   {
-    //     id: 522,
-    //     readStatus: "UNREAD",
-    //     notificationType: "SCHEDULE",
-    //     title: "2023-08-08 알림제목이다",
-    //     content:
-    //       "내일은 두 분이 알림내용이다 하는 날이에요. 클릭해서 팁을 알아보세요!",
-    //   },
-    //   {
-    //     id: 521,
-    //     readStatus: "UNREAD",
-    //     notificationType: "SCHEDULE",
-    //     title: "2023-08-08 알림제목이다",
-    //     content:
-    //       "내일은 두 분이 알림내용이다 하는 날이에요. 클릭해서 팁을 알아보세요!",
-    //   },
-    // ]);
   }, []);
 
-  const deleteNotice = async (id) => {
+  // 삭제
+  const handleDelete = (id) => async () => {
     try {
       customAxios.delete(`notification/${id}`);
-      setPage(page + 1);
+      // console.log("[DELETE]", id);
+      setNotice(notice.filter((item) => item.id !== id));
     } catch (error) {
       console.log("알림 삭제 에러", error);
     }
   };
-  const handleDelete = (id) => () => {
-    console.log("[DELETE]", id);
-    deleteNotice(id);
-    setNotice(notice.filter((item) => item.id !== id));
-  };
-
-  // 삭제
   const trailingActions = ({ id }) => (
     <TrailingActions>
       <SwipeAction destructive={true} onClick={handleDelete(id)}>
         <div className={classes.ActionContent}>
-          <div className={classes.Icon}>
-            {/* 쓰레기통 아이콘 */}
-            <img src='' alt='삭제' />
-          </div>
+          <RiDeleteBin5Fill className={classes.logo} />
+          <div className={classes.delete}>삭제</div>
         </div>
       </SwipeAction>
     </TrailingActions>
@@ -100,38 +80,70 @@ const NoticeSwipeable = () => {
             item.id === id ? { ...item, readStatus: "READ" } : item,
           ),
         );
-        console.log(id, "읽음");
-      } else {
-        console.log(id, "이미 읽음");
       }
     } catch (error) {
       console.log("읽음 처리 에러", error);
     }
   };
 
+  // 시간 변환
+  dayjs.extend(relativeTime);
+  dayjs.locale("ko");
+  const getRelativeTime = (createdAt) => {
+    const now = dayjs();
+    const created = dayjs(createdAt);
+    return created.from(now);
+  };
+
   return (
     <>
-      <SwipeableList fullSwipe={fullSwipe} type={ListType.IOS}>
-        {notice.map(({ id, readStatus, notificationType, title, content }) => (
-          <SwipeableListItem
-            onClick={() => readNotice({ id, readStatus })}
-            key={id}
-            trailingActions={trailingActions({ id })}
+      <InfiniteScroll
+        dataLength={notice.length}
+        next={fetchNotice}
+        hasMore={hasMore}
+        loader={
+          <p
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            <div
-              className={`${classes.ItemBox} ${
-                readStatus === "UNREAD" ? classes.unread : classes.read
-              }`}
-            >
-              <div className={classes.ItemTitle}>{title}</div>
-              <p className={classes.ItemContent}>{content}</p>
-              <div className={classes.ItemTime}>
-                몇시간전 이나 받은 날짜,시간
-              </div>
-            </div>
-          </SwipeableListItem>
-        ))}
-      </SwipeableList>
+            로딩중...
+          </p>
+        }
+      >
+        <SwipeableList fullSwipe={fullSwipe} type={ListType.IOS}>
+          {notice.map(
+            ({
+              id,
+              readStatus,
+              notificationType,
+              title,
+              content,
+              createdAt,
+            }) => (
+              <SwipeableListItem
+                onClick={() => readNotice({ id, readStatus })}
+                key={id}
+                trailingActions={trailingActions({ id })}
+              >
+                <div
+                  className={`${classes.ItemBox} ${
+                    readStatus === "UNREAD" ? classes.unread : classes.read
+                  }`}
+                >
+                  <div className={classes.ItemTitle}>{title}</div>
+                  <div className={classes.ItemContent}>{content}</div>
+                  <div className={classes.ItemTime}>
+                    {getRelativeTime(createdAt)}
+                  </div>
+                </div>
+              </SwipeableListItem>
+            ),
+          )}
+        </SwipeableList>
+      </InfiniteScroll>
     </>
   );
 };
