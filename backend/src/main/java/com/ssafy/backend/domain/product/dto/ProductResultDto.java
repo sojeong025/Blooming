@@ -21,9 +21,9 @@ public class ProductResultDto {
 
     //이미지 정보-- 미정
     private String thumbnail; //대표이미지
-    private String detailImage1;
-    private String detailImage2;
-    private String detailImage3;
+//    private String detailImage1;
+//    private String detailImage2;
+//    private String detailImage3;
 
     //업체 정보
     private String company;
@@ -33,14 +33,14 @@ public class ProductResultDto {
     //찜 정보
     private User user;
 
-    public ProductResultDto(Long id, String itemName, String brief, String thumbnail, String detailImage1, String detailImage2, String detailImage3, String company, String companyTime, String companyAddress, User user) {
+    public ProductResultDto(Long id, String itemName, String brief, String thumbnail, String company, String companyTime, String companyAddress, User user) {
         this.id = id;
         this.itemName = itemName;
         this.brief = brief;
         this.thumbnail = thumbnail;
-        this.detailImage1 = detailImage1;
-        this.detailImage2 = detailImage2;
-        this.detailImage3 = detailImage3;
+//        this.detailImage1 = detailImage1;
+//        this.detailImage2 = detailImage2;
+//        this.detailImage3 = detailImage3;
         this.company = company;
         this.companyTime = companyTime;
         this.companyAddress = companyAddress;
