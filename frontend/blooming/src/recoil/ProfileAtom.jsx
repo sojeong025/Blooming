@@ -57,3 +57,28 @@ export const coupleRoleState = selector({
     return gender === "MALE" ? "신랑" : "신부";
   },
 });
+
+
+// 나의 예약 정보
+export const reservationState = atom({
+  key: "reservationState",
+  default: [],
+})
+
+// 나의 찜 정보
+export const wishlistState = atom({
+  key: 'wishlistState',
+  default: [],
+})
+
+// 약혼자의 찜 정보
+export const fianceWishlistState = atom({
+  key: 'fianceWishlistState',
+  default: [],
+})
+
+// 나의 리뷰 정보
+export const reviewState = atom({
+  key: 'reviewState',
+  default: [],
+})

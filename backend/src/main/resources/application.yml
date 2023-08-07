@@ -2,6 +2,9 @@ spring:
   logging.level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace # ??? ?? 2.x, hibernate5
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: 'false'
 
 springdoc:
   packages-to-scan: com.ssafy.backend.domain, com.ssafy.backend.global.s3

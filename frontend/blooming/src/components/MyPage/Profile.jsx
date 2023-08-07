@@ -23,8 +23,8 @@ const ProfileBox = ({ isCouple }) => {
             <img
               className={classes.ProfileImg}
               src={
-                userData.profileImg
-                  ? userData.profileImg
+                userData.profileImage
+                  ? userData.profileImage
                   : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${userData.name}`
               }
               alt='profile'
@@ -32,8 +32,8 @@ const ProfileBox = ({ isCouple }) => {
             <img
               className={`${classes.ProfileImg} ${classes.coupleProfile}`}
               src={
-                coupleData.profileImg
-                  ? coupleData.profileImg
+                coupleData.profileImage
+                  ? coupleData.profileImage
                   : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${coupleData.name}`
               }
               alt='profile'
@@ -59,8 +59,8 @@ const ProfileBox = ({ isCouple }) => {
           <img
             className={classes.ProfileImg}
             src={
-              userData.profileImg
-                ? userData.profileImg
+              userData.profileImage
+                ? userData.profileImage
                 : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${userData.name}`
             }
             alt='profile'

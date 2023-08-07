@@ -104,51 +104,62 @@ function CreateItem({ hide, item }) {
   }
 
   return (
-    <>
-      <form className={classes.form} onSubmit={submitHandler}>
-        <div>
-          <label htmlFor="date">날짜 선택</label>
-          <DatePicker
-            showPopperArrow={false}
-            id="date"
-            selected={date}
-            onChange={dateChangeHandler}
-            dateFormat="yyyy-MM-dd"
-            required
-          />
+    <div>
+        <form className={classes.form} onSubmit={submitHandler}>
+        {/* 버튼 사이 날짜 선택 자리 */}
+        <div className={classes.actions}>
+          <button type='button' onClick={hide}>취소</button>
+
+          <div className={classes.datePickerContainer}>
+              <DatePicker
+                  showPopperArrow={false}
+                  id="date"
+                  selected={date}
+                  onChange={dateChangeHandler}
+                  dateFormat="yyyy-MM-dd"
+                  required
+              />
+          </div>
+
+          {item ? <button name='action' value='edit' type="submit">수정</button>
+            : <button name='action' value='add' type="submit">추가</button>}
         </div>
-        <div>
-          <label htmlFor="title">일정</label>
-          <textarea id="title" value={title} required rows={1} onChange={titleChangeHandler} placeholder='일정을 입력하세요.' />
-        </div>
-        <div>
-          <label htmlFor="body">내용</label>
-          <textarea id="body" value={content} required rows={10} onChange={contentChangeHandler} placeholder='내용을 입력하세요.' />
-        </div>
-        <div>
-          <label htmlFor="image">이미지</label>
+          
+
+
+        {/* 사진 등록 자리 */}
+        <div className={classes.imageContainer}>
+          <label className={classes.label} htmlFor="image">+</label>
           <input
+            className={classes.img}
             type="file"
             id="image"
             accept="image/*"
             onChange={imageChangeHandler}
-            style={{ display: 'block', margin: '8px 0' }}
           />
           {image && (
             <img
               src={image}
               alt="preview"
-              style={{ maxWidth: '100%', maxHeight: '200px', marginBottom: '8px' }}
             />
           )}
         </div>
-        <div className={classes.actions}>
-          <button type='button' onClick={hide}>취소</button>
-          {item ? <button name='action' value='edit' type="submit">수정</button> : <button name='action' value='add' type="submit">추가</button>}
+
+
+        
+        {/* 일정 타이틀 및 내용 자리 */}
+        <div className={classes.text}>
+          <textarea className={classes.title} id="title" value={title} required rows={1} 
+          onChange={titleChangeHandler} placeholder='기념일을 입력하세요' />
+
+          <hr/>  
+
+          <textarea className={classes.context} id="body" value={content} required rows={50}
+          onChange={contentChangeHandler} placeholder='상대방에게 전달하고 싶은 내용을 적어주세요.' />
         </div>
+        
       </form>
-      
-    </>
+    </div>
     
   );
 }

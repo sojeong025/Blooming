@@ -1,5 +1,9 @@
 package com.ssafy.backend.domain.reservation;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.user.User;
 import lombok.Getter;
