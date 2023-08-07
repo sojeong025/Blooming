@@ -24,8 +24,8 @@ const NoticeSwipeable = () => {
     const params = { page, size: 20 };
     try {
       const response = customAxios.get("notification", { params });
-      // console.log(response);
-      setNotice(response.data.result[0]);
+      console.log(response);
+      // setNotice(response.data.result[0]);
       setPage(page + 1);
     } catch (error) {
       console.log("알림 조회 에러", error);
@@ -95,7 +95,11 @@ const NoticeSwipeable = () => {
       // 안읽은 알림만 읽음 처리 가능
       if (readStatus === "UNREAD") {
         await customAxios.put(`notification/${id}`);
-        setNotice;
+        setNotice((prevState) =>
+          prevState.map((item) =>
+            item.id === id ? { ...item, readStatus: "READ" } : item,
+          ),
+        );
         console.log(id, "읽음");
       } else {
         console.log(id, "이미 읽음");
