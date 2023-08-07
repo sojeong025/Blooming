@@ -31,9 +31,9 @@ public class ProductResultDto {
     private String companyAddress;
 
     //찜 정보
-    private User user;
+    private boolean isWish;
 
-    public ProductResultDto(Long id, String itemName, String brief, String thumbnail, String company, String companyTime, String companyAddress, User user) {
+    public ProductResultDto(Long id, String itemName, String brief, String thumbnail, String company, String companyTime, String companyAddress, boolean isWish) {
         this.id = id;
         this.itemName = itemName;
         this.brief = brief;
@@ -44,6 +44,6 @@ public class ProductResultDto {
         this.company = company;
         this.companyTime = companyTime;
         this.companyAddress = companyAddress;
-        this.user = user;
+        this.isWish = isWish;
     }
 }
