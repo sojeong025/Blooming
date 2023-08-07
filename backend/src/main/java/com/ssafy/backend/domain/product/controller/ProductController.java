@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
@@ -30,8 +31,8 @@ public class ProductController {
     @Operation(summary = "상품 타입별로 상품 한 페이지(4개씩) 조회하기", description = "지정된 타입의 상품을 한 페이지만큼 가져옵니다.")
     @GetMapping("/product/{productType}")
     @Parameter(name = "페이지 번호")
-    public ResponseEntity<BasicResponse> getTypeProduct(@PathVariable ProductType productType, Pageable pageable){
-        Slice<ProductResultDto> productDtoList = productService.getTypeProduct(productType, pageable);
+    public ResponseEntity<BasicResponse> getTypeProduct(@PathVariable ProductType productType, @RequestParam int page, @RequestParam int size){
+        Slice<ProductResultDto> productDtoList = productService.getTypeProduct(productType, page, size);
 
         BasicResponse basicResponse;
         if (productDtoList.isEmpty()){
