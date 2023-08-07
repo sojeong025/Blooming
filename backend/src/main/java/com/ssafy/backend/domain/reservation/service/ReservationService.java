@@ -61,12 +61,12 @@ public class ReservationService {
         //스케줄 타입 결정
         ScheduleType scheduleType = null;
         switch(product.getProductType()){
-            case 웨딩홀:
-                scheduleType = ScheduleType.웨딩홀; break;
-            case 스튜디오:
-            case 드레스:
-            case 메이크업:
-                scheduleType = ScheduleType.스드메; break;
+            case HALL:
+                scheduleType = ScheduleType.HALL; break;
+            case STUDIO:
+            case DRESS:
+            case MAKEUP:
+                scheduleType = ScheduleType.SDM; break;
         }
         scheduleService.registReservationSchedule(new ReservationScheduleRegistDto(
                 product.getItemName() + " 예약",
