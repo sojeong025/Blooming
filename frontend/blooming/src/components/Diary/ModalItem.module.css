@@ -49,6 +49,9 @@
   color: #666;
   overflow: hidden;
 }
+.title:focus {
+  outline: none;
+}
 .text hr{
   width: 80%;
   color: #D8D8D8;
@@ -65,6 +68,9 @@
   line-height: 40px;
   word-break: keep-all;
   color: #666;
+}
+.context:focus{
+  outline: none;
 }
 /* -------------------------------- */
 
