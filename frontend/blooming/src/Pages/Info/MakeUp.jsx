@@ -44,7 +44,7 @@ export default function WeddingHall() {
   }, [])
 
   return (
-    <div style={{top:'102px'}}>
+    <div style={{marginTop:'102px'}}>
       <ErrorModal
         buttonText={"다시시도"}
         show={errorModal}

@@ -94,8 +94,8 @@ export default function InfoDetail() {
           initialRating={starRating}
           onChange={(rate) => setStarRating(rate)}
           stop={5}
-          emptySymbol="☆"
-          fullSymbol="★"
+          emptySymbol={<span className="empty-star" style={{ color: 'gray', fontSize: '2em' }}>☆</span>}
+          fullSymbol={<span className="full-star" style={{ color: 'gold', fontSize: '2em' }}>★</span>}
         />
         <br />
         <input
