@@ -1,16 +1,23 @@
 import NoticeList from "../../components/Notice/NoticeSwipeable";
-import { useState } from "react";
 import { PullToRefresh } from "antd-mobile";
+import { customAxios } from "../../lib/axios";
 
 export default function AllNotice() {
-  const [data, setData] = useState(0);
-
   const onReNotice = () => {
-    // 알림 정보 새로 고침
-    setData(data + 1);
+    // 알림 정보 다시 받기
+    async () => {
+      const params = { page: 0, size: 20 };
+      try {
+        const response = customAxios.get("notification", { params });
+        console.log(response);
+      } catch (error) {
+        console.log("알림 조회 에러", error);
+      }
+    };
   };
+
   return (
-    <div style={{ padding: "60px 0" }}>
+    <div className='mainContainer'>
       <PullToRefresh
         pullingText='당겨서 새로고침'
         canReleaseText='당겨서 새로고침'
@@ -18,7 +25,6 @@ export default function AllNotice() {
         refreshingText='로딩중...'
         onRefresh={onReNotice}
       >
-        {data}
         <NoticeList />
       </PullToRefresh>
     </div>

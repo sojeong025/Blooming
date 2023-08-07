@@ -21,7 +21,7 @@ const TopAppBar = () => {
     }
   }, [location]);
 
-  // 뒤로가기 필요하면 여기 넣기
+  // 왼쪽에 뒤로가기 필요하면 여기 넣기
   const backIcon = [
     "/all-notice",
     "/mobile-invitation",
@@ -59,13 +59,13 @@ const TopAppBar = () => {
     const fetchNotice = async () => {
       try {
         const response = await customAxios.get("notification/unread-cnt");
-        console.log(response.data.result);
+        console.log(response);
 
         if (response.data.result[0] > 0) {
           setIsNotice(true);
         }
       } catch (error) {
-        console.log("안 읽은 알림 에러", error);
+        console.log("안 읽은 알림 조회 에러", error);
       }
     };
 
