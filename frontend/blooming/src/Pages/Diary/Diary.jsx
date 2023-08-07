@@ -6,7 +6,37 @@ import CreateItem from "../../components/Diary/ModalItem";
 import { customAxios } from "../../lib/axios";
 
 const Diary = () => {
-  const [diaries, setDiaries] = useRecoilState(diaryState)
+  const diaries = [
+    {
+      id: 1,
+      title: "Diary Entry 1",
+      content: "오늘은 친구들과 멋진 하루를 보냈습니다...",
+      date: "2023-08-11",
+      image: {src: 'src/assets/test3.jpg'}
+    },
+    {
+      id: 2,
+      title: "Diary Entry 2",
+      content: "펫샵에 갔던 경험",
+      date: "2023-08-12",
+      image: {src: 'src/assets/test3.jpg'}
+    },
+    {
+      id: 3,
+      title: "Diary Entry 3",
+      content: "주말에 다녀온 휴양지 이야기",
+      date: "2023-08-18",
+      image: {src: 'src/assets/test3.jpg'}
+    },
+    {
+      id: 4,
+      title: "Diary Entry 4",
+      content: "독서 후 기록한 감상",
+      date: "2023-08-25",
+      image: {src: 'src/assets/test3.jpg'}
+    }
+  ];
+  // const [diaries, setDiaries] = useRecoilState(diaryState)
   const [loading, setLoading] = useState(true)
   const [ modalIsVisible, setModalIsVisible ] = useState(false);
 
