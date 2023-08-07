@@ -24,6 +24,7 @@ const NoticeSwipeable = () => {
     try {
       const response = await customAxios.get("notification", { params });
       setNotice(response.data.result[0]);
+      console.log(response);
       setPage(page + 1);
     } catch (error) {
       console.log("알림 조회 에러", error);
