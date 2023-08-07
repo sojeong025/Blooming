@@ -6,7 +6,6 @@ spring:
     serialization:
       FAIL_ON_EMPTY_BEANS: 'false'
 
-
 springdoc:
   packages-to-scan: com.ssafy.backend.domain, com.ssafy.backend.global.s3
   default-consumes-media-type: application/json;charset=UTF-8

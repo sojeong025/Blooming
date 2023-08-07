@@ -71,6 +71,12 @@ export const wishlistState = atom({
   default: [],
 })
 
+// 약혼자의 찜 정보
+export const fianceWishlistState = atom({
+  key: 'fianceWishlistState',
+  default: [],
+})
+
 // 나의 리뷰 정보
 export const reviewState = atom({
   key: 'reviewState',

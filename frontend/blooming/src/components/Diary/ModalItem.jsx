@@ -129,13 +129,13 @@ function CreateItem({ hide, item }) {
 
         {/* 사진 등록 자리 */}
         <div className={classes.imageContainer}>
-          {/* <label htmlFor="image">이미지</label> */}
+          <label className={classes.label} htmlFor="image">+</label>
           <input
+            className={classes.img}
             type="file"
             id="image"
             accept="image/*"
             onChange={imageChangeHandler}
-            style={{ display: 'block', margin: '8px 0' }}
           />
           {image && (
             <img
@@ -150,12 +150,12 @@ function CreateItem({ hide, item }) {
         {/* 일정 타이틀 및 내용 자리 */}
         <div className={classes.text}>
           <textarea className={classes.title} id="title" value={title} required rows={1} 
-          onChange={titleChangeHandler} placeholder='일정을 입력하세요.' />
+          onChange={titleChangeHandler} placeholder='기념일을 입력하세요' />
 
           <hr/>  
 
           <textarea className={classes.context} id="body" value={content} required rows={50}
-          onChange={contentChangeHandler} placeholder='내용을 입력하세요.' />
+          onChange={contentChangeHandler} placeholder='상대방에게 전달하고 싶은 내용을 적어주세요.' />
         </div>
         
       </form>
