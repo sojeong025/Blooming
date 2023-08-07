@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.wishlist.controller;
 
 import com.ssafy.backend.domain.common.BasicResponse;
+import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.wishlist.service.WishlistService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -57,10 +58,10 @@ public class WishlistController {
     @Operation(summary = "찜 전체 조회", description = "내가 찜한 상품ID 리스트와 나의 커플이 찜한 상품ID 리스트를 모두 받아 옵니다.")
     @GetMapping("/wishlist")
     public ResponseEntity<BasicResponse> getWishlist() {
-        List<Long> mywishlists = wishlistService.getAllWishtlist();
-        List<Long> couplewishlists = wishlistService.getAllCoupleWishlist();
+        List<Product> mywishlists = wishlistService.getAllWishtlist();
+        List<Product> couplewishlists = wishlistService.getAllCoupleWishlist();
         // 이렇게 주면 프론트에서 널인거 처리 따로 해야하는데 리팩 필요
-        Map<String, List<Long>> wishlists = new HashMap<>();
+        Map<String, List<Product>> wishlists = new HashMap<>();
         wishlists.put("mywishlist",mywishlists);
         wishlists.put("couplewishlist",couplewishlists);
 

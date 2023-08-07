@@ -54,22 +54,22 @@ public class WishlistService {
     // 리팩토링 한다면
     // 어차피 내가 찜한거, 커플이 찜한거 둘다 호출 할 건데 따로 구하지 말고
     // 한번에 구해서 내려 주는게 어떨까
-    public List<Long> getAllWishtlist(){
+    public List<Product> getAllWishtlist(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
         Long userId = user.getId();
         List<Wishlist> wishlists = wishlistRepository.findAllByUserId(userId);
-        List<Long> result = new ArrayList<>();
+        List<Product> result = new ArrayList<>();
         for (Wishlist wish : wishlists){
-            result.add(wish.getProduct().getId());
+            result.add(wish.getProduct());
         }
         return result;
     }
 
     // 커플이 등록한 찜 리스트 출력
     // 커플 없을경우 예외처리 해라
-    public  List<Long> getAllCoupleWishlist(){
+    public  List<Product> getAllCoupleWishlist(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
@@ -87,10 +87,10 @@ public class WishlistService {
             }
         }
 
-        List<Long> result = new ArrayList<>();
+        List<Product> result = new ArrayList<>();
         if(!wishlists.isEmpty()){
             for(Wishlist wish : wishlists){
-                result.add(wish.getProduct().getId());
+                result.add(wish.getProduct());
             }
         }
         return result;
