@@ -30,6 +30,7 @@ public class User extends CreatedAndUpdatedBaseEntity {
 
     private String email;
     private String password;
+    private String profileImage;
     private String name;
     private String nickname;
     private String phoneNumber;
