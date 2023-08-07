@@ -26,7 +26,6 @@ public class Wishlist extends CreatedBaseEntity {
     private User user;
 
     @ManyToOne(fetch = LAZY)
-    @JsonIgnore
     @JoinColumn(name="PRODUCT_ID")
     private Product product;
 
