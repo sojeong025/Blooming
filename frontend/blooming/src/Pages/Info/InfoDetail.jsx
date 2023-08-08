@@ -105,7 +105,7 @@ export default function InfoDetail() {
   const handleCreateWish = async () => {
     try {
       await customAxios.post(`wishlist/${product.id}`);
-      setProduct({ ...product, wish: 'true' })
+      setProduct({ ...product, wish: true })
       console.log(product)
     } catch (error) {
       console.error("찜하기 에러:", error);
@@ -115,7 +115,7 @@ export default function InfoDetail() {
   const handleDeleteWish = async () => {
     try {
       await customAxios.delete(`wishlist/${product.id}`);
-      setProduct({ ...product, wish: 'false' })
+      setProduct({ ...product, wish: false })
       console.log(product)
     } catch (error) {
       console.error("찜취소 에러:", error);
