@@ -10,12 +10,14 @@ import com.ssafy.backend.domain.user.repository.UserRepository;
 import com.ssafy.backend.global.redis.fcm.FcmToken;
 import com.ssafy.backend.global.redis.fcm.FcmTokenRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -71,7 +73,10 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("커플코드가 없는 회원입니다. 잘못된 회원!"));
 
         findUser.removeCouple();
-        if (originCouple.getUsers().size() == 0) {
+
+        log.debug(originCouple.getUsers().toString());
+
+        if (originCouple.getUsers().isEmpty()) {
             coupleRepository.delete(originCouple);
         }
 
