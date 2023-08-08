@@ -2,6 +2,7 @@ package com.ssafy.backend.global.s3.controller;
 
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.common.FileUploadResponse;
+import com.ssafy.backend.global.s3.DomainType;
 import com.ssafy.backend.global.s3.service.S3Uploader;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,9 +29,9 @@ public class S3UploaderController {
 
     @Operation(summary = "이미지 업로드 API", description = "이미지 파일 전송 시 S3 업로드 후 이미지 url을 반환합니다.")
     @Parameter(name = "multipartFile", description = "첨부할 사진(multipart/form-data)")
-    @PostMapping("/s3/{filePath}")
-    public ResponseEntity<BasicResponse> uploadImage(@PathVariable String filePath, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        FileUploadResponse fileUploadResponse = s3Uploader.uploadFiles(multipartFile, filePath);
+    @PostMapping("/s3/{domainType}")
+    public ResponseEntity<BasicResponse> uploadImage(@PathVariable DomainType domainType, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        FileUploadResponse fileUploadResponse = s3Uploader.uploadFiles(multipartFile, domainType);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())

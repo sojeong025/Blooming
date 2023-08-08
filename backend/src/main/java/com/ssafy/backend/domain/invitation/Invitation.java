@@ -1,17 +1,23 @@
 package com.ssafy.backend.domain.invitation;
 
-import com.ssafy.backend.domain.couple.Couple;
-import com.ssafy.backend.domain.invitation.dto.InvitationRegistDto;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import org.springframework.format.annotation.DateTimeFormat;
+import static javax.persistence.FetchType.*;
 
-import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import static javax.persistence.FetchType.LAZY;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.ssafy.backend.domain.couple.Couple;
+import com.ssafy.backend.domain.invitation.dto.InvitationRegistDto;
+
+import lombok.Getter;
 
 @Entity
 @Getter
@@ -56,7 +62,7 @@ public class Invitation {
     private String bridePhone;
 
     //맞나
-    @OneToOne(fetch = LAZY)
+    @OneToOne(fetch = LAZY, orphanRemoval = true)
     @JoinColumn(name = "COUPLE_ID")
     private Couple couple;
 

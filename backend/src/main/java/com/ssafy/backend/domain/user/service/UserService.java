@@ -1,7 +1,5 @@
 package com.ssafy.backend.domain.user.service;
 
-import java.util.List;
-
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.user.User;
@@ -69,6 +67,13 @@ public class UserService {
     public void withdrawal(String userEmail) {
         User findUser = userRepository.findByEmail(userEmail)
             .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+        Couple originCouple = coupleRepository.findByCoupleCode(findUser.getCouple().getCoupleCode())
+                .orElseThrow(() -> new IllegalArgumentException("커플코드가 없는 회원입니다. 잘못된 회원!"));
+
+        findUser.removeCouple();
+        if (originCouple.getUsers().size() == 0) {
+            coupleRepository.delete(originCouple);
+        }
 
         userRepository.delete(findUser);
     }
@@ -125,10 +130,7 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("커플코드가 없는 회원입니다. 잘못된 회원!"));
 
         user.removeCouple();
-        // 기존에 내가 가지고 있던 커플을 지우기
-        System.out.println("=====================");
-        System.out.println(originCouple.getUsers().size());
-        System.out.println("=====================");
+
         if (originCouple.getUsers().size() == 0) {
             coupleRepository.delete(originCouple);
         }

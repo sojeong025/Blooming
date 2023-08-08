@@ -4,6 +4,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.ssafy.backend.domain.common.FileUploadResponse;
+import com.ssafy.backend.global.s3.DomainType;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,22 +30,17 @@ public class S3Uploader {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public FileUploadResponse uploadFiles(MultipartFile multipartFile, String dirName) throws IOException {
+    public FileUploadResponse uploadFiles(MultipartFile multipartFile, DomainType dirName) throws IOException {
         File uploadFile = convert(multipartFile)
                 .orElseThrow(() -> new IllegalArgumentException("Error: MultipartFile -> File로 전환이 실패했습니다."));
         return upload(uploadFile, dirName);
     }
 
-    public FileUploadResponse upload(File uploadFile, String filePath) {
+    public FileUploadResponse upload(File uploadFile, DomainType filePath) {
         String fileName = filePath + "/" + generateUniqueFileName(uploadFile.getName()); // S3에 저장된 파일 이름
         String uploadImageUrl = putS3(uploadFile, fileName); // S3로 업로드
         log.info("uploadImageUrl = " + uploadImageUrl);
         removeNewFile(uploadFile);
-
-        //사용자의 프로필을 등록하는 것이기때문에, User 도메인에 setImageUrl을 해주는 코드.
-        //이 부분은 그냥 업로드만 필요하다면 필요없는 부분이다.
-//        User user = userRepository.findById(userId).orElseThrow(NullPointerException::new);
-//        user.setImageUrl(uploadImageUrl); // dirtyChecking으로 변경사항 DB반영
 
         //FileUploadResponse DTO로 반환해준다.
         return new FileUploadResponse(fileName, uploadImageUrl);

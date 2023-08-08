@@ -29,7 +29,7 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
     @OneToMany(mappedBy = "couple", fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "couple")
+    @OneToMany(mappedBy = "couple", cascade = CascadeType.ALL)
     private List<Schedule> schedules = new ArrayList<>();
 
     public void setCoupleCode(int coupleCode) {
