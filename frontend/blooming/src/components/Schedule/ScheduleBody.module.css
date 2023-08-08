@@ -26,10 +26,9 @@
   justify-content: center;
 }
 .btn button {
-  font-size: 10px;
-  background-color: #FF647C;
+  font-size: 30px;
   border: none;
-  color: white;
-  border-radius: 50%;
+  color: #666;
   margin: 20px;
+  background-color: transparent;
 }

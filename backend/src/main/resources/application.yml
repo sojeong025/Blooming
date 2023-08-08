@@ -5,6 +5,14 @@ spring:
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: 'false'
+  redis:
+    lettuce:
+      pool:
+        max-active: '5'
+        max-idle: '5'
+        min-idle: '2'
+    host: redis
+    port: '6379'
 
 springdoc:
   packages-to-scan: com.ssafy.backend.domain, com.ssafy.backend.global.s3
