@@ -58,3 +58,10 @@
   color: gray;
   padding-top: 1vh;
 }
+
+.reload {
+  width: 100%;
+  height: 5vh;
+  background-color: brown;
+  color: white;
+}
