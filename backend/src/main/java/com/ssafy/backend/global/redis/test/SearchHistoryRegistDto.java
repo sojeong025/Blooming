@@ -1,4 +1,4 @@
-package com.ssafy.backend.global.redis;
+package com.ssafy.backend.global.redis.test;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
