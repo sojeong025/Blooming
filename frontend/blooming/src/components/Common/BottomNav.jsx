@@ -35,7 +35,7 @@ const BottomNav = () => {
   // 1. 아이콘 밑에 글씨 넣기
   // 2. 아이콘만 넣고 페이지 명은 위에 적어주기
   return (
-    <>
+    <div>
       <div className={classes.navTop}></div>
       <nav>
         <input
@@ -145,7 +145,7 @@ const BottomNav = () => {
           </svg>
         </div>
       </nav>
-    </>
+    </div>
   );
 };
 
