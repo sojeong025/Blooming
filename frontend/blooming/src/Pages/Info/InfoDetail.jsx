@@ -1,7 +1,5 @@
 import { useLocation } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
-import { useRecoilState } from "recoil";
-import { reviewState } from "../../recoil/ProductAtom";
 import { useEffect, useState } from "react";
 import Rating from "react-rating";
 
@@ -9,7 +7,7 @@ export default function InfoDetail() {
   
   const location = useLocation();
   const product = location.state.product
-  const [reviews, setReviews] = useRecoilState(reviewState)
+  const [reviews, setReviews] = useState([])
 
   // 리뷰쓰는 폼관련된 State
   const [starRating, setStarRating] = useState(0);
@@ -89,7 +87,7 @@ export default function InfoDetail() {
       })}
       <div>후기등록 폼</div>
       <form onSubmit={handleSubmit}>
-        <p>{product.itemName}의 후기 작성</p>
+        <p>{product.company}의 후기 작성</p>
         <Rating
           initialRating={starRating}
           onChange={(rate) => setStarRating(rate)}
