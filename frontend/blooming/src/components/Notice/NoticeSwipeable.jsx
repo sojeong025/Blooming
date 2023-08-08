@@ -241,8 +241,8 @@ const NoticeSwipeable = () => {
   const handleDelete = (id) => async () => {
     try {
       customAxios.delete(`notification/${id}`);
-      // console.log("[DELETE]", id);
       setNotice(notice.filter((item) => item.id !== id));
+      console.log("[DELETE]", id);
     } catch (error) {
       console.log("알림 삭제 에러", error);
     }
@@ -269,6 +269,7 @@ const NoticeSwipeable = () => {
             item.id === id ? { ...item, readStatus: "READ" } : item,
           ),
         );
+        console.log("읽음");
       }
     } catch (error) {
       console.log("읽음 처리 에러", error);
