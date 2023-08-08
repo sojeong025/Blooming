@@ -1,35 +1,19 @@
-const KakaoShareButton = () => {
+const KakaoShareButton = ({code}) => {
   const shareToKakao = () => {
-    // SDK를 사용해 카카오 공유하기 서비스를 호출
-    window.Kakao.Link.sendDefault({
-      objectType: "feed",
+    
+    Kakao.Link.sendDefault({
+      ObjectType: 'feed',
       content: {
-        title: "샘플 제목",
-        description: "샘플 설명",
-        imageUrl:
-          "https://cdn.pixabay.com/photo/2021/08/19/03/51/mountains-6560839_1280.jpg",
+        title: '블루밍',
+        description: '약혼자 링크',
+        imageUrl: 'https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg',
         link: {
-          mobileWebUrl: "https://example.com",
-          webUrl: "https://example.com",
-        },
-      },
-      buttons: [
-        {
-          title: "웹으로 이동",
-          link: {
-            mobileWebUrl: "https://example.com",
-            webUrl: "https://example.com",
-          },
-        },
-        {
-          title: "앱으로 이동",
-          link: {
-            mobileWebUrl: "https://example.com",
-            webUrl: "https://example.com",
-          },
-        },
-      ],
-    });
+          mobileWebUrl: 'http://43.200.254.50/login',
+          webUrl: 'http://43.200.254.50/login',
+        }
+      }
+    })
+
   };
 
   return (
