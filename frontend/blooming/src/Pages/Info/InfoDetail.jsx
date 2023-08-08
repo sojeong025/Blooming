@@ -11,7 +11,7 @@ import Rating from "react-rating";
 export default function InfoDetail() {
   
   const location = useLocation();
-  const product = location.state.product
+  const [product, setProduct] = useState(location.state.product)
   const productType = location.state.productType
   const [images, setImages] = useState([])
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -46,10 +46,24 @@ export default function InfoDetail() {
     fetchImageData()
   }, [])
 
+  const ReviewData = {
+    product_id: product.id,
+    star: starRating,
+    image: reviewImage,
+    content: comment
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 폼 제출 로직 작성
-    // api요청해서 값넣고 성공하면 두고 실패하면 현재 페이지 redirect????
+    const createReview = async () => {
+      try {
+        await customAxios.post("review", ReviewData);
+        await fetchReviewData();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    createReview();
   };
 
   const handleReset = () => {
@@ -70,15 +84,31 @@ export default function InfoDetail() {
   };
 
   const handleReserve = () => {
-    //이건 예약 API
+    // 이건 예약 API
+    // 어찌할지 모르겠지만 얘는 음..... 음......
+    // 모달이든 페이지든 이동해서 시간 입력받는칸 만들어야겠지??? 근데 만들어서 다시 어디 보낼꺼 아니면 음
+    // 모달이 낫겠지? 그리고 만들고나면 예약했는지 안했는지 여부도 알아야겠지? 이건 API요청했을때 저쪽에서
+    // 예약된 정보도 줘야겠네? 예약 API 힘들겠다 ㅎㅎ
+    // 그리고 시간은 companyTime에서 가져와서 거기 안에서 1시간단위로 시간 보낼수 있게 해야겠쥬?
+    // 이정도 힌트 줬으면 만들어보아요 난 귀찮아요.
   }
 
-  const handleCreateWish = () => {
-    //이건 찜하기
+  const handleCreateWish = async () => {
+    try {
+      await customAxios.post(`wishlist/${product.id}`);
+      setProduct({...product, wish:'true'})
+    } catch (error) {
+      console.error("찜하기 에러:", error);
+    }
   }
 
-  const handleDeleteWish = () => {
-    //이건 찜취소
+  const handleDeleteWish = async () => {
+    try {
+      await customAxios.delete(`wishlist/${product.id}`);
+      setProduct({...product, wish:'false'})
+    } catch (error) {
+      console.error("찜취소 에러:", error);
+    }
   }
 
   const handleCarouselChange = (index) => {
@@ -111,9 +141,8 @@ export default function InfoDetail() {
       <p>{product.company}</p>
       <p>{product.companyTime}</p>
       <p>{product.companyAddress}</p>
-      <p>{product.thumbnail}</p>
       <button onClick={handleReserve}>예약하기</button>
-      {product.wish ? <button onClick={handleCreateWish}>찜하기</button> : <button onClick={handleDeleteWish}>찜취소</button> }
+      {product.wish ? <button onClick={handleDeleteWish}>찜취소</button> : <button onClick={handleCreateWish}>찜하기</button> }
       <div>후기후기</div>
       {reviews.map((review) => {
         <div key={review.id}>
