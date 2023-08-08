@@ -9,6 +9,8 @@ import com.ssafy.backend.domain.user.dto.CoupleCodeDto;
 import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.repository.UserRepository;
+import com.ssafy.backend.global.redis.fcm.FcmToken;
+import com.ssafy.backend.global.redis.fcm.FcmTokenRepository;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final CoupleRepository coupleRepository;
+    private final FcmTokenRepository fcmTokenRepository;
 
     @Transactional
     public void signUp(UserSignUpDto userSignUpDto, String userEmail) {
@@ -31,6 +34,9 @@ public class UserService {
 
         findUser.updateFirst(userSignUpDto);
         findUser.authorizeUser();
+
+        //fcm 토큰 redis 저장. 유저 key인 id로 저장
+        fcmTokenRepository.save(new FcmToken(String.valueOf(findUser.getId()), userSignUpDto.getFcmToken()));
 
         // TODO: coupleCode 검증하는 api를 하나 만들자.(프론트에서 인증버튼이 있으니까..) 그러면 null이 아닐 때 무조건 setCouple하면 된다.
         if (userSignUpDto.getCoupleCode() == null) {

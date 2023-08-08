@@ -1,6 +1,5 @@
-package com.ssafy.backend.global.redis;
+package com.ssafy.backend.global.redis.test;
 
-import com.ssafy.backend.global.redis.repository.SearchHistoryRedisRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
