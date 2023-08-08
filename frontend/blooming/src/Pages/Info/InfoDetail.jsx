@@ -46,7 +46,7 @@ export default function InfoDetail() {
     fetchImageData()
   }, [])
 
-  const ReviewData = {
+  const reviewData = {
     product_id: product.id,
     star: starRating,
     image: reviewImage,
@@ -55,15 +55,16 @@ export default function InfoDetail() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const createReview = async () => {
-      try {
-        await customAxios.post("review", ReviewData);
-        await fetchReviewData();
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    createReview();
+    console.log(reviewData)
+    // const createReview = async () => {
+    //   try {
+    //     await customAxios.post("review", reviewData);
+    //     await fetchReviewData();
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // };
+    // createReview();
   };
 
   const handleReset = () => {
