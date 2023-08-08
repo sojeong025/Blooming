@@ -18,7 +18,7 @@ const SettingList = () => {
         {settingLists.map((item) => (
           <NavLink
             to={`/${item.goTo}`}
-            state={{ pageTitle: `${item.name}` }}
+            // state={{ pageTitle: `${item.name}` }}
             key={item.id}
           >
             <li className={classes.settingItem}>
