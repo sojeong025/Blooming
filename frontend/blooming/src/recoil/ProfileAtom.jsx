@@ -9,7 +9,7 @@ export const userState = atom({
     name: "나이름",
     nickname: "나",
     phoneNumber: "11",
-    profileImg: "",
+    profileImage: "",
   },
 });
 export const userCoupleState = atom({
@@ -20,7 +20,7 @@ export const userCoupleState = atom({
     name: "너이름",
     nickname: "너",
     phoneNumber: "11",
-    profileImg: "",
+    profileImage: "",
   },
 });
 
@@ -60,25 +60,25 @@ export const coupleRoleState = selector({
 
 
 // 나의 예약 정보
-export const reservationState = atom({
-  key: "reservationState",
+export const myReservationState = atom({
+  key: "myReservationState",
   default: [],
 })
 
 // 나의 찜 정보
-export const wishlistState = atom({
-  key: 'wishlistState',
+export const myWishlistState = atom({
+  key: 'myWishlistState',
   default: [],
 })
 
 // 약혼자의 찜 정보
-export const fianceWishlistState = atom({
-  key: 'fianceWishlistState',
+export const myFianceWishlistState = atom({
+  key: 'myFianceWishlistState',
   default: [],
 })
 
 // 나의 리뷰 정보
-export const reviewState = atom({
-  key: 'reviewState',
+export const myReviewState = atom({
+  key: 'myReviewState',
   default: [],
 })

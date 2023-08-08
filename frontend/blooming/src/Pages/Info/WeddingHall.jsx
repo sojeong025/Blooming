@@ -23,14 +23,13 @@ export default function WeddingHall() {
 
   const fetchData = async () => {
     try {
-      const nextPage = currentPage + 1;
-      const response = await customAxios.get("product/HALL", { params: {page: nextPage, size: 4, sort: 'asc'} });
+      const response = await customAxios.get("product/HALL", { params: {page: currentPage, size: 4} });
       
-      if (response.data.result.length === 0) {
+      if (response.data.result[0].last) {
         setHasMore(false);
       } else {
-        setWeddingHall((prevProducts) => [...prevProducts, ...response.data.result[0]]);
-        setCurrentPage(nextPage);
+        setWeddingHall((prevProducts) => [...prevProducts, ...response.data.result[0].content]);
+        setCurrentPage(currentPage+1);
       }
       
     } catch (error) {

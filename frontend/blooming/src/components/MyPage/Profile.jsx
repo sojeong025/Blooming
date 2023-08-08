@@ -21,7 +21,7 @@ const ProfileBox = ({ isCouple }) => {
         <div className={`${classes.profileContainer} ${classes.Couple}`}>
           <div>
             <img
-              className={classes.ProfileImg}
+              className={classes.profileImg}
               src={
                 userData.profileImage
                   ? userData.profileImage
@@ -30,7 +30,7 @@ const ProfileBox = ({ isCouple }) => {
               alt='profile'
             />
             <img
-              className={`${classes.ProfileImg} ${classes.coupleProfile}`}
+              className={`${classes.profileImg} ${classes.coupleProfile}`}
               src={
                 coupleData.profileImage
                   ? coupleData.profileImage
@@ -57,7 +57,7 @@ const ProfileBox = ({ isCouple }) => {
         // 혼자
         <div className={`${classes.profileContainer} ${classes.Alone}`}>
           <img
-            className={classes.ProfileImg}
+            className={classes.profileImg}
             src={
               userData.profileImage
                 ? userData.profileImage
