@@ -37,7 +37,7 @@ const BottomNav = () => {
   return (
     <div>
       <div className={classes.navTop}></div>
-      <nav>
+      <nav className={classes.navBar}>
         <input
           type='radio'
           id='item-1'
@@ -45,9 +45,13 @@ const BottomNav = () => {
           defaultChecked={
             (selectedMenu === "home") | (location.pathname.slice(1) === "home")
           }
-          className={classes.item1}
+          className={`${classes.item1} ${classes.item}`}
         />
-        <label htmlFor='item-1' onClick={() => handleNavigation("/home")}>
+        <label
+          className={classes.label}
+          htmlFor='item-1'
+          onClick={() => handleNavigation("/home")}
+        >
           <span>
             <AiOutlineHome />
           </span>
@@ -60,9 +64,10 @@ const BottomNav = () => {
           defaultChecked={
             (selectedMenu === "info") | (location.pathname.slice(1) === "info")
           }
-          className={classes.item2}
+          className={`${classes.item2} ${classes.item}`}
         />
         <label
+          className={classes.label}
           htmlFor='item-2'
           onClick={() => handleNavigation("/info/wedding-hall")}
         >
@@ -79,9 +84,13 @@ const BottomNav = () => {
             (selectedMenu === "schedule") |
             (location.pathname.slice(1) === "schedule")
           }
-          className={classes.item3}
+          className={`${classes.item3} ${classes.item}`}
         />
-        <label htmlFor='item-3' onClick={() => handleNavigation("/schedule")}>
+        <label
+          className={classes.label}
+          htmlFor='item-3'
+          onClick={() => handleNavigation("/schedule")}
+        >
           <span>
             <Schedule />
           </span>
@@ -95,9 +104,13 @@ const BottomNav = () => {
             (selectedMenu === "diary") |
             (location.pathname.slice(1) === "diary")
           }
-          className={classes.item4}
+          className={`${classes.item4} ${classes.item}`}
         />
-        <label htmlFor='item-4' onClick={() => handleNavigation("/diary-explain")}>
+        <label
+          className={classes.label}
+          htmlFor='item-4'
+          onClick={() => handleNavigation("/diary-explain")}
+        >
           <span>
             <Diary />
           </span>
@@ -111,9 +124,13 @@ const BottomNav = () => {
             (selectedMenu === "my-page") |
             (location.pathname.slice(1) === "my-page")
           }
-          className={classes.item5}
+          className={`${classes.item5} ${classes.item}`}
         />
-        <label htmlFor='item-5' onClick={() => handleNavigation("/my-page")}>
+        <label
+          className={classes.label}
+          htmlFor='item-5'
+          onClick={() => handleNavigation("/my-page")}
+        >
           <span>
             <AiOutlineUser />
           </span>
