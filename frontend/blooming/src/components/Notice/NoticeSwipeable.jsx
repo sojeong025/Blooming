@@ -46,6 +46,188 @@ const NoticeSwipeable = () => {
 
   useEffect(() => {
     fetchNotice();
+    setNotice([
+      {
+        id: 688,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:58:23.345615",
+      },
+      {
+        id: 687,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:58:13.048663",
+      },
+      {
+        id: 686,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:58:02.844112",
+      },
+      {
+        id: 685,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:57:52.620322",
+      },
+      {
+        id: 684,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:57:42.427203",
+      },
+      {
+        id: 683,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:57:32.215056",
+      },
+      {
+        id: 682,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:57:22.004595",
+      },
+      {
+        id: 681,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:57:11.825431",
+      },
+      {
+        id: 680,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:57:01.625419",
+      },
+      {
+        id: 679,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-09 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:56:51.41097",
+      },
+      {
+        id: 678,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:56:41.182956",
+      },
+      {
+        id: 677,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:56:30.955461",
+      },
+      {
+        id: 676,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:56:20.732396",
+      },
+      {
+        id: 675,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:56:10.504923",
+      },
+      {
+        id: 674,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:56:00.293909",
+      },
+      {
+        id: 673,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:55:50.072007",
+      },
+      {
+        id: 672,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:55:39.842356",
+      },
+      {
+        id: 671,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:55:29.632891",
+      },
+      {
+        id: 669,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:55:19.426384",
+      },
+      {
+        id: 668,
+        readStatus: "UNREAD",
+        notificationType: "SCHEDULE",
+        title: "2023-08-08 [웨딩촬영] 스미다 예약",
+        content:
+          "내일은 두 분이 그림비스튜디오 에 방문해주세요 하는 날이에요. 클릭해서 팁을 알아보세요!",
+        createdAt: "2023-08-08T00:55:09.23017",
+      },
+    ]);
   }, []);
 
   // 삭제
