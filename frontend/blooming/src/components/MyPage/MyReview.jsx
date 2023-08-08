@@ -1,11 +1,11 @@
 import { customAxios } from "../../lib/axios";
 import { useRecoilState } from "recoil";
-import { reviewState } from "../../recoil/ProfileAtom";
+import { myReviewState } from "../../recoil/ProfileAtom";
 import { useEffect } from "react";
 
 export default function MyReview() {
 
-  const [myReview, setMyReview] = useRecoilState(reviewState)
+  const [myReview, setMyReview] = useRecoilState(myReviewState)
 
   const fetchData = async () => {
     try {
