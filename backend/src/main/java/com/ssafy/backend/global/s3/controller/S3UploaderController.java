@@ -29,7 +29,7 @@ public class S3UploaderController {
 
     @Operation(summary = "이미지 업로드 API", description = "이미지 파일 전송 시 S3 업로드 후 이미지 url을 반환합니다.")
     @Parameter(name = "multipartFile", description = "첨부할 사진(multipart/form-data)")
-    @PostMapping("/s3/{filePath}")
+    @PostMapping("/s3/{domainType}")
     public ResponseEntity<BasicResponse> uploadImage(@PathVariable DomainType domainType, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         FileUploadResponse fileUploadResponse = s3Uploader.uploadFiles(multipartFile, domainType);
 
