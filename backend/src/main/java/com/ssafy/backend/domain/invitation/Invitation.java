@@ -5,12 +5,7 @@ import static javax.persistence.FetchType.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -62,7 +57,7 @@ public class Invitation {
     private String bridePhone;
 
     //맞나
-    @OneToOne(fetch = LAZY, orphanRemoval = true)
+    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "COUPLE_ID")
     private Couple couple;
 
