@@ -1,6 +1,5 @@
 import { customAxios } from "../../lib/axios";
 import { useRecoilState } from "recoil";
-import { dressState } from "../../recoil/ProductAtom";
 import ErrorModal from "../../components/Error/Modal";
 import { errorState } from "../../recoil/ErrorAtom";
 import { useEffect, useState } from "react";
@@ -11,7 +10,7 @@ import ProductItem from "../../components/Info/ProductItem";
 export default function WeddingHall() {
   
   const [errorModal, setErrorModal] = useRecoilState(errorState);
-  const [dress, setDress] = useRecoilState(dressState)
+  const [dress, setDress] = useState([])
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
