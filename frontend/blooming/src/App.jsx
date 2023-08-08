@@ -33,6 +33,7 @@ import MyReservation from "./components/MyPage/MyReservation";
 import MyReview from "./components/MyPage/MyReview";
 import MyWishlist from "./components/MyPage/MyWishlist";
 // diary
+import DiaryExplain from "./Pages/Diary/DiaryExplain";
 import Diary from "./Pages/Diary/Diary";
 import DiaryDetails from "./Pages/Diary/DiaryDetails";
 // info
@@ -114,6 +115,7 @@ function App() {
           {/* 다이어리 */}
           <Route path='/diary' element={<Diary />} />
           <Route path='/diary/:id' element={<DiaryDetails />} />
+          <Route path='/diary-explain' element={<DiaryExplain />} />
 
           {/* 마이페이지 */}
           <Route path='/my-page' element={<MyPage />} />
