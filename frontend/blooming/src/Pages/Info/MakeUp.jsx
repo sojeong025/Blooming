@@ -11,7 +11,7 @@ import ProductItem from "../../components/Info/ProductItem";
 export default function WeddingHall() {
   
   const [errorModal, setErrorModal] = useRecoilState(errorState);
-  const [weddingHall, setWeddingHall] = useRecoilState(makeUpState)
+  const [makeUp, setMakeUp] = useRecoilState(makeUpState)
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
@@ -23,14 +23,13 @@ export default function WeddingHall() {
 
   const fetchData = async () => {
     try {
-      const nextPage = currentPage + 1;
-      const response = await customAxios.get("product/MAKEUP", { params: {page: nextPage, size: 4, sort: 'asc'} });
+      const response = await customAxios.get("product/MAKEUP", { params: {page: currentPage, size: 4} });
       
-      if (response.data.result.length === 0) {
+      if (response.data.result[0].last) {
         setHasMore(false);
       } else {
-        setWeddingHall((prevProducts) => [...prevProducts, ...response.data.result[0]]);
-        setCurrentPage(nextPage);
+        setMakeUp((prevProducts) => [...prevProducts, ...response.data.result[0].content]);
+        setCurrentPage(currentPage+1);
       }
       
     } catch (error) {
@@ -63,7 +62,7 @@ export default function WeddingHall() {
         </button>
       </ErrorModal>
       <InfiniteScroll
-        dataLength={weddingHall.length}
+        dataLength={makeUp.length}
         next={fetchData}
         hasMore={hasMore}
         loader={
@@ -75,7 +74,7 @@ export default function WeddingHall() {
           </p>
         }
       >
-        {weddingHall.map((product) => (
+        {makeUp.map((product) => (
           <ProductItem product={product} key={product.id} onClick={() => handleNavigation(product)} />
         ))}
       </InfiniteScroll>
