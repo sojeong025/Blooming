@@ -2,6 +2,7 @@ package com.ssafy.backend.domain.user.service;
 
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
+import com.ssafy.backend.domain.invitation.repository.InvitationRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.dto.CoupleCodeDto;
 import com.ssafy.backend.domain.user.dto.UserDto;
@@ -26,6 +27,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final CoupleRepository coupleRepository;
     private final FcmTokenRepository fcmTokenRepository;
+    private final InvitationRepository invitationRepository;
 
     @Transactional
     public void signUp(UserSignUpDto userSignUpDto, String userEmail) {
@@ -79,7 +81,9 @@ public class UserService {
         log.debug(originCouple.getUsers().toString());
 
         if (originCouple.getUsers().isEmpty()) {
+            // TODO: 커플 관련 삭제 분리해야하지 않을까?
             originCouple.getInvitation().setCouple(null);
+            invitationRepository.delete(originCouple.getInvitation());
             coupleRepository.delete(originCouple);
         }
 
