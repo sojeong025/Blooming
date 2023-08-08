@@ -1,11 +1,11 @@
 import { customAxios } from "../../lib/axios";
 import { useRecoilState } from "recoil";
-import { reservationState } from "../../recoil/ProfileAtom";
+import { myReservationState } from "../../recoil/ProfileAtom";
 import { useEffect } from "react";
 
 export default function MyReservation() {
 
-  const [MyReservation, setMyReservation] = useRecoilState(reservationState)
+  const [MyReservation, setMyReservation] = useRecoilState(myReservationState)
 
   const fetchData = async () => {
     try {
