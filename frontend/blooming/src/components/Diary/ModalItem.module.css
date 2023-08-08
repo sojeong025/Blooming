@@ -58,10 +58,11 @@
 /* --------------사진자리----------- */
 .imageContainer {
   width: 100vw;
-  height: 45vh;
+  height: 40vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: -5;
 }
 .img {
   width: 0.1px;
@@ -69,7 +70,6 @@
   opacity: 0;
   overflow: hidden;
   position: absolute;
-  z-index: -1;
 }
 .imageContainer img {
   width: 100vw;
@@ -88,7 +88,7 @@
   position: absolute;
   z-index: 5;
   font-family: 'SUITE-regular';
-  background-color: #a1a0a0;
+  background-color: #b4b4b459;
 }
 
 
@@ -110,14 +110,16 @@
   font-weight: 800;
   font-size: 20px;
   width: 80vw;
-  height: 5vh;
+  height: 8vh;
   line-height: 5vh;
   padding: 20px 0;
   color: #666;
   overflow: hidden;
+  resize: none;
 }
 .title:focus {
   outline: none;
+  resize: none;
 }
 .text hr{
   width: 80%;
@@ -135,7 +137,9 @@
   line-height: 40px;
   word-break: keep-all;
   color: #666;
+  resize: none;
 }
 .context:focus{
   outline: none;
+  resize: none;
 }
