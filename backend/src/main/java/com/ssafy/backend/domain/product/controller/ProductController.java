@@ -64,14 +64,14 @@ public class ProductController {
 	}
 
 	@Operation(summary = "상품 상세 이미지 조회", description = "원하는 상품 상세 조회 시 상품 사진을 조회합니다.")
-	@GetMapping("/product/{productId}")
-	public ResponseEntity<BasicResponse> getProductImages(@PathVariable long productId) {
+	@GetMapping("/product/{productType}/{productId}")
+	public ResponseEntity<BasicResponse> getProductImages(@PathVariable ProductType productType, @PathVariable long productId) {
 		List<ProductDetailDto> productDetail = productService.getProductImage(productId);
 
 		BasicResponse basicResponse = BasicResponse.builder()
 				.code(HttpStatus.OK.value())
 				.httpStatus(HttpStatus.OK)
-				.message("상품 타입에 대한 한 페이지 상품 조회 성공")
+				.message("상품 사진 조회 완료")
 				.count(productDetail.size())
 				.result(Collections.singletonList(productDetail)).build();
 
