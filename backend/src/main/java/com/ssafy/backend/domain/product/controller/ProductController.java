@@ -63,9 +63,9 @@ public class ProductController {
 		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
 	}
 
-	@Operation(summary = "상품 상세 조회", description = "원하는 상품을 상세히 조회합니다.")
+	@Operation(summary = "상품 상세 이미지 조회", description = "원하는 상품 상세 조회 시 상품 사진을 조회합니다.")
 	@GetMapping("/product/{productId}")
-	public ResponseEntity<BasicResponse> getTypeProduct(@PathVariable long productId) {
+	public ResponseEntity<BasicResponse> getProductImages(@PathVariable long productId) {
 		List<ProductDetailDto> productDetail = productService.getProductImage(productId);
 
 		BasicResponse basicResponse = BasicResponse.builder()
