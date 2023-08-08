@@ -15,6 +15,8 @@ import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.schedule.repository.ScheduleRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
+import com.ssafy.backend.global.redis.fcm.FcmToken;
+import com.ssafy.backend.global.redis.fcm.FcmTokenRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,11 +43,12 @@ public class NotificationScheduler {
 
     private FirebaseMessaging firebaseMessaging;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private ScheduleRepository scheduleRepository;
     @Autowired
     private NotificationService notificationService;
+    @Autowired
+    private FcmTokenRepository fcmTokenRepository;
+
 
 
     @PostConstruct
@@ -132,8 +135,14 @@ public class NotificationScheduler {
         if (user != null) {
             //토큰 받아오는 걸로 수정
 //            String token = "eKbKoD7ETfqRiIKFF_4Zom:APA91bHbzIq11sl8_qbv1yE7-RFqjXnywPVo5u13FMC9kqIjJTrHkXIfqWODhBYvTS3EOGlOLQzlXUvJNwXn4EFbgoAC_WZzylV9yo5KOGLj96agM68p8qPc8bCPODgRk9aP_TNeKiLn";
-            String token = user.getFcmToken();
-            if (token != null) {
+//            String token = user.getFcmToken();
+            //user id를 통해 redis에서 받아오자 : 일단 테스트는 보류
+            FcmToken fcmToken = fcmTokenRepository.findById(String.valueOf(user.getId()))
+                    .orElse(null);
+
+            if (fcmToken != null) {
+                String token = fcmToken.getValue(); //redis에서 토큰 읽어온거
+
                 Notification notification = Notification.builder()
                         .setTitle(fcmDto.getTitle())
                         .setBody(fcmDto.getBody())
@@ -155,13 +164,13 @@ public class NotificationScheduler {
                             fcmDto.getBody(),
                             fcmDto.getUser().getId()
                     ));
-                    return "알림 전송 성공";
+                    return "알림 전송 성공 " + fcmDto.getUser();
                 } catch (FirebaseMessagingException e) {
                     e.printStackTrace();
-                    return "알림 전송 실패";
+                    return "알림 전송 실패 " + fcmDto.getUser();
                 }
             } else {
-                return "서버에 유저 firebase token 없음";
+                return "Redis에 유저 FCM token 없음 " + fcmDto.getUser();
             }
         } else {
             return "해당 유저 없음 " + fcmDto.getUser();
