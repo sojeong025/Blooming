@@ -102,15 +102,17 @@ const NoticeSwipeable = () => {
         next={fetchNotice}
         hasMore={hasMore}
         loader={
-          <p
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            로딩중...
-          </p>
+          hasMore ? (
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            ></p>
+          ) : (
+            <></>
+          )
         }
       >
         <SwipeableList fullSwipe={fullSwipe} type={ListType.IOS}>

@@ -7,25 +7,28 @@ const LabelInputComponent = ({
   value,
   onChange,
   type = "text",
-  placeholder,
   autoFocus,
   required = false,
   readOnly = false,
+  autoComplete = "off",
 }) => {
   return (
-    <div className='label-input'>
-      <label htmlFor={name}>{label}</label>
+    <div className={classes.container}>
       <input
+        className={classes.inputField}
         type={type}
         name={name}
         id={name}
         value={value}
         onChange={onChange}
-        placeholder={placeholder}
         autoFocus={autoFocus}
         required={required}
         readOnly={readOnly}
+        autoComplete={autoComplete}
       />
+      <label className={classes.labelName} htmlFor={name}>
+        <span className={classes.contentName}>{label}</span>
+      </label>
     </div>
   );
 };
