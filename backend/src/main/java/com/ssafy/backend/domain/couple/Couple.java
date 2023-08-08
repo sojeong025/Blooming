@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.couple;
 
 import com.ssafy.backend.domain.common.CreatedAndUpdatedBaseEntity;
+import com.ssafy.backend.domain.invitation.Invitation;
 import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.user.User;
 import lombok.*;
@@ -10,6 +11,8 @@ import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -31,6 +34,9 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
 
     @OneToMany(mappedBy = "couple", cascade = CascadeType.ALL)
     private List<Schedule> schedules = new ArrayList<>();
+
+    @OneToOne(mappedBy = "couple", fetch = LAZY)
+    private Invitation invitation;
 
     public void setCoupleCode(int coupleCode) {
         this.coupleCode = coupleCode;
