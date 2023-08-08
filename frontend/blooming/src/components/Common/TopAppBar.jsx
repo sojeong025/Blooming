@@ -42,6 +42,7 @@ const TopAppBar = () => {
     "/decide-wedding",
     "/choose-wedding",
     "/share",
+    "/edit-profile",
   ];
 
   const navigate = useNavigate();
