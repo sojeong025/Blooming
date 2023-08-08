@@ -21,6 +21,8 @@ export default function InfoDetail() {
   // 리뷰쓰는 폼관련된 State
   const [starRating, setStarRating] = useState(0);
   const [comment, setComment] = useState('');
+  const [imgFile, setImgFile] = useState('');
+
   const [reviewImage, setReviewImage] = useState('');
 
   const fetchImageData = async () => {
@@ -49,22 +51,21 @@ export default function InfoDetail() {
   const reviewData = {
     product_id: product.id,
     star: starRating,
-    image: reviewImage,
+    image: imgFile,
     content: comment
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(reviewData)
-    // const createReview = async () => {
-    //   try {
-    //     await customAxios.post("review", reviewData);
-    //     await fetchReviewData();
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // };
-    // createReview();
+    const createReview = async () => {
+      try {
+        await customAxios.post("review", reviewData);
+        await fetchReviewData();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    createReview();
   };
 
   const fileInputRef = useRef(null);
@@ -82,6 +83,7 @@ export default function InfoDetail() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setImgFile(file)
       const reader = new FileReader();
       reader.onloadend = () => {
         setReviewImage(reader.result);
@@ -103,7 +105,8 @@ export default function InfoDetail() {
   const handleCreateWish = async () => {
     try {
       await customAxios.post(`wishlist/${product.id}`);
-      setProduct({...product, wish:'true'})
+      setProduct({ ...product, wish: 'true' })
+      console.log(product)
     } catch (error) {
       console.error("찜하기 에러:", error);
     }
@@ -112,7 +115,8 @@ export default function InfoDetail() {
   const handleDeleteWish = async () => {
     try {
       await customAxios.delete(`wishlist/${product.id}`);
-      setProduct({...product, wish:'false'})
+      setProduct({ ...product, wish: 'false' })
+      console.log(product)
     } catch (error) {
       console.error("찜취소 에러:", error);
     }
@@ -149,7 +153,9 @@ export default function InfoDetail() {
       <p>{product.companyTime}</p>
       <p>{product.companyAddress}</p>
       <button onClick={handleReserve}>예약하기</button>
-      {product.wish ? <button onClick={handleDeleteWish}>찜취소</button> : <button onClick={handleCreateWish}>찜하기</button> }
+      <button onClick={product.wish ? handleDeleteWish : handleCreateWish}>
+        {product.wish ? "찜취소" : "찜하기"}
+      </button>
       <div>후기후기</div>
       {reviews.map((review) => {
         <div key={review.id}>
