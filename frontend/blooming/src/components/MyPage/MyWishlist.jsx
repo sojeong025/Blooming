@@ -1,12 +1,12 @@
 import { customAxios } from "../../lib/axios";
 import { useRecoilState } from "recoil";
-import { myWishlistState, fianceWishlistState } from "../../recoil/ProfileAtom";
+import { myWishlistState, myFianceWishlistState } from "../../recoil/ProfileAtom";
 import { useEffect } from "react";
 
 export default function MyWishlist() {
 
   const [myWishlist, setMyWishlist] = useRecoilState(myWishlistState)
-  const [fianceWishlist, setFianceWishlist] = useRecoilState(fianceWishlistState)
+  const [fianceWishlist, setFianceWishlist] = useRecoilState(myFianceWishlistState)
 
   const fetchData = async () => {
     try {
