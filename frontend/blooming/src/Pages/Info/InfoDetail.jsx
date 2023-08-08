@@ -5,7 +5,7 @@ import classes from "./InfoDetail.module.css";
 
 import { useLocation } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Rating from "react-rating";
 
 export default function InfoDetail() {
@@ -21,7 +21,7 @@ export default function InfoDetail() {
   // 리뷰쓰는 폼관련된 State
   const [starRating, setStarRating] = useState(0);
   const [comment, setComment] = useState('');
-  const [reviewImage, setReviewImage] = useState(null);
+  const [reviewImage, setReviewImage] = useState('');
 
   const fetchImageData = async () => {
     try {
@@ -67,10 +67,16 @@ export default function InfoDetail() {
     // createReview();
   };
 
+  const fileInputRef = useRef(null);
+
   const handleReset = () => {
     setStarRating(0);
     setComment('');
     setReviewImage(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const handleFileChange = (e) => {
@@ -168,8 +174,8 @@ export default function InfoDetail() {
           type="file"
           accept="reviewImage/*"
           id="file"
+          ref={fileInputRef}
           onChange={handleFileChange}
-          required
         />
         {reviewImage && <img src={reviewImage} alt="여긴 이미지다" />}
         <br />
