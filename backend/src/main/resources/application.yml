@@ -11,7 +11,7 @@ spring:
         max-active: '5'
         max-idle: '5'
         min-idle: '2'
-    host: redis
+    host: '43.200.254.50'
     port: '6379'
 
 springdoc:
