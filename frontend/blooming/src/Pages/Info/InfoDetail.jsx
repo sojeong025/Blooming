@@ -1,3 +1,8 @@
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import classes from "./InfoDetail.module.css";
+
 import { useLocation } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
 import { useEffect, useState } from "react";
@@ -7,12 +12,25 @@ export default function InfoDetail() {
   
   const location = useLocation();
   const product = location.state.product
+  const productType = location.state.productType
+  const [images, setImages] = useState([])
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [reviews, setReviews] = useState([])
+
 
   // 리뷰쓰는 폼관련된 State
   const [starRating, setStarRating] = useState(0);
   const [comment, setComment] = useState('');
-  const [image, setImage] = useState(null);
+  const [reviewImage, setReviewImage] = useState(null);
+
+  const fetchImageData = async () => {
+    try {
+      const response = await customAxios.get(`product/${productType}/${product.id}`);
+      setImages(response.data.result[0])
+    } catch (error) {
+      console.error("이미지 정보 조회 에러:", error);
+    }
+  }
 
   const fetchReviewData = async () => {
     try {
@@ -25,6 +43,7 @@ export default function InfoDetail() {
 
   useEffect(() => {
     fetchReviewData()
+    fetchImageData()
   }, [])
 
   const handleSubmit = (e) => {
@@ -36,7 +55,7 @@ export default function InfoDetail() {
   const handleReset = () => {
     setStarRating(0);
     setComment('');
-    setImage(null);
+    setReviewImage(null);
   };
 
   const handleFileChange = (e) => {
@@ -44,7 +63,7 @@ export default function InfoDetail() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImage(reader.result);
+        setReviewImage(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -62,24 +81,43 @@ export default function InfoDetail() {
     //이건 찜취소
   }
 
+  const handleCarouselChange = (index) => {
+    setCurrentImageIndex(index);
+  };
+
   return (
     <div style={{marginTop: '102px', marginBottom: '80px'}}>
       <p>{product.id}</p>
       <p>{product.itemName}</p>
+      {images && <Carousel
+        infiniteLoop
+        showThumbs={false}
+        showStatus={false}
+        showArrows={false}
+        emulateTouch
+        swipeable
+        className={classes["image-carousel"]}
+        onChange={handleCarouselChange}
+        selectedItem={currentImageIndex}
+        renderIndicator={() => {}}
+      >
+        {images.map((image, index) => (
+          <div key={index}>
+            <img src={image.image} alt='이미지가 없습니다.' />
+          </div>
+        ))}
+      </Carousel>}
       <p>{product.brief}</p>
       <p>{product.company}</p>
       <p>{product.companyTime}</p>
       <p>{product.companyAddress}</p>
       <p>{product.thumbnail}</p>
-      <p>{product.deatilImage1}</p>
-      <p>{product.deatilImage2}</p>
-      <p>{product.deatilImage3}</p>
       <button onClick={handleReserve}>예약하기</button>
-      {product.wishList ? <button onClick={handleCreateWish}>찜하기</button> : <button onClick={handleDeleteWish}>찜취소</button> }
+      {product.wish ? <button onClick={handleCreateWish}>찜하기</button> : <button onClick={handleDeleteWish}>찜취소</button> }
       <div>후기후기</div>
       {reviews.map((review) => {
         <div key={review.id}>
-          <p>{review.image}</p>
+          <p>{review.reviewImage}</p>
           <p>{review.star}</p>
           <p>{review.content}</p>
           <button>좋아요 싫어요</button>
@@ -98,12 +136,12 @@ export default function InfoDetail() {
         <br />
         <input
           type="file"
-          accept="image/*"
+          accept="reviewImage/*"
           id="file"
           onChange={handleFileChange}
           required
         />
-        {image && <img src={image} alt="여긴 이미지다" />}
+        {reviewImage && <img src={reviewImage} alt="여긴 이미지다" />}
         <br />
         <textarea
           value={comment}

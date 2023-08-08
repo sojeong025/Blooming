@@ -1,0 +1,45 @@
+.image-carousel {
+  max-width: 300px;
+  max-height: 500px;
+  margin: auto;
+  border: 1px solid black;
+  align-items: center;
+}
+
+.image-carousel .slider-wrapper {
+  max-width: 300px;
+  max-height: 500px;
+}
+
+.image-carousel .slider {
+  max-width: 300px;
+  max-height: 300px;
+
+}
+
+.image-carousel .slider .slide {
+  max-width: 300px;
+  max-height: 300px;
+}
+
+.image-carousel .slider .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-carousel .carousel .control-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-dot {
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background-color: #FFF1F2;
+  margin: 0 20px;
+  padding: 5px;
+  cursor: pointer;
+
+}
