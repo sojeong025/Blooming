@@ -1,6 +1,5 @@
 import ErrorModal from "../components/Error/ErrorModal";
 import useErrorModal from "../components/Error/useErrorModal";
-import InputField from "../components/MyPage/InputField";
 import IconList from "../components/Icons/IconList";
 
 import Modal from "../components/Error/Modal";
@@ -71,18 +70,6 @@ const Error = () => {
         <button>g</button>
       </Modal>
 
-      <div style={{ border: "1px solid black" }}>
-        <h2>모듈테스트다</h2>
-        <form>
-          <InputField
-            label='이메일'
-            type='email'
-            name='email'
-            value={formData.email}
-            onChange={handleChange}
-          />
-        </form>
-      </div>
       <div style={{ border: "1px solid black" }}>
         <h2>아이콘리스트다</h2>
         <IconList />
