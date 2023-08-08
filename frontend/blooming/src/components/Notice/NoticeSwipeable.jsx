@@ -34,7 +34,7 @@ const NoticeSwipeable = () => {
       try {
         const response = await customAxios.get("notification", { params });
         setNotice((prevNotice) => [...prevNotice, ...response.data.result[0]]);
-        // console.log(response);
+        console.log(notice);
         setPage(page + 1);
       } catch (error) {
         console.log("알림 조회 에러", error);
@@ -230,10 +230,10 @@ const NoticeSwipeable = () => {
   }, []);
 
   // 새로고침 누르면 새로 받게 하자
-  const onReNotice = () => {
-    setPage(0);
-    setNotice([]);
-    setHasMore(true);
+  const onReNotice = async () => {
+    await setPage(0);
+    await setNotice([]);
+    await setHasMore(true);
     fetchNotice();
   };
 
