@@ -44,7 +44,7 @@ public class ProductService {
 				.orElseThrow(() -> new NoSuchElementException("해당하는 상품 정보가 없습니다."));
 
 		return product.getProductImages().stream()
-				.map(ProductDetailDto::new)
+				.map(productImage -> new ProductDetailDto(productImage.getImage()))
 				.collect(Collectors.toList());
 	}
 }
