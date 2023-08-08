@@ -70,6 +70,24 @@ export default function Share() {
     }
   };
 
+  // 카카오톡 공유하기 버튼
+  const [shareBtn, setShareBtn] = useState(false)
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://developers.kakao.com/sdk/js/kakao.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      setShareBtn(true);
+    }
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [])
+
   return (
     <div className='mainContainer'>
       <h3>{userData.name}님의 약혼자를 연결해주세요.</h3>
@@ -81,8 +99,7 @@ export default function Share() {
             <p style={{ textDecoration: "underline" }}>{verifyCode}</p>
           </div>
         </CopyToClipboardButton>
-
-        <KakaoShareButton code={verifyCode} />
+        { shareBtn && <KakaoShareButton code={verifyCode} /> }
       </div>
 
       <p>or</p>
