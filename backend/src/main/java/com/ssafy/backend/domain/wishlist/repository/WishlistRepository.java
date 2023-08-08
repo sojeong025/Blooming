@@ -9,5 +9,5 @@ import java.util.List;
 public interface WishlistRepository extends JpaRepository<Wishlist, Long>{
 //    @Query("select p from Product p join fetch ")
     List<Wishlist> findAllByUserId(Long userId);
-
+    void deleteByProductIdAndUserId(Long productId, Long userId);
 }
