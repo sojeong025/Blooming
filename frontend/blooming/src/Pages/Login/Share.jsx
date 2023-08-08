@@ -82,7 +82,7 @@ export default function Share() {
           </div>
         </CopyToClipboardButton>
 
-        <KakaoShareButton />
+        <KakaoShareButton code={verifyCode} />
       </div>
 
       <p>or</p>
