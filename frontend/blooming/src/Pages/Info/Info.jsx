@@ -1,4 +1,4 @@
-import { NavLink,Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 import classes from "./Info.module.css";
 
@@ -18,7 +18,10 @@ function Info() {
         <NavLink to='/info/make-up' state={{ pageTitle: "메이크업" }}>
           <div>메이크업</div>
         </NavLink>
-        <NavLink to='/info/mobile-invitation' state={{ pageTitle: "모바일청첩장" }}>
+        <NavLink
+          to='/info/mobile-invitation'
+          state={{ pageTitle: "모바일청첩장" }}
+        >
           <div>모바일청첩장</div>
         </NavLink>
       </nav>

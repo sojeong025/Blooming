@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 /* #FFFAF4 */
-.inputField {
+/* .inputField {
   width: 100%;
   height: 100%;
   padding-top: 20px;
@@ -32,10 +32,8 @@
   width: 100%;
   height: 100%;
   border-bottom: 3px solid #FFCBD3;
-  /* transform: translateX(-100%); */
   transition: all 0.3s ease;
 }
-
 .contentName {
   position: absolute;
   bottom: 0px;
@@ -57,4 +55,54 @@
 .inputField:focus + .labelName::after,
 .inputField:valid + .labelName::after {
   transform: translateX(0%);
+} */
+
+
+
+.input {
+  font-size: 16px;
+  color: #222222;
+  width: 100%;
+  border: none;
+  border-bottom: solid #aaaaaa 1px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  bottom: -26px;
+  position: relative;
+  background: none;
+  z-index: 2;
 }
+
+.input:focus { outline: none; }
+
+.span {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0%;
+  background-color: #666;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  transition: 0.5s;
+}
+
+.label {
+  position: absolute;
+  color: #aaa;
+  left: 10px;
+  font-size: 20px;
+  bottom: 8px;
+  transition: all .2s;
+}
+
+.input:focus ~ .label, .input:valid ~ .label {
+  font-size: 16px;
+  bottom: 40px;
+  color: #666;
+  font-weight: bold;
+}
+
+.input:focus ~ .span, .input:valid ~ .span {
+  width: 100%;
+} 

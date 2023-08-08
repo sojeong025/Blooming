@@ -1,0 +1,16 @@
+
+.mainText {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0 0 0;
+}
+
+.subText {
+  font-size: 18px;
+  margin: 10px;
+}
+
+.subText p {
+  margin: 0;
+  padding-top: 10px;
+}

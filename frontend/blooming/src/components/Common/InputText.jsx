@@ -12,8 +12,8 @@ const LabelInputComponent = ({
   autoComplete = "off",
 }) => {
   return (
-    <div className={classes.container}>
-      <input
+    <div className={`${classes.container} `}>
+      {/* <input
         className={classes.inputField}
         type={type}
         name={name}
@@ -27,7 +27,13 @@ const LabelInputComponent = ({
       />
       <label className={classes.labelName} htmlFor={name}>
         <span className={classes.contentName}>{label}</span>
-      </label>
+      </label> */}
+
+      <div>
+        <input className={classes.input} type='text' required />
+        <label className={classes.label}>{label}</label>
+        <span className={classes.span}></span>
+      </div>
     </div>
   );
 };

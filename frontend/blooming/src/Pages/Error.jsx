@@ -7,6 +7,7 @@ import { useCallback, useState } from "react";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 import { errorState } from "../recoil/ErrorAtom";
+import { GenderButton } from "../components/Common/GenderButton";
 
 const Error = () => {
   // 에러 모달
@@ -30,17 +31,6 @@ const Error = () => {
       setErrorModal(true);
     }
   }, [setErrorModal]);
-
-  // 모듈테스트
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    displayName: "",
-  });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   return (
     <div className='mainContainer'>
@@ -67,8 +57,10 @@ const Error = () => {
       >
         <h2>Error</h2>
         <p>에러등장</p>
-        <button>g</button>
+        <button>닫기</button>
       </Modal>
+
+      <GenderButton />
 
       <div style={{ border: "1px solid black" }}>
         <h2>아이콘리스트다</h2>
