@@ -36,7 +36,9 @@ public class UserService {
         findUser.authorizeUser();
 
         //fcm 토큰 redis 저장. 유저 key인 id로 저장
-        fcmTokenRepository.save(new FcmToken(String.valueOf(findUser.getId()), userSignUpDto.getFcmToken()));
+        if (userSignUpDto.getFcmToken() != null){ //null이 아닐 때만 저장
+            fcmTokenRepository.save(new FcmToken(String.valueOf(findUser.getId()), userSignUpDto.getFcmToken()));
+        }
 
         // TODO: coupleCode 검증하는 api를 하나 만들자.(프론트에서 인증버튼이 있으니까..) 그러면 null이 아닐 때 무조건 setCouple하면 된다.
         if (userSignUpDto.getCoupleCode() == null) {
