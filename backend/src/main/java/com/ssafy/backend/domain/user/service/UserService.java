@@ -79,6 +79,7 @@ public class UserService {
         log.debug(originCouple.getUsers().toString());
 
         if (originCouple.getUsers().isEmpty()) {
+            originCouple.getInvitation().setCouple(null);
             coupleRepository.delete(originCouple);
         }
 
