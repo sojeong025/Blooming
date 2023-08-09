@@ -2,6 +2,7 @@ package com.ssafy.backend.domain.product.dto;
 
 import java.util.List;
 
+import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.product.ProductImage;
 
 import lombok.AllArgsConstructor;
@@ -31,17 +32,15 @@ public class ProductDetailDto {
 	//찜 정보
 	private boolean isWish;
 
-	public ProductDetailDto(Long id, String itemName, String brief, String thumbnail, String company,
-			String companyTime,
-			String companyAddress, List<ProductImage> images, boolean isWish) {
-		this.id = id;
-		this.itemName = itemName;
-		this.brief = brief;
-		this.thumbnail = thumbnail;
-		this.company = company;
-		this.companyTime = companyTime;
-		this.companyAddress = companyAddress;
-		this.images = images;
+	public ProductDetailDto(Product product, boolean isWish) {
+		this.id = product.getId();
+		this.itemName = product.getItemName();
+		this.brief = product.getBrief();
+		this.thumbnail = product.getThumbnail();
+		this.company = product.getCompany();
+		this.companyTime = product.getCompanyTime();
+		this.companyAddress = product.getCompanyAddress();
+		this.images = product.getProductImages();
 		this.isWish = isWish;
 	}
 }
