@@ -45,7 +45,7 @@ function Main() {
             accept="image/*"
             onChange={handleInputImage}
           />
-          {invitation.main.imageURL && (
+          {invitation.main.thumbnail && (
             <img
               src={invitation.main.thumbnail}
               alt="preview"
