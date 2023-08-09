@@ -43,7 +43,7 @@ function CreateItem({ hide, item }) {
       try {
         const formData = new FormData();
         formData.append('image', file);
-        const response = await fileAxios.post('REVIEW', formData);
+        const response = await fileAxios.post('DIARY', formData);
         console.log('다이어리 이미지 Url', imageURL)
         setImageURL(response.data.result[0].uploadImageUrl);
       } catch (error) {
