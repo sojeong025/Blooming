@@ -16,11 +16,9 @@ function MobileInvitation() {
       setCount(response.data.count)
       console.log('가져오기 성공!')
       console.log('response.data.count 확인', response.data.count)
-      console.log(setCount)
     } catch (error) {
       console.error(error);
       console.log("가져오기 실패!");
-      console.log(setCount);
     }
   };
 
@@ -39,7 +37,7 @@ function MobileInvitation() {
         <ConceptsList />
         <hr />
 
-        {count === 0 ? (
+        {count !== 0 ? (
           <NavLink to='/mobile-invitation-detail'>
             <button className={classes.btn}>나의 청첩장 보기</button>
           </NavLink>
