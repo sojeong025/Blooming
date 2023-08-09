@@ -112,7 +112,7 @@ export default function InfoDetail() {
     <div style={{marginTop: '102px', marginBottom: '80px'}}>
       <p>{product.id}</p>
       <p>{product.itemName}</p>
-      {images && <Carousel
+      {Array.isArray(images) && <Carousel
         infiniteLoop
         showThumbs={false}
         showStatus={false}
@@ -159,7 +159,7 @@ export default function InfoDetail() {
       </button>
       <DetailReviewForm product={product} fetchReviewData={fetchReviewData} />
       <div>{product.company} 후기</div>
-      {reviews.map((review) => {
+      {Array.isArray(reviews) && reviews.map((review) => {
         <div key={review.id}>
           <p>{review.reviewImage}</p>
           <p>{review.star}</p>
