@@ -21,7 +21,7 @@ function Schedule() {
 
   async function fetchTask() {
     try {
-      const response = await customAxios.get('scehdule')
+      const response = await customAxios.get('schedule')
       console.log(response.data.result[0])
       setTask(response.data.result[0])
     } catch (error) {

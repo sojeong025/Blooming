@@ -44,7 +44,7 @@
 
 }
 
-.go-top-button {
+.topButton {
   position: fixed;
   bottom: 120px;
   right: 20px;
@@ -59,6 +59,6 @@
   transition: background-color 0.3s;
 }
 
-.go-top-button:hover {
+.topButton:hover {
   background-color: #0d47a1;
 }
