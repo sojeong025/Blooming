@@ -13,8 +13,6 @@ import { useState } from "react";
 import { PageIndicator } from "antd-mobile";
 
 function Preview() {
-  // 카카오버튼
-
   const CustomDot = ({ onClick, isActive }) => {
     return (
       <button
@@ -46,13 +44,13 @@ function Preview() {
   return (
     <div className={classes.div}>
       <Carousel
+        className={classes["image-carousel"]}
         infiniteLoop
         showThumbs={false}
         showStatus={false}
         showArrows={false}
         emulateTouch
         swipeable
-        className={classes["image-carousel"]}
         onChange={handleCarouselChange}
         selectedItem={currentImageIndex}
         renderIndicator={() => {}}
@@ -63,7 +61,9 @@ function Preview() {
           </div>
         ))}
       </Carousel>
+
       <PageIndicator
+        className={classes.pageIndicator}
         total={totalImages}
         current={currentImageIndex}
         style={{
@@ -76,23 +76,34 @@ function Preview() {
           "--dot-spacing": "8px",
         }}
       />
+      <div className={classes.buttonContainer}>
+        {currentImageIndex === totalImages - 1 ? (
+          // 카카오 버튼
+          <a href='http://43.200.254.50:8080/oauth2/authorization/kakao'>
+            <div className={classes.kakaoBtn}>
+              {/* <div>심볼</div>
+              <p>카카오 로그인</p> */}
+              <img src='src/assets/kakao.png' />
+            </div>
+          </a>
+        ) : (
+          <>
+            <div
+              className={`${classes.pre} ${classes.btn}`}
+              onClick={handlePrevClick}
+            >
+              건너뛰기
+            </div>
 
-      {currentImageIndex === 2 ? (
-        // 카카오 버튼
-        <a href='http://43.200.254.50:8080/oauth2/authorization/kakao'>
-          <img src='src/assets/kakao.png' />
-          {/* 300 * 45 */}
-        </a>
-      ) : (
-        <div className={classes.btn}>
-          <button className={classes.pre} onClick={handlePrevClick}>
-            건너뛰기
-          </button>
-          <button className={classes.next} onClick={handleNextClick}>
-            다음
-          </button>
-        </div>
-      )}
+            <div
+              className={`${classes.next} ${classes.btn}`}
+              onClick={handleNextClick}
+            >
+              다음
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
