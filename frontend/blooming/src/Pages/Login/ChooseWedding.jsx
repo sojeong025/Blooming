@@ -3,8 +3,13 @@ import Button from "../../components/Login/Button";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userCoupleState, userState } from "../../recoil/ProfileAtom";
 import { weddingDateState } from "../../recoil/WeddingDdayAtom";
-import { useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
+import classes from "./Question.module.css";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import dayjs from "dayjs";
 
 export default function ChooseWedding() {
   const userData = useRecoilValue(userState);
@@ -25,56 +30,81 @@ export default function ChooseWedding() {
   };
 
   const [weddingDate, setWeddingDate] = useRecoilState(weddingDateState);
-  const [resWeddingDate, setResWeddingDate] = useState();
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [chooseDate, setChooseDate] = useState();
 
   // 웨딩 정보 변경
   const handleChange = (e) => {
     const newWeddingDate = e.target.value;
     setWeddingDate(newWeddingDate);
-    setResWeddingDate({
-      weddingDate,
-    });
   };
 
-  // 웨딩 정보 POST 요청
-  const saveWeddingDate = async () => {
+  // 웨딩 정보 보내기
+  const submitWeddingDate = async () => {
     try {
-      await customAxios.post("wedding-date", {
-        weddingDate,
-      });
+      await setWeddingDate(dayjs(selectedDate).format("YYYY-MM-DD"));
+      // await customAxios.post("wedding-date", {
+      //   weddingDate,
+      // });
     } catch (error) {
       console.log("웨딩 정보 POST 에러: ", error);
-      // console.log("res", resWeddingDate);
-      // console.log(weddingDate);
     }
+    console.log(weddingDate);
+    // isFiance();
   };
 
-  // 버튼 클릭 시 웨딩 정보 보내기
-  const submitWeddingDate = () => {
-    saveWeddingDate();
-    isFiance();
-  };
+  // 아니 왜 date가 이전에 선택한 데이터냐고!!
+  function dateChangeHandler(date) {
+    setSelectedDate(date);
+    console.log(dayjs(selectedDate).format("YYYY-MM-DD"));
+  }
+  function submitHandler() {
+    const weddingDatePick = {
+      weddingDate: dayjs(selectedDate).format("YYYY-MM-DD"),
+    };
+    console.log(weddingDatePick);
+  }
 
   return (
-    <div className='mainContainer'>
-      <h3>{userData.name}님의 결혼식 날짜는 언제인가요?</h3>
-      {/* 달력 바꿔줘 소정아 */}
-      <input type='date' value={weddingDate} onChange={handleChange} />
+    <div className={`'mainContainer' ${classes.goJoinContainer}`}>
+      <div className={classes.titleText}>
+        {userData.name}님의 결혼식 날짜는 언제인가요?
+        <p
+          className={classes.subText}
+        >{`입력한 정보는 언제든 수정이 가능해요.`}</p>
+      </div>
 
+      <input type='date' value={weddingDate} onChange={handleChange} />
       {weddingDate && (
         <div>
           <p>{weddingDate}가 맞나요?</p>
-          <Button text='네' onClick={submitWeddingDate} />
+          <Button text='다음' onClick={submitWeddingDate} />
         </div>
       )}
-      <br />
-      <Button
-        text='날짜 입력 건너뛰기'
+
+      <h1>---👷🏻‍♀️🚧개발중🚧👷🏻‍♂️🚬---</h1>
+      {/* 데이트피커 */}
+      <div className={classes.datePick}>
+        <DatePicker
+          dateFormat='yyyy-MM-dd'
+          shouldCloseOnSelect
+          selected={selectedDate}
+          onChange={dateChangeHandler}
+        />
+      </div>
+
+      <div className={classes.dateBtn} onClick={submitWeddingDate}>
+        웨딩 날짜 저장하기
+      </div>
+      <div
+        className={classes.dateBtn}
         onClick={() => {
           setWeddingDate("");
           isFiance();
         }}
-      />
+      >
+        아직 못정했어요
+      </div>
     </div>
   );
 }
