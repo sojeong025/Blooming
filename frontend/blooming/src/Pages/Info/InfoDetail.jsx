@@ -161,7 +161,7 @@ export default function InfoDetail() {
           </button>
           <DetailReviewForm product={product} fetchReviewData={fetchReviewData} />
           <div>{product.company} 후기</div>
-          {Array.isArray(reviews) ? reviews.map((review) => {
+          {reviews ? reviews.map((review) => {
             <div key={review.id}>
               <p>{review.reviewImage}</p>
               <p>{review.star}</p>
