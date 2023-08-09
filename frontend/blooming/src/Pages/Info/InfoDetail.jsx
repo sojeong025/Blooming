@@ -102,6 +102,19 @@ export default function InfoDetail() {
     setCurrentImageIndex(index);
   };
 
+  window.onscroll = function () {
+    showTopButton();
+  };
+
+  function showTopButton() {
+    const topButton = document.getElementById("topButton");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      topButton.style.display = "block";
+    } else {
+      topButton.style.display = "none";
+    }
+  }
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -163,13 +176,14 @@ export default function InfoDetail() {
           <div>{product.company} 후기</div>
           {reviews ? reviews.map((review) => (
             <div key={review.id}>
-              <p>{review.reviewImage}</p>
+              <p>작성자: {review.nickName} {review.email}</p>
+              <img src={review.image} alt="이미지가 없습니다." />
               <p>{review.star}</p>
               <p>{review.content}</p>
-              <button>좋아요 싫어요</button>
+              <button>도움이 돼요! {review.likeCnt}</button>
             </div>
           )) : <div>등록된 후기가 없습니다.</div>}
-          <button onClick={scrollToTop} className={classes.topButton}>
+          <button id="topButton" onClick={scrollToTop} className={classes.topButton}>
             Top
           </button>
         </>
