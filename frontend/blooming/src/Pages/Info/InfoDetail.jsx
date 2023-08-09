@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import classes from "./InfoDetail.module.css";
 
 import { useLocation } from "react-router-dom";
-import { customAxios } from "../../lib/axios";
+import { customAxios, fileAxios } from "../../lib/axios";
 import { useEffect, useRef, useState } from "react";
 import Rating from "react-rating";
 
@@ -84,8 +84,10 @@ export default function InfoDetail() {
     const file = e.target.files[0];
     if (file) {
       try {
-        const response = await customAxios.post("s3/REVIEW", {image: file});
-        console.log('이건 이미지 s3 api', response.data.result[0])
+        const formData = new FormData();
+        formData.append('image', file)
+        const response = await fileAxios.post('REVIEW', formData)
+        console.log('이건 이미지 s3 api', response.data)
         setImgFile(response.data.result[0])
       } catch (error) {
         console.error('이미지 api 오류',error);
