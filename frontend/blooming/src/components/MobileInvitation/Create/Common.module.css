@@ -49,3 +49,39 @@
   color: rgb(236, 103, 103);
   font-size: 14px;
 }
+
+.imageContainer {
+  background-color: #dfdfdf;
+  width: 82vw;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -5;
+}
+.img {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+}
+.imageContainer img {
+  width: 100vw;
+  height: 45vh;
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 2;
+}
+.imageContainer input {
+  width: 200px;
+}
+.label {
+  font-size: 30px;
+  padding: 20px 25px;
+  color: #fff;
+  position: absolute;
+  z-index: 5;
+  font-family: 'SUITE-regular';
+  background-color: #b4b4b459;
+}
