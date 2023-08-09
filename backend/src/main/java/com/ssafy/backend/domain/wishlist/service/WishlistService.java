@@ -77,20 +77,18 @@ public class WishlistService {
     // 커플 없을경우 예외처리 해라
     public  List<WishlistDto> getAllCoupleWishlist(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByEmail(authentication.getName())
+        User findUser = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
         
         // 커플 가져와서 커플의 아이디로 검색
-        Couple couple = user.getCouple();
+        Couple couple = findUser.getCouple();
         List<User> userList = couple.getUsers();
-        System.out.println("위시리스트 커플 사이즈 출력");
-        System.out.println(userList.size());
 
         List<WishlistDto> wishlistDtos = new ArrayList<>();
-        for(User u : userList) {
-            List<Wishlist> wishlists = wishlistRepository.findAllByUser(u);
+        for(User user : userList) {
+            List<Wishlist> wishlists = wishlistRepository.findAllByUser(user);
             for (Wishlist wishlist : wishlists) {
-                wishlistDtos.add(new WishlistDto(wishlist.getProduct()));
+                wishlistDtos.add(new WishlistDto(wishlist.getProduct(), user));
             }
         }
 
