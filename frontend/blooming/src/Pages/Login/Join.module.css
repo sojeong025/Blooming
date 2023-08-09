@@ -22,6 +22,12 @@
   max-width: 500px;
   margin: 0 auto;
 }
+.titleText {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
 
 /* gender */
 .genderSelect {

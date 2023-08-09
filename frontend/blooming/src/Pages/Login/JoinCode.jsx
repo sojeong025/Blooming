@@ -22,7 +22,7 @@ const CoupleCode = () => {
       await customAxios.post("couple-certification", formData);
       setCoupled(`${formData.name}님과 연결되었습니다.`);
       setUserData({ ...userData, coupleCode: formData.coupleCode });
-      console.log(userData)
+      console.log(userData);
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
       setCoupled("잘못된 코드입니다");
@@ -37,8 +37,6 @@ const CoupleCode = () => {
       });
     }
   };
-
-  
 
   return (
     <div className='mainContainer'>
