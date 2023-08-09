@@ -1,5 +1,7 @@
 package com.ssafy.backend.domain.reservation;
 
+import static javax.persistence.FetchType.*;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
@@ -27,12 +29,12 @@ public class Reservation {
     private LocalTime reservedTime;
 
     //연관: 회원 : 다대일 양방향!!
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     //연관: 상품 : 다대일 단방향(예약 -> 상품)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
