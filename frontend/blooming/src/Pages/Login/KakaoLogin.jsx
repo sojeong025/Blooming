@@ -34,6 +34,7 @@ function KakaoLogin() {
         if (isUser === "T") {
           navigate("/home");
         } else if (isUser === "F") {
+          console.log(localStorage.getItem("accessToken"));
           navigate("/go-join");
         }
       }
