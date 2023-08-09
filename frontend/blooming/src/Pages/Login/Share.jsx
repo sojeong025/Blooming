@@ -74,6 +74,7 @@ export default function Share() {
     event.preventDefault();
     try {
       await customAxios.put("couple", formData);
+      navigate("/my-page");
       // 연결완료 모달이라도 띄워줄까.?
     } catch (error) {
       console.log("상대방 연결 에러:", error);
@@ -130,7 +131,7 @@ export default function Share() {
         <div>
           <CopyToClipboardButton text={verifyCode}>
             <div style={{ padding: "10px" }}>
-              <p>나의 코드</p>
+              <div>나의 코드</div>
               <span style={{ textDecoration: "underline" }}>{verifyCode}</span>
             </div>
           </CopyToClipboardButton>
@@ -142,12 +143,13 @@ export default function Share() {
         {coupled && (
           <>
             <form onSubmit={connectCouple}>
+              {/* coupled === true 되면 위에 폼 disabled로 바꾸기 */}
               <button type='submit'>연결하기</button>
             </form>
           </>
         )}
         <br />
-        {/* <a onClick={() => navigate("/home")}>메인 페이지로</a> */}
+        <a onClick={() => navigate("/home")}>메인 페이지로</a>
       </Wrapper>
     </div>
   );
