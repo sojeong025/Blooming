@@ -68,7 +68,9 @@ public class ReviewService {
                     review.getContent(),
                     review.getLikeCnt(),
                     review.getProduct().getId(),
-                    review.getProduct().getItemName()
+                    review.getProduct().getItemName(),
+                    review.getUser().getNickname(),
+                    review.getUser().getEmail()
             ));
         }
 
@@ -94,7 +96,10 @@ public class ReviewService {
                     review.getContent(),
                     review.getLikeCnt(),
                     review.getProduct().getId(),
-                    review.getProduct().getItemName()
+                    review.getProduct().getItemName(),
+                    "", // resultDto를 하나 더 만들건지 아니면 그냥 ""만 담는게 나은지 아니면 그냥 담아주는게 맞는지
+                    ""
+
             ));
         }
 

@@ -15,4 +15,9 @@ public class ReviewResultDto {
     //상품 조회 추가
     private Long productId;
     private String productName;
+
+    // 글쓴이 추가
+    private String nickName;
+    private String email;
+
 }
