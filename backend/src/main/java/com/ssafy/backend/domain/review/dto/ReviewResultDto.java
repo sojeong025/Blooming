@@ -19,5 +19,5 @@ public class ReviewResultDto {
     // 글쓴이 추가
     private String nickName;
     private String email;
-
+    private boolean isLiked;
 }

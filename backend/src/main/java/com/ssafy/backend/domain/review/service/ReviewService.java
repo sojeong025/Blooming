@@ -1,5 +1,6 @@
 package com.ssafy.backend.domain.review.service;
 
+import com.ssafy.backend.domain.liked.repository.LikedRepository;
 import com.ssafy.backend.domain.review.dto.ReviewModifyDto;
 import com.ssafy.backend.domain.review.dto.ReviewResultDto;
 import com.ssafy.backend.domain.product.Product;
@@ -27,6 +28,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final LikedRepository likedRepository;
 
     public void registReview(ReviewRegistDto reviewRegistDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -58,9 +60,19 @@ public class ReviewService {
         //상품 id에 대한 리뷰 얻기
         List<Review> reviews = reviewRepository.findByProductOrderByIdDesc(product, pageable);
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+        Long userId = user.getId();
+
         //ResultDto로 변환
         List<ReviewResultDto> reviewResultDtos = new ArrayList<>();
         for (Review review : reviews){
+            // 내가 도움돼요 눌렀는지 체크
+            Boolean isLiked = false;
+            if(likedRepository.countByUserIdAndReviewId(userId, review.getId()) != 0){
+                isLiked=true;
+            }
             reviewResultDtos.add(new ReviewResultDto(
                     review.getId(),
                     review.getStar(),
@@ -70,7 +82,8 @@ public class ReviewService {
                     review.getProduct().getId(),
                     review.getProduct().getItemName(),
                     review.getUser().getNickname(),
-                    review.getUser().getEmail()
+                    review.getUser().getEmail(),
+                    isLiked
             ));
         }
 
@@ -82,13 +95,17 @@ public class ReviewService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
-
+        Long userId = user.getId();
         //유저에 대한 리뷰 얻기
         List<Review> reviews = reviewRepository.findByUserOrderByIdDesc(user, pageable);
 
         //ResultDto로 변환
         List<ReviewResultDto> reviewResultDtos = new ArrayList<>();
         for (Review review : reviews){
+            Boolean isLiked = false;
+            if(likedRepository.countByUserIdAndReviewId(userId, review.getId()) != 0){
+                isLiked=true;
+            }
             reviewResultDtos.add(new ReviewResultDto(
                     review.getId(),
                     review.getStar(),
@@ -98,7 +115,9 @@ public class ReviewService {
                     review.getProduct().getId(),
                     review.getProduct().getItemName(),
                     "", // resultDto를 하나 더 만들건지 아니면 그냥 ""만 담는게 나은지 아니면 그냥 담아주는게 맞는지
-                    ""
+                    "",
+                    isLiked
+
 
             ));
         }

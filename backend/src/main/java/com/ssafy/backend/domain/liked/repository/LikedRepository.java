@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface LikedRepository  extends JpaRepository<Liked, Long> {
-    void deleteByUserIdAndReviewId(Long userid, Long reviewid);
-    Long countByReviewId(Long reviewId);
+    void deleteByUserIdAndReviewId(Long userid, Long reviewId);
+    Long countByUserIdAndReviewId(Long userId ,Long reviewId);
 }
