@@ -26,6 +26,9 @@ function MobileInvitation() {
 
   useEffect(() => {
     fetchData();
+  }, []);
+
+  useEffect(() => {
   }, [count]);
 
   return (
