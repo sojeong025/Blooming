@@ -111,65 +111,69 @@ export default function InfoDetail() {
 
   return (
     <div style={{marginTop: '102px', marginBottom: '80px'}}>
-      <p>{product.itemName}</p>
-      {Array.isArray(product.images) && <Carousel
-        infiniteLoop
-        showThumbs={false}
-        showStatus={false}
-        showArrows={false}
-        emulateTouch
-        swipeable
-        className={classes["image-carousel"]}
-        onChange={handleCarouselChange}
-        selectedItem={currentImageIndex}
-        renderIndicator={() => {}}
-      >
-        {product.images.map((image, index) => (
-          <div key={index}>
-            <img src={image} alt='이미지가 없습니다.' />
+      {product &&
+        <>
+          <p>{product.itemName}</p>
+          {Array.isArray(product.images) && <Carousel
+            infiniteLoop
+            showThumbs={false}
+            showStatus={false}
+            showArrows={false}
+            emulateTouch
+            swipeable
+            className={classes["image-carousel"]}
+            onChange={handleCarouselChange}
+            selectedItem={currentImageIndex}
+            renderIndicator={() => {}}
+          >
+            {product.images.map((image, index) => (
+              <div key={index}>
+                <img src={image} alt='이미지가 없습니다.' />
+              </div>
+            ))}
+          </Carousel>}
+          <p>{product.brief}</p>
+          <p>{product.company}</p>
+          <p>{product.companyTime}</p>
+          <p>{product.companyAddress}</p>
+          <div>
+            <DatePicker
+              selected={reservedDate}
+              onChange={onDateChange}
+              dateFormat="yyyy-MM-dd"
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"
+            />
+            <DatePicker
+              selected={reservedTime}
+              onChange={onTimeChange}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={30}
+              timeFormat="HH:mm"
+              dateFormat="HH:mm"
+            />
           </div>
-        ))}
-      </Carousel>}
-      <p>{product.brief}</p>
-      <p>{product.company}</p>
-      <p>{product.companyTime}</p>
-      <p>{product.companyAddress}</p>
-      <div>
-        <DatePicker
-          selected={reservedDate}
-          onChange={onDateChange}
-          dateFormat="yyyy-MM-dd"
-          showMonthDropdown
-          showYearDropdown
-          dropdownMode="select"
-        />
-        <DatePicker
-          selected={reservedTime}
-          onChange={onTimeChange}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={30}
-          timeFormat="HH:mm"
-          dateFormat="HH:mm"
-        />
-      </div>
-      <button onClick={handleReserve}>예약하기</button>
-      <button onClick={product.wish ? handleDeleteWish : handleCreateWish}>
-        {product.wish ? "찜취소" : "찜하기"}
-      </button>
-      <DetailReviewForm product={product} fetchReviewData={fetchReviewData} />
-      <div>{product.company} 후기</div>
-      {Array.isArray(reviews) && reviews.map((review) => {
-        <div key={review.id}>
-          <p>{review.reviewImage}</p>
-          <p>{review.star}</p>
-          <p>{review.content}</p>
-          <button>좋아요 싫어요</button>
-        </div>
-      })}
-      <button onClick={scrollToTop} className={classes["go-Top-button"]}>
-        Top
-      </button>
+          <button onClick={handleReserve}>예약하기</button>
+          <button onClick={product.wish ? handleDeleteWish : handleCreateWish}>
+            {product.wish ? "찜취소" : "찜하기"}
+          </button>
+          <DetailReviewForm product={product} fetchReviewData={fetchReviewData} />
+          <div>{product.company} 후기</div>
+          {Array.isArray(reviews) && reviews.map((review) => {
+            <div key={review.id}>
+              <p>{review.reviewImage}</p>
+              <p>{review.star}</p>
+              <p>{review.content}</p>
+              <button>좋아요 싫어요</button>
+            </div>
+          })}
+          <button onClick={scrollToTop} className={classes["go-Top-button"]}>
+            Top
+          </button>
+        </>
+      }
     </div>
   );
 }
