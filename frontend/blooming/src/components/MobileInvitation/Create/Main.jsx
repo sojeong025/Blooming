@@ -1,72 +1,59 @@
-import React, { useCallback } from 'react';
-import UploadImage from './UploadImage';
+import React from 'react';
+// import UploadImage from './UploadImage';
 import classes from './Common.module.css';
+import { mobileInvitationState } from '../../../recoil/MobileInvitationAtom';
+import { customAxios, fileAxios } from "../../../lib/axios";
+
+import { useRecoilState } from 'recoil';
+
 
 function Main() {
-  const requestFileFromApp = useCallback((event) => {
-    event.preventDefault();
-    window.location.href = 'filepicker://request';
-  }, []);
+  const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
 
-  // 필요한 경우 handleSelectedFile 함수를 window 객체에 추가합니다.
-  window.handleSelectedFile = (name, mimeType, base64Data) => {
-    var fileInput = document.getElementById("yourFileInputId");
-    var file = new File([base64Data], name, { type: mimeType });
-    var dt = new DataTransfer();
-    dt.items.add(file);
-    fileInput.files = dt.files;
+  const handleInputImage = async(e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const formData = new FormData();
+        formData.append('thumbnail', file);
+        const response = await fileAxios.post('', formData);
+        console.log('모바일청첩장 이미지 Url', invitation);
+        
+        setInvitation((prevInvitation) => ({
+          ...prevInvitation,
+          main: {
+            ...prevInvitation.main,
+            thumbnail: response.data.result[0].uploadImageUrl,
+          },
+        }));
+      } catch (error) {
+        console.error('모바일청첩장 이미지 api 오류', error);
+      }
+    }
   };
 
   return (
     <div className={classes.container} style={{ marginTop: '70px' }}>
       <p className={classes.header}>메인</p>
       <hr />
-      <div>
-        <UploadImage />
-      </div>
-      <div>
-        <input
-          type="file"
-          id="yourFileInputId"
-          onClick={requestFileFromApp}
-        />
-      </div>
+      <div className={classes.imageContainer}>
+          <label className={classes.label} htmlFor="image">+</label>
+          <input
+            className={classes.img}
+            type="file"
+            id="image"
+            accept="image/*"
+            onChange={handleInputImage}
+          />
+          {invitation.main.imageURL && (
+            <img
+              src={invitation.main.thumbnail}
+              alt="preview"
+            />
+          )}
+        </div>
     </div>
   );
 }
 
 export default Main;
-
-
-// import React from 'react';
-// import UploadImage from './UploadImage';
-// import classes from './Common.module.css';
-
-// function Main() {
-//   return (
-//     <div className={classes.container} style={{ marginTop: '70px' }}>
-//       <p className={classes.header}>메인</p>
-//       <hr />
-//       <div>
-//         <UploadImage />
-//       </div>
-//       <div>
-//         <input type="file" id="yourFileInputId"  onclick="requestFileFromApp(event)"/>
-//       </div>
-//     </div>
-//   );
-// }
-// function requestFileFromApp(event) {
-//   event.preventDefault();
-//   window.location.href = 'filepicker://request';
-// }
-
-// function handleSelectedFile(name, mimeType, base64Data) {
-//   var fileInput = document.getElementById("yourFileInputId");
-//   var file = new File([base64Data], name, { type: mimeType });
-//   var dt = new DataTransfer();
-//   dt.items.add(file);
-//   fileInput.files = dt.files;
-// }
-
-// export default Main;
