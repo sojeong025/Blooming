@@ -1,20 +1,24 @@
 package com.ssafy.backend.domain.wishlist.controller;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ssafy.backend.domain.common.BasicResponse;
-import com.ssafy.backend.domain.product.Product;
+import com.ssafy.backend.domain.wishlist.dto.WishlistDto;
 import com.ssafy.backend.domain.wishlist.service.WishlistService;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Tag(name = "찜 API", description = "웨딩 상품 찜 API")
 @RestController
@@ -58,15 +62,15 @@ public class WishlistController {
     @Operation(summary = "찜 전체 조회", description = "내가 찜한 상품ID 리스트와 나의 커플이 찜한 상품ID 리스트를 모두 받아 옵니다.")
     @GetMapping("/wishlist")
     public ResponseEntity<BasicResponse> getWishlist() {
-        List<Product> mywishlists = wishlistService.getAllWishtlist();
-        List<Product> couplewishlists = wishlistService.getAllCoupleWishlist();
+        // List<Product> myWishlists = wishlistService.getAllWishtlist();
+        List<WishlistDto> coupleWishlist = wishlistService.getAllCoupleWishlist();
         // 이렇게 주면 프론트에서 널인거 처리 따로 해야하는데 리팩 필요
-        Map<String, List<Product>> wishlists = new HashMap<>();
-        wishlists.put("mywishlist",mywishlists);
-        wishlists.put("couplewishlist",couplewishlists);
+        // Map<String, List<Product>> wishlists = new HashMap<>();
+        // wishlists.put("mywishlist", myWishlists);
+        // wishlists.put("couplewishlist", coupleWishlists);
 
         BasicResponse basicResponse;
-        if (mywishlists.isEmpty() && couplewishlists.isEmpty()) {
+        if (coupleWishlist.isEmpty()) {
             basicResponse = BasicResponse.builder()
                     .code(HttpStatus.NO_CONTENT.value())
                     .httpStatus(HttpStatus.NO_CONTENT)
@@ -76,11 +80,11 @@ public class WishlistController {
             basicResponse = BasicResponse.builder()
                     .code(HttpStatus.OK.value())
                     .httpStatus(HttpStatus.OK)
-                    .message("찜 조회 성공")
-                    .count(mywishlists.size() + couplewishlists.size())
-                    .result(Collections.singletonList(wishlists)).build();
+                    .message("내 커플 찜 조회 성공")
+                    .count(coupleWishlist.size())
+                    .result(Collections.singletonList(coupleWishlist)).build();
         }
-        return new ResponseEntity<BasicResponse>(basicResponse, basicResponse.getHttpStatus());
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
 }
