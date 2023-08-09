@@ -12,7 +12,7 @@ export const customAxios = axios.create({
   },
 });
 
-export const fileAxios = axios.post({
+export const fileAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}/s3`,
   headers: {
     Authorization: `Bearer ${accessToken}`,
