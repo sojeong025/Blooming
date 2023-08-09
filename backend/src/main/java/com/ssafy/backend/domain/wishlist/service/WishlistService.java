@@ -1,5 +1,13 @@
 package com.ssafy.backend.domain.wishlist.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.product.Product;
@@ -7,16 +15,10 @@ import com.ssafy.backend.domain.product.repository.ProductRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import com.ssafy.backend.domain.wishlist.Wishlist;
+import com.ssafy.backend.domain.wishlist.dto.WishlistDto;
 import com.ssafy.backend.domain.wishlist.repository.WishlistRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional
@@ -62,8 +64,8 @@ public class WishlistService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
-        Long userId = user.getId();
-        List<Wishlist> wishlists = wishlistRepository.findAllByUserId(userId);
+
+        List<Wishlist> wishlists = wishlistRepository.findAllByUser(user);
         List<Product> result = new ArrayList<>();
         for (Wishlist wish : wishlists){
             result.add(wish.getProduct());
@@ -73,7 +75,7 @@ public class WishlistService {
 
     // 커플이 등록한 찜 리스트 출력
     // 커플 없을경우 예외처리 해라
-    public  List<Product> getAllCoupleWishlist(){
+    public  List<WishlistDto> getAllCoupleWishlist(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
@@ -84,19 +86,14 @@ public class WishlistService {
         System.out.println("위시리스트 커플 사이즈 출력");
         System.out.println(userList.size());
 
-        List<Wishlist> wishlists = new ArrayList<>();
+        List<WishlistDto> wishlistDtos = new ArrayList<>();
         for(User u : userList) {
-            if (!Objects.equals(user.getId(), u.getId())) {
-                wishlists = wishlistRepository.findAllByUserId(u.getId());
+            List<Wishlist> wishlists = wishlistRepository.findAllByUser(u);
+            for (Wishlist wishlist : wishlists) {
+                wishlistDtos.add(new WishlistDto(wishlist.getProduct()));
             }
         }
 
-        List<Product> result = new ArrayList<>();
-        if(!wishlists.isEmpty()){
-            for(Wishlist wish : wishlists){
-                result.add(wish.getProduct());
-            }
-        }
-        return result;
+        return wishlistDtos;
     }
 }
