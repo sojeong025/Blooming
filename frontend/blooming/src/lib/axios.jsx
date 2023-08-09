@@ -11,3 +11,11 @@ export const customAxios = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const fileAxios = axios.post({
+  baseURL: `${SERVER_ADDRESS}/s3`,
+  headers: {
+    Authorization: `Bearer ${accessToken}`,
+    "Content-Type": "multipart/form-data",
+  },
+})
