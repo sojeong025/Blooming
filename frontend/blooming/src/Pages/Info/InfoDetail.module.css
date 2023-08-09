@@ -43,3 +43,22 @@
   cursor: pointer;
 
 }
+
+.go-top-button {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.go-top-button:hover {
+  background-color: #0d47a1;
+}

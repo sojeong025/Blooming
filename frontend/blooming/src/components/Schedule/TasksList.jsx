@@ -28,9 +28,9 @@ function TasksList({isPosting, onStopPosting}) {
     {tasks.length > 0 && (
       <ul className={ classes.posts } >
         {tasks.map((task) => {
-          if (formatDate(selectedDate) === formatDate(task.date)) {
+          if (formatDate(selectedDate) === formatDate(task.scheduleDate)) {
             return (
-              <Task key={task.body} date={task.date} body={task.body} />
+              <Task key={task.id} date={task.scheduleDate} body={task.content} />
             )
           }
         })}

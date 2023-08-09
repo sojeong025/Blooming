@@ -4,12 +4,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import classes from "./InfoDetail.module.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
-import { customAxios, fileAxios } from "../../lib/axios";
-import { useEffect, useRef, useState } from "react";
-import Rating from "react-rating";
+import { customAxios } from "../../lib/axios";
+import { useEffect, useState } from "react";
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
+import DetailReviewForm from "../../components/Info/DetailReviewForm";
 
 export default function InfoDetail() {
   
@@ -33,13 +34,6 @@ export default function InfoDetail() {
     setReservedTime(time);
   };
 
-  // 리뷰쓰는 폼관련된 State
-  const [starRating, setStarRating] = useState(0);
-  const [comment, setComment] = useState('');
-  const [imgFile, setImgFile] = useState('');
-
-  // 화면에 보여줄 이미지
-  const [reviewImage, setReviewImage] = useState('');
 
   const fetchImageData = async () => {
     try {
@@ -63,58 +57,6 @@ export default function InfoDetail() {
     fetchReviewData()
     fetchImageData()
   }, [])
-
-  const reviewData = {
-    product_id: product.id,
-    star: starRating,
-    image: imgFile,
-    content: comment
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const createReview = async () => {
-      try {
-        await customAxios.post("review", reviewData);
-        await fetchReviewData();
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    createReview();
-  };
-
-  const fileInputRef = useRef(null);
-
-  const handleReset = () => {
-    setStarRating(0);
-    setComment('');
-    setReviewImage(null);
-
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  };
-
-  const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      try {
-        const formData = new FormData();
-        formData.append('image', file)
-        const response = await fileAxios.post('REVIEW', formData)
-        console.log('이건 이미지 s3 api', response.data.result[0].uploadImageUrl)
-        setImgFile(response.data.result[0].uploadImageUrl)
-      } catch (error) {
-        console.error('이미지 api 오류',error);
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setReviewImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleReserve = async () => {
     const formattedDate = `${reservedDate.getFullYear()}-${(reservedDate.getMonth() + 1).toString().padStart(2, '0')}-${reservedDate.getDate().toString().padStart(2, '0')}`;
@@ -157,6 +99,13 @@ export default function InfoDetail() {
 
   const handleCarouselChange = (index) => {
     setCurrentImageIndex(index);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -208,7 +157,8 @@ export default function InfoDetail() {
       <button onClick={product.wish ? handleDeleteWish : handleCreateWish}>
         {product.wish ? "찜취소" : "찜하기"}
       </button>
-      <div>후기후기</div>
+      <DetailReviewForm product={product} fetchReviewData={fetchReviewData} />
+      <div>{product.company} 후기</div>
       {reviews.map((review) => {
         <div key={review.id}>
           <p>{review.reviewImage}</p>
@@ -217,37 +167,9 @@ export default function InfoDetail() {
           <button>좋아요 싫어요</button>
         </div>
       })}
-      <div>후기등록 폼</div>
-      <form onSubmit={handleSubmit}>
-        <p>{product.company}의 후기 작성</p>
-        <Rating
-          initialRating={starRating}
-          onChange={(rate) => setStarRating(rate)}
-          stop={5}
-          emptySymbol={<span className="empty-star" style={{ color: 'gray', fontSize: '2em' }}>☆</span>}
-          fullSymbol={<span className="full-star" style={{ color: 'gold', fontSize: '2em' }}>★</span>}
-        />
-        <br />
-        <input
-          type="file"
-          accept="reviewImage/*"
-          id="file"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-        />
-        {reviewImage && <img src={reviewImage} alt="여긴 이미지다" />}
-        <br />
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          required
-        ></textarea>
-        <br />
-        <button type="submit">작성하기</button>
-        <button type="button" onClick={handleReset}>
-          리셋입니다.
-        </button>
-      </form>
+      <button onClick={scrollToTop} className={classes["go-Top-button"]}>
+        Top
+      </button>
     </div>
   );
 }
