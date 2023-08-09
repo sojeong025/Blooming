@@ -16,11 +16,11 @@ export default function InfoDetail() {
   
   const navigate = useNavigate();
   const location = useLocation();
-  const [product, setProduct] = useState(location.state.product)
+  const id = location.state.id
   const productType = location.state.productType
-  const [images, setImages] = useState(null)
+  const [product, setProduct] = useState()
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [reviews, setReviews] = useState(null)
+  const [reviews, setReviews] = useState()
   
   // 예약하기와 관련된 날짜정보
   const [reservedDate, setReservedDate] = useState(new Date());
@@ -35,10 +35,11 @@ export default function InfoDetail() {
   };
 
 
-  const fetchImageData = async () => {
+  const fetchProductData = async () => {
     try {
-      const response = await customAxios.get(`product/${productType}/${product.id}`);
-      setImages(response.data.result[0])
+      const response = await customAxios.get(`product/${productType}/${id}`);
+      setProduct(response.data.result[0])
+      fetchReviewData()
     } catch (error) {
       console.error("이미지 정보 조회 에러:", error);
     }
@@ -46,16 +47,16 @@ export default function InfoDetail() {
 
   const fetchReviewData = async () => {
     try {
-      const response = await customAxios.get(`review/${product.id}`);
+      const response = await customAxios.get(`review/${id}`);
       setReviews(response.data.result[0])
+      console.log(response.data.result[0])
     } catch (error) {
       console.error("리뷰 정보 조회 에러:", error);
     }
   };
 
   useEffect(() => {
-    fetchReviewData()
-    fetchImageData()
+    fetchProductData()
   }, [])
 
   const handleReserve = async () => {
@@ -110,9 +111,8 @@ export default function InfoDetail() {
 
   return (
     <div style={{marginTop: '102px', marginBottom: '80px'}}>
-      <p>{product.id}</p>
       <p>{product.itemName}</p>
-      {Array.isArray(images) && <Carousel
+      {Array.isArray(product.images) && <Carousel
         infiniteLoop
         showThumbs={false}
         showStatus={false}
@@ -124,9 +124,9 @@ export default function InfoDetail() {
         selectedItem={currentImageIndex}
         renderIndicator={() => {}}
       >
-        {images.map((image, index) => (
+        {product.images.map((image, index) => (
           <div key={index}>
-            <img src={image.image} alt='이미지가 없습니다.' />
+            <img src={image} alt='이미지가 없습니다.' />
           </div>
         ))}
       </Carousel>}
