@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.wishlist.dto;
 
 import com.ssafy.backend.domain.product.Product;
+import com.ssafy.backend.domain.product.ProductType;
 import com.ssafy.backend.domain.user.User;
 
 import lombok.Getter;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WishlistDto {
 	private Long productId;
+	private ProductType productType;
 	private String thumbnail;
 	private String company;
 	private String address;
@@ -18,6 +20,7 @@ public class WishlistDto {
 
 	public WishlistDto(Product product, User user) {
 		this.productId = product.getId();
+		this.productType = product.getProductType();
 		this.thumbnail = product.getThumbnail();
 		this.company = product.getCompany();
 		this.address = product.getCompanyAddress();
