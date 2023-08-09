@@ -6,9 +6,11 @@ import com.ssafy.backend.domain.reservation.Reservation;
 import com.ssafy.backend.domain.reservation.dto.ReservationRegistDto;
 import com.ssafy.backend.domain.reservation.dto.ReservationResultDto;
 import com.ssafy.backend.domain.reservation.repository.ReservationRepository;
+import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.schedule.ScheduleType;
 import com.ssafy.backend.domain.schedule.ScheduledBy;
 import com.ssafy.backend.domain.schedule.dto.ReservationScheduleRegistDto;
+import com.ssafy.backend.domain.schedule.dto.ReservationScheduleResultDto;
 import com.ssafy.backend.domain.schedule.dto.ScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.service.ScheduleService;
 import com.ssafy.backend.domain.user.User;
@@ -34,7 +36,7 @@ public class ReservationService {
     private final ScheduleService scheduleService;
 
     @Transactional
-    public void registerReservation(ReservationRegistDto reservationRegistDto) {
+    public ReservationScheduleResultDto registerReservation(ReservationRegistDto reservationRegistDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication.getName() == null) {
             throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
@@ -68,7 +70,7 @@ public class ReservationService {
             case MAKEUP:
                 scheduleType = ScheduleType.SDM; break;
         }
-        scheduleService.registReservationSchedule(new ReservationScheduleRegistDto(
+        Schedule savedSchedule = scheduleService.registReservationSchedule(new ReservationScheduleRegistDto(
                 product.getItemName() + " 예약",
                 product.getCompany() + " 에 방문해주세요",
                 reservationRegistDto.getReservedDate(),
@@ -77,6 +79,8 @@ public class ReservationService {
                 scheduleType,
                 reservation.getId()
         ));
+
+        return new ReservationScheduleResultDto(savedSchedule.getReservationId());
     }
 
     public List<ReservationResultDto> getUserReservation() {

@@ -102,7 +102,7 @@ public class ScheduleService {
         return scheduleDto;
     }
 
-    public void registReservationSchedule(ReservationScheduleRegistDto reservationScheduleRegistDto) {
+    public Schedule registReservationSchedule(ReservationScheduleRegistDto reservationScheduleRegistDto) {
         Schedule schedule = new Schedule(
                 reservationScheduleRegistDto.getTitle(),
                 reservationScheduleRegistDto.getContent(),
@@ -121,7 +121,8 @@ public class ScheduleService {
         Couple couple = user.getCouple();
 
         schedule.setCouple(couple);
-        scheduleRepository.save(schedule);
+        Schedule savedSchedule = scheduleRepository.save(schedule);
+        return savedSchedule;
     }
 
     public void deleteReservationSchedule(Long reservationId) {

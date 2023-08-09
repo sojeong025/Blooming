@@ -8,6 +8,8 @@ import com.ssafy.backend.domain.reservation.dto.ReservationRegistDto;
 import com.ssafy.backend.domain.reservation.dto.ReservationResultDto;
 import com.ssafy.backend.domain.reservation.repository.ReservationRepository;
 import com.ssafy.backend.domain.reservation.service.ReservationService;
+import com.ssafy.backend.domain.schedule.Schedule;
+import com.ssafy.backend.domain.schedule.dto.ReservationScheduleResultDto;
 import com.ssafy.backend.domain.schedule.dto.ScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.service.ScheduleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,11 +40,13 @@ public class ReservationController {
     @PostMapping("/reservation")
     public ResponseEntity<BasicResponse> registerReservation(@RequestBody ReservationRegistDto reservationRegistDto) throws JsonProcessingException {
 
-        reservationService.registerReservation(reservationRegistDto);
+        ReservationScheduleResultDto reservationScheduleResultDto = reservationService.registerReservation(reservationRegistDto);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
+                .count(1)
+                .result(Collections.singletonList(reservationScheduleResultDto))
                 .message("예약 성공")
                 .build();
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
