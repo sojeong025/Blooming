@@ -9,6 +9,8 @@ import { customAxios } from "../../lib/axios";
 
 import { useEffect, useState } from "react";
 
+import axios from "axios";
+
 const TopAppBar = () => {
   const location = useLocation();
   const [pageTitle, setPageTitle] = useState("");
@@ -60,9 +62,23 @@ const TopAppBar = () => {
   useEffect(() => {
     const fetchNotice = async () => {
       try {
-        console.log(localStorage.getItem("accessToken"));
-        const response = await customAxios.get("notification/unread-cnt");
+        const SERVER_ADDRESS = "http://43.200.254.50:8080";
+        // const SERVER_ADDRESS = "";
+        const accessToken = localStorage.getItem("accessToken");
+
+        const customAxios1 = axios.create({
+          baseURL: `${SERVER_ADDRESS}`,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const response = await customAxios1.get("notification/unread-cnt");
         console.log(response);
+
+        // console.log(localStorage.getItem("accessToken"));
+        // const response = await customAxios.get("notification/unread-cnt");
+        // console.log(response);
 
         if (response.data.result[0] > 0) {
           setIsNotice(true);
