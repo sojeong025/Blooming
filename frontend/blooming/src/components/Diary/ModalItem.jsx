@@ -44,9 +44,8 @@ function CreateItem({ hide, item }) {
         const formData = new FormData();
         formData.append('image', file);
         const response = await fileAxios.post('REVIEW', formData);
-        console.log('imageURL before:', imageURL)
-        setImageURL(response.data.result[0]);
-        console.log('imageURL after:', response.data.result[0]);
+        console.log('다이어리 이미지 Url', imageURL)
+        setImageURL(response.data.result[0].uploadImageUrl);
       } catch (error) {
         console.error('이미지 api 오류', error);
       }
