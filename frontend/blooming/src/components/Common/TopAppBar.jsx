@@ -60,6 +60,7 @@ const TopAppBar = () => {
   useEffect(() => {
     const fetchNotice = async () => {
       try {
+        console.log(localStorage.getItem("accessToken"));
         const response = await customAxios.get("notification/unread-cnt");
         console.log(response);
 
