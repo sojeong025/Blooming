@@ -4,27 +4,23 @@ import { diaryState } from '../../recoil/DiaryStateAtom';
 import DatePicker from 'react-datepicker'
 import './DatePicker.css'
 import classes from './ModalItem.module.css'
-import { customAxios } from "../../lib/axios";
+import { customAxios, fileAxios } from "../../lib/axios";
 
 function CreateItem({ hide, item }) {
   const [diaries, setDiaries] = useRecoilState(diaryState)
   const [date, setDate] = useState(new Date());
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  // const [image, setImage] = useState('');
-  
-  // URL 정의 
-  const [URLThumbnail, setURLThumbnail] = useState({url:''});
-
+  const [imageURL, setImageURL] = useState('');
   const [isEditMode, setIsEditMode] = useState(false)
   
   useEffect(() => {
     if (item) {
-      setDate(new Date(item.date))
-      setTitle(item.title)
-      setContent(item.content)
-      setURLThumbnail({url: item.image})
-      setIsEditMode(true)
+      setDate(new Date(item.date));
+      setTitle(item.title);
+      setContent(item.content);
+      setImageURL(item.image);
+      setIsEditMode(true);
     }
   }, [item])
 
@@ -40,34 +36,28 @@ function CreateItem({ hide, item }) {
     setContent(event.target.value);
   }
 
-  // function imageChangeHandler(event) {
-  //   const file = event.target.files[0];
-  //   if (!file) {
-  //     setImage('');
-  //     return;
-  //   }
-  //   const reader = new FileReader();
-  //   reader.onload = (e) => {
-  //     setImage(e.target.result);
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
 
-  // ----------FileReader 사용 대신 URL 객체 사용-----------
-  function imageChangeHandler(event) {
-    const file = event.target.files[0];
-    if(!file) {
-      setURLThumbnail(null);
-      return;
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+        const response = await fileAxios.post('REVIEW', formData);
+        console.log('imageURL before:', imageURL)
+        setImageURL(response.data.result[0]);
+        console.log('imageURL after:', response.data.result[0]);
+      } catch (error) {
+        console.error('이미지 api 오류', error);
+      }
     }
-    setURLThumbnail(URL.createObjectURL(file));
-  }
+  };
 
   const ItemData = {
     title: title,
     content: content,
     date: `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
-    image: URLThumbnail.url
+    image: imageURL
   };
 
   function submitHandler(event) {
@@ -99,7 +89,7 @@ function CreateItem({ hide, item }) {
             title: title,
             content: content,
             date: `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
-            image: image,
+            image: imageURL,
           }
           await customAxios.put("diary", customItemData);
           setDiaries(diaries.map((diary) => {
@@ -149,11 +139,11 @@ function CreateItem({ hide, item }) {
             type="file"
             id="image"
             accept="image/*"
-            onChange={imageChangeHandler}
+            onChange={handleImageChange}
           />
-          {URLThumbnail && (
+          {imageURL && (
             <img
-              src={URLThumbnail}
+              src={imageURL}
               alt="preview"
             />
           )}
