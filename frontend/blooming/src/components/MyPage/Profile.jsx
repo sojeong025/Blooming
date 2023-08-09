@@ -16,7 +16,7 @@ const ProfileBox = ({ isCouple }) => {
   return (
     <div className={classes.profile}>
       {/* 프로필 사진이랑 이름 */}
-      {!isCouple ? (
+      {isCouple ? (
         // 커플
         <div className={`${classes.profileContainer} ${classes.Couple}`}>
           <div>
