@@ -39,12 +39,11 @@ public class ProductService {
 		return productRepository.getProductWithWish(user, productType, pageRequest);
 	}
 
-	public List<ProductDetailDto> getProductImage(long productId) {
-		Product product = productRepository.findById(productId)
-				.orElseThrow(() -> new NoSuchElementException("해당하는 상품 정보가 없습니다."));
+	public ProductDetailDto getProductDetail(long productId) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepository.findByEmail(authentication.getName())
+				.orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
 
-		return product.getProductImages().stream()
-				.map(productImage -> new ProductDetailDto(productImage.getImage()))
-				.collect(Collectors.toList());
+		return productRepository.getProductDetail(user, productId);
 	}
 }
