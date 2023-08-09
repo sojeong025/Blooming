@@ -3,7 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import classes from "./InfoDetail.module.css";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { customAxios, fileAxios } from "../../lib/axios";
 import { useEffect, useRef, useState } from "react";
 import Rating from "react-rating";
@@ -13,19 +13,32 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export default function InfoDetail() {
   
+  const navigate = useNavigate();
   const location = useLocation();
   const [product, setProduct] = useState(location.state.product)
   const productType = location.state.productType
   const [images, setImages] = useState([])
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [reviews, setReviews] = useState([])
-  const [startDate, setStartDate] = useState(new Date());
+  
+  // 예약하기와 관련된 날짜정보
+  const [reservedDate, setReservedDate] = useState(new Date());
+  const [reservedTime, setReservedTime] = useState(new Date());
+
+  const onDateChange = (date) => {
+    setReservedDate(date);
+  };
+
+  const onTimeChange = (time) => {
+    setReservedTime(time);
+  };
 
   // 리뷰쓰는 폼관련된 State
   const [starRating, setStarRating] = useState(0);
   const [comment, setComment] = useState('');
   const [imgFile, setImgFile] = useState('');
 
+  // 화면에 보여줄 이미지
   const [reviewImage, setReviewImage] = useState('');
 
   const fetchImageData = async () => {
@@ -103,15 +116,24 @@ export default function InfoDetail() {
     }
   };
 
-  const handleReserve = () => {
-    // 이건 예약 API
-    // 어찌할지 모르겠지만 얘는 음..... 음......
-    // 모달이든 페이지든 이동해서 시간 입력받는칸 만들어야겠지??? 근데 만들어서 다시 어디 보낼꺼 아니면 음
-    // 모달이 낫겠지? 그리고 만들고나면 예약했는지 안했는지 여부도 알아야겠지? 이건 API요청했을때 저쪽에서
-    // 예약된 정보도 줘야겠네? 예약 API 힘들겠다 ㅎㅎ
-    // 그리고 시간은 companyTime에서 가져와서 거기 안에서 1시간단위로 시간 보낼수 있게 해야겠쥬?
-    // 이정도 힌트 줬으면 만들어보아요 난 귀찮아요.
-  }
+  const handleReserve = async () => {
+    const formattedDate = `${reservedDate.getFullYear()}-${(reservedDate.getMonth() + 1).toString().padStart(2, '0')}-${reservedDate.getDate().toString().padStart(2, '0')}`;
+    const formattedTime = `${reservedTime.getHours().toString().padStart(2, '0')}:${reservedTime.getMinutes().toString().padStart(2, '0')}`;
+
+    const data = {
+      reservedDate: formattedDate,
+      reservedTime: formattedTime,
+      product_id: product.id
+    };
+    try {
+      await customAxios.post('reservation', data)
+      // 지금은 스케줄로 보내놨는데 스케쥴 수정 다하고 나면 바꿔야함.
+      navigate('/schedule')
+    } catch (error) {
+      console.log(error)
+    }
+    
+  };
 
   const handleCreateWish = async () => {
     try {
@@ -165,19 +187,19 @@ export default function InfoDetail() {
       <p>{product.companyAddress}</p>
       <div>
         <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          selected={reservedDate}
+          onChange={onDateChange}
           dateFormat="yyyy/MM/dd"
           showMonthDropdown
           showYearDropdown
           dropdownMode="select"
         />
         <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
+          selected={reservedTime}
+          onChange={onTimeChange}
           showTimeSelect
           showTimeSelectOnly
-          timeIntervals={15}
+          timeIntervals={30}
           timeFormat="HH:mm"
           dateFormat="HH:mm"
         />
