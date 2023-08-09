@@ -23,7 +23,7 @@ function Main() {
           ...prevInvitation,
           main: {
             ...prevInvitation.main,
-            thumbnail: response.data.result[0].uploadImageUrl,
+            thumbnail: response.data.uploadImageUrl,
           },
         }));
       } catch (error) {
