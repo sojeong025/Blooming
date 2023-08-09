@@ -80,9 +80,16 @@ export default function InfoDetail() {
     }
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      try {
+        const response = await customAxios.post("s3/REVIEW", {image: file});
+        console.log('이건 이미지 s3 api', response.data.result[0])
+        setImgFile(response.data.result[0])
+      } catch (error) {
+        console.error('이미지 api 오류',error);
+      }
       setImgFile(file)
       const reader = new FileReader();
       reader.onloadend = () => {
