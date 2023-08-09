@@ -17,7 +17,7 @@ export default function WeddingHall() {
   const navigate = useNavigate();
 
   const handleNavigation = (product) => {
-    navigate(`/info/${product.id}`, { state: { product, productType: 'MAKEUP'  } });
+    navigate(`/info/${product.id}`, { state: { id: product.id, productType: 'MAKEUP' } });
   };
 
   const fetchData = async () => {
