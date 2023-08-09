@@ -1,18 +1,16 @@
 import { customAxios } from "../../lib/axios";
-import { useRecoilState } from "recoil";
-import { myWishlistState, myFianceWishlistState } from "../../recoil/ProfileAtom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import classes from "./MyWishlist.module.css";
 
 export default function MyWishlist() {
 
-  const [myWishlist, setMyWishlist] = useRecoilState(myWishlistState)
-  const [fianceWishlist, setFianceWishlist] = useRecoilState(myFianceWishlistState)
+  const [state, setState] = useState('me')
 
   const fetchData = async () => {
     try {
       const response = await customAxios.get("wishlist");
-      setMyWishlist(response.data.result[0].mywishlist)
-      setFianceWishlist(response.data.result[0].couplewishlist)
+      console.log(response.data.result[0])
     } catch (error) {
       console.error("예약 정보 조회 에러:", error);
     }
@@ -22,10 +20,28 @@ export default function MyWishlist() {
     fetchData()
   }, [])
 
+  const handlerMeState = () => {
+    setState('me');
+  }
+
+  const handlerYouState = () => {
+    setState('you');
+  }
+
+  const handlerToState = () => {
+    setState('together');
+  }
+
   return (
     <div style={{marginTop: '56px'}}>
-      {myWishlist}
-      {fianceWishlist}
+      <nav className={classes.navContainer}>
+        <div onClick={handlerMeState}>내가 찜</div>
+        <div onClick={handlerYouState}>약혼자 찜</div>
+        <div onClick={handlerToState}>겹치는 찜</div>
+      </nav>
+      {(state === 'me') && <div>내꺼</div>}
+      {(state === 'you') && <div>너꺼</div>}
+      {(state === 'together') && <div>같아</div>}
     </div>
   );
 }
