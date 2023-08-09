@@ -1,12 +1,12 @@
 import WeddingDday from "../components/Home/WeddingDday";
 import PlanTips from "../components/Home/PlanTips";
-import Tipbox from "../components/Home/TipBox"
+import Tipbox from "../components/Home/TipBox";
 import { useRecoilState, useResetRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
 import { customAxios } from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import classes from './Home.module.css'
+import classes from "./Home.module.css";
 
 function Home() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ function Home() {
 
   useEffect(() => {
     updateUser();
-  }, [user]);
+  }, []);
 
   return (
     <div className={classes.top}>
@@ -39,7 +39,7 @@ function Home() {
       <PlanTips />
       <p className={classes.word}> Wedding Tips</p>
       <hr className={classes.hr} />
-      <Tipbox /> 
+      <Tipbox />
     </div>
   );
 }
