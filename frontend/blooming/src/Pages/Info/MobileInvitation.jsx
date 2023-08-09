@@ -15,7 +15,7 @@ function MobileInvitation() {
       const response = await customAxios.get("invitation");
       setCount(response.data.count)
       console.log('가져오기 성공!')
-      console.log('체크해보기', count)
+      console.log('count 체크: ', count)
       console.log('response.data.count 확인', response.data.count)
     } catch (error) {
       console.error(error);
