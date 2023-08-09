@@ -92,7 +92,6 @@ export default function InfoDetail() {
       } catch (error) {
         console.error('이미지 api 오류',error);
       }
-      setImgFile(file)
       const reader = new FileReader();
       reader.onloadend = () => {
         setReviewImage(reader.result);
