@@ -57,7 +57,7 @@ function Create() {
         console.log("성공했다~");
         console.log(response.data);
 
-        navigate("/mobile-invitation");
+        navigate("/mobile-invitation-detail");
       })
       .catch((error) => {
         console.log("저장에 실패하였습니다.");
