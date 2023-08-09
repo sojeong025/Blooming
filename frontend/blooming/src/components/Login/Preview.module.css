@@ -7,10 +7,11 @@
   justify-content: center;
 }
 .image-carousel {
-  max-width: 300px;
-  max-height: 500px;
-  margin: auto;
-  border: 1px solid black;
+  width: 100%;
+
+  object-fit: contain;
+  margin-bottom: 10px;
+  border: 1px solid #666;
   align-items: center;
 }
 
@@ -22,7 +23,6 @@
 .image-carousel .slider {
   max-width: 300px;
   max-height: 300px;
-
 }
 
 .image-carousel .slider .slide {
@@ -33,7 +33,6 @@
 .image-carousel .slider .slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .image-carousel .carousel .control-arrow {
@@ -41,43 +40,50 @@
   transform: translateY(-50%);
 }
 
-.custom-dot {
-  width: 1px;
-  height: 1px;
-  border-radius: 50%;
-  background-color: #FFF1F2;
-  margin: 0 20px;
-  padding: 5px;
-  cursor: pointer;
-  
+.pageIndicator {
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-/* 활성화된 페이지의 스타일을 정의합니다. */
-.active {
-  background-color: #FF647C;
-  border: none;
+.buttonContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+  height: 90px;
+
+  position: absolute;
+  margin-bottom: 10px;
+  bottom: 0;
 }
 
 .btn {
-  /* border: 1px solid black; */
-  width: 100vw;
-  display: flex;
-  justify-content: space-between;
-  margin: 50px;
-  font-size: 20px;
+  font-size: 18px;
+  margin-bottom: 5vh;
 }
-
 .pre {
-  margin-left: 50px;
-  /* border: 1px solid black; */
   color: rgb(139, 136, 136);
-  background-color: transparent;
+  text-align: center;
 }
-
 .next {
-  margin-right: 50px;
-  /* border: 1px solid black; */
   color: #FF647C;
   font-weight: bold;
-  background-color: transparent;
+  text-align: center;
+}
+
+.kakaoBtn {
+  margin-bottom: 5vh;
+  width: 80vw;
+  height: 45px;
+
+  background-color: #FEE500;
+  text-align: center;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  justify-content: space-evenly
+}
+
+.kakaoBtn * {
+  color: #000000;
 }

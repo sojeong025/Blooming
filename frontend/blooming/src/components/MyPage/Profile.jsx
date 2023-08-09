@@ -16,7 +16,7 @@ const ProfileBox = ({ isCouple }) => {
   return (
     <div className={classes.profile}>
       {/* 프로필 사진이랑 이름 */}
-      {isCouple ? (
+      {!isCouple ? (
         // 커플
         <div className={`${classes.profileContainer} ${classes.Couple}`}>
           <div>
@@ -42,14 +42,14 @@ const ProfileBox = ({ isCouple }) => {
 
           <div className={classes.profileName}>
             <span>
-              {userData.nickname}
-              <br />
               {userRole}
+              <br />
+              {userData.nickname}
             </span>
             <span>
-              {coupleData.nickname}
-              <br />
               {coupleRole}
+              <br />
+              {coupleData.nickname}
             </span>
           </div>
         </div>
@@ -66,7 +66,8 @@ const ProfileBox = ({ isCouple }) => {
             alt='profile'
           />
           <div className={classes.profileName}>
-            {userData.nickname} {userRole}
+            {userRole} {}
+            {userData.nickname}
           </div>
         </div>
       )}

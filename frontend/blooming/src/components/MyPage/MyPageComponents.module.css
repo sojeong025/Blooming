@@ -26,13 +26,16 @@
   object-fit: cover;
   position: relative;
 }
-
+.myImg {
+  width: 60px;
+  height: 60px;
+}
 .coupleProfile {
   width: 48px;
   height: 48px;
+  border-radius:50%;
   margin-left: -10px;
 }
-
 .Couple .profileName {
   display: flex;
   font-size: 1.1rem;
