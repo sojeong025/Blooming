@@ -161,14 +161,14 @@ export default function InfoDetail() {
           </button>
           <DetailReviewForm product={product} fetchReviewData={fetchReviewData} />
           <div>{product.company} 후기</div>
-          {reviews ? reviews.map((review) => {
+          {reviews ? reviews.map((review) => (
             <div key={review.id}>
               <p>{review.reviewImage}</p>
               <p>{review.star}</p>
               <p>{review.content}</p>
               <button>좋아요 싫어요</button>
             </div>
-          }) : <div>등록된 후기가 없습니다.</div>}
+          )) : <div>등록된 후기가 없습니다.</div>}
           <button onClick={scrollToTop} className={classes.topButton}>
             Top
           </button>
