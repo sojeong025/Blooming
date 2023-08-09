@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
-import { mobileInvitationState } from "../../recoil/MobileInvitationAtom";
+import { mobileInvitationState, mobileCountState } from "../../recoil/MobileInvitationAtom";
 import ConceptsList from "../../components/MobileInvitation/ConceptsList";
 import { useEffect, useState } from "react";
 import classes from "./MobileInvitation.module.css";
