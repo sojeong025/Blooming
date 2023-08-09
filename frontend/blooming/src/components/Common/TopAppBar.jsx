@@ -37,6 +37,7 @@ const TopAppBar = () => {
 
   // 알림버튼 없애려면 여기 넣기
   const noNotice = [
+    "/go-join",
     "/join-code",
     "/join",
     "/decide-wedding",

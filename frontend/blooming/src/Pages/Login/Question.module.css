@@ -1,24 +1,50 @@
-.div{
+.goJoinContainer{
   display: flex;
   flex-direction: column;
-}
-.container{
-  margin: 50px 50px;
-  /* border: 1px solid black; */
-  font-size: 15px;
-  text-align: left;
-}
-
-.img {
-  margin: 50px 50px;
-  border: 1px solid black;
-  width: 300px;
-  height: 300px;
   align-items: center;
+
+  border: 1px solid black;
+  margin: 10vh auto;
 }
 
-.btn {
+.titleText {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.titleText p {
+  margin: 0;
+  padding: 10px;
+}
+
+.subText {
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+
+/* .btn {
   margin: 50px 20px;
-  /* border: 1px solid black; */
   align-self: center;
+} */ 
+
+/* chooseDate */
+.datePick {
+  border: 1px red solid;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.dateBtn {
+  margin-bottom: 10px;
+  height: 50px;
+  width: 80vw;
+
+  font-size: 20px;
+  border: 1px solid black;
+  text-align: center;
+  word-break: keep-all;
 }

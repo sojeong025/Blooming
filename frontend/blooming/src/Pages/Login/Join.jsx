@@ -10,9 +10,12 @@ import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 
 export default function Join() {
+  // 에러 모달
+  const [ErrorModal, handleError] = useErrorModal();
+  const navigate = useNavigate();
+
   // fcmToken 받아오기
   const [fcmToken, setFcmToken] = useState("");
-
   const getToken = function () {
     return new Promise((resolve) => {
       if (window.flutter_inappwebview) {
@@ -27,16 +30,12 @@ export default function Join() {
       }
     });
   };
-
   useEffect(() => {
     getToken();
   }, []);
-  // 에러 모달
-  const [ErrorModal, handleError] = useErrorModal();
-  const navigate = useNavigate();
 
-  const [userData, setUserData] = useRecoilState(userState);
   // 추가정보 데이터 넣기
+  const [userData, setUserData] = useRecoilState(userState);
   const [formData, setFormData] = useState({
     name: "",
     nickname: "",
@@ -44,33 +43,32 @@ export default function Join() {
     gender: "",
   });
 
-  // 카카오 유저 정보 받아오기
+  // 카카오 유저 정보 받아오기:
+  // email(수정불가), profileImage, 닉네임(이름), 성별(신랑신부)
   const getKakaoProfile = async () => {
     try {
       const response = await customAxios.get("kakao-profile");
       const kakaoData = response.data.result[0];
       setFormData({ ...formData, ...kakaoData });
     } catch (error) {
-      console.log("카카오 유저 정보 에러: ", error);
+      // console.log("카카오 유저 정보 에러: ", error);
       // location.reload();
     }
   };
 
+  // 토큰 가져오기
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken"),
   );
-
   useEffect(() => {
     const syncToken = () => {
       setAccessToken(localStorage.getItem("accessToken"));
     };
-
     window.addEventListener("storage", syncToken);
     return () => {
       window.removeEventListener("storage", syncToken);
     };
   }, []);
-
   useEffect(() => {
     if (accessToken) {
       getKakaoProfile();
@@ -123,7 +121,7 @@ export default function Join() {
       });
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
-      navigate("/");
+      // navigate("/");
     }
   };
 
@@ -135,8 +133,7 @@ export default function Join() {
 
   return (
     <div className='mainContainer'>
-      <h3>추가 정보를 입력하세요</h3>
-      {/* <input type='text' id='fcminput'></input> */}
+      <div className={classes.titleText}>추가 정보를 입력해주세요</div>
 
       <div className={classes.container}>
         <form onSubmit={joinSubmit}>
