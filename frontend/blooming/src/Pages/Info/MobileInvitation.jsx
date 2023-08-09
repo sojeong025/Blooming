@@ -4,12 +4,11 @@ import { mobileInvitationState, mobileCountState } from "../../recoil/MobileInvi
 import ConceptsList from "../../components/MobileInvitation/ConceptsList";
 import { useEffect, useState } from "react";
 import classes from "./MobileInvitation.module.css";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 function MobileInvitation() {
   const mobileInvitationData = useRecoilValue(mobileInvitationState);
-  const count = useRecoilValue(mobileCountState);
-  const setCount = useSetRecoilState(mobileCountState);
+  const [count, setCount ] = useRecoilState(mobileCountState);
 
   const fetchData = async () => {
     try {
