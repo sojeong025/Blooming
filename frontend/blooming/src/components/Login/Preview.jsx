@@ -13,18 +13,6 @@ import { useState } from "react";
 import { PageIndicator } from "antd-mobile";
 
 function Preview() {
-  const CustomDot = ({ onClick, isActive }) => {
-    return (
-      <button
-        type='button'
-        onClick={onClick}
-        className={`${classes["custom-dot"]} ${
-          isActive ? classes["active"] : ""
-        }`}
-      />
-    );
-  };
-
   const imageList = useRecoilValue(imageListState);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const totalImages = imageList.length;
