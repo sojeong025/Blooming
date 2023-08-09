@@ -3,9 +3,7 @@ package com.ssafy.backend.domain.product.dto;
 import java.util.List;
 
 import com.ssafy.backend.domain.product.Product;
-import com.ssafy.backend.domain.product.ProductImage;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,12 +25,12 @@ public class ProductDetailDto {
 	private String companyTime;
 	private String companyAddress;
 
-	private List<ProductImage> images;
+	private List<String> images;
 
 	//찜 정보
 	private boolean isWish;
 
-	public ProductDetailDto(Product product, boolean isWish) {
+	public ProductDetailDto(Product product, boolean isWish, List<String> images) {
 		this.id = product.getId();
 		this.itemName = product.getItemName();
 		this.brief = product.getBrief();
@@ -40,7 +38,7 @@ public class ProductDetailDto {
 		this.company = product.getCompany();
 		this.companyTime = product.getCompanyTime();
 		this.companyAddress = product.getCompanyAddress();
-		this.images = product.getProductImages();
+		this.images = images;
 		this.isWish = isWish;
 	}
 }
