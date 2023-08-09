@@ -1,7 +1,6 @@
 package com.ssafy.backend.domain.product.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.PageRequest;
@@ -11,9 +10,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ssafy.backend.domain.product.Product;
+import com.ssafy.backend.domain.product.ProductImage;
 import com.ssafy.backend.domain.product.ProductType;
 import com.ssafy.backend.domain.product.dto.ProductDetailDto;
+import com.ssafy.backend.domain.product.dto.ProductDetailResult;
 import com.ssafy.backend.domain.product.dto.ProductResultDto;
 import com.ssafy.backend.domain.product.repository.ProductRepository;
 import com.ssafy.backend.domain.user.User;
@@ -44,6 +44,11 @@ public class ProductService {
 		User user = userRepository.findByEmail(authentication.getName())
 				.orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
 
-		return productRepository.getProductDetail(user, productId);
+		ProductDetailResult productDetailResult = productRepository.getProductDetail(user, productId);
+		List<String> images = productDetailResult.getProduct().getProductImages().stream()
+				.map(ProductImage::getImage).collect(Collectors.toList());
+
+		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images);
 	}
+
 }

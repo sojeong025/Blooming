@@ -1,14 +1,12 @@
 package com.ssafy.backend.domain.product.controller;
 
 import java.util.Collections;
-import java.util.List;
 
 import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,7 +61,7 @@ public class ProductController {
 		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
 	}
 
-	@Operation(summary = "상품 상세 조회", description = "원하는 상품을 상세 조회합니다.")
+	@Operation(summary = "상품 상세 이미지 조회", description = "원하는 상품 상세 조회 시 상품 사진을 조회합니다.")
 	@GetMapping("/product/{productType}/{productId}")
 	public ResponseEntity<BasicResponse> getProductImages(@PathVariable ProductType productType, @PathVariable long productId) {
 		ProductDetailDto productDetail = productService.getProductDetail(productId);
@@ -71,7 +69,7 @@ public class ProductController {
 		BasicResponse basicResponse = BasicResponse.builder()
 				.code(HttpStatus.OK.value())
 				.httpStatus(HttpStatus.OK)
-				.message("상품 상세 조회 성공")
+				.message("상품 사진 조회 완료")
 				.count(1)
 				.result(Collections.singletonList(productDetail)).build();
 
