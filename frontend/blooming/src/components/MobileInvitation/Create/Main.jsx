@@ -16,7 +16,7 @@ function Main() {
       try {
         const formData = new FormData();
         formData.append('thumbnail', file);
-        const response = await fileAxios.post('', formData);
+        const response = await fileAxios.post('INVITATION', formData);
         console.log('모바일청첩장 이미지 Url', invitation);
         
         setInvitation((prevInvitation) => ({
