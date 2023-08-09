@@ -30,7 +30,18 @@ const LabelInputComponent = ({
       </label> */}
 
       <div>
-        <input className={classes.input} type='text' required />
+        <input
+          className={classes.input}
+          type='text'
+          name={name}
+          id={name}
+          value={value}
+          onChange={onChange}
+          autoFocus={autoFocus}
+          required={required}
+          readOnly={readOnly}
+          autoComplete={autoComplete}
+        />
         <label className={classes.label}>{label}</label>
         <span className={classes.span}></span>
       </div>
