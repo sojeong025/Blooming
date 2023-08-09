@@ -189,7 +189,7 @@ export default function InfoDetail() {
         <DatePicker
           selected={reservedDate}
           onChange={onDateChange}
-          dateFormat="yyyy/MM/dd"
+          dateFormat="yyyy-MM-dd"
           showMonthDropdown
           showYearDropdown
           dropdownMode="select"
