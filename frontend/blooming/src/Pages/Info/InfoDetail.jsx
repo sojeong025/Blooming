@@ -8,6 +8,9 @@ import { customAxios, fileAxios } from "../../lib/axios";
 import { useEffect, useRef, useState } from "react";
 import Rating from "react-rating";
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 export default function InfoDetail() {
   
   const location = useLocation();
@@ -16,7 +19,7 @@ export default function InfoDetail() {
   const [images, setImages] = useState([])
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [reviews, setReviews] = useState([])
-
+  const [startDate, setStartDate] = useState(new Date());
 
   // 리뷰쓰는 폼관련된 State
   const [starRating, setStarRating] = useState(0);
@@ -160,6 +163,25 @@ export default function InfoDetail() {
       <p>{product.company}</p>
       <p>{product.companyTime}</p>
       <p>{product.companyAddress}</p>
+      <div>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          dateFormat="yyyy/MM/dd"
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
+        />
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          showTimeSelect
+          showTimeSelectOnly
+          timeIntervals={15}
+          timeFormat="HH:mm"
+          dateFormat="HH:mm"
+        />
+      </div>
       <button onClick={handleReserve}>예약하기</button>
       <button onClick={product.wish ? handleDeleteWish : handleCreateWish}>
         {product.wish ? "찜취소" : "찜하기"}
