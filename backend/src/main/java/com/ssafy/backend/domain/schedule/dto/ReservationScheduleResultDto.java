@@ -12,5 +12,5 @@ import java.time.LocalTime;
 @Getter
 @AllArgsConstructor
 public class ReservationScheduleResultDto {
-    private Long reservationId;
+    private Long scheduleId;
 }

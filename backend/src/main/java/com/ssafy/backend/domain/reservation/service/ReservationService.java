@@ -80,7 +80,7 @@ public class ReservationService {
                 reservation.getId()
         ));
 
-        return new ReservationScheduleResultDto(savedSchedule.getReservationId());
+        return new ReservationScheduleResultDto(savedSchedule.getId());
     }
 
     public List<ReservationResultDto> getUserReservation() {
