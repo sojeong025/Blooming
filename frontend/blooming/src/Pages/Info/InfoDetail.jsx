@@ -18,9 +18,9 @@ export default function InfoDetail() {
   const location = useLocation();
   const [product, setProduct] = useState(location.state.product)
   const productType = location.state.productType
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [reviews, setReviews] = useState([])
+  const [reviews, setReviews] = useState(null)
   
   // 예약하기와 관련된 날짜정보
   const [reservedDate, setReservedDate] = useState(new Date());
