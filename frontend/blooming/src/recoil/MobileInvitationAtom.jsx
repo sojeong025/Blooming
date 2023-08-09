@@ -37,9 +37,7 @@ export const mobileInvitationState = atom({
   },},
 });
 
-const mobileCountState = atom({
+export const mobileCountState = atom({
   key: 'mobileCountState',
   default: 0,
 });
-
-export default mobileCountState;
