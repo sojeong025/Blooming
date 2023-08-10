@@ -8,10 +8,15 @@ function KakaoLogin() {
 
   // Access Token 추출
   const accessTokenParam = searchParams.get("access_token");
+  const refreshTokenParam = searchParams.get("refresh_token");
   const isUser = searchParams.get("is_user");
 
   // Access Token에서 "Bearer " 부분을 제거하고, 공백을 제거
   const accessToken = accessTokenParam
+    ? accessTokenParam.replace("Bearer ", "").trim()
+    : null;
+  
+  const refreshToken = refreshTokenParam
     ? accessTokenParam.replace("Bearer ", "").trim()
     : null;
 
@@ -24,7 +29,12 @@ function KakaoLogin() {
       localStorage.setItem("accessToken", accessToken);
       if (localStorage.getItem("accessToken") === accessToken) {
         if (isUser === "T") {
-          navigate("/home");
+          if (refreshToken) {
+            localStorage.setItem("refreshToken", refreshToken);
+            navigate("/home");
+          } else {
+            navigate("login")
+          }
         } else if (isUser === "F") {
           navigate("/go-join");
         }
