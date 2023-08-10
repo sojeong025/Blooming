@@ -62,8 +62,10 @@ export default function InfoDetail() {
   }, [])
 
   const handleReserve = async () => {
-    const formattedDate = `${reservedDate.getFullYear()}-${(reservedDate.getMonth() + 1).toString().padStart(2, '0')}-${reservedDate.getDate().toString().padStart(2, '0')}`;
-    const formattedTime = `${reservedTime.getHours().toString().padStart(2, '0')}:${reservedTime.getMinutes().toString().padStart(2, '0')}`;
+    const selectedDate = new Date(reservedDate)
+    const selectedTime = new Date(reservedTime)
+    const formattedDate = `${selectedDate.getFullYear()}-${(selectedDate.getMonth() + 1).toString().padStart(2, '0')}-${selectedDate.getDate().toString().padStart(2, '0')}`;
+    const formattedTime = `${selectedTime.getHours().toString().padStart(2, '0')}:${selectedTime.getMinutes().toString().padStart(2, '0')}`;
 
     const data = {
       reservedDate: formattedDate,
