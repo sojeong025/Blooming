@@ -2,6 +2,7 @@ package com.ssafy.backend.domain.user.service;
 
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
+import com.ssafy.backend.domain.diary.repository.DiaryRepository;
 import com.ssafy.backend.domain.invitation.repository.InvitationRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.dto.CoupleCodeDto;
@@ -28,6 +29,7 @@ public class UserService {
     private final CoupleRepository coupleRepository;
     private final FcmTokenRepository fcmTokenRepository;
     private final InvitationRepository invitationRepository;
+    private final DiaryRepository diaryRepository;
 
     @Transactional
     public void signUp(UserSignUpDto userSignUpDto, String userEmail) {
@@ -77,6 +79,9 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("커플코드가 없는 회원입니다. 잘못된 회원!"));
 
         findUser.removeCouple();
+        // userId를 참조하는 테이블의 데이터 삭제
+        diaryRepository.deleteAllByUserId(findUser.getId());
+
 
         log.debug(originCouple.getUsers().toString());
 

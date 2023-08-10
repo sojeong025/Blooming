@@ -50,7 +50,7 @@ public class User extends CreatedAndUpdatedBaseEntity {
     @JoinColumn(name = "COUPLE_ID")
     private Couple couple;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notification> notifications = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
