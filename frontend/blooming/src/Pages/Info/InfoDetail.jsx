@@ -67,8 +67,8 @@ export default function InfoDetail() {
     const formattedTime = `${reservedTime.getHours().toString().padStart(2, '0')}:${reservedTime.getMinutes().toString().padStart(2, '0')}`;
 
     const data = {
-      reservedDate: formattedDate(reservedDate),
-      reservedTime: formattedTime(reservedTime),
+      reservedDate: formattedDate,
+      reservedTime: formattedTime,
       product_id: product.id
     };
     try {
