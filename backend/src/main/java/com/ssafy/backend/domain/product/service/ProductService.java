@@ -59,7 +59,7 @@ public class ProductService {
 			String key = "latest-seen-products:" + Long.valueOf(user.getId());
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
-			redisTemplate.opsForZSet().add(key, productId, Long.valueOf(sdf.format(timestamp))); //되ㅏ나
+			redisTemplate.opsForZSet().add(key, Long.valueOf(productId), Long.valueOf(sdf.format(timestamp))); //되ㅏ나
 			System.out.println("저장 완료");
 		}catch(Exception e){
 			e.printStackTrace();
