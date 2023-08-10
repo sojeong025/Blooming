@@ -1,4 +1,3 @@
-import { useState } from 'react';
 // import Address from './Address';
 import { useRecoilState } from 'recoil';
 import { mobileInvitationState } from '../../../recoil/MobileInvitationAtom';
@@ -13,10 +12,7 @@ function WeddingHall() {
     const { id, value } = event.target;
     setInvitation((preInvitation) => ({
       ...preInvitation,
-      weddingHall: {
-        ...preInvitation.weddingHall,
-        [id]: value,
-      },
+      [id]: value,
     }));
   };
 
@@ -30,7 +26,7 @@ function WeddingHall() {
           className={classes.inputField}
           id="weddingHallName"
           placeholder="웨딩 컨벤션"
-          value={invitation.weddingHall.weddingHallName}
+          value={invitation.weddingHallName}
           onChange={handleInputChange}
         />
 
@@ -40,7 +36,7 @@ function WeddingHall() {
           className={classes.inputField}
           id="floor"
           placeholder="1층 그레이트홀"
-          value={invitation.weddingHall.floor}
+          value={invitation.floor}
           onChange={handleInputChange}
         />
 
@@ -50,7 +46,7 @@ function WeddingHall() {
           className={classes.inputField}
           id="address"
           placeholder="선택시 주소 검색창이 노출됩니다."
-          value={invitation.weddingHall.address}
+          value={invitation.address}
           onChange={handleInputChange}
         />
 

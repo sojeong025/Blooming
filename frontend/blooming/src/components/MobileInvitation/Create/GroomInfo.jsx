@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { mobileInvitationState } from '../../../recoil/MobileInvitationAtom';
 
@@ -11,10 +10,7 @@ function GroomInfo() {
     const { id, value } = event.target;
     setInvitation((preInvitation) => ({
       ...preInvitation,
-      groom: {
-        ...preInvitation.groom,
-        [id]: value,
-      },
+      [id]: value,
     }));
   };
 
@@ -28,7 +24,7 @@ function GroomInfo() {
         type="text"
         id="groomFatherName"
         placeholder="이름"
-        value={invitation.groom.groomFatherName}
+        value={invitation.groomFatherName}
         onChange={handleInputChange}
       />
       <input
@@ -38,7 +34,7 @@ function GroomInfo() {
         name="groomFatherPhone"
         placeholder="전화번호"
         pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-        value={invitation.groom.groomFatherPhone}
+        value={invitation.groomFatherPhone}
         onChange={handleInputChange}
       />
       <br />
@@ -48,7 +44,7 @@ function GroomInfo() {
         type="text"
         id="groomMotherName"
         placeholder="이름"
-        value={invitation.groom.groomMotherName}
+        value={invitation.groomMotherName}
         onChange={handleInputChange}
       />
       <input
@@ -58,7 +54,7 @@ function GroomInfo() {
         name="groomMotherPhone"
         placeholder="전화번호"
         pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-        value={invitation.groom.groomMotherPhone}
+        value={invitation.groomMotherPhone}
         onChange={handleInputChange}
       />
 
@@ -68,7 +64,7 @@ function GroomInfo() {
         type="text"
         id="groomName"
         placeholder="이름"
-        value={invitation.groom.groomName}
+        value={invitation.groomName}
         onChange={handleInputChange}
       />
       <input
@@ -78,7 +74,7 @@ function GroomInfo() {
         name="groomPhone"
         placeholder="전화번호"
         pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-        value={invitation.groom.groomPhone}
+        value={invitation.groomPhone}
         onChange={handleInputChange}
       />
     </div>

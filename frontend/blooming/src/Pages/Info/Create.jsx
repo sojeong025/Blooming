@@ -26,31 +26,31 @@ function Create() {
     setPreviewModalVisible(true);
   }
 
-  function handleSaveClick() {
+  async function handleSaveClick() {
     const finalFormData = {
-      thumbnail: formData.main.thumbnail,
-      groomFatherName: formData.groom.groomFatherName,
-      groomFatherPhone: formData.groom.groomFatherPhone,
-      groomMotherName: formData.groom.groomMotherName,
-      groomMotherPhone: formData.groom.groomMotherPhone,
-      groomName: formData.groom.groomName,
-      groomPhone: formData.groom.groomPhone,
-      brideFatherName: formData.brider.briderFatherName,
-      brideFatherPhone: formData.brider.briderFatherPhone,
-      brideMotherName: formData.brider.briderMotherName,
-      brideMotherPhone: formData.brider.briderMotherPhone,
-      brideName: formData.brider.briderName,
-      bridePhone: formData.brider.briderPhone,
-      title: formData.invitation.title,
-      content: formData.invitation.content,
-      weddingHallName: formData.weddingHall.weddingHallName,
-      floor: formData.weddingHall.floor,
-      address: formData.weddingHall.address,
-      date: formData.weddingDate.date,
-      time: formData.weddingDate.time,
+      thumbnail: formData.thumbnail,
+      groomFatherName: formData.groomFatherName,
+      groomFatherPhone: formData.groomFatherPhone,
+      groomMotherName: formData.groomMotherName,
+      groomMotherPhone: formData.groomMotherPhone,
+      groomName: formData.groomName,
+      groomPhone: formData.groomPhone,
+      brideFatherName: formData.briderFatherName,
+      brideFatherPhone: formData.briderFatherPhone,
+      brideMotherName: formData.briderMotherName,
+      brideMotherPhone: formData.briderMotherPhone,
+      brideName: formData.briderName,
+      bridePhone: formData.briderPhone,
+      title: formData.title,
+      content: formData.content,
+      weddingHallName: formData.weddingHallName,
+      floor: formData.floor,
+      address: formData.address,
+      date: formData.date,
+      time: formData.time,
     };
 
-    customAxios
+    await customAxios
       .post("invitation", finalFormData)
       .then((response) => {
         console.log(finalFormData);

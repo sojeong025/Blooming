@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { mobileInvitationState } from '../../../recoil/MobileInvitationAtom';
 
@@ -11,10 +10,7 @@ function BriderInfo() {
     const { id, value } = event.target;
     setInvitation((preInvitation) => ({
       ...preInvitation,
-      brider: {
-        ...preInvitation.brider,
-        [id]: value,
-      },
+      [id]: value,
     }));
   };
 
@@ -22,63 +18,63 @@ function BriderInfo() {
     <div className={classes.container}>
       <p className={classes.header}>신부측 정보</p>
       <hr />
-      <label htmlFor="briderFatherName">아버님</label>
+      <label htmlFor="brideFatherName">아버님</label>
       <input
         className={classes.inputField}
         type="text"
-        id="briderFatherName"
+        id="brideFatherName"
         placeholder="이름"
-        value={invitation.brider.briderFatherName}
+        value={invitation.brideFatherName}
         onChange={handleInputChange}
       />
       <input
         className={classes.inputField}
         type="tel"
-        id="briderFatherPhone"
-        name="briderFatherPhone"
+        id="brideFatherPhone"
+        name="brideFatherPhone"
         placeholder="전화번호"
         pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-        value={invitation.brider.briderFatherPhone}
+        value={invitation.brideFatherPhone}
         onChange={handleInputChange}
       />
       <br />
-      <label htmlFor="briderMotherName">어머님</label>
+      <label htmlFor="brideMotherName">어머님</label>
       <input
         className={classes.inputField}
         type="text"
-        id="briderMotherName"
+        id="brideMotherName"
         placeholder="이름"
-        value={invitation.brider.briderMotherName}
+        value={invitation.brideMotherName}
         onChange={handleInputChange}
       />
       <input
         className={classes.inputField}
         type="tel"
-        id="briderMotherPhone"
-        name="briderMotherPhone"
+        id="brideMotherPhone"
+        name="brideMotherPhone"
         placeholder="전화번호"
         pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-        value={invitation.brider.briderMotherPhone}
+        value={invitation.brideMotherPhone}
         onChange={handleInputChange}
       />
 
-      <label htmlFor="briderName">신부</label>
+      <label htmlFor="brideName">신부</label>
       <input
         className={classes.inputField}
         type="text"
-        id="briderName"
+        id="brideName"
         placeholder="이름"
-        value={invitation.brider.briderName}
+        value={invitation.brideName}
         onChange={handleInputChange}
       />
       <input
         className={classes.inputField}
         type="tel"
-        id="briderPhone"
-        name="briderPhone"
+        id="bridePhone"
+        name="bridePhone"
         placeholder="전화번호"
         pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-        value={invitation.brider.briderPhone}
+        value={invitation.bridePhone}
         onChange={handleInputChange}
       />
     </div>
