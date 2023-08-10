@@ -31,27 +31,15 @@ function KakaoLogin() {
       fileAxios.setAccessToken(accessToken);
       
       await setAccess(accessToken);
-      // await localStorage.setItem('refreshToken', refreshToken)
-      // setRefresh(refreshToken)
-      // if (access) {
-      //   if (isUser === "T") {
-      //     navigate("/home");
-      //   } else if (isUser === "F") {
-      //     console.log(localStorage.getItem("accessToken"));
-      //     navigate("/go-join");
-      //   }
-      // }
-
-      // 사용자 닉네임 가져와보기 (test)
-      const userProfile = await KakaoLogin.Auth.getUserProfile();
-      const userNickname = userProfile.nickname;
-
-
-      if (isUser === "T") {
-        navigate("/home");
-      } else if (isUser === "F") {
-        console.log(localStorage.getItem("accessToken"));
-        navigate("/go-join", {state: {nickname: userNickname}});
+      await localStorage.setItem('refreshToken', refreshToken)
+      setRefresh(refreshToken)
+      if (access) {
+        if (isUser === "T") {
+          navigate("/home");
+        } else if (isUser === "F") {
+          console.log(localStorage.getItem("accessToken"));
+          navigate("/go-join");
+        }
       }
     }
   };

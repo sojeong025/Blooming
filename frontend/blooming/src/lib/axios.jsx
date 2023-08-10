@@ -1,44 +1,20 @@
 import axios from "axios";
 
 const SERVER_ADDRESS = "http://43.200.254.50:8080";
-// const accessToken = localStorage.getItem("accessToken");
+const accessToken = localStorage.getItem("accessToken");
 
-// export const customAxios = axios.create({
-//   baseURL: `${SERVER_ADDRESS}`,
-//   headers: {
-//     Authorization: `Bearer ${accessToken}`,
-//     "Content-Type": "application/json",
-//   },
-// });
-
-// export const fileAxios = axios.create({
-//   baseURL: `${SERVER_ADDRESS}/s3`,
-//   headers: {
-//     Authorization: `Bearer ${accessToken}`,
-//     "Content-Type": "multipart/form-data",
-//   },
-// })
-
-const customAxios = axios.create({
+export const customAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}`,
   headers: {
+    Authorization: `Bearer ${accessToken}`,
     "Content-Type": "application/json",
   },
 });
 
-customAxios.setAccessToken = (token) => {
-  customAxios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-};
-
-const fileAxios = axios.create({
+export const fileAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}/s3`,
   headers: {
+    Authorization: `Bearer ${accessToken}`,
     "Content-Type": "multipart/form-data",
   },
-});
-
-fileAxios.setAccessToken = (token) => {
-  fileAxios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-};
-
-export { customAxios, fileAxios };
+})

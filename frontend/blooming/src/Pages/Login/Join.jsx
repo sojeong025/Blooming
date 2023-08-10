@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import classes from "./Join.module.css";
 // 에러 모달
 import useErrorModal from "../../components/Error/useErrorModal";
@@ -35,25 +35,14 @@ export default function Join() {
   }, []);
 
   // 추가정보 데이터 넣기
-  // const [userData, setUserData] = useRecoilState(userState);
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   nickname: "",
-  //   phoneNumber: "",
-  //   gender: "",
-  // });
-  const location = useLocation();
-  const [formData, setFormData] = useState(() => {
-    const defaultState = {
-      name: "",
-      nickname: "",
-      phoneNumber: "",
-      gender: "",
-    };
-    return location.state && location.state.nickname
-      ? { ...defaultState, nickname: location.state.nickname }
-      : defaultState;
+  const [userData, setUserData] = useRecoilState(userState);
+  const [formData, setFormData] = useState({
+    name: "",
+    nickname: "",
+    phoneNumber: "",
+    gender: "",
   });
+  
 
   // 카카오 유저 정보 받아오기:
   // email(수정불가), profileImage, 닉네임(이름), 성별(신랑신부)
