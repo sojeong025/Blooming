@@ -21,7 +21,7 @@ const DiaryDetails = () => {
       title: "Diary Entry 1",
       content: "오늘은 친구들과 멋진 하루를 보냈습니다...",
       date: "2023-08-11",
-      image: {src: 'src/assets/test3.jpg'}
+      image: {src: 'src/assets/test.jpg'}
     },
     {
       id: 2,
