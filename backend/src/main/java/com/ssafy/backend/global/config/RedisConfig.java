@@ -36,7 +36,7 @@ public class RedisConfig {
     public RedisTemplate<String,Long> redisTemplate(){
         RedisTemplate<String, Long> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(new StringRedisSerializer()); //key 깨짐 방지
-        redisTemplate.setValueSerializer(new StringRedisSerializer()); //value 깨짐 방지
+//        redisTemplate.setValueSerializer(new StringRedisSerializer()); //value 깨짐 방지 -- 이것 때문인가..
         redisTemplate.setConnectionFactory(redisConnectionFactory());
         return redisTemplate;
     }
