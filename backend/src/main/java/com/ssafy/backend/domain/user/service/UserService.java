@@ -4,11 +4,14 @@ import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.diary.repository.DiaryRepository;
 import com.ssafy.backend.domain.invitation.repository.InvitationRepository;
+import com.ssafy.backend.domain.reservation.Reservation;
+import com.ssafy.backend.domain.reservation.repository.ReservationRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.dto.CoupleCodeDto;
 import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.repository.UserRepository;
+import com.ssafy.backend.domain.wishlist.repository.WishlistRepository;
 import com.ssafy.backend.global.redis.fcm.FcmToken;
 import com.ssafy.backend.global.redis.fcm.FcmTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -30,6 +35,8 @@ public class UserService {
     private final FcmTokenRepository fcmTokenRepository;
     private final InvitationRepository invitationRepository;
     private final DiaryRepository diaryRepository;
+    private final ReservationRepository reservationRepository;
+    private final WishlistRepository wishlistRepository;
 
     @Transactional
     public void signUp(UserSignUpDto userSignUpDto, String userEmail) {
@@ -81,6 +88,9 @@ public class UserService {
         findUser.removeCouple();
         // userId를 참조하는 테이블의 데이터 삭제
         diaryRepository.deleteAllByUserId(findUser.getId());
+        List<Reservation> reservations = findUser.getReservations();
+        reservationRepository.deleteAll(reservations);
+        wishlistRepository.deleteAllByUserId(findUser.getId());
 
 
         log.debug(originCouple.getUsers().toString());
