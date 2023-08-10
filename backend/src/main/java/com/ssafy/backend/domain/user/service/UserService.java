@@ -85,7 +85,7 @@ public class UserService {
 
         log.debug(originCouple.getUsers().toString());
 
-        if (originCouple.getUsers().isEmpty()) {
+        if (originCouple.getUsers().isEmpty() && originCouple.getInvitation() != null) {
             // TODO: 커플 관련 삭제 분리해야하지 않을까?
             originCouple.getInvitation().setCouple(null);
             invitationRepository.delete(originCouple.getInvitation());
