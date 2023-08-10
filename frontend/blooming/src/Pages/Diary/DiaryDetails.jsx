@@ -68,7 +68,7 @@ const DiaryDetails = () => {
             <input readOnly className={classes.img} 
               type="file" id="image" accept="image/*"
             />
-            {image && (
+            {diary.image && (
               <img
                 src={diary.image}
                 alt="preview"
