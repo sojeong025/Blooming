@@ -37,10 +37,7 @@ export default function ProductItem({ product, onClick }) {
   };
 
   return (
-    <div
-      className={classes.ItemContainer}
-      // onClick={onClick}
-    >
+    <div className={classes.ItemContainer} onClick={onClick}>
       <img
         className={classes.itemImg}
         src={product.thumbnail}
