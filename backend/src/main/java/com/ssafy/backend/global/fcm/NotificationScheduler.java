@@ -1,4 +1,4 @@
-package com.ssafy.backend.fcm;
+package com.ssafy.backend.global.fcm;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -14,7 +14,6 @@ import com.ssafy.backend.domain.notification.service.NotificationService;
 import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.schedule.repository.ScheduleRepository;
 import com.ssafy.backend.domain.user.User;
-import com.ssafy.backend.domain.user.repository.UserRepository;
 import com.ssafy.backend.global.redis.fcm.FcmToken;
 import com.ssafy.backend.global.redis.fcm.FcmTokenRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +28,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
