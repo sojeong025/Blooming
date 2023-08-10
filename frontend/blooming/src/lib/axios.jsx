@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const SERVER_ADDRESS = "http://43.200.254.50:8080";
 
-const customAxios = axios.create({
+export const customAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}`,
   headers: {
     "Content-Type": "application/json",
@@ -22,7 +22,7 @@ customAxios.interceptors.request.use(
   }
 );
 
-const fileAxios = axios.create({
+export const fileAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}/s3`,
   headers: {
     "Content-Type": "multipart/form-data",
