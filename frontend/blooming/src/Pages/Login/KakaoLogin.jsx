@@ -28,8 +28,8 @@ function KakaoLogin() {
     if (accessToken) {
       await localStorage.setItem("accessToken", accessToken);
 
-      // await setAccess(accessToken);
-      // await localStorage.setItem('refreshToken', refreshToken)
+      await setAccess(accessToken);
+      await localStorage.setItem('refreshToken', refreshToken)
       setRefresh(refreshToken)
       if (access) {
         if (isUser === "T") {
