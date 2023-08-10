@@ -1,11 +1,10 @@
 package com.ssafy.backend.domain.product.dto;
 
-import java.util.List;
-
 import com.ssafy.backend.domain.product.Product;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -31,8 +30,9 @@ public class ProductDetailDto {
 	private boolean isWish;
 
 	private Float starRate;
+	private Long reviewCount;
 
-	public ProductDetailDto(Product product, boolean isWish, List<String> images, Float starRate) {
+	public ProductDetailDto(Product product, boolean isWish, List<String> images, Float starRate, Long reviewCount) {
 		this.id = product.getId();
 		this.itemName = product.getItemName();
 		this.brief = product.getBrief();
@@ -43,5 +43,6 @@ public class ProductDetailDto {
 		this.images = images;
 		this.isWish = isWish;
 		this.starRate = starRate;
+		this.reviewCount = reviewCount;
 	}
 }

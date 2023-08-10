@@ -1,12 +1,15 @@
 package com.ssafy.backend.domain.product.service;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.ssafy.backend.domain.product.ProductImage;
+import com.ssafy.backend.domain.product.ProductType;
+import com.ssafy.backend.domain.product.dto.ProductDetailDto;
+import com.ssafy.backend.domain.product.dto.ProductDetailResult;
+import com.ssafy.backend.domain.product.dto.ProductResultDto;
+import com.ssafy.backend.domain.product.repository.ProductRepository;
 import com.ssafy.backend.domain.review.repository.ReviewRepository;
+import com.ssafy.backend.domain.user.User;
+import com.ssafy.backend.domain.user.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -15,16 +18,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ssafy.backend.domain.product.ProductImage;
-import com.ssafy.backend.domain.product.ProductType;
-import com.ssafy.backend.domain.product.dto.ProductDetailDto;
-import com.ssafy.backend.domain.product.dto.ProductDetailResult;
-import com.ssafy.backend.domain.product.dto.ProductResultDto;
-import com.ssafy.backend.domain.product.repository.ProductRepository;
-import com.ssafy.backend.domain.user.User;
-import com.ssafy.backend.domain.user.repository.UserRepository;
-
-import lombok.RequiredArgsConstructor;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -56,8 +56,14 @@ public class ProductService {
 				.map(ProductImage::getImage)
 				.collect(Collectors.toList());
 
-		Float starRate = reviewRepository.findStarRate(productId);
-		
+		Map<String, Object> reviewSummary = reviewRepository.findStarRate(productId);
+		Float starRate = (Float) reviewSummary.get("starRate");
+		Long reviewCount = (Long) reviewSummary.get("reviewCount");
+
+		float ceilingStarRate = BigDecimal.valueOf(starRate)
+				.setScale(2, RoundingMode.CEILING) // 올림으로 2번째까지 표시
+				.floatValue();
+
 		//redis: 상품 상세조회 후 최근 상품 보기 리스트에 추가
 		try{
 			System.out.println("=============redis");
@@ -74,7 +80,7 @@ public class ProductService {
 			System.out.println("=============redis");
 		}
 
-		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images, starRate);
+		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images, ceilingStarRate, reviewCount);
 	}
 
 }

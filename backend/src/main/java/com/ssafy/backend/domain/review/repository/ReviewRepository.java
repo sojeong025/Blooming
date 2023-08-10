@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Map;
+
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     @Query("select new com.ssafy.backend.domain.review.dto.ProductReviewDto(r, CASE WHEN COUNT(l) > 0 THEN true ELSE false END) from Review r left join fetch Liked l on l.review = r and l.user = :user where r.product.id = :productId group by r")
@@ -18,7 +20,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select new com.ssafy.backend.domain.review.dto.MyReviewDto(r) from Review r where r.user = :user")
     Slice<MyReviewDto> findReviewByUser(@Param("user") User user, Pageable pageable);
 
-    @Query("select avg(r.star) from Review r where r.product.id = :productId")
-    Float findStarRate(@Param("productId") Long productId);
+    @Query("select avg(r.star) as starRate, count(r) as reviewCount from Review r where r.product.id = :productId")
+    Map<String, Object> findStarRate(@Param("productId") Long productId);
 
 }
