@@ -53,6 +53,8 @@ public class ReviewService {
 
     public Slice<ReviewResultDto> getAllProductReview(Long productId, int page, int size) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
 
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdDate"));
 
@@ -80,7 +82,7 @@ public class ReviewService {
 //            ));
 //        }
 
-        return reviewRepository.findReviewByProduct(productId, authentication.getName(), pageRequest);
+        return reviewRepository.findReviewByProduct(productId, user, pageRequest);
     }
 
 //    public List<ReviewResultDto> getAllUserReview(int page, int size) {
@@ -121,7 +123,7 @@ public class ReviewService {
 //        return reviewResultDtos;
 //    }
 
-    public void modifyReview(Long reviewId, ReviewModifyDto reviewModifyDto) throws Throwable {
+    public void modifyReview(Long reviewId, ReviewModifyDto reviewModifyDto) {
         //리뷰 엔티티를 찾아서 update
         //왜 이건 그냥 안되지.. 에러처리
         Review review = reviewRepository.findById(reviewId)
