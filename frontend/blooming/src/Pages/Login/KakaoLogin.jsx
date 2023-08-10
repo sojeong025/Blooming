@@ -1,4 +1,3 @@
-import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function KakaoLogin() {
@@ -27,15 +26,13 @@ function KakaoLogin() {
   const goTo = async () => {
     if (accessToken) {
       await localStorage.setItem("accessToken", accessToken);
-
-      // await setAccess(accessToken);
+      await setAccess(accessToken);
       // await localStorage.setItem('refreshToken', refreshToken)
-      setRefresh(refreshToken)
+      // setRefresh(refreshToken)
       if (access) {
         if (isUser === "T") {
           navigate("/home");
         } else if (isUser === "F") {
-          console.log(localStorage.getItem("accessToken"));
           navigate("/go-join");
         }
       }

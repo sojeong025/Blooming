@@ -1,6 +1,6 @@
-import axios from "axios";
 
 const SERVER_ADDRESS = "http://43.200.254.50:8080";
+// const SERVER_ADDRESS = "";
 const accessToken = localStorage.getItem("accessToken");
 
 export const customAxios = axios.create({
@@ -17,4 +17,4 @@ export const fileAxios = axios.create({
     Authorization: `Bearer ${accessToken}`,
     "Content-Type": "multipart/form-data",
   },
-})
+});
