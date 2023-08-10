@@ -3,6 +3,7 @@ package com.ssafy.backend.domain.product.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.ssafy.backend.domain.review.repository.ReviewRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.security.core.Authentication;
@@ -27,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductService {
 
 	private final ProductRepository productRepository;
+	private final ReviewRepository reviewRepository;
 	private final UserRepository userRepository;
 
 	public Slice<ProductResultDto> getTypeProduct(ProductType productType, int page, int size) {
@@ -46,9 +48,12 @@ public class ProductService {
 
 		ProductDetailResult productDetailResult = productRepository.getProductDetail(user, productId);
 		List<String> images = productDetailResult.getProduct().getProductImages().stream()
-				.map(ProductImage::getImage).collect(Collectors.toList());
+				.map(ProductImage::getImage)
+				.collect(Collectors.toList());
 
-		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images);
+		Float starRate = reviewRepository.findStarRate(productId);
+
+		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images, starRate);
 	}
 
 }

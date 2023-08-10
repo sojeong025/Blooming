@@ -26,6 +26,9 @@ public class ProductResultDto {
     //찜 정보
     private boolean isWish;
 
+    // 후기 별점 평균
+    private float starRate;
+
     public ProductResultDto(Long id, String itemName, String brief, String thumbnail, String company, String companyTime, String companyAddress, Wishlist wishlist) {
         this.id = id;
         this.itemName = itemName;

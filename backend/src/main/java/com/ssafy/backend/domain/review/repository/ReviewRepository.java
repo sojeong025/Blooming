@@ -18,4 +18,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select new com.ssafy.backend.domain.review.dto.MyReviewDto(r) from Review r where r.user = :user")
     Slice<MyReviewDto> findReviewByUser(@Param("user") User user, Pageable pageable);
 
+    @Query("select avg(r.star) from Review r where r.product.id = :productId")
+    Float findStarRate(@Param("productId") Long productId);
+
 }

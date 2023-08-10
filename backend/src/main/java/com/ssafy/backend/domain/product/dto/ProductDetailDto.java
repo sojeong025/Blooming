@@ -30,7 +30,9 @@ public class ProductDetailDto {
 	//찜 정보
 	private boolean isWish;
 
-	public ProductDetailDto(Product product, boolean isWish, List<String> images) {
+	private Float starRate;
+
+	public ProductDetailDto(Product product, boolean isWish, List<String> images, Float starRate) {
 		this.id = product.getId();
 		this.itemName = product.getItemName();
 		this.brief = product.getBrief();
@@ -40,5 +42,6 @@ public class ProductDetailDto {
 		this.companyAddress = product.getCompanyAddress();
 		this.images = images;
 		this.isWish = isWish;
+		this.starRate = starRate;
 	}
 }
