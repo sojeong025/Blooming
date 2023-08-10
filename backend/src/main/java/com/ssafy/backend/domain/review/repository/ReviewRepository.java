@@ -21,4 +21,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 //    @Query("select avg(r.star) as starRate, count(r) as reviewCount from Review r where r.product.id = :productId")
 //    Map<String, Object> findStarRate(@Param("productId") Long productId);
 
+    void deleteAllByUserId(Long userId);
+
 }
