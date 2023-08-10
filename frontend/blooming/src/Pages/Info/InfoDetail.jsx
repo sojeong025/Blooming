@@ -11,6 +11,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import DetailReviewForm from "../../components/Info/DetailReviewForm";
+import DetailReviewList from "../../components/Info/DetailReviewList";
 
 export default function InfoDetail() {
   
@@ -18,9 +19,12 @@ export default function InfoDetail() {
   const location = useLocation();
   const id = location.state.id
   const productType = location.state.productType
+  const [reviews, setReviews] = useState()
+  const [currentPage, setCurrentPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
   const [product, setProduct] = useState()
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [reviews, setReviews] = useState()
+  
   
   // 예약하기와 관련된 날짜정보
   const [reservedDate, setReservedDate] = useState(new Date());
@@ -49,9 +53,18 @@ export default function InfoDetail() {
 
   const fetchReviewData = async () => {
     try {
-      const response = await customAxios.get(`review/${id}`);
-      setReviews(response.data.result[0])
-      console.log(response.data.result[0])
+      const response = await customAxios.get(`review/${id}`, {
+        params: {page : currentPage, size: 4},
+      });
+      if (response.data.result[0].last) {
+        setHasMore(false);
+      } else {
+        setReviews((prevReviews) => [
+          ...prevReviews,
+          ...response.data.result[0].content,
+        ]);
+        setCurrentPage(currentPage + 1);
+      }
     } catch (error) {
       console.error("리뷰 정보 조회 에러:", error);
     }
@@ -177,15 +190,7 @@ export default function InfoDetail() {
           </button>
           <DetailReviewForm product={product} fetchReviewData={fetchReviewData} />
           <div>{product.company} 후기</div>
-          {reviews ? reviews.map((review) => (
-            <div key={review.id}>
-              <p>작성자: {review.nickName} {review.email}</p>
-              <img src={review.image} alt="이미지가 없습니다." />
-              <p>{review.star}</p>
-              <p>{review.content}</p>
-              <button>도움이 돼요! {review.likeCnt}</button>
-            </div>
-          )) : <div>등록된 후기가 없습니다.</div>}
+        {reviews ? <DetailReviewList hasMore={hasMore} reviews={reviews} fetchReviewData={fetchReviewData} /> : <div>등록된 후기가 없습니다.</div>}
           <button id="topButton" onClick={scrollToTop} className={classes.topButton}>
             Top
           </button>
