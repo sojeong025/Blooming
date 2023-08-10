@@ -8,15 +8,12 @@ import classes from "./Common.module.css";
 
 function WeddingDay() {
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
-  const weddingDate = invitation.weddingDate.date;
+  const weddingDate = invitation.date;
 
   const handleDateChange = (date) => {
     setInvitation((preInvitation) => ({
       ...preInvitation,
-      weddingDate: {
-        ...preInvitation.weddingDate,
-        date,
-      },
+      date,
     }));
   };
 
@@ -29,10 +26,7 @@ function WeddingDay() {
   const handleTimeChange = (time) => {
     setInvitation((preInvitation) => ({
       ...preInvitation,
-      weddingDate: {
-        ...preInvitation.weddingDate,
-        time: timeFormatter.format(time),
-      },
+      time: timeFormatter.format(time),
     }));
   };
 
@@ -59,7 +53,7 @@ function WeddingDay() {
           onChange={handleTimeChange}
           showTimeSelect
           showTimeSelectOnly
-          timeIntervals={15}
+          timeIntervals={30}
           timeCaption="시간"
           dateFormat="HH:mm"
           locale={ko}

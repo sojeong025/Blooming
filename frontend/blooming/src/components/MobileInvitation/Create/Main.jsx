@@ -1,7 +1,6 @@
-import React from 'react';
 import classes from './Common.module.css';
 import { mobileInvitationState } from '../../../recoil/MobileInvitationAtom';
-import { customAxios, fileAxios } from "../../../lib/axios";
+import { fileAxios } from "../../../lib/axios";
 import { useRecoilState } from 'recoil';
 
 function Main() {
@@ -21,10 +20,7 @@ function Main() {
         setInvitation((prevInvitation) => {
           const updatedInvitation = {
             ...prevInvitation,
-            main: {
-              ...prevInvitation.main,
-              thumbnail: response.data.result[0].uploadImageUrl,
-            },
+            thumbnail: response.data.result[0].uploadImageUrl,
           };
           console.log('Updated invitation:', updatedInvitation);
           return updatedInvitation;
@@ -48,9 +44,9 @@ function Main() {
             accept="image/*"
             onChange={handleInputImage}
           />
-          {invitation.main.thumbnail && (
+          {invitation.thumbnail && (
             <img
-              src={invitation.main.thumbnail}
+              src={invitation.thumbnail}
               alt="preview"
             />
           )}
