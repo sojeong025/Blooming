@@ -27,11 +27,9 @@ function KakaoLogin() {
   const goTo = async () => {
     if (accessToken) {
       await localStorage.setItem("accessToken", accessToken);
-      customAxios.setAccessToken(accessToken);
-      fileAxios.setAccessToken(accessToken);
-      
-      await setAccess(accessToken);
-      await localStorage.setItem('refreshToken', refreshToken)
+
+      // await setAccess(accessToken);
+      // await localStorage.setItem('refreshToken', refreshToken)
       setRefresh(refreshToken)
       if (access) {
         if (isUser === "T") {
