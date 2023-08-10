@@ -11,7 +11,7 @@ function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true })
   
   const calculateDday = (weddingDate) => {
     const now = new Date();
-    const wedding = new Date(weddingDate.toISOString());
+    const wedding = new Date(weddingDate);
     const diff = wedding - now;
     const dday = Math.ceil(diff / (1000 * 60 * 60 * 24));
     return dday;
