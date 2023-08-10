@@ -20,28 +20,28 @@
 }
 
 /* 신부버전 */
-/* .word {
+.word {
   font-family: 'LeferiPoint-SpecialItalicA';
   font-size: 27px;
-  color: #FF98A8;
+  color: #F25287;
   margin-bottom: 0;
 }
 
 .hr {
-  border-top: 3px double #FF98A8;
+  border-top: 3px double #F25287;
   width: 80vw;
-} */
+}
 
 /* 신랑버전 */
 .word {
   font-family: 'LeferiPoint-SpecialItalicA';
   font-size: 27px;
-  color: #343D63;
+  color: #8A92BF;
   margin-bottom: 0;
 }
 
 .hr {
-  border-top: 3px double #343D63;
+  border-top: 3px double #8A92BF;
   width: 84vw;
   margin: 0;
 }

@@ -23,7 +23,7 @@
   left: 0;
   right: 0;
 
-  background: #FFCBD3;
+  background: #fff;
   z-index: 2;
 }
 .navBar .label {
@@ -43,7 +43,7 @@
   content: "";
   z-index: -1;
   position: absolute;
-  background: #FFCBD3;
+  background: #D8A790;
   border-radius: 100%;
   width: 100%;
   height: 100%;

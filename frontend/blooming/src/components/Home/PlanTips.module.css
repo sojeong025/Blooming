@@ -9,28 +9,13 @@
   margin: 0px;
   width: 90vw;
   height: 150px;
-  background:#FF98A8; 
+  background: #FFDAE4; 
 
   display: flex;
   flex-direction: space-around;
   justify-content: center;
   align-items: center;
 }
-
-/* --------------신랑버전---------------- */
-.tipContainer {  
-  position:relative; 
-  margin: 0px;
-  width: 90vw;
-  height: 150px;
-  background:#343D63; 
-
-  display: flex;
-  flex-direction: space-around;
-  justify-content: center;
-  align-items: center;
-}
-/* -------------------------------------- */
 
 .mainImg {
   width: 350px;
