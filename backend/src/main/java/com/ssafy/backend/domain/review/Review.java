@@ -8,6 +8,8 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Entity
 @Getter
 public class Review extends CreatedAndUpdatedBaseEntity {
@@ -23,13 +25,13 @@ public class Review extends CreatedAndUpdatedBaseEntity {
 
     //연관관계
     // 일단 단방향
-    @ManyToOne//(fetch = FetchType.LAZY) //일단 해제
-    @JoinColumn(name = "product_id")
+    @ManyToOne(fetch = LAZY) //일단 해제
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
     // 일단 단방향
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     public Review() {}
