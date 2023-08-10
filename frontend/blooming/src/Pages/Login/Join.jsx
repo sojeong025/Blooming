@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import classes from "./Join.module.css";
 // 에러 모달
 import useErrorModal from "../../components/Error/useErrorModal";
