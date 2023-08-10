@@ -1,22 +1,24 @@
 .ItemContainer {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 }
 
 .itemImg {
   width: 40vw;
   margin: 0 auto;
-  /* justify-content: center; */
+  object-fit: contain;
 }
 
 .textContainer {
+  padding-top: 10px;
   display: block;
   margin: 0 10px;
 }
 
 .address {
-font-size: 16px;
+  font-size: 16px;
+  color: #666;
+  padding-bottom: 3px;
 }
 
 .company {
@@ -24,5 +26,31 @@ font-size: 16px;
   font-size: 20px;
 }
 
+.Wrapper {
+  position: relative;
+}
+
 .heart {
+  position: absolute;
+  top: 5px;
+  right: 18px;
+  z-index: 1;
+
+}
+.IconWrapper {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color:  rgba( 255, 255, 255, 0.8 );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heartIconTrue {
+  color: #FF647C;
+  z-index: 5;
+}
+.heartIconFalse {
+  color: #FF647C;
 }
