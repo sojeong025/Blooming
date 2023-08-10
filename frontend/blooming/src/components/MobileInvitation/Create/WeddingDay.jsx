@@ -17,16 +17,11 @@ function WeddingDay() {
     }));
   };
 
-  const timeFormatter = new Intl.DateTimeFormat(ko, {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: false,
-  });
-
   const handleTimeChange = (time) => {
+    const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
     setInvitation((preInvitation) => ({
       ...preInvitation,
-      time: timeFormatter.format(time),
+      time: formattedTime,
     }));
   };
 
