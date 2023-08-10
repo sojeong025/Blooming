@@ -23,7 +23,7 @@ function Main() {
             ...prevInvitation,
             main: {
               ...prevInvitation.main,
-              thumbnail: response.data.uploadImageUrl,
+              thumbnail: response.data.result[0].uploadImageUrl,
             },
           };
           console.log('Updated invitation:', updatedInvitation);
