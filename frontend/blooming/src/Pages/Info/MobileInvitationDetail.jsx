@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { mobileInvitationIdState } from "../../recoil/MobileInvitationAtom";
 import { customAxios } from "../../lib/axios";
 import { useRecoilValue } from "recoil";
+import { mobileInvitationState } from "../../recoil/MobileInvitationAtom";
 import Preview from "../../components/MobileInvitation/Preview"
 import classes from "./MobileInvitationDetail.module.css"
 
 function MobileInvitationDetail() {
   const navigate = useNavigate();
-  const invitationId = useRecoilValue(mobileInvitationIdState);
-
+  const invitation = useRecoilValue(mobileInvitationState);
+  const invitationId = invitation.id
   const handleGoBack = () => {
     navigate(-1);
   };
