@@ -4,8 +4,10 @@ import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.diary.repository.DiaryRepository;
 import com.ssafy.backend.domain.invitation.repository.InvitationRepository;
+import com.ssafy.backend.domain.liked.repository.LikedRepository;
 import com.ssafy.backend.domain.reservation.Reservation;
 import com.ssafy.backend.domain.reservation.repository.ReservationRepository;
+import com.ssafy.backend.domain.review.repository.ReviewRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.dto.CoupleCodeDto;
 import com.ssafy.backend.domain.user.dto.UserDto;
@@ -37,6 +39,8 @@ public class UserService {
     private final DiaryRepository diaryRepository;
     private final ReservationRepository reservationRepository;
     private final WishlistRepository wishlistRepository;
+    private final ReviewRepository reviewRepository;
+    private final LikedRepository likedRepository;
 
     @Transactional
     public void signUp(UserSignUpDto userSignUpDto, String userEmail) {
@@ -91,6 +95,8 @@ public class UserService {
         List<Reservation> reservations = findUser.getReservations();
         reservationRepository.deleteAll(reservations);
         wishlistRepository.deleteAllByUserId(findUser.getId());
+        likedRepository.deleteAllByUserId(findUser.getId());
+        reviewRepository.deleteAllByUserId(findUser.getId());
 
 
         log.debug(originCouple.getUsers().toString());
