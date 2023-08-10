@@ -56,14 +56,18 @@ export default function InfoDetail() {
       const response = await customAxios.get(`review/${id}`, {
         params: {page : currentPage, size: 4},
       });
-      if (response.data.result[0].last) {
+      if (response.status === 204) {
         setHasMore(false);
       } else {
-        setReviews((prevReviews) => [
-          ...prevReviews,
-          ...response.data.result[0].content,
-        ]);
-        setCurrentPage(currentPage + 1);
+        if (response.data.result[0].last) {
+          setHasMore(false);
+        } else {
+          setReviews((prevReviews) => [
+            ...prevReviews,
+            ...response.data.result[0].content,
+          ]);
+          setCurrentPage(currentPage + 1);
+        }
       }
     } catch (error) {
       console.error("리뷰 정보 조회 에러:", error);
