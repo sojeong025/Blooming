@@ -32,8 +32,10 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
 
   async function submitHandler(event) {
     event.preventDefault();
-    const formattedDate = `${enteredDate.getFullYear()}-${(enteredDate.getMonth() + 1).toString().padStart(2, '0')}-${enteredDate.getDate().toString().padStart(2, '0')}`;
-    const formattedTime = `${enteredTime.getHours().toString().padStart(2, '0')}:${enteredTime.getMinutes().toString().padStart(2, '0')}`;
+    const brforeDate = new Date(enteredDate)
+    const beforeTime = new Date(enteredTime)
+    const formattedDate = `${brforeDate.getFullYear()}-${(brforeDate.getMonth() + 1).toString().padStart(2, '0')}-${brforeDate.getDate().toString().padStart(2, '0')}`;
+    const formattedTime = `${beforeTime.getHours().toString().padStart(2, '0')}:${beforeTime.getMinutes().toString().padStart(2, '0')}`;
 
     const taskData = {
       title: enteredTitle,
