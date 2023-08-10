@@ -8,6 +8,7 @@ import classes from "./Common.module.css";
 
 function WeddingDay() {
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
+  console.log('invitation',invitation)
 
   const handleDateChange = (date) => {
     const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
@@ -44,7 +45,7 @@ function WeddingDay() {
         <label htmlFor="time">예식 시간</label>
         <br />
         <DatePicker
-          selected={new Date(`2023-08-10T${invitation.time}Z`)}
+          selected={new Date(`${invitation.date}T${invitation.time}`)}
           onChange={handleTimeChange}
           showTimeSelect
           showTimeSelectOnly
