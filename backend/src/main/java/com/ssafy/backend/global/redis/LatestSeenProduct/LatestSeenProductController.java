@@ -36,6 +36,7 @@ public class LatestSeenProductController {
         ZSetOperations<String, Long> stringStringZSetOperations = redisTemplate.opsForZSet();
         Set<ZSetOperations.TypedTuple<Long>> typedTuples = stringStringZSetOperations.reverseRangeByScoreWithScores(key, 0, 10);
 
+        System.out.println(typedTuples);
         //형태를 보기 위해 일단 출력
         return typedTuples;
     }
