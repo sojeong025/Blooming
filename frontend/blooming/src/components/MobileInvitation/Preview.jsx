@@ -1,32 +1,58 @@
 import { useRecoilValue } from 'recoil';
 import { mobileInvitationState } from '../../recoil/MobileInvitationAtom';
+import { useState, useEffect } from 'react';
 
-import Ring from '../../../src/assets/Icons/Ring4.svg'
 import classes from './Preview.module.css';
 import { Calendar } from 'antd-mobile';
 
 function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true }) {
   const invitationData = useRecoilValue(mobileInvitationState);
+  const [dday, setDday] = useState(null);
+  
+  const calculateDday = (weddingDate) => {
+    const now = new Date();
+    const wedding = new Date(weddingDate.toISOString());
+    const diff = wedding - now;
+    const dday = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    return dday;
+  };
+
+  useEffect(() => {
+    if (invitationData.weddingDate.date) {
+      setDday(calculateDday(invitationData.weddingDate.date));
+    } else {
+      setDday(null);
+    }
+  }, [invitationData.weddingDate.date]);
 
   return (
     <div className={classes.total} style={positionStyle}>
       {showPre && <p className={classes.pre}>미리보기</p> }
       {showCloseButton && <button onClick={onClose}>X</button> }
 
-      {/* 진짜 내용 들어간다~ */}
+      {/* 진짜 내용 */}
       <div className={classes.form}>
 
       {/* ---------메인-------- */}
       <div className={classes.main}>
         <p className={classes.mainTitle}>WEDDING DAY</p>
-        <p className={classes.mainDday}>D-30</p>
-        <img src="../../../src/assets/Character/main.jpeg" alt="thumbnail" />
-        {/* <p>{invitationData.main.thumbnail}</p> */}
+        <p className={classes.mainDday}>{dday ? "D-" + dday : "D-Day"}</p>
+        <img
+          src={invitationData.main.thumbnail ? invitationData.main.thumbnail : '../../../src/assets/Character/main.jpeg'}
+          alt="thumbnail"
+        />
         <p className={classes.mainName}>{invitationData.groom.groomName ? invitationData.groom.groomName : '신랑'} <span style={{fontSize:'15px'}}>그리고</span> {invitationData.brider.briderName ? invitationData.brider.briderName : '신부'}</p>
         {/* <img src={Ring} alt="Ring Icon" style={{margin:'10px 0'}}/> */}
         <p className={classes.mainWedding}>
-          일단 날짜 <br/>
-          {invitationData.weddingHall.weddingHallName ? invitationData.weddingHall.weddingHallName : '예식장 명'} &nbsp; | &nbsp; {invitationData.weddingHall.floor ? invitationData.weddingHall.floor : '예식창 층 및 홀'}
+          {invitationData.weddingDate.date
+            ? invitationData.weddingDate.date.toISOString().substr(0, 10)
+            : '예식일'}{' '}
+          <br />
+          {invitationData.weddingHall.weddingHallName
+            ? invitationData.weddingHall.weddingHallName
+            : '예식장 명'}{' '}
+          &nbsp; | &nbsp;{' '}
+          {invitationData.weddingHall.floor ? invitationData.weddingHall.floor : '예식장 층 및 홀'}
         </p>
         <hr />        
       </div>

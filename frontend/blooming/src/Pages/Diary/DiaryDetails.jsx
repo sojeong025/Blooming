@@ -70,7 +70,7 @@ const DiaryDetails = () => {
             />
             {image && (
               <img
-                src={image}
+                src={diary.image}
                 alt="preview"
               />
             )}
