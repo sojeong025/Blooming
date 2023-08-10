@@ -1,10 +1,12 @@
 package com.ssafy.backend.domain.product.service;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,7 @@ public class ProductService {
 
 	private final ProductRepository productRepository;
 	private final UserRepository userRepository;
+	private final RedisTemplate redisTemplate;
 
 	public Slice<ProductResultDto> getTypeProduct(ProductType productType, int page, int size) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -47,6 +50,21 @@ public class ProductService {
 		ProductDetailResult productDetailResult = productRepository.getProductDetail(user, productId);
 		List<String> images = productDetailResult.getProduct().getProductImages().stream()
 				.map(ProductImage::getImage).collect(Collectors.toList());
+
+		//redis: 상품 상세조회 후 최근 상품 보기 리스트에 추가
+		try{
+			System.out.println("=============redis");
+			String key = "latest-seen-products:" + Long.valueOf(user.getId());
+			LocalTime localTime = LocalTime.now(); //timestemp
+			redisTemplate.opsForZSet().add(key, localTime, productId);
+			System.out.println("저장 완료");
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("저장 실패");
+		}
+		finally {
+			System.out.println("=============redis");
+		}
 
 		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images);
 	}
