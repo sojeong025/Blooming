@@ -18,12 +18,12 @@ function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true })
   };
 
   useEffect(() => {
-    if (invitationData.weddingDate.date) {
-      setDday(calculateDday(invitationData.weddingDate.date));
+    if (invitationData.date) {
+      setDday(calculateDday(invitationData.date));
     } else {
       setDday(null);
     }
-  }, [invitationData.weddingDate.date]);
+  }, [invitationData.date]);
 
   return (
     <div className={classes.total} style={positionStyle}>
@@ -38,29 +38,29 @@ function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true })
         <p className={classes.mainTitle}>WEDDING DAY</p>
         <p className={classes.mainDday}>{dday ? "D-" + dday : "D-Day"}</p>
         <img
-          src={invitationData.main.thumbnail ? invitationData.main.thumbnail : '../../../src/assets/Character/main.jpeg'}
+          src={invitationData.thumbnail ? invitationData.thumbnail : '../../../src/assets/Character/main.jpeg'}
           alt="thumbnail"
         />
-        <p className={classes.mainName}>{invitationData.groom.groomName ? invitationData.groom.groomName : '신랑'} <span style={{fontSize:'15px'}}>그리고</span> {invitationData.brider.briderName ? invitationData.brider.briderName : '신부'}</p>
+        <p className={classes.mainName}>{invitationData.groomName ? invitationData.groomName : '신랑'} <span style={{fontSize:'15px'}}>그리고</span> {invitationData.brideName ? invitationData.brideName : '신부'}</p>
         {/* <img src={Ring} alt="Ring Icon" style={{margin:'10px 0'}}/> */}
         <p className={classes.mainWedding}>
-          {invitationData.weddingDate.date
-            ? invitationData.weddingDate.date.toISOString().substr(0, 10)
+          {invitationData.date
+            ? invitationData.date
             : '예식일'}{' '}
           <br />
-          {invitationData.weddingHall.weddingHallName
-            ? invitationData.weddingHall.weddingHallName
+          {invitationData.weddingHallName
+            ? invitationData.weddingHallName
             : '예식장 명'}{' '}
           &nbsp; | &nbsp;{' '}
-          {invitationData.weddingHall.floor ? invitationData.weddingHall.floor : '예식장 층 및 홀'}
+          {invitationData.floor ? invitationData.floor : '예식장 층 및 홀'}
         </p>
         <hr />        
       </div>
 
       {/* --------인사말---------- */}
       <div className={classes.mention}>
-        <p className={classes.mentionTitle}> 🌿 {invitationData.invitation.title ? invitationData.invitation.title : 'Invitation'} 🌿</p>
-        <p className={classes.mentionContent}>{invitationData.invitation.content ? invitationData.invitation.content : '서로가 마주보며 다져온 사랑을 이제 함께 한 곳을 바라보며 걸어갈 수 있는 큰 사랑으로 키우고자 합니다. 저희 두 사람이 사랑의 이름으로 지켜나갈 수 있도록 앞날을 축복해 주시면 감사하겠습니다.'} </p>
+        <p className={classes.mentionTitle}> 🌿 {invitationData.title ? invitationData.title : 'Invitation'} 🌿</p>
+        <p className={classes.mentionContent}>{invitationData.content ? invitationData.content : '서로가 마주보며 다져온 사랑을 이제 함께 한 곳을 바라보며 걸어갈 수 있는 큰 사랑으로 키우고자 합니다. 저희 두 사람이 사랑의 이름으로 지켜나갈 수 있도록 앞날을 축복해 주시면 감사하겠습니다.'} </p>
         <hr />
       </div>
 
@@ -68,8 +68,8 @@ function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true })
       {/* --------연락 관련-------- */}
       <div className={classes.connect}>
         <div className={classes.connectName}>
-          {invitationData.groom.groomFatherName ? invitationData.groom.groomFatherName : '신랑아버지'} ∘ {invitationData.groom.groomMotherName ? invitationData.groom.groomMotherName : '신랑어머니'} <span style={{fontSize:'12px'}}>의 아들</span> {invitationData.groom.groomName ?invitationData.groom.groomName : '신랑'} <br />
-          {invitationData.brider.briderFatherName ? invitationData.brider.briderFatherName : '신부아버지'} ∘ {invitationData.brider.briderMotherName ? invitationData.brider.briderMotherName :  '신부어머니'} <span style={{fontSize:'12px'}}>의 딸</span> {invitationData.brider.briderName ? invitationData.brider.briderName : '신부'}
+          {invitationData.groomFatherName ? invitationData.groomFatherName : '신랑아버지'} ∘ {invitationData.groomMotherName ? invitationData.groomMotherName : '신랑어머니'} <span style={{fontSize:'12px'}}>의 아들</span> {invitationData.groomName ?invitationData.groomName : '신랑'} <br />
+          {invitationData.brideFatherName ? invitationData.brideFatherName : '신부아버지'} ∘ {invitationData.brideMotherName ? invitationData.brideMotherName :  '신부어머니'} <span style={{fontSize:'12px'}}>의 딸</span> {invitationData.brideName ? invitationData.brideName : '신부'}
           <div className={classes.connectImg}>소중한 당신을 초대합니다</div>
         </div>
 
@@ -83,13 +83,13 @@ function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true })
           
           <div className={classes.connectParentPhone}>
             <p>신랑 측 혼주 <br /> 
-            아버지 <span style={{fontWeight:'bold'}}>{invitationData.groom.groomFatherName ? invitationData.groom.groomFatherName : '신랑아버지'}</span> <br /> 
-            어머니 <span style={{fontWeight:'bold'}}>{invitationData.groom.groomMotherName ? invitationData.groom.groomMotherName : '신랑어머니'} </span> <br /> 
+            아버지 <span style={{fontWeight:'bold'}}>{invitationData.groomFatherName ? invitationData.groomFatherName : '신랑아버지'}</span> <br /> 
+            어머니 <span style={{fontWeight:'bold'}}>{invitationData.groomMotherName ? invitationData.groomMotherName : '신랑어머니'} </span> <br /> 
             </p>
 
             <p>신부 측 혼주 <br /> 
-            아버지 <span style={{fontWeight:'bold'}}>{invitationData.brider.briderFatherName ? invitationData.brider.briderFatherName : '신부아버지'}</span> <br /> 
-            어머니 <span style={{fontWeight:'bold'}}>{invitationData.brider.briderMotherName ? invitationData.brider.briderMotherName : '신부어머니'}</span> <br /> 
+            아버지 <span style={{fontWeight:'bold'}}>{invitationData.brideFatherName ? invitationData.brideFatherName : '신부아버지'}</span> <br /> 
+            어머니 <span style={{fontWeight:'bold'}}>{invitationData.brideMotherName ? invitationData.brideMotherName : '신부어머니'}</span> <br /> 
             </p>
           </div>
 
