@@ -13,7 +13,7 @@
   width: 100%;
   height: 56px;
   /* 너무 높으면 48 */
-  z-index: 999;
+  z-index: 900;
 }
 
 /* 타이틀 */
