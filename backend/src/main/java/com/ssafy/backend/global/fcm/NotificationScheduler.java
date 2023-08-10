@@ -101,6 +101,7 @@ public class NotificationScheduler {
                 //null 참조 방지를 위해 닉네임 미리 받기
                 String groomNickname = (groom != null) ? groom.getNickname() : "예비신랑";
                 String brideNickname = (bride != null) ? bride.getNickname() : "예비신부";
+                if (schedule.getScheduledBy() == null) continue; //예외처리
                 switch(schedule.getScheduledBy()){
                     case COMMON:
                         //두 명에게 같은 알림 전송
