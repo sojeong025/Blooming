@@ -56,7 +56,7 @@ public class ProductService {
 			System.out.println("=============redis");
 			String key = "latest-seen-products:" + Long.valueOf(user.getId());
 			LocalTime localTime = LocalTime.now(); //timestemp
-			redisTemplate.opsForZSet().add(key, localTime, productId);
+			redisTemplate.opsForZSet().add(key, productId, Long.valueOf(localTime.toString())); //되ㅏ나
 			System.out.println("저장 완료");
 		}catch(Exception e){
 			e.printStackTrace();
