@@ -29,10 +29,10 @@ public class ProductDetailDto {
 	//찜 정보
 	private boolean isWish;
 
-	private Float starRate;
+	private Double starRate;
 	private Long reviewCount;
 
-	public ProductDetailDto(Product product, boolean isWish, List<String> images, Float starRate, Long reviewCount) {
+	public ProductDetailDto(Product product, boolean isWish, List<String> images, Double starRate, Long reviewCount) {
 		this.id = product.getId();
 		this.itemName = product.getItemName();
 		this.brief = product.getBrief();

@@ -57,12 +57,12 @@ public class ProductService {
 				.collect(Collectors.toList());
 
 		Map<String, Object> reviewSummary = reviewRepository.findStarRate(productId);
-		Float starRate = (Float) reviewSummary.get("starRate");
+		Double starRate = (Double) reviewSummary.get("starRate");
 		Long reviewCount = (Long) reviewSummary.get("reviewCount");
 
-		float ceilingStarRate = BigDecimal.valueOf(starRate)
+		Double ceilingStarRate = BigDecimal.valueOf(starRate)
 				.setScale(2, RoundingMode.CEILING) // 올림으로 2번째까지 표시
-				.floatValue();
+				.doubleValue();
 
 		//redis: 상품 상세조회 후 최근 상품 보기 리스트에 추가
 		try{
