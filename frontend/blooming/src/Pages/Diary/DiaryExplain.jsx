@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap/dist/gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import LocomotiveScroll from 'locomotive-scroll';
 import classes from './DiaryExplain.module.css';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 function DiaryExplain() {
   const navigate = useNavigate();
   const [originalBgColor, setOriginalBgColor] = useState(null);
   const [originalTextColor, setOriginalTextColor] = useState(null);
+  const scrollerRef = useRef(null);
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -21,12 +23,16 @@ function DiaryExplain() {
   };
 
   useEffect(() => {
-    getColorStyles(); // 컬러 스타일을 가져옵니다
+    getColorStyles();
 
-    const scroller = new LocomotiveScroll({
-      el: document.querySelector('.container'),
-      smooth: true,
-    });
+    if (!scrollerRef.current) {
+      scrollerRef.current = new LocomotiveScroll({
+        el: document.querySelector('.container'),
+        smooth: true,
+      });
+    }
+
+    const scroller = scrollerRef.current;
 
     scroller.on("scroll", ScrollTrigger.update);
 
@@ -48,6 +54,8 @@ function DiaryExplain() {
 
     ScrollTrigger.addEventListener("refresh", () => scroller.update());
     ScrollTrigger.refresh();
+    scroller.scrollTo(0, 0, 0);
+
 
     const scrollColorElems = document.querySelectorAll("[data-bgcolor]");
 
@@ -77,6 +85,7 @@ function DiaryExplain() {
 
       return () => {
         scroller.destroy();
+        scrollerRef.current = null;
         ScrollTrigger.getAll().forEach((st) => st.kill());
         
         // 원래 색상으로 변경합니다
@@ -88,7 +97,7 @@ function DiaryExplain() {
           });
         }
       };
-    }, [navigate, originalBgColor, originalTextColor]);
+    }, [location.pathname, originalBgColor, originalTextColor]);
 
   return (
     <div className={classes.container}>
@@ -121,7 +130,8 @@ function DiaryExplain() {
         {/* section 3 */}
         <section className={classes.section} data-bgcolor="#FFFAF4" data-textcolor="#666">
           <p data-scroll data-scroll-speed="1">
-            설명 주절주절자리야
+            사용방법
+            1. 
           </p>
           <NavLink to='/diary'>
             <button>

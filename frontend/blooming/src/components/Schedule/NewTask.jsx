@@ -8,10 +8,11 @@ import classes from './NewTask.module.css';
 import { customAxios } from '../../lib/axios';
 
 function NewTask({ onCancel, onAddTask, selectedDate }) {
+
   const [ enteredTitle, setEnteredTitle ] = useState('');
   const [ enteredBody, setEnteredBody ] = useState('');
-  const [ enteredDate, setEnteredDate ] = useRecoilState(ScheduleState);
-  const [ enteredTime, setEnteredTime ] = useState(new Date());
+  const [enteredDate, setEnteredDate] = useRecoilState(ScheduleState);
+  const [enteredTime, setEnteredTime] = useState(new Date());
   const user = useRecoilValue(userState)
 
   function titleChangeHandler(event) {
@@ -26,8 +27,8 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
     setEnteredDate(date);
   }
 
-  function timeChangeHandler(date) {
-    setEnteredTime(date);
+  function timeChangeHandler(time) {
+    setEnteredTime(time);
   }
 
   async function submitHandler(event) {
@@ -43,6 +44,7 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
       scehduledBy: user.gender,
       scheduleType: "PRI",
     };
+    console.log(taskData)
     try {
       await customAxios.post('schedule', taskData)
       onAddTask(taskData);

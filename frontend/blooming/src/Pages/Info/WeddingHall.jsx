@@ -6,17 +6,15 @@ import { useNavigate } from "react-router-dom";
 import ErrorModal from "../../components/Error/Modal";
 import { errorState } from "../../recoil/ErrorAtom";
 
-import { styled } from "styled-components";
+import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ProductItem from "../../components/Info/ProductItem";
+import RecommendItem from "../../components/Info/RecommendItem";
 import LoadingSpinner from "../../components/Common/LoadingSpinner";
 
-import classes from "./Info.module.css";
-
 export default function WeddingHall() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // const [showModal, setShowModal] = useState(false);
-
   const [errorModal, setErrorModal] = useRecoilState(errorState);
   const [weddingHall, setWeddingHall] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -191,7 +189,8 @@ export default function WeddingHall() {
             X
           </button>
         </ErrorModal>
-
+        <RecommendItem />
+        <TitleText>예식장 전체</TitleText>
         <InfiniteScroll
           dataLength={weddingHall.length}
           next={fetchData}
@@ -234,4 +233,12 @@ const FlexItem = styled.div`
   flex-basis: 50%;
   box-sizing: border-box;
   padding: 10px;
+`;
+
+const TitleText = styled.div`
+  margin-top: 20px;
+  margin-left: 15px;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
 `;
