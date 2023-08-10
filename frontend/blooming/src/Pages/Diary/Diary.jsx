@@ -48,7 +48,7 @@ const Diary = () => {
         {diaries.map((diary) => (
           <div key={diary.id} className={classes.diaryItem}>
           <Link key={diary.id} to={`/diary/${diary.id}`}>
-            <img src={diary.image.src} alt={diary.title} className={classes.diaryImage} />
+            <img src={diary.image} alt='image' className={classes.diaryImage} />
             <p className={classes.title}>{diary.title}</p>
             <p className={classes.date}>{diary.date}</p>
           </Link>
