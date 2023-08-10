@@ -64,20 +64,16 @@ const DiaryDetails = () => {
 
 
           <div className={classes.imageContainer}>
-          <label htmlFor="image">이미지</label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={imageChangeHandler}
-            style={{ display: 'block', margin: '8px 0' }}
-          />
-          {image && (
-            <img
-              src={image}
-              alt="preview"
+            <label className={classes.label} htmlFor="image">+</label>
+            <input readOnly className={classes.img} 
+              type="file" id="image" accept="image/*"
             />
-          )}
+            {image && (
+              <img
+                src={image}
+                alt="preview"
+              />
+            )}
         </div>
 
         <div className={classes.text}>
