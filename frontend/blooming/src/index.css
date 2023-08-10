@@ -31,12 +31,17 @@
 
 :root {
   --vh: 100%;
+  /* 배경 */
   --color-bg: #FFFAF4;
+  /* 신랑 */
+  --color-groom: #6FAEC7;
+  /* 신부 */
+  --color-brider: #FFA4A9;
+  /* 공통 */
+  --color-common: #bec0c2
 }
 
-#root {
-  /* height: calc(var(--vh, 1vh) * 100);  */
-}
+
 
 .mainContainer {
   margin: 60px 16px; 
@@ -44,31 +49,22 @@
   /* box-sizing: border-box; */
 } 
 
-/* :root {
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-} */
-
 body {
   font-family: 'SUITE-Regular', 'SUITE-SemiBold', 'SUITE-Bold', 'SUITE-ExtraBold', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
 
   min-width: 100vw;
-  /* min-height: 100vh; */
-  background-color: #FFFAF4;
+  background-color: var(--color-bg);
 }
 
 a{
   text-decoration-line: none;
 }
 
+body[data-theme='groom'] {
+  --color-point: var(--color-groom);
+}
+
+body[data-theme='brider'] {
+  --color-point: var(--color-brider);
+}

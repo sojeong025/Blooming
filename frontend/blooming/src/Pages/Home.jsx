@@ -40,6 +40,7 @@ function Home() {
       <p className={classes.word}> Wedding Tips</p>
       <hr className={classes.hr} />
       <Tipbox />
+      <h1>---🚧🚦🚦🚨개발중👩🏻‍🚒👨🏻‍🚒💨🔨🚬---</h1>
     </div>
   );
 }
