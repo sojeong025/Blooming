@@ -8,12 +8,21 @@ import classes from './NewTask.module.css';
 import { customAxios } from '../../lib/axios';
 
 function NewTask({ onCancel, onAddTask, selectedDate }) {
+
+  const formatDate = (date) => {
+    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  }
+
+  const formatTime = (time) => {
+    return `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+  }
+
   const [ enteredTitle, setEnteredTitle ] = useState('');
   const [ enteredBody, setEnteredBody ] = useState('');
   const [enteredDate, setEnteredDate] = useRecoilState(ScheduleState);
-  const [ formattedDate, setFormattedDate] = useState()
+  const [formattedDate, setFormattedDate] = useState(formatDate(new Date()))
   const [enteredTime, setEnteredTime] = useState(new Date());
-  const [formattedTime, setFormattedTime] = useState()
+  const [formattedTime, setFormattedTime] = useState(formatTime(new Date()))
   const user = useRecoilValue(userState)
 
   function titleChangeHandler(event) {
