@@ -25,7 +25,7 @@ public class LatestSeenProductController {
 
     @Operation(description = "로그인 한 유저의 최근 본 상품 목록 10개 조회")
     @GetMapping("/latestSeenProduct")
-    public Set<ZSetOperations.TypedTuple<String>> getList(){
+    public Set<ZSetOperations.TypedTuple<Long>> getList(){
         //로그인 한 유저 찾기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
@@ -33,8 +33,8 @@ public class LatestSeenProductController {
 
         //로그인 한 유저가 본 상품 목록 검색 : redis
         String key = "latest-seen-product:" + Long.valueOf(user.getId());
-        ZSetOperations<String, String> stringStringZSetOperations = redisTemplate.opsForZSet();
-        Set<ZSetOperations.TypedTuple<String>> typedTuples = stringStringZSetOperations.reverseRangeByScoreWithScores(key, 0, 10);
+        ZSetOperations<String, Long> stringStringZSetOperations = redisTemplate.opsForZSet();
+        Set<ZSetOperations.TypedTuple<Long>> typedTuples = stringStringZSetOperations.reverseRangeByScoreWithScores(key, 0, 10);
 
         //형태를 보기 위해 일단 출력
         return typedTuples;

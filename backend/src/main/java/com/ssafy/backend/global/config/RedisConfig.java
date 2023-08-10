@@ -33,8 +33,8 @@ public class RedisConfig {
      * RedisConnection에서 넘겨준 byte 값 객체 직렬화
      */
     @Bean
-    public RedisTemplate<String,String> redisTemplate(){
-        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<String,Long> redisTemplate(){
+        RedisTemplate<String, Long> redisTemplate = new RedisTemplate<>();
         redisTemplate.setKeySerializer(new StringRedisSerializer()); //key 깨짐 방지
         redisTemplate.setValueSerializer(new StringRedisSerializer()); //value 깨짐 방지
         redisTemplate.setConnectionFactory(redisConnectionFactory());
