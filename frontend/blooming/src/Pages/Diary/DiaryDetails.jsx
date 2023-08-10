@@ -64,10 +64,6 @@ const DiaryDetails = () => {
 
 
           <div className={classes.imageContainer}>
-            <label className={classes.label} htmlFor="image">+</label>
-            <input readOnly className={classes.img} 
-              type="file" id="image" accept="image/*"
-            />
             {diary.image && (
               <img
                 src={diary.image}
