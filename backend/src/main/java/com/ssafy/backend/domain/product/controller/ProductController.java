@@ -59,7 +59,7 @@ public class ProductController {
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
-    @Operation(summary = "상품 상세 이미지 조회", description = "원하는 상품 상세 조회 시 상품 사진을 조회합니다.")
+    @Operation(summary = "상품 상세 조회", description = "원하는 상품 상세 조회합니다.")
     @GetMapping("/product/{productType}/{productId}")
     public ResponseEntity<BasicResponse> getProductImages(@PathVariable ProductType productType, @PathVariable long productId) {
         ProductDetailDto productDetail = productService.getProductDetail(productId);
@@ -67,7 +67,7 @@ public class ProductController {
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
-                .message("상품 사진 조회 완료")
+                .message("상품 상세 조회 완료")
                 .count(1)
                 .result(Collections.singletonList(productDetail)).build();
 

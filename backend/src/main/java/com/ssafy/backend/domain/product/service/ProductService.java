@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.ssafy.backend.domain.review.repository.ReviewRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -31,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class ProductService {
 
 	private final ProductRepository productRepository;
+	private final ReviewRepository reviewRepository;
 	private final UserRepository userRepository;
 	private final RedisTemplate redisTemplate;
 
@@ -51,8 +53,11 @@ public class ProductService {
 
 		ProductDetailResult productDetailResult = productRepository.getProductDetail(user, productId);
 		List<String> images = productDetailResult.getProduct().getProductImages().stream()
-				.map(ProductImage::getImage).collect(Collectors.toList());
+				.map(ProductImage::getImage)
+				.collect(Collectors.toList());
 
+		Float starRate = reviewRepository.findStarRate(productId);
+		
 		//redis: 상품 상세조회 후 최근 상품 보기 리스트에 추가
 		try{
 			System.out.println("=============redis");
@@ -69,7 +74,7 @@ public class ProductService {
 			System.out.println("=============redis");
 		}
 
-		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images);
+		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images, starRate);
 	}
 
 }
