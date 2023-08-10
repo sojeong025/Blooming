@@ -62,8 +62,8 @@ function Splash() {
             navigate("/login");
           }
         } catch (error) {
-          // 에러 처리
-          console.error("API 요청 에러:", error);
+          // 리프레시토큰이 유효하지 않을 경우
+          navigate("/login");
         }
       } else {
         // 로그인이 되지 않은 경우 login 페이지로 이동
