@@ -61,13 +61,19 @@ export default function InfoDetail() {
     fetchProductData()
   }, [])
 
+  function formattedDate(date) {
+    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  }
+
+  function formattedTime(time) {
+    return `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+  }
+
   const handleReserve = async () => {
-    const formattedDate = `${reservedDate.getFullYear()}-${(reservedDate.getMonth() + 1).toString().padStart(2, '0')}-${reservedDate.getDate().toString().padStart(2, '0')}`;
-    const formattedTime = `${reservedTime.getHours().toString().padStart(2, '0')}:${reservedTime.getMinutes().toString().padStart(2, '0')}`;
 
     const data = {
-      reservedDate: formattedDate,
-      reservedTime: formattedTime,
+      reservedDate: formattedDate(reservedDate),
+      reservedTime: formattedTime(reservedTime),
       product_id: product.id
     };
     try {

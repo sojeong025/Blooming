@@ -26,23 +26,30 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
     setEnteredDate(date);
   }
 
-  function timeChangeHandler(date) {
-    setEnteredTime(date);
+  function timeChangeHandler(time) {
+    setEnteredTime(time);
+  }
+
+  function formattedDate(date) {
+    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  }
+
+  function formattedTime(time) {
+    return `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
   }
 
   async function submitHandler(event) {
     event.preventDefault()
-    const formattedDate = `${enteredDate.getFullYear()}-${(enteredDate.getMonth() + 1).toString().padStart(2, '0')}-${enteredDate.getDate().toString().padStart(2, '0')}`;
-    const formattedTime = `${enteredTime.getHours().toString().padStart(2, '0')}:${enteredTime.getMinutes().toString().padStart(2, '0')}`;
 
     const taskData = {
       title: enteredTitle,
       content: enteredBody,
-      scheduleDate: formattedDate,
-      scheduleTime: formattedTime,
+      scheduleDate: formattedDate(enteredDate),
+      scheduleTime: formattedTime(enteredTime),
       scehduledBy: user.gender,
       scheduleType: "PRI",
     };
+    console.log(taskData)
     try {
       await customAxios.post('schedule', taskData)
       onAddTask(taskData);
