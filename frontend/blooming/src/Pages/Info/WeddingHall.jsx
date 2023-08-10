@@ -12,12 +12,9 @@ import ProductItem from "../../components/Info/ProductItem";
 import RecommendItem from "../../components/Info/RecommendItem";
 import LoadingSpinner from "../../components/Common/LoadingSpinner";
 
-import classes from "./Info.module.css";
-
 export default function WeddingHall() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // const [showModal, setShowModal] = useState(false);
-
   const [errorModal, setErrorModal] = useRecoilState(errorState);
   const [weddingHall, setWeddingHall] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -55,106 +52,106 @@ export default function WeddingHall() {
   };
 
   useEffect(() => {
-    // fetchData();
+    fetchData();
     // 희영 디자인용 더미
-    setWeddingHall([
-      {
-        id: 85,
-        itemName: "빌라드지디 수서",
-        brief:
-          "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
-        company: "빌라드지디 수서",
-        companyTime: "None",
-        companyAddress: "서울 강남구 율현동 68-8",
-        wish: true,
-      },
-      {
-        id: 86,
-        itemName: "상록아트홀",
-        brief:
-          "소중한 꿈이 이루어지는 날, 웨딩상록만의 노하우와 고객감동의 친절한 서비스로 최고의 만족감을 선사합니다.",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/86_thumbnail.jpg",
-        company: "상록아트홀",
-        companyTime: "None",
-        companyAddress: "서울 강남구 역삼동 701 : 5F",
-        wish: true,
-      },
-      {
-        id: 87,
-        itemName: "소노펠리체컨벤션",
-        brief:
-          "특급호텔급의 정통코스를 표방한 정갈한 식사, 명문가의 혼례장소로 각광 받아온 노블웨딩의 명가, 소노펠리체컨벤션!",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/87_thumbnail.jpg",
-        company: "소노펠리체컨벤션",
-        companyTime: "None",
-        companyAddress: "서울 강남구 삼성동 159-6 : 한국도심공항터미널 3F",
-        wish: true,
-      },
-      {
-        id: 88,
-        itemName: "그랜드힐컨벤션",
-        brief:
-          "7성급 호텔수준의 품격웨딩 360도 회전단상과 함께 신성함과 더불어 두 분의 영원한 약속을 완성할 것입니다. 다양한 주제의 맞춤형 웨딩, 그랜드힐컨벤션!",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/88_thumbnail.jpg",
-        company: "그랜드힐컨벤션",
-        companyTime: "None",
-        companyAddress: "서울 강남구 대치동 1004-3",
-        wish: false,
-      },
-      {
-        id: 851,
-        itemName: "빌라드지디 수서",
-        brief:
-          "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
-        company: "빌라드지디 수서",
-        companyTime: "None",
-        companyAddress: "서울 강남구 율현동 68-8",
-        wish: true,
-      },
-      {
-        id: 861,
-        itemName: "상록아트홀",
-        brief:
-          "소중한 꿈이 이루어지는 날, 웨딩상록만의 노하우와 고객감동의 친절한 서비스로 최고의 만족감을 선사합니다.",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/86_thumbnail.jpg",
-        company: "상록아트홀",
-        companyTime: "None",
-        companyAddress: "서울 강남구 역삼동 701 : 5F",
-        wish: true,
-      },
-      {
-        id: 871,
-        itemName: "소노펠리체컨벤션",
-        brief:
-          "특급호텔급의 정통코스를 표방한 정갈한 식사, 명문가의 혼례장소로 각광 받아온 노블웨딩의 명가, 소노펠리체컨벤션!",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/87_thumbnail.jpg",
-        company: "소노펠리체컨벤션",
-        companyTime: "None",
-        companyAddress: "서울 강남구 삼성동 159-6 : 한국도심공항터미널 3F",
-        wish: true,
-      },
-      {
-        id: 881,
-        itemName: "그랜드힐컨벤션",
-        brief:
-          "7성급 호텔수준의 품격웨딩 360도 회전단상과 함께 신성함과 더불어 두 분의 영원한 약속을 완성할 것입니다. 다양한 주제의 맞춤형 웨딩, 그랜드힐컨벤션!",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/88_thumbnail.jpg",
-        company: "그랜드힐컨벤션",
-        companyTime: "None",
-        companyAddress: "서울 강남구 대치동 1004-3",
-        wish: false,
-      },
-    ]);
+    // setWeddingHall([
+    //   {
+    //     id: 85,
+    //     itemName: "빌라드지디 수서",
+    //     brief:
+    //       "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
+    //     thumbnail:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
+    //     company: "빌라드지디 수서",
+    //     companyTime: "None",
+    //     companyAddress: "서울 강남구 율현동 68-8",
+    //     wish: true,
+    //   },
+    //   {
+    //     id: 86,
+    //     itemName: "상록아트홀",
+    //     brief:
+    //       "소중한 꿈이 이루어지는 날, 웨딩상록만의 노하우와 고객감동의 친절한 서비스로 최고의 만족감을 선사합니다.",
+    //     thumbnail:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/86_thumbnail.jpg",
+    //     company: "상록아트홀",
+    //     companyTime: "None",
+    //     companyAddress: "서울 강남구 역삼동 701 : 5F",
+    //     wish: true,
+    //   },
+    //   {
+    //     id: 87,
+    //     itemName: "소노펠리체컨벤션",
+    //     brief:
+    //       "특급호텔급의 정통코스를 표방한 정갈한 식사, 명문가의 혼례장소로 각광 받아온 노블웨딩의 명가, 소노펠리체컨벤션!",
+    //     thumbnail:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/87_thumbnail.jpg",
+    //     company: "소노펠리체컨벤션",
+    //     companyTime: "None",
+    //     companyAddress: "서울 강남구 삼성동 159-6 : 한국도심공항터미널 3F",
+    //     wish: true,
+    //   },
+    //   {
+    //     id: 88,
+    //     itemName: "그랜드힐컨벤션",
+    //     brief:
+    //       "7성급 호텔수준의 품격웨딩 360도 회전단상과 함께 신성함과 더불어 두 분의 영원한 약속을 완성할 것입니다. 다양한 주제의 맞춤형 웨딩, 그랜드힐컨벤션!",
+    //     thumbnail:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/88_thumbnail.jpg",
+    //     company: "그랜드힐컨벤션",
+    //     companyTime: "None",
+    //     companyAddress: "서울 강남구 대치동 1004-3",
+    //     wish: false,
+    //   },
+    //   {
+    //     id: 851,
+    //     itemName: "빌라드지디 수서",
+    //     brief:
+    //       "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
+    //     thumbnail:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
+    //     company: "빌라드지디 수서",
+    //     companyTime: "None",
+    //     companyAddress: "서울 강남구 율현동 68-8",
+    //     wish: true,
+    //   },
+    //   {
+    //     id: 861,
+    //     itemName: "상록아트홀",
+    //     brief:
+    //       "소중한 꿈이 이루어지는 날, 웨딩상록만의 노하우와 고객감동의 친절한 서비스로 최고의 만족감을 선사합니다.",
+    //     thumbnail:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/86_thumbnail.jpg",
+    //     company: "상록아트홀",
+    //     companyTime: "None",
+    //     companyAddress: "서울 강남구 역삼동 701 : 5F",
+    //     wish: true,
+    //   },
+    //   {
+    //     id: 871,
+    //     itemName: "소노펠리체컨벤션",
+    //     brief:
+    //       "특급호텔급의 정통코스를 표방한 정갈한 식사, 명문가의 혼례장소로 각광 받아온 노블웨딩의 명가, 소노펠리체컨벤션!",
+    //     thumbnail:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/87_thumbnail.jpg",
+    //     company: "소노펠리체컨벤션",
+    //     companyTime: "None",
+    //     companyAddress: "서울 강남구 삼성동 159-6 : 한국도심공항터미널 3F",
+    //     wish: true,
+    //   },
+    //   {
+    //     id: 881,
+    //     itemName: "그랜드힐컨벤션",
+    //     brief:
+    //       "7성급 호텔수준의 품격웨딩 360도 회전단상과 함께 신성함과 더불어 두 분의 영원한 약속을 완성할 것입니다. 다양한 주제의 맞춤형 웨딩, 그랜드힐컨벤션!",
+    //     thumbnail:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/88_thumbnail.jpg",
+    //     company: "그랜드힐컨벤션",
+    //     companyTime: "None",
+    //     companyAddress: "서울 강남구 대치동 1004-3",
+    //     wish: false,
+    //   },
+    // ]);
   }, []);
 
   // 로딩 후 모달 그런데 개발중
@@ -171,7 +168,7 @@ export default function WeddingHall() {
 
   return (
     <>
-      {isLoading && <LoadingSpinner />}
+      {/* {isLoading && <LoadingSpinner />} */}
 
       <Wrapper>
         <ErrorModal
@@ -193,6 +190,7 @@ export default function WeddingHall() {
           </button>
         </ErrorModal>
         <RecommendItem />
+        <TitleText>예식장 전체</TitleText>
         <InfiniteScroll
           dataLength={weddingHall.length}
           next={fetchData}
@@ -235,4 +233,12 @@ const FlexItem = styled.div`
   flex-basis: 50%;
   box-sizing: border-box;
   padding: 10px;
+`;
+
+const TitleText = styled.div`
+  margin-top: 20px;
+  margin-left: 15px;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
 `;

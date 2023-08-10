@@ -29,28 +29,35 @@ export default function ProductItem({ product, onClick }) {
     // 찜
     if (productHeart) {
       // true이면 DELETE
-      handleCreateWish();
+      handleDeleteWish();
     } else {
       // false이면 POST
-      handleDeleteWish();
+      handleCreateWish();
     }
   };
 
   return (
-    <div className={classes.ItemContainer} onClick={onClick}>
-      <img
-        className={classes.itemImg}
-        src={product.thumbnail}
-        alt='이미지 없음'
-      />
-      <div className={classes.textContainer}>
-        <div className={classes.address}>
-          {address[0]} {address[1]}
+    <div className={classes.Wrapper}>
+      <div onClick={onClick} className={classes.ItemContainer}>
+        <img
+          className={classes.itemImg}
+          src={product.thumbnail}
+          alt='이미지 없음'
+        />
+        <div className={classes.textContainer}>
+          <div className={classes.address}>
+            {address[0]} {address[1]}
+          </div>
+          <div className={classes.company}>{product.company}</div>
         </div>
-        <div className={classes.company}>{product.company}</div>
-        <div>{product.wish.toString()}</div>
-        <div className={classes.heart} onClick={onWish}>
-          {productHeart ? <AiFillHeart /> : <AiOutlineHeart />}
+      </div>
+      <div className={classes.heart} onClick={onWish}>
+        <div className={classes.IconWrapper}>
+          {productHeart ? (
+            <AiFillHeart size={25} className={classes.heartIconTrue} />
+          ) : (
+            <AiOutlineHeart size={25} className={classes.heartIconFalse} />
+          )}
         </div>
       </div>
     </div>
