@@ -1,5 +1,7 @@
 package com.ssafy.backend.domain.product.service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,8 +57,9 @@ public class ProductService {
 		try{
 			System.out.println("=============redis");
 			String key = "latest-seen-products:" + Long.valueOf(user.getId());
-			LocalTime localTime = LocalTime.now(); //timestemp
-			redisTemplate.opsForZSet().add(key, productId, Long.valueOf(localTime.toString())); //되ㅏ나
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+			redisTemplate.opsForZSet().add(key, productId, Long.parseLong(sdf.format(timestamp))); //되ㅏ나
 			System.out.println("저장 완료");
 		}catch(Exception e){
 			e.printStackTrace();
