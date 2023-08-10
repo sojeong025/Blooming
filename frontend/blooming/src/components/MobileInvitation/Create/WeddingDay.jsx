@@ -49,7 +49,7 @@ function WeddingDay() {
         <label htmlFor="time">예식 시간</label>
         <br />
         <DatePicker
-          selected={new Date(invitation.time)}
+          selected={new Date(`2023-08-10T${invitation.time}Z`)}
           onChange={handleTimeChange}
           showTimeSelect
           showTimeSelectOnly
