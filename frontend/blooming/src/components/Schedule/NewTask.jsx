@@ -12,7 +12,7 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
   const [ enteredTitle, setEnteredTitle ] = useState('');
   const [ enteredBody, setEnteredBody ] = useState('');
   const [enteredDate, setEnteredDate] = useRecoilState(ScheduleState);
-  const [enteredTime, setEnteredTime] = useState(`${(new Date()).getHours().toString().padStart(2, '0')}:${(new Date()).getMinutes().toString().padStart(2, '0')}`);
+  const [enteredTime, setEnteredTime] = useState(new Date());
   const user = useRecoilValue(userState)
 
   function titleChangeHandler(event) {
