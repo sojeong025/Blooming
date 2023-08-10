@@ -1,0 +1,28 @@
+.ItemContainer {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.itemImg {
+  width: 40vw;
+  margin: 0 auto;
+  /* justify-content: center; */
+}
+
+.textContainer {
+  display: block;
+  margin: 0 10px;
+}
+
+.address {
+font-size: 16px;
+}
+
+.company {
+  font-weight: bold;;
+  font-size: 20px;
+}
+
+.heart {
+}

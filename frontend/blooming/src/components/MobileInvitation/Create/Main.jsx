@@ -40,7 +40,7 @@ function Main() {
       <p className={classes.header}>메인</p>
       <hr />
       <div className={classes.imageContainer}>
-          <label className={classes.label} htmlFor="image">+</label>
+          <label style={{zIndex:"0"}}className={classes.label} htmlFor="image">+</label>
           <input
             className={classes.img}
             type="file"

@@ -8,10 +8,11 @@ import classes from './NewTask.module.css';
 import { customAxios } from '../../lib/axios';
 
 function NewTask({ onCancel, onAddTask, selectedDate }) {
+
   const [ enteredTitle, setEnteredTitle ] = useState('');
   const [ enteredBody, setEnteredBody ] = useState('');
-  const [ enteredDate, setEnteredDate ] = useRecoilState(ScheduleState);
-  const [ enteredTime, setEnteredTime ] = useState(new Date());
+  const [enteredDate, setEnteredDate] = useRecoilState(ScheduleState);
+  const [enteredTime, setEnteredTime] = useState(`${(new Date()).getHours().toString().padStart(2, '0')}:${(new Date()).getMinutes().toString().padStart(2, '0')}`);
   const user = useRecoilValue(userState)
 
   function titleChangeHandler(event) {
@@ -26,23 +27,24 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
     setEnteredDate(date);
   }
 
-  function timeChangeHandler(date) {
-    setEnteredTime(date);
+  function timeChangeHandler(time) {
+    setEnteredTime(time);
   }
 
   async function submitHandler(event) {
-    event.preventDefault();
+    event.preventDefault()
     const formattedDate = `${enteredDate.getFullYear()}-${(enteredDate.getMonth() + 1).toString().padStart(2, '0')}-${enteredDate.getDate().toString().padStart(2, '0')}`;
     const formattedTime = `${enteredTime.getHours().toString().padStart(2, '0')}:${enteredTime.getMinutes().toString().padStart(2, '0')}`;
 
     const taskData = {
       title: enteredTitle,
       content: enteredBody,
-      schelduleDate: formattedDate,
-      schelduleTime: formattedTime,
-      scehduledNy: user.gender,
+      scheduleDate: formattedDate,
+      scheduleTime: formattedTime,
+      scehduledBy: user.gender,
       scheduleType: "PRI",
     };
+    console.log(taskData)
     try {
       await customAxios.post('schedule', taskData)
       onAddTask(taskData);

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
-import { mobileInvitationState, mobileCountState } from "../../recoil/MobileInvitationAtom";
+import { mobileInvitationState, mobileCountState, mobileInvitationIdState } from "../../recoil/MobileInvitationAtom";
 import ConceptsList from "../../components/MobileInvitation/ConceptsList";
 import { useEffect, useState } from "react";
 import classes from "./MobileInvitation.module.css";
@@ -9,11 +9,13 @@ import { useRecoilValue, useRecoilState } from "recoil";
 function MobileInvitation() {
   const mobileInvitationData = useRecoilValue(mobileInvitationState);
   const [count, setCount ] = useRecoilState(mobileCountState);
+  const [,setMobileInvitationIdState] = useRecoilState(mobileInvitationIdState);
 
   const fetchData = async () => {
     try {
       const response = await customAxios.get("invitation");
       setCount(response.data.count)
+      setMobileInvitationIdState(response.data.invitation.id)
       console.log('가져오기 성공!')
       console.log('response.data.count 확인', response.data.count)
     } catch (error) {
@@ -32,10 +34,10 @@ function MobileInvitation() {
   return (
     <div className='mainContainer'>
       <div className={classes.container}>
-        <h1>Mobile Wedding Invitation</h1>
-        <hr />
-        <ConceptsList />
-        <hr />
+        {/* <h1>Mobile Wedding Invitation</h1> */}
+        <div className={classes.concept}>
+          <ConceptsList />
+        </div>
 
         {count !== 0 ? (
           <NavLink to='/mobile-invitation-detail'>
