@@ -21,6 +21,7 @@
   justify-content: space-between;
   width: 100vw;
   height: 56px;
+  z-index: 955;
   background-color: #FFFAF4;
 }
 .datePickerContainer {
@@ -28,7 +29,7 @@
   justify-content: center;
   align-items: center;
   width: 55vw;
-  z-index: 1000;
+  z-index: 999;
 }
 .actions button {
   cursor: pointer;
