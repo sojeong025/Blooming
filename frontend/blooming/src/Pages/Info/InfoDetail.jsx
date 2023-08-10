@@ -27,10 +27,12 @@ export default function InfoDetail() {
   const [reservedTime, setReservedTime] = useState(new Date());
 
   const onDateChange = (date) => {
+    console.log(date)
     setReservedDate(date);
   };
 
   const onTimeChange = (time) => {
+    console.log(time)
     setReservedTime(time);
   };
 
