@@ -23,8 +23,8 @@ export default function InfoDetail() {
   const [reviews, setReviews] = useState()
   
   // 예약하기와 관련된 날짜정보
-  const [reservedDate, setReservedDate] = useState(new Date());
-  const [reservedTime, setReservedTime] = useState(new Date());
+  const [reservedDate, setReservedDate] = useState(`${(new Date()).getFullYear()}-${((new Date()).getMonth() + 1).toString().padStart(2, '0')}-${(new Date()).getDate().toString().padStart(2, '0')}`);
+  const [reservedTime, setReservedTime] = useState(`${(new Date()).getHours().toString().padStart(2, '0')}:${(new Date()).getMinutes().toString().padStart(2, '0')}`);
 
   const onDateChange = (date) => {
     console.log(date)
@@ -61,15 +61,10 @@ export default function InfoDetail() {
     fetchProductData()
   }, [])
 
-  function formattedDate(date) {
-    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-  }
-
-  function formattedTime(time) {
-    return `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
-  }
-
   const handleReserve = async () => {
+
+    const formattedDate = `${reservedDate.getFullYear()}-${(reservedDate.getMonth() + 1).toString().padStart(2, '0')}-${reservedDate.getDate().toString().padStart(2, '0')}`;
+    const formattedTime = `${reservedTime.getHours().toString().padStart(2, '0')}:${reservedTime.getMinutes().toString().padStart(2, '0')}`;
 
     const data = {
       reservedDate: formattedDate(reservedDate),
