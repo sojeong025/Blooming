@@ -5,13 +5,13 @@ import Ring from '../../../src/assets/Icons/Ring4.svg'
 import classes from './Preview.module.css';
 import { Calendar } from 'antd-mobile';
 
-function Preview({ onClose }) {
+function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true }) {
   const invitationData = useRecoilValue(mobileInvitationState);
 
   return (
-    <div className={classes.total}>
-      <p className={classes.pre}>미리보기</p> 
-      <button onClick={onClose}>X</button>
+    <div className={classes.total} style={positionStyle}>
+      {showPre && <p className={classes.pre}>미리보기</p> }
+      {showCloseButton && <button onClick={onClose}>X</button> }
 
       {/* 진짜 내용 들어간다~ */}
       <div className={classes.form}>

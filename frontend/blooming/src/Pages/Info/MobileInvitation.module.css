@@ -4,13 +4,16 @@
   align-items: center;
   z-index: 1000;
 }
+.concept {
+  margin-top: 100px;
+}
 
-.container h1{
+/* .container h1{
   text-align: center;
   margin: 50px 10px 30px;
   font-size: 28px;
   font-family: 'LeferiPoint-SpecialItalicA';
-}
+} */
 
 .container p {
   width: 80%;
