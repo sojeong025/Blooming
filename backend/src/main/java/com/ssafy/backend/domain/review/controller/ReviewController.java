@@ -1,9 +1,10 @@
 package com.ssafy.backend.domain.review.controller;
 
 import com.ssafy.backend.domain.common.BasicResponse;
+import com.ssafy.backend.domain.review.dto.MyReviewDto;
+import com.ssafy.backend.domain.review.dto.ProductReviewDto;
 import com.ssafy.backend.domain.review.dto.ReviewModifyDto;
 import com.ssafy.backend.domain.review.dto.ReviewRegistDto;
-import com.ssafy.backend.domain.review.dto.ReviewResultDto;
 import com.ssafy.backend.domain.review.service.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -38,14 +39,13 @@ public class ReviewController {
     }
 
     @Operation(summary = "상품 후기 한 페이지 조회하기", description = "상품 아이디와 페이징 정보에 해당하는 모든 후기를 불러옵니다.")
-    @Parameter(name = "/review/productId?page=1&size=3", description = "page : 페이지 번호, size : 페이지당 후기 개수 . 해당 상품 아이디")
     @GetMapping("/review/{productId}")
     public ResponseEntity<?> getAllProductReview(@PathVariable Long productId,
                                                  @RequestParam @Parameter(name = "page", description = "요청하는 페이지") int page,
                                                  @RequestParam @Parameter(name = "size", description = "가져오려는 후기 개수") int size) { //pageNumber, pageSize, offset
-        Slice<ReviewResultDto> reviewList = reviewService.getAllProductReview(productId, page, size);
+        Slice<ProductReviewDto> productReviews = reviewService.getAllProductReview(productId, page, size);
         BasicResponse basicResponse;
-        if (reviewList.isEmpty()) {
+        if (productReviews.isEmpty()) {
             basicResponse = BasicResponse.builder()
                     .code(HttpStatus.NO_CONTENT.value())
                     .httpStatus(HttpStatus.NO_CONTENT)
@@ -56,40 +56,39 @@ public class ReviewController {
                     .code(HttpStatus.OK.value())
                     .httpStatus(HttpStatus.OK)
                     .message("상품에 대한 한 페이지 리뷰 조회 성공")
-                    .count(reviewList.getNumberOfElements())
-                    .result(Collections.singletonList(reviewList)).build();
+                    .count(productReviews.getNumberOfElements())
+                    .result(Collections.singletonList(productReviews)).build();
         }
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
-//    @Operation(summary = "회원이 쓴 상품 후기 한 페이지 조회하기", description = "로그인한 유저와 페이징 정보에 해당하는 모든 후기를 불러옵니다.")
-//    @Parameter(name = "/review?page=1&size=3", description = "page : 페이지 번호, size : 페이지당 후기 개수 ")
-//    @GetMapping("/review")
-//    public ResponseEntity<?> getAllUserReview(@RequestParam @Parameter(name = "page", description = "요청하는 페이지") int page,
-//                                              @RequestParam @Parameter(name = "size", description = "가져오려는 후기 개수") int size) { //pageNumber, pageSize, offset
-//        List<ReviewResultDto> reviewList = reviewService.getAllUserReview(page, size);
-//        BasicResponse basicResponse;
-//        if (reviewList == null) {
-//            basicResponse = BasicResponse.builder()
-//                    .code(HttpStatus.BAD_REQUEST.value())
-//                    .httpStatus(HttpStatus.BAD_REQUEST)
-//                    .message("회원에 대한 한 페이지 리뷰 조회 실패")
-//                    .count(0).build();
-//        } else {
-//            basicResponse = BasicResponse.builder()
-//                    .code(HttpStatus.OK.value())
-//                    .httpStatus(HttpStatus.OK)
-//                    .message("회원에 대한 한 페이지 리뷰 조회 성공")
-//                    .count(reviewList.size())
-//                    .result(Collections.singletonList(reviewList)).build();
-//        }
-//        return new ResponseEntity<BasicResponse>(basicResponse, basicResponse.getHttpStatus());
-//    }
+    @Operation(summary = "회원이 쓴 상품 후기 한 페이지 조회하기", description = "로그인한 유저와 페이징 정보에 해당하는 모든 후기를 불러옵니다.")
+    @GetMapping("/review")
+    public ResponseEntity<?> getAllUserReview(@RequestParam @Parameter(name = "page", description = "요청하는 페이지") int page,
+                                              @RequestParam @Parameter(name = "size", description = "가져오려는 후기 개수") int size) { //pageNumber, pageSize, offset
+        Slice<MyReviewDto> myReviews = reviewService.getAllUserReview(page, size);
+        BasicResponse basicResponse;
+        if (myReviews.isEmpty()) {
+            basicResponse = BasicResponse.builder()
+                    .code(HttpStatus.NO_CONTENT.value())
+                    .httpStatus(HttpStatus.NO_CONTENT)
+                    .message("내가 쓴 리뷰가 없습니다.")
+                    .build();
+        } else {
+            basicResponse = BasicResponse.builder()
+                    .code(HttpStatus.OK.value())
+                    .httpStatus(HttpStatus.OK)
+                    .message("내가 쓴 리뷰 조회 성공")
+                    .count(myReviews.getNumberOfElements())
+                    .result(Collections.singletonList(myReviews)).build();
+        }
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
 
     @Operation(summary = "후기 하나 수정하기", description = "후기를 수정합니다.")
     @Parameter(name = "reviewId, ReviewModifyDto", description = "변경 가능한 것 : 별점, 이미지, 내용")
     @PutMapping("/review/{reviewId}")
-    public ResponseEntity<?> modifyReview(@PathVariable Long reviewId, @RequestBody ReviewModifyDto reviewModifyDto) throws Throwable {
+    public ResponseEntity<?> modifyReview(@PathVariable Long reviewId, @RequestBody ReviewModifyDto reviewModifyDto) {
         reviewService.modifyReview(reviewId, reviewModifyDto);
 
         BasicResponse basicResponse = BasicResponse.builder()
