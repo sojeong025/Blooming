@@ -229,7 +229,6 @@ const ProductFlex = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  /* margin: 0 16px; */
 `;
 
 const FlexItem = styled.div`
