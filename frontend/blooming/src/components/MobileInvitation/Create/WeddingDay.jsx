@@ -5,12 +5,15 @@ import { mobileInvitationState } from "../../../recoil/MobileInvitationAtom";
 import ko from "date-fns/locale/ko";
 
 import classes from "./Common.module.css";
+import { useState } from "react";
 
 function WeddingDay() {
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
-  console.log('invitation',invitation)
+  const [enteredDate, setEnteredDate] = useState(new Date())
+  const [enteredTime, setEnteredTime] = useState(new Date())
 
   const handleDateChange = (date) => {
+    setEnteredDate(date)
     const formattedDate = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
     setInvitation((preInvitation) => ({
       ...preInvitation,
@@ -19,6 +22,7 @@ function WeddingDay() {
   };
 
   const handleTimeChange = (time) => {
+    setEnteredTime(time)
     const formattedTime = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
     setInvitation((preInvitation) => ({
       ...preInvitation,
@@ -34,7 +38,7 @@ function WeddingDay() {
         <label htmlFor="date">예식일</label>
         <br />
         <DatePicker
-          selected={new Date()}
+          selected={enteredDate}
           dateFormat="yyyy-MM-dd"
           locale={ko}
           onChange={handleDateChange}
@@ -45,6 +49,7 @@ function WeddingDay() {
         <label htmlFor="time">예식 시간</label>
         <br />
         <DatePicker
+          selected={enteredTime}
           onChange={handleTimeChange}
           showTimeSelect
           showTimeSelectOnly
