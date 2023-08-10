@@ -34,7 +34,7 @@ function WeddingDay() {
         <label htmlFor="date">예식일</label>
         <br />
         <DatePicker
-          selected={new Date(invitation.date)}
+          selected={new Date()}
           dateFormat="yyyy-MM-dd"
           locale={ko}
           onChange={handleDateChange}
@@ -45,7 +45,6 @@ function WeddingDay() {
         <label htmlFor="time">예식 시간</label>
         <br />
         <DatePicker
-          selected={new Date(`${invitation.date}T${invitation.time}`)}
           onChange={handleTimeChange}
           showTimeSelect
           showTimeSelectOnly
