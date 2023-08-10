@@ -6,7 +6,6 @@ import com.ssafy.backend.domain.product.dto.ProductDetailDto;
 import com.ssafy.backend.domain.product.dto.ProductDetailResult;
 import com.ssafy.backend.domain.product.dto.ProductResultDto;
 import com.ssafy.backend.domain.product.repository.ProductRepository;
-import com.ssafy.backend.domain.review.repository.ReviewRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +17,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,7 +28,6 @@ import java.util.stream.Collectors;
 public class ProductService {
 
 	private final ProductRepository productRepository;
-	private final ReviewRepository reviewRepository;
 	private final UserRepository userRepository;
 	private final RedisTemplate redisTemplate;
 
@@ -56,14 +51,6 @@ public class ProductService {
 				.map(ProductImage::getImage)
 				.collect(Collectors.toList());
 
-		Map<String, Object> reviewSummary = reviewRepository.findStarRate(productId);
-		Double starRate = (Double) reviewSummary.get("starRate");
-		Long reviewCount = (Long) reviewSummary.get("reviewCount");
-
-		Double ceilingStarRate = BigDecimal.valueOf(starRate)
-				.setScale(2, RoundingMode.CEILING) // 올림으로 2번째까지 표시
-				.doubleValue();
-
 		//redis: 상품 상세조회 후 최근 상품 보기 리스트에 추가
 		try{
 			System.out.println("=============redis");
@@ -80,7 +67,7 @@ public class ProductService {
 			System.out.println("=============redis");
 		}
 
-		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images, ceilingStarRate, reviewCount);
+		return new ProductDetailDto(productDetailResult.getProduct(), productDetailResult.isWish(), images);
 	}
 
 }
