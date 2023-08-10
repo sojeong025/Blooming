@@ -34,7 +34,7 @@ public class LatestSeenProductController {
         //로그인 한 유저가 본 상품 목록 검색 : redis
         String key = "latest-seen-products:" + Long.valueOf(user.getId());
         ZSetOperations<String, String> stringStringZSetOperations = redisTemplate.opsForZSet();
-        Set<ZSetOperations.TypedTuple<String>> typedTuples = stringStringZSetOperations.reverseRangeByScoreWithScores(key, 0, 10);
+        Set<ZSetOperations.TypedTuple<String>> typedTuples = stringStringZSetOperations.reverseRangeWithScores(key, 0, 10);
 
         System.out.println(typedTuples);
         //형태를 보기 위해 일단 출력
