@@ -3,6 +3,8 @@ package com.ssafy.backend.domain.review.dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @AllArgsConstructor
 public class ReviewResultDto {
@@ -20,4 +22,6 @@ public class ReviewResultDto {
     private String nickName;
     private String email;
     private boolean isLiked;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
 }

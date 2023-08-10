@@ -1,5 +1,6 @@
 package com.ssafy.backend.domain.review;
 
+import com.ssafy.backend.domain.common.CreatedAndUpdatedBaseEntity;
 import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.review.dto.ReviewModifyDto;
 import com.ssafy.backend.domain.user.User;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-public class Review {
+public class Review extends CreatedAndUpdatedBaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "review_id")
