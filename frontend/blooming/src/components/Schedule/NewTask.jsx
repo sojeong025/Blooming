@@ -10,8 +10,10 @@ import { customAxios } from '../../lib/axios';
 function NewTask({ onCancel, onAddTask, selectedDate }) {
   const [ enteredTitle, setEnteredTitle ] = useState('');
   const [ enteredBody, setEnteredBody ] = useState('');
-  const [ enteredDate, setEnteredDate ] = useRecoilState(ScheduleState);
-  const [ enteredTime, setEnteredTime ] = useState(new Date());
+  const [enteredDate, setEnteredDate] = useRecoilState(ScheduleState);
+  const [ formattedDate, setFormattedDate] = useState()
+  const [enteredTime, setEnteredTime] = useState(new Date());
+  const [formattedTime, setFormattedTime] = useState()
   const user = useRecoilValue(userState)
 
   function titleChangeHandler(event) {
@@ -24,18 +26,12 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
   
   function dateChangeHandler(date) {
     setEnteredDate(date);
+    setFormattedDate(`${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`)
   }
 
   function timeChangeHandler(time) {
     setEnteredTime(time);
-  }
-
-  function formattedDate(date) {
-    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-  }
-
-  function formattedTime(time) {
-    return `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
+    setFormattedTime(`${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`)
   }
 
   async function submitHandler(event) {
@@ -44,8 +40,8 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
     const taskData = {
       title: enteredTitle,
       content: enteredBody,
-      scheduleDate: formattedDate(enteredDate),
-      scheduleTime: formattedTime(enteredTime),
+      scheduleDate: formattedDate,
+      scheduleTime: formattedTime,
       scehduledBy: user.gender,
       scheduleType: "PRI",
     };
