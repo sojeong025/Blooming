@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { mobileInvitationState } from '../../../recoil/MobileInvitationAtom';
 
@@ -11,10 +10,7 @@ function Invitation() {
     const { id, value } = event.target;
     setInvitation((preInvitation) => ({
       ...preInvitation,
-      invitation: {
-        ...preInvitation.invitation,
-        [id]: value,
-      },
+      [id]: value,
     }));
   };
 
@@ -30,7 +26,7 @@ function Invitation() {
           type="text"
           id="title"
           placeholder="초대합니다."
-          value={invitation.invitation.title}
+          value={invitation.title}
           onChange={handleInputChange}
         /><br/>
 
@@ -41,7 +37,7 @@ function Invitation() {
           name="content"
           id="content"
           rows='10'
-          value={invitation.invitation.content}
+          value={invitation.content}
           onChange={handleInputChange}
         ></textarea>
       </div>

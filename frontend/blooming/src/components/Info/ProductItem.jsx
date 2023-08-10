@@ -1,6 +1,7 @@
 import { useState } from "react";
 import classes from "./ProductItem.module.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { MdLocationOn } from "react-icons/md";
 import { customAxios } from "../../lib/axios";
 
 export default function ProductItem({ product, onClick }) {
@@ -45,8 +46,13 @@ export default function ProductItem({ product, onClick }) {
           alt='이미지 없음'
         />
         <div className={classes.textContainer}>
-          <div className={classes.address}>
-            {address[0]} {address[1]}
+          <div className={classes.location}>
+            <span className={classes.locationIcon}>
+              <MdLocationOn size={18} />
+            </span>
+            <span className={classes.address}>
+              {address[0]} {address[1]}
+            </span>
           </div>
           <div className={classes.company}>{product.company}</div>
         </div>

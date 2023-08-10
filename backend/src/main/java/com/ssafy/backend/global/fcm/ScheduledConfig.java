@@ -1,4 +1,4 @@
-package com.ssafy.backend.fcm;
+package com.ssafy.backend.global.fcm;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;

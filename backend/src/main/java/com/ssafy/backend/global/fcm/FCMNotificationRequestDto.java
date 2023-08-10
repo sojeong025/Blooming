@@ -1,4 +1,4 @@
-package com.ssafy.backend.fcm;
+package com.ssafy.backend.global.fcm;
 
 import com.ssafy.backend.domain.user.User;
 import lombok.AllArgsConstructor;
