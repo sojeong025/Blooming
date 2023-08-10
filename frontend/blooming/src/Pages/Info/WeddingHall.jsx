@@ -190,7 +190,7 @@ export default function WeddingHall() {
           </button>
         </ErrorModal>
         <RecommendItem />
-        <TitleText>예식장 전체</TitleText>
+        <TitleText>전체 주절주절</TitleText>
         <InfiniteScroll
           dataLength={weddingHall.length}
           next={fetchData}
@@ -224,21 +224,22 @@ const Wrapper = styled.div`
 `;
 
 const ProductFlex = styled.div`
+  margin-left: 16px;
+  margin-right: 16px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  /* margin: 0 16px; */
 `;
 
 const FlexItem = styled.div`
   flex-basis: 50%;
-  box-sizing: border-box;
-  padding: 10px;
 `;
 
 const TitleText = styled.div`
   margin-top: 20px;
-  margin-left: 15px;
-  padding: 10px;
+  margin-left: 16px;
+  margin-bottom: 5px;
   font-size: 24px;
   font-weight: bold;
 `;
