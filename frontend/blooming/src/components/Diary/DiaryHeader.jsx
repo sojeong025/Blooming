@@ -3,6 +3,8 @@ import classes from "./DiaryHeader.module.css";
 import { HiOutlineLockClosed } from "react-icons/hi"
 
 function DiaryHeader(props) {
+  const { diaries } = props;
+
   return (
     <HTMLFlipBook
       width={180}
@@ -16,18 +18,19 @@ function DiaryHeader(props) {
     >
       {/* 커버 페이지 */}
       <div className={classes.cover}>
-        <h1>웨딩 다이어리</h1>
       </div>
       
       {/* 컨텐츠 페이지 */}
-      <div className={classes.demoPage}>
-        <div className={classes.image}>
-          <img src="/src/assets/diary2.jpg" width={150} height={140} alt="" />
+      {diaries.map((diary) => (
+        <div key={diary.id} className={classes.demoPage}>
+          <div className={classes.image}>
+            <img src={diary.image ? diary.image : "/src/assets/diary2.jpg"} width={150} height={140} alt="" />
+          </div>
+          <div className={classes.content}>
+            {diary.content}
+          </div>
         </div>
-        <div className={classes.content}>
-          나의 내용
-        </div>
-      </div>
+      ))}
 
 
       <div className={classes.demoPage2}>

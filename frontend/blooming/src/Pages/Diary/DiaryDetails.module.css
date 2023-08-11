@@ -12,7 +12,7 @@
     border: none;
     padding: 0;
     overflow: hidden;
-    z-index: 21;
+    z-index: 910;
   }
   /* --------------사진자리----------- */
   .imageContainer {
@@ -82,27 +82,34 @@
     justify-content: space-between;
     width: 100vw;
     height: 56px;
+    z-index: 955;
     background-color: #FFFAF4;
   }
-  .datePickerContainer {
+  .date {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 55vw;
+    height: 56px;
+    font-size: 20px;
+  }
+  .editdel button{
+    padding: 17px !important;
   }
   .actions button {
+    height: 56px;
     cursor: pointer;
     font: inherit;
     border: none;
-    background-color: #FF647C;;
-    color: white;
+    background-color: transparent;
+    color: black;
     font-size: 20px;
     padding: 0 25px;
+    z-index: 999;
   }
-  
   /* 일단은 동일하게 해놓기..? */
   .actions button:hover {
-    background-color: #FF647C;
+    background-color: var(--color-groom);
     color: white;
   }
   

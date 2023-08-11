@@ -5,6 +5,8 @@ import DatePicker from 'react-datepicker'
 import './DatePicker.css'
 import classes from './ModalItem.module.css'
 import { customAxios, fileAxios } from "../../lib/axios";
+import { AiOutlineLeft } from "react-icons/ai"
+import { AiOutlineCheck } from "react-icons/ai"
 
 function CreateItem({ hide, item }) {
   const [diaries, setDiaries] = useRecoilState(diaryState)
@@ -111,7 +113,7 @@ function CreateItem({ hide, item }) {
         <form className={classes.form} onSubmit={submitHandler}>
         {/* 버튼 사이 날짜 선택 자리 */}
         <div className={classes.actions}>
-          <button type='button' onClick={hide}>취소</button>
+          <button type='button' onClick={hide}><AiOutlineLeft /></button>
 
           <div className={classes.datePickerContainer}>
               <DatePicker
@@ -124,8 +126,8 @@ function CreateItem({ hide, item }) {
               />
           </div>
 
-          {item ? <button name='action' value='edit' type="submit">수정</button>
-            : <button name='action' value='add' type="submit">추가</button>}
+          {item ? <button name='action' value='edit' type="submit"><AiOutlineCheck /></button>
+            : <button name='action' value='add' type="submit"><AiOutlineCheck /></button>}
         </div>
           
 
