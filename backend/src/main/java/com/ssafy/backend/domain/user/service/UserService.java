@@ -164,17 +164,12 @@ public class UserService {
 
         user.removeCouple();
 
-        if (originCouple.getUsers().size() == 0) {
+        if (originCouple.getUsers().isEmpty() && originCouple.getInvitation() != null) {
+            // TODO: 커플 관련 삭제 분리해야하지 않을까?
+            originCouple.getInvitation().setCouple(null);
+            invitationRepository.delete(originCouple.getInvitation());
             coupleRepository.delete(originCouple);
         }
-        // // 나한테 있던 커플 정보 삭제
-        // Couple originCouple = user.getCouple();
-        // if (originCouple != null) {
-        //     user.setCouple(null);
-        //     originCouple.getUsers().remove(user);
-        //     coupleRepository.delete(originCouple);
-        //     userRepository.saveAndFlush(user);
-        // }
 
         // 상대방 커플 코드의 커플을 연결
         user.setCouple(couple);
