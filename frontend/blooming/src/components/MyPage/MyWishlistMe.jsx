@@ -9,23 +9,22 @@ export default function MyWishlistMe({ wishlist }) {
       state: { id: wish.productId, productType: wish.productType },
     });
   };
-  <ProductItem
-                  product={product}
-                  onClick={() => handleNavigation(product)}
-                />
+  
   return (
     <>
       {wishlist ?
-        {wishlist.map((wish) => {
-          return (
-            <div onClick={() => handleNavigation(wish)}>
-              <img src={wish.thumbnail} alt="" />
-              <p>{wish.productType}</p>
-              <p>{wish.company}</p>
-              <p>{wish.address}</p>
-            </div>
-          )
-        })}
+        <>
+          {wishlist.map((wish) => {
+            return (
+              <div key={wish.productId} onClick={() => handleNavigation(wish)}>
+                <img src={wish.thumbnail} alt="" />
+                <p>{wish.productType}</p>
+                <p>{wish.company}</p>
+                <p>{wish.address}</p>
+              </div>
+            )
+          })}
+        </>
         :
         <div>찜 목록이 없습니다.</div>}
     </>
