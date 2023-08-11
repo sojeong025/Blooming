@@ -22,5 +22,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     ProductDetailResult getProductDetail(@Param("user") User user, @Param("productId") long productId);
 
     @Query("select new com.ssafy.backend.domain.product.dto.ProductRecentDto(p.id, p.itemName, p.thumbnail, w) from Product p left join Wishlist w on p = w.product and w.user = :user where p.id = :productId")
-    ProductRecentDto getProductRecentInfo(@Param("product_id") Long productId, @Param("user") User user);
+    ProductRecentDto getProductRecentInfo(@Param("productId") Long productId, @Param("user") User user);
 }
