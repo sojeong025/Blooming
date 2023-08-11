@@ -17,12 +17,12 @@ const Diary = () => {
     const fetchData = async () => {
       try {
         const response = await customAxios.get("diary");
-        setDiaries(response?.data.result[0]);
-
-        console.log('길이 체크 :'+ response.data.result.length)
-        console.log('response:'+ response)
-        console.log('response.data.result[0]:' + response.data.result[0])
-
+        
+        if (response?.data?.result?.length > 0) {
+          setDiaries(response.data.result);
+        } else {
+          setDiaries([]);
+        }
       } catch (error) {
         console.error(error);
       }
