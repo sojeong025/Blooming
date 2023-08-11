@@ -5,7 +5,7 @@ import classes from "./InfoDetail.module.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -126,14 +126,25 @@ export default function InfoDetail() {
     showTopButton();
   };
 
-  function showTopButton() {
-    const topButton = document.getElementById("topButton");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-      topButton.style.display = "block";
+  const showTopButton = useCallback(() => {
+    const topButton = document.getElementById('topButton');
+    if (
+      document.body.scrollTop > 100 ||
+      document.documentElement.scrollTop > 100
+    ) {
+      topButton.style.display = 'block';
     } else {
-      topButton.style.display = "none";
+      topButton.style.display = 'none';
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', showTopButton);
+
+    return () => {
+      window.removeEventListener('scroll', showTopButton);
+    };
+  }, [showTopButton]);
 
   const scrollToTop = () => {
     window.scrollTo({
