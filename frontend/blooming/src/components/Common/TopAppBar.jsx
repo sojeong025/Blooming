@@ -50,7 +50,6 @@ const TopAppBar = () => {
   const isDynamicPath = (path) => {
     return dynamicBackRoutes.some((route) => route.regex.test(path));
   };
-
   const shouldDisplayBackIcon =
     backRoutes.includes(location.pathname) || isDynamicPath(location.pathname);
 
