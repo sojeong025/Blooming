@@ -85,7 +85,7 @@ public class ReservationService {
         //예약 시 랭킹 보드에 추가 ranking - productId
         try{
             System.out.println("=============redis: ranking");
-            String key = "ranking";
+            String key = "ranking:" + product.getProductType();
             String value = String.valueOf(product.getId());
             Long score = 1L;
             //랭킹 키로 해당 value 1 증가해보기
