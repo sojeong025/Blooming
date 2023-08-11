@@ -132,6 +132,15 @@ public class NotificationScheduler {
         User user = fcmDto.getUser();
 
         if (user != null) {
+
+            //0. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장 : 유저가 있으면 보내기
+            notificationService.registNotification(new NotificationRegistDto(
+                    ReadStatus.UNREAD,
+                    NotificationType.SCHEDULE,
+                    fcmDto.getTitle(),
+                    fcmDto.getBody(),
+                    fcmDto.getUser().getId()
+            ));
             //토큰 받아오는 걸로 수정
 //            String token = "eKbKoD7ETfqRiIKFF_4Zom:APA91bHbzIq11sl8_qbv1yE7-RFqjXnywPVo5u13FMC9kqIjJTrHkXIfqWODhBYvTS3EOGlOLQzlXUvJNwXn4EFbgoAC_WZzylV9yo5KOGLj96agM68p8qPc8bCPODgRk9aP_TNeKiLn";
 //            String token = user.getFcmToken();
@@ -154,15 +163,6 @@ public class NotificationScheduler {
 
                 try {
                     firebaseMessaging.send(message);
-
-                    //2. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장.
-                    notificationService.registNotification(new NotificationRegistDto(
-                            ReadStatus.UNREAD,
-                            NotificationType.SCHEDULE,
-                            fcmDto.getTitle(),
-                            fcmDto.getBody(),
-                            fcmDto.getUser().getId()
-                    ));
                     return "알림 전송 성공 " + fcmDto.getUser();
                 } catch (FirebaseMessagingException e) {
                     e.printStackTrace();

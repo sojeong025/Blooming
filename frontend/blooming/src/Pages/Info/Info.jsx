@@ -6,16 +6,16 @@ function Info() {
   return (
     <div>
       <nav className={classes.navContainer}>
-        <NavLink to='/info/wedding-hall'>
+        <NavLink to='/info/wedding-hall' state={{ productType: "HALL" }}>
           <div>예식장</div>
         </NavLink>
-        <NavLink to='/info/studio'>
+        <NavLink to='/info/studio' state={{ productType: "STUDIO" }}>
           <div>스튜디오</div>
         </NavLink>
-        <NavLink to='/info/dress'>
+        <NavLink to='/info/dress' state={{ productType: "DRESS" }}>
           <div>드레스</div>
         </NavLink>
-        <NavLink to='/info/make-up'>
+        <NavLink to='/info/make-up' state={{ productType: "MAKEUP" }}>
           <div>메이크업</div>
         </NavLink>
         <NavLink
