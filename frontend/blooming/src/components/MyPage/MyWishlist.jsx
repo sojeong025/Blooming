@@ -75,7 +75,7 @@ export default function MyWishlist() {
         <div onClick={handlerYouState}>약혼자 찜</div>
         <div onClick={handlerToState}>겹치는 찜</div>
       </nav>
-      {(state === 'me') && <MyWishlistMe wishlist={me} /> }
+      {(state === 'me') && <MyWishlistMe myWishlist={me} toWishlist={together} /> }
       {(state === 'you') && <div>너꺼</div>}
       {(state === 'together') && <div>같아</div>}
     </div>

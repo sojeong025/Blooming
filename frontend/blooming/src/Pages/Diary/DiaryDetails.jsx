@@ -5,12 +5,17 @@ import { diaryState } from "../../recoil/DiaryStateAtom";
 import { useState } from "react";
 import CreateItem from "../../components/Diary/ModalItem";
 import { customAxios } from "../../lib/axios";
+import { AiOutlineLeft } from "react-icons/ai"
+import { BsTrash } from "react-icons/bs"
+import { PiPencilLineFill } from "react-icons/pi"
+
 
 import classes from "./DiaryDetails.module.css"
 
 const DiaryDetails = () => {
 
   const [diaries, setDiaries] = useRecoilState(diaryState);
+
   const navigate = useNavigate();
   const { id } = useParams();
   const [ modalIsVisible, setModalIsVisible ] = useState(false);
@@ -56,10 +61,18 @@ const DiaryDetails = () => {
       {modalIsVisible ? <CreateItem hide={hideModalHandler} item={diary} /> :
         <div className={classes.form}>
           <div className={classes.actions}>
-            <button onClick={handleGoBack}>뒤로가기</button>
-            <p>{diary.date}</p>
-            <button onClick={showModalHandler}>수정하기</button>
-            <button onClick={handleDelete}>삭제하기</button>
+            <div className={classes.back}>
+              <button onClick={handleGoBack}><AiOutlineLeft/></button>
+            </div>
+            
+            <div className={classes.date}>
+              <p>{diary.date}</p>
+            </div>
+
+            <div className={classes.editdel}>
+              <button onClick={showModalHandler}><PiPencilLineFill/></button>
+              <button onClick={handleDelete}><BsTrash/></button>
+            </div>
           </div>
 
 

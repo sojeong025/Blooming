@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.redis.RankingProduct;
 
 import com.ssafy.backend.domain.common.BasicResponse;
+import com.ssafy.backend.domain.product.ProductType;
 import com.ssafy.backend.domain.product.dto.ProductRankingDto;
 import com.ssafy.backend.domain.product.repository.ProductRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +12,7 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -27,10 +29,10 @@ public class RankingProductController {
     private final ProductRepository productRepository;
 
     @Operation(description = "예약 랭킹 상위 10개의 상품 조회")
-    @GetMapping("/ranking")
-    public ResponseEntity<BasicResponse> getRanking(){
+    @GetMapping("/ranking/{productType}")
+    public ResponseEntity<BasicResponse> getRanking(@PathVariable ProductType productType){
         //랭킹 검색 : redis
-        String key = "ranking";
+        String key = "ranking:" + String.valueOf(productType);
         ZSetOperations<String, String> stringStringZSetOperations = redisTemplate.opsForZSet();
         Set<ZSetOperations.TypedTuple<String>> typedTuples = stringStringZSetOperations.reverseRangeWithScores(key, 0, 9);
 
