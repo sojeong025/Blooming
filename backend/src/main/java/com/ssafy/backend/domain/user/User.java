@@ -83,6 +83,7 @@ public class User extends CreatedAndUpdatedBaseEntity {
     public void updateProfile(UserDto userDto) {
         this.name = userDto.getName();
         this.nickname = userDto.getNickname();
+        this.profileImage = userDto.getProfileImage();
         this.phoneNumber = userDto.getPhoneNumber();
         this.gender = userDto.getGender();
     }
