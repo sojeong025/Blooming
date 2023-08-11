@@ -1,7 +1,10 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 
-export default function DetailReviewList({hasMore, reviews, fetchReviewData}) {
-
+export default function DetailReviewList({
+  hasMore,
+  reviews,
+  fetchReviewData,
+}) {
   return (
     <>
       <InfiniteScroll
@@ -18,8 +21,10 @@ export default function DetailReviewList({hasMore, reviews, fetchReviewData}) {
         <div>
           {reviews.map((review) => (
             <div key={review.id}>
-              <p>작성자: {review.nickName} {review.email}</p>
-              <img src={review.image} alt="이미지가 없습니다." />
+              <p>
+                작성자: {review.nickName} {review.email}
+              </p>
+              <img src={review.image} alt='이미지가 없습니다.' />
               <p>{review.star}</p>
               <p>{review.content}</p>
               <button>도움이 돼요! {review.likeCnt}</button>
@@ -28,8 +33,5 @@ export default function DetailReviewList({hasMore, reviews, fetchReviewData}) {
         </div>
       </InfiniteScroll>
     </>
-  )
+  );
 }
-
-
-

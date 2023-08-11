@@ -32,7 +32,7 @@ export default function InfoDetail() {
     setCurrentImageIndex(index);
   };
 
-  const [reviews, setReviews] = useState();
+  const [reviews, setReviews] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
@@ -55,7 +55,7 @@ export default function InfoDetail() {
     try {
       const response = await customAxios.get(`product/${productType}/${id}`);
       setProduct(response.data.result[0]);
-      fetchReviewData();
+      // fetchReviewData();
     } catch (error) {
       console.error("이미지 정보 조회 에러:", error);
     }
@@ -66,18 +66,17 @@ export default function InfoDetail() {
       const response = await customAxios.get(`review/${id}`, {
         params: { page: currentPage, size: 4 },
       });
+      // no content
       if (response.status === 204) {
         setHasMore(false);
+      } else if (response.data.result[0].last) {
+        setHasMore(false);
       } else {
-        if (response.data.result[0].last) {
-          setHasMore(false);
-        } else {
-          setReviews((prevReviews) => [
-            ...prevReviews,
-            ...response.data.result[0].content,
-          ]);
-          setCurrentPage(currentPage + 1);
-        }
+        setReviews((prevReviews) => [
+          ...prevReviews,
+          ...response.data.result[0].content,
+        ]);
+        setCurrentPage(currentPage + 1);
       }
     } catch (error) {
       console.error("리뷰 정보 조회 에러:", error);
@@ -86,6 +85,7 @@ export default function InfoDetail() {
 
   useEffect(() => {
     fetchProductData();
+    fetchReviewData();
     // 디자인 용 더미
     // setProduct({
     //   id: 85,
@@ -300,6 +300,7 @@ export default function InfoDetail() {
           </div>
         </>
       )}
+
       <BottomButton>
         <HeartButton onClick={onWish} isActive={product?.wish}>
           {/* 하뚜 */}
