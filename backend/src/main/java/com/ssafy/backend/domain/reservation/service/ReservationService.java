@@ -16,14 +16,18 @@ import com.ssafy.backend.domain.schedule.service.ScheduleService;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @Transactional(readOnly = true)
@@ -34,6 +38,7 @@ public class ReservationService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final ScheduleService scheduleService;
+    private final RedisTemplate redisTemplate;
 
     @Transactional
     public ReservationScheduleResultDto registerReservation(ReservationRegistDto reservationRegistDto) {
@@ -79,6 +84,30 @@ public class ReservationService {
                 scheduleType,
                 reservation.getId()
         ));
+
+        //예약 시 랭킹 보드에 추가 ranking - productId
+        try{
+            System.out.println("=============redis: ranking");
+            String key = "ranking";
+            String value = String.valueOf(product.getId());
+            Long score = 1L;
+            //랭킹 키로 해당 value 1 증가해보기
+            try{
+                //일단 증가시켜보기
+                redisTemplate.opsForZSet().incrementScore(key, value, score);
+            }catch (Exception e){
+                //에러나면 없는 것이므로 추가하기
+                System.out.println("===처음 추가함===");
+                redisTemplate.opsForZSet().add(key, value, score);
+            }
+            System.out.println("저장 완료");
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("저장 실패");
+        }
+        finally {
+            System.out.println("=============redis");
+        }
 
         return new ReservationScheduleResultDto(savedSchedule.getId());
     }

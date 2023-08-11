@@ -3,7 +3,6 @@ package com.ssafy.backend.domain.redis.LatestSeenProduct;
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.product.dto.ProductRecentDto;
 import com.ssafy.backend.domain.product.repository.ProductRepository;
-import com.ssafy.backend.domain.product.service.ProductService;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
