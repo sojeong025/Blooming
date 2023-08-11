@@ -20,7 +20,7 @@ const Diary = () => {
         
         if (response?.data?.result?.length > 0) {
           setDiaries(response.data.result[0]);
-          console(diaries)
+          console.log(diaries)
         } else {
           setDiaries([]);
         }
