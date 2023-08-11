@@ -1,64 +1,73 @@
 .div{
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
   align-items: center;
   justify-content: center;
+  margin-bottom: 5vh;
+
+  height: 80vh;
+
+  /* 
+  width: 100%;
+   */
+
+  /* max-height: 80vh; */
+  /* height: 80vh; */
+  /* margin: 0 auto;*/
+  /* margin-top: 5vh;  */
+  /* bottom: 0; */
+
+
+  /* position: absolute; */
 }
 .image-carousel {
-  width: 100%;
-
-  object-fit: contain;
+  min-width: 100%;
   margin-bottom: 10px;
   border: 1px solid #666;
   align-items: center;
 }
 
+.pageIndicator {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+.img {
+  
+  object-fit: fill
+}
+
+/* 
 .image-carousel .slider-wrapper {
   max-width: 300px;
   max-height: 500px;
-}
-
+} 
 .image-carousel .slider {
   max-width: 300px;
   max-height: 300px;
 }
-
 .image-carousel .slider .slide {
   max-width: 300px;
   max-height: 300px;
 }
-
 .image-carousel .slider .slide img {
   width: 100%;
   height: 100%;
 }
-
 .image-carousel .carousel .control-arrow {
   top: 50%;
   transform: translateY(-50%);
 }
-
-.pageIndicator {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
+*/
 
 .buttonContainer{
   display: flex;
   justify-content: space-between;
   width: 80vw;
   height: 90px;
-
-  position: absolute;
-  margin-bottom: 10px;
   bottom: 0;
 }
-
 .btn {
   font-size: 18px;
-  margin-bottom: 5vh;
 }
 .pre {
   color: rgb(139, 136, 136);
@@ -70,11 +79,11 @@
   text-align: center;
 }
 
+/* 화나서 이미지로 대체함 */
 .kakaoBtn {
   margin-bottom: 5vh;
   width: 80vw;
   height: 45px;
-
   background-color: #FEE500;
   text-align: center;
   border-radius: 12px;
@@ -83,7 +92,6 @@
   /* justify-content: center; */
   justify-content: space-evenly
 }
-
 .kakaoBtn * {
   color: #000000;
 }

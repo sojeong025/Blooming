@@ -45,7 +45,7 @@ function Preview() {
       >
         {imageList.map((image, index) => (
           <div key={index}>
-            <img src={image.src} alt={image.caption} />
+            <img className={classes.img} src={image.src} alt={image.caption} />
           </div>
         ))}
       </Carousel>
