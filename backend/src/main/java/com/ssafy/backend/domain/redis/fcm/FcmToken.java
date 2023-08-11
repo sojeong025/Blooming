@@ -1,4 +1,4 @@
-package com.ssafy.backend.global.redis.fcm;
+package com.ssafy.backend.domain.redis.fcm;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

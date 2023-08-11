@@ -10,14 +10,10 @@
   border-radius: 8%;
 
   background-color: #fff;
-
-  min-height: 280px;
-  /* padding-bottom: 40px; */
 }
 
 .itemImg {
   width: 100%;
-
   object-fit: contain;
   /* margin: 0 auto; */
 
@@ -27,29 +23,33 @@
 
 .textContainer {
   padding-top: 10px;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
   margin: 0 10px;
 }
 
 .location {
   display: flex;
 }
+
 .address {
   font-size: 16px;
   color: #666;
 }
+
 .locationIcon {
   color: #666;
   padding-top: 1.2px;
   padding-right: 3px;
 }
-.company {
-  font-weight: 600;
-  font-size: 20px;
 
-  /* word-break: keep-all; */
+.company {
+  font-weight: bold;
+  ;
+  font-size: 20px;
 }
 
 /* 하트 용 relative */
@@ -60,25 +60,30 @@
   margin-bottom: 10px;
   position: relative;
 }
+
 .heart {
   position: absolute;
   top: 10px;
   right: 10px;
   z-index: 1;
+
 }
+
 .IconWrapper {
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  background-color:  rgba( 255, 255, 255, 0.8 );
+  background-color: rgba(255, 255, 255, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .heartIconTrue {
   color: #FF647C;
   z-index: 5;
 }
+
 .heartIconFalse {
   color: #FF647C;
 }

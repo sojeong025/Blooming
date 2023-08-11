@@ -9,8 +9,6 @@ import { customAxios } from "../../lib/axios";
 
 import { useEffect, useState } from "react";
 
-import axios from "axios";
-
 const TopAppBar = () => {
   const location = useLocation();
   const [pageTitle, setPageTitle] = useState("");
@@ -35,6 +33,10 @@ const TopAppBar = () => {
     "/share",
     "/edit-profile",
     "/setting-notice",
+    "/my-reservation",
+    "/my-wishlist",
+    "/my-review",
+    // "/info/:id", // 동적 경로
   ];
 
   // 알림버튼 없애려면 여기 넣기
@@ -62,29 +64,13 @@ const TopAppBar = () => {
   useEffect(() => {
     const fetchNotice = async () => {
       try {
-        const SERVER_ADDRESS = "http://43.200.254.50:8080";
-        // const SERVER_ADDRESS = "";
-        const accessToken = localStorage.getItem("accessToken");
-
-        const customAxios1 = axios.create({
-          baseURL: `${SERVER_ADDRESS}`,
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-          },
-        });
-        const response = await customAxios1.get("notification/unread-cnt");
-        console.log(response);
-
-        // console.log(localStorage.getItem("accessToken"));
-        // const response = await customAxios.get("notification/unread-cnt");
+        const response = await customAxios.get("notification/unread-cnt");
         // console.log(response);
-
         if (response.data.result[0] > 0) {
           setIsNotice(true);
         }
       } catch (error) {
-        console.log("안 읽은 알림 조회 에러", error);
+        // console.log("안 읽은 알림 조회 에러", error);
       }
     };
 

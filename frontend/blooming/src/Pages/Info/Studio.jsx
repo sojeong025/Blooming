@@ -1,7 +1,7 @@
 import { customAxios } from "../../lib/axios";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import ErrorModal from "../../components/Error/Modal";
 import { errorState } from "../../recoil/ErrorAtom";
@@ -21,10 +21,13 @@ export default function WeddingHall() {
   const [hasMore, setHasMore] = useState(true);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const productType = location.state.productType;
 
   const handleNavigation = (product) => {
-    navigate(`/info/${product.id}`, {
-      state: { id: product.id, productType: "STUDIO" },
+    console.log(productType);
+    navigate(`/${productType}/${product.id}`, {
+      state: { id: product.id, productType },
     });
   };
 

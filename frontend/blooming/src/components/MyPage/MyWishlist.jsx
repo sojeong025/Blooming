@@ -2,15 +2,51 @@ import { customAxios } from "../../lib/axios";
 import { useEffect, useState } from "react";
 
 import classes from "./MyWishlist.module.css";
+import { useRecoilValue } from "recoil";
+import { userState } from "../../recoil/ProfileAtom"
+
+import MyWishlistMe from "./MyWishlistMe";
 
 export default function MyWishlist() {
 
+  const user = useRecoilValue(userState)
   const [state, setState] = useState('me')
+  const [me, setMe] = useState([])
+  const [you, setYou] = useState([])
+  const [together, setTogether] = useState([])
+
+  const classify = (myWishlist) => {
+    let newMe = []
+    let newYou = []
+    let newTogether = []
+    {
+      myWishlist.map((wishlist) => {
+        console.log(wishlist, user.name)
+        if (wishlist.userName === user.name) {
+          newMe.push(wishlist)
+          if (newYou.some((item) => item.productId === wishlist.productId)) {
+            newTogether.push(wishlist)
+          }
+        } else {
+          newYou.push(wishlist)
+          if (newMe.some((item) => item.productId === wishlist.productId)) {
+            newTogether.push(wishlist)
+          }
+        }
+      })}
+    setMe(newMe);
+    setYou(newYou)
+    setTogether(newTogether)
+  }
 
   const fetchData = async () => {
     try {
       const response = await customAxios.get("wishlist");
-      console.log(response.data.result[0])
+      if (response.status === 204) {
+        return <div>찜한 정보가 없습니다.</div>
+      } else {
+        classify(response.data.result[0])
+      }
     } catch (error) {
       console.error("예약 정보 조회 에러:", error);
     }
@@ -39,7 +75,7 @@ export default function MyWishlist() {
         <div onClick={handlerYouState}>약혼자 찜</div>
         <div onClick={handlerToState}>겹치는 찜</div>
       </nav>
-      {(state === 'me') && <div>내꺼</div>}
+      {(state === 'me') && <MyWishlistMe wishlist={me} /> }
       {(state === 'you') && <div>너꺼</div>}
       {(state === 'together') && <div>같아</div>}
     </div>

@@ -14,8 +14,8 @@ import com.ssafy.backend.domain.user.dto.UserDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import com.ssafy.backend.domain.wishlist.repository.WishlistRepository;
-import com.ssafy.backend.global.redis.fcm.FcmToken;
-import com.ssafy.backend.global.redis.fcm.FcmTokenRepository;
+import com.ssafy.backend.domain.redis.fcm.FcmToken;
+import com.ssafy.backend.domain.redis.fcm.FcmTokenRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
