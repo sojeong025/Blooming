@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import MyWishlistItem from "./MyWishlistItem";
 
 function MyWishlistMe({ wishlist }) {
   const navigate = useNavigate();
@@ -13,15 +14,7 @@ function MyWishlistMe({ wishlist }) {
     <>
       {wishlist ? (
         wishlist.map((wish) => (
-          <div
-            key={wish.productId}
-            onClick={() => handleNavigation(wish)}
-          >
-            <img src={wish.thumbnail} alt="" />
-            <p>{wish.productType}</p>
-            <p>{wish.company}</p>
-            <p>{wish.address}</p>
-          </div>
+          <MyWishlistItem key={wish.productId} wish={wish} onClick={handleNavigation} />
         ))
       ) : (
         <div>찜 목록이 없습니다.</div>
