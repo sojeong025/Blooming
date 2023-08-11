@@ -63,7 +63,7 @@ const Diary = () => {
             </div>
           ))
         ) : (
-          <p>다이어리를 작성해주세요.</p>
+          <div className={classes.none}>다이어리를 작성해주세요</div>
         )}
       </div>
       <div>

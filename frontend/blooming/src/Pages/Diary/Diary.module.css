@@ -56,10 +56,18 @@
 .preDiary {
   padding-top: 10px;
   padding-left: 10px;
-/* border: 1px solid black; */
   border-radius: 10px;
   min-height: 290px;
   min-width: 370px;
   margin-bottom: 40px;
   background-color: var(--color-groom);
+}
+
+.none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 20px;
+  width: 100%;
 }

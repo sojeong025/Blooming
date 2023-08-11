@@ -7,37 +7,45 @@ function DiaryHeader(props) {
 
   const createElements = () => {
     const elements = [];
-    diaries.forEach((diary, index) => {
+    if (diaries.length === 0) {
       elements.push(
-        <div key={diary.id} className={classes.demoPage}>
-          <div className={classes.image}>
-            <img
-              src={diary.image ? diary.image : "/src/assets/diary2.jpg"}
-              width={150}
-              height={140}
-              alt=""
-            />
-          </div>
-          <div className={classes.content}>{diary.content}</div>
+        <div key="empty_left" className={classes.demoPage}>
         </div>
       );
-
-      elements.push(
-        <div key={`other_${diary.id}`} className={classes.demoPage2}>
-          <div>
-            <HiOutlineLockClosed className={classes.lock} />
-          </div>
-          <div className={classes.blur}>
+    } else {
+      diaries.forEach((diary, index) => {
+        elements.push(
+          <div key={diary.id} className={classes.demoPage}>
             <div className={classes.image}>
-              <img src="/src/assets/diary.jpg" width={150} height={140} alt="" />
+              <img
+                src={diary.image ? diary.image : "/src/assets/diary2.jpg"}
+                width={150}
+                height={140}
+                alt=""
+              />
             </div>
-            <div className={classes.content2}><br/><br/>상대방은 어떤 내용을 <hr/>작성했을까요?</div>
+            <div className={classes.content}>{diary.content}</div>
           </div>
-        </div>
-      );
-    });
+        );
+  
+        elements.push(
+          <div key={`other_${diary.id}`} className={classes.demoPage2}>
+            <div>
+              <HiOutlineLockClosed className={classes.lock} />
+            </div>
+            <div className={classes.blur}>
+              <div className={classes.image}>
+                <img src="/src/assets/diary.jpg" width={150} height={140} alt="" />
+              </div>
+              <div className={classes.content2}><br/><br/>상대방은 어떤 내용을 <hr/>작성했을까요?</div>
+            </div>
+          </div>
+        );
+      });
+    }
     return elements;
   };
+  
 
   return (
     <HTMLFlipBook
@@ -46,8 +54,9 @@ function DiaryHeader(props) {
       pageFlipDirection="rtl"
       responsive={true}
       usePortrait={false}
-      swipeEnabled={true}
+      mobileScrollSupport={diaries.length === 0 ? false:true}
       showCover={true}
+      disableFlipByClick={diaries.length === 0 ? true:false}
       drawShadow
     >
       {/* 커버 페이지 */}
