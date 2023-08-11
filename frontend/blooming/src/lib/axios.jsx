@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
-// const SERVER_ADDRESS = "http://43.200.254.50:8080";
-const SERVER_ADDRESS = "";
+const SERVER_ADDRESS = "http://43.200.254.50:8080";
+// const SERVER_ADDRESS = "";
 const accessToken = localStorage.getItem("accessToken");
 
 export const customAxios = axios.create({
@@ -21,7 +21,7 @@ customAxios.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export const fileAxios = axios.create({
@@ -41,5 +41,5 @@ fileAxios.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
