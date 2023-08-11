@@ -37,7 +37,7 @@ export default function MyWishlist() {
       if (response.status === 204) {
         return <div>찜한 정보가 없습니다.</div>
       } else {
-        classify(response.data.result[0])
+        classify([response.data.result[0]])
       }
     } catch (error) {
       console.error("예약 정보 조회 에러:", error);
