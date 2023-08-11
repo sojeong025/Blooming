@@ -19,12 +19,12 @@ export default function MyWishlist() {
     {myWishlist.map((wishlist) => {
       if (wishlist.username === user.name) {
         setMe([...me, wishlist])
-        if (you.some((item) => item.productId === wishlist.productId)) {
+        if (you && you.some((item) => item.productId === wishlist.productId)) {
           setTogether([...together, wishlist])
         }
       } else {
         setYou([...you, wishlist])
-        if (me.some((item) => item.productId === wishlist.productId)) {
+        if (me && me.some((item) => item.productId === wishlist.productId)) {
           setTogether([...together, wishlist])
         }
       }
