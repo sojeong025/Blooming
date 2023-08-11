@@ -22,6 +22,7 @@ const DiaryDetails = () => {
 
   const diary = diaries.find((diary) => {
     console.log(diary.id, id)
+    console.log(diary)
     if (`${diary.id}` === id) {
       return diary
     }
@@ -66,7 +67,7 @@ const DiaryDetails = () => {
             </div>
             
             <div className={classes.date}>
-              <p>{diary.date}</p>
+              <div>{diary.date}</div>
             </div>
 
             <div className={classes.editdel}>
