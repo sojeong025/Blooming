@@ -3,11 +3,11 @@ import classes from "./DiaryHeader.module.css";
 import { HiOutlineLockClosed } from "react-icons/hi";
 
 function DiaryHeader(props) {
-  const { diaries } = props;
+  const { diaries, noDiaries } = props;
 
   const createElements = () => {
     const elements = [];
-    if (diaries.length === 0) {
+    if (noDiaries) {
       elements.push(
         <div key="empty_left" className={classes.demoPage}>
         </div>
@@ -54,9 +54,9 @@ function DiaryHeader(props) {
       pageFlipDirection="rtl"
       responsive={true}
       usePortrait={false}
-      mobileScrollSupport={diaries.length === 0 ? false:true}
+      mobileScrollSupport={!noDiaries}
       showCover={true}
-      disableFlipByClick={diaries.length === 0 ? true:false}
+      disableFlipByClick={noDiaries}
       drawShadow
     >
       {/* 커버 페이지 */}
