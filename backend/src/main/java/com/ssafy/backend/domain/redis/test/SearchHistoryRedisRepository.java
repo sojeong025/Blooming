@@ -1,4 +1,4 @@
-package com.ssafy.backend.global.redis.test;
+package com.ssafy.backend.domain.redis.test;
 
 import org.springframework.data.repository.CrudRepository;
 

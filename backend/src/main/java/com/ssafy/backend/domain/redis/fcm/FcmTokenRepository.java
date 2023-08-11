@@ -1,4 +1,4 @@
-package com.ssafy.backend.global.redis.fcm;
+package com.ssafy.backend.domain.redis.fcm;
 
 import org.springframework.data.repository.CrudRepository;
 
