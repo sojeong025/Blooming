@@ -84,25 +84,25 @@ export default function InfoDetail() {
   };
 
   useEffect(() => {
-    // fetchProductData()
+    fetchProductData();
     // 디자인 용 더미
-    setProduct({
-      id: 85,
-      itemName: "빌라드지디 수서",
-      brief:
-        "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
-      thumbnail:
-        "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
-      company: "빌라드지디 수서",
-      companyTime: "None",
-      companyAddress: "서울 강남구 율현동 68-8",
-      images: [
-        "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_image1.jpg",
-        "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_image2.jpg",
-        "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_image3.jpg",
-      ],
-      wish: true,
-    });
+    // setProduct({
+    //   id: 85,
+    //   itemName: "빌라드지디 수서",
+    //   brief:
+    //     "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
+    //   thumbnail:
+    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
+    //   company: "빌라드지디 수서",
+    //   companyTime: "None",
+    //   companyAddress: "서울 강남구 율현동 68-8",
+    //   images: [
+    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_image1.jpg",
+    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_image2.jpg",
+    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_image3.jpg",
+    //   ],
+    //   wish: true,
+    // });
   }, []);
 
   const handleReserve = async () => {
