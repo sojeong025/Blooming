@@ -76,9 +76,9 @@ function CreateItem({ hide, item }) {
             image: ItemData.image
           }
           setDiaries((existingData) => {
-            hide(); 
-            return [customItemData, ...existingData]; 
-          }); 
+            return [customItemData, ...existingData];
+          });
+          hide(); 
         } catch (error) {
           console.error(error);
         }
