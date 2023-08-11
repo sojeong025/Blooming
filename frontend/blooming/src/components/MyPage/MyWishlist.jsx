@@ -16,6 +16,7 @@ export default function MyWishlist() {
   const [together, setTogether] = useState([])
 
   const classify = (myWishlist) => {
+    console.log(myWishlist)
     let newMe = []
     let newYou = []
     let newTogether = []
