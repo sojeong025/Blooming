@@ -23,10 +23,15 @@ const BottomNav = () => {
   const location = useLocation();
 
   // 효과 후 페이지 이동
-  const handleNavigation = (path) => {
+  const handleNavigation = (path, state = null) => {
     setLoading(true);
     setTimeout(() => {
-      navigate(path);
+      if (state) {
+        navigate(path, { state });
+      } else {
+        navigate(path);
+      }
+
       setLoading(false);
     }, 350); // 애니메이션 지속 시간 설정
     setSelectedMenu(path.slice(1));
@@ -69,7 +74,9 @@ const BottomNav = () => {
         <label
           className={classes.label}
           htmlFor='item-2'
-          onClick={() => handleNavigation("/info/wedding-hall")}
+          onClick={() =>
+            handleNavigation("/info/wedding-hall", { productType: "HALL" })
+          }
         >
           <span>
             <Info />

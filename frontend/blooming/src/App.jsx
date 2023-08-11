@@ -103,9 +103,9 @@ function App() {
             <Route path='studio' element={<Studio />} />
             <Route path='dress' element={<Dress />} />
             <Route path='make-up' element={<MakeUp />} />
-            <Route path=":id" element={<InfoDetail />} />
             <Route path='mobile-invitation' element={<MobileInvitation />} />
           </Route>
+          <Route path=':productType/:id' element={<InfoDetail />} />
           <Route
             path='/mobile-invitation-detail'
             element={<MobileInvitationDetail />}
@@ -124,7 +124,7 @@ function App() {
           <Route path='/my-wishlist' element={<MyWishlist />} />
           <Route path='/my-review' element={<MyReview />} />
           <Route path='/my-reservation' element={<MyReservation />} />
-          
+
           {/* 스케줄 */}
           <Route path='/schedule' element={<Schedule />} />
 
