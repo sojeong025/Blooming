@@ -229,23 +229,24 @@ const NoticeSwipeable = () => {
     // ]);
   }, []);
 
-  // 새로고침 누르면 새로 받게 하자
+  // 새로고침
   const onReNotice = async () => {
     await setPage(0);
     await setNotice([]);
     await setHasMore(true);
-
-    const params = { page, size: 20 };
-    if (hasMore) {
-      try {
-        const response = await customAxios.get("notification", { params });
-        setNotice(...response.data.result[0]);
-        console.log(notice);
-        setPage(page + 1);
-      } catch (error) {
-        console.log("알림 조회 에러", error);
-        setHasMore(false);
-      }
+    try {
+      const response = await customAxios.get("notification", {
+        params: {
+          page: 0,
+          size: 20,
+        },
+      });
+      setNotice(response.data.result[0]);
+      console.log(notice);
+      setPage(page + 1);
+    } catch (error) {
+      console.log("알림 조회 에러", error);
+      setHasMore(false);
     }
   };
 
