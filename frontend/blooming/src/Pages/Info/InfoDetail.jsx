@@ -19,7 +19,7 @@ export default function InfoDetail() {
   const location = useLocation();
   const id = location.state.id
   const productType = location.state.productType
-  const [reviews, setReviews] = useState()
+  const [reviews, setReviews] = useState([])
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [product, setProduct] = useState()
@@ -194,7 +194,7 @@ export default function InfoDetail() {
           </button>
           <DetailReviewForm product={product} fetchReviewData={fetchReviewData} />
           <div>{product.company} 후기</div>
-        {reviews ? <DetailReviewList hasMore={hasMore} reviews={reviews} fetchReviewData={fetchReviewData} /> : <div>등록된 후기가 없습니다.</div>}
+          {reviews !== [] ? <DetailReviewList hasMore={hasMore} reviews={reviews} fetchReviewData={fetchReviewData} /> : <div>등록된 후기가 없습니다.</div>}
           <button id="topButton" onClick={scrollToTop} className={classes.topButton}>
             Top
           </button>
