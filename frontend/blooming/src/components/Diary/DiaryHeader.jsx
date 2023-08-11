@@ -1,4 +1,4 @@
-// DiaryHeader.jsx
+import React from "react";
 import HTMLFlipBook from "react-pageflip";
 import classes from "./DiaryHeader.module.css";
 import { HiOutlineLockClosed } from "react-icons/hi"
