@@ -11,24 +11,30 @@ export default function MyWishlist() {
 
   const user = useRecoilValue(userState)
   const [state, setState] = useState('me')
-  const [me, setMe] = useState()
-  const [you, setYou] = useState()
-  const [together, setTogether] = useState()
+  const [me, setMe] = useState([])
+  const [you, setYou] = useState([])
+  const [together, setTogether] = useState([])
 
   const classify = (myWishlist) => {
+    let newMe = []
+    let newYou = []
+    let newTogether = []
     {myWishlist.map((wishlist) => {
       if (wishlist.username === user.name) {
-        setMe([...me, wishlist])
-        if (you && you.some((item) => item.productId === wishlist.productId)) {
-          setTogether([...together, wishlist])
+        newMe.push(wishlist)
+        if (newYou.some((item) => item.productId === wishlist.productId)) {
+          newTogether.push(wishlist)
         }
       } else {
-        setYou([...you, wishlist])
-        if (me && me.some((item) => item.productId === wishlist.productId)) {
-          setTogether([...together, wishlist])
+        newYou.push(wishlist)
+        if (newMe.some((item) => item.productId === wishlist.productId)) {
+          newTogether.push(wishlist)
         }
       }
     })}
+    setMe(newMe);
+    setYou(newYou)
+    setTogether(newTogether)
   }
 
   const fetchData = async () => {
@@ -37,7 +43,7 @@ export default function MyWishlist() {
       if (response.status === 204) {
         return <div>찜한 정보가 없습니다.</div>
       } else {
-        classify([response.data.result[0]])
+        classify(response.data.result[0])
       }
     } catch (error) {
       console.error("예약 정보 조회 에러:", error);
