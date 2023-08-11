@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -56,7 +57,7 @@ public class ProductService {
 			System.out.println("=============redis");
 			String key = "latest-seen-products:" + Long.valueOf(user.getId());
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss", Locale.KOREA);
 			redisTemplate.opsForZSet().add(key, String.valueOf(productId), Long.valueOf(sdf.format(timestamp))); //되ㅏ나
 			System.out.println("저장 완료");
 		}catch(Exception e){
