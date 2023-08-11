@@ -11,12 +11,11 @@ export default function MyWishlist() {
 
   const user = useRecoilValue(userState)
   const [state, setState] = useState('me')
-  const [myWishlist, setMyWishlist] = useState()
   const [me, setMe] = useState()
   const [you, setYou] = useState()
   const [together, setTogether] = useState()
 
-  const classify = () => {
+  const classify = (myWishlist) => {
     {myWishlist.map((wishlist) => {
       if (wishlist.username === user.name) {
         setMe([...me, wishlist])
@@ -38,8 +37,7 @@ export default function MyWishlist() {
       if (response.status === 204) {
         return <div>찜한 정보가 없습니다.</div>
       } else {
-        setMyWishlist(response.data.result[0])
-        classify()
+        classify(response.data.result[0])
       }
     } catch (error) {
       console.error("예약 정보 조회 에러:", error);
