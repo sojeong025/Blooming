@@ -4,7 +4,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdLocationOn } from "react-icons/md";
 import { customAxios } from "../../lib/axios";
 
-export default function MyWishlistItem({ wish, onClick }) {
+export default function MyWishlistItem({ wish, onClick, you }) {
   const address = wish.address.split(" ");
   const [productHeart, setProductHeart] = useState(true);
 
@@ -63,6 +63,15 @@ export default function MyWishlistItem({ wish, onClick }) {
             <AiFillHeart size={25} className={classes.heartIconTrue} />
           ) : (
             <AiOutlineHeart size={25} className={classes.heartIconFalse} />
+          )}
+        </div>
+      </div>
+      <div className={classes.heart}>
+        <div className={classes.IconWrapper}>
+          {you === 'yes' ? (
+            <AiFillHeart size={50} className={classes.heartIconTrue} />
+          ) : (
+            <AiOutlineHeart size={50} className={classes.heartIconFalse} />
           )}
         </div>
       </div>
