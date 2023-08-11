@@ -102,7 +102,8 @@ const TopAppBar = () => {
 
       {/* 가운데 로고 또는 페이지타이틀 */}
       <div className={classes.pageTitleContainer}>
-        {!pageTitle && <img src='src/assets/Nav/word.png' alt='Logo' />}
+        {/* {!pageTitle && <img src='src/assets/Nav/word.png' alt='Logo' />} */}
+        {!pageTitle && <img src='/public/word.png' alt='Logo' />}
         {pageTitle}
       </div>
 
