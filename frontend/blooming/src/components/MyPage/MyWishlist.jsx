@@ -16,23 +16,24 @@ export default function MyWishlist() {
   const [together, setTogether] = useState([])
 
   const classify = (myWishlist) => {
-    console.log(myWishlist)
     let newMe = []
     let newYou = []
     let newTogether = []
-    {myWishlist.map((wishlist) => {
-      if (wishlist.username === user.name) {
-        newMe.push(wishlist)
-        if (newYou.some((item) => item.productId === wishlist.productId)) {
-          newTogether.push(wishlist)
+    {
+      myWishlist.map((wishlist) => {
+        console.log(wishlist, user.name)
+        if (wishlist.userName === user.name) {
+          newMe.push(wishlist)
+          if (newYou.some((item) => item.productId === wishlist.productId)) {
+            newTogether.push(wishlist)
+          }
+        } else {
+          newYou.push(wishlist)
+          if (newMe.some((item) => item.productId === wishlist.productId)) {
+            newTogether.push(wishlist)
+          }
         }
-      } else {
-        newYou.push(wishlist)
-        if (newMe.some((item) => item.productId === wishlist.productId)) {
-          newTogether.push(wishlist)
-        }
-      }
-    })}
+      })}
     setMe(newMe);
     setYou(newYou)
     setTogether(newTogether)
