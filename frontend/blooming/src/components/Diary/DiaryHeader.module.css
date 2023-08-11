@@ -48,24 +48,25 @@
   justify-content: center;
   align-items: center;
   width: 180px;
-  height: 200px;
+  height: 160px;
   /* border: 1px solid black; */
 }
 .content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-  /* border: 1px solid black; */
+  display: block;
+  max-height: 95px;
+  max-width: 140px;
+  margin-left: 20px;
   text-align: center;
-  font-size: 16px;
-  white-space: nowrap;
+  font-size: 13px;
+  white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 15ch;
+  text-align: left;
 }
-
-.content p {
-  
+.content2 {
+  max-height: 140px;
+  max-width: 140px;
+  margin-left: 20px;
+  text-align: center;
+  font-size: 13px;
 }
