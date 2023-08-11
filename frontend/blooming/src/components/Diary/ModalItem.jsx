@@ -75,7 +75,10 @@ function CreateItem({ hide, item }) {
             date: ItemData.date,
             image: ItemData.image
           }
-          setDiaries((existingData) => [customItemData, ...existingData]); // 아이템 만들기
+          setDiaries((existingData) => {
+            hide(); 
+            return [customItemData, ...existingData]; 
+          }); 
         } catch (error) {
           console.error(error);
         }
