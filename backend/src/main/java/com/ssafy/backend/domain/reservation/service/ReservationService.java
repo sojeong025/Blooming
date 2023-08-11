@@ -1,5 +1,14 @@
 package com.ssafy.backend.domain.reservation.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.product.repository.ProductRepository;
 import com.ssafy.backend.domain.reservation.Reservation;
@@ -11,23 +20,11 @@ import com.ssafy.backend.domain.schedule.ScheduleType;
 import com.ssafy.backend.domain.schedule.ScheduledBy;
 import com.ssafy.backend.domain.schedule.dto.ReservationScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.dto.ReservationScheduleResultDto;
-import com.ssafy.backend.domain.schedule.dto.ScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.service.ScheduleService;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional(readOnly = true)
@@ -136,6 +133,7 @@ public class ReservationService {
         return reservationResultDtos;
     }
 
+    @Transactional
     public void deleteReservation(Long reservationId) {
         reservationRepository.deleteById(reservationId);
 
