@@ -1,4 +1,4 @@
-package com.ssafy.backend.global.redis.LatestSeenProduct;
+package com.ssafy.backend.domain.redis.LatestSeenProduct;
 
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.product.dto.ProductRecentDto;
