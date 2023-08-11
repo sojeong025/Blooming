@@ -1,6 +1,7 @@
 package com.ssafy.backend.domain.product.repository;
 
 import com.ssafy.backend.domain.product.dto.ProductRecentDto;
+import com.ssafy.backend.domain.product.dto.ProductRankingDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +24,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("select new com.ssafy.backend.domain.product.dto.ProductRecentDto(p.id, p.itemName, p.thumbnail, w) from Product p left join Wishlist w on p = w.product and w.user = :user where p.id = :productId")
     ProductRecentDto getProductRecentInfo(@Param("productId") Long productId, @Param("user") User user);
+
+    @Query("select new com.ssafy.backend.domain.product.dto.ProductRankingDto(p.id, p.itemName, p.productType, p.brief, p.company, p.thumbnail) from Product p where p.id = :productId")
+    ProductRankingDto getProductRankingInfo(@Param("productId") Long productId);
 }
