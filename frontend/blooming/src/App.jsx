@@ -52,7 +52,7 @@ import AllNotice from "./Pages/Notice/AllNotice";
 import Error from "./Pages/Error";
 
 function App() {
-  // BottomNav를 숨길 페이지 path
+  // TopNav를 숨길 페이지 path
   const hiddenTopPaths = ["/", "/kakaologin", "/login"];
   // BottomNav를 숨길 페이지 path
   const hiddenBottomPaths = [
@@ -68,16 +68,32 @@ function App() {
     "/share",
   ];
 
-  const Routing = () => {
-    function setScreenSize() {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
-    }
-    useEffect(() => {
-      setScreenSize();
-    });
+  // 동적 경로
+  const dynamicRoutes = [
+    {
+      regex: /^\/[^/]+\/\d+$/,
+      path: (productType, id) => `/${productType}/${id}`,
+    },
+  ];
+  // 동적 경로 확인을 위한 함수
+  const isDynamicPath = (path) => {
+    return dynamicRoutes.some((route) => route.regex.test(path));
+  };
 
+  const Routing = () => {
     const location = useLocation();
+    const shouldHiddenBottom =
+      hiddenBottomPaths.includes(location.pathname) ||
+      isDynamicPath(location.pathname);
+
+    useEffect(() => {
+      function setScreenSize() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+      }
+      setScreenSize();
+    }, []);
+
     return (
       <>
         {!hiddenTopPaths.includes(location.pathname) && <TopAppBar />}
@@ -132,7 +148,7 @@ function App() {
           <Route path='*' element={<Error />} />
         </Routes>
 
-        {!hiddenBottomPaths.includes(location.pathname) && <BottomNav />}
+        {!shouldHiddenBottom && <BottomNav />}
       </>
     );
   };

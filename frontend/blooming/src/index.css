@@ -35,13 +35,18 @@
   --color-bg: #FFFAF4;
   /* 신랑 */
   --color-groom: #6FAEC7;
+  /* 고민이다 */
+  /* --color-groom: #4d65b2; */
+
   /* 신부 */
   --color-brider: #FFA4A9;
   /* 공통 */
-  --color-common: #bec0c2
+  --color-common: #bec0c2;
+
+  /* 하트 */
+  --color-heart: #FF6347;
+  --color-heart-inactive:#A9A9A9;
 }
-
-
 
 .mainContainer {
   margin: 60px 16px; 

@@ -22,7 +22,7 @@ const TopAppBar = () => {
   }, [location]);
 
   // 왼쪽에 뒤로가기 필요하면 여기 넣기
-  const backIcon = [
+  const backRoutes = [
     "/all-notice",
     "/mobile-invitation",
     "/invitation-create",
@@ -36,8 +36,22 @@ const TopAppBar = () => {
     "/my-reservation",
     "/my-wishlist",
     "/my-review",
-    // "/info/:id", // 동적 경로
   ];
+
+  // 동적 경로
+  const dynamicBackRoutes = [
+    {
+      regex: /^\/[^/]+\/\d+$/,
+      path: (productType, id) => `/${productType}/${id}`,
+    },
+  ];
+
+  // 동적 경로 확인을 위한 함수
+  const isDynamicPath = (path) => {
+    return dynamicBackRoutes.some((route) => route.regex.test(path));
+  };
+  const shouldDisplayBackIcon =
+    backRoutes.includes(location.pathname) || isDynamicPath(location.pathname);
 
   // 알림버튼 없애려면 여기 넣기
   const noNotice = [
@@ -81,7 +95,8 @@ const TopAppBar = () => {
     <header className={classes.header}>
       <div className={`${classes.navIcon} ${classes.navLeft}`}>
         <div onClick={handleHistory}>
-          {backIcon.includes(location.pathname) && <BackSvg />}
+          {/* {backRoutes.includes(location.pathname) && <BackSvg />} */}
+          {shouldDisplayBackIcon && <BackSvg />}
         </div>
       </div>
 
