@@ -11,8 +11,7 @@ function MyWishlistMe({ wishlist }) {
 
   return (
     <>
-      <div>{wishlist}</div>
-      {/* {wishlist ? (
+      {wishlist ? (
         wishlist.map((wish) => (
           <div
             key={wish.productId}
@@ -26,7 +25,7 @@ function MyWishlistMe({ wishlist }) {
         ))
       ) : (
         <div>찜 목록이 없습니다.</div>
-      )} */}
+      )}
     </>
   );
 }

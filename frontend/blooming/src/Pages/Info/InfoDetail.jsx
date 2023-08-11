@@ -122,10 +122,6 @@ export default function InfoDetail() {
     setCurrentImageIndex(index);
   };
 
-  window.onscroll = function () {
-    showTopButton();
-  };
-
   const showTopButton = useCallback(() => {
     const topButton = document.getElementById('topButton');
     if (
