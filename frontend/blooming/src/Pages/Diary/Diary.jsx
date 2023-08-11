@@ -42,14 +42,14 @@ const Diary = () => {
     <div className={classes.container}>
       <p className={classes.mainText}>Diary Preview</p>
       <div className={classes.preDiary}>
-        <DiaryHeader diaries={diaries}/>
+      <DiaryHeader diaries={diaries} />
       </div>
 
       <hr style={{width:'80vw', marginBottom:'40px'}}/>
 
       <div className={classes.diary}>
         {diaries.length > 0 ? (
-          diaries.map((diary) => (
+          diaries.reverse().map((diary) => (
             <div key={diary.id} className={classes.diaryItem}>
               <Link key={diary.id} to={`/diary/${diary.id}`}>
                 <img
