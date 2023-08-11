@@ -78,12 +78,13 @@ function CreateItem({ hide, item }) {
           setDiaries((existingData) => {
             return [customItemData, ...existingData];
           });
-          hide(); 
+          // hide(); 
         } catch (error) {
           console.error(error);
         }
       };
       createDiary();
+      hide();
       
     } else {
       const updateDiary = async () => {
