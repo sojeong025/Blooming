@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class ProductRecentDto {
-    private Long id;
+    private Long productId;
 
     //상품 정보
     private String itemName;
@@ -18,7 +18,7 @@ public class ProductRecentDto {
     private boolean isWish;
 
     public ProductRecentDto(Long id, String itemName, String thumbnail, Wishlist wishlist) {
-        this.id = id;
+        this.productId = id;
         this.itemName = itemName;
         this.thumbnail = thumbnail;
         this.isWish = (wishlist != null);
