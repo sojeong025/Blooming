@@ -35,7 +35,7 @@
   cursor: pointer;
   font: inherit;
   border: none;
-  background-color: #FF647C;;
+  background-color: var(--color-groom);
   color: white;
   font-size: 20px;
   padding: 0 25px;
@@ -43,7 +43,7 @@
 
 /* 일단은 동일하게 해놓기..? */
 .actions button:hover {
-  background-color: #FF647C;
+  background-color: var(--color-groom);
   color: white;
 }
 
@@ -111,7 +111,7 @@
   font-weight: 800;
   font-size: 20px;
   width: 80vw;
-  height: 8vh;
+  height: 5vh;
   line-height: 5vh;
   padding: 20px 0;
   color: #666;
