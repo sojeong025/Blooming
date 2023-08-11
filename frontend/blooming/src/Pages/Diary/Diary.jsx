@@ -49,7 +49,7 @@ const Diary = () => {
 
       <div className={classes.diary}>
         {diaries.length > 0 ? (
-          diaries.reverse().map((diary) => (
+          diaries.slice().reverse().map((diary) => (
             <div key={diary.id} className={classes.diaryItem}>
               <Link key={diary.id} to={`/diary/${diary.id}`}>
                 <img

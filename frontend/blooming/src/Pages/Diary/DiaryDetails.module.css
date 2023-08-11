@@ -20,7 +20,7 @@
   }
   .imageContainer img {
     width: 100vw;
-    height: 30vh;
+    height: 45vh;
     object-fit: cover;
     overflow: hidden;
     z-index: 10;
