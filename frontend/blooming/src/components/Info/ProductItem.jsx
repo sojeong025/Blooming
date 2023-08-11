@@ -16,7 +16,6 @@ export default function ProductItem({ product, onClick }) {
       console.error("찜하기 에러:", error);
     }
   };
-
   const handleDeleteWish = async () => {
     try {
       await customAxios.delete(`wishlist/${product.id}`);
@@ -25,7 +24,6 @@ export default function ProductItem({ product, onClick }) {
       console.error("찜취소 에러:", error);
     }
   };
-
   const onWish = () => {
     // 찜
     if (productHeart) {

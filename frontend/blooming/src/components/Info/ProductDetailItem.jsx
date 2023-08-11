@@ -8,7 +8,6 @@ const ProductDetailItem = ({ product, productType }) => {
 
   return (
     <>
-      <div>{product.wish.toString()}</div>
       <div className={classes.ProductTitle}>
         <div className={classes.companyTitle}>{product.company}</div>
         <div className={classes.location}>
