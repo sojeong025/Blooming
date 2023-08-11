@@ -13,17 +13,12 @@ const Diary = () => {
   const [loading, setLoading] = useState(true);
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
-  const noDiaries = diaries.every(diary => Object.values(diary).every(value => value === ''));
-
-  if (noDiaries) {
-    return <div className={classes.none}>다이어리를 작성해주세요</div>;
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await customAxios.get("diary");
         setDiaries(response.data.result[0]);
+        console.log(response.data.result.length)
       } catch (error) {
         console.error(error);
       }
@@ -48,29 +43,29 @@ const Diary = () => {
     <div className={classes.container}>
       <p className={classes.mainText}>Diary Preview</p>
       <div className={classes.preDiary}>
-      <DiaryHeader diaries={diaries} noDiaries={noDiaries}/>
+      <DiaryHeader diaries={diaries} />
       </div>
 
       <hr style={{width:'80vw', marginBottom:'40px'}}/>
 
       <div className={classes.diary}>
-        {noDiaries ? (
+        {diaries.length > 0 ? (
+          diaries.slice().reverse().map((diary) => (
+            <div key={diary.id} className={classes.diaryItem}>
+              <Link key={diary.id} to={`/diary/${diary.id}`}>
+                <img
+                  src={diary.image ? diary.image : 'src/assets/test2.jpg'}
+                  alt="image"
+                  className={classes.diaryImage}
+                />
+                <p className={classes.title}>{diary.title}</p>
+                <p className={classes.date}>{diary.date}</p>
+              </Link>
+            </div>
+          ))
+        ) : (
           <div className={classes.none}>다이어리를 작성해주세요</div>
-            ) : (
-              diaries.slice().reverse().map((diary) => (
-                <div key={diary.id} className={classes.diaryItem}>
-                  <Link key={diary.id} to={`/diary/${diary.id}`}>
-                  <img
-                    src={diary.image ? diary.image : 'src/assets/test2.jpg'}
-                    alt="image"
-                    className={classes.diaryImage}
-                  />
-                  <p className={classes.title}>{diary.title}</p>
-                  <p className={classes.date}>{diary.date}</p>
-                </Link>
-              </div>
-            ))
-          )}
+        )}
       </div>
       <div>
         {modalIsVisible ? (
