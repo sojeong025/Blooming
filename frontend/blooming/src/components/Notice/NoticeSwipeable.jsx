@@ -301,8 +301,9 @@ const NoticeSwipeable = () => {
   return (
     <>
       <div className={classes.reload} onClick={onReNotice}>
-        눌러서 새로고침 테스트중
+        ==눌러서 새로고침 테스트 완료== 앱바에 새로고침 아이콘, 버튼 넣기
       </div>
+      <div>읽음처리 안댐 고쳐야해</div>
       <InfiniteScroll
         dataLength={notice.length}
         next={fetchNotice}
