@@ -75,12 +75,16 @@ function CreateItem({ hide, item }) {
             date: ItemData.date,
             image: ItemData.image
           }
-          setDiaries((existingData) => [customItemData, ...existingData]); // 아이템 만들기
+          setDiaries((existingData) => {
+            return [customItemData, ...existingData];
+          });
+          // hide(); 
         } catch (error) {
           console.error(error);
         }
       };
       createDiary();
+      hide();
       
     } else {
       const updateDiary = async () => {
@@ -125,9 +129,10 @@ function CreateItem({ hide, item }) {
                   required
               />
           </div>
-
-          {item ? <button name='action' value='edit' type="submit"><AiOutlineCheck /></button>
-            : <button name='action' value='add' type="submit"><AiOutlineCheck /></button>}
+          <div className={classes.btn}>
+            {item ? <button name='action' value='edit' type="submit"><AiOutlineCheck /></button>
+              : <button name='action' value='add' type="submit"><AiOutlineCheck /></button>}
+          </div>
         </div>
           
 

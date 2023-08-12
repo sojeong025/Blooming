@@ -17,7 +17,13 @@ const Diary = () => {
     const fetchData = async () => {
       try {
         const response = await customAxios.get("diary");
-        setDiaries(response.data.result[0]);
+        
+        if (response?.data?.result?.length > 0) {
+          setDiaries(response.data.result[0]);
+          console.log(diaries)
+        } else {
+          setDiaries([]);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -25,6 +31,7 @@ const Diary = () => {
     };
     fetchData();
   }, []);
+
 
   if (loading) {
     return <div>로딩중...</div>;
@@ -63,7 +70,7 @@ const Diary = () => {
             </div>
           ))
         ) : (
-          <p>다이어리를 작성해주세요.</p>
+          <div className={classes.none}>다이어리를 작성해주세요</div>
         )}
       </div>
       <div>

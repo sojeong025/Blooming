@@ -10,9 +10,17 @@ function MyWishlistMe({ myWishlist, toWishlist }) {
     });
   };
 
+  if (!myWishlist) {
+    return (
+      toWishlist.map((wish) => 
+        <MyWishlistItem key={wish.productId} wish={wish} onClick={handleNavigation} you="yes" />
+      )
+    )
+  }
+
   return (
     <>
-      {myWishlist ? (
+      {myWishlist !== [] ? (
         myWishlist.map((wish) => (
           toWishlist.includes(wish) ? (
             <MyWishlistItem key={wish.productId} wish={wish} onClick={handleNavigation} you="yes" />
