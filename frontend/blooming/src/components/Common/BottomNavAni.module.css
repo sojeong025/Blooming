@@ -56,7 +56,7 @@
 }
 
 /* #FFFAF4 */
-.navTop {
+/* .navTop {
   width: 100%;
   height: 70px;
   position: fixed;
@@ -64,23 +64,22 @@
   left: 0;
   right: 0;
   z-index: 1;
-  background-color: #FFFAF4;
-}
+  background-color: var(--color-bg);
+} */
 .cursor {
   position: absolute;
-  top: -12px;
+  bottom: 4px;
   left: 0px;
-  height: 64px;
-  width: 64px;
-  background: #FFFAF4;
+  height: 53px;
+  width: 63px;
+  background: var(--color-bg);
   border-radius: 0 0 100% 100%;
   z-index: 1;
   transition: transform 300ms ease;
 }
 .cursor svg {
   position: absolute;
-  top: 12px;
-  fill: #FFFAF4;
+  fill: var(--color-bg);
 }
 .cursor svg:first-child {
   right: calc(100% - 1px);

@@ -41,7 +41,7 @@ const BottomNav = () => {
   // 2. 아이콘만 넣고 페이지 명은 위에 적어주기
   return (
     <div>
-      <div className={classes.navTop}></div>
+      {/* <div className={classes.navTop}></div> */}
       <nav className={classes.navBar}>
         <input
           type='radio'
