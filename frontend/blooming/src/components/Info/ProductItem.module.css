@@ -40,7 +40,7 @@
 }
 .company {
   font-weight: 600;
-  font-size: 20px;
+  font-size: 18px;
   /* word-break: keep-all; */
 }
 
@@ -54,15 +54,15 @@
 }
 .heart {
   position: absolute;
-  top: 8%;
+  top: 5%;
   right: 8%;
   z-index: 1;
 }
 .IconWrapper {
-  width: 35px;
+  /* width: 35px;
   height: 35px;
   border-radius: 50%;
-  background-color:  rgba( 255, 255, 255, 0.8);
+  background-color:  rgba( 255, 255, 255, 0.8); */
   display: flex;
   justify-content: center;
   align-items: center;

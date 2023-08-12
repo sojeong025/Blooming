@@ -43,21 +43,3 @@
   cursor: pointer;
 }
 
-.topButton {
-  position: fixed;
-  bottom: 70px;
-  right: 20px;
-  background-color: #1e88e5;
-  border: none;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 12px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-.topButton:hover {
-  background-color: #0d47a1;
-}

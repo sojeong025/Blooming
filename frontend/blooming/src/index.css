@@ -45,7 +45,10 @@
 
   /* 하트 */
   --color-heart: #FF6347;
-  --color-heart-inactive:#A9A9A9;
+  --color-heart-inactive:#a9a9a9;
+  /* 별점 */
+  --color-rating-full: gold;
+  --color-rating-empty: grey;
 }
 
 .mainContainer {

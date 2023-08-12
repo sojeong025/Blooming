@@ -1,7 +1,19 @@
+/* infoDetail ================================= */
+
+/* 고민중 */ 
+.topSticky{
+  padding: 0 16px;
+
+  top: 50px;
+  position: sticky;
+  background-color: var(--color-bg);
+  z-index: 1;
+}
 
 /* 회사명, 위치 */
 .ProductTitle {
   padding-top: 10px;
+  padding-bottom: 10px;
   height: 70px;
   display: flex;
   flex-direction: column;
@@ -24,24 +36,33 @@
   padding-top: 1.2px;
   padding-right: 3px;
 }
-
 .hr {
-  margin: 0;
-  margin-top: 5px;
+  opacity: 0.5;
+  margin: 5px 0;
 }
+/* infoDetail ================================= */
 
+/* productDetailItem ===========================*/
 /* 업체 정보 */
+.TabTitle{
+  margin: 15px 0;
+  font-size: 20px;
+  font-weight: 800;
+} 
 .detailContainer {
   display: flex;
   align-items: flex-start;
-  padding: 20px 0;
+  padding-bottom: 15px;
 }
 .companyImg{
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
-  padding-right: 10px;
+  margin-right: 15px;
+}
+.titleBrief {
+  margin-top: 5px;
 }
 .subTitle{
   font-size: 20px;
@@ -51,4 +72,25 @@
 .brief {
   font-size: 16px;
   word-break: keep-all;
+}
+
+.infoContainer {
+  margin: 0 4px;
+  height: 60px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  line-height: 27px;
+}
+
+.leftText {
+  flex-basis: 18%;
+  font-weight: 600;
+  color: #7a7a7a;
+}
+.rightText{
+  flex: 1; 
+  padding: 0 8px; 
 }
