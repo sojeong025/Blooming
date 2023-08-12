@@ -97,7 +97,10 @@ const EditProfile = () => {
             required
           />
           {/* form이 바뀌면, 완료 버튼 활성화 시키기!! */}
-          <TopBtn text='완료' onSubmit={submitUpdate} />
+          {/* <TopBtn text='완료' onSubmit={submitUpdate} /> */}
+          <button type='submit' onSubmit={submitUpdate}>
+            완료
+          </button>
         </form>
       </div>
 
