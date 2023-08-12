@@ -56,6 +56,7 @@ export default function WeddingHall() {
 
   useEffect(() => {
     fetchData();
+    // 디자인용 더미 =======================================================================================================================
     // setWeddingHall([
     //   {
     //     id: 85,
@@ -148,7 +149,7 @@ export default function WeddingHall() {
           </button>
         </ErrorModal> */}
         <RecommendItem />
-        <TitleText>전체 주절주절</TitleText>
+        <TitleText>웨딩홀 전체</TitleText>
         <InfiniteScroll
           dataLength={weddingHall.length}
           next={fetchData}
@@ -195,8 +196,8 @@ const FlexItem = styled.div`
 
 const TitleText = styled.div`
   margin-top: 20px;
-  margin-left: 16px;
-  margin-bottom: 5px;
-  font-size: 24px;
+  margin-left: 24px;
+  margin-bottom: 10px;
+  font-size: 20px;
   font-weight: bold;
 `;

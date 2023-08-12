@@ -7,7 +7,7 @@ function Info() {
     <div>
       <nav className={classes.navContainer}>
         <NavLink to='/info/wedding-hall' state={{ productType: "HALL" }}>
-          <div>예식장</div>
+          <div>웨딩홀</div>
         </NavLink>
         <NavLink to='/info/studio' state={{ productType: "STUDIO" }}>
           <div>스튜디오</div>

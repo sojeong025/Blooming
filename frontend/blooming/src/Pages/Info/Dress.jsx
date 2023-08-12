@@ -129,8 +129,8 @@ const FlexItem = styled.div`
 
 const TitleText = styled.div`
   margin-top: 20px;
-  margin-left: 16px;
-  margin-bottom: 5px;
-  font-size: 24px;
+  margin-left: 24px;
+  margin-bottom: 10px;
+  font-size: 20px;
   font-weight: bold;
 `;
