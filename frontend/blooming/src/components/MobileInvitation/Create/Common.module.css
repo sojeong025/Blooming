@@ -7,8 +7,8 @@
 }
 .header{
   font-weight: bold;
-  font-size: 18px;
-  padding-bottom: 6px;
+  margin: 15px 0;
+  font-size: 20px;
 }
 .thumbnail{
   display: flex;
@@ -24,8 +24,10 @@
   border-radius: 4px;
   width: 94%;
   padding: 10px;
-  margin: 10px 0 10px;
+  margin: 5px 0 5px;
   height: 15px;
+  font-size: 16px;
+  font-family: 'SUITE-regular';
 }
 .inputField:focus {
   outline: none;
@@ -84,4 +86,20 @@
   z-index: 5;
   font-family: 'SUITE-regular';
   background-color: #b4b4b459;
+}
+
+.bodytext{
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: 600;
+}
+.themeSelection {
+  margin: 20px 0 30px;
+}
+.radio {
+  padding: 5px;
+  font-size:18px;
+}
+.hr {
+  margin-bottom: 20px;
 }

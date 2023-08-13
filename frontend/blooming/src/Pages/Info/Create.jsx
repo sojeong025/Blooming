@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./Create.module.css";
-import Preview from "../../components/MobileInvitation/Preview";
 
 import PreviewModal from "../../components/MobileInvitation/PreviewModal";
 
@@ -21,6 +20,8 @@ function Create() {
 
   const [previewModalVisible, setPreviewModalVisible] = useState(false);
   const formData = useRecoilValue(mobileInvitationState);
+
+  const [selectedTheme, setSelectedTheme] = useState(1);
 
   function handlePreviewClick() {
     setPreviewModalVisible(true);
@@ -69,7 +70,7 @@ function Create() {
 
   return (
     <div className='mainContainer'>
-      <Main />
+      <Main onThemeSelected={(theme) => setSelectedTheme(theme)} />
       <GroomInfo />
       <BriderInfo />
       <Invitation />
@@ -85,7 +86,7 @@ function Create() {
       </div>
 
       {previewModalVisible && (
-        <PreviewModal onClose={() => setPreviewModalVisible(false)} />
+        <PreviewModal theme={selectedTheme} onClose={() => setPreviewModalVisible(false)} />
       )}
     </div>
   );

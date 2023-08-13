@@ -1,0 +1,37 @@
+.main {
+  margin-top: 30px;
+  text-align: center;
+  width: 370px;
+}
+.mainTitle {
+  letter-spacing: 3px;
+  font-size: 18px;
+  color: #FF98A8;
+  margin: 20px 0;
+}
+.mainDday{
+  font-weight: 600;
+  font-size: 30px;
+  margin: 20px 0 40px;
+}
+.main Img{
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+.mainName{
+  letter-spacing: 3px;
+  margin: 20px 0 40px;
+  font-weight: 700;
+  font-size: 25px
+}
+.mainWedding{
+  line-height: 50px;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+.main hr{
+  border: 0.3px solid #FF98A8;
+  width: 80%;
+}

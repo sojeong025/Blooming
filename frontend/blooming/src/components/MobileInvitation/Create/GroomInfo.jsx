@@ -17,9 +17,10 @@ function GroomInfo() {
   return (
     <div className={classes.container}>
       <p className={classes.header}>신랑측 정보</p>
-      <hr />
-      <label htmlFor="groomFatherName">아버님</label>
+      <hr className={classes.hr} />
+      <p className={classes.bodytext} htmlFor="groomFatherName">아버님</p>
       <input
+        autocomplete="off"
         className={classes.inputField}
         type="text"
         id="groomFatherName"
@@ -29,6 +30,7 @@ function GroomInfo() {
       />
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="tel"
         id="groomFatherPhone"
         name="groomFatherPhone"
@@ -38,9 +40,10 @@ function GroomInfo() {
         onChange={handleInputChange}
       />
       <br />
-      <label htmlFor="groomMotherName">어머님</label>
+      <p className={classes.bodytext} htmlFor="groomMotherName">어머님</p>
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="text"
         id="groomMotherName"
         placeholder="이름"
@@ -49,6 +52,7 @@ function GroomInfo() {
       />
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="tel"
         id="groomMotherPhone"
         name="groomMotherPhone"
@@ -58,9 +62,10 @@ function GroomInfo() {
         onChange={handleInputChange}
       />
 
-      <label htmlFor="groomName">신랑</label>
+      <p className={classes.bodytext} htmlFor="groomName">신랑</p>
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="text"
         id="groomName"
         placeholder="이름"
@@ -69,6 +74,7 @@ function GroomInfo() {
       />
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="tel"
         id="groomPhone"
         name="groomPhone"
