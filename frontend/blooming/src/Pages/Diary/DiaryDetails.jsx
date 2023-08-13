@@ -80,7 +80,7 @@ const DiaryDetails = () => {
           <div className={classes.imageContainer}>
             {diary.image && (
               <img
-                src={diary.image}
+                src={diary.image ? diary.image : 'src/assets/test2.jpg'}
                 alt="preview"
               />
             )}

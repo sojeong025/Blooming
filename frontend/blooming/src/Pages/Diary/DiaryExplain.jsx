@@ -6,6 +6,7 @@ import classes from './DiaryExplain.module.css';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
+import { GiSpellBook, GiSecretBook, GiHeartBottle } from 'react-icons/gi' 
 
 function DiaryExplain() {
   const navigate = useNavigate();
@@ -116,7 +117,7 @@ function DiaryExplain() {
         </section>
 
         {/* section 2 */}
-        <section className={classes.section} data-bgcolor="#f1dfe2" data-textcolor="#2b4176">
+        <section className={classes.section2} data-bgcolor="#f1dfe2" data-textcolor="#2b4176">
           <img className={classes.mainImg2} src="/src/assets/diary2.jpg" alt="" />
           <div className={classes.context}>
           <p className={classes.mainText} data-scroll data-scroll-speed="1">
@@ -125,19 +126,55 @@ function DiaryExplain() {
           </div>
         </section>
 
-        <hr className={classes.hr} />
+        {/* <hr className={classes.hr} /> */}
 
         {/* section 3 */}
-        <section className={classes.section} data-bgcolor="#FFFAF4" data-textcolor="#666">
-          <p data-scroll data-scroll-speed="1">
-            사용방법
-            1. 
-          </p>
-          <NavLink to='/diary'>
-            <button>
+        <section className={classes.section3} data-bgcolor="#FFFAF4" data-textcolor="#666">
+          <div data-scroll data-scroll-speed="1">
+          <div className={classes.Title}>다이어리 작성 방법</div>
+            
+            
+            <div className={classes.way1}>
+              <div className={classes.icon}>
+                <GiHeartBottle/>
+              </div>
+              <div className={classes.wayTitle}>
+                기념일마다 사진과 함께 <br/>
+                당신의 마음을 작성해보세요
+              </div>
+            </div>
+
+
+            <div className={classes.way2}>
+            <div className={classes.icon}>
+                <GiSecretBook />
+              </div>
+              <div className={classes.wayTitle}>
+                여러분의 본식 전까지 <br/> 
+                서로의 게시글은 비밀입니다
+              </div>
+            </div>
+            
+            
+            <div className={classes.way3}>
+            <div className={classes.icon}>
+                <GiSpellBook/>
+              </div>
+              <div className={classes.wayTitle}>
+                결혼식 후 공유와 함께 <br/>
+                실물 제작이 가능합니다!
+              </div>
+            </div>
+
+
+          </div>
+          <div >
+            <NavLink to='/diary'>
+              <div className={classes.btn}>
               다이어리 제작
-            </button>
-          </NavLink>
+              </div>
+            </NavLink>
+          </div>
         </section>
       </div>
     </div>
