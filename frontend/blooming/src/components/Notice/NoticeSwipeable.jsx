@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import { customAxios } from "../../lib/axios";
 
 import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
 
@@ -109,11 +111,14 @@ const NoticeSwipeable = () => {
   };
 
   // 시간 변환
+  dayjs.extend(timezone);
+  dayjs.extend(utc);
   dayjs.extend(relativeTime);
   dayjs.locale("ko");
+
   const getRelativeTime = (createdAt) => {
-    const now = dayjs();
-    const created = dayjs(createdAt);
+    const now = dayjs().tz("Asia/Seoul");
+    const created = dayjs.utc(createdAt).tz("Asia/Seoul");
     return created.from(now);
   };
 
