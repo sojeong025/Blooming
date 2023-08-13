@@ -10,21 +10,12 @@ import { AiOutlineCheck } from "react-icons/ai"
 
 function CreateItem({ hide, item }) {
   const [diaries, setDiaries] = useRecoilState(diaryState)
-  const [date, setDate] = useState(new Date());
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [imageURL, setImageURL] = useState('');
-  const [isEditMode, setIsEditMode] = useState(false)
+  const [date, setDate] = useState(item ? new Date(item.date) : new Date());
+  const [title, setTitle] = useState(item ? item.title : "");
+  const [content, setContent] = useState(item ? item.content : "");
+  const [imageURL, setImageURL] = useState(item ? item.image : "");
+  const [isEditMode, ] = useState(item ? true : false)
   
-  useEffect(() => {
-    if (item) {
-      setDate(new Date(item.date));
-      setTitle(item.title);
-      setContent(item.content);
-      setImageURL(item.image);
-      setIsEditMode(true);
-    }
-  }, [item])
 
   function dateChangeHandler(date) {
     setDate(date);
