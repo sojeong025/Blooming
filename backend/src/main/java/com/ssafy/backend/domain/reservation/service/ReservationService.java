@@ -126,7 +126,10 @@ public class ReservationService {
                     reservation.getId(),
                     reservation.getReservedDate(),
                     reservation.getReservedTime(),
-                    reservation.getProduct().getId()
+                    reservation.getProduct().getId(),
+                    reservation.getProduct().getProductType(),
+                    reservation.getProduct().getThumbnail(),
+                    reservation.getProduct().getCompany()
             );
             reservationResultDtos.add(reservationResultDto);
         }
