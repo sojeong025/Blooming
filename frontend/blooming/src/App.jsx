@@ -66,6 +66,7 @@ function App() {
     "/decide-wedding",
     "/choose-wedding",
     "/share",
+    "/invitation-create",
   ];
 
   // 동적 경로

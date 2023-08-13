@@ -17,12 +17,13 @@ function Invitation() {
   return (
     <div className={classes.container}>
       <p className={classes.header}>모시는 글</p>
-      <hr />
+      <hr className={classes.hr}/>
 
       <div>
-        <label htmlFor="title">제목 <span className={classes.required}>(필수)</span></label><br/>
+        <p className={classes.bodytext} htmlFor="title">제목 <span className={classes.required}>(필수)</span></p>
         <input
           className={classes.inputField}
+          autocomplete="off"
           type="text"
           id="title"
           placeholder="초대합니다."
@@ -30,7 +31,7 @@ function Invitation() {
           onChange={handleInputChange}
         /><br/>
 
-        <label htmlFor="content">내용 <span className={classes.required}>(필수)</span></label><br/>
+        <p className={classes.bodytext} htmlFor="content">내용 <span className={classes.required}>(필수)</span></p>
         {/* <button>샘플 인사말</button><br/> */}
         <textarea
           className={classes.textField}

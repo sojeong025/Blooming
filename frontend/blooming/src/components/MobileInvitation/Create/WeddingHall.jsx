@@ -19,11 +19,12 @@ function WeddingHall() {
   return (
     <div className={classes.container}  style={{ marginBottom: '110px' }}>
       <p className={classes.header}>예식장소</p>
-      <hr />
+      <hr className={classes.hr}/>
       <div>
-        <label htmlFor="weddingHallName">예식장 명 <span className={classes.required}>(필수)</span></label>
+        <p className={classes.bodytext} htmlFor="weddingHallName">예식장 명 <span className={classes.required}>(필수)</span></p>
         <input
           className={classes.inputField}
+          autocomplete="off"
           id="weddingHallName"
           placeholder="웨딩 컨벤션"
           value={invitation.weddingHallName}
@@ -31,9 +32,10 @@ function WeddingHall() {
         />
 
         <br />
-        <label htmlFor="floor">층 및 홀 <span className={classes.required}>(필수)</span></label>
+        <p className={classes.bodytext} htmlFor="floor">층 및 홀 <span className={classes.required}>(필수)</span></p>
         <input
           className={classes.inputField}
+          autocomplete="off"
           id="floor"
           placeholder="1층 그레이트홀"
           value={invitation.floor}
@@ -41,9 +43,10 @@ function WeddingHall() {
         />
 
         <br />
-        <label htmlFor="address">주소 <span className={classes.required}>(필수)</span></label>
+        <p className={classes.bodytext} htmlFor="address">주소 <span className={classes.required}>(필수)</span></p>
         <input
           className={classes.inputField}
+          autocomplete="off"
           id="address"
           placeholder="선택시 주소 검색창이 노출됩니다."
           value={invitation.address}

@@ -5,16 +5,8 @@
   z-index: 1000;
 }
 .concept {
-  margin-top: 100px;
+  margin-top: 130px;
 }
-
-/* .container h1{
-  text-align: center;
-  margin: 50px 10px 30px;
-  font-size: 28px;
-  font-family: 'LeferiPoint-SpecialItalicA';
-} */
-
 .container p {
   width: 80%;
   text-align: center;
@@ -24,14 +16,16 @@
 }
 
 .btn {
-  width: 90vw;
-  top: 0;
-  height: 50px;
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  width: 70vw;
+  height: 30px;
+  background-color: var(--color-groom); 
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 4px;
+  font-size: 20px;
+  margin-top: 50px;
 }

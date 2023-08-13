@@ -33,9 +33,9 @@ function WeddingDay() {
   return (
     <div className={classes.container}>
       <p className={classes.header}>예식일</p>
-      <hr />
+      <hr className={classes.hr}/>
       <div>
-        <label htmlFor="date">예식일</label>
+        <p className={classes.bodytext} htmlFor="date">예식일</p>
         <br />
         <DatePicker
           selected={enteredDate}
@@ -46,7 +46,7 @@ function WeddingDay() {
       </div>
 
       <div>
-        <label htmlFor="time">예식 시간</label>
+        <p className={classes.bodytext} htmlFor="time">예식 시간</p>
         <br />
         <DatePicker
           selected={enteredTime}

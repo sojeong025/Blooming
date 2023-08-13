@@ -11,17 +11,18 @@
   text-align: center;
 }
 .pre{
-  font-size: 16px;
-  padding-bottom: 16px;
+  font-size: 20px;
+  padding-bottom: 20px;
 }
 .total button {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 35px;
+  right: 20px;
   background-color: transparent;
   border: none;
   cursor: pointer;
   font-size: 16px;
+  color: rgb(129, 129, 129);
 }
 
 /* 전체 청첩장 */
@@ -31,45 +32,10 @@
   flex-direction: column;
   border-radius: 8px;
   align-items: center;
+  /* border: 1px solid black; */
 }
 
 /* ------------------ 메인 div ---------------- */
-.main {
-  margin-top: 30px;
-  /* border: 1px solid black; */
-  text-align: center;
-  width: 370px;
-}
-.mainTitle {
-  letter-spacing: 3px;
-  color: #FF98A8;
-  margin: 20px 0;
-}
-.mainDday{
-  font-weight: 400;
-  font-size: 30px;
-  margin: 20px 0;
-}
-.main Img{
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-}
-.mainName{
-  letter-spacing: 3px;
-  margin: 20px 0;
-  font-weight: 700;
-  font-size: 20px
-}
-.mainWedding{
-  line-height: 30px;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-.main hr{
-  border: 0.3px solid #FF98A8;
-  width: 80%;
-}
 
 /* -----------------인사말 div ---------------- */
 .mention{
@@ -82,24 +48,28 @@
   align-items: center;
 }
 .mentionTitle{
+  font-size: 24px;
   font-weight: 700;
   margin-bottom: 30px;
 }
 .mentionContent{
-  line-height: 30px;
-  width: 200px;
+  font-size: 18px;
+  line-height: 40px;
+  width: 250px;
   word-break: keep-all;
   color: rgb(81, 78, 78);
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 .mention hr{
   border: 0.3px solid #FF98A8;
-  width: 30%;
+  margin: 30px 0;
+  width: 80%;
 }
 
 /* -----------------연락 관련 div ------------------- */
 .connect {
   /* border: 1px solid black; */
+  font-size: 20px;
   text-align: center;
   width: 370px;
   display: flex;
@@ -108,39 +78,106 @@
   margin: 50px 0;
   line-height: 35px;
 }
+
 .connectImg{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url('../../assets/Preview/2.jpg'); 
-  margin-top: 50px;
-  width: 300px;
-  border: 1px solid black;
-  color: white;
+  background-image: url('/src/assets/Couple/cover.jpg'); 
+  margin: 50px 0 20px;
+  width: 368px;
+  /* border: 1px solid black; */
+  font-weight: 800;
   height: 100px;
-  letter-spacing: 8px;
-  font-size: 13px;
+  letter-spacing: 3px;
+  font-size: 18px;
 }
 .connectCouple {
+  display: flex;
+  flex-direction: column;
   margin: 40px;
-  font-size: 16px;
+  font-size: 20px;
+}
+.connectCall {
+  display: flex;
+  margin-bottom: 30px;
+  width: 100vw;
+  justify-content: center;
+}
+.connectCallGroom {
+  margin : 0px 10px;
+  padding: 5px 0px;
+}
+.connectIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-common);
+  color: #fff;  padding: 5px 12px;
+  margin: 0px 10px;
+  border-radius: 100%;
+}
+.connectIconGroom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-groom);
+  color: #fff;
+  padding: 5px 12px;
+  margin: 0px 10px;
+  border-radius: 100%;
+}
+.connectIconBrider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-brider);
+  color: #fff;
+  padding: 5px 12px;
+  margin: 0px 10px;
+  border-radius: 100%;
 }
 .connectParentImg{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 370px;
-  height: 40px;
-  background-color: #f7d8dd;
+  width: 368px;
+  height: 50px;
+  font-weight: 600;
+  background-color: #ebe8e8;
 }
 .connectParentPhone{
-  margin-top: 20px;
+  margin-bottom: 40px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+}
+.par {
+  margin: 30px 0;
+  font-weight: 600;
+  color: var(--color-groom)
+}
+.par2 {
+  margin: 30px 0;
+  font-weight: 600;
+  color: var(--color-brider)
+}
+.parent {
+  margin: 20px 0;
+}
+.connecticons{
+  display: flex;
+  height: 45px;
 }
 
 /* --------캘린더--------- */
 .calendar {
   width: 300px;
   background-color: white;
+}
+
+.styledForm {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  align-items: center;
 }

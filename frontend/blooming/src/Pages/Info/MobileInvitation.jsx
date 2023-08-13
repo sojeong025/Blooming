@@ -31,18 +31,17 @@ function MobileInvitation() {
   return (
     <div className='mainContainer'>
       <div className={classes.container}>
-        {/* <h1>Mobile Wedding Invitation</h1> */}
         <div className={classes.concept}>
           <ConceptsList />
         </div>
 
         {count ? (
           <NavLink to='/mobile-invitation-detail'>
-            <button className={classes.btn}>나의 청첩장 보기</button>
+            <div className={classes.btn}>나의 청첩장 보기</div>
           </NavLink>
         ) : (
           <NavLink to='/invitation-create'>
-            <button className={classes.btn}>제작하기</button>
+            <div className={classes.btn}>제작하기</div>
           </NavLink>
         )}
       </div>

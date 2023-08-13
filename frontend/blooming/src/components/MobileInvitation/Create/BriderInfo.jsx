@@ -17,10 +17,11 @@ function BriderInfo() {
   return (
     <div className={classes.container}>
       <p className={classes.header}>신부측 정보</p>
-      <hr />
-      <label htmlFor="brideFatherName">아버님</label>
+      <hr className={classes.hr} />
+      <p className={classes.bodytext} htmlFor="brideFatherName">아버님</p>
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="text"
         id="brideFatherName"
         placeholder="이름"
@@ -29,6 +30,7 @@ function BriderInfo() {
       />
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="tel"
         id="brideFatherPhone"
         name="brideFatherPhone"
@@ -38,9 +40,10 @@ function BriderInfo() {
         onChange={handleInputChange}
       />
       <br />
-      <label htmlFor="brideMotherName">어머님</label>
+      <p className={classes.bodytext} htmlFor="brideMotherName">어머님</p>
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="text"
         id="brideMotherName"
         placeholder="이름"
@@ -49,6 +52,7 @@ function BriderInfo() {
       />
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="tel"
         id="brideMotherPhone"
         name="brideMotherPhone"
@@ -58,9 +62,10 @@ function BriderInfo() {
         onChange={handleInputChange}
       />
 
-      <label htmlFor="brideName">신부</label>
+      <p className={classes.bodytext} htmlFor="brideName">신부</p>
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="text"
         id="brideName"
         placeholder="이름"
@@ -69,6 +74,7 @@ function BriderInfo() {
       />
       <input
         className={classes.inputField}
+        autocomplete="off"
         type="tel"
         id="bridePhone"
         name="bridePhone"
