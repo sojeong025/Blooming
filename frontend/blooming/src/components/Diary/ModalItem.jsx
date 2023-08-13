@@ -60,13 +60,13 @@ function CreateItem({ hide, item }) {
         try {
           const response = await customAxios.post("diary", ItemData);
           const customItemData = {
-            id: response.data.result[0],
+            id: Number(response.data.result[0]),
             title: ItemData.title,
             content: ItemData.content,
             date: ItemData.date,
             image: ItemData.image
           }
-          setDiaries([customItemData, ...diaries]);
+          setDiaries((prevDiaries) => [customItemData, ...prevDiaries]);
         } catch (error) {
           console.error(error);
         }
