@@ -11,4 +11,7 @@ Button.propTypes = {
 
 export default Button;
 
-const CostomBtn = styled.button``;
+const CostomBtn = styled.div`
+  border: 1px solid black;
+  margin: 10px;
+`;

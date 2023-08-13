@@ -1,18 +1,3 @@
-/* 나중에 디테일 수정 */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  position: fixed;
-  width: 100%;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #dee2e6;
-  height: 56px;
-}
-
 .container {
   display: flex;
   flex-direction: column;

@@ -1,0 +1,161 @@
+.JoinContainer {
+  margin: 50px 0;
+}
+.JoinContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titleText {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+
+}
+.subText{
+  color:grey;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* ========= input ========= */
+.wrapper {
+  width: 80vw;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  margin-top: 25px;
+  display: inline-block;
+}
+.errorMessage {
+  padding-top: 5px;
+  margin-left: 3px;
+  font-size: 13px;
+  color: red;
+}
+
+.inputBox {
+  display: block;
+  width: 100%;
+  height: 20px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  transition: border-radius 250ms ease;
+}
+.inputBox:focus {
+  outline: none;
+  border: 1px solid steelblue;
+}
+.inputError {
+  border: 1px solid red;
+}
+
+.inputFilled {
+  border: 1px solid steelblue; 
+}
+/* ============================================== */
+
+.inputName {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.inputName > div {
+  width: auto;
+}
+/* ========= gender ========== */
+.checkbox {
+  background: #1e1e1e;
+  border-radius: 100px;
+  padding: 10px 15px;
+  color: #626262;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 45px;
+  width: 245px;
+  font-size: 21px;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+  background-clip: content-box;
+  margin-bottom: 20px;
+}
+
+.input {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.on {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #1e1e1e;
+  text-align: right;
+  color: #fff;
+  border-radius: 100px;
+  z-index: 2;
+}
+
+.on span {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 500ms ease-in-out;
+  user-select: none;
+}
+
+.off {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  text-align: right;
+  color: #000;
+  border-radius: 100px;
+  z-index: 1;
+  background-clip: content-box;
+}
+.off span {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 500ms ease-in-out;
+  user-select: none;
+}
+.active .on {
+  transform: translateX(100%);
+  z-index: 1;
+}
+.active .off {
+  transform: translateX(-0%);
+  z-index: 2;
+}
