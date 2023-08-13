@@ -8,7 +8,7 @@ import { customAxios, fileAxios } from "../../lib/axios";
 import { AiOutlineLeft } from "react-icons/ai"
 import { AiOutlineCheck } from "react-icons/ai"
 
-function CreateItem({ hide, item }) {
+function CreateItem({ hide, visible, item }) {
   const [diaries, setDiaries] = useRecoilState(diaryState)
   const [date, setDate] = useState(item ? new Date(item.date) : new Date());
   const [title, setTitle] = useState(item ? item.title : "");
@@ -16,6 +16,9 @@ function CreateItem({ hide, item }) {
   const [imageURL, setImageURL] = useState(item ? item.image : "");
   const [isEditMode, ] = useState(item ? true : false)
   
+  const modalStyle = {
+    display: visible ? 'block' : 'none'
+  }
 
   function dateChangeHandler(date) {
     setDate(date);
@@ -105,7 +108,7 @@ function CreateItem({ hide, item }) {
   }
 
   return (
-    <div>
+    <div style={modalStyle}>
         <form className={classes.form} onSubmit={submitHandler}>
         {/* 버튼 사이 날짜 선택 자리 */}
         <div className={classes.actions}>
