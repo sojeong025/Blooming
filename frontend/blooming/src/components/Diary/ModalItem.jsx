@@ -55,47 +55,53 @@ function CreateItem({ hide, item }) {
   async function submitHandler(event) {
     event.preventDefault();
     
-    if (!isEditMode) {
-      const createDiary = async () => {
-        try {
-          const response = await customAxios.post("diary", ItemData);
-          const customItemData = {
-            id: Number(response.data.result[0]),
-            title: ItemData.title,
-            content: ItemData.content,
-            date: ItemData.date,
-            image: ItemData.image
-          }
-          setDiaries((prevDiaries) => [customItemData, ...prevDiaries]);
-        } catch (error) {
-          console.error(error);
+    const createDiary = async () => {
+      try {
+        const response = await customAxios.post("diary", ItemData);
+        const customItemData = {
+          id: Number(response.data.result[0]),
+          title: ItemData.title,
+          content: ItemData.content,
+          date: ItemData.date,
+          image: ItemData.image
         }
-      };
-      await createDiary();
-    } else {
-      const updateDiary = async () => {
-        try {
-          const customItemData = {
-            id: Number(item.id),
-            title: title,
-            content: content,
-            date: `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
-            image: imageURL,
-          }
-          await customAxios.put("diary", customItemData);
-          setDiaries(diaries.map((diary) => {
-            if (diary.id === Number(item.id)) {
-              return customItemData
-            }
-            return diary
-          }));
-        } catch (error) {
-          console.error(error);
+        setDiaries((prevDiaries) => [customItemData, ...prevDiaries]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
+    const updateDiary = async () => {
+      try {
+        const customItemData = {
+          id: Number(item.id),
+          title: title,
+          content: content,
+          date: `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
+          image: imageURL,
         }
-      };
-      await updateDiary();
+        await customAxios.put("diary", customItemData);
+        setDiaries(diaries.map((diary) => {
+          if (diary.id === Number(item.id)) {
+            return customItemData
+          }
+          return diary
+        }));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const postHandling = () => {
+      if (!isEditMode) {
+        return createDiary();
+      } else {
+        return updateDiary();
+      }
     }
-    setTimeout(() => hide(), 500);
+
+    await postHandling();
+    hide();
   }
 
   return (
