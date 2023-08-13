@@ -59,7 +59,7 @@ const DiaryDetails = () => {
 
   return (
     <motion.div initial="initial" animate="visible" variants={pageTransition} style={{marginTop:"56px"}}>
-      {modalIsVisible ? <CreateItem hide={hideModalHandler} item={diary} /> :
+      {modalIsVisible ? <CreateItem hide={hideModalHandler} visible={modalIsVisible} item={diary} /> :
         <div className={classes.form}>
           <div className={classes.actions}>
             <div className={classes.back}>

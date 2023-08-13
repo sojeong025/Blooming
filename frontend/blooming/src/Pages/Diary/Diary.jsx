@@ -73,13 +73,10 @@ const Diary = () => {
         )}
       </div>
       <div>
-        {modalIsVisible ? (
-          <CreateItem hide={hideModalHandler} />
-        ) : (
-          <button onClick={showModalHandler} className={classes.button}>
-            <PiPencilLineFill />
-          </button>
-        )}
+        <CreateItem hide={hideModalHandler} visible={modalIsVisible} />
+        <button onClick={showModalHandler} className={classes.button}>
+          <PiPencilLineFill />
+        </button>
       </div>
     </div>
   );
