@@ -60,15 +60,15 @@ function CreateItem({ hide, visible, item }) {
     
     const createDiary = async () => {
       try {
-        const response = await customAxios.post("diary", ItemData);
-        const customItemData = {
-          id: Number(response.data.result[0]),
-          title: ItemData.title,
-          content: ItemData.content,
-          date: ItemData.date,
-          image: ItemData.image
-        }
-        setDiaries((prevDiaries) => [customItemData, ...prevDiaries]);
+        await customAxios.post("diary", ItemData);
+        // const customItemData = {
+        //   id: Number(response.data.result[0]),
+        //   title: ItemData.title,
+        //   content: ItemData.content,
+        //   date: ItemData.date,
+        //   image: ItemData.image
+        // }
+        // setDiaries((prevDiaries) => [customItemData, ...prevDiaries]);
       } catch (error) {
         console.error(error);
       }
