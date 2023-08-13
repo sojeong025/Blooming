@@ -75,10 +75,7 @@ function CreateItem({ hide, item }) {
             date: ItemData.date,
             image: ItemData.image
           }
-          setDiaries((existingData) => {
-            return [customItemData, ...existingData];
-          });
-          // hide(); 
+          setDiaries([customItemData, ...diaries]);
         } catch (error) {
           console.error(error);
         }
