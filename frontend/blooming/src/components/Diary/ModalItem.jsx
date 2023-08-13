@@ -72,8 +72,6 @@ function CreateItem({ hide, item }) {
         }
       };
       createDiary();
-      hide();
-      
     } else {
       const updateDiary = async () => {
         try {
@@ -97,7 +95,7 @@ function CreateItem({ hide, item }) {
       };
       updateDiary();
     }
-    hide();
+    setTimeout(() => hide(), 200);
   }
 
   return (
