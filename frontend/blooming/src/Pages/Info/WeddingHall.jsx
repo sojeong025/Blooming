@@ -40,13 +40,13 @@ export default function WeddingHall() {
       if (response.data.result[0].last) {
         setHasMore(false);
       } else {
-        setWeddingHall((prevProducts) => [
-          ...prevProducts,
-          ...response.data.result[0].content,
-        ]);
         setCurrentPage(currentPage + 1);
         setIsLoading(false);
       }
+      setWeddingHall((prevProducts) => [
+        ...prevProducts,
+        ...response.data.result[0].content,
+      ]);
     } catch (error) {
       console.error("HALL 조회 에러:", error);
       // setIsLoading(true);

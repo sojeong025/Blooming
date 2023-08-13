@@ -22,12 +22,12 @@ export default function MyReview() {
       if (response.data.result[0].last) {
         setHasMore(false);
       } else {
-        setMyReview((prevProducts) => [
-          ...prevProducts,
-          ...response.data.result[0].content,
-        ]);
         setCurrentPage(currentPage + 1);
       }
+      setMyReview((prevProducts) => [
+        ...prevProducts,
+        ...response.data.result[0].content,
+      ]);
     } catch (error) {
       console.error("예약 정보 조회 에러:", error);
     }

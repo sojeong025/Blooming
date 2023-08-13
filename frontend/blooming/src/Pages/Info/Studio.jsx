@@ -40,13 +40,13 @@ export default function WeddingHall() {
       if (response.data.result[0].last) {
         setHasMore(false);
       } else {
-        setStudio((prevProducts) => [
-          ...prevProducts,
-          ...response.data.result[0].content,
-        ]);
         setCurrentPage(currentPage + 1);
         setIsLoading(false);
       }
+      setStudio((prevProducts) => [
+        ...prevProducts,
+        ...response.data.result[0].content,
+      ]);
     } catch (error) {
       console.error("유저 정보 조회 에러:", error);
       setErrorModal(true);
