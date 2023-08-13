@@ -29,7 +29,7 @@ const Diary = () => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [diaries]);
 
 
   if (loading) {
