@@ -1,0 +1,35 @@
+/* 별점 */
+.starContainer {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.starTitle {
+  flex-basis: 15%;
+  font-size: 16px;
+  padding-left: 5px;
+}
+
+.rating {
+  padding-top: 3px;
+}
+
+.emptyStar,
+.fullStar {
+  font-size: 2em;
+  margin-right: 4px;
+}
+
+.emptyStar {
+  color: var(--color-rating-empty);
+}
+
+.fullStar {
+  color: var(--color-rating-full);
+}
+
+.starRating {
+  margin-left: auto;
+  font-size: 14px;
+}

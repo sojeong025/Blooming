@@ -2,8 +2,13 @@ import { customAxios } from "../../lib/axios";
 import { useRecoilState } from "recoil";
 import { myReservationState } from "../../recoil/ProfileAtom";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import ReservationItem from "./ReservationItem";
+
 
 export default function MyReservation() {
+
+  const navigate = useNavigate();
 
   const [MyReservation, setMyReservation] = useRecoilState(myReservationState)
 
@@ -20,9 +25,21 @@ export default function MyReservation() {
     fetchData()
   }, [])
 
+  const handleNavigation = (reservation) => {
+    navigate(`/info/${reservation.productId}`, {
+      state: { id: reservation.productId, productType: reservation.productType },
+    });
+  };
+
   return (
     <div style={{marginTop: '56px'}}>
-      {MyReservation}
+      {MyReservation !== [] ? (
+        MyReservation.map((reservation) => (
+          <ReservationItem key={reservation.reservationId} reservation={reservation} onClick={handleNavigation} />
+        ))
+      ) : (
+          <div>예약이 없습니다.</div>
+      )}
     </div>
   );
 }
