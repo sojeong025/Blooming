@@ -53,7 +53,7 @@ import Error from "./Pages/Error";
 
 function App() {
   // TopNav를 숨길 페이지 path
-  const hiddenTopPaths = ["/", "/kakaologin", "/login"];
+  const hiddenTopPaths = ["/", "/kakaologin", "/login", "/go-join", "/join"];
   // BottomNav를 숨길 페이지 path
   const hiddenBottomPaths = [
     "/",

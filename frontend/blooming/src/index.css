@@ -51,6 +51,9 @@
   --color-rating-empty: grey;
   /* 삭제 */
   --color-delete: #DC143C;
+  
+  /* join 포인트 컬러 바꾸기 */
+  --color-join-point: red;
 }
 
 .mainContainer {
