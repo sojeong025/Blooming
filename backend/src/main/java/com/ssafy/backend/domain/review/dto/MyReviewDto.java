@@ -1,5 +1,7 @@
 package com.ssafy.backend.domain.review.dto;
 
+import com.ssafy.backend.domain.product.ProductType;
+import com.ssafy.backend.domain.product.repository.ProductRepository;
 import com.ssafy.backend.domain.review.Review;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class MyReviewDto {
+
     private Long reviewId;
     private int star;
     private String image;
@@ -17,6 +20,7 @@ public class MyReviewDto {
     private int likeCnt;
 
     private Long productId;
+    private ProductType productType;
     private String productName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createdDate;
@@ -33,5 +37,6 @@ public class MyReviewDto {
         this.productName = review.getProduct().getItemName();
         this.createdDate = review.getCreatedDate();
         this.updatedDate = review.getUpdatedDate();
+        this.productType = review.getProduct().getProductType();
     }
 }
