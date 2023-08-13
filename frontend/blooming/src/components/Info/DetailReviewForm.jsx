@@ -38,6 +38,7 @@ export default function DetailReviewForm({
       try {
         await customAxios.post("review", reviewData);
         await fetchReviewData();
+        onClose();
       } catch (error) {
         console.error(error);
       }

@@ -14,7 +14,7 @@ export default function DetailReviewList({
         loader={<h4>Loading...</h4>}
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>모든 상품을 불러왔습니다.</b>
+            <b>모든 리뷰를 불러왔습니다.</b>
           </p>
         }
       >
