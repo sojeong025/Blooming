@@ -95,7 +95,7 @@ function CreateItem({ hide, item }) {
       };
       updateDiary();
     }
-    setTimeout(() => hide(), 200);
+    setTimeout(() => hide(), 1000);
   }
 
   return (
