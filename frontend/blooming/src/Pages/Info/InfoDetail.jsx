@@ -80,6 +80,10 @@ export default function InfoDetail() {
         setHasMore(false);
       } else if (response.data.result[0].last) {
         setHasMore(false);
+        setReviews((prevReviews) => [
+          ...prevReviews,
+          ...response.data.result[0].content,
+        ]);
       } else {
         setReviews((prevReviews) => [
           ...prevReviews,
