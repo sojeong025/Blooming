@@ -64,7 +64,7 @@ public class SecurityConfig {
 			.antMatchers("/", "/v3/api-docs/**", "/swagger-ui/**", "/css/**", "/images/**", "/js/**", "/favicon.ico",
 				"/h2-console/**").permitAll()
 			.antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll() // options 무시
-			.antMatchers("/couple-certification").permitAll() // 커플 인증 요청 접근 가능
+			.antMatchers("/couple-certification", "/.well-known/**").permitAll() // 커플 인증 요청 접근 가능
 			.anyRequest().authenticated() // 위의 경로 이외에는 모두 인증된 사용자만 접근 가능
 			.and()
 			.logout()
