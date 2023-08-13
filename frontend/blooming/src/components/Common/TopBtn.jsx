@@ -1,17 +1,21 @@
 import styled from "styled-components";
 
-const TopBtn = ({ text, onSubmit }) => {
-  return <SubmitBtn onSubmit={onSubmit}>{text}</SubmitBtn>;
+const TopBtn = ({ children, onClick }) => {
+  return <CustomBtn onClick={onClick}>{children}</CustomBtn>;
 };
 
-const SubmitBtn = styled.button`
-  background-color: red;
-  z-index: 999;
+const CustomBtn = styled.button`
+  z-index: 950;
+  color: black;
+  border: none;
+  background-color: transparent;
+
   display: flex;
   text-align: center;
   align-items: center;
-  font-size: 1.3rem;
   letter-spacing: 2px;
+  margin: 0;
+  padding: 0;
 
   height: 56px;
 

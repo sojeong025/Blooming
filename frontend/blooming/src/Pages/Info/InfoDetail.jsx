@@ -27,7 +27,7 @@ export default function InfoDetail() {
   const location = useLocation();
   const id = location.state.id;
   const productType = location.state.productType;
-  // 디자인 용 더미
+  // 디자인 용 더미 =======================================================================================================================
   // const id = 85;
   // const productType = "DRESS";
 
@@ -95,7 +95,7 @@ export default function InfoDetail() {
   useEffect(() => {
     fetchProductData();
     fetchReviewData();
-    // 디자인 용 더미
+    // 디자인 용 더미 =======================================================================================================================
     // setProduct({
     //   id: 29,
     //   itemName: "[촬영+본식] 드레스 4벌",
@@ -135,7 +135,7 @@ export default function InfoDetail() {
     };
     try {
       await customAxios.post("reservation", data);
-      // 지금은 스케줄로 보내놨는데 스케쥴 수정 다하고 나면 바꿔야함.
+      // 지금은 스케줄로 보내놨는데 스케쥴 수정 다하고 나면 바꿔야함. =============================================================================
       navigate("/schedule");
     } catch (error) {
       console.log(error);
@@ -287,7 +287,7 @@ export default function InfoDetail() {
             </div>
             <button onClick={handleReserve}>예약하기</button>
 
-            {/* 스크롤용 lorem */}
+            {/* 스크롤용 lorem ======================================================================================================================= */}
             <div>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Architecto quo reiciendis error maiores ipsam placeat id deserunt
