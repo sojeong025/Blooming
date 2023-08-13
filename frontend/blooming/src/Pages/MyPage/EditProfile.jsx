@@ -2,8 +2,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userRoleState, userState } from "../../recoil/ProfileAtom";
 import classes from "./EditProfile.module.css";
 
-import { useEffect, useState } from "react";
-import { customAxios } from "../../lib/axios";
+import { useEffect, useRef, useState } from "react";
+import { customAxios, fileAxios } from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
 import InputForm from "../../components/Common/InputText";
 import TopBtn from "../../components/Common/TopBtn";
@@ -17,6 +17,9 @@ const EditProfile = () => {
   const [userData, setUserData] = useRecoilState(userState);
   const userRole = useRecoilValue(userRoleState);
   const [formData, setFormData] = useState({});
+
+  const inputFileRef = useRef();
+  const [image, setImage] = useState(userData.profileImage)
 
   // 탈퇴 모달
   const [isModal, setIsModal] = useState(false);
@@ -52,6 +55,25 @@ const EditProfile = () => {
     updateUserData();
   };
 
+  const handleImageClick = () => {
+    inputFileRef.current.click();
+  }
+
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      try {
+        const imageFormData = new FormData();
+        imageFormData.append('image', file);
+        const response = await fileAxios.post('INVITATION', imageFormData);
+        setImage(response.data.result[0].uploadImageUrl)
+        setFormData({...formData, profileImage : response.data.result[0].uploadImageUrl });
+      } catch (error) {
+        console.error('이미지 api 오류', error);
+      }
+    }
+  };
+
   const deleteProfile = async () => {
     try {
       await customAxios.delete("profile");
@@ -68,13 +90,20 @@ const EditProfile = () => {
         <img
           className={classes.profileImg}
           src={
-            userData.profileImage
-              ? userData.profileImage
+            image
+              ? image
               : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${userData.name}`
           }
           alt='profile'
+          onClick={handleImageClick}
         />
-
+        <input
+          type='file'
+          onChange={handleImageChange}
+          ref={inputFileRef}
+          style={{ display: "none" }}
+          accept='image/*'
+        />
         <div className={classes.profileEmail}>{formData.email}</div>
         {/* <div>{userRole}</div> */}
       </div>
