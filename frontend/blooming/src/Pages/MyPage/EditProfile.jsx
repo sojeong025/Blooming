@@ -9,12 +9,17 @@ import InputForm from "../../components/Common/InputText";
 import TopBtn from "../../components/Common/TopBtn";
 import { styled } from "styled-components";
 
+import DeleteModal from "../../components/MyPage/DeleteModal";
+
 const EditProfile = () => {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useRecoilState(userState);
   const userRole = useRecoilValue(userRoleState);
   const [formData, setFormData] = useState({});
+
+  // 탈퇴 모달
+  const [isModal, setIsModal] = useState(false);
 
   // 기존 데이터 채우기
   useEffect(() => {
@@ -49,8 +54,9 @@ const EditProfile = () => {
 
   const deleteProfile = async () => {
     try {
-      await customAxios.delete("profile");
-      navigate("/");
+      // await customAxios.delete("profile");
+      // navigate("/");
+      console.log("탈퇴");
     } catch (error) {
       console.log(error);
     }
@@ -58,56 +64,60 @@ const EditProfile = () => {
 
   return (
     <div className={`mainContainer ${classes.EditContainer}`}>
-      <div>
-        <div className={classes.profileContainer}>
-          <img
-            className={classes.profileImg}
-            src={
-              userData.profileImage
-                ? userData.profileImage
-                : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${userData.name}`
-            }
-            alt='profile'
-          />
+      <div className={classes.profileContainer}>
+        <img
+          className={classes.profileImg}
+          src={
+            userData.profileImage
+              ? userData.profileImage
+              : `https://boring-avatars-api.vercel.app/api/avatar?variant=beam&name=${userData.name}`
+          }
+          alt='profile'
+        />
 
-          <div className={classes.profileEmail}>{formData.email}</div>
-          {/* <div>{userRole}</div> */}
-        </div>
-        <form onSubmit={submitUpdate}>
-          <InputForm
-            label='닉네임'
-            name='nickname'
-            value={formData.nickname}
-            onChange={handleChange}
-            required
-          />
-          <InputForm
-            label='이름'
-            name='name'
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-          <InputForm
-            label='전화번호'
-            name='phoneNumber'
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            placeholder='전화번호를 작성해주세요.'
-            required
-          />
-          {/* form이 바뀌면, 완료 버튼 활성화 시키기!! */}
-          {/* <TopBtn text='완료' onSubmit={submitUpdate} /> */}
-          <button type='submit' onSubmit={submitUpdate}>
-            완료
-          </button>
-        </form>
+        <div className={classes.profileEmail}>{formData.email}</div>
+        {/* <div>{userRole}</div> */}
+      </div>
+      <form onSubmit={submitUpdate}>
+        <InputForm
+          label='닉네임'
+          name='nickname'
+          value={formData.nickname}
+          onChange={handleChange}
+          required
+        />
+        <InputForm
+          label='이름'
+          name='name'
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <InputForm
+          label='전화번호'
+          name='phoneNumber'
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          placeholder='전화번호를 작성해주세요.'
+          required
+        />
+        {/* form이 바뀌면, 완료 버튼 활성화 시키기!! */}
+        {/* <TopBtn text='완료' onSubmit={submitUpdate} /> */}
+        <button type='submit' onSubmit={submitUpdate}>
+          완료
+        </button>
+      </form>
+
+      <div className={classes.deleteProfile} onClick={() => setIsModal(true)}>
+        탈퇴하기
       </div>
 
-      {/* 누르면 모달로 바꾸기 */}
-      <a className={classes.deleteProfile} onClick={deleteProfile}>
-        회원탈퇴
-      </a>
+      <DeleteModal
+        userData={userData}
+        deleteProfile={deleteProfile}
+        show={isModal}
+        onClose={() => setIsModal(false)}
+      />
     </div>
   );
 };

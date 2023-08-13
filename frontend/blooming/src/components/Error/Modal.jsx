@@ -19,7 +19,6 @@ function Modal({ show, children, onClose }) {
         <ModalOverlay onClick={onClose}>
           <ModalContent onClick={(e) => e.stopPropagation()}>
             {children}
-            {/* <button onClick={onClose}>닫기</button> */}
           </ModalContent>
         </ModalOverlay>
       </>
@@ -36,7 +35,6 @@ const ModalOverlay = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 900;
-  /* transform: translateY(100%); */
 `;
 
 const ModalContent = styled.div`
@@ -45,10 +43,6 @@ const ModalContent = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  /* 전체크기 */
-  /* min-width: 100vw;
-  min-height: 100vh; */
-  /* min-height: calc(100vh - 60px); */
   padding: 20px;
   z-index: 900;
 `;

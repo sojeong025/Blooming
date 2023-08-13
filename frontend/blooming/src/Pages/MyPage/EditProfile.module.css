@@ -25,6 +25,8 @@
 }
 
 .deleteProfile {
-  margin-top: 20px;
-  
+  position: absolute;
+  bottom: 100px;
+  font-size: 16px;
+  color: grey
 }
