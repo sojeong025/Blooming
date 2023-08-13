@@ -54,9 +54,9 @@ const EditProfile = () => {
 
   const deleteProfile = async () => {
     try {
-      // await customAxios.delete("profile");
-      // navigate("/");
-      console.log("탈퇴");
+      await customAxios.delete("profile");
+      navigate("/");
+      // console.log("탈퇴");
     } catch (error) {
       console.log(error);
     }
