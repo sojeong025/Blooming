@@ -147,12 +147,9 @@ function CreateItem({ hide, item }) {
             accept="image/*"
             onChange={handleImageChange}
           />
-          {imageURL && (
-            <img
-              src={imageURL}
-              alt="preview"
-            />
-          )}
+          <div>
+            {imageURL ? <img src={imageURL} alt="preview"/> : null}
+          </div>
         </div>
 
 
