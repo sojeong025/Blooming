@@ -52,7 +52,7 @@ function CreateItem({ hide, item }) {
     image: imageURL
   };
 
-  function submitHandler(event) {
+  async function submitHandler(event) {
     event.preventDefault();
     
     if (!isEditMode) {
@@ -71,7 +71,7 @@ function CreateItem({ hide, item }) {
           console.error(error);
         }
       };
-      createDiary();
+      await createDiary();
     } else {
       const updateDiary = async () => {
         try {
@@ -93,9 +93,9 @@ function CreateItem({ hide, item }) {
           console.error(error);
         }
       };
-      updateDiary();
+      await updateDiary();
     }
-    setTimeout(() => hide(), 1000);
+    setTimeout(() => hide(), 500);
   }
 
   return (
