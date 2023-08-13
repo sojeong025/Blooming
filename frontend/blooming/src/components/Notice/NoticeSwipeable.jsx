@@ -46,45 +46,7 @@ const NoticeSwipeable = () => {
   };
 
   useEffect(() => {
-    // fetchNotice();
-    setNotice([
-      {
-        id: 688,
-        readStatus: "UNREAD",
-        notificationType: "SCHEDULE",
-        title: "2023-08-09 [웨딩촬영] 스미다 예약",
-        content:
-          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
-        createdAt: "2023-08-08T00:58:23.345615",
-      },
-      {
-        id: 687,
-        readStatus: "UNREAD",
-        notificationType: "SCHEDULE",
-        title: "2023-08-09 [웨딩촬영] 스미다 예약",
-        content:
-          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
-        createdAt: "2023-08-08T00:58:13.048663",
-      },
-      {
-        id: 686,
-        readStatus: "UNREAD",
-        notificationType: "SCHEDULE",
-        title: "2023-08-09 [웨딩촬영] 스미다 예약",
-        content:
-          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
-        createdAt: "2023-08-08T00:58:02.844112",
-      },
-      {
-        id: 685,
-        readStatus: "UNREAD",
-        notificationType: "SCHEDULE",
-        title: "2023-08-09 [웨딩촬영] 스미다 예약",
-        content:
-          "내일은 예비신랑님이 웨딩웨딩촬용 하는 날이에요. 클릭해서 팁을 알아보세요!",
-        createdAt: "2023-08-08T00:57:52.620322",
-      },
-    ]);
+    fetchNotice();
   }, []);
 
   // 새로고침
