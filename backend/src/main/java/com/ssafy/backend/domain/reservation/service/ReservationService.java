@@ -1,7 +1,9 @@
 package com.ssafy.backend.domain.reservation.service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.Authentication;
@@ -51,62 +53,80 @@ public class ReservationService {
         Product product = productRepository.findById(reservationRegistDto.getProduct_id())
                 .orElseThrow(() -> new IllegalArgumentException("아이디에 해당하는 상품이 없습니다."));
 
-        //예약 객체 생성
-        Reservation reservation = new Reservation(reservationRegistDto.getReservedDate(), reservationRegistDto.getReservedTime());
-        reservation.setUser(findUser);
-        reservation.setProduct(product);
+        boolean validTime = isValidTime(reservationRegistDto, product);
 
-        //객체 저장
-        reservationRepository.save(reservation);
+        if (validTime) {
+            //예약 객체 생성
+            Reservation reservation = new Reservation(reservationRegistDto.getReservedDate(), reservationRegistDto.getReservedTime());
+            reservation.setUser(findUser);
+            reservation.setProduct(product);
 
-        //예약 시 스케줄 자동 등록
-        //등록한 예약의 id 가져오기 : 그 1차캐시로.. 바로 되려나 아래처럼
-        
-        //스케줄 타입 결정
-        ScheduleType scheduleType = null;
-        switch(product.getProductType()){
-            case HALL:
-                scheduleType = ScheduleType.HALL; break;
-            case STUDIO:
-            case DRESS:
-            case MAKEUP:
-                scheduleType = ScheduleType.SDM; break;
-        }
-        Schedule savedSchedule = scheduleService.registReservationSchedule(new ReservationScheduleRegistDto(
-                product.getItemName() + " 예약",
-                product.getCompany() + " 에 방문해주세요",
-                reservationRegistDto.getReservedDate(),
-                reservationRegistDto.getReservedTime(),
-                ScheduledBy.COMMON,
-                scheduleType,
-                reservation.getId()
-        ));
+            //객체 저장
+            reservationRepository.save(reservation);
 
-        //예약 시 랭킹 보드에 추가 ranking - productId
-        try{
-            System.out.println("=============redis: ranking");
-            String key = "ranking:" + product.getProductType();
-            String value = String.valueOf(product.getId());
-            Long score = 1L;
-            //랭킹 키로 해당 value 1 증가해보기
-            try{
-                //일단 증가시켜보기
-                redisTemplate.opsForZSet().incrementScore(key, value, score);
-            }catch (Exception e){
-                //에러나면 없는 것이므로 추가하기
-                System.out.println("===처음 추가함===");
-                redisTemplate.opsForZSet().add(key, value, score);
+            //예약 시 스케줄 자동 등록
+            //등록한 예약의 id 가져오기 : 그 1차캐시로.. 바로 되려나 아래처럼
+
+            //스케줄 타입 결정
+            ScheduleType scheduleType = null;
+            switch (product.getProductType()) {
+                case HALL:
+                    scheduleType = ScheduleType.HALL;
+                    break;
+                case STUDIO:
+                case DRESS:
+                case MAKEUP:
+                    scheduleType = ScheduleType.SDM;
+                    break;
             }
-            System.out.println("저장 완료");
-        }catch(Exception e){
-            e.printStackTrace();
-            System.out.println("저장 실패");
-        }
-        finally {
-            System.out.println("=============redis");
-        }
+            Schedule savedSchedule = scheduleService.registReservationSchedule(new ReservationScheduleRegistDto(
+                    product.getItemName() + " 예약",
+                    product.getCompany() + " 에 방문해주세요",
+                    reservationRegistDto.getReservedDate(),
+                    reservationRegistDto.getReservedTime(),
+                    ScheduledBy.COMMON,
+                    scheduleType,
+                    reservation.getId()
+            ));
 
-        return new ReservationScheduleResultDto(savedSchedule.getId());
+            //예약 시 랭킹 보드에 추가 ranking - productId
+            try {
+                System.out.println("=============redis: ranking");
+                String key = "ranking:" + product.getProductType();
+                String value = String.valueOf(product.getId());
+                Long score = 1L;
+                //랭킹 키로 해당 value 1 증가해보기
+                try {
+                    //일단 증가시켜보기
+                    redisTemplate.opsForZSet().incrementScore(key, value, score);
+                } catch (Exception e) {
+                    //에러나면 없는 것이므로 추가하기
+                    System.out.println("===처음 추가함===");
+                    redisTemplate.opsForZSet().add(key, value, score);
+                }
+                System.out.println("저장 완료");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("저장 실패");
+            } finally {
+                System.out.println("=============redis");
+            }
+
+            return new ReservationScheduleResultDto(savedSchedule.getId());
+        } else {
+            throw new IllegalArgumentException("예약 가능한 시간이 아닙니다. 업체 운영 시간 내에 30분 단위의 예약만 가능합니다.");
+        }
+    }
+
+    private static boolean isValidTime(ReservationRegistDto reservationRegistDto, Product product) {
+        LocalTime reservedTime = reservationRegistDto.getReservedTime();
+        String companyTime = product.getCompanyTime();
+        StringTokenizer st = new StringTokenizer(companyTime, "~");
+        LocalTime openTime = LocalTime.parse(st.nextToken().trim());
+        LocalTime closeTime = LocalTime.parse(st.nextToken().trim());
+
+        // 오픈 시간과 마감시간 30분 전인지, 30분 단위의 예약 요청이 맞는지
+        return reservedTime.isAfter(openTime) && reservedTime.isBefore(closeTime.minusMinutes(30)) && (reservedTime.getMinute() == 0 || reservedTime.getMinute() == 30);
     }
 
     public List<ReservationResultDto> getUserReservation() {
