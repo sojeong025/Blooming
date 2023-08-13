@@ -1,4 +1,3 @@
-//
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -66,16 +65,13 @@ function Preview() {
       />
       <div className={classes.buttonContainer}>
         {currentImageIndex === totalImages - 1 ? (
-          // 카카오 버튼
           <a href='http://43.200.254.50:8080/oauth2/authorization/kakao'>
             <div className={classes.kakaoBtn}>
-              {/* <div>심볼</div>
-              <p>카카오 로그인</p> */}
               <img src='src/assets/kakao.png' />
             </div>
           </a>
         ) : (
-          <>
+          <div className={classes.buttonContainer}>
             <div
               className={`${classes.pre} ${classes.btn}`}
               onClick={handlePrevClick}
@@ -89,7 +85,7 @@ function Preview() {
             >
               다음
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
