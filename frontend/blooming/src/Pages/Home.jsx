@@ -34,13 +34,16 @@ function Home() {
   }, []);
 
   return (
-    <div className={classes.top}>
+    <div className={classes.container}>
       <WeddingDday />
+    <div className={classes.top}>
       <PlanTips />
-      <p className={classes.word}> Wedding Tips</p>
+      {/* <p className={classes.word}> Wedding Tips</p>
       <hr className={classes.hr} />
-      <Tipbox />
-      <h1>---🚧🚦🚦🚨개발중👩🏻‍🚒👨🏻‍🚒💨🔨🚬---</h1>
+      <Tipbox /> */}
+      {/* <h1>---🚧🚦🚦🚨개발중👩🏻‍🚒👨🏻‍🚒💨🔨🚬---</h1> */}
+    </div>
+      
     </div>
   );
 }

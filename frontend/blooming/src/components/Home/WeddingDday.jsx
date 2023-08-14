@@ -7,6 +7,8 @@ import {
 } from "../../recoil/WeddingDdayAtom";
 // import "dayjs/locale/ko"; // 한국어 가져오기
 import classes from './WeddingDday.module.css'
+import { BsFillArrowRightCircleFill } from 'react-icons/bs'
+import { Link } from "react-router-dom";
 
 export const WeddingDday = () => {
   const [weddingDate, setWeddingDate] = useRecoilState(weddingDateState);
@@ -52,7 +54,15 @@ export const WeddingDday = () => {
 
   const renderScript = () => {
     if (!weddingDate) {
-      return "아직 D-Day가 없어용";
+      return (
+        <>
+          결혼식을 등록해주세요 &nbsp;
+          <Link to="/choose-wedding">
+            <BsFillArrowRightCircleFill size={30} className={classes.btn} />
+          </Link>
+        </>
+
+      )
     }
 
     if (weddingDday === 0) {
@@ -65,10 +75,7 @@ export const WeddingDday = () => {
   };
 
   return (
-    <div className={classes.dday}>
-      <input style={{ visibility: "hidden" }} type='date' value={weddingDate} onChange={handleChange} readOnly />
-      <p>{renderScript()}</p>
-    </div>
+    <div className={classes.dday}>{renderScript()}</div>
   );
 };
 

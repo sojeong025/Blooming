@@ -3,19 +3,6 @@
   flex-direction: column;
   align-items: center;
 }
-/*--------------- 신부버전---------------- */
-.tipContainer {  
-  position:relative; 
-  margin: 0px;
-  width: 90vw;
-  height: 150px;
-  background: var(--color-point); 
-
-  display: flex;
-  flex-direction: space-around;
-  justify-content: center;
-  align-items: center;
-}
 
 .mainImg {
   width: 350px;
@@ -23,6 +10,18 @@
   margin: 30px 0 10px;
 }
 
+.tipContainer {  
+  background: var(--color-point); 
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px, rgba(255, 255, 255, 0.6) 0px -2px 5px inset;
+  border-radius: 8px;
+  margin: 0px;
+  width: 90vw;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .textBold {
   color: white;
   font-weight: bold;
@@ -33,9 +32,10 @@
   margin: 20px;
 }
 .tip{
-  width: 70%;
+  width: 80%;
   color: white;
   font-size: 18px;
   margin: 20px;
+  line-height: 30px;
   word-break: keep-all;
 }

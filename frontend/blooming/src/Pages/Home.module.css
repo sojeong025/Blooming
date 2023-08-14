@@ -1,23 +1,3 @@
-/* 일단 상단바 Plantips 있는 곳까지 */
-.top {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  margin-top: 80px;
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  width: 80%;
-  box-shadow: 0 -5px 5px -5px #7d7c60,
-  -5px 0 5px -5px #7d7c60, 
-  5px 0 5px -5px #7d7c60;
-  border-radius: 100px/ 98px;
-  background-image: url('../assets/back6.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 50vh;
-}
 
 /* 신부버전 */
 .word {
@@ -44,4 +24,11 @@
   border-top: 3px double #8A92BF;
   width: 84vw;
   margin: 0;
+}
+
+.container {
+  margin-top: 56px;
+}
+.top {
+  margin-top: 50px;
 }

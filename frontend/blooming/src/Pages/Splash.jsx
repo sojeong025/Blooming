@@ -101,14 +101,20 @@ function Splash() {
 
   return (
     <div className={classes.div}>
-      <motion.div
-        className={classes.container}
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 2.0 }}
-      >
-        {/* 로딩 중일 때의 내용 */}
-      </motion.div>
+      <div className={classes.container}>
+          <motion.div
+            initial={{ scale: 1}}
+            animate={{ scale: [1, 1.1, 1]}}
+            transition={{
+              duration: 2.5,
+              times: [0, 0.5, 1],
+              ease: "easeInOut",
+            }}
+          >
+            <img src="src/assets/Logo/ring.png" alt="" />
+          </motion.div>
+          <div style={{marginTop:'20px'}}><img src="src/assets/Logo/text.png" alt="" /></div>
+      </div>
     </div>
   );
 }
