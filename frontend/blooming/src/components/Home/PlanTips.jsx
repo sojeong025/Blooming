@@ -51,7 +51,7 @@ const Tips = () => {
     <div className={classes.container}>
       {weddingDate !== "" ? (
         weddingDday >= 0 ? (
-          <>
+          <div>
             <img
               src={nextPlan.img}
               alt={nextPlan.title}
@@ -63,9 +63,9 @@ const Tips = () => {
               {/* <p>{ReactHtmlParser(randomComment)}</p> */}
               <p className={classes.tip}>{randomComment}</p>
             </div>
-          </>
+          </div>
         ) : (
-          <>
+          <div>
             <img
               src='src/assets/Character/dday.png'
               className={classes.mainImg}
@@ -73,10 +73,10 @@ const Tips = () => {
             <div className={classes.tipContainer}>
               <p className={classes.tip}>결혼 축하해</p>
             </div>
-          </>
+          </div>
         )
       ) : (
-        <>
+        <div>
           <img
             src='src/assets/Character/date.png'
             className={classes.mainImg}
@@ -84,7 +84,7 @@ const Tips = () => {
           <div className={classes.tipContainer}>
             <p className={classes.tip}>결혼 일정을 등록하고 추천 팁을 받아보세용</p>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

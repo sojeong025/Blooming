@@ -6,9 +6,11 @@
   justify-content: center;
 }
 .container {
-  background-image: url('../assets/logo.png'); 
-  background-size: contain; 
-  background-repeat: no-repeat; 
+  justify-content: center;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
   width: 300px;
   height: 300px; 
+  margin-left: 30px;
 }
