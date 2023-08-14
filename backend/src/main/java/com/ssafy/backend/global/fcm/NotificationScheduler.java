@@ -147,7 +147,7 @@ public class NotificationScheduler {
             FcmToken fcmToken = fcmTokenRepository.findById(String.valueOf(user.getId()))
                     .orElse(null);
 
-            if (fcmToken != null) {
+            if (fcmToken != null && user.getNotificationSetting().equals("agree")) {
                 String token = fcmToken.getValue(); //redis에서 토큰 읽어온거
 
                 Notification notification = Notification.builder()

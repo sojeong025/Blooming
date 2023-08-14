@@ -5,13 +5,18 @@ export const ScheduleState = atom({
   default: new Date(), // Date 객체를 default 값으로 사용
 });
 
+export const TodayTaskState = atom({
+  key: 'TodayTaskState',
+  default: 0,
+})
+
 export const ScheduleTaskState = atom({
   key: 'ScheduleTaskState',
   default: [],
 });
 
-export const schedulesState = atom({
-  key: "schedulesState",
+export const SchedulesState = atom({
+  key: "SchedulesState",
   default: [
     // 나중에 key값 문자열 수정
     {

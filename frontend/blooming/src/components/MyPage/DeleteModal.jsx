@@ -34,14 +34,8 @@ const DeleteForm = ({ userData, deleteProfile, show = false, onClose }) => {
       <>
         <ModalOverlay onClick={handleClose}>
           <ModalContent onClick={(e) => e.stopPropagation()} $show={!isClosing}>
-            {/* <h1>{userData.name} 가지마</h1>
-            <div>블루밍을 탈퇴하는 사유는 무엇인가요?</div>
-            <div>상대방 연결을 다시 하고 싶어</div>
-            <div>결혼 일정이 잡히면 돌아올게</div>
-            <div>너보다 좋은 앱이 생겼어</div>
-            <button onClick={handleClick}>가지마</button> */}
-
             <Wrapper>
+              {/* <Grey></Grey> */}
               <TitleText>회원 탈퇴 전 꼭 확인해주세요!</TitleText>
               <SubText>
                 블루밍을 떠나면 {userData.name}님의 데이터가 모두 사라져요.
@@ -62,11 +56,14 @@ const DeleteForm = ({ userData, deleteProfile, show = false, onClose }) => {
 export default DeleteForm;
 
 const Wrapper = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: flex-start; */
   width: 80%;
   margin-top: 10px;
+`;
+const Grey = styled.div`
+  width: 20px;
+  height: 5px;
+  border-radius: 20px;
+  background-color: grey;
 `;
 const TitleText = styled.div`
   font-size: 20px;
@@ -127,7 +124,7 @@ const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 900;
@@ -140,8 +137,9 @@ const ModalContent = styled.div`
   left: 0;
   transform: translateY(100%);
   width: 100%;
-  height: 50vh;
+  height: 35vh;
   background-color: #fff;
+
   padding: 20px;
   z-index: 900;
   animation: ${({ $show }) => ($show ? slideUpIn : slideUpOut)} 0.3s ease-out

@@ -13,23 +13,22 @@ const Diary = () => {
   const [loading, setLoading] = useState(true);
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await customAxios.get("diary");
-        
-        if (response?.data?.result?.length > 0) {
-          setDiaries(response.data.result[0]);
-        } else {
-          setDiaries([]);
-        }
-      } catch (error) {
-        console.error(error);
+  const fetchData = async () => {
+    try {
+      const response = await customAxios.get("diary");
+      
+      if (response.status === 200) {
+        setDiaries(response.data.result[0]);
       }
-      setLoading(false);
-    };
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
     fetchData();
-  }, [diaries]);
+  }, []);
 
 
   if (loading) {
@@ -73,7 +72,7 @@ const Diary = () => {
         )}
       </div>
       <div>
-        <CreateItem hide={hideModalHandler} visible={modalIsVisible} />
+        <CreateItem hide={hideModalHandler} visible={modalIsVisible} fetchData={fetchData} />
         <button onClick={showModalHandler} className={classes.button}>
           <PiPencilLineFill />
         </button>

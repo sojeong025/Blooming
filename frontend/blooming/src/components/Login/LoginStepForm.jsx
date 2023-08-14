@@ -1,10 +1,21 @@
 import { styled } from "styled-components";
 import classes from "./LoginStep.module.css";
 import { useEffect, useState } from "react";
+import { customAxios } from "../../lib/axios";
 
+const coupleCodeValidate = (values) => {
+  const errors = {};
+  // 코드
+  if (!/^\d{8}$/.test(values.coupleCode)) {
+    errors.coupleCode = "숫자 8자리를 입력해주세요.";
+    return errors;
+  }
+  return errors;
+};
+
+// 추가정보 유효성
 const validate = (values) => {
   const errors = {};
-
   // 이름
   if (!values.name) {
     errors.name = "이름을 입력해주세요.";
@@ -13,7 +24,6 @@ const validate = (values) => {
     errors.name = "이름은 한글 또는 영어로만 입력해주세요.";
     return errors;
   }
-
   // 전화번호
   if (!values.phoneNumber) {
     errors.phoneNumber = "전화번호를 입력해주세요.";
@@ -22,6 +32,13 @@ const validate = (values) => {
   }
 
   // 닉네임
+  if (!values.nickname) {
+    errors.nickname = "닉네임을 입력해주세요.";
+  } else if (values.nickname.length < 2 || values.nickname.length > 5) {
+    errors.nickname = "닉네임은 2~5자로 작성해주세요.";
+  } else if (!/^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]{2,5}$/.test(values.nickname)) {
+    errors.nickname = "닉네임에는 한글, 영어, 숫자만 사용할 수 있습니다.";
+  }
 
   return errors;
 };
@@ -29,7 +46,7 @@ const validate = (values) => {
 const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
   const { handleChange, onToggleChange } = onChangeHandlers;
 
-  // 유효성 검사
+  // 추가정보 유효성 검사
   const [errors, setErrors] = useState(() => validate(values));
   useEffect(() => {
     setErrors(validate(values));
@@ -53,23 +70,51 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
 
   // 커플 코드 인증 =====================================================
   const [coupleData, setCoupleData] = useState({ name: "", coupleCode: "" });
-  const [coupled, setCoupled] = useState();
-  const handleCoupleChange = (event) => {
+  const [coupleErrors, setCoupleErrors] = useState(() =>
+    coupleCodeValidate(values),
+  );
+  const [coupled, setCoupled] = useState("");
+
+  const handleCoupleChange = async (event) => {
+    // event.preventDefault();
     const { name, value } = event.target;
-    setCoupleData({ ...coupleData, [name]: value });
+    const updatedCoupleData = { ...coupleData, [name]: value };
+    setCoupleData(updatedCoupleData);
+
+    const newErrors = coupleCodeValidate({ ...values, [name]: value });
+    setCoupleErrors(newErrors);
+
+    // 유효성 검증에 실패하는 것이 없는지 확인
+    const isAllValid = Object.values(newErrors).every((error) => error === "");
+    if (isAllValid) {
+      setCouple(event, updatedCoupleData);
+    }
   };
+  // 유효성 검사 후 인증코드 확인 시 다음버튼 활성화
+  const inputCoupleStyle = (fieldName) => {
+    if (coupleErrors[fieldName] !== undefined) {
+      return `${classes.inputBox} ${classes.inputError}`;
+    } else if (coupleData[fieldName] !== "") {
+      return `${classes.inputBox} ${classes.inputFilled}`;
+    } else {
+      return classes.inputBox;
+    }
+  };
+
   // 인증코드 확인
-  const setCouple = async (event) => {
+  const setCouple = async (event, validCoupleData) => {
     event.preventDefault();
-    console.log(coupleData);
     try {
-      await customAxios.post("couple-certification", formData);
-      setCoupled(`${formData.name}님과 연결되었습니다.`);
-      setUserData({ ...userData, coupleCode: formData.coupleCode });
-      console.log(userData);
+      await customAxios.post("couple-certification", validCoupleData);
+      setCoupled(`${coupleData.name}님과 연결이 가능합니다.`);
+      handleChange({
+        target: {
+          name: "coupleCode",
+          value: String(validCoupleData.coupleCode),
+        },
+      });
     } catch (error) {
-      console.log("추가 정보 POST 에러:", error);
-      setCoupled("잘못된 코드입니다");
+      setCoupled(error.response.data.message);
     }
   };
   // 커플 코드 인증 =====================================================
@@ -79,49 +124,56 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
       {/* 0. 가입 시 커플 코드 입력 */}
       {step === 0 && (
         <div className={classes.JoinContainer}>
-          <h1>==👷🏻‍♂️공사 중 입력하지마👷🏻‍♀️==</h1>
-
-          <p className={classes.titleText}>
-            상대방의 이름과 코드를 입력해주세요
-          </p>
-          <p>상대방 코드는 가입 후에도 입력할 수 있어요.</p>
-          <form onSubmit={setCouple}>
-            <label>
-              상대방 이름
-              <input
-                required
-                autoFocus
-                type='text'
-                name='name'
-                value={coupleData.name}
-                onChange={handleCoupleChange}
-              />
-            </label>
-            <br />
-            <label>
-              코드
-              <input
-                required
-                autoFocus
-                type='text'
-                name='coupleCode'
-                value={coupleData.coupleCode}
-                onChange={handleCoupleChange}
-              />
-            </label>
-            <button type='submit'>인증하기</button>
-          </form>
-
           <form onSubmit={handleSubmit(0)}>
-            {/* <label>
-              <input
-                type='text'
-                name='coupleCode'
-                value={values.coupleCode}
-                onChange={onChange}
-              />
-            </label> */}
-            <NextButton type='submit'>다음</NextButton>
+            <p className={classes.titleText}>
+              상대방의 이름과 코드를 입력해주세요
+            </p>
+            <p className={classes.subText}>
+              상대방 코드는 가입 후에도 입력할 수 있어요.
+            </p>
+            <div className={`${classes.wrapper} `}>
+              <div className={classes.codeContainer}>
+                <input
+                  required
+                  autoFocus
+                  type='text'
+                  name='name'
+                  value={coupleData.name}
+                  placeholder='상대방 이름'
+                  onChange={handleCoupleChange}
+                  className={inputCoupleStyle("name")}
+                />
+                {coupleErrors.name && (
+                  <div className={classes.errorMessage}>
+                    {coupleErrors.name}
+                  </div>
+                )}
+              </div>
+              <div className={classes.codeContainer}>
+                <input
+                  required
+                  inputMode='tel'
+                  type='text'
+                  name='coupleCode'
+                  value={coupleData.coupleCode}
+                  placeholder='상대방 연결 코드'
+                  onChange={handleCoupleChange}
+                  className={inputCoupleStyle("coupleCode")}
+                />
+                {coupleErrors.coupleCode && (
+                  <div className={classes.errorMessage}>
+                    {coupleErrors.coupleCode}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className={classes.coupledNo}>{coupled}</div>
+            <div className={classes.passCode} onClick={handleSubmit(0)}>
+              코드 입력 건너뛰기
+            </div>
+            <NextButton type='submit' disabled={coupleErrors.coupleCode}>
+              다음
+            </NextButton>
           </form>
         </div>
       )}
@@ -218,7 +270,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
                 value={values.phoneNumber}
                 onChange={handleChange}
                 placeholder='01012345678'
-                className={classes.inputBox}
+                className={inputStyle("phoneNumber")}
               />
               {errors.phoneNumber && (
                 <div className={classes.errorMessage}>{errors.phoneNumber}</div>
@@ -237,7 +289,9 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
             <p className={classes.titleText}>
               {values.name}님의 닉네임을 알려주세요
             </p>
-            <p>입력한 정보는 언제든 수정이 가능합니다.</p>
+            <p className={classes.subText}>
+              입력한 정보는 언제든 수정이 가능합니다.
+            </p>
             <div className={classes.wrapper}>
               <input
                 required

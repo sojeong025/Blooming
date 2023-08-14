@@ -1,41 +1,48 @@
 import classes from './TasksList.module.css';
-import NewTask from "./NewTask";
 import Task from './Task';
-import Modal from './Modal';
-import { useRecoilState } from 'recoil';
-import { ScheduleState, ScheduleTaskState } from '../../recoil/ScheduleStateAtom';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { ScheduleState, ScheduleTaskState, TodayTaskState } from '../../recoil/ScheduleStateAtom';
+import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
 
-function TasksList({isPosting, onStopPosting}) {
-  const [tasks, setTasks ]= useRecoilState(ScheduleTaskState);
-  const [selectedDate, setSelectedDate] = useRecoilState(ScheduleState)
+function TasksList() {
+  const tasks = useRecoilValue(ScheduleTaskState);
+  const selectedDate = useRecoilValue(ScheduleState)
+  const setTodayTask = useSetRecoilState(TodayTaskState)
 
   const formatDate = (date) => {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(date).toLocaleDateString(undefined, options);
   };
 
-  function addTaskHandler(taskData) {
-    setTasks((existingTasks) => [taskData, ...existingTasks]);
-  }
+  useEffect(() => {
+    let count = 0;
+
+    tasks.forEach((task) => {
+      if (formatDate(selectedDate) === formatDate(task.scheduleDate)) {
+        count += 1;
+      }
+    });
+
+    setTodayTask(count);
+  }, [tasks, selectedDate, setTodayTask]);
 
   return (
     <>
-    {isPosting && (
-      <Modal onClose={onStopPosting}>
-        <NewTask onCancel={onStopPosting} onAddTask={addTaskHandler} />
-      </Modal>
-    )}
-    {tasks.length > 0 && (
-      <ul className={ classes.posts } >
-        {tasks.map((task) => {
-          if (formatDate(selectedDate) === formatDate(task.scheduleDate)) {
-            return (
-              <Task key={task.id} date={task.scheduleDate} body={task.content} />
-            )
-          }
-        })}
-      </ul>
-    )}
+      {tasks.length > 0 && (
+        <ul className={ classes.posts } >
+          {tasks.map((task) => {
+            if (formatDate(selectedDate) === formatDate(task.scheduleDate)) {
+              return (
+                <NavLink to={`/schedule/${task.id}`} key={task.id}>
+                  <Task task={task} />
+                </NavLink>
+              )
+            }
+            return null;
+          })}
+        </ul>
+      )}
     </>
   )
 }
