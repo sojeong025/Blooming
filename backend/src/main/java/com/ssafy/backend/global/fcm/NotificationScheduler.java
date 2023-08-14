@@ -131,7 +131,7 @@ public class NotificationScheduler {
     private String sendNotificationByToken(FCMNotificationRequestDto fcmDto) {
         User user = fcmDto.getUser();
 
-        if (user != null && user.getNotificationSetting().equals("agree")) {
+        if (user != null) {
             //0. 일림 로그 테이블에 저장 : 사용자마다, 알림 테이블에 저장 : 유저가 있으면 보내기
             notificationService.registNotification(new NotificationRegistDto(
                     ReadStatus.UNREAD,
@@ -147,7 +147,7 @@ public class NotificationScheduler {
             FcmToken fcmToken = fcmTokenRepository.findById(String.valueOf(user.getId()))
                     .orElse(null);
 
-            if (fcmToken != null) {
+            if (fcmToken != null && user.getNotificationSetting().equals("agree")) {
                 String token = fcmToken.getValue(); //redis에서 토큰 읽어온거
 
                 Notification notification = Notification.builder()
