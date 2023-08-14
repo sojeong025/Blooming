@@ -12,8 +12,7 @@ function NewTask() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const task = location.state.task
-  console.log(task)
+  const task = location.state?.task;
 
   const [ enteredTitle, setEnteredTitle ] = useState('');
   const [ enteredBody, setEnteredBody ] = useState('');
@@ -21,14 +20,17 @@ function NewTask() {
   const [enteredTime, setEnteredTime] = useState(new Date());
   const user = useRecoilValue(userState)
 
-  const [time, setTime] = useState(new Date())
   useEffect(() => {
     if (task) {
+      setEnteredTitle(task.title)
+      setEnteredBody(task.content)
+      setEnteredDate(new Date(task.scheduleDate))
+
       const [hours, minutes] = task.scheduleTime.split(':').map(Number);
       const newTime = new Date();
       newTime.setHours(hours);
       newTime.setMinutes(minutes);
-      setTime(newTime);
+      setEnteredTime(newTime);
     }
   }, [task]);
 
@@ -70,6 +72,17 @@ function NewTask() {
     }
   }
 
+  async function deleteHandler() {
+    if (task) {
+      try {
+        await customAxios.delete(`schedule/${task.id}`);
+        navigate('schedule');
+      } catch (error) {
+        console.log('스케쥴 삭제 API 에러', error);
+      }
+    }
+  }
+
   return (
     <form className={classes.form} onSubmit={submitHandler}>
       <div>
@@ -100,7 +113,16 @@ function NewTask() {
       </div>
       <div className={classes.actions}>
         <button type='button' >취소</button>
-        <button type='submit' >추가</button>
+        {task ? (
+          <>
+            <button type="submit">수정</button>
+            <button type="button" onClick={deleteHandler}>
+              삭제
+            </button>
+          </>
+        ) : (
+          <button type="submit">추가</button>
+        )}
       </div>
     </form>
   );

@@ -20,7 +20,7 @@ function ScheduleBody() {
         <p className={classes.count}>오늘의 일정은 {todayTask} 개 입니다</p>
       </div>
       <div className={classes.btn}>
-        <NavLink to="schedule/new-task">
+        <NavLink to="new-task">
           <button> + </button>
         </NavLink>
       </div>
