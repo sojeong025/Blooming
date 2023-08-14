@@ -9,10 +9,10 @@ const SettingNotice = () => {
   const fetchNotification = async () => {
     try {
       const response = await customAxios.get("notification-setting");
-      console.log(response.data.result[0].notificationSetting);
+      // console.log(response.data.result[0].notificationSetting);
       setIsAgree(response.data.result[0].notificationSetting);
     } catch (error) {
-      console.log("푸시알림 조회 에러", error);
+      // console.log("푸시알림 조회 에러", error);
     }
   };
 
@@ -27,17 +27,17 @@ const SettingNotice = () => {
         await customAxios.delete("notification-setting");
         setIsAgree("disagree");
       } catch (error) {
-        console.log("푸시 delete", error);
+        // console.log("푸시 delete", error);
       }
     } else if (isAgree === "disagree") {
       try {
         await customAxios.post("notification-setting");
         setIsAgree("agree");
       } catch (error) {
-        console.log("푸시 post", error);
+        // console.log("푸시 post", error);
       }
     } else {
-      console.log("why error");
+      // console.log("why error");
     }
   };
 
