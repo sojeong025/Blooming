@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { useEffect } from "react";
+import { RecoilRoot } from "recoil";
 import {
   BrowserRouter as Router,
   Route,
@@ -52,29 +52,9 @@ import Create from "./Pages/Info/Create";
 import AllNotice from "./Pages/Notice/AllNotice";
 // err
 import Error from "./Pages/Error";
-//user
-import { themeState } from "./recoil/ProfileAtom";
 
-const setThemeState = (gender) => {
-  const rootElement = document.documentElement;
-
-  switch (gender) {
-    case "MALE":
-      rootElement.style.setProperty("--color-point", "var(--color-groom)");
-      break;
-    case "FEMALE":
-      rootElement.style.setProperty("--color-point", "var(--color-brider)");
-      break;
-  }
-}
 
 function App() {
-  // 테마설정
-  const theme = useRecoilValue(themeState)
-  
-  useEffect(() => {
-    setThemeState(theme)
-  }, [theme])
 
   // TopNav를 숨길 페이지 path
   const hiddenTopPaths = ["/", "/kakaologin", "/login", "/go-join", "/join", "/mobile-invitation-detail",];
