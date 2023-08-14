@@ -26,6 +26,7 @@ import Home from "./Pages/Home";
 // schedule
 import Schedule from "./Pages/Schedule";
 import TaskDetail from "./Pages/Schedule/TaskDetail";
+import NewTask from "./Pages/Schedule/NewTask";
 // my-page
 import MyPage from "./Pages/MyPage/MyPage";
 import SettingNotice from "./Pages/MyPage/SettingNotice";
@@ -54,7 +55,7 @@ import Error from "./Pages/Error";
 
 function App() {
   // TopNav를 숨길 페이지 path
-  const hiddenTopPaths = ["/", "/kakaologin", "/login", "/go-join", "/join"];
+  const hiddenTopPaths = ["/", "/kakaologin", "/login", "/go-join", "/join", "/mobile-invitation-detail",];
   // BottomNav를 숨길 페이지 path
   const hiddenBottomPaths = [
     "/",
@@ -68,6 +69,7 @@ function App() {
     "/choose-wedding",
     "/share",
     "/invitation-create",
+    "/mobile-invitation-detail",
   ];
 
   // 동적 경로
@@ -146,6 +148,7 @@ function App() {
           {/* 스케줄 */}
           <Route path='/schedule' element={<Schedule />} />
           <Route path='/schedule/:id' element={<TaskDetail />} />
+          <Route path='/schedule/new-task' element={<NewTask />} />
 
           {/* NotFound */}
           <Route path='*' element={<Error />} />
