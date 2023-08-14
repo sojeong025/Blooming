@@ -54,7 +54,7 @@ import Error from "./Pages/Error";
 
 function App() {
   // TopNav를 숨길 페이지 path
-  const hiddenTopPaths = ["/", "/kakaologin", "/login", "/go-join", "/join"];
+  const hiddenTopPaths = ["/", "/kakaologin", "/login", "/go-join", "/join", "/mobile-invitation-detail",];
   // BottomNav를 숨길 페이지 path
   const hiddenBottomPaths = [
     "/",
@@ -68,6 +68,7 @@ function App() {
     "/choose-wedding",
     "/share",
     "/invitation-create",
+    "/mobile-invitation-detail",
   ];
 
   // 동적 경로
