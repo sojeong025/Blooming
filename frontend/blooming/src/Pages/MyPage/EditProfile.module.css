@@ -21,6 +21,20 @@
   object-fit: cover;
   margin-bottom: 10px;
 }
+.profileEdit {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #fffffffb;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  margin-left: 60px;
+  margin-top: 25px;
+}
 .profileEmail {
   font-size: 1rem;
 }
@@ -77,18 +91,6 @@
   &:disabled {
     color: gray;
   }
-}
-
-.passCode {
-  margin-top: 50px;
-  font-size: 16px;
-  color: grey;
-}
-.coupledNo {
-  height: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  color: slateblue;
 }
 
 /* ========= input ========= */
