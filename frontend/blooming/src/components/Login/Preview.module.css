@@ -62,7 +62,7 @@
   text-align: center;
 }
 .next {
-  color: #FF647C;
+  color: var(--color-join-point);
   font-weight: bold;
   text-align: center;
 }
