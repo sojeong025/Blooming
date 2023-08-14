@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { ScheduleState } from '../../recoil/ScheduleStateAtom';
 import { userState } from '../../recoil/ProfileAtom';
@@ -7,13 +7,24 @@ import './DatePicker.css'
 import classes from './NewTask.module.css';
 import { customAxios } from '../../lib/axios';
 
-function NewTask({ onCancel, onAddTask, selectedDate }) {
+function NewTask({ onCancel, onAddTask, task }) {
 
   const [ enteredTitle, setEnteredTitle ] = useState('');
   const [ enteredBody, setEnteredBody ] = useState('');
   const [enteredDate, setEnteredDate] = useRecoilState(ScheduleState);
   const [enteredTime, setEnteredTime] = useState(new Date());
   const user = useRecoilValue(userState)
+
+  const [time, setTime] = useState(new Date())
+  useEffect(() => {
+    if (task) {
+      const [hours, minutes] = task.scheduleTime.split(':').map(Number);
+      const newTime = new Date();
+      newTime.setHours(hours);
+      newTime.setMinutes(minutes);
+      setTime(newTime);
+    }
+  }, [task]);
 
   function titleChangeHandler(event) {
     setEnteredTitle(event.target.value);
@@ -41,7 +52,7 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
       content: enteredBody,
       scheduleDate: formattedDate,
       scheduleTime: formattedTime,
-      scehduledBy: user.gender,
+      scheduledBy: user.gender,
       scheduleType: "PRI",
     };
     console.log(taskData)
@@ -61,26 +72,28 @@ function NewTask({ onCancel, onAddTask, selectedDate }) {
         <DatePicker
           showPopperArrow={false}
           id="date"
-          selected={enteredDate}
+          selected={task ? time : enteredDate}
           onChange={dateChangeHandler}
           dateFormat="yyyy-MM-dd"
           required
+          disabled={!!task && task.scheduleBy === 'COMMON'}
         />
         <label htmlFor="time">시간 선택</label>
         <DatePicker
           showPopperArrow={false}
           id="time"
-          selected={enteredTime}
+          selected={task ? new Date(`${task.scheduleDate}T${task.scheduleTime}`) : enteredTime}
           onChange={timeChangeHandler}
           dateFormat="HH:mm"
           required
+          disabled={!!task && task.scheduleBy === 'COMMON'}
         />
       </div>
       <div>
         <label htmlFor="title">일정 제목</label>
-        <textarea id="title" required rows={1} onChange={titleChangeHandler} placeholder='제목을 입력하세요.' />
+        <textarea id="title" required rows={1} onChange={titleChangeHandler} placeholder='제목을 입력하세요.' value={task && task.title} />
         <label htmlFor="body">일정 내용</label>
-        <textarea id="body" required rows={3} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' />
+        <textarea id="body" required rows={3} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' value={task && task.content} />
       </div>
       <div className={classes.actions}>
         <button type='button' onClick={onCancel}>취소</button>

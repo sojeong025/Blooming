@@ -5,7 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class CoupleCodeDto {
-	private String name;
-	private String coupleCode;
+public class UserNotificationSettingDto {
+    private String notificationSetting;
 }

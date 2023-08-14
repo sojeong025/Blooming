@@ -10,6 +10,6 @@ public class UserSignUpDto {
     private String nickname;
     private String phoneNumber;
     private String gender;
-    private Integer coupleCode;
+    private String coupleCode;
     private String fcmToken;
 }

@@ -2,10 +2,7 @@ package com.ssafy.backend.domain.user.controller;
 
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.user.User;
-import com.ssafy.backend.domain.user.dto.CoupleCodeDto;
-import com.ssafy.backend.domain.user.dto.KakaoUserDto;
-import com.ssafy.backend.domain.user.dto.UserDto;
-import com.ssafy.backend.domain.user.dto.UserSignUpDto;
+import com.ssafy.backend.domain.user.dto.*;
 import com.ssafy.backend.domain.user.service.UserService;
 import com.ssafy.backend.global.jwt.service.JwtService;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -220,6 +217,68 @@ public class UserController {
 
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
+
+    // 푸시 알림 동으 api 작성 get / post / delete
+    @Operation(summary = "내 알림동의 얻기", description = "나의 푸시알림 설정을 얻습니다.")
+    @GetMapping("/notification-setting")
+    public ResponseEntity<BasicResponse> getNotificationSetting() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || authentication.getName() == null) {
+            throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
+        }
+
+        UserNotificationSettingDto userNotificationSettingDto = userService.getNotificationSetting(authentication.getName());
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("내 푸시알림 설정 조회 성공")
+                .count(1)
+                .result(Collections.singletonList(userNotificationSettingDto))
+                .build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
+
+    @Operation(summary = "푸시알림 동의", description = "푸시 알림을 받습니다.")
+    @PostMapping("/notification-setting")
+    public ResponseEntity<BasicResponse> agreeNotification() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication.getName() == null) {
+            throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
+        }
+
+        userService.agreeNotificationSetting(authentication.getName());
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("푸시 알림 설정 동의 성공")
+                .build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
+    @Operation(summary = "푸시알림 거절", description = "푸시 알림을 받지 않습니다.")
+    @DeleteMapping("/notification-setting")
+    public ResponseEntity<BasicResponse> disagreeNotification() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication.getName() == null) {
+            throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
+        }
+
+        userService.disagreeNotificationSetting(authentication.getName());
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("푸시 알림 설정 거절 성공")
+                .build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
+
+
 
     @Hidden
     @GetMapping("/jwt-test")

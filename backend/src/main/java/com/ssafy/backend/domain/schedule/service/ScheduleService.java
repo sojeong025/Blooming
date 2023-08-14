@@ -5,6 +5,7 @@ import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.reservation.Reservation;
 import com.ssafy.backend.domain.reservation.service.ReservationService;
 import com.ssafy.backend.domain.schedule.Schedule;
+import com.ssafy.backend.domain.schedule.ScheduledBy;
 import com.ssafy.backend.domain.schedule.dto.ReservationScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.dto.ScheduleModifyDto;
 import com.ssafy.backend.domain.schedule.dto.ScheduleRegistDto;
@@ -34,12 +35,22 @@ public class ScheduleService {
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
 
+        //성별 정하기
+        ScheduledBy scheduledBy = scheduleRegistDto.getScheduledBy();
+        String gender = user.getGender();
+        if (gender.equals("MALE") || gender.equals("male")){
+            scheduledBy = ScheduledBy.MALE;
+        }
+        else if (gender.equals("FEMALE") || gender.equals("female")){
+            scheduledBy = ScheduledBy.FEMALE;
+        }
+
         Schedule schedule = new Schedule(
                 scheduleRegistDto.getTitle(),
                 scheduleRegistDto.getContent(),
                 scheduleRegistDto.getScheduleDate(),
                 scheduleRegistDto.getScheduleTime(),
-                scheduleRegistDto.getScheduledBy(),
+                scheduledBy,
                 scheduleRegistDto.getScheduleType()
         );
         Couple couple = user.getCouple();

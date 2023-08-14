@@ -8,6 +8,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.security.SecureRandom;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
     private Long id;
 
     private LocalDate weddingDate;
-    private int coupleCode;
+    private String coupleCode;
 
     @OneToMany(mappedBy = "couple", fetch = FetchType.EAGER)
     private List<User> users = new ArrayList<>();
@@ -38,20 +39,23 @@ public class Couple extends CreatedAndUpdatedBaseEntity {
     @OneToOne(mappedBy = "couple", fetch = LAZY)
     private Invitation invitation;
 
-    public void setCoupleCode(int coupleCode) {
+    public void setCoupleCode(String coupleCode) {
         this.coupleCode = coupleCode;
     }
 
     public static Couple createCouple() {
         Couple couple = new Couple();
-        int coupleCode = couple.generateCoupleCode();
+        String coupleCode = couple.generateCoupleCode();
         couple.setCoupleCode(coupleCode);
         return couple;
     }
 
-    public int generateCoupleCode() {
+    public String generateCoupleCode() {
         SecureRandom random = new SecureRandom();
-        return random.nextInt(100000000);
+        int randomNumber = random.nextInt(100000000);
+        DecimalFormat format = new DecimalFormat("00000000");
+
+        return format.format(randomNumber);
     }
 
     public void changeWeddingDate(LocalDate weddingDate) {
