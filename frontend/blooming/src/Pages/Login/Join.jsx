@@ -101,8 +101,12 @@ export default function Join() {
       const kakaoData = response.data.result[0];
       // setFormData({ ...formData, ...kakaoData });
 
-      // 카카오 nickname -> name
-      const updatedKakaoData = { ...kakaoData, name: kakaoData.nickname };
+      const genderInUpperCase = kakaoData.gender.toUpperCase();
+      const updatedKakaoData = {
+        ...kakaoData,
+        gender: genderInUpperCase,
+        name: kakaoData.nickname,
+      };
       delete updatedKakaoData.nickname;
       setFormData({ ...formData, ...updatedKakaoData });
     } catch (error) {
