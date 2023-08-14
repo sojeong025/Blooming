@@ -27,8 +27,9 @@
 }
 .coupledNo {
   height: 10px;
-  font-size: 14px;
-  color: red;
+  font-size: 15px;
+  font-weight: 600;
+  color: slateblue;
 }
 
 /* ========= input ========= */
