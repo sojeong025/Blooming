@@ -178,14 +178,15 @@ export default function Share() {
             저장
           </button>
         </form>
-
         <hr />
-        <h1>==👷🏻‍♂️공사중 뚝딱뚝딱👷🏻‍♀️==</h1>
-        <div>
+
+        <div className={classes.copyContainer}>
           <CopyToClipboardButton text={verifyCode}>
             <div className={classes.copyText}>
-              <div className={classes.titleText}>나의 코드 복사하기</div>
-              <p className={classes.subText}>{verifyCode}</p>
+              <div className={classes.titleText}>
+                <span>{userData.name}</span>님의 코드 복사하기
+                <p className={classes.subText}>{verifyCode}asdasd</p>
+              </div>
             </div>
           </CopyToClipboardButton>
           {shareBtn && <KakaoShareButton code={verifyCode} />}
