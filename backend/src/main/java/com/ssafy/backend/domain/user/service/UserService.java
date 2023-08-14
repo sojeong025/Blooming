@@ -11,6 +11,7 @@ import com.ssafy.backend.domain.review.repository.ReviewRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.dto.CoupleCodeDto;
 import com.ssafy.backend.domain.user.dto.UserDto;
+import com.ssafy.backend.domain.user.dto.UserNotificationSettingDto;
 import com.ssafy.backend.domain.user.dto.UserSignUpDto;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import com.ssafy.backend.domain.wishlist.repository.WishlistRepository;
@@ -174,4 +175,27 @@ public class UserService {
         // 상대방 커플 코드의 커플을 연결
         user.setCouple(couple);
     }
+
+    // 유저 푸시알림 설정 api
+    public UserNotificationSettingDto getNotificationSetting(String userName) {
+        User user = userRepository.findByEmail(userName)
+                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+        return new UserNotificationSettingDto(user.getNotificationSetting());
+    }
+
+    @Transactional
+    public void agreeNotificationSetting(String userName) {
+        User user = userRepository.findByEmail(userName)
+                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+        user.agreeNotification();
+    }
+
+
+    @Transactional
+    public void disagreeNotificationSetting(String userName) {
+        User user = userRepository.findByEmail(userName)
+                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+        user.disagreeNotification();
+    }
+
 }
