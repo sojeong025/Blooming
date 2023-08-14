@@ -82,7 +82,7 @@ function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true, i
         alt="thumbnail"
       />
 
-      <div className={isDetailPage ? themeStyles.wedding-detail : themeStyles.wedding}>Wedding</div>
+      <div className={isDetailPage ? themeStyles.weddingDetail : themeStyles.wedding}>Wedding</div>
 
       <div className={`${themeStyles.mainWedding}`}>
         {invitationData.date
