@@ -35,7 +35,6 @@ const DeleteForm = ({ userData, deleteProfile, show = false, onClose }) => {
         <ModalOverlay onClick={handleClose}>
           <ModalContent onClick={(e) => e.stopPropagation()} $show={!isClosing}>
             <Wrapper>
-              {/* <Grey></Grey> */}
               <TitleText>회원 탈퇴 전 꼭 확인해주세요!</TitleText>
               <SubText>
                 블루밍을 떠나면 {userData.name}님의 데이터가 모두 사라져요.
@@ -56,15 +55,11 @@ const DeleteForm = ({ userData, deleteProfile, show = false, onClose }) => {
 export default DeleteForm;
 
 const Wrapper = styled.div`
-  width: 80%;
+  width: 100%;
   margin-top: 10px;
+  padding: 20px;
 `;
-const Grey = styled.div`
-  width: 20px;
-  height: 5px;
-  border-radius: 20px;
-  background-color: grey;
-`;
+
 const TitleText = styled.div`
   font-size: 20px;
   font-weight: 600;
@@ -89,7 +84,7 @@ const DeleteBtn = styled.div`
   margin-top: 50px;
   margin-left: 5vw;
 
-  width: 80vw;
+  width: 90vw;
   height: 40px;
 `;
 
@@ -140,7 +135,9 @@ const ModalContent = styled.div`
   height: 35vh;
   background-color: #fff;
 
-  padding: 20px;
+  border-top-right-radius: 10%;
+  border-top-left-radius: 10%;
+
   z-index: 900;
   animation: ${({ $show }) => ($show ? slideUpIn : slideUpOut)} 0.3s ease-out
     forwards;
