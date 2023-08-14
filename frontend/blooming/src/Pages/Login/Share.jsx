@@ -66,6 +66,11 @@ export default function Share() {
     const isAllValid = Object.values(newErrors).every((error) => error === "");
     if (isAllValid) {
       setCouple(e, updatedFormData);
+    } else {
+      setCoupled({
+        isCoupled: false,
+        description: ``,
+      });
     }
   };
 
@@ -168,7 +173,7 @@ export default function Share() {
           <button
             className={classes.SubmitBtn}
             type='submit'
-            disabled={coupleErrors.coupleCode || coupled.isCoupled}
+            disabled={coupleErrors.coupleCode || !coupled.isCoupled}
           >
             저장
           </button>
