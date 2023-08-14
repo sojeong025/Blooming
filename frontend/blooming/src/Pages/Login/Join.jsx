@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./Join.module.css";
-import { useRecoilState } from "recoil";
-import { userState } from "../../recoil/ProfileAtom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { userState, themeState } from "../../recoil/ProfileAtom";
 import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 
@@ -16,6 +16,7 @@ export default function Join() {
   const [currentStep, setCurrentStep] = useState(initialStep);
 
   // 추가정보 데이터 넣기
+  const setTheme = useSetRecoilState(themeState)
   const [userData, setUserData] = useRecoilState(userState);
   const [formData, setFormData] = useState({
     name: "",
@@ -169,6 +170,7 @@ export default function Join() {
         );
       }
       setUserData(formData);
+      setTheme(formData.gender)
       console.log(response);
       // navigate("/decide-wedding", {
       //   state: { pageTitle: "회원가입" },

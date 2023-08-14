@@ -9,7 +9,7 @@
   margin: 0px;
   width: 90vw;
   height: 150px;
-  background: #FFDAE4; 
+  background: var(--color-point); 
 
   display: flex;
   flex-direction: space-around;
