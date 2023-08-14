@@ -72,7 +72,8 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
   const handleCoupleChange = async (event) => {
     // event.preventDefault();
     const { name, value } = event.target;
-    setCoupleData({ ...coupleData, [name]: value });
+    const updatedCoupleData = { ...coupleData, [name]: value };
+    setCoupleData(updatedCoupleData);
 
     const newErrors = coupleCodeValidate({ ...values, [name]: value });
     setCoupleErrors(newErrors);
@@ -80,7 +81,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
     // 유효성 검증에 실패하는 것이 없는지 확인
     const isAllValid = Object.values(newErrors).every((error) => error === "");
     if (isAllValid) {
-      setCouple(event);
+      setCouple(event, updatedCoupleData);
     }
   };
   // 유효성 검사 후 인증코드 확인
@@ -95,10 +96,11 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
   };
 
   // 인증코드 확인
-  const setCouple = async () => {
+  const setCouple = async (event, validCoupleData) => {
+    event.preventDefault();
     try {
-      await customAxios.post("couple-certification", coupleData);
-      console.log(coupleData);
+      await customAxios.post("couple-certification", validCoupleData);
+      // console.log(coupleData);
       // setCoupled(`${coupleData.name}님과 연결되었습니다.`);
       handleChange({
         target: { name: "coupleCode", value: String(coupleData.coupleCode) },
