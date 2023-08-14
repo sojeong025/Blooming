@@ -41,6 +41,8 @@ public class User extends CreatedAndUpdatedBaseEntity {
 
     private String socialId;
 
+    private String notificationSetting;
+
     @Column(length = 500)
     private String refreshToken;
 
@@ -108,6 +110,9 @@ public class User extends CreatedAndUpdatedBaseEntity {
     public void updateRefreshToken(String updateRefreshToken) {
         this.refreshToken = updateRefreshToken;
     }
+
+    public void agreeNotification(){this.notificationSetting="agree";}
+    public void disagreeNotification(){this.notificationSetting="disagree";}
 
     // 비밀번호 암호화 메소드
     public void passwordEncode(PasswordEncoder passwordEncoder) {
