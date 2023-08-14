@@ -22,7 +22,7 @@ const getMonthAndDate = (dateString) => {
   return { month, day };
 };
 
-function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true }) {
+function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true, isDetailPage = false }) {
   const invitationData = useRecoilValue(mobileInvitationState);
   const theme = useRecoilValue(themeState);
   const themeStyles = themes[theme - 1];
