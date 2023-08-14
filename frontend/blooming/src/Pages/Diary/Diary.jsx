@@ -28,7 +28,7 @@ const Diary = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [diaries]);
 
 
   if (loading) {
