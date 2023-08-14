@@ -5,9 +5,10 @@
   background-color: white;
   padding: 20px 10px;
   border-radius: 8px;
-  z-index: 2000;
+  z-index: 900;
   max-height: 85vh;
   overflow: auto;
+  overflow-x: hidden;
   text-align: center;
 }
 .pre{
@@ -27,7 +28,7 @@
 
 /* 전체 청첩장 */
 .form {
-  background-color: rgb(250, 248, 246);
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -101,7 +102,7 @@
 .connectCall {
   display: flex;
   margin-bottom: 30px;
-  width: 100vw;
+  width: 100%;
   justify-content: center;
 }
 .connectCallGroom {
