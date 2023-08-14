@@ -26,6 +26,7 @@ import Home from "./Pages/Home";
 // schedule
 import Schedule from "./Pages/Schedule";
 import TaskDetail from "./Pages/Schedule/TaskDetail";
+import NewTask from "./Pages/Schedule/NewTask";
 // my-page
 import MyPage from "./Pages/MyPage/MyPage";
 import SettingNotice from "./Pages/MyPage/SettingNotice";
@@ -147,6 +148,7 @@ function App() {
           {/* 스케줄 */}
           <Route path='/schedule' element={<Schedule />} />
           <Route path='/schedule/:id' element={<TaskDetail />} />
+          <Route path='/schedule/new-task' element={<NewTask />} />
 
           {/* NotFound */}
           <Route path='*' element={<Error />} />

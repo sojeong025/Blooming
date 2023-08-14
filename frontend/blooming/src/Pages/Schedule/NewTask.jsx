@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil'
+import { useLocation, useNavigate } from "react-router-dom";
 import { ScheduleState } from '../../recoil/ScheduleStateAtom';
 import { userState } from '../../recoil/ProfileAtom';
 import DatePicker from 'react-datepicker'
@@ -7,7 +8,12 @@ import './DatePicker.css'
 import classes from './NewTask.module.css';
 import { customAxios } from '../../lib/axios';
 
-function NewTask({ onCancel, onAddTask, task }) {
+function NewTask() {
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const task = location.state.task
+  console.log(task)
 
   const [ enteredTitle, setEnteredTitle ] = useState('');
   const [ enteredBody, setEnteredBody ] = useState('');
@@ -58,11 +64,10 @@ function NewTask({ onCancel, onAddTask, task }) {
     console.log(taskData)
     try {
       await customAxios.post('schedule', taskData)
-      onAddTask(taskData);
+      navigate('schedule')
     } catch (error) {
       console.log('스케쥴 등록 API 에러', error)
     }
-    onCancel();
   }
 
   return (
@@ -72,31 +77,29 @@ function NewTask({ onCancel, onAddTask, task }) {
         <DatePicker
           showPopperArrow={false}
           id="date"
-          selected={task ? time : enteredDate}
+          selected={enteredDate}
           onChange={dateChangeHandler}
           dateFormat="yyyy-MM-dd"
           required
-          disabled={!!task && task.scheduleBy === 'COMMON'}
         />
         <label htmlFor="time">시간 선택</label>
         <DatePicker
           showPopperArrow={false}
           id="time"
-          selected={task ? new Date(`${task.scheduleDate}T${task.scheduleTime}`) : enteredTime}
+          selected={enteredTime}
           onChange={timeChangeHandler}
           dateFormat="HH:mm"
           required
-          disabled={!!task && task.scheduleBy === 'COMMON'}
         />
       </div>
       <div>
         <label htmlFor="title">일정 제목</label>
-        <textarea id="title" required rows={1} onChange={titleChangeHandler} placeholder='제목을 입력하세요.' value={task && task.title} />
+        <textarea id="title" required rows={1} onChange={titleChangeHandler} placeholder='제목을 입력하세요.' />
         <label htmlFor="body">일정 내용</label>
-        <textarea id="body" required rows={3} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' value={task && task.content} />
+        <textarea id="body" required rows={3} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' />
       </div>
       <div className={classes.actions}>
-        <button type='button' onClick={onCancel}>취소</button>
+        <button type='button' >취소</button>
         <button type='submit' >추가</button>
       </div>
     </form>
