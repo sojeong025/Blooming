@@ -8,7 +8,7 @@ import { customAxios, fileAxios } from "../../lib/axios";
 import { AiOutlineLeft } from "react-icons/ai"
 import { AiOutlineCheck } from "react-icons/ai"
 
-function CreateItem({ hide, visible, item }) {
+function CreateItem({ hide, visible, fetchData, item }) {
   const [diaries, setDiaries] = useRecoilState(diaryState)
   const [date, setDate] = useState(item ? new Date(item.date) : new Date());
   const [title, setTitle] = useState(item ? item.title : "");
@@ -61,14 +61,7 @@ function CreateItem({ hide, visible, item }) {
     const createDiary = async () => {
       try {
         await customAxios.post("diary", ItemData);
-        // const customItemData = {
-        //   id: Number(response.data.result[0]),
-        //   title: ItemData.title,
-        //   content: ItemData.content,
-        //   date: ItemData.date,
-        //   image: ItemData.image
-        // }
-        // setDiaries((prevDiaries) => [customItemData, ...prevDiaries]);
+        await fetchData();
       } catch (error) {
         console.error(error);
       }
