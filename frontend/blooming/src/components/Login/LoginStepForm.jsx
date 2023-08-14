@@ -5,7 +5,6 @@ import { customAxios } from "../../lib/axios";
 
 const coupleCodeValidate = (values) => {
   const errors = {};
-
   // 코드
   if (!/^\d{8}$/.test(values.coupleCode)) {
     errors.coupleCode = "숫자 8자리를 입력해주세요.";
@@ -33,6 +32,13 @@ const validate = (values) => {
   }
 
   // 닉네임
+  if (!values.nickname) {
+    errors.nickname = "닉네임을 입력해주세요.";
+  } else if (values.nickname.length < 2 || values.nickname.length > 5) {
+    errors.nickname = "닉네임은 2~5자로 작성해주세요.";
+  } else if (!/^[a-zA-Z0-9가-힣ㄱ-ㅎㅏ-ㅣ]{2,5}$/.test(values.nickname)) {
+    errors.nickname = "닉네임에는 한글, 영어, 숫자만 사용할 수 있습니다.";
+  }
 
   return errors;
 };
@@ -67,7 +73,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
   const [coupleErrors, setCoupleErrors] = useState(() =>
     coupleCodeValidate(values),
   );
-  const [coupled, setCoupled] = useState();
+  const [coupled, setCoupled] = useState("");
 
   const handleCoupleChange = async (event) => {
     // event.preventDefault();
@@ -84,7 +90,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
       setCouple(event, updatedCoupleData);
     }
   };
-  // 유효성 검사 후 인증코드 확인
+  // 유효성 검사 후 인증코드 확인 시 다음버튼 활성화
   const inputCoupleStyle = (fieldName) => {
     if (coupleErrors[fieldName] !== undefined) {
       return `${classes.inputBox} ${classes.inputError}`;
@@ -100,8 +106,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
     event.preventDefault();
     try {
       await customAxios.post("couple-certification", validCoupleData);
-      // console.log(coupleData);
-      setCoupled(`${coupleData.name}님과 연결되었습니다.`);
+      setCoupled(`${coupleData.name}님과 연결이 가능합니다.`);
       handleChange({
         target: {
           name: "coupleCode",
@@ -109,7 +114,6 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
         },
       });
     } catch (error) {
-      // console.log("추가 정보 POST 에러:", error);
       setCoupled(error.response.data.message);
     }
   };
@@ -152,7 +156,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
                   type='text'
                   name='coupleCode'
                   value={coupleData.coupleCode}
-                  placeholder='코드'
+                  placeholder='상대방 연결 코드'
                   onChange={handleCoupleChange}
                   className={inputCoupleStyle("coupleCode")}
                 />
@@ -285,7 +289,9 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
             <p className={classes.titleText}>
               {values.name}님의 닉네임을 알려주세요
             </p>
-            <p>입력한 정보는 언제든 수정이 가능합니다.</p>
+            <p className={classes.subText}>
+              입력한 정보는 언제든 수정이 가능합니다.
+            </p>
             <div className={classes.wrapper}>
               <input
                 required
