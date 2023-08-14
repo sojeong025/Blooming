@@ -9,15 +9,6 @@ import { customAxios } from "../lib/axios";
 
 function Schedule() {
   const [task, setTask] = useRecoilState(ScheduleTaskState)
-  const [ modalIsVisible, setModalIsVisible ] = useState(false);
-
-  function hideModalHandler() {
-    setModalIsVisible(false);
-  }
-
-  function showModalHandler() {
-    setModalIsVisible(true);
-  }
 
   async function fetchTask() {
     try {
@@ -36,8 +27,8 @@ function Schedule() {
   return (
     <div className={classes.mainContainer}>
       <CalendarComponent />
-      <ScheduleBody onCreatePost={showModalHandler}/>
-      <TasksList isPosting={modalIsVisible} onStopPosting={hideModalHandler}/>
+      <ScheduleBody />
+      <TasksList />
     </div>
   )
 }

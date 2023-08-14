@@ -2,14 +2,14 @@ import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import { useRecoilValue } from "recoil";
-import { schedulesState } from "../../recoil/ScheduleDdayAtom";
+import { SchedulesState } from "../../recoil/ScheduleDdayAtom";
 import { useEffect, useState } from "react";
 dayjs.locale("ko");
 
 dayjs.extend(isSameOrAfter);
 
 const ScheduleDday = () => {
-  const schedules = useRecoilValue(schedulesState);
+  const schedules = useRecoilValue(SchedulesState);
 
   const todayDate = dayjs().format("YYYY-MM-DD"); // 오늘 날짜만
 
