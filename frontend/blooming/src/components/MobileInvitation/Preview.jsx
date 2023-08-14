@@ -27,9 +27,6 @@ function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true, i
   const theme = useRecoilValue(themeState);
   const themeStyles = themes[theme - 1];
   const [dday, setDday] = useState(null);
-
-  const location = useLocation();
-  const isDetailPage = location.pathname === '/mobile-invitation-detail';
   
   const calculateDday = (weddingDate) => {
     const now = new Date();
