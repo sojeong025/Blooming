@@ -45,6 +45,7 @@ function MobileInvitationDetail() {
           "--preview-total-position":"relative",
           "--preview-total-transform":"none",
           }}
+        isDetailPage={true}
         showPre={false}
         showCloseButton={false}
         className={classes.modal}
