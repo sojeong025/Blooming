@@ -10,7 +10,6 @@ import { PiPencilLineFill } from "react-icons/pi"
 
 const Diary = () => {
   const [diaries, setDiaries] = useRecoilState(diaryState);
-  const [loading, setLoading] = useState(true);
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const fetchData = async () => {
@@ -23,17 +22,11 @@ const Diary = () => {
     } catch (error) {
       console.error(error);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
-
-  if (loading) {
-    return <div>로딩중...</div>;
-  }
 
   function hideModalHandler() {
     setModalIsVisible(false);

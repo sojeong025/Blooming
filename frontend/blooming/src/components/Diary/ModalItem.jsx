@@ -1,4 +1,4 @@
-import { useParams, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { diaryState } from '../../recoil/DiaryStateAtom';
 import DatePicker from 'react-datepicker'
@@ -7,8 +7,12 @@ import classes from './ModalItem.module.css'
 import { customAxios, fileAxios } from "../../lib/axios";
 import { AiOutlineLeft } from "react-icons/ai"
 import { AiOutlineCheck } from "react-icons/ai"
+import { useNavigate } from 'react-router-dom';
 
-function CreateItem({ hide, visible, fetchData, item }) {
+function CreateItem({ hide, visible, item }) {
+
+  const navigate = useNavigate();
+
   const [diaries, setDiaries] = useRecoilState(diaryState)
   const [date, setDate] = useState(item ? new Date(item.date) : new Date());
   const [title, setTitle] = useState(item ? item.title : "");
@@ -60,8 +64,8 @@ function CreateItem({ hide, visible, fetchData, item }) {
     
     const createDiary = async () => {
       try {
-        await customAxios.post("diary", ItemData);
-        await fetchData();
+        const response = await customAxios.post("diary", ItemData);
+        navigate(`/diary/${response.data.result[0]}`)
       } catch (error) {
         console.error(error);
       }
@@ -86,6 +90,7 @@ function CreateItem({ hide, visible, fetchData, item }) {
       } catch (error) {
         console.error(error);
       }
+      hide();
     };
 
     const postHandling = () => {
@@ -97,7 +102,6 @@ function CreateItem({ hide, visible, fetchData, item }) {
     }
 
     await postHandling();
-    hide();
   }
 
   return (
