@@ -21,6 +21,7 @@ function NewTask() {
   const user = useRecoilValue(userState)
 
   useEffect(() => {
+    console.log(task)
     if (task) {
       setEnteredTitle(task.title)
       setEnteredBody(task.content)
@@ -105,7 +106,7 @@ function NewTask() {
   }
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <form style={{marginTop: '56px'}} className={classes.form} onSubmit={submitHandler}>
       <div>
         <label htmlFor="date">날짜 선택</label>
         <DatePicker
@@ -120,6 +121,9 @@ function NewTask() {
         <DatePicker
           showPopperArrow={false}
           id="time"
+          showTimeSelect
+          showTimeSelectOnly
+          timeFormat='HH:mm'
           selected={enteredTime}
           onChange={timeChangeHandler}
           dateFormat="HH:mm"
