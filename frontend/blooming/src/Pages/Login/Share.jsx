@@ -66,6 +66,11 @@ export default function Share() {
     const isAllValid = Object.values(newErrors).every((error) => error === "");
     if (isAllValid) {
       setCouple(e, updatedFormData);
+    } else {
+      setCoupled({
+        isCoupled: false,
+        description: ``,
+      });
     }
   };
 
