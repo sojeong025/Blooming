@@ -18,10 +18,8 @@ const Diary = () => {
       try {
         const response = await customAxios.get("diary");
         
-        if (response?.data?.result?.length > 0) {
+        if (response.status === 200) {
           setDiaries(response.data.result[0]);
-        } else {
-          setDiaries([]);
         }
       } catch (error) {
         console.error(error);
