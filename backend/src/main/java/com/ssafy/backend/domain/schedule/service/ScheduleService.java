@@ -13,6 +13,8 @@ import com.ssafy.backend.domain.schedule.dto.ScheduleResultDto;
 import com.ssafy.backend.domain.schedule.repository.ScheduleRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
+import com.ssafy.backend.global.fcm.FCMNotificationRequestDto;
+import com.ssafy.backend.global.fcm.NotificationScheduler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,6 +31,7 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final CoupleRepository coupleRepository;
     private final UserRepository userRepository;
+    private final NotificationScheduler notificationScheduler;
 
     public void registSchedule(ScheduleRegistDto scheduleRegistDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -57,7 +60,15 @@ public class ScheduleService {
         schedule.setCouple(couple);
 
         scheduleRepository.save(schedule);
+
+        //새로운 스케쥴 등록 시 본인 + 상대에게 알림
+        String title = "새로운 일정이 등록되었습니다.";
+        String content = scheduleRegistDto.getTitle() + " : " + scheduleRegistDto.getContent();
+        for (User userOne : couple.getUsers()){
+            notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
+        }
     }
+
 
     public List<ScheduleResultDto> getAllSchedule() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -133,6 +144,13 @@ public class ScheduleService {
 
         schedule.setCouple(couple);
         Schedule savedSchedule = scheduleRepository.save(schedule);
+
+        //새로운 스케쥴 등록 시 본인 + 상대에게 알림
+        String title = "새로운 일정이 등록되었습니다.";
+        String content = reservationScheduleRegistDto.getTitle() + " : " + reservationScheduleRegistDto.getContent();
+        for (User userOne : couple.getUsers()){
+            notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
+        }
         return savedSchedule;
     }
 

@@ -128,7 +128,7 @@ public class NotificationScheduler {
     }
 
 
-    private String sendNotificationByToken(FCMNotificationRequestDto fcmDto) {
+    public String sendNotificationByToken(FCMNotificationRequestDto fcmDto) {
         User user = fcmDto.getUser();
 
         if (user != null) {
