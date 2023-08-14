@@ -48,6 +48,16 @@ function Preview() {
           </div>
         ))}
       </Carousel>
+      {imageList.map((image, index) => (
+        <div
+          key={index}
+          className={`${classes.caption} ${
+            currentImageIndex === index ? classes.activeCaption : ""
+          }`}
+        >
+          {image.caption}
+        </div>
+      ))}
 
       <PageIndicator
         className={classes.pageIndicator}

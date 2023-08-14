@@ -10,7 +10,7 @@
 .image-carousel {
   min-width: 100%;
   margin-bottom: 10px;
-  border: 1px solid #666;
+  /* border: 1px solid #666; */
   align-items: center;
 }
 
@@ -19,7 +19,7 @@
   margin-bottom: 50px;
 }
 .img {
-  height: 80vh;
+  height: 60vh;
   object-fit: contain;
 }
 
@@ -81,4 +81,15 @@
 }
 .kakaoBtn * {
   color: #000000;
+}
+.caption {
+  display: none;
+  margin-bottom: 50px;
+  font-size: 25px;
+  font-weight: 600;
+  color: #666;
+}
+
+.activeCaption {
+  display: block;
 }
