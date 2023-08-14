@@ -101,12 +101,15 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
     try {
       await customAxios.post("couple-certification", validCoupleData);
       // console.log(coupleData);
-      // setCoupled(`${coupleData.name}님과 연결되었습니다.`);
+      setCoupled(`${coupleData.name}님과 연결되었습니다.`);
       handleChange({
-        target: { name: "coupleCode", value: String(coupleData.coupleCode) },
+        target: {
+          name: "coupleCode",
+          value: String(validCoupleData.coupleCode),
+        },
       });
     } catch (error) {
-      console.log("추가 정보 POST 에러:", error);
+      // console.log("추가 정보 POST 에러:", error);
       setCoupled(error.response.data.message);
     }
   };
