@@ -7,5 +7,5 @@ import lombok.Getter;
 @Getter
 public class CoupleCodeDto {
 	private String name;
-	private Integer coupleCode;
+	private String coupleCode;
 }
