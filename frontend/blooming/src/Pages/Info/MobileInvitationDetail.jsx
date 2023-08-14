@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { mobileInvitationState } from "../../recoil/MobileInvitationAtom";
 import Preview from "../../components/MobileInvitation/Preview"
 import classes from "./MobileInvitationDetail.module.css"
@@ -10,11 +10,27 @@ import { PiPencilLineFill } from "react-icons/pi"
 
 function MobileInvitationDetail() {
   const navigate = useNavigate();
-  const invitation = useRecoilValue(mobileInvitationState);
+  const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
   const invitationId = invitation.id
   const handleGoBack = () => {
     navigate(-1);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await customAxios.get("invitation");
+        if (response.data.result[0]) {
+          setInvitation(response.data.result[0]);
+        } else {
+          setInvitation(null);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [setInvitation]);
 
   const handleDelete = async () => {
     try {
