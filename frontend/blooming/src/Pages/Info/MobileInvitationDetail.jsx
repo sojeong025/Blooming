@@ -7,6 +7,7 @@ import classes from "./MobileInvitationDetail.module.css"
 import { AiOutlineLeft } from "react-icons/ai"
 import { BsTrash } from "react-icons/bs"
 import { PiPencilLineFill } from "react-icons/pi"
+import { useEffect } from "react";
 
 function MobileInvitationDetail() {
   const navigate = useNavigate();
