@@ -55,10 +55,11 @@ const DeleteForm = ({ userData, deleteProfile, show = false, onClose }) => {
 export default DeleteForm;
 
 const Wrapper = styled.div`
-  width: 80%;
+  width: 100%;
   margin-top: 10px;
   padding: 20px;
 `;
+
 const TitleText = styled.div`
   font-size: 20px;
   font-weight: 600;
@@ -83,7 +84,7 @@ const DeleteBtn = styled.div`
   margin-top: 50px;
   margin-left: 5vw;
 
-  width: 80vw;
+  width: 90vw;
   height: 40px;
 `;
 
