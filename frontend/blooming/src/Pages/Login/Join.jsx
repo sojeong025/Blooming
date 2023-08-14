@@ -54,12 +54,12 @@ export default function Join() {
   // 저장 후 단계 넘어가기
   const handleSubmit = (step) => (event) => {
     event.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     nextStep();
   };
   const nextStep = () => {
     if (currentStep === 3) {
-      console.log(formData);
+      // console.log(formData);
       // 마지막 페이지 로그인 정보 입력 끝 넘기기
       handleSignUp();
     }
@@ -133,7 +133,7 @@ export default function Join() {
   const handleSignUp = async () => {
     const currentFcmToken = await getToken();
     let customData = formData;
-    console.log("여기가 중요", userData, userData.coupleCode);
+    // console.log("여기가 중요", userData, userData.coupleCode);
     if (userData.coupleCode) {
       customData = {
         ...formData,
@@ -153,10 +153,10 @@ export default function Join() {
         response.headers["authorization"] &&
         response.headers["authorization_refresh"]
       ) {
-        console.log(
-          response.headers["authorization"],
-          response.headers["authorization_refresh"],
-        );
+        // console.log(
+        //   response.headers["authorization"],
+        //   response.headers["authorization_refresh"],
+        // );
         localStorage.setItem("accessToken", response.headers["authorization"]);
         localStorage.setItem(
           "refreshToken",
@@ -165,7 +165,7 @@ export default function Join() {
       }
       setUserData(formData);
       setThemeState(formData.gender);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
     }
