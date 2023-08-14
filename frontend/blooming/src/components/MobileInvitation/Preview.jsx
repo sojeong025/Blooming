@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import { BsFillTelephoneFill } from 'react-icons/bs'
 import { BiSolidMessageDots } from 'react-icons/bi'
+import { useLocation } from 'react-router-dom';
 
 import classes from './Preview.module.css';
 import theme1 from './Create/theme1.module.css'
@@ -26,6 +27,9 @@ function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true })
   const theme = useRecoilValue(themeState);
   const themeStyles = themes[theme - 1];
   const [dday, setDday] = useState(null);
+
+  const location = useLocation();
+  const isDetailPage = location.pathname === '/mobile-invitation-detail';
   
   const calculateDday = (weddingDate) => {
     const now = new Date();
