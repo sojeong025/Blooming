@@ -48,7 +48,7 @@ const Tips = () => {
   }, [weddingDate, weddingDday, nextPlan]);
 
   return (
-    <div data-theme="groom" className={classes.container}>
+    <div className={classes.container}>
       {weddingDate !== "" ? (
         weddingDday >= 0 ? (
           <>
