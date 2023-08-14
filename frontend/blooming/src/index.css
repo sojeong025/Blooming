@@ -64,7 +64,10 @@
   --color-delete: #DC143C;
   
   /* join 포인트 컬러 바꾸기 */
-  --color-join-point: red;
+  /* 텍스트(진한) */
+  --color-join-point: #d98c10;
+  /* 진행(좀 연한) */
+  --color-join-progress:#fda73f;
   /* default 값 */
   --color-point: var(--color-groom);
 }

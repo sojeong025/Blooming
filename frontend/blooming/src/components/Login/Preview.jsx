@@ -64,8 +64,8 @@ function Preview() {
         total={totalImages}
         current={currentImageIndex}
         style={{
-          "--dot-color": "rgba(0, 0, 0, 0.4)",
-          "--active-dot-color": "#ffc0cb",
+          "--dot-color": "#bec0c2",
+          "--active-dot-color": "#fda73f",
           "--dot-size": "10px",
           "--active-dot-size": "30px",
           "--dot-border-radius": "50%",
@@ -77,7 +77,7 @@ function Preview() {
         {currentImageIndex === totalImages - 1 ? (
           <a href='http://43.200.254.50:8080/oauth2/authorization/kakao'>
             <div className={classes.kakaoBtn}>
-              <img src='src/assets/kakao.png' />
+              <img src='/src/assets/kakao.png' />
             </div>
           </a>
         ) : (
