@@ -1,11 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import classes from "./Join.module.css";
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/ProfileAtom";
 import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 
-// 공사중 ==========================================================
 import StepIndicator from "../../components/Login/StepIndicator";
 import LoginStepForm from "../../components/Login/LoginStepForm";
 
@@ -35,21 +33,7 @@ export default function Join() {
         rootElement.style.setProperty("--color-point", "var(--color-brider)");
         break;
     }
-  }
-  // const dummy = {
-  //   email: "lotus0028@kakao.com",
-  //   nickname: "희영",
-  //   gender: "FEMALE",
-  // };
-  // // 체크용 더미
-  // useEffect(() => {
-  //   // 'nickname' -> 'name'
-  //   const updatedDummy = { ...dummy, name: dummy.nickname };
-  //   delete updatedDummy.nickname;
-
-  //   setFormData({ ...formData, ...updatedDummy });
-  //   console.log("check", formData);
-  // }, []);
+  };
 
   const onToggleChange = (event) => {
     const gender = event.target.checked ? "FEMALE" : "MALE";
@@ -112,7 +96,6 @@ export default function Join() {
     try {
       const response = await customAxios.get("kakao-profile");
       const kakaoData = response.data.result[0];
-      // setFormData({ ...formData, ...kakaoData });
 
       const genderInUpperCase = kakaoData.gender.toUpperCase();
       const updatedKakaoData = {
@@ -146,7 +129,6 @@ export default function Join() {
     }
   }, [accessToken]);
 
-  // 공사중 ====================================================
   // 추가 정보 작성 POST 요청 주고, 유저 데이터에 넣기
   const handleSignUp = async () => {
     const currentFcmToken = await getToken();
@@ -182,22 +164,12 @@ export default function Join() {
         );
       }
       setUserData(formData);
-      setThemeState(formData.gender)
+      setThemeState(formData.gender);
       console.log(response);
-      // navigate("/decide-wedding", {
-      //   state: { pageTitle: "회원가입" },
-      // });
     } catch (error) {
       console.log("추가 정보 POST 에러:", error);
-      // navigate("/");
     }
   };
-
-  // 제출 버튼 클릭
-  // const joinSubmit = async (event) => {
-  //   event.preventDefault();
-  //   handleSignUp();
-  // };
 
   return (
     <div>
@@ -209,64 +181,6 @@ export default function Join() {
         onChangeHandlers={{ handleChange, onToggleChange }}
         values={formData}
       />
-
-      {/* <div className={classes.titleText}>추가 정보를 입력해주세요</div>
-      <div className={classes.container}>
-        <form onSubmit={joinSubmit}>
-          <InputForm
-            label='이름'
-            name='name'
-            value={formData.name}
-            onChange={handleChange}
-            placeholder='이름을 작성해주세요.'
-            autoFocus
-            required
-          />
-          <InputForm
-            label='닉네임'
-            name='nickname'
-            value={formData.nickname}
-            onChange={handleChange}
-            placeholder='닉네임을 작성해주세요.'
-          />
-
-          <InputForm
-            label='전화번호'
-            name='phoneNumber'
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            placeholder='전화번호를 작성해주세요.'
-            required
-          />
-          <div className={`${classes.genderSelect}`}>
-            <div className={`${classes.genderButton} radio_male`}>
-              <input
-                id='gender-1'
-                type='radio'
-                name='gender'
-                value='MALE'
-                onChange={handleChange}
-                checked={formData.gender === "MALE"}
-              />
-              <label htmlFor='gender-1'>신랑</label>
-            </div>
-            <div className={`${classes.genderButton} radio_male`}>
-              <input
-                id='gender-2'
-                type='radio'
-                name='gender'
-                value='FEMALE'
-                onChange={handleChange}
-                checked={formData.gender === "FEMALE"}
-              />
-              <label htmlFor='gender-2'>신부</label>
-            </div>
-          </div>
-          <button type='submit' className={classes.submitButton}>
-            제출
-          </button>
-        </form>
-      </div> */}
     </div>
   );
 }
