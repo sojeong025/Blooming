@@ -102,7 +102,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
       // setCoupled(`${coupleData.name}님과 연결되었습니다.`);
       // values에 넣어주기
       handleChange({
-        target: { name: "coupleCode", value: coupleData.coupleCode },
+        target: { name: "coupleCode", value: String(coupleData.coupleCode) },
       });
     } catch (error) {
       // console.log("추가 정보 POST 에러:", error);
