@@ -6,7 +6,7 @@ import axios from "axios";
 import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { customAxios } from "../lib/axios";
 
-import { userState } from "../recoil/ProfileAtom";
+import { userState, themeState } from "../recoil/ProfileAtom";
 
 function Splash() {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ function Splash() {
   const localRefreshToken = localStorage.getItem("refreshToken");
 
   // 유저 정보를 저장
+  const setTheme = useSetRecoilState(themeState)
   const setUserState = useSetRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
 
@@ -49,6 +50,7 @@ function Splash() {
               const res = await customAxios("profile");
               if (res.data) {
                 setUserState({ ...res.data.result[0] });
+                setTheme(res.data.result[0].gender)
                 navigate("/home");
               }
             } catch (error) {

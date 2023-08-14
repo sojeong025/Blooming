@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilValue } from "recoil";
 import {
   BrowserRouter as Router,
   Route,
@@ -53,27 +53,24 @@ import AllNotice from "./Pages/Notice/AllNotice";
 // err
 import Error from "./Pages/Error";
 //user
-import { userState } from "./recoil/ProfileAtom";
+import { themeState } from "./recoil/ProfileAtom";
 
 const setThemeState = (gender) => {
-  const bodyElement = document.getElementsByTagName("body")[0];
+  const rootElement = document.documentElement;
 
   switch (gender) {
     case "MALE":
-      bodyElement.style.setProperty("--color-bg", "var(--color-groom)");
+      rootElement.style.setProperty("--color-point", "var(--color-groom)");
       break;
     case "FEMALE":
-      bodyElement.style.setProperty("--color-bg", "var(--color-brider)");
-      break;
-    default:
-      bodyElement.style.setProperty("--color-bg", "var(--color-common)");
+      rootElement.style.setProperty("--color-point", "var(--color-brider)");
       break;
   }
 }
 
 function App() {
   // 테마설정
-  const [theme, setTheme] = useState("MALE")
+  const theme = useRecoilValue(themeState)
   
   useEffect(() => {
     setThemeState(theme)

@@ -12,6 +12,12 @@ export const userState = atom({
     profileImage: "",
   },
 });
+
+export const themeState = atom({
+  key: "themeState",
+  default: "FEMALE"
+})
+
 export const userCoupleState = atom({
   key: "userCoupleState",
   default: {

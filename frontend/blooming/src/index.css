@@ -65,6 +65,8 @@
   
   /* join 포인트 컬러 바꾸기 */
   --color-join-point: red;
+  /* default 값 */
+  --color-point: var(--color-groom);
 }
 
 .mainContainer {
@@ -83,12 +85,4 @@ body {
 
 a{
   text-decoration-line: none;
-}
-
-body[data-theme='groom'] {
-  --color-point: var(--color-groom);
-}
-
-body[data-theme='brider'] {
-  --color-point: var(--color-brider);
 }
