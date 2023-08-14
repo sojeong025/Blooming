@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import classes from './TaskDetail.module.css';
 import { useEffect, useState } from 'react';
 import { customAxios } from '../../lib/axios';
-import { NavLink } from 'react-router-dom';
 
 function TaskDetail() {
 
@@ -12,7 +11,7 @@ function TaskDetail() {
   const navigate = useNavigate();
 
   const handleHistory = () => {
-    navigate(-1);
+    navigate("/schedule");
   };
 
   const handleUpdate = () => {
