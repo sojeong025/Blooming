@@ -72,7 +72,7 @@ function NewTask() {
     if (task) {
       const updateTaskData = {
         id: task.id,
-        title: enteredTime,
+        title: enteredTitle,
         content: enteredBody,
         scheduleDate: formattedDate,
         scheduleTime: formattedTime,
@@ -132,9 +132,9 @@ function NewTask() {
       </div>
       <div>
         <label htmlFor="title">일정 제목</label>
-        <textarea id="title" required rows={1} onChange={titleChangeHandler} placeholder='제목을 입력하세요.' />
+        <textarea id="title" required rows={1} onChange={titleChangeHandler} placeholder='제목을 입력하세요.' value={enteredTitle} />
         <label htmlFor="body">일정 내용</label>
-        <textarea id="body" required rows={3} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' />
+        <textarea id="body" required rows={3} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' value={enteredBody} />
       </div>
       <div className={classes.actions}>
         <button type='button' onClick={handleHistory} >취소</button>
