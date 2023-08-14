@@ -71,8 +71,8 @@ abbr[title] {
 
 /* 오늘날짜 */
 .react-calendar__tile--now {
-  background-color: #D8D8D8;
-  color: white;
+  border: 2px solid #D8D8D8;
+  /* background-color: #D8D8D8; */
   border-radius: 50%;
 }
 .react-calendar__tile--now:enabled:hover,
@@ -84,18 +84,27 @@ abbr[title] {
 }
 /* 선택된 날짜 */
 .selected-day {
-  background-color: #FF647C;
+  background-color: var(--color-point);
+  border: none;
   color: white;
   border-radius: 50%;
 }
 
 .selected-day:enabled:hover,
 .selected-day:enabled:focus {
-  background-color: #FF647C;
+  background-color: var(--color-point);
   color: white;
 }
 
 .react-calendar__navigation__label{
   font-size: 40px;
 }
+.weekend-day {
+  border-radius: 50%;
+}
 
+.weekend-day:enabled:hover,
+.weekend-day:enabled:focus {
+  background-color: var(--color-point);
+  color: white;
+}

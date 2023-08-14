@@ -2,6 +2,7 @@ import { useRecoilValue } from 'recoil';
 import { ScheduleState, TodayTaskState } from '../../recoil/ScheduleStateAtom';
 import classes from './ScheduleBody.module.css'
 import { NavLink } from 'react-router-dom';
+import { BsCalendarPlus } from 'react-icons/bs'
 
 function ScheduleBody() {
   const selectedDate = useRecoilValue(ScheduleState);
@@ -21,7 +22,7 @@ function ScheduleBody() {
       </div>
       <div className={classes.btn}>
         <NavLink to="new-task">
-          <button> + </button>
+          <button> <BsCalendarPlus /></button>
         </NavLink>
       </div>
     </div>

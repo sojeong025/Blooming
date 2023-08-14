@@ -1,51 +1,75 @@
 .form {
-	background-color: #FFFAF4;
+	background-color: #FFF;
+	height: 100vh;
 	/* padding: 1rem;
 	width: 100vw;
 	height: 100vh; */
 }
-
 .form label {
 	display: block;
 	margin-bottom: 0.05rem;
 	font-weight: bold;
 }
-
-.form input,
 .form textarea {
 	display: block;
 	width: 95%;
-	font: inherit;
-	padding: 0.5rem;
-	border-radius: 6px;
 	border: none;
 	color: #28262c;
+	resize: none;
+	padding: 0;
 }
-
 .actions {
-	display: flex;
-	justify-content: flex-end;
-	gap: 0.5rem;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 56px;
+  z-index: 955;
+  background-color: #FFFAF4;
 }
-
 .actions button {
-	cursor: pointer;
-	font: inherit;
-	padding: 0.5rem 1.5rem;
-	border: none;
-	border-radius: 4px;
-	background-color: #34036c;
-	color: #e5d5f7;
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: var(--color-point);
+  color: white;
+  font-size: 20px;
+  padding: 0 25px;
+  height: 56px;
 }
-
+/* 일단은 동일하게 해놓기..? */
 .actions button:hover {
-	background-color: #23014a;
+  background-color: var(--color-point);
+  color: white;
 }
-
 .actions button[type='button'] {
-	background-color: transparent;
+  background-color: transparent;
+  color: #666;
 }
-
-.actions button[type='button']:hover {
-	color: #d1bee6;
+.mainTitle {
+	display: block;
+	margin: 20px 30px;
+	width: 80%;
+	height: 40px;
+	font: inherit;
+	border: none;
+	color: #28262c;
+	resize: none;
+	border-left: 4px solid var(--color-point);
+	padding: 0 10px;
+}
+.title {
+	height: 50px;
+	line-height: 40px;
+	font-size: 25px;
+	font-family: 'SUITE-regular';
+}
+.title:focus {
+	outline: none;
+}
+.date {
+	margin: 20px 30px;
+}
+.time {
+	margin: 20px 30px;
 }

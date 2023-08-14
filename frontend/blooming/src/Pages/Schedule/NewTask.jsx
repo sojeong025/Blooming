@@ -7,6 +7,10 @@ import DatePicker from 'react-datepicker'
 import './DatePicker.css'
 import classes from './NewTask.module.css';
 import { customAxios } from '../../lib/axios';
+import { AiOutlineLeft } from "react-icons/ai"
+import { AiOutlineCheck } from "react-icons/ai"
+import { PiPencilLineFill } from 'react-icons/pi'
+import { BsTrash , BsCalendarCheck, BsClock, BsReverseLayoutTextSidebarReverse } from 'react-icons/bs'
 
 function NewTask() {
 
@@ -106,9 +110,32 @@ function NewTask() {
   }
 
   return (
-    <form style={{marginTop: '56px'}} className={classes.form} onSubmit={submitHandler}>
-      <div>
-        <label htmlFor="date">날짜 선택</label>
+    <form className={classes.form} onSubmit={submitHandler}>
+
+      {/* ---------버튼 부분-------- */}   
+      <div className={classes.actions}>
+        <button type='button' onClick={handleHistory} ><AiOutlineLeft /></button>
+        {task ? (
+          <>
+            <button type="submit"><PiPencilLineFill/></button>
+            <button type="button" onClick={deleteHandler}>
+              <BsTrash />
+            </button>
+          </>
+        ) : (
+          <button type="submit"><AiOutlineCheck /></button>
+        )}
+      </div>
+
+      {/* ---------제목 입력 부분-------- */}
+      <div className={classes.mainTitle}>
+        <textarea className={classes.title} id="title" autoFocus required  rows={1} onChange={titleChangeHandler} placeholder='일정 제목' value={enteredTitle} />
+      </div>
+
+
+      <div className={classes.date}>
+        {/* ---------날짜 선택 부분-------- */}
+        <BsCalendarCheck size={24}/>
         <DatePicker
           showPopperArrow={false}
           id="date"
@@ -117,7 +144,11 @@ function NewTask() {
           dateFormat="yyyy-MM-dd"
           required
         />
-        <label htmlFor="time">시간 선택</label>
+      </div>
+
+      <div className={classes.time}>
+        {/* ---------시간 선택 부분-------- */}
+        <BsClock size={24} />
         <DatePicker
           showPopperArrow={false}
           id="time"
@@ -130,25 +161,14 @@ function NewTask() {
           required
         />
       </div>
-      <div>
-        <label htmlFor="title">일정 제목</label>
-        <textarea id="title" required rows={1} onChange={titleChangeHandler} placeholder='제목을 입력하세요.' value={enteredTitle} />
-        <label htmlFor="body">일정 내용</label>
-        <textarea id="body" required rows={3} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' value={enteredBody} />
+
+      {/* ---------내용 입력 부분-------- */}
+      <div className={classes.mainContent}>
+        <BsReverseLayoutTextSidebarReverse size={24} />
+        <textarea id="body" required rows={20} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' value={enteredBody} />
       </div>
-      <div className={classes.actions}>
-        <button type='button' onClick={handleHistory} >취소</button>
-        {task ? (
-          <>
-            <button type="submit">수정</button>
-            <button type="button" onClick={deleteHandler}>
-              삭제
-            </button>
-          </>
-        ) : (
-          <button type="submit">추가</button>
-        )}
-      </div>
+      
+      
     </form>
   );
 }
