@@ -280,6 +280,20 @@ public class UserController {
 
 
 
+    // 어플 자체 푸시알림 설정 추가 ( post, get, delete )
+    @Operation(summary = "어플 푸시 알림 동의", description = "푸시 알림 동의 합니다.")
+    @PostMapping("/")
+    public ResponseEntity<BasicResponse> enableNotification(@RequestBody CoupleCodeDto coupleCodeDto) {
+        userService.certificationCouple(coupleCodeDto);
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("커플 인증 성공").build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
+
     @Hidden
     @GetMapping("/jwt-test")
     public String jwtTest() {

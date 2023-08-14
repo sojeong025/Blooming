@@ -91,7 +91,8 @@ public class SecurityConfig {
 		CorsConfiguration configuration = new CorsConfiguration();
 
 		//허용할 url 설정
-		configuration.addAllowedOrigin("http://43.200.254.50");
+//		configuration.addAllowedOrigin("http://43.200.254.50");
+		configuration.addAllowedOrigin("https://i9e104.p.ssafy.io");
 		//허용할 헤더 설정
 		configuration.addAllowedHeader("*");
 		//허용할 http method
