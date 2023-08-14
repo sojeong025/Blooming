@@ -20,6 +20,17 @@
   margin-top: 10px;
 }
 
+.passCode {
+  margin-top: 50px;
+  font-size: 16px;
+  color: grey;
+}
+.coupledNo {
+  height: 10px;
+  font-size: 14px;
+  color: red;
+}
+
 /* ========= input ========= */
 .wrapper {
   width: 80vw;
@@ -32,6 +43,15 @@
   margin-top: 25px;
   display: inline-block;
 }
+.codeContainer {
+  padding-bottom: 10px;
+  height: 70px;
+}
+
+/* .codeContainer .errorMessage {
+  margin-bottom: 20px;
+} */
+
 .errorMessage {
   padding-top: 5px;
   margin-left: 3px;
