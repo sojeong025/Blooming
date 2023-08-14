@@ -84,7 +84,7 @@
   padding: 20px 25px;
   color: #fff;
   position: absolute;
-  z-index: 1000;
+  z-index: 1000 !important;
   font-family: 'SUITE-regular';
   background-color: #b4b4b459;
 }

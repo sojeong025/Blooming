@@ -19,7 +19,15 @@
   margin-bottom: 20px;
 }
 .wedding {
-  top: 520px;
+  top: 62%;
+  left: 10px;
+  font-size: 60px;
+  position: absolute;
+  font-family: 'LeferiPoint-SpecialItalicA';
+  font-style: italic;
+}
+.wedding-detail {
+  top: 57%;
   left: 10px;
   font-size: 60px;
   position: absolute;
