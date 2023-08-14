@@ -50,6 +50,10 @@ function NewTask() {
     setEnteredTime(time);
   }
 
+  const handleHistory = () => {
+    navigate(-1);
+  };
+
   async function submitHandler(event) {
     event.preventDefault()
     const formattedDate = `${enteredDate.getFullYear()}-${(enteredDate.getMonth() + 1).toString().padStart(2, '0')}-${enteredDate.getDate().toString().padStart(2, '0')}`;
@@ -63,20 +67,37 @@ function NewTask() {
       scheduledBy: user.gender,
       scheduleType: "PRI",
     };
-    console.log(taskData)
-    try {
-      await customAxios.post('schedule', taskData)
-      navigate('schedule')
-    } catch (error) {
-      console.log('스케쥴 등록 API 에러', error)
+
+    if (task) {
+      const updateTaskData = {
+        id: task.id,
+        title: enteredTime,
+        content: enteredBody,
+        scheduleDate: formattedDate,
+        scheduleTime: formattedTime,
+      }
+      try {
+        await customAxios.put('schedule', updateTaskData)
+        navigate(`/schedule/${task.id}`)
+      } catch (error) {
+        console.log('스케쥴 수정 API 에러', error)
+      }
+    } else {
+      try {
+        await customAxios.post('schedule', taskData)
+        navigate('/schedule')
+      } catch (error) {
+        console.log('스케쥴 등록 API 에러', error)
+      }
     }
+    
   }
 
   async function deleteHandler() {
     if (task) {
       try {
         await customAxios.delete(`schedule/${task.id}`);
-        navigate('schedule');
+        navigate('/schedule');
       } catch (error) {
         console.log('스케쥴 삭제 API 에러', error);
       }
@@ -112,7 +133,7 @@ function NewTask() {
         <textarea id="body" required rows={3} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' />
       </div>
       <div className={classes.actions}>
-        <button type='button' >취소</button>
+        <button type='button' onClick={handleHistory} >취소</button>
         {task ? (
           <>
             <button type="submit">수정</button>

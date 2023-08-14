@@ -3,6 +3,7 @@ import Task from './Task';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { ScheduleState, ScheduleTaskState, TodayTaskState } from '../../recoil/ScheduleStateAtom';
 import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function TasksList() {
   const tasks = useRecoilValue(ScheduleTaskState);
@@ -13,6 +14,10 @@ function TasksList() {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(date).toLocaleDateString(undefined, options);
   };
+
+  useEffect(() => {
+    setTodayTask(0)
+  }, [])
 
 
   return (
