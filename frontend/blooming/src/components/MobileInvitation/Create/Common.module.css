@@ -59,7 +59,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: -5;
+  z-index: 1;
 }
 .img {
   width: 0.1px;
@@ -69,8 +69,8 @@
   position: absolute;
 }
 .imageContainer img {
-  width: 100vw;
-  height: 45vh;
+  width: 82vw;
+  height: 40vh;
   object-fit: cover;
   overflow: hidden;
   z-index: 2;
@@ -83,7 +83,7 @@
   padding: 20px 25px;
   color: #fff;
   position: absolute;
-  z-index: 5;
+  z-index: 20;
   font-family: 'SUITE-regular';
   background-color: #b4b4b459;
 }
