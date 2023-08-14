@@ -2,31 +2,45 @@ import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 import { diaryState } from "../../recoil/DiaryStateAtom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateItem from "../../components/Diary/ModalItem";
 import { customAxios } from "../../lib/axios";
 import { AiOutlineLeft } from "react-icons/ai"
 import { BsTrash } from "react-icons/bs"
 import { PiPencilLineFill } from "react-icons/pi"
 
-
 import classes from "./DiaryDetails.module.css"
 
 const DiaryDetails = () => {
 
   const [diaries, setDiaries] = useRecoilState(diaryState);
+  const [loading, setLoading] = useState(true);
+  const [diary, setDiary] = useState()
 
   const navigate = useNavigate();
   const { id } = useParams();
   const [ modalIsVisible, setModalIsVisible ] = useState(false);
 
-  const diary = diaries.find((diary) => {
-    console.log(diary.id, id)
-    console.log(diary)
-    if (`${diary.id}` === id) {
-      return diary
+  const fetchData = async () => {
+    try {
+      const response = await customAxios.get(`diary/${id}`);
+      
+      if (response.status === 200) {
+        setDiary(response.data.result[0]);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  })
+    setLoading(false)
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>로딩중...</div>;
+  }
 
   const pageTransition = {
     initial: { opacity: 0, x: 500 },
