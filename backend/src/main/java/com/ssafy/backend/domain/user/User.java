@@ -80,6 +80,7 @@ public class User extends CreatedAndUpdatedBaseEntity {
         this.phoneNumber = userSignUpDto.getPhoneNumber();
         this.gender = userSignUpDto.getGender();
         this.fcmToken = userSignUpDto.getFcmToken();
+        this.notificationSetting = "agree";
     }
 
     public void updateProfile(UserDto userDto) {
