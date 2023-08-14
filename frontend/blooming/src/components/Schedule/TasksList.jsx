@@ -4,6 +4,7 @@ import Task from './Task';
 import Modal from './Modal';
 import { useRecoilState } from 'recoil';
 import { ScheduleState, ScheduleTaskState } from '../../recoil/ScheduleStateAtom';
+import { NavLink } from 'react-router-dom';
 
 function TasksList({isPosting, onStopPosting}) {
   const [tasks, setTasks ]= useRecoilState(ScheduleTaskState);
@@ -30,7 +31,9 @@ function TasksList({isPosting, onStopPosting}) {
         {tasks.map((task) => {
           if (formatDate(selectedDate) === formatDate(task.scheduleDate)) {
             return (
-              <Task key={task.id} date={task.scheduleDate} body={task.content} />
+              <NavLink to={`/schedule/${task.id}`} key={task.id}>
+                <Task task={task} />
+              </NavLink>
             )
           }
         })}

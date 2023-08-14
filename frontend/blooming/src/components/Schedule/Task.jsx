@@ -1,11 +1,11 @@
 import classes from './Task.module.css'
 
-function Task ({ date, body }) {
+function Task ({ task }) {
 
   return (
     <li className={classes.post}>
-      <p className={classes.body}>{body}</p>
-      <p className={classes.date}>{date}</p>
+      <p className={classes.body}>{task.title}</p>
+      <p className={classes.date}>{task.scheduleDate}</p>
     </li>
   );
 }

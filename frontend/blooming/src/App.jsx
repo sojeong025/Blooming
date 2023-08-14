@@ -25,6 +25,7 @@ import BottomNav from "./components/Common/BottomNav";
 import Home from "./Pages/Home";
 // schedule
 import Schedule from "./Pages/Schedule";
+import TaskDetail from "./Pages/Schedule/TaskDetail";
 // my-page
 import MyPage from "./Pages/MyPage/MyPage";
 import SettingNotice from "./Pages/MyPage/SettingNotice";
@@ -144,6 +145,7 @@ function App() {
 
           {/* 스케줄 */}
           <Route path='/schedule' element={<Schedule />} />
+          <Route path='/schedule/:id' element={<TaskDetail />} />
 
           {/* NotFound */}
           <Route path='*' element={<Error />} />
