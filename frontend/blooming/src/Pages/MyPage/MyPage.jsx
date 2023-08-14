@@ -42,7 +42,7 @@ function MyPage() {
       setCoupleData(response.data.result[0]);
       setIsCouple(true);
     } catch (error) {
-      console.log("약혼자 없음");
+      // console.log("약혼자 없음");
     }
   };
 
@@ -54,7 +54,7 @@ function MyPage() {
       setWeddingDate(response.data.result[0].weddingDate);
       setIsChooseDate(true);
     } catch (error) {
-      console.log("결혼식 날짜 없음");
+      // console.log("결혼식 날짜 없음");
     }
   };
 
@@ -65,12 +65,9 @@ function MyPage() {
   }, []);
 
   return (
-    <div
-      className='mainContainer'
-      style={{ marginLeft: "0px", marginRight: "0px" }}
-    >
+    <div style={{ marginLeft: "0px", marginRight: "0px", marginTop: "55px" }}>
       {/* 에러 모달 표시 */}
-      <ErrorModal
+      {/* <ErrorModal
         buttonText={"다시시도"}
         show={errorModal}
         onClose={() => {
@@ -87,7 +84,7 @@ function MyPage() {
         >
           더미데이터넣기
         </button>
-      </ErrorModal>
+      </ErrorModal> */}
       {/* 프로필 */}
       <Profile isCouple={isCouple} isChooseDate={isChooseDate} />
       {/* 아이콘 */}

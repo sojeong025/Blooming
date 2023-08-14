@@ -5,47 +5,81 @@
   align-items: center;
   justify-content: center;
   background-color: #f8f8f8;
+  height: 150px;
   padding: 1.5rem 0;
 }
-
+/* 혼자 */
 .Alone .profileImg {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   object-fit: cover;
-  /* margin-right: 1rem; */
 }
 .Alone .profileName {
-  font-size: 1.6rem;
+  font-size: 24px;
   font-weight: bold;
   color: #333;
+}
+.Alone .Role {
+  font-size: 20px;
+}
+/* 둘이 */
+.Couple .profileContainer {
+  display: flex;
+  justify-content: center;
 }
 
-.Couple .profileImg {
-  border-radius:50%;
-  object-fit: cover;
-  position: relative;
+.Couple .profileImages {
+  display: flex;
+  align-items: flex-end;
 }
-.myImg {
+ .myImg {
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+} 
+ .coupleProfile {
   width: 60px;
   height: 60px;
-}
-.coupleProfile {
-  width: 48px;
-  height: 48px;
   border-radius:50%;
   margin-left: -10px;
+} 
+.Couple .profileNames {
+ display: flex;
+  align-items: center;
+  width: 200px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .Couple .profileName {
-  display: flex;
-  font-size: 1.1rem;
+  margin-left: 35px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* .Couple .profileName .Role {
+  margin-left: 20px;
+} */
+.Couple .profileCoupleName {
+  position: absolute;
+  margin-left: 125px;
+
+}
+.Couple p {
+  padding: 5px 0;
+  margin: 0;
+  font-size: 20px;
   font-weight: bold;
   color: #333;
 }
-.Couple .profileName span {
-  padding: 0 10px;
-  text-align: end;
+.Couple .Role {
+  font-size: 18px;
+  padding-bottom: 0;
 }
+
+
 
 /* AppContainer */
 .wrapper {
