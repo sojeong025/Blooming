@@ -61,6 +61,7 @@ function CreateItem({ hide, visible, fetchData, item }) {
     const createDiary = async () => {
       try {
         await customAxios.post("diary", ItemData);
+        await fetchData();
       } catch (error) {
         console.error(error);
       }
@@ -96,7 +97,6 @@ function CreateItem({ hide, visible, fetchData, item }) {
     }
 
     await postHandling();
-    await fetchData();
     hide();
   }
 
