@@ -96,19 +96,17 @@ const DiaryDetails = () => {
 
 
           <div className={classes.imageContainer}>
-            {diary.image && (
-              <img
-                src={diary.image ? diary.image : 'src/assets/test2.jpg'}
-                alt="preview"
-              />
-            )}
-        </div>
+            <img
+              src={diary.image ? diary.image : 'src/assets/test2.jpg'}
+              alt="preview"
+            />
+          </div>
 
-        <div className={classes.text}>
-          <textarea readOnly className={classes.title}>{diary.title}</textarea>
-          <hr />
-          <textarea readOnly className={classes.context}>{diary.content}</textarea>
-        </div>
+          <div className={classes.text}>
+            <textarea readOnly className={classes.title}>{diary.title}</textarea>
+            <hr />
+            <textarea readOnly className={classes.context}>{diary.content}</textarea>
+          </div>
         </div>}
     </motion.div>
   );
