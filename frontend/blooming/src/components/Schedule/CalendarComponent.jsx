@@ -67,19 +67,19 @@ function CalendarComponent() {
   };
 
   const tileClassName = ({ date, view }) => {
-  if (view === 'month') {
-    if (date.getDay() === 0 || date.getDay() === 6) {
-      return 'weekend-day';
-    } else if (
-      date.getDate() === selectedDate.getDate() &&
-      date.getMonth() === selectedDate.getMonth() &&
-      date.getFullYear() === selectedDate.getFullYear()
-    ) {
-      return 'selected-day';
+    if (view === 'month') {
+      if (date.getDay() === 0 || date.getDay() === 6) {
+        return 'weekend-day';
+      } else if (
+        date.getDate() === selectedDate.getDate() &&
+        date.getMonth() === selectedDate.getMonth() &&
+        date.getFullYear() === selectedDate.getFullYear()
+      ) {
+        return 'selected-day';
+      }
     }
-  }
-  return '';
-};
+    return '';
+  };
 
 
   const formatShortWeekday = (locale, date) => {

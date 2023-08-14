@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 // import ReactHtmlParser from "react-html-parser";
 
 const Tips = () => {
-  const weddingDate = useRecoilValue(weddingDateState);
+  // const weddingDate = useRecoilValue(weddingDateState);
+  const weddingDate = "2023-09-20"
   const weddingDday = useRecoilValue(weddingDdayState);
 
   const weddingPlan = useRecoilValue(weddingPlanState);
@@ -51,40 +52,40 @@ const Tips = () => {
     <div className={classes.container}>
       {weddingDate !== "" ? (
         weddingDday >= 0 ? (
-          <div>
+          <>
             <img
               src={nextPlan.img}
               alt={nextPlan.title}
               className={classes.mainImg}
             />
             <div className={classes.tipContainer} onClick={updateRandomComment}>
-              <p className={classes.textBold}>{nextPlan.title}
-              </p>
+              <div className={classes.textBold}>{nextPlan.title}
+              </div>
               {/* <p>{ReactHtmlParser(randomComment)}</p> */}
-              <p className={classes.tip}>{randomComment}</p>
+              <div className={classes.tip}>{randomComment}</div>
             </div>
-          </div>
+          </>
         ) : (
-          <div>
+          <>
             <img
               src='src/assets/Character/dday.png'
               className={classes.mainImg}
             />
             <div className={classes.tipContainer}>
-              <p className={classes.tip}>결혼 축하해</p>
+              <div className={classes.tip}>결혼 축하해</div>
             </div>
-          </div>
+          </>
         )
       ) : (
-        <div>
+        <>
           <img
             src='src/assets/Character/date.png'
             className={classes.mainImg}
           />
           <div className={classes.tipContainer}>
-            <p className={classes.tip}>결혼 일정을 등록하고 추천 팁을 받아보세용</p>
+            <div className={classes.tip}>결혼 일정을 등록하고 추천 팁을 받아보세요</div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
