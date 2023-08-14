@@ -17,7 +17,7 @@ function TasksList() {
 
   useEffect(() => {
     setTodayTask(0)
-  }, [])
+  }, [tasks])
 
 
   return (
