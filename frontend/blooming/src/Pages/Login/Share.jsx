@@ -4,33 +4,19 @@ import classes from "./Share.module.css";
 
 import { useNavigate } from "react-router-dom";
 
-import InputForm from "../../components/Common/InputText";
-
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { userState } from "../../recoil/ProfileAtom";
 import { customAxios } from "../../lib/axios";
-import { styled } from "styled-components";
 
 export default function Share() {
   const navigate = useNavigate();
-  // const [userData, setUserData] = useRecoilState(userState);
-  const [userData, setUserData] = useState({
-    profileImage:
-      "http://k.kakaocdn.net/dn/dpk9l1/btqmGhA2lKL/Oz0wDuJn1YV2DIn92f6DVK/img_110x110.jpg",
-    email: "lotus0028@kakao.com",
-    name: "string",
-    nickname: "string",
-    phoneNumber: "string",
-    gender: "string",
-    coupleCode: 25065652,
-  });
+  const [userData, setUserData] = useRecoilState(userState);
+
   // 유저 정보 가져오기
   const fetchData = async () => {
     try {
       const response = await customAxios.get("profile");
-      // console.log(response.data.result[0]);
-      // 유저 정보 저장
       setUserData(response.data.result[0]);
     } catch (error) {
       console.error("유저 정보 API 에러", error);
@@ -42,40 +28,75 @@ export default function Share() {
 
   const verifyCode = userData.coupleCode;
 
-  // 상대방 코드 확인
+  // 입력 코드받을 코드
   const [formData, setFormData] = useState({
     name: "",
     coupleCode: "",
   });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  // 코드 8자리 유효성
+  const coupleCodeValidate = (values) => {
+    const errors = {};
+    if (!/^\d{8}$/.test(values.coupleCode)) {
+      errors.coupleCode = "숫자 8자리를 입력해주세요.";
+      return errors;
+    }
+    return errors;
   };
+  // 유효성 검사 후 다음버튼 활성화
+  const inputCoupleStyle = (fieldName) => {
+    if (coupleErrors[fieldName] !== undefined) {
+      return `${classes.inputBox} ${classes.inputError}`;
+    } else if (formData[fieldName] !== "") {
+      return `${classes.inputBox} ${classes.inputFilled}`;
+    } else {
+      return classes.inputBox;
+    }
+  };
+  const [coupleErrors, setCoupleErrors] = useState(() =>
+    coupleCodeValidate(formData),
+  );
+  const handleChange = async (e) => {
+    const { name, value } = e.target;
+    const updatedFormData = { ...formData, [name]: value };
+    setFormData(updatedFormData);
 
-  // 인증코드 확인
-  const [coupled, setCoupled] = useState(false);
-  const [description, setDescription] = useState();
-  const setCouple = async (event) => {
-    event.preventDefault();
-    try {
-      await customAxios.post("couple-certification", formData);
-      setDescription(`${formData.name}님이 맞나요?`);
-      setCoupled(true);
+    const newErrors = coupleCodeValidate({ ...formData, [name]: value });
+    setCoupleErrors(newErrors);
 
-      console.log(userData);
-    } catch (error) {
-      console.log("추가 정보 POST 에러:", error);
-      setDescription(error.response.data.message);
+    const isAllValid = Object.values(newErrors).every((error) => error === "");
+    if (isAllValid) {
+      setCouple(e, updatedFormData);
     }
   };
 
-  // 상대방 연결
+  // 인증코드 확인
+  const [coupled, setCoupled] = useState({
+    isCoupled: false,
+    description: "",
+  });
+  const setCouple = async (event, validCoupleData) => {
+    event.preventDefault();
+    try {
+      await customAxios.post("couple-certification", validCoupleData);
+      setCoupled({
+        isCoupled: true,
+        description: `${validCoupleData.name}님과 연결이 가능합니다.`,
+      });
+    } catch (error) {
+      console.log("추가 정보 POST 에러:", error);
+      setCoupled({
+        isCoupled: false,
+        description: error.response.data.message,
+      });
+    }
+  };
+
+  // 상대방 연결 put
   const connectCouple = async (event) => {
     event.preventDefault();
     try {
       await customAxios.put("couple", formData);
       navigate("/my-page");
-      // 연결완료 모달이라도 띄워줄까.?
     } catch (error) {
       console.log("상대방 연결 에러:", error);
     }
@@ -99,65 +120,72 @@ export default function Share() {
   }, []);
 
   return (
-    <div className='mainContainer'>
-      <Wrapper>
-        <p className={classes.mainText}>약혼자 연결을 해주세요.</p>
-        <div className={classes.subText}>
-          <p>블루밍의 다양한 기능을 함께 사용할 수 있습니다.</p>
-        </div>
+    <>
+      <div className={`${classes.JoinContainer}`}>
+        <form onSubmit={connectCouple}>
+          <p className={classes.titleText}>
+            상대방의 이름과 코드를 입력해주세요
+          </p>
+          <p className={classes.subText}>
+            블루밍의 다양한 기능을 함께 사용할 수 있습니다.
+          </p>
 
-        <div>
-          <form onSubmit={setCouple}>
-            <InputForm
-              label='이름'
-              name='name'
-              value={formData.name}
-              onChange={handleChange}
-              required
-              autoFocus
-            />
-            <InputForm
-              label='커플 코드'
-              name='coupleCode'
-              value={formData.coupleCode}
-              onChange={handleChange}
-              required
-            />
-            {/* 위에 input 다 쳐야 인증 버튼 활성화 */}
-            <button type='submit'>인증</button>
-          </form>
-        </div>
+          <div className={`${classes.wrapper} `}>
+            <div className={classes.codeContainer}>
+              <input
+                required
+                type='text'
+                name='name'
+                value={formData.name}
+                placeholder='상대방 이름'
+                onChange={handleChange}
+                className={inputCoupleStyle("name")}
+              />
+              {coupleErrors.name && (
+                <div className={classes.errorMessage}>{coupleErrors.name}</div>
+              )}
+            </div>
+            <div className={classes.codeContainer}>
+              <input
+                required
+                inputMode='tel'
+                type='text'
+                name='coupleCode'
+                value={formData.coupleCode}
+                placeholder='상대방 연결 코드'
+                onChange={handleChange}
+                className={inputCoupleStyle("coupleCode")}
+              />
+              {coupleErrors.coupleCode && (
+                <div className={classes.errorMessage}>
+                  {coupleErrors.coupleCode}
+                </div>
+              )}
+            </div>
+          </div>
+          <div className={classes.coupledNo}>{coupled.description}</div>
 
+          <button
+            className={classes.SubmitBtn}
+            type='submit'
+            disabled={coupleErrors.coupleCode || coupled.isCoupled}
+          >
+            저장
+          </button>
+        </form>
+
+        <hr />
+        <h1>==👷🏻‍♂️공사중 뚝딱뚝딱👷🏻‍♀️==</h1>
         <div>
           <CopyToClipboardButton text={verifyCode}>
-            <div style={{ padding: "10px" }}>
-              <div>나의 코드</div>
-              <span style={{ textDecoration: "underline" }}>{verifyCode}</span>
+            <div className={classes.copyText}>
+              <div className={classes.titleText}>나의 코드 복사하기</div>
+              <p className={classes.subText}>{verifyCode}</p>
             </div>
           </CopyToClipboardButton>
           {shareBtn && <KakaoShareButton code={verifyCode} />}
         </div>
-        <p>or</p>
-        <hr />
-        <p>{description}</p>
-        {coupled && (
-          <>
-            <form onSubmit={connectCouple}>
-              {/* coupled === true 되면 위에 폼 disabled로 바꾸기 */}
-              <button type='submit'>연결하기</button>
-            </form>
-          </>
-        )}
-        <br />
-        <a onClick={() => navigate("/home")}>메인 페이지로</a>
-      </Wrapper>
-    </div>
+      </div>
+    </>
   );
 }
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-`;

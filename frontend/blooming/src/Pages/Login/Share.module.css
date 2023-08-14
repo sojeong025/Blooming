@@ -1,16 +1,107 @@
+.JoinContainer {
+  margin: 100px 0;
+}
+.JoinContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.mainText {
-  font-size: 24px;
+  margin-bottom: 40px;
+}
+.titleText {
+  font-size: 22px;
   font-weight: bold;
-  margin: 20px 0 0 0;
-}
-
-.subText {
-  font-size: 18px;
-  margin: 10px;
-}
-
-.subText p {
+  text-align: center;
   margin: 0;
-  padding-top: 10px;
 }
+.subText{
+  color:grey;
+  font-size: 15px;
+  margin-top: 10px;
+}
+.copyText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-decoration: underline;
+}
+
+.SubmitBtn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-right: 16px;
+  height: 60px;
+  width: 60px;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  color: var(--color-join-point);
+  z-index: 999;
+  &:disabled {
+    color: gray;
+  }
+}
+
+.passCode {
+  margin-top: 50px;
+  font-size: 16px;
+  color: grey;
+}
+.coupledNo {
+  height: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: slateblue;
+}
+
+/* ========= input ========= */
+.wrapper {
+  width: 80vw;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  margin-top: 25px;
+  display: inline-block;
+}
+.codeContainer {
+  padding-bottom: 10px;
+  height: 70px;
+}
+.errorMessage {
+  padding-top: 5px;
+  margin-left: 3px;
+  font-size: 13px;
+  color: red;
+}
+
+.inputBox {
+  display: block;
+  width: 100%;
+  height: 20px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  transition: border-radius 250ms ease;
+}
+.inputBox:focus {
+  outline: none;
+  border: 1px solid steelblue;
+}
+.inputError {
+  border: 1px solid red;
+}
+
+.inputFilled {
+  border: 1px solid steelblue; 
+}
+/* ============================================== */
+
