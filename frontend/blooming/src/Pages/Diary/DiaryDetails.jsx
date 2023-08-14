@@ -48,9 +48,13 @@ const DiaryDetails = () => {
   const handleDelete = async () => {
     try {
       await customAxios.delete(`diary/${id}`,);
-      setDiaries(diaries.filter((diary) => 
-        diary.id !== id
-      ));
+      if (diaries.length === 1) {
+        setDiaries([])
+      } else {
+        setDiaries(diaries.filter((diary) => 
+          diary.id !== id
+        ));
+      }
       navigate('/diary')
     } catch (error) {
       console.error(error);
