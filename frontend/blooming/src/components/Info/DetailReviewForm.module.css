@@ -29,7 +29,7 @@
 }
 .starTitle {
   flex-basis: 15%;
-  font-size: 16px;
+  font-size: 17px;
   padding-left: 5px;
 }
 .rating {
@@ -48,7 +48,8 @@
 }
 .starRating{
   margin-left: auto;
-  font-size: 14px;
+  margin-top: 4px;
+  font-size: 15px;
 }
 
 /* 후기 */
@@ -59,9 +60,11 @@
   height: 80%;
   padding: 10px;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 16px;
   font-family: 'SUITE-Regular';
   border: none;
+  word-break: keep-all;
+  line-height: 1.5;
 }
 
 /* 사진 추가 */
