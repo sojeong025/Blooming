@@ -1,0 +1,89 @@
+.ReviewsContainer {
+  width: 100%;
+}
+.ReviewContainer {
+  border-bottom: 0.2px solid rgba(128, 128, 128, 0.3);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  padding-top: 15px;
+  padding-bottom: 30px;
+  font-size: 16px;
+}
+.ReviewImg {
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+}
+.ModalImage {
+  width: 80vw;
+}
+.CloseButton {
+  position: absolute;
+  right: 20px;
+  top: -10px;
+  color: white;
+}
+
+.ReviewWriter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.ReviewStar {
+  padding-right: 5px;
+}
+
+.emptyStar,
+.fullStar {
+  font-size: 16px;
+  margin-right: 4px;
+}
+.emptyStar {
+  color: var(--color-rating-empty);
+}
+.fullStar {
+  color: var(--color-rating-full);
+}
+
+.Grey {
+  color: grey;
+}
+.date {
+  font-size: 15px;
+}
+.name {
+  padding: 0;
+  padding-top: 5px;
+  margin: 0;
+}
+.nameContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ThumbsUp {
+  flex-basis: 10%;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.ThumbsUp p {
+  margin: 0;
+}
+.ThumbsUpBlue {
+  color: blue;
+}
+
+.ThumbsUpGrey {
+  color: grey;
+}
+
+.ReviewContent {
+  word-break: keep-all;
+}

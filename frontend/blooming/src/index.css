@@ -89,3 +89,10 @@ body {
 a{
   text-decoration-line: none;
 }
+
+button {
+  font-family: 'SUITE-Regular';
+}
+input::placeholder{
+  font-family: 'SUITE-Regular';
+}

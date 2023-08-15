@@ -5,7 +5,7 @@ import classes from "../../components/Info/ProductDetailItem.module.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Carousel } from "react-responsive-carousel";
 import DatePicker from "react-datepicker";
@@ -21,6 +21,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdLocationOn } from "react-icons/md";
 
 import ReviewCreateModal from "../../components/Error/Modal";
+import GotoTop from "../../components/Common/GoToTopButton";
 
 export default function InfoDetail() {
   const navigate = useNavigate();
@@ -30,12 +31,6 @@ export default function InfoDetail() {
   // 디자인 용 더미 =======================================================================================================================
   // const id = 85;
   // const productType = "DRESS";
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const handleCarouselChange = (index) => {
-    setCurrentImageIndex(index);
-  };
 
   const [reviews, setReviews] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -64,7 +59,6 @@ export default function InfoDetail() {
     try {
       const response = await customAxios.get(`product/${productType}/${id}`);
       setProduct(response.data.result[0]);
-      // fetchReviewData();
     } catch (error) {
       console.error("이미지 정보 조회 에러:", error);
     }
@@ -73,7 +67,7 @@ export default function InfoDetail() {
   const fetchReviewData = async () => {
     try {
       const response = await customAxios.get(`review/${id}`, {
-        params: { page: currentPage, size: 4 },
+        params: { page: currentPage, size: 8 },
       });
       // no content
       if (response.status === 204) {
@@ -102,13 +96,14 @@ export default function InfoDetail() {
     // 디자인 용 더미 =======================================================================================================================
     // setProduct({
     //   id: 29,
-    //   itemName: "[촬영+본식] 드레스 4벌",
-    //   brief: "대중적인 금액대, 수입 및 자체 디자인 보유",
+    //   itemName: "[스냅] 신부신랑 헤어메이크업(주중)",
+    //   brief:
+    //     "대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유",
     //   thumbnail:
     //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/dress/29_thumbnail.jpg",
     //   company: "브라이덜수지",
     //   companyTime: "10:00 ~ 20:00",
-    //   companyAddress: "서울 강남구 선릉로148길 48",
+    //   companyAddress: "서울 강남구 선릉로148길 48 서울 강남구 선릉로148길 48",
     //   images: [
     //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/dress/29_image1.jpg",
     //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/dress/29_image2.jpg",
@@ -116,6 +111,47 @@ export default function InfoDetail() {
     //   ],
     //   wish: false,
     // });
+    // setReviews([
+    //   {
+    //     reviewId: 21555,
+    //     star: 5,
+    //     image:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/REVIEW/%EB%B6%80%EC%9A%B8%EA%B2%BD_1%EB%B0%98_%EA%B5%AC%ED%9D%AC%EC%98%81_f1a5fdb0-46ce-455d-97ec-e1057bb355ee.JPG",
+    //     content:
+    //       "ㄴㅇㅁㅁㅇㄴ대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유",
+    //     likeCnt: 0,
+    //     nickName: "ㅎㅇ",
+    //     email: "lotus0028@kakao.com",
+    //     createdDate: "2023-08-15T03:24:54.970296",
+    //     updatedDate: "2023-08-15T03:24:54.970296",
+    //     liked: false,
+    //   },
+    //   {
+    //     reviewId: 21554,
+    //     star: 5,
+    //     image:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/REVIEW/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202023-07-31%20090848_d75370ed-b888-43c7-b7e2-4bbee27cae55.png",
+    //     content: "ㄴㄴㅇㅁㅇㅁㅁㄴ",
+    //     likeCnt: 0,
+    //     nickName: "ㅎㅇ",
+    //     email: "lotus0028@kakao.com",
+    //     createdDate: "2023-08-15T03:24:47.389665",
+    //     updatedDate: "2023-08-15T03:24:47.389665",
+    //     liked: false,
+    //   },
+    //   {
+    //     reviewId: 21553,
+    //     star: 3,
+    //     image: "",
+    //     content: "ㄴㅇ",
+    //     likeCnt: 0,
+    //     nickName: "ㅎㅇ",
+    //     email: "lotus0028@kakao.com",
+    //     createdDate: "2023-08-15T03:24:42.828944",
+    //     updatedDate: "2023-08-15T03:24:42.828944",
+    //     liked: false,
+    //   },
+    // ]);
   }, []);
 
   const handleReserve = async () => {
@@ -142,7 +178,7 @@ export default function InfoDetail() {
       // 지금은 스케줄로 보내놨는데 스케쥴 수정 다하고 나면 바꿔야함. =============================================================================
       navigate(`/schedule/${response.data.result[0].scheduleId}`);
     } catch (error) {
-      alert('예약 가능한 시간이 아닙니다.')
+      alert("예약 가능한 시간이 아닙니다.");
     }
   };
 
@@ -171,31 +207,31 @@ export default function InfoDetail() {
     }
   };
 
-  // 위로
-  const showTopButton = useCallback(() => {
-    const topButton = document.getElementById("topButton");
-    if (
-      document.body.scrollTop > 100 ||
-      document.documentElement.scrollTop > 100
-    ) {
-      topButton.style.display = "block";
-    } else {
-      topButton.style.display = "none";
+  // 후기가 도움돼요
+  const handleLikeClick = async (reviewId) => {
+    console.log(reviewId);
+    try {
+      await customAxios.post(`liked/${reviewId}`);
+      const updatedReviews = reviews.map((review) => {
+        if (review.reviewId === reviewId) {
+          const liked = !review.liked;
+          const likeCnt = liked ? review.likeCnt + 1 : review.likeCnt - 1;
+          return { ...review, liked, likeCnt };
+        }
+        return review;
+      });
+
+      // 업데이트된 reviews 배열을 설정하여 리렌더링을 강제합니다.
+      setReviews(updatedReviews);
+    } catch (error) {
+      console.log("좋아요 에러", error);
     }
-  }, []);
-  useEffect(() => {
-    window.addEventListener("scroll", showTopButton);
-    return () => {
-      window.removeEventListener("scroll", showTopButton);
-    };
-  }, [showTopButton]);
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   };
 
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const handleCarouselChange = (index) => {
+    setCurrentImageIndex(index);
+  };
   return (
     <Wrapper>
       {product && (
@@ -209,10 +245,10 @@ export default function InfoDetail() {
               showArrows={false}
               emulateTouch
               swipeable
-              // className={classes["image-carousel"]}
+              className={classes["image-carousel"]}
               onChange={handleCarouselChange}
               selectedItem={currentImageIndex}
-              renderIndicator={() => {}}
+              // renderIndicator={() => {}}
             >
               {product.images.map((image, index) => (
                 <div key={index}>
@@ -221,6 +257,8 @@ export default function InfoDetail() {
               ))}
             </Carousel>
           )}
+          {/* =================================================== */}
+
           {/* 타이틀 */}
           <div className={classes.topSticky}>
             <div className={classes.ProductTitle}>
@@ -234,8 +272,8 @@ export default function InfoDetail() {
               </div>
               <div className={classes.companyTitle}>{product.company}</div>
             </div>
-            <hr className={classes.hr} />
           </div>
+          <hr className={classes.hr} />
 
           <ProductDetail>
             <div className={classes.TabTitle}>업체 정보</div>
@@ -243,26 +281,15 @@ export default function InfoDetail() {
 
             <hr className={classes.hr} />
 
-            <div className={classes.TabTitle}>후기</div>
-
-            {/* 후기 작성 모달 */}
-            <ReviewCreateModal
-              show={isReviewModal}
-              onClose={() => setIsReviewModal(false)}
-            >
-              <DetailReviewForm
-                product={product}
-                fetchReviewData={fetchReviewData}
-                onClose={() => setIsReviewModal(false)}
-              />
-            </ReviewCreateModal>
-
-            <div>{product.company} 후기</div>
+            <div className={classes.TabTitle} style={{ marginBottom: "0" }}>
+              후기
+            </div>
             {reviews ? (
               <DetailReviewList
                 hasMore={hasMore}
                 reviews={reviews}
                 fetchReviewData={fetchReviewData}
+                onLikeClick={handleLikeClick}
               />
             ) : (
               <div>등록된 후기가 없습니다.</div>
@@ -291,62 +318,23 @@ export default function InfoDetail() {
             </div>
             <button onClick={handleReserve}>예약하기</button>
 
-            {/* 스크롤용 lorem ======================================================================================================================= */}
-            <div>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Architecto quo reiciendis error maiores ipsam placeat id deserunt
-              nihil, voluptatibus porro ut eligendi officiis alias excepturi
-              nisi quia impedit enim et. Lorem ipsum dolor sit amet, consectetur
-              adipisicing elit. Maiores rem, deleniti illum illo quisquam
-              incidunt quod, aut exercitationem corporis soluta at! Quas nulla
-              modi architecto quisquam, vitae inventore asperiores provident.
-              Eligendi illo ipsa doloribus consectetur et quae culpa quam sint
-              expedita deleniti cum, eveniet dolore. Delectus, nulla.
-              Praesentium amet sint consectetur accusamus eligendi culpa. Eum
-              deleniti commodi adipisci reiciendis laudantium? Veritatis harum
-              id quasi quibusdam quis accusantium dolorum doloremque, officia,
-              nobis mollitia et repudiandae minus sapiente commodi vel
-              architecto reiciendis? Similique illo culpa reiciendis illum.
-              Reiciendis dolore iure veritatis maxime? Natus voluptatem impedit
-              adipisci ratione cumque necessitatibus aspernatur assumenda eius
-              recusandae excepturi facere perspiciatis explicabo, rerum vel
-              ipsum! Voluptas deserunt, odit dolorem nobis vitae voluptate
-              dolorum reprehenderit nostrum quam unde? Rem sit debitis labore
-              earum accusamus sed facilis voluptatem consequuntur, ab deleniti
-              saepe nulla qui commodi quaerat reiciendis sapiente. Atque quasi
-              dolores mollitia repellat odit. Soluta, quo veniam. Perspiciatis,
-              odit? Sequi earum repudiandae maiores dicta libero, ullam
-              laboriosam animi. Vero rem ut, accusamus quae nihil minus, sint
-              consectetur facilis voluptates fugit ad facere. Perferendis sint
-              commodi, quos facere ut fugiat. Perferendis, deserunt nesciunt
-              nisi ratione recusandae blanditiis molestias libero obcaecati
-              nostrum, nulla optio animi quam officia illum tempore! Odit, quo.
-              Eius numquam id esse recusandae maiores molestias obcaecati
-              commodi voluptate! Odit sapiente nulla veritatis, minus,
-              necessitatibus laborum voluptate nobis dicta iure explicabo
-              temporibus tempore quae, eaque blanditiis! Molestiae molestias
-              ullam ratione aut voluptate sunt, repudiandae, odit eius, non
-              tempore dignissimos. Necessitatibus a, ullam perspiciatis saepe
-              neque magnam nemo dignissimos aliquid atque assumenda in quos
-              deserunt culpa iste omnis voluptate quam consequuntur consectetur
-              incidunt, et eum. Eos et quia ea aspernatur! Blanditiis,
-              reprehenderit vero minus repudiandae ab quos repellendus
-              cupiditate rerum dolorum non cumque exercitationem quod porro
-              corporis earum nesciunt rem aspernatur provident mollitia, et sunt
-              id expedita? Dolorum, et? Pariatur?
-            </div>
-
             {/* 위로 */}
-            <TopButton
-              id='topButton'
-              onClick={scrollToTop}
-              className={classes.topButton}
-            >
-              Top
-            </TopButton>
+            <GotoTop />
           </ProductDetail>
         </>
       )}
+
+      {/* 후기 작성 모달 */}
+      <ReviewCreateModal
+        show={isReviewModal}
+        onClose={() => setIsReviewModal(false)}
+      >
+        <DetailReviewForm
+          product={product}
+          fetchReviewData={fetchReviewData}
+          onClose={() => setIsReviewModal(false)}
+        />
+      </ReviewCreateModal>
 
       {/* 하단 버튼 */}
       <BottomButton>
@@ -452,23 +440,4 @@ const ReserveButton = styled(Button)`
   background-color: var(--color-groom);
   /* background-color: #4d65b2; */
   color: white;
-`;
-
-const TopButton = styled.button`
-  position: fixed;
-  bottom: 70px;
-  right: 20px;
-  background-color: #1e88e5;
-  border: none;
-  color: white;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 12px;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #0d47a1;
-  }
 `;
