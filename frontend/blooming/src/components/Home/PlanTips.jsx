@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 // import ReactHtmlParser from "react-html-parser";
 
 const Tips = () => {
-  // const weddingDate = useRecoilValue(weddingDateState);
-  const weddingDate = "2023-09-20"
+  const weddingDate = useRecoilValue(weddingDateState);
+  // const weddingDate = "2023-09-20"
   const weddingDday = useRecoilValue(weddingDdayState);
 
   const weddingPlan = useRecoilValue(weddingPlanState);

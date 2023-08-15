@@ -362,7 +362,7 @@
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled:hover {
   cursor: default;
   background-color: transparent;
-}
+} 
 
 .react-datepicker__week-number {
   color: #ccc;
