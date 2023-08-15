@@ -1,5 +1,6 @@
 /* infoDetail ================================= */
-
+.image-carousel {
+}
 /* 고민중 */ 
 .topSticky{
   padding: 0 16px;
@@ -38,7 +39,6 @@
 }
 .hr {
   opacity: 0.5;
-  margin: 5px 0;
 }
 /* infoDetail ================================= */
 
@@ -76,7 +76,6 @@
 
 .infoContainer {
   margin: 0 4px;
-  height: 60px;
 }
 .item {
   display: flex;

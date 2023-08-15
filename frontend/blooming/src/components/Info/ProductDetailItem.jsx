@@ -7,6 +7,9 @@ const ProductDetailItem = ({ product, productType }) => {
         <img src={product.thumbnail} className={classes.companyImg}></img>
         <div className={classes.titleBrief}>
           <div className={classes.subTitle}>{product.company}</div>
+          {productType !== "HALL" && (
+            <div className={classes.itemTitle}>{product.itemName}</div>
+          )}
           <div className={classes.brief}>{product.brief}</div>
         </div>
       </div>

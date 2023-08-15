@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { styled } from "styled-components";
 
-function Modal({ show, children, onClose }) {
+function Modal({ show, children, onClose, backgroundColor }) {
   // 모달 보여졌을 때 스크롤 방지
   useEffect(() => {
     const body = document.querySelector("body");
@@ -17,7 +17,10 @@ function Modal({ show, children, onClose }) {
     show && (
       <>
         <ModalOverlay onClick={onClose}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
+          <ModalContent
+            onClick={(e) => e.stopPropagation()}
+            backgroundColor={backgroundColor}
+          >
             {children}
           </ModalContent>
         </ModalOverlay>
@@ -42,7 +45,7 @@ const ModalContent = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: ${(props) => props.backgroundColor || "#fff"};
   padding: 20px;
   z-index: 900;
 `;

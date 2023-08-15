@@ -55,10 +55,6 @@ export default function DetailReviewForm({
         const formData = new FormData();
         formData.append("image", file);
         const response = await fileAxios.post("REVIEW", formData);
-        // console.log(
-        //   "이건 이미지 s3 api",
-        //   response.data.result[0].uploadImageUrl,
-        // );
         setImgFile(response.data.result[0].uploadImageUrl);
       } catch (error) {
         console.error("이미지 api 오류", error);
