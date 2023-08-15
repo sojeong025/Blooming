@@ -5,7 +5,7 @@ export const mobileInvitationState = atom({
   default: {},
 });
 
-export const themeState = atom({
-  key: 'themeState',
+export const mobileInvitationThemeState = atom({
+  key: 'mobileInvitationThemeState',
   default: 1,
 });
