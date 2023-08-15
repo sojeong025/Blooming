@@ -12,11 +12,14 @@
 }
 .form textarea {
 	display: block;
-	width: 95%;
 	border: none;
 	color: #28262c;
 	resize: none;
 	padding: 0;
+	font-family: 'SUITE-regular';
+}
+.form textarea:focus {
+	outline: none;
 }
 .actions {
   /* border: 1px solid black; */
@@ -28,7 +31,7 @@
   background-color: #FFFAF4;
 }
 .actions button {
-  cursor: pointer;
+cursor: pointer;
   font: inherit;
   border: none;
   background-color: var(--color-point);
@@ -51,25 +54,28 @@
 	margin: 20px 30px;
 	width: 80%;
 	height: 40px;
-	font: inherit;
-	border: none;
-	color: #28262c;
-	resize: none;
 	border-left: 4px solid var(--color-point);
 	padding: 0 10px;
 }
 .title {
+	width: 95%;
 	height: 50px;
 	line-height: 40px;
 	font-size: 25px;
-	font-family: 'SUITE-regular';
 }
-.title:focus {
-	outline: none;
+.date, .time {
+  margin: 30px 30px;
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
 }
-.date {
-	margin: 20px 30px;
+.mainContent {
+	margin: 30px 30px;
+	display: flex;
+	/* border: 1px solid black; */
 }
-.time {
-	margin: 20px 30px;
+.content {
+	font-size: 20px;
+	margin-left: 20px;
+	width: 80%;
 }

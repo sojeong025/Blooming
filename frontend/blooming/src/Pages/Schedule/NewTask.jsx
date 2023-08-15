@@ -4,13 +4,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ScheduleState } from '../../recoil/ScheduleStateAtom';
 import { userState } from '../../recoil/ProfileAtom';
 import DatePicker from 'react-datepicker'
-import './DatePicker.css'
+import './DatePickerSchedule.css'
 import classes from './NewTask.module.css';
 import { customAxios } from '../../lib/axios';
 import { AiOutlineLeft } from "react-icons/ai"
 import { AiOutlineCheck } from "react-icons/ai"
 import { PiPencilLineFill } from 'react-icons/pi'
 import { BsTrash , BsCalendarCheck, BsClock, BsReverseLayoutTextSidebarReverse } from 'react-icons/bs'
+import { ko } from "date-fns/esm/locale";
 
 function NewTask() {
 
@@ -133,9 +134,9 @@ function NewTask() {
       </div>
 
 
-      <div className={classes.date}>
+      <div className={`${classes.date} schedule`}>
         {/* ---------날짜 선택 부분-------- */}
-        <BsCalendarCheck size={24}/>
+        <BsCalendarCheck className={classes.icon} size={24}/>
         <DatePicker
           showPopperArrow={false}
           id="date"
@@ -143,12 +144,13 @@ function NewTask() {
           onChange={dateChangeHandler}
           dateFormat="yyyy-MM-dd"
           required
+          locale={ko}
         />
       </div>
 
-      <div className={classes.time}>
+      <div className={`${classes.time} schedule`}>
         {/* ---------시간 선택 부분-------- */}
-        <BsClock size={24} />
+        <BsClock size={24} className={classes.icon}/>
         <DatePicker
           showPopperArrow={false}
           id="time"
@@ -159,13 +161,14 @@ function NewTask() {
           onChange={timeChangeHandler}
           dateFormat="HH:mm"
           required
+          locale={ko}
         />
       </div>
 
       {/* ---------내용 입력 부분-------- */}
       <div className={classes.mainContent}>
         <BsReverseLayoutTextSidebarReverse size={24} />
-        <textarea id="body" required rows={20} onChange={bodyChangeHandler} placeholder='내용을 입력하세요.' value={enteredBody} />
+        <textarea className={classes.content} id="body" required rows={8} onChange={bodyChangeHandler} placeholder='내용을 입력하세요' value={enteredBody} />
       </div>
       
       

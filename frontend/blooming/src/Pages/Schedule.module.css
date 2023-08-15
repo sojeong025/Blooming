@@ -1,5 +1,5 @@
 .mainContainer{
   margin-top: 57px;
   background-color: white;
-  height: 100vh;
+  min-height: calc(100vh - 57px);
 }
