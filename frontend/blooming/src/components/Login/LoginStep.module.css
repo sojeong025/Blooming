@@ -180,3 +180,34 @@
   transform: translateX(-0%);
   z-index: 2;
 }
+
+/* weddingDate */
+.datePick {
+  border: 1px var(--color-join-point) solid;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  margin-top: 30px;
+  height: 120px;
+}
+.codeBtn {
+  font-size: 18px;
+  height: 40px;
+  width: 80vw;
+  border: 1.5px solid var(--color-join-point);
+  color: var(--color-join-point);
+  border-radius: 20px;
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  margin-top: 60px;
+}

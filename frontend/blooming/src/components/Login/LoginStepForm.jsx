@@ -3,8 +3,19 @@ import classes from "./LoginStep.module.css";
 import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 
+import { useRecoilState, useRecoilValue } from "recoil";
+import { weddingDateState } from "../../recoil/WeddingDdayAtom";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import dayjs from "dayjs";
+
 const coupleCodeValidate = (values) => {
   const errors = {};
+  if (!values.name) {
+    errors.name = "이름을 입력해주세요.";
+    return errors;
+  }
   // 코드
   if (!/^\d{8}$/.test(values.coupleCode)) {
     errors.coupleCode = "숫자 8자리를 입력해주세요.";
@@ -30,7 +41,6 @@ const validate = (values) => {
   } else if (!/^(01[016789]{1})[0-9]{3,4}[0-9]{4}$/.test(values.phoneNumber)) {
     errors.phoneNumber = "올바른 전화번호 형식이 아닙니다.";
   }
-
   // 닉네임
   if (!values.nickname) {
     errors.nickname = "닉네임을 입력해주세요.";
@@ -102,6 +112,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
   };
 
   // 인증코드 확인
+  const [isVerified, setIsVerified] = useState(false);
   const setCouple = async (event, validCoupleData) => {
     event.preventDefault();
     try {
@@ -113,11 +124,41 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
           value: String(validCoupleData.coupleCode),
         },
       });
+      setIsVerified(true);
     } catch (error) {
       setCoupled(error.response.data.message);
+      setIsVerified(false);
     }
   };
   // 커플 코드 인증 =====================================================
+
+  // 웨딩 날짜 선택=====================================
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [weddingDate, setWeddingDate] = useRecoilState(weddingDateState);
+
+  function dateChangeHandler(date) {
+    setSelectedDate(date);
+  }
+  const submitHandler = async (event) => {
+    event.preventDefault();
+
+    const updateDate = dayjs(selectedDate).format("YYYY-MM-DD");
+    const weddingDatePick = {
+      weddingDate: updateDate,
+    };
+    try {
+      await customAxios.post("wedding-date", {
+        weddingDatePick,
+      });
+      setWeddingDate(updateDate);
+      if (typeof handleSubmit === "function") {
+        await handleSubmit(4)(event);
+      }
+    } catch (error) {
+      console.log("웨딩 정보 POST 에러: ", error);
+    }
+  };
+  // 웨딩 날짜 선택 ====================================
 
   return (
     <>
@@ -171,7 +212,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
             <div className={classes.passCode} onClick={handleSubmit(0)}>
               코드 입력 건너뛰기
             </div>
-            <NextButton type='submit' disabled={coupleErrors.coupleCode}>
+            <NextButton type='submit' disabled={!isVerified}>
               다음
             </NextButton>
           </form>
@@ -317,20 +358,24 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
       {/* 4. weddingDate */}
       {step === 4 && (
         <div className={classes.JoinContainer}>
-          <h1>==👷🏻‍♂️공사 중 다음 버튼 눌러👷🏻‍♀️==</h1>
-          <form onSubmit={handleSubmit(4)}>
+          <form onSubmit={submitHandler}>
             <p className={classes.titleText}>
               {values.name}님의 결혼 날짜는 정해졌나요?
             </p>
-            <p> 입력한 정보는 언제든 수정이 가능합니다.</p>
-            <label>
-              <input
-                type='date'
-                name='weddingDate'
-                value={values.weddingDate}
-                onChange={handleChange}
+            <p className={classes.subText}>
+              입력한 정보는 언제든 수정이 가능합니다.
+            </p>
+            <div className={classes.datePick}>
+              <DatePicker
+                dateFormat='yyyy-MM-dd'
+                shouldCloseOnSelect
+                selected={selectedDate}
+                onChange={dateChangeHandler}
               />
-            </label>
+            </div>
+            <div className={classes.codeBtn} onClick={handleSubmit(4)}>
+              아직 정해지지 않았어요
+            </div>
             <NextButton type='submit'>다음</NextButton>
           </form>
         </div>

@@ -5,7 +5,7 @@ import classes from "./EditProfile.module.css";
 import { useEffect, useRef, useState } from "react";
 import { customAxios, fileAxios } from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
-import InputForm from "../../components/Common/InputText";
+import { AiOutlineEdit } from "react-icons/ai";
 
 import DeleteModal from "../../components/MyPage/DeleteModal";
 
@@ -131,6 +131,9 @@ const EditProfile = () => {
   return (
     <div className={`mainContainer ${classes.EditContainer}`}>
       <div className={classes.profileContainer}>
+        <div className={classes.profileEdit}>
+          <AiOutlineEdit size={16} />
+        </div>
         <img
           className={classes.profileImg}
           src={
@@ -155,6 +158,7 @@ const EditProfile = () => {
         <hr />
         <div className={`${classes.wrapper} `}>
           {/* Gender 선택 넣기 */}
+
           <div className={classes.codeContainer}>
             <label htmlFor='name' className={classes.label}>
               이름

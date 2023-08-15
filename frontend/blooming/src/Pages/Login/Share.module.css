@@ -8,22 +8,35 @@
 
   margin-bottom: 40px;
 }
+.copyContainer {
+  margin-top: 30px;
+}
 .titleText {
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 20px;
   text-align: center;
   margin: 0;
+  font-weight: bold;
+}
+.copyContainer .titleText {
+  font-weight: normal;
+}
+.copyContainer .subText{
+  font-weight: 600;
+}
+.titleText span {
+  font-weight: 600;
 }
 .subText{
   color:grey;
-  font-size: 15px;
-  margin-top: 10px;
+  font-size: 16px;
+  margin-top: 5px;
 }
 .copyText {
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  height: 80px;
   text-decoration: underline;
 }
 

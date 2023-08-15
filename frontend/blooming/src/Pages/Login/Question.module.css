@@ -10,7 +10,6 @@
   font-weight: 600;
   text-align: center;
   word-break: keep-all;
-
 }
 .titleText p {
   margin: 0;
@@ -20,12 +19,12 @@
   color: var(--color-join-point);
   font-weight: bold;
 }
-
 .subTitle {
   font-size: 20px;
   margin: 0;
   margin-top: 10px;
 }
+
 
 .buttonContainer {
   display: flex;
@@ -48,26 +47,42 @@
   align-items : center;
 }
 
-/* .btn {
-  margin: 50px 20px;
-  align-self: center;
-} */ 
 
 /* chooseDate */
+.subText{
+  color:grey;
+  font-size: 16px;
+  margin-top: 5px;
+}
+.chooseDateContainer {
+  margin: 100px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .datePick {
-  border: 1px red solid;
+  border: 1px #FFA4A9 solid;
+  border-radius: 10px;
   margin: 10px;
   display: flex;
   justify-content: center;
 }
 
-.dateBtn {
-  margin-bottom: 10px;
-  height: 50px;
-  width: 80vw;
-
-  font-size: 20px;
-  border: 1px solid black;
-  text-align: center;
-  word-break: keep-all;
+.SubmitBtn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-right: 16px;
+  height: 60px;
+  width: 60px;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  color: var(--color-point);
+  z-index: 999;
+  &:disabled {
+    color: gray;
+  }
 }
