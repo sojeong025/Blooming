@@ -8,8 +8,6 @@ import { customAxios } from "../lib/axios";
 
 import { userState } from "../recoil/ProfileAtom";
 
-  
-
 function Splash() {
   const navigate = useNavigate();
   const [isRendered, setIsRendered] = useState(false);
@@ -26,12 +24,28 @@ function Splash() {
     switch (gender) {
       case "MALE":
         rootElement.style.setProperty("--color-point", "var(--color-groom)");
+        rootElement.style.setProperty(
+          "--color-point-text",
+          "var(--color-groom-text)",
+        );
+        rootElement.style.setProperty(
+          "--color-point-opacity",
+          "var(--color-groom-opacity)",
+        );
         break;
       case "FEMALE":
         rootElement.style.setProperty("--color-point", "var(--color-brider)");
+        rootElement.style.setProperty(
+          "--color-point-text",
+          "var(--color-brider-text)",
+        );
+        rootElement.style.setProperty(
+          "--color-point-opacity",
+          "var(--color-brider-opacity)",
+        );
         break;
     }
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,7 +80,7 @@ function Splash() {
               const res = await customAxios("profile");
               if (res.data) {
                 setUserState({ ...res.data.result[0] });
-                setThemeState(res.data.result[0].gender)
+                setThemeState(res.data.result[0].gender);
                 navigate("/home");
               }
             } catch (error) {
@@ -106,18 +120,20 @@ function Splash() {
   return (
     <div className={classes.div}>
       <div className={classes.container}>
-          <motion.div
-            initial={{ scale: 1}}
-            animate={{ scale: [1, 1.1, 1]}}
-            transition={{
-              duration: 2.5,
-              times: [0, 0.5, 1],
-              ease: "easeInOut",
-            }}
-          >
-            <img src="src/assets/Logo/ring.png" alt="" />
-          </motion.div>
-          <div style={{marginTop:'20px'}}><img src="src/assets/Logo/text.png" alt="" /></div>
+        <motion.div
+          initial={{ scale: 1 }}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{
+            duration: 2.5,
+            times: [0, 0.5, 1],
+            ease: "easeInOut",
+          }}
+        >
+          <img src='src/assets/Logo/ring.png' alt='' />
+        </motion.div>
+        <div style={{ marginTop: "20px" }}>
+          <img src='src/assets/Logo/text.png' alt='' />
+        </div>
       </div>
     </div>
   );
