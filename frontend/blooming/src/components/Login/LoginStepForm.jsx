@@ -227,47 +227,35 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
               입력한 정보는 언제든 수정이 가능합니다.
             </p>
 
-            <h2>👷🏻‍♂️공사 중 체크하면 신부 체크안하면 신랑👷🏻‍♀️</h2>
             <div className={`${classes.wrapper} ${classes.inputName}`}>
-              {/* <div
-                className={`${classes.checkbox} ${
-                  active ? classes.active : ""
-                }`}
+              <div
+                className={`${classes.GenderSelector}`}
+                onChange={handleFieldChange}
               >
                 <input
-                  type='checkbox'
+                  type='radio'
                   id='gender'
                   name='gender'
-                  checked={values.gender === "FEMALE"}
-                  onChange={onToggleChange}
-                  className={classes.input}
+                  value='MALE'
+                  checked={values.gender === "MALE"}
                 />
-                <label htmlFor='checkbox' className={classes.label}></label>
-                <div className={`${classes.on}`}>
-                  <span>ON</span>
-                </div>
-                <div className={`${classes.off}`}>
-                  <span>OFF</span>
-                </div>
-              </div> */}
 
-              <div className={`${classes.checkbox}`}>
+                <label htmlFor='gender' className={classes.male}>
+                  신랑
+                </label>
                 <input
-                  className={classes.inputGender}
-                  type='checkbox'
-                  id='gender'
-                  onChange={onToggleChange}
-                  checked={values.gender === "FEMALE"}
+                  type='radio'
+                  id='gender2'
                   name='gender'
+                  value='FEMALE'
+                  checked={values.gender === "FEMALE"}
                 />
-                <label htmlFor='gender' className={classes.labelGender}></label>
-                <div className={classes.Male}>
-                  <span>신랑</span>
-                </div>
-                <div className={classes.Female}>
-                  <span>신부</span>
-                </div>
+
+                <label htmlFor='gender2' className={classes.female}>
+                  신부
+                </label>
               </div>
+
               <div>
                 <input
                   required

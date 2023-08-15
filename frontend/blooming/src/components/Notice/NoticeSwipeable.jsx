@@ -23,6 +23,7 @@ import TopBtn from "../Common/TopBtn";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { IoMdRefresh } from "react-icons/io";
+import { styled } from "styled-components";
 
 const NoticeSwipeable = () => {
   const [fullSwipe] = useState(true);
@@ -69,6 +70,15 @@ const NoticeSwipeable = () => {
     } catch (error) {
       // console.log("알림 조회 에러", error);
       setHasMore(false);
+    }
+  };
+
+  const deleteAllNotice = async () => {
+    try {
+      await customAxios.delete("notifiation");
+      onReNotice();
+    } catch (error) {
+      console.log("알림 전체 삭제:", error);
     }
   };
 
@@ -127,6 +137,8 @@ const NoticeSwipeable = () => {
       <TopBtn onClick={onReNotice}>
         <IoMdRefresh size={25} />
       </TopBtn>
+      <AllDelete onClick={deleteAllNotice}>알림 전체 삭제</AllDelete>
+
       <InfiniteScroll
         dataLength={notice.length}
         next={fetchNotice}
@@ -181,3 +193,15 @@ const NoticeSwipeable = () => {
 };
 
 export default NoticeSwipeable;
+
+const AllDelete = styled.div`
+  height: 20px;
+  width: 100px;
+
+  position: absolute;
+  margin-top: 5px;
+  right: 2px;
+  color: black;
+  font-size: 14px;
+  font-weight: 600;
+`;

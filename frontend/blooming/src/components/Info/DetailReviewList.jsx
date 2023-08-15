@@ -8,15 +8,20 @@ import { GoThumbsup } from "react-icons/go";
 
 import Rating from "react-rating";
 import { customAxios } from "../../lib/axios";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userState } from "../../recoil/ProfileAtom";
 
 export default function DetailReviewList({
   hasMore,
   reviews,
   fetchReviewData,
   onLikeClick,
+  onReviewClick,
 }) {
+  const userData = useRecoilValue(userState);
   const [isModal, setIsModal] = useState(false);
   const [selectedImageUrl, setSelectedImageUrl] = useState(null);
+
   const maskEmail = (email) => {
     const [user, domain] = email.split("@");
     const maskedDomain = domain.replace(/./g, "*");
@@ -38,7 +43,13 @@ export default function DetailReviewList({
       >
         <div className={classes.ReviewsContainer}>
           {reviews.map((review) => (
-            <div key={review.reviewId} className={classes.ReviewContainer}>
+            <div
+              key={review.reviewId}
+              className={classes.ReviewContainer}
+              onClick={() => {
+                onReviewClick && onReviewClick(review);
+              }}
+            >
               <div className={classes.ReviewWriter}>
                 <div>
                   <span className={classes.ReviewStar}>
@@ -56,9 +67,15 @@ export default function DetailReviewList({
                 </div>
 
                 <div className={` ${classes.nameContainer}`}>
-                  <p className={`${classes.name}`}>
-                    {review.nickName}({maskEmail(review.email)})
-                  </p>
+                  {review.email ? (
+                    <p className={`${classes.name}`}>
+                      {review.nickName}({maskEmail(review.email)})
+                    </p>
+                  ) : (
+                    <p className={`${classes.name}`}>
+                      {userData.nickname}({maskEmail(userData.email)})
+                    </p>
+                  )}
                   <div
                     onClick={() => {
                       onLikeClick(review.reviewId);
@@ -83,7 +100,7 @@ export default function DetailReviewList({
                       }}
                       className={classes.ReviewImg}
                       src={review.image}
-                      alt='이미지가 없습니다.'
+                      alt='이미지 없음'
                     />
                   )}
                 </div>
