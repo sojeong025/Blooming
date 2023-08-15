@@ -37,7 +37,8 @@ function Splash() {
     const fetchData = async () => {
       if (localRefreshToken) {
         const headers = {
-          Authorization_Refresh: `Bearer ${localRefreshToken}`,
+          "Content-Type": "application/json",
+          "Authorization_refresh": `Bearer ${localRefreshToken}`,
         };
         console.log('refresh', headers)
         try {
