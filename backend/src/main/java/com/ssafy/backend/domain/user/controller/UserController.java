@@ -3,6 +3,7 @@ package com.ssafy.backend.domain.user.controller;
 import com.ssafy.backend.domain.common.BasicResponse;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.dto.*;
+import com.ssafy.backend.domain.user.repository.UserRepository;
 import com.ssafy.backend.domain.user.service.UserService;
 import com.ssafy.backend.global.jwt.service.JwtService;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -17,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 
 @Tag(name = "회원 API", description = "카카오톡 로그인 회원 API")
@@ -25,6 +27,7 @@ import java.util.Collections;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
     private final JwtService jwtService;
 
     @Operation(summary = "카카오 회원 정보 가져오기", description = "카카오톡에서 제공하는 회원 정보를 가지고 와서 추가 정보칸에 제공하기 위한 API입니다.")
@@ -278,12 +281,23 @@ public class UserController {
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
-
-
-
     @Hidden
     @GetMapping("/auto-login")
-    public ResponseEntity<BasicResponse> autoLogin() {
+    public ResponseEntity<BasicResponse> autoLogin(HttpServletRequest request) {
+
+        String refreshToken = request.getHeader("Authorization_refresh");
+        User findUser = userRepository.findByRefreshToken(refreshToken)
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 사용자 정보가 없습니다."));
+
+        String reissueAccessToken = jwtService.createAccessToken(findUser.getEmail());
+        String reissueRefreshToken = jwtService.createRefreshToken();
+
+        // 헤더에 토큰 정보 추가
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + reissueAccessToken);
+        headers.add("Authorization_refresh", "Bearer " + reissueRefreshToken);
+
+        jwtService.updateRefreshToken(findUser.getEmail(), refreshToken);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
@@ -291,7 +305,7 @@ public class UserController {
                 .message("자동로그인을 위한 api라 아무 의미없다~")
                 .build();
 
-        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+        return new ResponseEntity<>(basicResponse, headers, basicResponse.getHttpStatus());
     }
 
     @Hidden
