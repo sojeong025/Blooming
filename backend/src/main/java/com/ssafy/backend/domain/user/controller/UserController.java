@@ -285,7 +285,8 @@ public class UserController {
     @GetMapping("/auto-login")
     public ResponseEntity<BasicResponse> autoLogin(HttpServletRequest request) {
 
-        String refreshToken = request.getHeader("Authorization_refresh");
+        String refreshToken = jwtService.extractRefreshToken(request)
+                .orElseThrow(() -> new IllegalArgumentException("refresh 토큰이 없습니다."));
         User findUser = userRepository.findByRefreshToken(refreshToken)
                 .orElseThrow(() -> new IllegalArgumentException("일치하는 사용자 정보가 없습니다."));
 
