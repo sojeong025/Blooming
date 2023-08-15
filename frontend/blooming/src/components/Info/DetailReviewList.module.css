@@ -73,11 +73,11 @@
   align-items: center;
   justify-content: space-around;
 }
-.ThumbsUp p {
+.ThumbsUp span {
   margin: 0;
 }
 .ThumbsUpBlue {
-  color: blue;
+  color: steelblue;
 }
 
 .ThumbsUpGrey {

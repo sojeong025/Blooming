@@ -64,11 +64,11 @@ export default function DetailReviewList({
                       onLikeClick(review.reviewId);
                     }}
                     className={`${classes.ThumbsUp} ${
-                      review.liked ? "ThumbsUpBlue" : "ThumbsUpGrey"
+                      review.liked ? classes.ThumbsUpBlue : classes.ThumbsUpGrey
                     }`}
                   >
                     <GoThumbsup size={20} />
-                    {review.likeCnt}
+                    <span>{review.likeCnt}</span>
                   </div>
                 </div>
               </div>

@@ -26,11 +26,11 @@ import GotoTop from "../../components/Common/GoToTopButton";
 export default function InfoDetail() {
   const navigate = useNavigate();
   const location = useLocation();
-  const id = location.state.id;
-  const productType = location.state.productType;
+  // const id = location.state.id;
+  // const productType = location.state.productType;
   // 디자인 용 더미 =======================================================================================================================
-  // const id = 85;
-  // const productType = "DRESS";
+  const id = 85;
+  const productType = "DRESS";
 
   const [reviews, setReviews] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -209,9 +209,21 @@ export default function InfoDetail() {
 
   // 후기가 도움돼요
   const handleLikeClick = async (reviewId) => {
-    console.log(reviewId);
     try {
-      await customAxios.post(`liked/${reviewId}`);
+      const currentReview = reviews.find(
+        (review) => review.reviewId === reviewId,
+      );
+      if (!currentReview) {
+        console.log("리뷰를 찾을 수 없습니다.");
+        return;
+      }
+
+      if (currentReview.liked) {
+        await customAxios.delete(`liked/${reviewId}`);
+      } else {
+        await customAxios.post(`liked/${reviewId}`);
+      }
+
       const updatedReviews = reviews.map((review) => {
         if (review.reviewId === reviewId) {
           const liked = !review.liked;
@@ -221,7 +233,6 @@ export default function InfoDetail() {
         return review;
       });
 
-      // 업데이트된 reviews 배열을 설정하여 리렌더링을 강제합니다.
       setReviews(updatedReviews);
     } catch (error) {
       console.log("좋아요 에러", error);
@@ -339,7 +350,6 @@ export default function InfoDetail() {
       {/* 하단 버튼 */}
       <BottomButton>
         <HeartButton onClick={onWish} $isActive={product?.wish}>
-          {/* 하뚜 */}
           <div className='heartBorder'>
             {product?.wish ? (
               <AiFillHeart size={30} />
@@ -362,7 +372,6 @@ export default function InfoDetail() {
 const Wrapper = styled.div`
   margin: 55px 0;
 
-  /* 이것도 고민이다 */
   background-color: white;
   --color-bg: white;
 `;
@@ -382,7 +391,6 @@ const BottomButton = styled.div`
 
   height: 55px;
   background-color: var(--color-bg);
-  /* background-color: white; */
   padding: 0 10px;
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 `;
@@ -424,20 +432,13 @@ const Button = styled.div`
 `;
 
 const ReviewButton = styled(Button)`
-  /* background-color: var(--color-groom); */
-  /* groom-opacity */
-  background-color: rgba(111, 174, 199, 0.25);
-
-  /* 고민-opacity */
-  /* background-color: rgba(77, 101, 178, 0.12); */
+  background-color: var(--color-point-opacity);
   p {
-    color: #4a8c98;
-    /* color: #4d65b2; */
+    color: var(--color-point-text);
   }
 `;
 
 const ReserveButton = styled(Button)`
-  background-color: var(--color-groom);
-  /* background-color: #4d65b2; */
+  background-color: var(--color-point);
   color: white;
 `;

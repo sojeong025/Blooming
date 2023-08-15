@@ -28,9 +28,25 @@ export default function Join() {
     switch (gender) {
       case "MALE":
         rootElement.style.setProperty("--color-point", "var(--color-groom)");
+        rootElement.style.setProperty(
+          "--color-point-text",
+          "var(--color-groom-text)",
+        );
+        rootElement.style.setProperty(
+          "--color-point-opacity",
+          "var(--color-groom-opacity)",
+        );
         break;
       case "FEMALE":
         rootElement.style.setProperty("--color-point", "var(--color-brider)");
+        rootElement.style.setProperty(
+          "--color-point-text",
+          "var(--color-brider-text)",
+        );
+        rootElement.style.setProperty(
+          "--color-point-opacity",
+          "var(--color-brider-opacity)",
+        );
         break;
     }
   };
