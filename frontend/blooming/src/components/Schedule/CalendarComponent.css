@@ -12,11 +12,12 @@
   text-align: center;
 }
 .react-calendar__navigation button {
-  min-width: 44px;
+  min-width: 60px;
   margin: 10px 2px;
   background: none;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 30px;
+  font-weight:400;
+  font-family: 'SUITE-regular';
   border-style: none;
 }
 
@@ -99,10 +100,14 @@ abbr[title] {
 .react-calendar__navigation__label{
   font-size: 40px;
 }
+.react-calendar__navigation__label__labelText {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'SUITE-regular';
+}
 .weekend-day {
   border-radius: 50%;
 }
-
 .weekend-day:enabled:hover,
 .weekend-day:enabled:focus {
   background-color: var(--color-point);
