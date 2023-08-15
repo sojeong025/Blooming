@@ -4,9 +4,6 @@ import { myReviewState } from "../../recoil/ProfileAtom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import InfiniteScroll from "react-infinite-scroll-component";
-
-import ReviewItem from "./ReviewItem";
 import DetailReviewList from "../info/DetailReviewList";
 
 export default function MyReview() {
