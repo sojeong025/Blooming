@@ -88,98 +88,45 @@
 .inputName {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
+  width: 90%;
 }
 .inputName > div {
-  width: auto;
+  width: 200px;
 }
 /* ========= gender ========== */
-.checkbox {
-  background: #1e1e1e;
-  border-radius: 100px;
-  padding: 10px 15px;
-  color: #626262;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 45px;
-  width: 245px;
-  font-size: 21px;
-  position: relative;
-  transition: all 0.5s ease-in-out;
-  overflow: hidden;
-  background-clip: content-box;
-  margin-bottom: 20px;
+.GenderSelector {
+  padding: 0;
 }
-
-.input {
-  opacity: 0;
-  pointer-events: none;
+.GenderSelector input[type=radio]{
+  display: none;
 }
-
-.label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+.GenderSelector input[type=radio]+label{
+  display: inline-block;
   cursor: pointer;
-  z-index: 3;
+  height: 30px;
+  width: 80px;
+  border: 1px solid #333;
+  line-height: 30px;
+  text-align: center;
+  font-weight:bold;
+  font-size:13px;
+  transition: background-color 0.3s, color 0.3s, font-size 0.3s, border-color 0.3s;
 }
-
-.on {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #1e1e1e;
-  text-align: right;
+.GenderSelector input[type=radio]:checked+.male{
+  background-color: var(--color-groom);
   color: #fff;
-  border-radius: 100px;
-  z-index: 2;
+  font-size: 15px;
+  border: 1px solid var(--color-groom);
+}
+.GenderSelector input[type=radio]:checked+.female{
+  background-color: var(--color-brider);
+  color: #fff;
+  font-size: 15px;
+  border: 1px solid var(--color-brider);
 }
 
-.on span {
-  position: absolute;
-  left: 25px;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: all 500ms ease-in-out;
-  user-select: none;
-}
-
-.off {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  text-align: right;
-  color: #000;
-  border-radius: 100px;
-  z-index: 1;
-  background-clip: content-box;
-}
-.off span {
-  position: absolute;
-  right: 25px;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: all 500ms ease-in-out;
-  user-select: none;
-}
-.active .on {
-  transform: translateX(100%);
-  z-index: 1;
-}
-.active .off {
-  transform: translateX(-0%);
-  z-index: 2;
-}
 
 /* weddingDate */
 .datePick {
@@ -209,5 +156,5 @@
   justify-content : center;
   align-items : center;
 
-  margin-top: 60px;
+  margin-top: 0px;
 }

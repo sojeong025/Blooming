@@ -158,6 +158,29 @@ const EditProfile = () => {
         <hr />
         <div className={`${classes.wrapper} `}>
           {/* Gender 선택 넣기 */}
+          <div className={`${classes.GenderSelector}`} onChange={handleChange}>
+            <input
+              type='radio'
+              id='gender'
+              name='gender'
+              value='MALE'
+              checked={formData.gender === "MALE"}
+            />
+            <label htmlFor='gender' className={classes.male}>
+              신랑
+            </label>
+            <input
+              type='radio'
+              id='gender2'
+              name='gender'
+              value='FEMALE'
+              checked={formData.gender === "FEMALE"}
+            />
+
+            <label htmlFor='gender2' className={classes.female}>
+              신부
+            </label>
+          </div>
 
           <div className={classes.codeContainer}>
             <label htmlFor='name' className={classes.label}>

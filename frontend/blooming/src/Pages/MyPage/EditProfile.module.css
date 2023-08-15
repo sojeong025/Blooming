@@ -147,3 +147,38 @@
 }
 /* ============================================== */
 
+.GenderSelector {
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: center;
+}
+.GenderSelector input[type=radio]{
+  display: none;
+}
+.GenderSelector input[type=radio]+label{
+  display: inline-block;
+  cursor: pointer;
+  height: 30px;
+  width: 75vw;
+  border: 1px solid #333;
+  line-height: 30px;
+  text-align: center;
+  font-weight:bold;
+  font-size :16px;
+  transition: background-color 0.3s, color 0.3s, font-size 0.3s, border-color 0.3s;
+}
+.GenderSelector input[type=radio]:checked+.male{
+  background-color: var(--color-groom);
+  color: #fff;
+  font-size: 18px;
+  border: 1px solid var(--color-groom);
+}
+.GenderSelector input[type=radio]:checked+.female{
+  background-color: var(--color-brider);
+  color: #fff;
+  font-size: 18px;
+  border: 1px solid var(--color-brider);
+}
