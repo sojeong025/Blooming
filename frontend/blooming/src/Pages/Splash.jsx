@@ -39,6 +39,7 @@ function Splash() {
         const headers = {
           Authorization_Refresh: `Bearer ${localRefreshToken}`,
         };
+        console.log('refresh', headers)
         try {
           // 헤더 포함하여 GET 요청 보내기
           const response = await axios.get(url, { headers });
