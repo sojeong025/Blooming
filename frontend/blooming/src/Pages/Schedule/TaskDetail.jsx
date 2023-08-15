@@ -21,7 +21,7 @@ function TaskDetail() {
   //   }
   const formattedTime = task.scheduleTime.slice(0, 5);
   const { id } = useParams();
-  // const [task, setTask] = useState();
+  const [task, setTask] = useState();
 
   const navigate = useNavigate();
 
