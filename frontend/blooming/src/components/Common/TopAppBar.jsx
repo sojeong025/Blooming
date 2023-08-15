@@ -11,9 +11,10 @@ import { useEffect, useState } from "react";
 
 const TopAppBar = () => {
   const location = useLocation();
-  const [pageTitle, setPageTitle] = useState("");
+  const [pageTitle, setPageTitle] = useState();
 
   useEffect(() => {
+    console.log(location);
     if (location.state && location.state.pageTitle) {
       setPageTitle(location.state.pageTitle);
     } else {
@@ -104,8 +105,11 @@ const TopAppBar = () => {
       {/* 가운데 로고 또는 페이지타이틀 */}
       <div className={classes.pageTitleContainer}>
         {/* {!pageTitle && <img src='src/assets/Nav/word.png' alt='Logo' />} */}
-        {!pageTitle && <img src='/public/word.png' alt='Logo' />}
-        {pageTitle}
+        {!pageTitle ? (
+          <img src='/public/word.png' alt='Logo' />
+        ) : (
+          <>{pageTitle}</>
+        )}
       </div>
 
       {/* 알림창으로 이동 */}
