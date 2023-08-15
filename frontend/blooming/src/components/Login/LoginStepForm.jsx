@@ -148,7 +148,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
     };
     try {
       await customAxios.post("wedding-date", {
-        weddingDatePick,
+        ...weddingDatePick,
       });
       setWeddingDate(updateDate);
       if (typeof handleSubmit === "function") {
