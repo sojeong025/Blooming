@@ -1,5 +1,5 @@
 import { useState } from "react";
-import classes from "./MyWishlistItem.module.css";
+import classes from "../Info/ProductItem.module.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdLocationOn } from "react-icons/md";
 import { customAxios } from "../../lib/axios";
@@ -66,15 +66,16 @@ export default function MyWishlistItem({ wish, onClick, you }) {
           )}
         </div>
       </div>
-      <div className={classes.heart}>
+      {/* 고밍 */}
+      {/* <div className={classes.heart}>
         <div className={classes.IconWrapper}>
-          {you === 'yes' ? (
-            <AiFillHeart size={50} className={classes.heartIconTrue} />
+          {you === "yes" ? (
+            <AiFillHeart size={25} className={classes.heartIconTrue} />
           ) : (
-            <AiOutlineHeart size={50} className={classes.heartIconFalse} />
+            <AiOutlineHeart size={25} className={classes.heartIconFalse} />
           )}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
