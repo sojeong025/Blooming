@@ -19,7 +19,7 @@
 .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle {
   margin-left: -4px;
   position: absolute;
-  width: 0;
+  width: 0; 
 }
 
 .react-datepicker-popper[data-placement^=top] .react-datepicker__triangle::before,
