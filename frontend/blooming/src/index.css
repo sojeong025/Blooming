@@ -46,11 +46,13 @@
   --color-bg: #FFFAF4;
   /* 신랑 */
   --color-groom: #6FAEC7;
-  /* 고민이다 */
-  /* --color-groom: #4d65b2; */
+  --color-groom-text: #4a8c98;
+  --color-groom-opacity:rgba(111, 174, 199, 0.25);
 
   /* 신부 */
   --color-brider: #FFA4A9;
+  --color-brider-text: #F4758C;
+  --color-brider-opacity: rgba(255, 164, 169, 0.25);
   /* 공통 */
   --color-common: #bec0c2;
 
@@ -69,7 +71,9 @@
   /* 진행(좀 연한) */
   --color-join-progress:#fda73f;
   /* default 값 */
-  --color-point: var(--color-groom);
+  --color-point: var(--color-brider);
+  --color-point-opacity: var(--color-brider-opacity);
+  --color-point-text: var(--color-brider-text);
 }
 
 .mainContainer {
