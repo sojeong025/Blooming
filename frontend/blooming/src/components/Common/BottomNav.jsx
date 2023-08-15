@@ -48,7 +48,9 @@ const BottomNav = () => {
           id='item-1'
           name='menu'
           defaultChecked={
-            (selectedMenu === "home") | (location.pathname.slice(1) === "home")
+            selectedMenu === "home" ||
+            location.pathname.slice(1) === "home" ||
+            (location.state && location.state.navAction === "home")
           }
           className={`${classes.item1} ${classes.item}`}
         />
@@ -67,7 +69,9 @@ const BottomNav = () => {
           id='item-2'
           name='menu'
           defaultChecked={
-            (selectedMenu === "info") | (location.pathname.slice(1) === "info")
+            selectedMenu === "info" ||
+            location.pathname.slice(1) === "info" ||
+            (location.state && location.state.navAction === "info")
           }
           className={`${classes.item2} ${classes.item}`}
         />
@@ -88,8 +92,9 @@ const BottomNav = () => {
           id='item-3'
           name='menu'
           defaultChecked={
-            (selectedMenu === "schedule") |
-            (location.pathname.slice(1) === "schedule")
+            selectedMenu === "schedule" ||
+            location.pathname.slice(1) === "schedule" ||
+            (location.state && location.state.navAction === "schedule")
           }
           className={`${classes.item3} ${classes.item}`}
         />
@@ -108,8 +113,9 @@ const BottomNav = () => {
           id='item-4'
           name='menu'
           defaultChecked={
-            (selectedMenu === "diary") |
-            (location.pathname.slice(1) === "diary")
+            selectedMenu === "diary" ||
+            location.pathname.slice(1) === "diary" ||
+            (location.state && location.state.navAction === "diary")
           }
           className={`${classes.item4} ${classes.item}`}
         />
@@ -128,8 +134,9 @@ const BottomNav = () => {
           id='item-5'
           name='menu'
           defaultChecked={
-            (selectedMenu === "my-page") |
-            (location.pathname.slice(1) === "my-page")
+            selectedMenu === "my-page" ||
+            location.pathname.slice(1) === "my-page" ||
+            (location.state && location.state.navAction === "my-page")
           }
           className={`${classes.item5} ${classes.item}`}
         />
