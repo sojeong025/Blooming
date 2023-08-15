@@ -71,7 +71,7 @@ export default function ChooseWedding() {
         <DatePicker
           dateFormat='yyyy-MM-dd'
           shouldCloseOnSelect
-          selected={selectedDate}
+          selected={weddingDate ? weddingDate : selectedDate}
           onChange={dateChangeHandler}
         />
       </div>
