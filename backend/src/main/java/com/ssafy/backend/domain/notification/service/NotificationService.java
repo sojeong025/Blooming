@@ -83,6 +83,15 @@ public class NotificationService {
         notificationRepository.deleteById(notificationId);
     }
 
+
+    public void deleteAllNotification() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
+
+        notificationRepository.deleteAllByUserId(user.getId());
+    }
+
     public int getUnreadCnt() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
