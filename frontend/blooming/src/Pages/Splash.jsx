@@ -11,7 +11,7 @@ import { userState } from "../recoil/ProfileAtom";
 function Splash() {
   const navigate = useNavigate();
   const [isRendered, setIsRendered] = useState(false);
-  const url = "https://i9e104.p.ssafy.io/api/profile";
+  const url = "https://i9e104.p.ssafy.io/api/auto-login";
   const localRefreshToken = localStorage.getItem("refreshToken");
 
   // 유저 정보를 저장
@@ -52,9 +52,9 @@ function Splash() {
       if (localRefreshToken) {
         const headers = {
           "Content-Type": "application/json",
-          "Authorization_refresh": `Bearer ${localRefreshToken}`,
+          Authorization_refresh: `Bearer ${localRefreshToken}`,
         };
-        console.log('refresh', headers)
+        console.log("refresh", headers);
         try {
           // 헤더 포함하여 GET 요청 보내기
           const response = await axios.get(url, { headers });
@@ -91,12 +91,12 @@ function Splash() {
               navigate("/login");
             }
           } else {
-            console.log("header에 토큰이 없다?")
+            console.log("header에 토큰이 없다?");
             navigate("/login");
           }
         } catch (error) {
           // 리프레시토큰이 유효하지 않을 경우
-          console.log("유효하지 않은 refresh Token")
+          console.log("유효하지 않은 refresh Token");
           navigate("/login");
         }
       } else {
