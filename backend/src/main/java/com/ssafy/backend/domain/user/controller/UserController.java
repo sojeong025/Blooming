@@ -284,8 +284,6 @@ public class UserController {
     @Hidden
     @GetMapping("/auto-login")
     public ResponseEntity<BasicResponse> autoLogin(HttpServletRequest request) {
-        System.out.println("request.getHeader(\"Authorization_refresh\") = " + request.getHeader("Authorization_refresh"));
-
         String refreshToken = jwtService.extractRefreshToken(request)
                 .orElseThrow(() -> new IllegalArgumentException("refresh 토큰이 없습니다."));
         User findUser = userRepository.findByRefreshToken(refreshToken)
@@ -299,7 +297,7 @@ public class UserController {
         headers.add("Authorization", "Bearer " + reissueAccessToken);
         headers.add("Authorization_refresh", "Bearer " + reissueRefreshToken);
 
-        jwtService.updateRefreshToken(findUser.getEmail(), refreshToken);
+        jwtService.updateRefreshToken(findUser.getEmail(), reissueRefreshToken);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
