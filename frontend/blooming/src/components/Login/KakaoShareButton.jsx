@@ -1,24 +1,25 @@
 import { useEffect } from "react";
+import { styled } from "styled-components";
 
 const KakaoShareButton = ({ code }) => {
-  
-  const url = "http://43.200.254.50/login"
+  const url = "http://43.200.254.50/login";
 
   useEffect(() => {
-  const createKakaoButton = () => {
+    const createKakaoButton = () => {
       if (window.Kakao) {
         // 카카오 스크립트가 로드된 경우 init
         const kakao = window.Kakao;
         if (!kakao.isInitialized()) {
-          kakao.init('94f660d5b29760bb7ff5e51729ad26be');
+          kakao.init("94f660d5b29760bb7ff5e51729ad26be");
         }
         kakao.Link.createDefaultButton({
           container: "#kakao-link-btn",
           objectType: "feed",
           content: {
-            title: '블루밍, 당신만을 위한 모바일 웨딩 플래너',
-            description: '약혼자와 연결하기',
-            imageUrl: "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
+            title: "블루밍, 당신만을 위한 모바일 웨딩 플래너",
+            description: "약혼자와 연결하기",
+            imageUrl:
+              "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
             link: {
               mobileWebUrl: url,
               webUrl: url,
@@ -38,13 +39,34 @@ const KakaoShareButton = ({ code }) => {
     };
     createKakaoButton();
   }, [code]);
-  
 
   return (
-    <button id="kakao-link-btn" type="button">
-      카카오톡으로 공유하기
-    </button>
+    <KakaoBtn id='kakao-link-btn' type='button'>
+      <img src='/src/assets/kakaoshare.png' alt='카카오톡으로 공유하기' />
+    </KakaoBtn>
   );
 };
 
 export default KakaoShareButton;
+
+const KakaoBtn = styled.button`
+  border: none;
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 60vw;
+  height: calc(60vw * 193 / 1080); // img 비율이 1080:193이라서
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
