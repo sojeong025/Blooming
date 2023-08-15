@@ -86,7 +86,7 @@ function MyPage() {
         </button>
       </ErrorModal> */}
       {/* 프로필 */}
-      <Profile isCouple={isCouple} isChooseDate={isChooseDate} />
+      <Profile isCouple={isCouple} />
       {/* 아이콘 */}
       <AppContainer />
       <SettingList isChooseDate={isChooseDate} />

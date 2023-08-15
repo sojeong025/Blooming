@@ -59,8 +59,6 @@ export default function Join() {
   };
   const nextStep = () => {
     if (currentStep === 3) {
-      // console.log(formData);
-      // 마지막 페이지 로그인 정보 입력 끝 넘기기
       handleSignUp();
     }
     if (currentStep < 5) {

@@ -51,19 +51,24 @@ const StepBar = styled.div`
     left: 0;
     width: calc((var(--current-step, 0) / var(--total-steps, 6)) * 100%);
     height: 5px;
-    background-color: ${(props) => props.activeBarColor || "blue"};
+    background-color: ${(props) =>
+      props.activeBarColor || "var(--color-join-progress)"};
     border-radius: 5px;
     transition: width 0.5s;
   }
 `;
 const PrevButton = styled.button`
-  background-color: #f5f5f5;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  margin-left: 16px;
+
+  height: 60px;
+  width: 60px;
+  font-size: 17px;
   font-weight: bold;
-  cursor: pointer;
-  &:hover {
-    background-color: #e0e0e0;
-  }
+  border: none;
+  background-color: transparent;
+
+  color: grey;
 `;
