@@ -2,8 +2,6 @@ import axios from "axios";
 
 const SERVER_ADDRESS = "https://i9e104.p.ssafy.io/api/";
 
-const accessToken = localStorage.getItem("accessToken");
-
 export const customAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}`,
   headers: {
