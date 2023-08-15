@@ -42,7 +42,7 @@ function Splash() {
         try {
           // 헤더 포함하여 GET 요청 보내기
           const response = await axios.get(url, { headers });
-          // console.log(response);
+          console.log(response);
           if (
             response.headers["authorization"] &&
             response.headers["authorization_refresh"]
@@ -75,10 +75,12 @@ function Splash() {
               navigate("/login");
             }
           } else {
+            console.log("header에 토큰이 없다?")
             navigate("/login");
           }
         } catch (error) {
           // 리프레시토큰이 유효하지 않을 경우
+          console.log("유효하지 않은 refresh Token")
           navigate("/login");
         }
       } else {
