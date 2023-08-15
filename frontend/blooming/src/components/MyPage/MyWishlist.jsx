@@ -69,39 +69,7 @@ export default function MyWishlist() {
   };
 
   useEffect(() => {
-    // fetchData();
-    setMe([
-      {
-        productId: 1,
-        productType: "STUDIO",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/studio/1_thumbnail.jpg",
-        company: "그림비스튜디오",
-        address: "경기도 하남시 미사동로37번길 64 (미사동)",
-        userEmail: "lotus0028@kakao.com",
-        userName: "희영",
-      },
-      {
-        productId: 85,
-        productType: "HALL",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
-        company: "빌라드지디 수서",
-        address: "서울 강남구 율현동 68-8",
-        userEmail: "lotus0028@kakao.com",
-        userName: "희영",
-      },
-      {
-        productId: 87,
-        productType: "HALL",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/87_thumbnail.jpg",
-        company: "소노펠리체컨벤션",
-        address: "서울 강남구 삼성동 159-6 : 한국도심공항터미널 3F",
-        userEmail: "lotus0028@kakao.com",
-        userName: "희영",
-      },
-    ]);
+    fetchData();
   }, []);
 
   const handlerMeState = () => {
