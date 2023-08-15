@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { mobileInvitationState, themeState } from '../../recoil/MobileInvitationAtom';
+import { mobileInvitationState, mobileInvitationThemeState } from '../../recoil/MobileInvitationAtom';
 import { useState, useEffect } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 import { BsFillTelephoneFill } from 'react-icons/bs'
@@ -24,7 +24,7 @@ const getMonthAndDate = (dateString) => {
 
 function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true, isDetailPage = false }) {
   const invitationData = useRecoilValue(mobileInvitationState);
-  const theme = useRecoilValue(themeState);
+  const theme = useRecoilValue(mobileInvitationThemeState);
   const themeStyles = themes[theme - 1];
   const [dday, setDday] = useState(null);
   

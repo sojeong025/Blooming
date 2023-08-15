@@ -1,12 +1,12 @@
 import classes from './Common.module.css';
-import { mobileInvitationState, themeState } from '../../../recoil/MobileInvitationAtom';
+import { mobileInvitationState, mobileInvitationThemeState } from '../../../recoil/MobileInvitationAtom';
 import { fileAxios } from "../../../lib/axios";
 import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 
 function Main({onThemeSelected}) {
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
-  const [theme, setTheme] = useRecoilState(themeState)
+  const [theme, setTheme] = useRecoilState(mobileInvitationThemeState)
 
   const handleThemeButtonClick = (e) => {
     const selectedTheme = parseInt(e.target.value);
