@@ -282,9 +282,16 @@ public class UserController {
 
 
     @Hidden
-    @GetMapping("/jwt-test")
-    public String jwtTest() {
-        return "jwtTest 요청 성공";
+    @GetMapping("/auto-login")
+    public ResponseEntity<BasicResponse> autoLogin() {
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("자동로그인을 위한 api라 아무 의미없다~")
+                .build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
     @Hidden
