@@ -1,24 +1,76 @@
 .details {
-  padding: 1rem;
-  width: 30rem;
+  background-color: #fff;
+  min-height: calc(100vh - 56px);
+  z-index: 999 !important;
+  padding-top: 56px; 
 }
-
-.date {
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: #543280;
-  margin: 0;
-  text-transform: uppercase;
+.actions {
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 56px;
+  z-index: 999 !important;
+  background-color: #FFFAF4;
 }
-
-.text {
-  white-space: pre-wrap;
-  font-size: 1.25rem;
-  margin: 0.25rem 0 0 0;
-  color: #593884;
-  font-style: italic;
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: var(--color-point);
+  color: white;
+  font-size: 20px;
+  padding: 0 25px;
+  height: 56px;
 }
-
-.details a {
-  text-decoration: none;
+/* 일단은 동일하게 해놓기..? */
+.actions button:hover {
+  background-color: var(--color-point);
+  color: white;
+}
+.actions button[type='button'] {
+  background-color: transparent;
+  color: #666;
+}
+.mainTitle {
+	display: block;
+	margin: 20px 30px;
+	width: 80%;
+	height: 40px;
+	border-left: 4px solid var(--color-point);
+	padding: 0 10px;
+}
+.title {
+	width: 95%;
+	height: 50px;
+	line-height: 40px;
+	font-size: 25px;
+}
+.date, .time {
+  margin: 30px 30px;
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: start;
+}
+.date1, .time1 {
+  font-weight: 400;
+  margin-left: 20px;
+  line-height: 40px;
+  width: 50vw;
+  height: 40px;
+  font-size: 20px;
+}
+.mainContent {
+	margin: 30px 30px;
+	display: flex;
+	/* border: 1px solid black; */
+}
+.content {
+	font-size: 20px;
+	margin-left: 20px;
+	width: 80%;
 }

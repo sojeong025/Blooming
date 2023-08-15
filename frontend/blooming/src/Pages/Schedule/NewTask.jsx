@@ -134,8 +134,8 @@ function NewTask() {
       </div>
 
 
+      {/* ---------날짜 선택 부분-------- */}
       <div className={`${classes.date} schedule`}>
-        {/* ---------날짜 선택 부분-------- */}
         <BsCalendarCheck className={classes.icon} size={24}/>
         <DatePicker
           showPopperArrow={false}
@@ -148,8 +148,8 @@ function NewTask() {
         />
       </div>
 
+      {/* ---------시간 선택 부분-------- */}
       <div className={`${classes.time} schedule`}>
-        {/* ---------시간 선택 부분-------- */}
         <BsClock size={24} className={classes.icon}/>
         <DatePicker
           showPopperArrow={false}
