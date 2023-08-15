@@ -10,15 +10,15 @@ import { ko } from "date-fns/esm/locale";
 
 
 function TaskDetail() {
-  const task = {
-    "id": 23160,
-    "title": "희영이랑 만나기",
-    "content": "희영이랑 만나기의 내용",
-    "scheduleDate": "2023-08-15",
-    "scheduleTime": "16:20:00",
-    "scheduledBy": "FEMALE",
-    "scheduleType": "PRI"
-    }
+  // const task = {
+  //   "id": 23160,
+  //   "title": "희영이랑 만나기",
+  //   "content": "희영이랑 만나기의 내용",
+  //   "scheduleDate": "2023-08-15",
+  //   "scheduleTime": "16:20:00",
+  //   "scheduledBy": "FEMALE",
+  //   "scheduleType": "PRI"
+  //   }
   const formattedTime = task.scheduleTime.slice(0, 5);
   const { id } = useParams();
   // const [task, setTask] = useState();
