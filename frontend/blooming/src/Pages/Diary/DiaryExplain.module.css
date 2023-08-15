@@ -147,7 +147,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-groom);
+  background-color: var(--color-point);
 }
 .icon svg {
   /* background-color: var(--color-common); */
@@ -180,7 +180,7 @@
   padding: 10px;
   width: 70vw;
   height: 30px;
-  background-color: var(--color-groom); 
+  background-color: var(--color-point); 
   color: #fff;
   border-radius: 4px;
   font-size: 20px;

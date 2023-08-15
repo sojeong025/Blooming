@@ -1,26 +1,64 @@
 .post {
-  /* margin: 1rem 0; */
-  padding: 1rem;
+  height: 80px;
+  margin: 20px 10px;
+  display: flex;
+  justify-content: space-between;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
   animation: animate-in 1s ease-out forwards;
 }
-
-.date {
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: #543280;
-  margin: 0;
-  text-transform: uppercase;
+.left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 30px;
+  padding-left: 30px;
+}
+.left::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  height: 60%;
+  left: 0;
+}
+.FEMALE::before {
+  border-left: 3px solid var(--color-brider);
 }
 
-.text {
-  white-space: pre-wrap;
-  font-weight: bold;
-  font-size: 1.25rem;
-  margin: 0.25rem 0 0 0;
-  color: #593884;
-  font-style: italic;
+.MALE::before {
+  border-left: 3px solid var(--color-groom);
+}
+
+.COMMON::before {
+  border-left: 3px solid var(--color-common);
+}
+
+.body {
+  font-size: 20px;
+  color: #666;
+}
+.dateWrapper {
+  display: flex;
+}
+
+.dateText {
+  font-size: 16px;
+  color: #666;
+  text-transform: uppercase;
+}
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+}
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
 }
 
 @keyframes animate-in {
@@ -32,4 +70,13 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.date {
+  display: inline;
+  font-size: 16px;
+  color: #666;
+  margin-right: 0 20px;
+  text-transform: uppercase;
+  width:20%;
 }
