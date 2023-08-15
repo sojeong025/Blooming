@@ -50,7 +50,7 @@ export default function ChooseWedding() {
     };
     try {
       await customAxios.post("wedding-date", {
-        weddingDatePick,
+        ...weddingDatePick,
       });
       setWeddingDate(updateDate);
       console.log(weddingDate);
