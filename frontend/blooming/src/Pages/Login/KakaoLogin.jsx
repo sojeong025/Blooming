@@ -17,7 +17,7 @@ function KakaoLogin() {
     : null;
   
   const refreshToken = refreshTokenParam
-    ? accessTokenParam.replace("Bearer ", "").trim()
+    ? refreshTokenParam.replace("Bearer ", "").trim()
     : null;
 
   // Access Token 출력 (디버깅용)
