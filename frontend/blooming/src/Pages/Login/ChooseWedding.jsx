@@ -40,6 +40,9 @@ export default function ChooseWedding() {
   }, []);
 
   function dateChangeHandler(date) {
+    if (weddingDate) {
+      setWeddingDate(date)
+    }
     setSelectedDate(date);
   }
   // 웨딩 정보 보내기
@@ -71,7 +74,7 @@ export default function ChooseWedding() {
         <DatePicker
           dateFormat='yyyy-MM-dd'
           shouldCloseOnSelect
-          selected={weddingDate ? weddingDate : selectedDate}
+          selected={weddingDate ? new Date(weddingDate) : new Date(selectedDate)}
           onChange={dateChangeHandler}
         />
       </div>
