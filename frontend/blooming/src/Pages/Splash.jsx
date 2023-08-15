@@ -13,7 +13,7 @@ import { userState } from "../recoil/ProfileAtom";
 function Splash() {
   const navigate = useNavigate();
   const [isRendered, setIsRendered] = useState(false);
-  const url = "http://43.200.254.50:8080/profile";
+  const url = "https://i9e104.p.ssafy.io/api/profile";
   const localRefreshToken = localStorage.getItem("refreshToken");
 
   // 유저 정보를 저장
