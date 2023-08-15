@@ -14,12 +14,28 @@ function Home() {
   const [user, setUser] = useRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
 
+  const setThemeState = (gender) => {
+    const rootElement = document.documentElement;
+
+    switch (gender) {
+      case "MALE":
+        rootElement.style.setProperty("--color-point", "var(--color-groom)");
+        break;
+      case "FEMALE":
+        rootElement.style.setProperty("--color-point", "var(--color-brider)");
+        break;
+    }
+  }
+
   const updateUser = async () => {
     try {
       // 유저 정보 조회
       const res = await customAxios.get("profile");
       if (res.data) {
         setUser(res.data.result[0]);
+        if (res.data.result[0]?.gender) {
+          setThemeState(res.data.result[0].gender)
+        }
       }
     } catch (error) {
       // 유저 정보 초기화
