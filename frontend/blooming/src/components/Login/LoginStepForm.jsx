@@ -3,7 +3,7 @@ import classes from "./LoginStep.module.css";
 import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { weddingDateState } from "../../recoil/WeddingDdayAtom";
 
 import DatePicker from "react-datepicker";
@@ -381,23 +381,9 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
         </div>
       )}
       {step === 5 && (
-        <div className={classes.JoinContainer}>
-          <form onSubmit={handleSubmit(5)}>
-            <p className={classes.titleText}>회원가입 됐나?</p>
-            <p>두근두근</p>
-            {/* <p>입력한 정보는 언제든 수정이 가능해요.</p>
-            <label>
-              <input
-                required
-                type='text'
-                name='step5'
-                value={values.step5}
-                onChange={handleChange}
-              />
-            </label> */}
-            <NextButton type='submit'>다음</NextButton>
-          </form>
-        </div>
+        <Container>
+          {/* <img src='src/assets/Logo/logo2.png' alt='Blooming' /> */}
+        </Container>
       )}
     </>
   );
@@ -424,5 +410,15 @@ const NextButton = styled.button`
 
   &:disabled {
     color: gray;
+  }
+`;
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+
+  img {
+    object-fit: scale-down;
   }
 `;

@@ -61,10 +61,13 @@ export default function Join() {
     if (currentStep === 3) {
       handleSignUp();
     }
-    if (currentStep < 5) {
+    if (currentStep < 4) {
       setCurrentStep(currentStep + 1);
     } else {
-      navigate("/home");
+      setCurrentStep(currentStep + 1);
+      setTimeout(() => {
+        navigate("/home");
+      }, 300);
     }
   };
 

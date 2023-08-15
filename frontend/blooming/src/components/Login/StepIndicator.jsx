@@ -19,7 +19,7 @@ const StepIndicator = ({
           activeBarColor={activeBarColor}
           style={{
             "--current-step": currentStep || 0,
-            "--total-steps": 6,
+            "--total-steps": 5,
           }}
         />
       </Steps>
@@ -49,7 +49,7 @@ const StepBar = styled.div`
     content: "";
     position: absolute;
     left: 0;
-    width: calc((var(--current-step, 0) / var(--total-steps, 6)) * 100%);
+    width: calc((var(--current-step, 0) / var(--total-steps, 5)) * 100%);
     height: 5px;
     background-color: ${(props) =>
       props.activeBarColor || "var(--color-join-progress)"};
