@@ -64,7 +64,7 @@ public class SecurityConfig {
 			.antMatchers("/", "/v3/api-docs/**", "/swagger-ui/**", "/css/**", "/images/**", "/js/**", "/favicon.ico",
 				"/h2-console/**").permitAll()
 			.antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll() // options 무시
-			.antMatchers("/couple-certification", "/profile").permitAll() // 커플 인증 요청 접근 가능
+			.antMatchers("/couple-certification").permitAll() // 커플 인증 요청 접근 가능
 			.anyRequest().authenticated() // 위의 경로 이외에는 모두 인증된 사용자만 접근 가능
 			.and()
 			.logout()
@@ -72,6 +72,9 @@ public class SecurityConfig {
 			.and()
 			//== 소셜 로그인 설정 ==//
 			.oauth2Login()
+			.authorizationEndpoint()
+			.baseUri("/api/oauth2/authorization")
+			.and()
 			.successHandler(oAuth2LoginSuccessHandler) // 동의하고 계속하기를 눌렀을 때 Handler 설정
 			.failureHandler(oAuth2LoginFailureHandler) // 소셜 로그인 실패 시 핸들러 설정
 			.userInfoEndpoint().userService(customOAuth2UserService); // customUserService 설정
