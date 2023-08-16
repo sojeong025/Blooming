@@ -101,22 +101,31 @@ public class NotificationScheduler {
                 //null 참조 방지를 위해 닉네임 미리 받기
                 String groomNickname = (groom != null) ? groom.getNickname() : "예비신랑";
                 String brideNickname = (bride != null) ? bride.getNickname() : "예비신부";
+
+                //오늘은 오늘이라고 하기
+                String dayName = "오늘은 ";
+                if (day == 1){
+                    dayName = "내일은 ";
+                }
+                else if (day != 0){
+                    dayName = day + "일 후에는 ";
+                }
                 if (schedule.getScheduledBy() == null) continue; //예외처리
                 switch(schedule.getScheduledBy()){
                     case COMMON:
                         //두 명에게 같은 알림 전송
-                        contentGroom = "내일은 두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = "내일은 두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = dayName + "두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = dayName + "두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         break;
                     case MALE:
                         //신랑 일정.
-                        contentGroom = "내일은 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = "내일은 " + groomNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = dayName + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = dayName + groomNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         break;
                     case FEMALE:
                         //신부 일정.
-                        contentGroom = "내일은 " + brideNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = "내일은 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = dayName + brideNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentBride = dayName + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         break;
                 }
 
