@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { RecoilRoot } from "recoil";
 import {
   BrowserRouter as Router,
   Route,
@@ -49,6 +49,7 @@ import MakeUp from "./Pages/Info/MakeUp";
 import InfoDetail from "./Pages/Info/InfoDetail";
 import MobileInvitation from "./Pages/Info/MobileInvitation";
 import MobileInvitationDetail from "./Pages/Info/MobileInvitationDetail";
+import MobileInvitationShare from "./Pages/Info/MobileInvitationShare";
 import Create from "./Pages/Info/Create";
 // notice
 import AllNotice from "./Pages/Notice/AllNotice";
@@ -135,6 +136,10 @@ function App() {
           <Route
             path='/mobile-invitation-detail'
             element={<MobileInvitationDetail />}
+          />
+          <Route
+            path='/mobile-invitation-detail/:id'
+            element={<MobileInvitationShare />}
           />
           <Route path='/invitation-create' element={<Create />} />
 
