@@ -1,5 +1,5 @@
 .navContainer {
-  top: 55px;
+  top: 56px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -7,29 +7,19 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 0px;
   width: 100%;
-  height: 46px;
+  height: 40px;
   position: fixed;
-  z-index: 890;
+  z-index: 800;
 }
 
-.navContainer div {
-  font-size: 18px;
-  font-weight: 600;
-  color: #555;
-}
-
-.navContainer div:hover {
-  color: #000;
-}
-
-.navLink {
+.navItem {
   font-size: 18px;
   font-weight: 600;
   color: #555;
   position: relative;
 }
 
-.navLink::after {
+.navItem::after {
   content: "";
   position: absolute;
   bottom: -5px;
@@ -38,10 +28,10 @@
   width: 100%;
   height: 3px;
   background-color: var(--color-point);
-  display: none;
+  opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.navLink.active::after {
-  display: block;
+.active::after {
+  opacity: 1;
 }
