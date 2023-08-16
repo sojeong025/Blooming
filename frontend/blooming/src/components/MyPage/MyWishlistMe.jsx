@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import MyWishlistItem from "./MyWishlistItem";
 import styled from "styled-components";
+import { useEffect } from "react";
 
-function MyWishlistMe({ myWishlist, toWishlist }) {
+function MyWishlistMe({ myWishlist = null, toWishlist }) {
   const navigate = useNavigate();
 
+  // 누르면 디테일로
   const handleNavigation = (wish) => {
     navigate(`/${wish.productType}/${wish.productId}`, {
       state: {
@@ -15,36 +17,43 @@ function MyWishlistMe({ myWishlist, toWishlist }) {
     });
   };
 
-  if (!myWishlist) {
+  useEffect(() => {
+    console.log(myWishlist);
+    console.log("t0", toWishlist);
+  });
+  // together
+  if (myWishlist === null || myWishlist === "me") {
     return (
-      <ProductFlex>
-        toWishlist.map((wish) => (
-        <FlexItem key={wish.productId}>
-          <MyWishlistItem
-            key={wish.productId}
-            wish={wish}
-            onClick={handleNavigation}
-            you='yes'
-          />
-        </FlexItem>
-        ));
-      </ProductFlex>
+      <Wrapper>
+        <ProductFlex>
+          {toWishlist.map((wish) => (
+            <FlexItem key={wish.productId}>
+              <MyWishlistItem
+                key={wish.productId}
+                wish={wish}
+                onClick={handleNavigation}
+                me={true}
+              />
+            </FlexItem>
+          ))}
+        </ProductFlex>
+      </Wrapper>
     );
   }
-
+  // you
   return (
     <Wrapper>
       {myWishlist.length > 0 ? (
         <ProductFlex>
-          {myWishlist.map((wish) => (
+          {toWishlist.map((wish) => (
             <FlexItem key={wish.productId}>
-              {toWishlist.includes(wish) ? (
+              {myWishlist.some((item) => item.productId === wish.productId) ? (
                 <MyWishlistItem
                   wish={wish}
                   onClick={() => {
                     handleNavigation(wish);
                   }}
-                  you='yes'
+                  me={true}
                 />
               ) : (
                 <MyWishlistItem
@@ -53,7 +62,7 @@ function MyWishlistMe({ myWishlist, toWishlist }) {
                   onClick={() => {
                     handleNavigation(wish);
                   }}
-                  you='no'
+                  me={false}
                 />
               )}
             </FlexItem>

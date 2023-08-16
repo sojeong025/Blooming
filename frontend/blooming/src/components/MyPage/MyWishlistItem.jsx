@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "../Info/ProductItem.module.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdLocationOn } from "react-icons/md";
 import { customAxios } from "../../lib/axios";
 
-export default function MyWishlistItem({ wish, onClick, you }) {
+export default function MyWishlistItem({ wish, onClick, me }) {
   const address = wish.address.split(" ");
-  const [productHeart, setProductHeart] = useState(true);
+  const [productHeart, setProductHeart] = useState(me);
 
-  const handleCreateWish = async () => {
+  const handleCreateWish = async (wish) => {
     try {
       await customAxios.post(`wishlist/${wish.productId}`);
       setProductHeart(!productHeart);
@@ -17,7 +17,7 @@ export default function MyWishlistItem({ wish, onClick, you }) {
     }
   };
 
-  const handleDeleteWish = async () => {
+  const handleDeleteWish = async (wish) => {
     try {
       await customAxios.delete(`wishlist/${wish.productId}`);
       setProductHeart(!productHeart);
@@ -26,16 +26,21 @@ export default function MyWishlistItem({ wish, onClick, you }) {
     }
   };
 
-  const onWish = () => {
+  const onWish = (id) => {
     // 찜
     if (productHeart) {
       // true이면 DELETE
-      handleDeleteWish();
+      handleDeleteWish(id);
     } else {
       // false이면 POST
-      handleCreateWish();
+      handleCreateWish(id);
     }
   };
+
+  useEffect(() => {
+    setProductHeart(me);
+    console.log(productHeart);
+  });
 
   return (
     <div className={classes.Wrapper}>
@@ -57,7 +62,7 @@ export default function MyWishlistItem({ wish, onClick, you }) {
           <div className={classes.company}>{wish.company}</div>
         </div>
       </div>
-      <div className={classes.heart} onClick={onWish}>
+      <div className={classes.heart} onClick={() => onWish(wish.productId)}>
         <div className={classes.IconWrapper}>
           {productHeart ? (
             <AiFillHeart size={25} className={classes.heartIconTrue} />
@@ -66,16 +71,6 @@ export default function MyWishlistItem({ wish, onClick, you }) {
           )}
         </div>
       </div>
-      {/* 고밍 */}
-      {/* <div className={classes.heart}>
-        <div className={classes.IconWrapper}>
-          {you === "yes" ? (
-            <AiFillHeart size={25} className={classes.heartIconTrue} />
-          ) : (
-            <AiOutlineHeart size={25} className={classes.heartIconFalse} />
-          )}
-        </div>
-      </div> */}
     </div>
   );
 }

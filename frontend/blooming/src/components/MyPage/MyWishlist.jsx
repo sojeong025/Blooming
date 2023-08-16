@@ -14,29 +14,16 @@ export default function MyWishlist() {
   const [you, setYou] = useState([]);
   const [together, setTogether] = useState([]);
   const [selected, setSelected] = useState("me");
+  const [duplicatedProducts, setDuplicatedProducts] = useState([]);
 
   const classify = (myWishlist) => {
-    function handlerMeState() {
-      setState("me");
-      setSelected("me");
-    }
-
-    function handlerYouState() {
-      setState("you");
-      setSelected("you");
-    }
-
-    function handlerToState() {
-      setState("together");
-      setSelected("together");
-    }
-
     let newMe = [];
     let newYou = [];
     let newTogether = [];
+
     {
       myWishlist.map((wishlist) => {
-        console.log(wishlist, user.name);
+        // console.log(wishlist, user.name);
         if (wishlist.userName === user.name) {
           newMe.push(wishlist);
           if (newYou.some((item) => item.productId === wishlist.productId)) {
@@ -55,6 +42,31 @@ export default function MyWishlist() {
     setTogether(newTogether);
   };
 
+  const findDuplicatedProducts = (wishList) => {
+    const counts = {};
+    let duplicatedItems = [];
+
+    wishList.forEach((item) => {
+      counts[item.productId] = counts[item.productId]
+        ? {
+            count: counts[item.productId].count + 1,
+            items: [...counts[item.productId].items, item],
+          }
+        : {
+            count: 1,
+            items: [item],
+          };
+    });
+
+    Object.entries(counts)
+      .filter(([, { count }]) => count > 1)
+      .forEach(([, { count, items }]) => {
+        duplicatedItems = [...duplicatedItems, ...items];
+      });
+
+    setDuplicatedProducts(duplicatedItems);
+  };
+
   const fetchData = async () => {
     try {
       const response = await customAxios.get("wishlist");
@@ -62,6 +74,7 @@ export default function MyWishlist() {
         return <div>찜한 정보가 없습니다.</div>;
       } else {
         classify(response.data.result[0]);
+        findDuplicatedProducts(response.data.result[0]);
       }
     } catch (error) {
       console.error("예약 정보 조회 에러:", error);
@@ -101,9 +114,9 @@ export default function MyWishlist() {
         </NavItem>
       </NavContainer>
 
-      {state === "me" && <MyWishlistMe myWishlist={me} toWishlist={together} />}
+      {state === "me" && <MyWishlistMe myWishlist={me} toWishlist={me} />}
       {state === "you" && (
-        <MyWishlistMe myWishlist={you} toWishlist={together} />
+        <MyWishlistMe myWishlist={duplicatedProducts} toWishlist={you} />
       )}
       {state === "together" && <MyWishlistMe toWishlist={together} />}
     </div>
