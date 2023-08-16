@@ -24,7 +24,7 @@ function WeddingFair() {
   return (
     <div>
       <div>
-        {data.map((item, index) => (
+        {weddingFairData.map((item, index) => (
           <div key={index}>
             <img src={item.thumbnail} alt={item.name} style={{width:'200px', height:'200px'}}/>
             <h3>{item.name}</h3>
