@@ -55,6 +55,8 @@ import Create from "./Pages/Info/Create";
 import AllNotice from "./Pages/Notice/AllNotice";
 // err
 import Error from "./Pages/Error";
+// QR
+import QrCode from "./Pages/QrCode";
 
 function App() {
 
@@ -161,6 +163,8 @@ function App() {
           <Route path='/schedule/:id' element={<TaskDetail />} />
           <Route path='/schedule/new-task' element={<NewTask />} />
 
+          {/* QR Code */}
+          <Route path='/qrcode' element={<QrCode />} />
           {/* NotFound */}
           <Route path='*' element={<Error />} />
         </Routes>

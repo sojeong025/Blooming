@@ -80,8 +80,8 @@ function MobileInvitationShare() {
         <div className={classes.connect}>
 
           <div className={classes.connectName}>
-            <div>{invitation.groomFatherName ? invitation.groomFatherName : '신랑아버지'} ∘ {invitation.groomMotherName ? invitation.groomMotherName : '신랑어머니'} <span style={{fontSize:'15px'}}>의 아들</span> {invitation.groomName ?invitation.groomName : '신랑'}</div> <br />
-            <div>{invitation.brideFatherName ? invitation.brideFatherName : '신부아버지'} ∘ {invitation.brideMotherName ? invitation.brideMotherName :  '신부어머니'} <span style={{fontSize:'15px'}}>의 딸</span> {invitation.brideName ? invitation.brideName : '신부'}</div>
+            <div>{invitation.groomFatherName} ∘ {invitation.groomMotherName} <span style={{fontSize:'15px'}}>의 아들</span> {invitation.groomName}</div> <br />
+            <div>{invitation.brideFatherName} ∘ {invitation.brideMotherName} <span style={{fontSize:'15px'}}>의 딸</span> {invitation.brideName}</div>
             <div className={classes.connectImg}>
               소중한 당신을 초대합니다
             </div>
@@ -107,12 +107,12 @@ function MobileInvitationShare() {
           <div className={classes.connectParentPhone}>
             <div>
               <div className={classes.par}> 신랑 측 혼주 </div> 
-                <div className={classes.parent}>아버지 <span style={{fontWeight:'bold'}}>{invitation.groomFatherName ? invitation.groomFatherName : '신랑아버지'}</span></div> 
+                <div className={classes.parent}>아버지 <span style={{fontWeight:'bold'}}>{invitation.groomFatherName}</span></div> 
                 <div className={classes.connecticons}>
                   <div className={classes.connectIconGroom}><BsFillTelephoneFill size={20} /></div>
                   <div className={classes.connectIcon}><BiSolidMessageDots size={20} /></div>
                 </div>
-                <div className={classes.parent} >어머니 <span style={{fontWeight:'bold'}}>{invitation.groomMotherName ? invitation.groomMotherName : '신랑어머니'} </span></div>
+                <div className={classes.parent} >어머니 <span style={{fontWeight:'bold'}}>{invitation.groomMotherName} </span></div>
                 <div className={classes.connecticons}>
                   <div className={classes.connectIconGroom}><BsFillTelephoneFill size={20} /></div>
                   <div className={classes.connectIcon}><BiSolidMessageDots size={20} /></div>
@@ -121,12 +121,12 @@ function MobileInvitationShare() {
 
             <div>
               <div className={classes.par2}> 신부 측 혼주 </div> 
-                <div className={classes.parent}>아버지 <span style={{fontWeight:'bold'}}>{invitation.bridedFatherName ? invitation.bridedFatherName : '신부아버지'}</span></div>
+                <div className={classes.parent}>아버지 <span style={{fontWeight:'bold'}}>{invitation.bridedFatherName}</span></div>
                   <div className={classes.connecticons}>
                     <div className={classes.connectIconBrider}><BsFillTelephoneFill size={20} /></div>
                     <div className={classes.connectIcon}><BiSolidMessageDots size={20} /></div>
                   </div> 
-                <div className={classes.parent}>어머니 <span style={{fontWeight:'bold'}}>{invitation.bridedMotherName ? invitation.bridedMotherName : '신부어머니'} </span></div><div className={classes.connecticons}>
+                <div className={classes.parent}>어머니 <span style={{fontWeight:'bold'}}>{invitation.bridedMotherName} </span></div><div className={classes.connecticons}>
                   <div className={classes.connecticons}>
                     <div className={classes.connectIconBrider}><BsFillTelephoneFill size={20} /></div>
                     <div className={classes.connectIcon}><BiSolidMessageDots size={20} /></div>
