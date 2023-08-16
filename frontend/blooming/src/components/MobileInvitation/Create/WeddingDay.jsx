@@ -5,12 +5,25 @@ import { mobileInvitationState } from "../../../recoil/MobileInvitationAtom";
 import ko from "date-fns/locale/ko";
 
 import classes from "./Common.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function WeddingDay() {
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
   const [enteredDate, setEnteredDate] = useState(new Date())
   const [enteredTime, setEnteredTime] = useState(new Date())
+
+  useEffect(() => {
+    if (invitation.date) {
+      setEnteredDate(new Date(invitation.date))
+    }
+    if (invitation.time) {
+      const [hours, minutes] = invitation.time.split(":").map(Number);
+      const newTime = new Date();
+      newTime.setHours(hours);
+      newTime.setMinutes(minutes);
+      setEnteredTime(newTime);
+    }
+  }, [])
 
   const handleDateChange = (date) => {
     setEnteredDate(date)
