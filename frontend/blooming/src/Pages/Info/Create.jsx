@@ -93,7 +93,7 @@ function Create() {
           미리보기
         </button>
         <button className={classes.save} onClick={handleSaveClick}>
-          저장
+          {id ? "수정하기" : "저장하기"}
         </button>
       </div>
 
