@@ -1,6 +1,7 @@
 import WeddingDday from "../components/Home/WeddingDday";
 import WeddingFair from "../components/Home/WeddingFair";
 import PlanTips from "../components/Home/PlanTips";
+import Footer from "../components/Home/Footer";
 import { useSetRecoilState, useResetRecoilState, useRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
 import { customAxios } from "../lib/axios";
@@ -114,6 +115,8 @@ function Home() {
         <div className={classes.magazineTitle}>❏ 결혼 준비에 필요한 TIP </div>
         <TipMagazine />
       </div>
+
+      <Footer/>
     </div>
   );
 }
