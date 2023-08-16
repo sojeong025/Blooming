@@ -29,8 +29,10 @@ const Tips = () => {
   useEffect(() => {
     if (weddingDday) {
       fetchData();
+    } else {
+      setIsLoading(false)
     }
-  }, [weddingDday])
+  }, [])
 
   // const randomComment =
   //   nextPlan.content[Math.floor(Math.random() * nextPlan?.content.length)];
