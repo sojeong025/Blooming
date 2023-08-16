@@ -47,7 +47,7 @@ public class LatestSeenProductController {
         //형태를 보기 위해 일단 출력
         System.out.println(typedTuples);
 
-        //상품 정보를 리턴 : productId, 썸네일 사진, 제품명, productType, 찜정보
+        //상품 정보를 리턴 : productId, 썸네일 사진, 제품명, productType, 찜정보 + company
 
         BasicResponse basicResponse;
         List<ProductRecentDto> productRecentDtoList = new ArrayList<>();
