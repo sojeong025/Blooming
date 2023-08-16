@@ -13,15 +13,13 @@ const ReviewForm = ({ show = false, onClose, children }) => {
     }
   }, [show]);
 
-  // 모달 애니메이션 상태 관리
   const [isClosing, setIsClosing] = useState(false);
-  // 모달이 닫힐 때 애니메이션 처리
   const handleClose = useCallback(() => {
     setIsClosing(true);
     setTimeout(() => {
       setIsClosing(false);
       onClose();
-    }, 300); // 애니메이션 지속 시간과 동일하게 설정
+    }, 300);
   }, [onClose]);
 
   return (
