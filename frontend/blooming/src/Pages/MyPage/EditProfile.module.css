@@ -86,8 +86,8 @@
   font-weight: bold;
   border: none;
   background-color: transparent;
-  color: var(--color-point);
-  z-index: 999;
+  color: black;
+  z-index: 980;
   &:disabled {
     color: gray;
   }
