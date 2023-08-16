@@ -5,17 +5,11 @@ import { useEffect, useState } from "react";
 import { userCoupleState, userState } from "../../recoil/ProfileAtom";
 import { weddingDateState } from "../../recoil/WeddingDdayAtom";
 
-import { useRecoilState, useSetRecoilState } from "recoil";
-
-import ErrorModal from "../../components/Error/Modal";
-import { errorState } from "../../recoil/ErrorAtom";
-
+import { useSetRecoilState } from "recoil";
 import { customAxios } from "../../lib/axios";
 
 // 헤더 알림 아이콘 자리에 설정으로 바꾸기
 function MyPage() {
-  const [errorModal, setErrorModal] = useRecoilState(errorState);
-
   // 유저 정보 넣기
   const setUserData = useSetRecoilState(userState);
   const setCoupleData = useSetRecoilState(userCoupleState);
@@ -98,25 +92,6 @@ function MyPage() {
 
   return (
     <div style={{ marginLeft: "0px", marginRight: "0px", marginTop: "55px" }}>
-      {/* 에러 모달 표시 */}
-      {/* <ErrorModal
-        buttonText={"다시시도"}
-        show={errorModal}
-        onClose={() => {
-          setErrorModal(false);
-          fetchUser();
-        }}
-      >
-        <h2>Error</h2>
-        <p>에러등장</p>
-        <button
-          onClick={() => {
-            setErrorModal(false);
-          }}
-        >
-          더미데이터넣기
-        </button>
-      </ErrorModal> */}
       {/* 프로필 */}
       <Profile isCouple={isCouple} />
       {/* 아이콘 */}
