@@ -58,9 +58,13 @@ function TaskDetail() {
 
           {/* ---------버튼 부분-------- */}   
           <div className={classes.actions}>
-          <button onClick={handleHistory}><AiOutlineLeft /></button>
-          <button onClick={handleUpdate}><PiPencilLineFill/></button>
-          <button onClick={deleteHandler}><BsTrash /></button>
+            <div className={classes.back}>
+              <button onClick={handleHistory}><AiOutlineLeft /></button>
+            </div>
+            <div className={classes.editdel}>
+              <button onClick={handleUpdate}><PiPencilLineFill/></button>
+              <button onClick={deleteHandler}><BsTrash /></button>
+            </div>
           </div>
 
 

@@ -109,7 +109,7 @@
 }
 /* 일단은 동일하게 해놓기..? */
 .actions button:hover {
-  background-color: var(--color-groom);
+  background-color: var(--color-point);
   color: white;
 }
 
