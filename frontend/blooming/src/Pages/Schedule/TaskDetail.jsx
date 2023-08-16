@@ -24,6 +24,17 @@ function TaskDetail() {
     });
   }
 
+  async function deleteHandler() {
+    if (task) {
+      try {
+        await customAxios.delete(`schedule/${task.id}`);
+        navigate('/schedule');
+      } catch (error) {
+        console.log('스케쥴 삭제 API 에러', error);
+      }
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,6 +60,7 @@ function TaskDetail() {
           <div className={classes.actions}>
           <button onClick={handleHistory}><AiOutlineLeft /></button>
           <button onClick={handleUpdate}><PiPencilLineFill/></button>
+          <button onClick={deleteHandler}><BsTrash /></button>
           </div>
 
 

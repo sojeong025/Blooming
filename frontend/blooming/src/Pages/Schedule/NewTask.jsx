@@ -118,10 +118,7 @@ function NewTask() {
         <button type='button' onClick={handleHistory} ><AiOutlineLeft /></button>
         {task ? (
           <>
-            <button type="submit"><PiPencilLineFill/></button>
-            <button type="button" onClick={deleteHandler}>
-              <BsTrash />
-            </button>
+            <button type="submit"><AiOutlineCheck /></button>
           </>
         ) : (
           <button type="submit"><AiOutlineCheck /></button>
