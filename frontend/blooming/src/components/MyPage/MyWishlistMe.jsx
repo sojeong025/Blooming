@@ -16,14 +16,20 @@ function MyWishlistMe({ myWishlist, toWishlist }) {
   };
 
   if (!myWishlist) {
-    return toWishlist.map((wish) => (
-      <MyWishlistItem
-        key={wish.productId}
-        wish={wish}
-        onClick={handleNavigation}
-        you='yes'
-      />
-    ));
+    return (
+      <ProductFlex>
+        toWishlist.map((wish) => (
+        <FlexItem key={wish.productId}>
+          <MyWishlistItem
+            key={wish.productId}
+            wish={wish}
+            onClick={handleNavigation}
+            you='yes'
+          />
+        </FlexItem>
+        ));
+      </ProductFlex>
+    );
   }
 
   return (
