@@ -260,7 +260,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
                 <input
                   required
                   autoFocus
-                  autoComplete={false}
+                  autoComplete='false'
                   type='text'
                   name='name'
                   value={values.name}
@@ -294,7 +294,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
               <input
                 required
                 autoFocus
-                autoComplete={false}
+                autoComplete='false'
                 inputMode='tel'
                 type='text'
                 name='phoneNumber'
@@ -327,7 +327,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
               <input
                 required
                 autoFocus
-                autoComplete={false}
+                autoComplete='false'
                 type='text'
                 name='nickname'
                 value={values.nickname}
