@@ -1,8 +1,8 @@
 .total {
-  margin-top: 30px;
+  margin-top: 60px;
 }
 .container {
-  margin: 30px;
+  margin: 15px 30px;
   display: flex;
   flex-direction: column;
 }
