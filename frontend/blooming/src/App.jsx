@@ -61,7 +61,7 @@ import QrCode from "./Pages/QrCode";
 function App() {
 
   // TopNav를 숨길 페이지 path
-  const hiddenTopPaths = ["/", "/kakaologin", "/login", "/go-join", "/join", "/mobile-invitation-detail", "/schedule/new-task",];
+  const hiddenTopPaths = ["/", "/kakaologin", "/login", "/go-join", "/join", "/mobile-invitation-detail", "/schedule/new-task", "/qrcode"];
   // BottomNav를 숨길 페이지 path
   const hiddenBottomPaths = [
     "/",
@@ -77,6 +77,7 @@ function App() {
     "/invitation-create",
     "/mobile-invitation-detail",
     "/schedule/new-task",
+    "/qrcode"
   ];
 
   // 동적 경로
