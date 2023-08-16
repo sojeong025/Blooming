@@ -2,8 +2,27 @@ import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
 import classes from './TipMagazine.module.css'
+import { useRef } from 'react'
+
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 export default function TipMagazine() {
+  const sliderRef = useRef(null);
+  const sliderSettings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    nextArrow: <button className={classes.nextArrow}>&gt;</button>,
+    prevArrow: <button className={classes.prevArrow}>&lt;</button>,
+    beforeChange: (current, next) => setCurrentSlide(next), // 추가
+  };
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   // const tipMagazine = [
   //   {
   //     "id": 1,
@@ -72,12 +91,20 @@ export default function TipMagazine() {
   
   return (
     <div className={classes.magazineContainer}>
-      {tipMagazine.map((item, index) => (
-        <div key={index} className={classes.card} onClick={handleNavigation(item.id)}>
-          <div className={classes.cardimg}><img src={item.thumbnail} alt="이미지가 없습니다." style={{width:'170px', height:'170px'}}/></div>
-          <div className={classes.cardtitle}>{item.title}</div>
-        </div>
-      ))}
+      <Slider ref={sliderRef} {...sliderSettings}>
+        {tipMagazine.map((item, index) => (
+          <div key={index} className={classes.card}>
+            <div className={classes.cardimg}>
+              <img src={item.thumbnail} alt="이미지가 없습니다." />
+              <div className={classes.counter}>{index + 1}/{tipMagazine.length}</div>
+            
+            </div>
+              <div className={classes.cardtitle}>{item.title}</div>
+              <div className={classes.viewMore} onClick={handleNavigation(item.id)}>View More ➥</div>
+            </div>
+        ))}
+      </Slider>
     </div>
-  )
+  );
 }
+
