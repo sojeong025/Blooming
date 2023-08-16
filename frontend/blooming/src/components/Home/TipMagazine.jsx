@@ -85,7 +85,7 @@ export default function TipMagazine() {
     fetchData();
   }, []);
 
-  const handleNavigation = (id) => () => {
+  const handleNavigation = (id) => {
     navigate(`/magazine/${id}`);
   };
   
@@ -94,8 +94,8 @@ export default function TipMagazine() {
       <div className={classes.counter}>{currentSlide + 1}/{tipMagazine.length}</div>
 
       <Slider ref={sliderRef} {...sliderSettings} >
-        {tipMagazine.map((item, index) => (
-          <div key={item.id} className={classes.card}  onClick={ () => handleNavigation(tipMagazine.id)}>
+        {tipMagazine.map((item) => (
+          <div key={item.id} className={classes.card} onClick={() => handleNavigation(item.id)}>
             <div className={classes.cardimg}>
               <img src={item.thumbnail} alt="이미지가 없습니다." />
             </div>
