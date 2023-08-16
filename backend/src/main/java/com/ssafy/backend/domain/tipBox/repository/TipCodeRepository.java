@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface TipCodeRepository extends JpaRepository<TipCode, Long> {
     TipCode findByLeftDay(int leftDay);
-    List<TipCode> findAll();
+//    List<TipCode> f1indAll();
 
 }
