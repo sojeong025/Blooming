@@ -104,7 +104,14 @@ function Splash() {
         setIsRendered(true);
       }
     };
-    fetchData();
+
+    const delayFetchData = () => {
+      setTimeout(() => {
+        fetchData();
+      }, 2000);
+    };
+
+    delayFetchData();
   }, []);
 
   useEffect(() => {
