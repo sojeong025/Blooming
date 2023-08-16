@@ -2,13 +2,14 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // import classes from "./InfoDetail.module.css";
 import classes from "../../components/Info/ProductDetailItem.module.css";
+import { Carousel } from "antd";
 import "../../Pages/Schedule/DatePickerSchedule.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
 import { useEffect, useRef, useState } from "react";
 
-import { Carousel } from "react-responsive-carousel";
+// import { Carousel } from "react-responsive-carousel";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -265,31 +266,20 @@ export default function InfoDetail() {
     }
   };
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const handleCarouselChange = (index) => {
-    setCurrentImageIndex(index);
-  };
   return (
     <Wrapper>
       {product && (
         <>
           {/* 사진 수정할거: 1/3 보이기, 이미지 사이즈 줄이기: 스크롤이 안됨 */}
           {Array.isArray(product.images) && (
-            <Carousel
-              infiniteLoop
-              showThumbs={false}
-              showStatus={false}
-              showArrows={false}
-              emulateTouch
-              swipeable
-              className={classes["image-carousel"]}
-              onChange={handleCarouselChange}
-              selectedItem={currentImageIndex}
-              // renderIndicator={() => {}}
-            >
-              {product.images.map((image, index) => (
+            <Carousel waitForAnimate autoplay>
+              {product.images.map((item, index) => (
                 <div key={index}>
-                  <img src={image} alt='이미지가 없습니다.' />
+                  <img
+                    className={classes.CarouselImg}
+                    src={item}
+                    alt={product.company}
+                  />
                 </div>
               ))}
             </Carousel>
