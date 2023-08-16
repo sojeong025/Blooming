@@ -1,33 +1,37 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   weddingDateState,
   weddingDdayState,
 } from "../../recoil/WeddingDdayAtom";
-import { weddingPlanState } from "../../recoil/PlanTipsAtom";
 import classes from "./PlanTips.module.css";
 import { useEffect, useState } from "react";
+import { customAxios } from "../../lib/axios";
 // import ReactHtmlParser from "react-html-parser";
 
 const Tips = () => {
   const weddingDate = useRecoilValue(weddingDateState);
   // const weddingDate = "2023-09-20"
   const weddingDday = useRecoilValue(weddingDdayState);
+  const [nextPlan, setNextPlan] = useState();
 
-  const weddingPlan = useRecoilValue(weddingPlanState);
+  const fetchData = async () => {
+    try {
+      const response = await customAxios.get(`/tipbox/${weddingDday}`)
+      setNextPlan(response.data.result[0])
+    } catch (error) {
+      console.log("Tipbox fetch error")
+      console.log(error)
+    }
+  }
 
-  // myTotalDay는 나중에 받아서 맞추기 일단 210 플랜으로만 간다!
-  // 내가 설정한 TotalDday와 plan의 totalDay가 같은 것을 보여줌
-  const myTotalDday = 210;
-  const sameTotalDayPlan = weddingPlan.filter(
-    (plan) => plan.totalDay === myTotalDday,
-  );
-
-  const nextPlan = sameTotalDayPlan[0]?.plan.find(
-    (planItem) => planItem.leftDay <= weddingDday,
-  );
+  useEffect(() => {
+    if (weddingDday) {
+      fetchData();
+    }
+  }, [weddingDday])
 
   // const randomComment =
-  //   nextPlan.context[Math.floor(Math.random() * nextPlan?.context.length)];
+  //   nextPlan.content[Math.floor(Math.random() * nextPlan?.content.length)];
 
   const [randomComment, setRandomComment] = useState("");
 
@@ -36,7 +40,7 @@ const Tips = () => {
 
     do {
       newRandomComment =
-        nextPlan.context[Math.floor(Math.random() * nextPlan?.context.length)];
+        nextPlan.content[Math.floor(Math.random() * nextPlan?.content.length)];
     } while (newRandomComment === randomComment);
 
     setRandomComment(newRandomComment);
@@ -54,7 +58,7 @@ const Tips = () => {
         weddingDday >= 0 ? (
           <>
             <img
-              src={nextPlan.img}
+              src={nextPlan.image}
               alt={nextPlan.title}
               className={classes.mainImg}
             />
