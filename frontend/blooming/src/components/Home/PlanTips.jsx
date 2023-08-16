@@ -13,6 +13,7 @@ const Tips = () => {
   // const weddingDate = "2023-09-20"
   const weddingDday = useRecoilValue(weddingDdayState);
   const [nextPlan, setNextPlan] = useState();
+  const [isLoading, setIsLoading] = useState(true)
 
   const fetchData = async () => {
     try {
@@ -22,6 +23,7 @@ const Tips = () => {
       console.log("Tipbox fetch error")
       console.log(error)
     }
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -51,6 +53,10 @@ const Tips = () => {
       updateRandomComment();
     }
   }, [weddingDate, weddingDday, nextPlan]);
+
+  if (isLoading) {
+    return <div>...loading</div>
+  }
 
   return (
     <div className={classes.container}>
