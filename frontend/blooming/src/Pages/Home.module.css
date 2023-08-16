@@ -33,3 +33,16 @@
   font-weight: 800;
   margin-bottom: 10px;
 }
+
+/* 비스포크 */
+.bespoke {
+  
+  margin: 0
+}
+.bespokeTitle {
+  margin: 50px 30px 50px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}

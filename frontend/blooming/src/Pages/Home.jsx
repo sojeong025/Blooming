@@ -1,6 +1,7 @@
 import WeddingDday from "../components/Home/WeddingDday";
 import WeddingFair from "../components/Home/WeddingFair";
 import PlanTips from "../components/Home/PlanTips";
+import Bespoke from "../components/Home/Bespoke";
 import Footer from "../components/Home/Footer";
 import { useSetRecoilState, useResetRecoilState, useRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
@@ -12,7 +13,12 @@ import TipMagazine from "../components/Home/TipMagazine";
 import Ranking from "../components/Home/Ranking";
 import LatestSeenProduct from "../components/Home/LatestSeenProduct";
 
+// import ReactAudioPlayer from 'react-audio-player';
+// import audioFile from "../assets/wedding.mp3";
+
+
 function Home() {
+  
   const [userData, setUserData] = useRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
   const setWeddingDate = useSetRecoilState(weddingDateState);
@@ -87,6 +93,7 @@ function Home() {
 
   return (
     <div className={classes.container}>
+      {/* <ReactAudioPlayer src={audioFile} autoPlay controls /> */}
       <WeddingDday />
       <div className={classes.top}>
         <PlanTips />
@@ -114,6 +121,12 @@ function Home() {
       <div className={classes.magazine}>
         <div className={classes.magazineTitle}>❏ 결혼 준비에 필요한 TIP </div>
         <TipMagazine />
+      </div>
+
+      {/* 광고 줘봄 */}
+      <div className={classes.bespoke}>
+        <div className={classes.bespokeTitle}>❏ 신혼 살림 <span style={{color:'#OC4DA2'}}>SAMSUNG</span> 비스포크와 함께 </div>
+        <Bespoke />
       </div>
 
       <Footer/>
