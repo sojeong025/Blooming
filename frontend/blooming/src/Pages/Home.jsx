@@ -94,37 +94,25 @@ function Home() {
       {/* 웨딩박람회 */}
       <div className={classes.fairbox}>
         <div className={classes.fair}>
-          <div className={classes.fairTitle}>블루밍 개발자들이 선택한 웨딩 박람회 ⇲</div>
+          <div className={classes.fairTitle}>❏ 블루밍 개발자들이 선택한 웨딩 박람회 </div>
           <div className={classes.weddingfair}>
             <WeddingFair />
           </div>
         </div>
       </div>
 
-      {/* 팁메거진 */}
-      <div className={classes.magazine}>
-        <div className={classes.magazineTitle}>결혼 준비에 필요한 TIP ⇲</div>
-        <TipMagazine />
-      </div>
-
-      
-
-
       {/* 최근 본 상품 */}
       <div className={classes.fair}>
         <div className={classes.fairTitle}>
-          {userData.name}님의 최근 본 상품 ⇲
+        ❏ {userData.nickname}님의 최근 본 상품 
         </div>
         <LatestSeenProduct />
       </div>
-      <div>
-        <div>
-          <div onClick={() => handleProductTypeClick("HALL")}>예식장</div>
-          <div onClick={() => handleProductTypeClick("STUDIO")}>스튜디오</div>
-          <div onClick={() => handleProductTypeClick("DRESS")}>드레스</div>
-          <div onClick={() => handleProductTypeClick("MAKEUP")}>메이크업</div>
-        </div>
-        <Ranking productType={productType} />
+
+      {/* 팁메거진 */}
+      <div className={classes.magazine}>
+        <div className={classes.magazineTitle}>❏ 결혼 준비에 필요한 TIP </div>
+        <TipMagazine />
       </div>
     </div>
   );
