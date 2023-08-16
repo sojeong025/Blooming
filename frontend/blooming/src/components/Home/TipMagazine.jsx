@@ -90,12 +90,12 @@ export default function TipMagazine() {
   };
   
   return (
-    <div className={classes.magazineContainer} onClick={ () => handleNavigation(tipMagazine.id)}>
+    <div className={classes.magazineContainer}>
       <div className={classes.counter}>{currentSlide + 1}/{tipMagazine.length}</div>
 
-      <Slider ref={sliderRef} {...sliderSettings}>
+      <Slider ref={sliderRef} {...sliderSettings} >
         {tipMagazine.map((item, index) => (
-          <div key={item.id} className={classes.card}>
+          <div key={item.id} className={classes.card}  onClick={ () => handleNavigation(tipMagazine.id)}>
             <div className={classes.cardimg}>
               <img src={item.thumbnail} alt="이미지가 없습니다." />
             </div>
