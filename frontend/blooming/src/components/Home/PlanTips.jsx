@@ -66,12 +66,12 @@ const Tips = () => {
         weddingDday >= 0 ? (
           <>
             <img
-              src={nextPlan.image}
-              alt={nextPlan.title}
+              src={nextPlan?.image}
+              alt={nextPlan?.title}
               className={classes.mainImg}
             />
             <div className={classes.tipContainer} onClick={updateRandomComment}>
-              <div className={classes.textBold}>{nextPlan.title}
+              <div className={classes.textBold}>{nextPlan?.title}
               </div>
               {/* <p>{ReactHtmlParser(randomComment)}</p> */}
               <div className={classes.tip}>{randomComment}</div>
