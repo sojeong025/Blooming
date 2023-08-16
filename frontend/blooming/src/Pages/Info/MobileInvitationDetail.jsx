@@ -16,6 +16,7 @@ function MobileInvitationDetail() {
   const navigate = useNavigate();
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
   const invitationId = invitation.id
+  const api_key = import.meta.env.REACT_APP_KAKAO_API_KEY;
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -51,6 +52,9 @@ function MobileInvitationDetail() {
       if (window.Kakao) {
         // 카카오 스크립트가 로드된 경우 init
         const kakao = window.Kakao;
+        if (!kakao.isInitialized()) {
+          kakao.init(api_key);
+        }
         kakao.Link.createDefaultButton({
           container: "#kakao-link-btn",
           objectType: "feed",

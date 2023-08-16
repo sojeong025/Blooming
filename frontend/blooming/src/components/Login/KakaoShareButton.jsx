@@ -6,12 +6,16 @@ import { userState } from "../../recoil/ProfileAtom";
 const KakaoShareButton = ({ code }) => {
   const user = useRecoilState(userState)
   const url = "https://i9e104.p.ssafy.io/login";
+  const api_key = import.meta.env.REACT_APP_KAKAO_API_KEY;
 
   useEffect(() => {
     const createKakaoButton = () => {
       if (window.Kakao) {
         // 카카오 스크립트가 로드된 경우 init
         const kakao = window.Kakao;
+        if (!kakao.isInitialized()) {
+          kakao.init(api_key);
+        }
         kakao.Link.createDefaultButton({
           container: "#kakao-link-btn",
           objectType: "feed",
