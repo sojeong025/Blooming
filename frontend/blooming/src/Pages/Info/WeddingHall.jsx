@@ -12,6 +12,9 @@ import ProductItem from "../../components/Info/ProductItem";
 import RecommendItem from "../../components/Info/RecommendItem";
 import LoadingSpinner from "../../components/Common/LoadingSpinner";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 export default function WeddingHall() {
   const [isLoading, setIsLoading] = useState(true);
   // const [showModal, setShowModal] = useState(false);
@@ -68,22 +71,8 @@ export default function WeddingHall() {
     fetchRanking();
   }, []);
 
-  // 로딩 후 모달 그런데 개발중
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     if (isLoading) {
-  //       setShowModal(true);
-  //     }
-  //   }, 10000);
-
-  //   // Cleanup: 프로미스가 완료되기 전에 컴포넌트가 언마운트되면 타이머를 제거합니다.
-  //   return () => clearTimeout(timer);
-  // }, [isLoading]);
-
   return (
     <>
-      {/* {isLoading && <LoadingSpinner />} */}
-
       <Wrapper>
         <RecommendItem data={ranking} productType={productType} />
         <TitleText>웨딩홀 전체</TitleText>
@@ -99,6 +88,41 @@ export default function WeddingHall() {
           }
         >
           <ProductFlex>
+            {isLoading
+              ? Array(8)
+                  .fill()
+                  .map((_, index) => (
+                    <FlexItem key={index}>
+                      <div
+                        style={{
+                          padding: "1rem",
+                          textAlign: "center",
+                          boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.1)",
+                          background: "#FFF",
+                          borderRadius: "6px",
+                          overflow: "hidden",
+                          border: "1px solid rgba(0, 0, 0, 0.08)",
+                          marginBottom: "2rem",
+                        }}
+                      >
+                        <Skeleton height={200} />
+                        <Skeleton
+                          width={115}
+                          height={16}
+                          style={{ marginTop: "1rem", marginBottom: "0.5rem" }}
+                        />{" "}
+                        <Skeleton width={120} height={16} />
+                      </div>
+                    </FlexItem>
+                  ))
+              : weddingHall.map((product) => (
+                  <FlexItem key={product.id}>
+                    <ProductItem
+                      product={product}
+                      onClick={() => handleNavigation(product)}
+                    />
+                  </FlexItem>
+                ))}
             {weddingHall.map((product) => (
               <FlexItem key={product.id}>
                 <ProductItem

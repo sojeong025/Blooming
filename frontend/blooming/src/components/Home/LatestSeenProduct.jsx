@@ -3,6 +3,7 @@ import { customAxios } from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
 import classes from "./WeddingFair.module.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { styled } from "styled-components";
 
 export default function LatestSeenProduct() {
   const navigate = useNavigate();
@@ -88,19 +89,21 @@ export default function LatestSeenProduct() {
                 />
                 <div className={`${classes.Company}`}>{item.company}</div>
               </div>
-              <div
-                className={classes.heart}
-                onClick={() => onWish(item.productId, item.wish)}
-              >
+              <div className={classes.heart}>
                 <div className={classes.IconWrapper}>
-                  {item.wish ? (
-                    <AiFillHeart size={25} className={classes.heartIconTrue} />
-                  ) : (
-                    <AiOutlineHeart
-                      size={25}
-                      className={classes.heartIconFalse}
-                    />
-                  )}
+                  <div onClick={() => onWish(item.productId, item.wish)}>
+                    {item.wish ? (
+                      <AiFillHeart
+                        size={25}
+                        className={classes.heartIconTrue}
+                      />
+                    ) : (
+                      <AiOutlineHeart
+                        size={25}
+                        className={classes.heartIconFalse}
+                      />
+                    )}
+                  </div>
                   <div className={classes.LaViewDetail}>View Detail →</div>
                 </div>
               </div>
@@ -108,8 +111,14 @@ export default function LatestSeenProduct() {
           </div>
         ))
       ) : (
-        <div>최근 본 상품이 없습니다.</div>
+        <NoContent>최근 본 상품이 없습니다.</NoContent>
       )}
     </div>
   );
 }
+
+const NoContent = styled.div`
+  font-size: 14px;
+  padding: 5px;
+  margin-left: 12px;
+`;
