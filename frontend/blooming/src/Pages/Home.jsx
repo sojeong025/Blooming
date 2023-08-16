@@ -1,21 +1,27 @@
 import WeddingDday from "../components/Home/WeddingDday";
 import WeddingFair from "../components/Home/WeddingFair"
 import PlanTips from "../components/Home/PlanTips";
-import Tipbox from "../components/Home/TipBox";
-import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState, useResetRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
 import { customAxios } from "../lib/axios";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import classes from "./Home.module.css";
 import { weddingDateState } from "../recoil/WeddingDdayAtom";
+import TipMagazine from "../components/Home/TipMagazine";
+import Ranking from "../components/Home/Ranking"
+import LatestSeenProduct from "../components/Home/LatestSeenProduct"
 
 function Home() {
-  const navigate = useNavigate();
 
-  const [user, setUser] = useRecoilState(userState);
+  const setUser = useSetRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
   const setWeddingDate = useSetRecoilState(weddingDateState);
+
+  const [productType, setProductType] = useState('HALL');
+
+  const handleProductTypeClick = (type) => {
+    setProductType(type);
+  };
 
   const setThemeState = (gender) => {
     const rootElement = document.documentElement;
@@ -75,7 +81,21 @@ function Home() {
       <div>
         <WeddingFair />
       </div>
-      
+      <div>
+        <TipMagazine />
+      </div>
+      <div>
+        <div>
+          <div onClick={() => handleProductTypeClick('HALL')}>예식장</div>
+          <div onClick={() => handleProductTypeClick('STUDIO')}>스튜디오</div>
+          <div onClick={() => handleProductTypeClick('DRESS')}>드레스</div>
+          <div onClick={() => handleProductTypeClick('MAKEUP')}>메이크업</div>
+        </div>
+        <Ranking productType={productType} />
+      </div>
+      <div>
+        <LatestSeenProduct />
+      </div>
     </div>
   );
 }

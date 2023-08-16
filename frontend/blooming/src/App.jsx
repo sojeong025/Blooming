@@ -22,7 +22,9 @@ import Share from "./Pages/Login/Share";
 // common
 import TopAppBar from "./components/Common/TopAppBar";
 import BottomNav from "./components/Common/BottomNav";
+// Home
 import Home from "./Pages/Home";
+import Magazine from "./Pages/Home/Magazine";
 // schedule
 import Schedule from "./Pages/Schedule";
 import TaskDetail from "./Pages/Schedule/TaskDetail";
@@ -105,8 +107,10 @@ function App() {
         {!hiddenTopPaths.includes(location.pathname) && <TopAppBar />}
         <Routes>
           <Route path='/' element={<Splash />} />
-          <Route path='/home' element={<Home />} />
           <Route path='/all-notice' element={<AllNotice />} />
+          {/* home */}
+          <Route path='/home' element={<Home />} />
+          <Route path='/magazine/:id' element={<Magazine />} />
 
           {/* login */}
           <Route path='/login' element={<Login />} />
