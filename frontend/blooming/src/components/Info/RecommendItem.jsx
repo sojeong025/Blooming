@@ -23,14 +23,13 @@ const RecommendItem = ({ data = [], productType }) => {
   ];
   const navigate = useNavigate();
   const goToProduct = (type, id) => {
-    console.log(type, id);
     navigate(`/${type}/${id}`, {
       state: { id: id, productType: type, navAction: "info" },
     });
   };
   return (
     <Wrapper>
-      <Carousel autoplay>
+      <Carousel autoplay renderIndicator={() => {}}>
         {data.map((item, index) => (
           <Slide key={index}>
             <img src={item.thumbnail} alt={item.itemName} />

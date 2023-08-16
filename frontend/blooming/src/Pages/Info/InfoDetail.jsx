@@ -354,8 +354,8 @@ export default function InfoDetail() {
           </ReviewButton>
           <ReserveButton
             onClick={() => {
-              handleReserve();
               setIsReservationModal(true);
+              handleReserve();
             }}
           >
             <p>예약하기</p>
