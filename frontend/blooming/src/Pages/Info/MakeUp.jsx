@@ -28,7 +28,7 @@ export default function WeddingHall() {
   const productType = location.state.productType;
 
   const handleNavigation = (product) => {
-    console.log(productType);
+    // console.log(productType);
     navigate(`/${productType}/${product.id}`, {
       state: { id: product.id, productType, navAction: "info" },
     });

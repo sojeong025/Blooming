@@ -56,8 +56,8 @@ function Create() {
       await customAxios
         .put(`invitation/${id}`, finalFormData)
         .then((response) => {
-          console.log("put 요청 성공했다~");
-          console.log(response.data);
+          // console.log("put 요청 성공했다~");
+          // console.log(response.data);
           navigate("/mobile-invitation-detail");
         })
         .catch((error) => {
@@ -68,15 +68,14 @@ function Create() {
       await customAxios
         .post("invitation", finalFormData)
         .then((response) => {
-          console.log("post 요청 성공했다~");
-          console.log(response.data);
+          // console.log("post 요청 성공했다~");
+          // console.log(response.data);
           navigate("/mobile-invitation-detail");
         })
         .catch((error) => {
           console.log("저장에 실패하였습니다.");
           console.error(error);
         });
-
     }
   }
 
@@ -98,7 +97,10 @@ function Create() {
       </div>
 
       {previewModalVisible && (
-        <PreviewModal theme={selectedTheme} onClose={() => setPreviewModalVisible(false)} />
+        <PreviewModal
+          theme={selectedTheme}
+          onClose={() => setPreviewModalVisible(false)}
+        />
       )}
     </div>
   );

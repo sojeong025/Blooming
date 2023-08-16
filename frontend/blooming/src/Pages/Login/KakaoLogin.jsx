@@ -15,13 +15,13 @@ function KakaoLogin() {
   const accessToken = accessTokenParam
     ? accessTokenParam.replace("Bearer ", "").trim()
     : null;
-  
+
   const refreshToken = refreshTokenParam
     ? refreshTokenParam.replace("Bearer ", "").trim()
     : null;
 
   // Access Token 출력 (디버깅용)
-  console.log("Access Token:", accessToken);
+  // console.log("Access Token:", accessToken);
 
   // accessToken이 있는 경우 /join 페이지로 이동
   const goTo = () => {
@@ -33,7 +33,7 @@ function KakaoLogin() {
             localStorage.setItem("refreshToken", refreshToken);
             navigate("/home");
           } else {
-            navigate("login")
+            navigate("login");
           }
         } else if (isUser === "F") {
           navigate("/go-join");
