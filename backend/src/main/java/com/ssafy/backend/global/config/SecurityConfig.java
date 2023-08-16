@@ -5,11 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -31,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	//    private final LoginService loginService;
 	private final JwtService jwtService;
@@ -43,6 +46,8 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		RequestMatcher invitationMatcher = new RegexRequestMatcher("/invitation/\\d+", null);
+
 		http.cors().configurationSource(corsConfigurationSource());
 		http
 			.formLogin().disable() // 기본 제공되는 FormLogin 사용 X
@@ -65,6 +70,7 @@ public class SecurityConfig {
 				"/h2-console/**").permitAll()
 			.antMatchers(HttpMethod.OPTIONS, "/**/*").permitAll() // options 무시
 			.antMatchers("/couple-certification", "/auto-login").permitAll() // 커플 인증 요청 접근 가능
+			.requestMatchers(invitationMatcher).permitAll()
 			.anyRequest().authenticated() // 위의 경로 이외에는 모두 인증된 사용자만 접근 가능
 			.and()
 			.logout()
