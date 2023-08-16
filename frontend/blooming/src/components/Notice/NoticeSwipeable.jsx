@@ -75,7 +75,7 @@ const NoticeSwipeable = () => {
 
   const deleteAllNotice = async () => {
     try {
-      await customAxios.delete("notifiation");
+      await customAxios.delete("notification");
       onReNotice();
     } catch (error) {
       console.log("알림 전체 삭제:", error);
@@ -196,11 +196,12 @@ export default NoticeSwipeable;
 
 const AllDelete = styled.div`
   height: 20px;
-  width: 100px;
-
-  position: absolute;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  display: flex;
   margin-top: 5px;
-  right: 2px;
+  margin-right: 2px;
   color: black;
   font-size: 14px;
   font-weight: 600;
