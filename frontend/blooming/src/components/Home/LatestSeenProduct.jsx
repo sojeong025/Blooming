@@ -76,12 +76,7 @@ export default function LatestSeenProduct() {
         latest.map((item, index) => (
           <div key={index}>
             <div className={`${classes.LastWrapper}`}>
-              <div
-                className={classes.lastItemContainer}
-                onClick={() =>
-                  handleNavigation(item.productType, item.productId)
-                }
-              >
+              <div className={classes.lastItemContainer}>
                 <img
                   className={`${classes.listItemImg} `}
                   src={item.thumbnail}
@@ -104,7 +99,14 @@ export default function LatestSeenProduct() {
                       />
                     )}
                   </div>
-                  <div className={classes.LaViewDetail}>View Detail →</div>
+                  <div
+                    className={classes.LaViewDetail}
+                    onClick={() =>
+                      handleNavigation(item.productType, item.productId)
+                    }
+                  >
+                    View Detail →
+                  </div>
                 </div>
               </div>
             </div>
