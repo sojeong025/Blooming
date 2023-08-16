@@ -89,19 +89,21 @@ export default function LatestSeenProduct() {
                 />
                 <div className={`${classes.Company}`}>{item.company}</div>
               </div>
-              <div
-                className={classes.heart}
-                onClick={() => onWish(item.productId, item.wish)}
-              >
+              <div className={classes.heart}>
                 <div className={classes.IconWrapper}>
-                  {item.wish ? (
-                    <AiFillHeart size={25} className={classes.heartIconTrue} />
-                  ) : (
-                    <AiOutlineHeart
-                      size={25}
-                      className={classes.heartIconFalse}
-                    />
-                  )}
+                  <div onClick={() => onWish(item.productId, item.wish)}>
+                    {item.wish ? (
+                      <AiFillHeart
+                        size={25}
+                        className={classes.heartIconTrue}
+                      />
+                    ) : (
+                      <AiOutlineHeart
+                        size={25}
+                        className={classes.heartIconFalse}
+                      />
+                    )}
+                  </div>
                   <div className={classes.LaViewDetail}>View Detail →</div>
                 </div>
               </div>
