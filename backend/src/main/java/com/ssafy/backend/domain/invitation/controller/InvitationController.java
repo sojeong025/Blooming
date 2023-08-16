@@ -110,7 +110,7 @@ public class InvitationController {
     }
 
     @Operation(summary = "모바일 청첩장 하나 가져오기", description = "본인의 모바일 청찹장을 DB에서 가져옵니다.")
-    @GetMapping("/invitation/{invitationId}")
+    @GetMapping("/invitation/share/{invitationId}")
     public ResponseEntity<BasicResponse> getSharedInvitation(@PathVariable Long invitationId) {
         Invitation invitation = invitationService.getSharedInvitation(invitationId);
 

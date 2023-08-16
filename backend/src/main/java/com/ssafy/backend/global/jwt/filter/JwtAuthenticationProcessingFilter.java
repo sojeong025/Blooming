@@ -40,7 +40,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
             return; // return으로 이후 현재 필터 진행 막기 (안해주면 아래로 내려가서 계속 필터 진행시킴)
         }
 
-        Pattern pattern = Pattern.compile("/invitation/(\\d+)");
+        Pattern pattern = Pattern.compile("/invitation/share/(\\d+)");
         Matcher matcher = pattern.matcher(request.getRequestURI());
 
         if (matcher.matches()) {
