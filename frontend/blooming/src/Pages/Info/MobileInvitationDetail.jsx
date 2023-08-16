@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { mobileInvitationState } from "../../recoil/MobileInvitationAtom";
@@ -15,10 +15,9 @@ function MobileInvitationDetail() {
   const user = useRecoilValue(userState)
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
   const invitationId = invitation.id
-  const api_key = import.meta.env.REACT_APP_KAKAO_API_KEY;
-  const handleGoBack = () => {
-    navigate(-1);
-  };
+  const navigate = useNavigate();
+  const api_key = import.meta.env.VITE_KAKAO_API_KEY;
+
 
   useEffect(() => {
     const fetchData = async () => {
