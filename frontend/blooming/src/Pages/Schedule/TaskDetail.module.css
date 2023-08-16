@@ -19,7 +19,7 @@
   font: inherit;
   border: none;
   background-color: transparent;
-  color: white;
+  color: black;
   font-size: 20px;
   padding: 0 25px;
   height: 56px;
@@ -27,11 +27,11 @@
 /* 일단은 동일하게 해놓기..? */
 .actions button:hover {
   background-color: transparent;
-  color: white;
+  color: black;
 }
 .actions button[type='button'] {
   background-color: transparent;
-  color: #666;
+  color: black;
 }
 .mainTitle {
 	display: block;
@@ -55,6 +55,7 @@
   padding: 17px !important;
   width: 16vw;
   font-size: 20px !important;
+  color: black;
 }
 .title {
 	width: 95%;
