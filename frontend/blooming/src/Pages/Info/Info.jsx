@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 import classes from "./Info.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Info() {
   const [activePath, setActivePath] = useState("wedding-hall");
@@ -11,6 +11,13 @@ function Info() {
     setActivePath(path);
     navigate(`/info/${path}`, { state });
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  })
 
   return (
     <div>
