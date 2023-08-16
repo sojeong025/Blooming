@@ -358,6 +358,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
             </p>
             <div className={classes.datePick}>
               <DatePicker
+                inputMode='numeric'
                 dateFormat='yyyy-MM-dd'
                 shouldCloseOnSelect
                 selected={selectedDate}
