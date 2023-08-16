@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import ErrorModal from "../../components/Error/Modal";
 import { errorState } from "../../recoil/ErrorAtom";
 
 import styled from "styled-components";
@@ -25,7 +24,6 @@ export default function WeddingHall() {
   const productType = location.state.productType;
 
   const handleNavigation = (product) => {
-    console.log(productType);
     navigate(`/${productType}/${product.id}`, {
       state: { id: product.id, productType, navAction: "info" },
     });
