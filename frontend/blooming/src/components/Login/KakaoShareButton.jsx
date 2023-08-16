@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { styled } from "styled-components";
 
 const KakaoShareButton = ({ code }) => {
-  const url = "https://i9e104.p.ssafy.io/login";
+  const url = import.meta.env.VITE_LOGIN_URL;
   const api_key = import.meta.env.VITE_KAKAO_API_KEY;
 
   useEffect(() => {

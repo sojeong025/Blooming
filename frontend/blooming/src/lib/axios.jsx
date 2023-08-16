@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const SERVER_ADDRESS = "https://i9e104.p.ssafy.io/api/";
+const SERVER_ADDRESS = import.meta.env.VITE_BASE_URL;
+const S3_ADDRESS = import.meta.env.VITE_S3_URL;
 
 export const customAxios = axios.create({
   baseURL: `${SERVER_ADDRESS}`,
@@ -54,7 +55,7 @@ customAxios.interceptors.request.use(
 );
 
 export const fileAxios = axios.create({
-  baseURL: `${SERVER_ADDRESS}/s3`,
+  baseURL: `${S3_ADDRESS}`,
   headers: {
     "Content-Type": "multipart/form-data",
   },
