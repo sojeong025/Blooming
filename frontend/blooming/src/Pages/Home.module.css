@@ -4,13 +4,23 @@
 .top {
   margin-top: 50px;
 }
+
+/* 팁 메거진 */
+.magazine {
+  margin: 10px;
+}
+.magazineTitle {
+  margin: 50px 30px 50px;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+/* 웨딩박람회 */
 .fair {
   margin: 50px 30px 50px;
 }
 .fairTitle {
   font-size: 20px;
   font-weight: 800;
-  margin-bottom: 20px;
-}
-.weddingfair {
+  margin-bottom: 10px;
 }
