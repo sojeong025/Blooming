@@ -271,7 +271,7 @@ function Preview({ onClose, positionStyle, showPre=true, showCloseButton=true, i
           </div>
         </div>
 
-      캘린더 - 수정해야함
+      {/* 캘린더 - 수정해야함 */}
       {/* <div className={classes.calendar}> */}
         {/* <CalendarComponent /> */}
       {/* </div> */}

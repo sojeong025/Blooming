@@ -17,7 +17,7 @@ function WeddingHall() {
   };
 
   return (
-    <div className={classes.container}  style={{ marginBottom: '110px' }}>
+    <div className={classes.container}  style={{ marginBottom: '70px' }}>
       <p className={classes.header}>예식장소</p>
       <hr className={classes.hr}/>
       <div>
@@ -48,7 +48,7 @@ function WeddingHall() {
           className={classes.inputField}
           autocomplete="off"
           id="address"
-          placeholder="선택시 주소 검색창이 노출됩니다."
+          placeholder="주소를 입력해주세요."
           value={invitation.address}
           onChange={handleInputChange}
         />

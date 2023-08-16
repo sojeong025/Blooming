@@ -4,10 +4,10 @@ import { atom } from "recoil";
 export const imageListState = atom({
   key: "imageListState",
   default: [
-    { src: "src/assets/Preview/on1.png", caption: "일정맞춤 알림 제공" },
-    { src: "src/assets/Preview/on2.png", caption: "웨딩다이어리 실물 제작까지"},
+    { src: "src/assets/Preview/on1.png", caption: "일정에 맞춘 알림 제공" },
+    { src: "src/assets/Preview/on2.png", caption: "결혼 준비 기록은 다이어리로"},
     { src: "src/assets/Preview/on3.png", caption: "웨딩 업체와 예약 연결" },
-    { src: "src/assets/Preview/on4.png", caption: "모바일 청첩장 제공까지" },
+    { src: "src/assets/Preview/on4.png", caption: "직접 만드는 모바일 청첩장" },
   ],
 });
 
