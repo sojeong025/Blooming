@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { styled } from "styled-components";
 
 const KakaoShareButton = ({ code }) => {
-  const url = "http://43.200.254.50/login";
+  const url = "https://i9e104.p.ssafy.io/login";
 
   useEffect(() => {
     const createKakaoButton = () => {
