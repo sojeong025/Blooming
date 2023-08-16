@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { mobileInvitationState } from "../../recoil/MobileInvitationAtom";
@@ -16,9 +16,7 @@ function MobileInvitationDetail() {
   const navigate = useNavigate();
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
   const invitationId = invitation.id
-  const handleGoBack = () => {
-    navigate(-1);
-  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,7 +83,9 @@ function MobileInvitationDetail() {
     <div style={{ backgroundColor: "#fff" }}>
       <div className={classes.actions}>
         <div className={classes.back}>
-          <button onClick={handleGoBack}><AiOutlineLeft/></button>
+          <NavLink to='/info/mobile-invitation'>
+          <button><AiOutlineLeft/></button>
+          </NavLink>
         </div>
 
         <div className={classes.editdel}>
