@@ -89,12 +89,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 55vw;
+  width: 50vw;
   height: 56px;
   font-size: 20px;
 }
 .editdel button{
   padding: 17px !important;
+  width: 16vw;
+  font-size: 20px !important;
 }
 .actions button {
   height: 56px;
