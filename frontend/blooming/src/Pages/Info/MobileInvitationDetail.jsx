@@ -119,7 +119,7 @@ export default MobileInvitationDetail;
 const KakaoBtn = styled.button`
   border: none;
   border-radius: 10px;
-  margin: 0 auto;
+  margin-bottom: 60px;
   width: 60vw;
   height: calc(60vw * 193 / 1080); // img 비율이 1080:193이라서
   display: flex;
