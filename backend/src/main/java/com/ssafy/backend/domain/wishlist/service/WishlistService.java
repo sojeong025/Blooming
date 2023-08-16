@@ -52,7 +52,12 @@ public class WishlistService {
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
 
-        wishlistRepository.deleteByProductIdAndUserId(productId, user.getId());
+        Wishlist findWishList = wishlistRepository.findByProductIdAndUserId(productId, user.getId())
+                .orElseThrow(() -> new IllegalArgumentException("회원이 찜한 상품이 아닙니다."));
+
+        wishlistRepository.delete(findWishList);
+
+        // wishlistRepository.deleteByProductIdAndUserId(productId, user.getId());
     }
 
 

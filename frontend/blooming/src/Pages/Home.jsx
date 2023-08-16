@@ -1,5 +1,5 @@
 import WeddingDday from "../components/Home/WeddingDday";
-import WeddingFair from "../components/Home/WeddingFair"
+import WeddingFair from "../components/Home/WeddingFair";
 import PlanTips from "../components/Home/PlanTips";
 import { useSetRecoilState, useResetRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
@@ -8,16 +8,15 @@ import { useEffect, useState } from "react";
 import classes from "./Home.module.css";
 import { weddingDateState } from "../recoil/WeddingDdayAtom";
 import TipMagazine from "../components/Home/TipMagazine";
-import Ranking from "../components/Home/Ranking"
-import LatestSeenProduct from "../components/Home/LatestSeenProduct"
+import Ranking from "../components/Home/Ranking";
+import LatestSeenProduct from "../components/Home/LatestSeenProduct";
 
 function Home() {
-
   const setUser = useSetRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
   const setWeddingDate = useSetRecoilState(weddingDateState);
 
-  const [productType, setProductType] = useState('HALL');
+  const [productType, setProductType] = useState("HALL");
 
   const handleProductTypeClick = (type) => {
     setProductType(type);
@@ -29,12 +28,28 @@ function Home() {
     switch (gender) {
       case "MALE":
         rootElement.style.setProperty("--color-point", "var(--color-groom)");
+        rootElement.style.setProperty(
+          "--color-point-text",
+          "var(--color-groom-text)",
+        );
+        rootElement.style.setProperty(
+          "--color-point-opacity",
+          "var(--color-groom-opacity)",
+        );
         break;
       case "FEMALE":
         rootElement.style.setProperty("--color-point", "var(--color-brider)");
+        rootElement.style.setProperty(
+          "--color-point-text",
+          "var(--color-brider-text)",
+        );
+        rootElement.style.setProperty(
+          "--color-point-opacity",
+          "var(--color-brider-opacity)",
+        );
         break;
     }
-  }
+  };
 
   const updateUser = async () => {
     try {
@@ -44,7 +59,7 @@ function Home() {
         setUser(res.data.result[0]);
         fetchWeddingDate();
         if (res.data.result[0]?.gender) {
-          setThemeState(res.data.result[0].gender)
+          setThemeState(res.data.result[0].gender);
         }
       }
     } catch (error) {
@@ -71,34 +86,40 @@ function Home() {
 
   return (
     <div className={classes.container}>
-        <WeddingDday />
+      <WeddingDday />
       <div className={classes.top}>
         <PlanTips />
       </div>
 
+      {/* 팁메거진 */}
+      <div className={classes.magazine}>
+        <div className={classes.magazineTitle}>결혼 준비에 필요한 TIP들 여기 집중</div>
+        <TipMagazine />
+      </div>
+
       {/* 웨딩박람회 */}
       <div className={classes.fair}>
-        <div className={classes.fairTitle}>블루밍 개발자들이 선택한 웨딩 박람회 ➤</div>
+        <div className={classes.fairTitle}>블루밍 개발자들이 선택한 웨딩 박람회 ⇲</div>
         <div className={classes.weddingfair}>
           <WeddingFair />
         </div>
       </div>
 
 
-      <div>
-        <TipMagazine />
-      </div>
-      <div>
-        <div>
-          <div onClick={() => handleProductTypeClick('HALL')}>예식장</div>
-          <div onClick={() => handleProductTypeClick('STUDIO')}>스튜디오</div>
-          <div onClick={() => handleProductTypeClick('DRESS')}>드레스</div>
-          <div onClick={() => handleProductTypeClick('MAKEUP')}>메이크업</div>
-        </div>
-        <Ranking productType={productType} />
-      </div>
+      {/* 최근 본 상품 */}
       <div>
         <LatestSeenProduct />
+      </div>
+
+
+      <div>
+        <div>
+          <div onClick={() => handleProductTypeClick("HALL")}>예식장</div>
+          <div onClick={() => handleProductTypeClick("STUDIO")}>스튜디오</div>
+          <div onClick={() => handleProductTypeClick("DRESS")}>드레스</div>
+          <div onClick={() => handleProductTypeClick("MAKEUP")}>메이크업</div>
+        </div>
+        <Ranking productType={productType} />
       </div>
     </div>
   );

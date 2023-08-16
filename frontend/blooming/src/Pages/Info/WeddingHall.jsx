@@ -85,7 +85,7 @@ export default function WeddingHall() {
       {/* {isLoading && <LoadingSpinner />} */}
 
       <Wrapper>
-        <RecommendItem data={ranking} />
+        <RecommendItem data={ranking} productType={productType} />
         <TitleText>웨딩홀 전체</TitleText>
         <InfiniteScroll
           dataLength={weddingHall.length}
