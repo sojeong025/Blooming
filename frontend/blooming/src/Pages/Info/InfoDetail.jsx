@@ -139,7 +139,9 @@ export default function InfoDetail() {
     try {
       const response = await customAxios.post("reservation", data);
       // 지금은 스케줄로 보내놨는데 스케쥴 수정 다하고 나면 바꿔야함. =============================================================================
-      navigate(`/schedule/${response.data.result[0].scheduleId}`);
+      navigate(`/schedule/${response.data.result[0].scheduleId}`, {
+        state: { navAction: "info" },
+      });
     } catch (error) {
       alert("예약 가능한 시간이 아닙니다.");
     }
