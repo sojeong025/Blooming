@@ -9,7 +9,7 @@
   bottom: 90px;
   right: 30px;
   color: white;
-  background-color: var(--color-groom);
+  background-color: var(--color-point);
   border-radius: 50%;
   padding: 12px 15px;
   border: none;
@@ -60,7 +60,7 @@
   min-height: 290px;
   min-width: 370px;
   margin-bottom: 40px;
-  background-color: var(--color-groom);
+  background-color: var(--color-point);
 }
 
 .none {
