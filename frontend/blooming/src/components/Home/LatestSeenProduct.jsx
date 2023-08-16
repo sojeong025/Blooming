@@ -24,46 +24,7 @@ export default function LatestSeenProduct() {
   };
 
   useEffect(() => {
-    // fetchData();
-    // 더미다 안지우면 내가 바보
-    setLatest([
-      {
-        productId: 86,
-        productType: "HALL",
-        itemName: "상록아트홀",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/86_thumbnail.jpg",
-        company: "상록아트홀",
-        wish: false,
-      },
-      {
-        productId: 85,
-        productType: "HALL",
-        itemName: "빌라드지디 수서",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
-        company: "빌라드지디 수서",
-        wish: true,
-      },
-      {
-        productId: 30,
-        productType: "DRESS",
-        itemName: "[촬영+본식] 드레스 4벌",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/dress/30_thumbnail.jpg",
-        company: "에델린",
-        wish: false,
-      },
-      {
-        productId: 61,
-        productType: "MAKEUP",
-        itemName: "[본식] 신부신랑 헤어메이크업(실장)",
-        thumbnail:
-          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/makeup/61_thumbnail.jpg",
-        company: "바이엘린",
-        wish: false,
-      },
-    ]);
+    fetchData();
   }, []);
 
   const handleNavigation = (productType, id) => {
