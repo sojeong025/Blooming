@@ -101,7 +101,7 @@ const BottomNav = () => {
         <label
           className={classes.label}
           htmlFor='item-3'
-          onClick={() => handleNavigation("/schedule")}
+          onClick={() => handleNavigation("/schedule", { today: new Date() })}
         >
           <span>
             <Schedule />
