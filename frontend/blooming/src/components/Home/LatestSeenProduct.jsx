@@ -3,6 +3,7 @@ import { customAxios } from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
 import classes from "./WeddingFair.module.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { styled } from "styled-components";
 
 export default function LatestSeenProduct() {
   const navigate = useNavigate();
@@ -108,8 +109,14 @@ export default function LatestSeenProduct() {
           </div>
         ))
       ) : (
-        <div>최근 본 상품이 없습니다.</div>
+        <NoContent>최근 본 상품이 없습니다.</NoContent>
       )}
     </div>
   );
 }
+
+const NoContent = styled.div`
+  font-size: 14px;
+  padding: 5px;
+  margin-left: 12px;
+`;

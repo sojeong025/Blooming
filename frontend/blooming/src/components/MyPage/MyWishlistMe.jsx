@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import MyWishlistItem from "./MyWishlistItem";
 import styled from "styled-components";
 import { useEffect } from "react";
+import NoContent from "../../components/Common/NoContent";
 
 function MyWishlistMe({ myWishlist = null, toWishlist }) {
   const navigate = useNavigate();
@@ -17,12 +18,16 @@ function MyWishlistMe({ myWishlist = null, toWishlist }) {
     });
   };
 
-  useEffect(() => {
-    console.log(myWishlist);
-    console.log("t0", toWishlist);
-  });
   // together
-  if (myWishlist === null || myWishlist === "me") {
+  if (myWishlist === null && toWishlist.length === 0) {
+    return (
+      <Wrapper2>
+        <NoContent />
+      </Wrapper2>
+    );
+  }
+
+  if (myWishlist === "me") {
     return (
       <Wrapper>
         <ProductFlex>
@@ -69,7 +74,9 @@ function MyWishlistMe({ myWishlist = null, toWishlist }) {
           ))}
         </ProductFlex>
       ) : (
-        <div>찜 목록이 없습니다.</div>
+        <Wrapper2>
+          <NoContent />
+        </Wrapper2>
       )}
     </Wrapper>
   );
@@ -92,4 +99,13 @@ const ProductFlex = styled.div`
 
 const FlexItem = styled.div`
   flex-basis: 50%;
+`;
+
+const Wrapper2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: auto;
+  margin-top: 120px;
 `;

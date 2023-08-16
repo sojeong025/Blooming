@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import DetailReviewList from "../Info/DetailReviewList";
+import NoContent from "../../components/Common/NoContent";
+import { styled } from "styled-components";
 
 export default function MyReview() {
   const navigate = useNavigate();
@@ -53,8 +55,19 @@ export default function MyReview() {
           onReviewClick={handleNavigation}
         />
       ) : (
-        <div>작성한 리뷰가 없습니다.</div>
+        <Wrapper>
+          <NoContent />
+        </Wrapper>
       )}
     </div>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: auto;
+  margin-top: 120px;
+`;
