@@ -13,6 +13,9 @@ export default function QrCode() {
         console.error("QR 코드 생성 실패: ", error);
     });
   return (
-    <img id="qrCodeImage" alt="QR 코드" />
+    <div style={{
+      display: "flex", alignContent: "center", justifyContent: "center"}}>
+      <img id="qrCodeImage" alt="QR 코드" />
+    </div>
   )
 }
