@@ -2,6 +2,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 // import classes from "./InfoDetail.module.css";
 import classes from "../../components/Info/ProductDetailItem.module.css";
+import "../../Pages/Schedule/DatePickerSchedule.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
@@ -21,7 +22,10 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdLocationOn } from "react-icons/md";
 
 import ReviewCreateModal from "../../components/Error/Modal";
+import ReservationForm from "../../components/Info/ReservationModal";
 import GotoTop from "../../components/Common/GoToTopButton";
+import { userState } from "../../recoil/ProfileAtom";
+import { useRecoilValue } from "recoil";
 
 export default function InfoDetail() {
   const navigate = useNavigate();
@@ -41,10 +45,21 @@ export default function InfoDetail() {
 
   // 후기 모달
   const [isReviewModal, setIsReviewModal] = useState(false);
+  const [isReservationModal, setIsReservationModal] = useState(false);
+  const userData = useRecoilValue(userState);
+  const [formData, setFormData] = useState({ ...userData });
 
+  const getCurrentRoundedDate = () => {
+    const currentDate = new Date();
+    const minutes = currentDate.getMinutes();
+    const roundedMinutes = Math.ceil(minutes / 30) * 30;
+    currentDate.setMinutes(roundedMinutes);
+    currentDate.setSeconds(0);
+    return currentDate;
+  };
   // 예약하기와 관련된 날짜정보
   const [reservedDate, setReservedDate] = useState(new Date());
-  const [reservedTime, setReservedTime] = useState(new Date());
+  const [reservedTime, setReservedTime] = useState(getCurrentRoundedDate());
   const onDateChange = (date) => {
     console.log(date);
     setReservedDate(date);
@@ -52,6 +67,13 @@ export default function InfoDetail() {
   const onTimeChange = (time) => {
     console.log(time);
     setReservedTime(time);
+  };
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...formData,
+      [name]: value,
+    }));
   };
 
   // 상품 정보 가져오기
@@ -310,29 +332,6 @@ export default function InfoDetail() {
               <div>등록된 후기가 없습니다.</div>
             )}
 
-            {/* 예약 */}
-            <h1>예약 --</h1>
-            <div>
-              <DatePicker
-                selected={reservedDate}
-                onChange={onDateChange}
-                dateFormat='yyyy-MM-dd'
-                showMonthDropdown
-                showYearDropdown
-                dropdownMode='select'
-              />
-              <DatePicker
-                selected={reservedTime}
-                onChange={onTimeChange}
-                showTimeSelect
-                showTimeSelectOnly
-                timeIntervals={30}
-                timeFormat='HH:mm'
-                dateFormat='HH:mm'
-              />
-            </div>
-            <button onClick={handleReserve}>예약하기</button>
-
             {/* 위로 */}
             <GotoTop />
           </ProductDetail>
@@ -351,6 +350,95 @@ export default function InfoDetail() {
         />
       </ReviewCreateModal>
 
+      {/* 예약하기 모달 */}
+      <ReservationForm
+        show={isReservationModal}
+        onClose={() => setIsReservationModal(false)}
+      >
+        <div className={classes.Reservation}>
+          <div className={`${classes.ReservationItem} info`}>
+            <span>날짜</span>
+            <DatePicker
+              selected={reservedDate}
+              onChange={onDateChange}
+              dateFormat='yyyy-MM-dd'
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode='select'
+            />
+          </div>
+          <div className={`${classes.ReservationItem} info`}>
+            <span>시간</span>
+            <DatePicker
+              selected={reservedTime}
+              onChange={onTimeChange}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={30}
+              timeFormat='HH:mm'
+              dateFormat='HH:mm'
+            />
+          </div>
+          <div className={`${classes.ReservationItem}`}>
+            <span>예약자</span>
+            <input
+              required
+              className={classes.inputField}
+              type='text'
+              name='name'
+              value={formData.name}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className={`${classes.ReservationItem}`}>
+            <span>이메일</span>
+            <input
+              required
+              className={classes.inputField}
+              type='text'
+              name='email'
+              value={formData.email}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className={`${classes.ReservationItem}`}>
+            <span>연락처</span>
+            <input
+              required
+              className={classes.inputField}
+              type='text'
+              name='phoneNumber'
+              value={formData.phoneNumber}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className={`${classes.ReservationItem} ${classes.upText}`}>
+            <span className={classes.p}>요청사항</span>
+            <span>
+              <textarea
+                className={classes.textField}
+                name='text'
+                value={formData.text}
+                onChange={handleInputChange}
+              ></textarea>
+            </span>
+          </div>
+        </div>
+        <BottomButton2>
+          <ReviewButton onClick={() => setIsReservationModal(false)}>
+            <p>예약 취소</p>
+          </ReviewButton>
+          <ReserveButton
+            onClick={() => {
+              handleReserve();
+              setIsReservationModal(true);
+            }}
+          >
+            <p>예약하기</p>
+          </ReserveButton>
+        </BottomButton2>
+      </ReservationForm>
+
       {/* 하단 버튼 */}
       <BottomButton>
         <HeartButton onClick={onWish} $isActive={product?.wish}>
@@ -365,7 +453,7 @@ export default function InfoDetail() {
         <ReviewButton onClick={() => setIsReviewModal(true)}>
           <p>후기쓰기</p>
         </ReviewButton>
-        <ReserveButton>
+        <ReserveButton onClick={() => setIsReservationModal(true)}>
           <p>예약하기</p>
         </ReserveButton>
       </BottomButton>
@@ -397,6 +485,11 @@ const BottomButton = styled.div`
   background-color: var(--color-bg);
   padding: 0 10px;
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+`;
+const BottomButton2 = styled(BottomButton)`
+  div {
+    width: 48%;
+  }
 `;
 
 const HeartButton = styled.div`
