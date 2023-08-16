@@ -93,7 +93,7 @@ const TopAppBar = () => {
       }
     };
     fetchNotice();
-  }, []);
+  }, [location]);
 
   return (
     <header className={classes.header}>
