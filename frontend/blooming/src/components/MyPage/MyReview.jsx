@@ -34,6 +34,7 @@ export default function MyReview() {
 
   useEffect(() => {
     fetchData();
+    return setMyReview([])
   }, []);
 
   const handleNavigation = (review) => {
