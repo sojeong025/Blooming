@@ -74,14 +74,17 @@ export default function MyWishlist() {
 
   const handlerMeState = () => {
     setState("me");
+    setSelected("me");
   };
 
   const handlerYouState = () => {
     setState("you");
+    setSelected("you");
   };
 
   const handlerToState = () => {
     setState("together");
+    setSelected("together");
   };
 
   return (
