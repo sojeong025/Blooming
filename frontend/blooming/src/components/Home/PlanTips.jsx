@@ -32,7 +32,7 @@ const Tips = () => {
     } else {
       setIsLoading(false)
     }
-  }, [weddingDday])
+  }, [weddingDate, weddingDday])
 
   // const randomComment =
   //   nextPlan.content[Math.floor(Math.random() * nextPlan?.content.length)];
