@@ -32,7 +32,7 @@ const Tips = () => {
     } else {
       setIsLoading(false)
     }
-  }, [])
+  }, [weddingDday])
 
   // const randomComment =
   //   nextPlan.content[Math.floor(Math.random() * nextPlan?.content.length)];
@@ -62,43 +62,19 @@ const Tips = () => {
 
   return (
     <div className={classes.container}>
-      {weddingDate !== "" ? (
-        weddingDday >= 0 ? (
-          <>
-            <img
-              src={nextPlan?.image}
-              alt={nextPlan?.title}
-              className={classes.mainImg}
-            />
-            <div className={classes.tipContainer} onClick={updateRandomComment}>
-              <div className={classes.textBold}>{nextPlan?.title}
-              </div>
-              {/* <p>{ReactHtmlParser(randomComment)}</p> */}
-              <div className={classes.tip}>{randomComment}</div>
-            </div>
-          </>
-        ) : (
-          <>
-            <img
-              src='src/assets/Character/dday.png'
-              className={classes.mainImg}
-            />
-            <div className={classes.tipContainer}>
-              <div className={classes.tip}>결혼 축하해</div>
-            </div>
-          </>
-        )
-      ) : (
-        <>
-          <img
-            src='src/assets/Character/date.png'
-            className={classes.mainImg}
-          />
-          <div className={classes.tipContainer}>
-            <div className={classes.tip}>결혼 일정을 등록하고 추천 팁을 받아보세요</div>
-          </div>
-        </>
-      )}
+      <img
+        src={nextPlan ? nextPlan.image : 'src/assets/Character/date.png'}
+        alt={nextPlan ? nextPlan.title : "결혼 일정을 등록하고 추천 팁을 받아보세요"}
+        className={classes.mainImg}
+      />
+      <div className={classes.tipContainer} onClick={updateRandomComment}>
+        <div className={classes.textBold}>
+          {nextPlan ? nextPlan.title : "결혼 일정을 등록하고 추천 팁을 받아보세요"}
+        </div>
+        <div className={classes.tip}>
+          {nextPlan && randomComment}
+        </div>
+      </div>
     </div>
   );
 };
