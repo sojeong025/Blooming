@@ -43,38 +43,6 @@ export default function MyReview() {
     });
   };
 
-  // 후기가 도움돼요
-  const handleLikeClick = async (reviewId) => {
-    try {
-      const currentReview = myReview.find(
-        (review) => review.reviewId === reviewId,
-      );
-      if (!currentReview) {
-        console.log("리뷰를 찾을 수 없습니다.");
-        return;
-      }
-
-      if (currentReview.liked) {
-        await customAxios.delete(`liked/${reviewId}`);
-      } else {
-        await customAxios.post(`liked/${reviewId}`);
-      }
-
-      const updatedReviews = myReview.map((review) => {
-        if (review.reviewId === reviewId) {
-          const liked = !review.liked;
-          const likeCnt = liked ? review.likeCnt + 1 : review.likeCnt - 1;
-          return { ...review, liked, likeCnt };
-        }
-        return review;
-      });
-
-      setMyReview(updatedReviews);
-    } catch (error) {
-      console.log("좋아요 에러", error);
-    }
-  };
-
   return (
     <div style={{ margin: "60px 16px" }}>
       {myReview.length !== 0 ? (
@@ -82,7 +50,6 @@ export default function MyReview() {
           hasMore={hasMore}
           reviews={myReview}
           fetchReviewData={fetchData}
-          onLikeClick={handleLikeClick}
           onReviewClick={handleNavigation}
         />
       ) : (
