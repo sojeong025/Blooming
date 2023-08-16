@@ -53,13 +53,13 @@ cursor: pointer;
 	display: block;
 	margin: 20px 30px;
 	width: 80%;
-	height: 40px;
+	/* height: 40px; */
 	border-left: 4px solid var(--color-point);
 	padding: 0 10px;
 }
 .title {
 	width: 95%;
-	height: 50px;
+	/* height: 50px; */
 	line-height: 40px;
 	font-size: 25px;
 }
@@ -78,4 +78,19 @@ cursor: pointer;
 	font-size: 20px;
 	margin-left: 20px;
 	width: 80%;
+}
+
+.inputField {
+	border: none;
+  border-radius: 4px;
+  width: 94%;
+  padding: 10px;
+  margin: 5px 0 5px;
+  height: 15px;
+  font-size: 25px;
+  font-family: 'SUITE-regular';
+	word-break: keep-all;
+}
+.inputField:focus {
+	outline:none;
 }

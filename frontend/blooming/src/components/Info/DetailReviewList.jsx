@@ -78,7 +78,7 @@ export default function DetailReviewList({
                   )}
                   <div
                     onClick={() => {
-                      onLikeClick(review.reviewId);
+                      onLikeClick && onLikeClick(review.reviewId);
                     }}
                     className={`${classes.ThumbsUp} ${
                       review.liked ? classes.ThumbsUpBlue : classes.ThumbsUpGrey

@@ -185,7 +185,7 @@ export default function Share() {
             <div className={classes.copyText}>
               <div className={classes.titleText}>
                 <span>{userData.name}</span>님의 코드 복사하기
-                <p className={classes.subText}>{verifyCode}asdasd</p>
+                <p className={classes.subText}>{verifyCode}</p>
               </div>
             </div>
           </CopyToClipboardButton>

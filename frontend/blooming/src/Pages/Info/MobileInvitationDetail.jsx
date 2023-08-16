@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { mobileInvitationState } from "../../recoil/MobileInvitationAtom";
@@ -13,7 +13,6 @@ import { userState } from "../../recoil/ProfileAtom";
 
 function MobileInvitationDetail() {
   const user = useRecoilValue(userState)
-  const navigate = useNavigate();
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
   const invitationId = invitation.id
   const api_key = import.meta.env.REACT_APP_KAKAO_API_KEY;
@@ -86,7 +85,9 @@ function MobileInvitationDetail() {
     <div style={{ backgroundColor: "#fff" }}>
       <div className={classes.actions}>
         <div className={classes.back}>
-          <button onClick={handleGoBack}><AiOutlineLeft/></button>
+          <NavLink to='/mobile-invitation-detail'>
+          <button><AiOutlineLeft/></button>
+          </NavLink>
         </div>
 
         <div className={classes.editdel}>
@@ -120,7 +121,7 @@ export default MobileInvitationDetail;
 const KakaoBtn = styled.button`
   border: none;
   border-radius: 10px;
-  margin: 0 auto;
+  margin-bottom: 60px;
   width: 60vw;
   height: calc(60vw * 193 / 1080); // img 비율이 1080:193이라서
   display: flex;

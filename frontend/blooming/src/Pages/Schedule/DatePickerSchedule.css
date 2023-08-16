@@ -344,6 +344,7 @@
 }
 
 
+
 .react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {
   cursor: pointer;
   background-color: #f0f0f0;
@@ -758,4 +759,22 @@
   width: 1em;
   height: 1em;
   vertical-align: -0.125em;
+}
+
+/* info 인풋수정 ======= */
+.info .react-datepicker__input-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.info .react-datepicker__input-container input{
+  width: 50vw;
+  height: 40px;
+  line-height: 50px;
+  text-align: start;
+  font-size: 20px;
+  font-family: 'SUITE-regular';
+  background-color: transparent;
+  border: none;
+  margin-left: 55px;
 }

@@ -89,12 +89,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 55vw;
+  width: 50vw;
   height: 56px;
   font-size: 20px;
 }
 .editdel button{
   padding: 17px !important;
+  width: 16vw;
+  font-size: 20px !important;
 }
 .actions button {
   height: 56px;
@@ -109,7 +111,7 @@
 }
 /* 일단은 동일하게 해놓기..? */
 .actions button:hover {
-  background-color: var(--color-groom);
+  background-color: var(--color-point);
   color: white;
 }
 

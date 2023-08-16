@@ -84,14 +84,15 @@ const TopAppBar = () => {
         // console.log(response);
         if (response.data.result[0] > 0) {
           setIsNotice(true);
+        } else {
+          setIsNotice(false);
         }
       } catch (error) {
         // console.log("안 읽은 알림 조회 에러", error);
       }
     };
-
     fetchNotice();
-  }, []);
+  }, [location]);
 
   return (
     <header className={classes.header}>

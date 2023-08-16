@@ -7,12 +7,16 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
+import com.ssafy.backend.domain.couple.Couple;
+import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.notification.NotificationType;
 import com.ssafy.backend.domain.notification.ReadStatus;
 import com.ssafy.backend.domain.notification.dto.NotificationRegistDto;
 import com.ssafy.backend.domain.notification.service.NotificationService;
 import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.schedule.repository.ScheduleRepository;
+import com.ssafy.backend.domain.tipBox.TipCode;
+import com.ssafy.backend.domain.tipBox.repository.TipCodeRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.redis.fcm.FcmToken;
 import com.ssafy.backend.domain.redis.fcm.FcmTokenRepository;
@@ -26,6 +30,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,8 +51,14 @@ public class NotificationScheduler {
     private NotificationService notificationService;
     @Autowired
     private FcmTokenRepository fcmTokenRepository;
+    @Autowired
+    private TipCodeRepository tipCodeRepository;
+    @Autowired
+    private CoupleRepository coupleRepository;
 
 
+
+//    private List<TipCode> tipCodeList = tipCodeRepository.findAll();
 
     @PostConstruct
     public void firebaseSetting() throws IOException {
@@ -70,8 +81,8 @@ public class NotificationScheduler {
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
         //나중에 지난 일정은 삭제? 해도 될듯
         //일정 repository에서 day를 매개변수로 넘겨주면서, 30일, 21일, 7일, 1일, 0일 을 인자로 해서 date 비교해서 해당되는거 가져옴. 알림 보내고 테이블에 추가.
-
-        //일단 임시
+        List<TipCode> tipCodeList = tipCodeRepository.findAll();
+        // 일정 알림
         for (int day : new int[]{0, 1, 7, 30}) {
             System.out.println(day + "일 후 알림");
 
@@ -128,6 +139,51 @@ public class NotificationScheduler {
                         contentBride = dayName + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
                         break;
                 }
+
+                //처리한 내용을 알림 전송(신랑, 신부)
+                log.info(sendNotificationByToken(new FCMNotificationRequestDto(groom, title, contentGroom)));
+                log.info(sendNotificationByToken(new FCMNotificationRequestDto(bride, title, contentBride)));
+            }
+        }
+
+
+        // 디데이 체크리스트 알림
+        for (TipCode tipCode : tipCodeList){
+            int day = tipCode.getLeftDay();
+            System.out.println("D-Day" + day + "일 후 알림");
+
+            //day일 후 체크리스트 일단 읽어옴 -> 푸시 알림 보내기 + 알림 로그 테이블에 저장
+            List<Couple> couples = coupleRepository.findAllByWeddingDate(LocalDate.now().plusDays(day));
+            for (Couple couple : couples) {
+                System.out.println(couple);
+
+                //커플 아이디에 해당하는 유저 두 명을 찾는다. 남자는 신랑, 여자는 신부로 매핑한다.
+                User groom = null;
+                User bride = null;
+                List<User> users = couple.getUsers();
+                for (User user : users){
+                    if (user.getGender().equals("MALE")){
+                        groom = user;
+                    }
+                    else if(user.getGender().equals("FEMALE")){
+                        bride = user;
+                    }
+                }
+
+                //스케쥴 타입에 따라 다르게 알림 내용 처리
+                String contentGroom = "";
+                String contentBride = "";
+
+                // 체크리스트 타입에 따라 다르게 알림 내용 처리
+                String title = "결혼식 D - "+tipCode.getLeftDay();
+
+                //null 참조 방지를 위해 닉네임 미리 받기
+                String groomNickname = (groom != null) ? groom.getNickname() : "예비신랑";
+                String brideNickname = (bride != null) ? bride.getNickname() : "예비신부";
+
+                contentGroom = groomNickname + "님 " + tipCode.getTitle() + " 하셨나요?. 지금쯤 준비하셔야 해요.";
+                contentBride = brideNickname + "님 " + tipCode.getTitle() + " 하셨나요?. 지금쯤 준비하셔야 해요.";
+
 
                 //처리한 내용을 알림 전송(신랑, 신부)
                 log.info(sendNotificationByToken(new FCMNotificationRequestDto(groom, title, contentGroom)));

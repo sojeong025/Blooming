@@ -5,7 +5,7 @@
   z-index: 1000;
 }
 .concept {
-  margin-top: 130px;
+  margin-top: 70px;
 }
 .container p {
   width: 80%;
@@ -28,4 +28,5 @@
   border-radius: 4px;
   font-size: 20px;
   margin-top: 50px;
+  margin-bottom: 50px;
 }

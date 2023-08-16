@@ -55,6 +55,7 @@ public class Schedule extends CreatedBaseEntity {
         //변경 가능한 것 : title, content, scheduleTime
         this.title = scheduleModifyDto.getTitle();
         this.content = scheduleModifyDto.getContent();
+        this.scheduleDate = scheduleModifyDto.getScheduleDate();
         this.scheduleTime = scheduleModifyDto.getScheduleTime();
     }
 

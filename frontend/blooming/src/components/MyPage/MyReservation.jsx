@@ -4,6 +4,7 @@ import { myReservationState } from "../../recoil/ProfileAtom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ReservationItem from "./ReservationItem";
+import GotoTop from "../../components/Common/GoToTopButton";
 
 export default function MyReservation() {
   const navigate = useNavigate();
@@ -20,11 +21,9 @@ export default function MyReservation() {
 
   useEffect(() => {
     fetchData();
-
-    return setMyReservation([])
+    return setMyReservation([]);
   }, []);
 
-  // 일정으로 가야하나?
   // 일단 상품상세
   const handleNavigation = (reservation) => {
     navigate(`/${reservation.productType}/${reservation.productId}`, {
@@ -37,7 +36,7 @@ export default function MyReservation() {
   };
 
   return (
-    <div style={{ marginTop: "60px" }}>
+    <div style={{ marginTop: "70px", marginBottom: "100px" }}>
       {MyReservation !== [] ? (
         MyReservation.map((reservation) => (
           <div
@@ -50,6 +49,7 @@ export default function MyReservation() {
       ) : (
         <div>예약이 없습니다.</div>
       )}
+      <GotoTop />
     </div>
   );
 }

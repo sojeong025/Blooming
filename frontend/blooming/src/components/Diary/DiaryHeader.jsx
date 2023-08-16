@@ -18,7 +18,7 @@ function DiaryHeader(props) {
           <div key={diary.id} className={classes.demoPage}>
             <div className={classes.image}>
               <img
-                src={diary.image ? diary.image : "/src/assets/diary2.jpg"}
+                src={diary.image ? diary.image : "/src/assets/Icon/nopicture.png"}
                 width={150}
                 height={140}
                 alt=""
