@@ -34,7 +34,7 @@ export default function MyReview() {
 
   useEffect(() => {
     fetchData();
-    return setMyReview([])
+    return setMyReview([]);
   }, []);
 
   const handleNavigation = (review) => {
@@ -76,7 +76,7 @@ export default function MyReview() {
   };
 
   return (
-    <div style={{ margin: "60px 16px 10px 16px" }}>
+    <div style={{ margin: "60px 16px" }}>
       {myReview.length !== 0 ? (
         <DetailReviewList
           hasMore={hasMore}
