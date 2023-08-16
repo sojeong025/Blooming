@@ -1,71 +1,34 @@
-import ErrorModal from "../components/Error/ErrorModal";
-import useErrorModal from "../components/Error/useErrorModal";
-import IconList from "../components/Icons/IconList";
-
-import Modal from "../components/Error/Modal";
-import { useCallback, useState } from "react";
-import { useRecoilState } from "recoil";
-import axios from "axios";
-import { errorState } from "../recoil/ErrorAtom";
-import { GenderButton } from "../components/Common/GenderButton";
+import { styled } from "styled-components";
+import NoContent from "../components/Common/NoContent";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const Error = () => {
-  // 에러 모달
-  // const [ErrorModal, handleError] = useErrorModal();
-  // const onClickButton = (event) => {
-  //   handleError("데이터 요청 에러");
-  // };
+  const navigate = useNavigate();
 
-  // 모달 테스트
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const openModal = () => setIsModalOpen(true);
-  // const onClose = () => setIsModalOpen(false);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigate("/");
+    }, 3000);
 
-  // 에러 모달 테스트
-  const [errorModal, setErrorModal] = useRecoilState(errorState);
-  const triggerError = useCallback(async () => {
-    try {
-      await axios.get("https://non-existing-url.com/api/data");
-    } catch (error) {
-      console.log(error);
-      setErrorModal(true);
-    }
-  }, [setErrorModal]);
+    () => clearTimeout(timeout);
+  }, [navigation]);
 
   return (
-    <div className='mainContainer'>
-      <p>여긴 사공사</p>
-
-      {/* 왜안돼 */}
-      {/* <button onClick={onClickButton}>나와라모달</button>
-      <ErrorModal /> */}
-      {/* 모달 테스트 */}
-      <button onClick={openModal}>나와라모달</button>
-      <Modal
-        buttonText={"닫기"}
-        show={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      >
-        <h2>나는모달</h2>
-        <p>나는모달내용</p>
-      </Modal>
-      <button onClick={triggerError}>나와라에러</button>
-      <Modal
-        buttonText={"뒤로가기"}
-        show={errorModal}
-        onClose={() => setErrorModal(false)}
-      >
-        <h2>Error</h2>
-        <p>에러등장</p>
-        <button>닫기</button>
-      </Modal>
-      {/* <GenderButton /> */}
-      <div style={{ border: "1px solid black" }}>
-        <h2>아이콘리스트다</h2>
-        <IconList />
-      </div>
-    </div>
+    <Wrapper>
+      <NoContent />
+    </Wrapper>
   );
 };
 
 export default Error;
+
+const Wrapper = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 80vh;
+  margin-top: 100px;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+`;
