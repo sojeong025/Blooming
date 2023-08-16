@@ -129,7 +129,7 @@ function Home() {
 
       {/* 광고 줘봄 */}
       <div className={classes.bespoke}>
-        <div className={classes.bespokeTitle}>❏ 신혼 살림 <span style={{color:'#OC4DA2'}}>SAMSUNG</span> 비스포크와 함께 </div>
+        <div className={classes.bespokeTitle}>❏ 신혼 살림 <span style={{color:'#0C4DA2'}}>SAMSUNG</span> 비스포크와 함께 </div>
         <Bespoke />
       </div>
 

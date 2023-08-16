@@ -12,3 +12,7 @@
 .btn {
   color: black;
 }
+
+.active {
+  color: var(--color-point);
+}

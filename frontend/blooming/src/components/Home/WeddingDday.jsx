@@ -65,14 +65,19 @@ export const WeddingDday = () => {
       )
     }
 
-    if (weddingDday === 0) {
-      return "D-day";
-    } else if (weddingDday > 0) {
-      return `D-${weddingDday}`;
-    } else {
-      return `D+${Math.abs(weddingDday)}`;
-    }
-  };
+    const ddayClass =
+    weddingDday === 0 || weddingDday > 0
+      ? `${classes.dday} ${classes.active}`
+      : classes.dday;
+
+  if (weddingDday === 0) {
+    return <div className={ddayClass}>D-day</div>;
+  } else if (weddingDday > 0) {
+    return <div className={ddayClass}>{`D-${weddingDday}`}</div>;
+  } else {
+    return <div className={ddayClass}>{`D+${Math.abs(weddingDday)}`}</div>;
+  }
+};
 
   return (
     <div className={classes.dday}>{renderScript()}</div>
