@@ -2,7 +2,7 @@ import QRCode from "qrcode"
 
 export default function QrCode() {
 
-  const fileUrl = ""
+  const fileUrl = "https://drive.google.com/file/d/1k7cU1QCJhkn8giZaugqRVw7TRFu3tPqg/view?usp=sharing"
 
   QRCode.toDataURL(fileUrl, { errorCorrectionLevel: "H" })
     .then((qrCodeDataUrl) => {
