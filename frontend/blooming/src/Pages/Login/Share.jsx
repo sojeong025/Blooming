@@ -2,7 +2,7 @@ import CopyToClipboardButton from "../../components/Login/CopyToClipboardButton"
 import KakaoShareButton from "../../components/Login/KakaoShareButton";
 import classes from "./Share.module.css";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -12,6 +12,7 @@ import { customAxios } from "../../lib/axios";
 export default function Share() {
   const navigate = useNavigate();
   const [userData, setUserData] = useRecoilState(userState);
+  const location = useLocation();
 
   // 유저 정보 가져오기
   const fetchData = async () => {
@@ -123,6 +124,21 @@ export default function Share() {
       document.body.removeChild(script);
     };
   }, []);
+
+  // 상대방을 이미 연결했어 그러면 나올 페이지
+  if (location.state && location.state.isCouple === true) {
+    return (
+      <>
+        <div className={`${classes.JoinContainer} ${classes.isCoupled}`}>
+          <p className={classes.titleText}>상대방 연결이 완료되었습니다.</p>
+          <p className={classes.subText}>
+            블루밍의 다양한 기능을 함께 사용해 보세요.
+          </p>
+          <img src='/src/assets/Logo/heart.png' alt='' />
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
