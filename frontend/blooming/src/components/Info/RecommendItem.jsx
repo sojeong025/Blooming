@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
 import { Carousel } from "antd";
 import { useNavigate } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const RecommendItem = ({ data = [], productType }) => {
   const TypeText = {
@@ -29,20 +31,30 @@ const RecommendItem = ({ data = [], productType }) => {
   };
   return (
     <Wrapper>
-      <NoCarousel autoplay>
-        {data.map((item, index) => (
-          <Slide key={index}>
-            <img src={item.thumbnail} alt={item.itemName} />
-            <TitleContainer>
-              <Title>{titles[index % titles.length]}</Title>
-              <Company>{item.company}</Company>
-            </TitleContainer>
-            <ClickableArea
-              onClick={() => goToProduct(item.productType, item.productId)}
-            />
-          </Slide>
-        ))}
-      </NoCarousel>
+      {data.length === 0 ? (
+        <Slide key='skeleton'>
+          <Skeleton height='40vh' width='100vw' />
+          <TitleContainer>
+            <Skeleton height={30} width={200} style={{ marginBottom: "5px" }} />
+            <Skeleton height={22} width={150} />
+          </TitleContainer>
+        </Slide>
+      ) : (
+        <NoCarousel autoplay>
+          {data.map((item, index) => (
+            <Slide key={index}>
+              <img src={item.thumbnail} alt={item.itemName} />
+              <TitleContainer>
+                <Title>{titles[index % titles.length]}</Title>
+                <Company>{item.company}</Company>
+              </TitleContainer>
+              <ClickableArea
+                onClick={() => goToProduct(item.productType, item.productId)}
+              />
+            </Slide>
+          ))}
+        </NoCarousel>
+      )}
     </Wrapper>
   );
 };
