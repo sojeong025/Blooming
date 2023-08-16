@@ -53,8 +53,19 @@ export default function WeddingHall() {
     }
   };
 
+  const [ranking, setRanking] = useState();
+  const fetchRanking = async () => {
+    try {
+      const response = await customAxios.get("ranking/MAKEUP");
+      setRanking(response.data.result[0]);
+    } catch (error) {
+      console.log("랭킹", error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchRanking();
   }, []);
 
   return (
@@ -62,26 +73,8 @@ export default function WeddingHall() {
       {/* {isLoading && <LoadingSpinner />} */}
 
       <Wrapper>
-        <ErrorModal
-          buttonText={"다시시도"}
-          show={errorModal}
-          onClose={() => {
-            setErrorModal(false);
-            fetchData();
-          }}
-        >
-          <h2>Error</h2>
-          <p>데이터 수신 오류</p>
-          <button
-            onClick={() => {
-              setErrorModal(false);
-            }}
-          >
-            X
-          </button>
-        </ErrorModal>
+        <RecommendItem data={ranking} />
 
-        <RecommendItem />
         <TitleText>메이크업 전체</TitleText>
         <InfiniteScroll
           dataLength={makeUp.length}

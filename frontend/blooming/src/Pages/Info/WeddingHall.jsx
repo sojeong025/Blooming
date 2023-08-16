@@ -53,8 +53,81 @@ export default function WeddingHall() {
     }
   };
 
+  const [ranking, setRanking] = useState();
+  const fetchRanking = async () => {
+    try {
+      const response = await customAxios.get("ranking/HALL");
+      setRanking(response.data.result[0]);
+    } catch (error) {
+      console.log("랭킹", error);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    // fetchData();
+    // fetchRanking();
+    setRanking([
+      {
+        productId: 86,
+        itemName: "상록아트홀",
+        productType: "HALL",
+        brief:
+          "소중한 꿈이 이루어지는 날, 웨딩상록만의 노하우와 고객감동의 친절한 서비스로 최고의 만족감을 선사합니다.",
+        company: "상록아트홀",
+        thumbnail:
+          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/86_thumbnail.jpg",
+      },
+      {
+        productId: 85,
+        itemName: "빌라드지디 수서",
+        productType: "HALL",
+        brief:
+          "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
+        company: "빌라드지디 수서",
+        thumbnail:
+          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
+      },
+      {
+        productId: 89,
+        itemName: "토브헤세드",
+        productType: "HALL",
+        brief:
+          "나만의 프라이빗한 맞춤웨딩이 가능한 강남 최고의 고품격 하우스웨딩홀, 토브헤세드!",
+        company: "토브헤세드",
+        thumbnail:
+          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/89_thumbnail.jpg",
+      },
+      {
+        productId: 95,
+        itemName: "더리버사이드호텔",
+        productType: "HALL",
+        brief:
+          "빛의 축제장 콘서트홀, 프리미엄급 웨딩 그랜드볼룸, 호텔에서 즐기는 뷔페식 웨딩, 산타마리아 노벨라까지..다채로운 웨딩의 진수, 더리버사이드호텔!",
+        company: "더리버사이드호텔",
+        thumbnail:
+          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/95_thumbnail.jpg",
+      },
+      {
+        productId: 94,
+        itemName: "더뉴컨벤션웨딩",
+        productType: "HALL",
+        brief:
+          "품격있고 격조높은 명품 예식홀, 화려한 시설과 다양한 휴식공간, 명장이 만드는 명품웨딩, 더뉴컨벤션!",
+        company: "더뉴컨벤션웨딩",
+        thumbnail:
+          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/94_thumbnail.jpg",
+      },
+      {
+        productId: 92,
+        itemName: "더파티움 여의도",
+        productType: "HALL",
+        brief:
+          "더파티움 강남의 신화를 여의도에서! 2020년 8월 리뉴얼 그랜드오픈, 더파티움 여의도!",
+        company: "더파티움 여의도",
+        thumbnail:
+          "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/92_thumbnail.jpg",
+      },
+    ]);
   }, []);
 
   // 로딩 후 모달 그런데 개발중
@@ -74,25 +147,7 @@ export default function WeddingHall() {
       {/* {isLoading && <LoadingSpinner />} */}
 
       <Wrapper>
-        {/* <ErrorModal
-          buttonText={"다시시도"}
-          show={errorModal}
-          onClose={() => {
-            setErrorModal(false);
-            fetchData();
-          }}
-        >
-          <h2>Error</h2>
-          <p>데이터 수신 오류</p>
-          <button
-            onClick={() => {
-              setErrorModal(false);
-            }}
-          >
-            X
-          </button>
-        </ErrorModal> */}
-        <RecommendItem />
+        <RecommendItem data={ranking} />
         <TitleText>웨딩홀 전체</TitleText>
         <InfiniteScroll
           dataLength={weddingHall.length}
