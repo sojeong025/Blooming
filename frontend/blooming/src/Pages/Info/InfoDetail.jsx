@@ -26,11 +26,11 @@ import GotoTop from "../../components/Common/GoToTopButton";
 export default function InfoDetail() {
   const navigate = useNavigate();
   const location = useLocation();
-  // const id = location.state.id;
-  // const productType = location.state.productType;
+  const id = location.state.id;
+  const productType = location.state.productType;
   // 디자인 용 더미 =======================================================================================================================
-  const id = 85;
-  const productType = "DRESS";
+  // const id = 85;
+  // const productType = "DRESS";
 
   const [reviews, setReviews] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -89,6 +89,10 @@ export default function InfoDetail() {
       console.error("리뷰 정보 조회 에러:", error);
     }
   };
+
+  const addMyReviewData = (review) => {
+    setReviews((prevreview) => [review, ...prevreview])
+  }
 
   useEffect(() => {
     fetchProductData();
@@ -298,8 +302,7 @@ export default function InfoDetail() {
             {reviews ? (
               <DetailReviewList
                 hasMore={hasMore}
-                reviews={reviews}
-                fetchReviewData={fetchReviewData}
+                fetchReviewData={addMyReviewData}
                 onLikeClick={handleLikeClick}
               />
             ) : (
@@ -342,7 +345,8 @@ export default function InfoDetail() {
       >
         <DetailReviewForm
           product={product}
-          fetchReviewData={fetchReviewData}
+          reviewsData={reviews}
+          setReviewsData={setReviews}
           onClose={() => setIsReviewModal(false)}
         />
       </ReviewCreateModal>

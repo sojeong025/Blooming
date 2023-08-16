@@ -2,18 +2,20 @@ import WeddingDday from "../components/Home/WeddingDday";
 import WeddingFair from "../components/Home/WeddingFair"
 import PlanTips from "../components/Home/PlanTips";
 import Tipbox from "../components/Home/TipBox";
-import { useRecoilState, useResetRecoilState } from "recoil";
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from "recoil";
 import { userState } from "../recoil/ProfileAtom";
 import { customAxios } from "../lib/axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import classes from "./Home.module.css";
+import { weddingDateState } from "../recoil/WeddingDdayAtom";
 
 function Home() {
   const navigate = useNavigate();
 
   const [user, setUser] = useRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
+  const setWeddingDate = useSetRecoilState(weddingDateState);
 
   const setThemeState = (gender) => {
     const rootElement = document.documentElement;
@@ -34,6 +36,7 @@ function Home() {
       const res = await customAxios.get("profile");
       if (res.data) {
         setUser(res.data.result[0]);
+        fetchWeddingDate();
         if (res.data.result[0]?.gender) {
           setThemeState(res.data.result[0].gender)
         }
@@ -43,6 +46,16 @@ function Home() {
       resetUserState();
       console.error("유저 정보 API 요청 에러", error);
       // navigate("/");
+    }
+  };
+
+  const fetchWeddingDate = async () => {
+    try {
+      const response = await customAxios.get("wedding-date");
+      // 날짜(YYYY-MM-DD) 형태로만 받기
+      setWeddingDate(response.data.result[0].weddingDate);
+    } catch (error) {
+      // console.log("결혼식 날짜 없음");
     }
   };
 
