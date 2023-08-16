@@ -15,7 +15,7 @@ export default function QrCode() {
   return (
     <div style={{
       display: "flex", alignContent: "center", justifyContent: "center"}}>
-      <img id="qrCodeImage" alt="QR 코드" />
+      <img style={{marginTop: "300px"}} id="qrCodeImage" alt="QR 코드" />
     </div>
   )
 }
