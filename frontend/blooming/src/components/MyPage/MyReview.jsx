@@ -4,7 +4,7 @@ import { myReviewState } from "../../recoil/ProfileAtom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import DetailReviewList from "../info/DetailReviewList";
+import DetailReviewList from "../Info/DetailReviewList";
 
 export default function MyReview() {
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ export default function MyReview() {
         return review;
       });
 
-      setReviews(updatedReviews);
+      setMyReview(updatedReviews);
     } catch (error) {
       console.log("좋아요 에러", error);
     }
@@ -76,7 +76,7 @@ export default function MyReview() {
 
   return (
     <div style={{ margin: "60px 16px 10px 16px" }}>
-      {myReview !== [] ? (
+      {myReview.length !== 0 ? (
         <DetailReviewList
           hasMore={hasMore}
           reviews={myReview}
