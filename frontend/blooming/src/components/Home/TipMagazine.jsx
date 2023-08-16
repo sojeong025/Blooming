@@ -24,7 +24,7 @@ export default function TipMagazine() {
     fetchData();
   }, []);
 
-  const handleNavigation = (id) => {
+  const handleNavigation = (id) => () => {
     navigate(`/magazine/${id}`);
   };
   
