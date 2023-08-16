@@ -32,7 +32,8 @@ function TaskDetail() {
   };
 
   const handleHistory = () => {
-    navigate("/schedule");
+    // navigate("/schedule");
+    navigate(-1);
   };
 
   const handleUpdate = () => {
