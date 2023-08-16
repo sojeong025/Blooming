@@ -89,9 +89,8 @@ const TopAppBar = () => {
         // console.log("안 읽은 알림 조회 에러", error);
       }
     };
-
     fetchNotice();
-  }, []);
+  }, [location]);
 
   return (
     <header className={classes.header}>
