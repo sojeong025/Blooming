@@ -7,8 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { GoThumbsup } from "react-icons/go";
 
 import Rating from "react-rating";
-import { customAxios } from "../../lib/axios";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { userState } from "../../recoil/ProfileAtom";
 
 export default function DetailReviewList({
@@ -54,6 +53,7 @@ export default function DetailReviewList({
                 <div>
                   <span className={classes.ReviewStar}>
                     <Rating
+                      readonly
                       className={classes.rating}
                       initialRating={review.star}
                       stop={5}
