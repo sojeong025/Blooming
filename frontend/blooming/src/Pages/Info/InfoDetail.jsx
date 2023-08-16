@@ -462,8 +462,9 @@ export default function InfoDetail() {
 }
 
 const Wrapper = styled.div`
-  margin: 55px 0;
+  padding: 55px 0 100px;
 
+  height: 100%;
   background-color: white;
   --color-bg: white;
 `;
