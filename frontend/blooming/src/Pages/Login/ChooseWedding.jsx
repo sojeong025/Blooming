@@ -41,7 +41,7 @@ export default function ChooseWedding() {
 
   function dateChangeHandler(date) {
     if (weddingDate) {
-      setWeddingDate(date)
+      setWeddingDate(date);
     }
     setSelectedDate(date);
   }
@@ -74,7 +74,9 @@ export default function ChooseWedding() {
         <DatePicker
           dateFormat='yyyy-MM-dd'
           shouldCloseOnSelect
-          selected={weddingDate ? new Date(weddingDate) : new Date(selectedDate)}
+          selected={
+            weddingDate ? new Date(weddingDate) : new Date(selectedDate)
+          }
           onChange={dateChangeHandler}
         />
       </div>
