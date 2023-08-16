@@ -58,7 +58,7 @@ public class NotificationScheduler {
 
 
 
-    private List<TipCode> tipCodeList = tipCodeRepository.findAll();
+//    private List<TipCode> tipCodeList = tipCodeRepository.findAll();
 
     @PostConstruct
     public void firebaseSetting() throws IOException {
@@ -81,7 +81,7 @@ public class NotificationScheduler {
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
         //나중에 지난 일정은 삭제? 해도 될듯
         //일정 repository에서 day를 매개변수로 넘겨주면서, 30일, 21일, 7일, 1일, 0일 을 인자로 해서 date 비교해서 해당되는거 가져옴. 알림 보내고 테이블에 추가.
-
+        List<TipCode> tipCodeList = tipCodeRepository.findAll();
         // 일정 알림
         for (int day : new int[]{0, 1, 7, 30}) {
             System.out.println(day + "일 후 알림");
