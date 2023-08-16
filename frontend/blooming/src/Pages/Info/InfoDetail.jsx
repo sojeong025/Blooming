@@ -91,8 +91,8 @@ export default function InfoDetail() {
   };
 
   const addMyReviewData = (review) => {
-    setReviews((prevreview) => [review, ...prevreview])
-  }
+    setReviews((prevreview) => [review, ...prevreview]);
+  };
 
   useEffect(() => {
     fetchProductData();
@@ -301,6 +301,7 @@ export default function InfoDetail() {
             </div>
             {reviews ? (
               <DetailReviewList
+                reviews={reviews}
                 hasMore={hasMore}
                 fetchReviewData={addMyReviewData}
                 onLikeClick={handleLikeClick}
