@@ -10,6 +10,11 @@
   background-color: var(--color-bg);
   z-index: 1;
 }
+.CarouselImg {
+  width: 100vw;
+  height: 40vh;
+  object-fit: contain;
+}
 
 /* 회사명, 위치 */
 .ProductTitle {

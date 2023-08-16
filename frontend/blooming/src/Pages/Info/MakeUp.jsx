@@ -104,7 +104,7 @@ export default function WeddingHall() {
 }
 
 const Wrapper = styled.div`
-  margin-top: 110px;
+  margin-top: 100px;
   margin-bottom: 60px;
 `;
 
