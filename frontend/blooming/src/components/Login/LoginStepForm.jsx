@@ -260,6 +260,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
                 <input
                   required
                   autoFocus
+                  autoComplete={false}
                   type='text'
                   name='name'
                   value={values.name}
@@ -293,6 +294,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
               <input
                 required
                 autoFocus
+                autoComplete={false}
                 inputMode='tel'
                 type='text'
                 name='phoneNumber'
@@ -325,6 +327,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
               <input
                 required
                 autoFocus
+                autoComplete={false}
                 type='text'
                 name='nickname'
                 value={values.nickname}
@@ -355,6 +358,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
             </p>
             <div className={classes.datePick}>
               <DatePicker
+                inputMode='numeric'
                 dateFormat='yyyy-MM-dd'
                 shouldCloseOnSelect
                 selected={selectedDate}
