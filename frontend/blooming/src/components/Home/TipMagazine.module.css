@@ -46,6 +46,7 @@
   bottom: 40px; 
   left: 25px;
   font-style: italic;
+  border-bottom: 1px solid #fff;
 }
 
 .nextArrow {
@@ -84,8 +85,13 @@
 }
 .counter {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  /* top: 1010px; */
+  /* right: 20px; */
+  margin-top: 10px;
+  margin-left: 360px;
   color: #fff;
   font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  z-index: 2;
 }
