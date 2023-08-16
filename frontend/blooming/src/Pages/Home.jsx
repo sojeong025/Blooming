@@ -1,4 +1,5 @@
 import WeddingDday from "../components/Home/WeddingDday";
+import WeddingFair from "../components/Home/WeddingFair"
 import PlanTips from "../components/Home/PlanTips";
 import Tipbox from "../components/Home/TipBox";
 import { useRecoilState, useResetRecoilState } from "recoil";
@@ -51,14 +52,17 @@ function Home() {
 
   return (
     <div className={classes.container}>
-      <WeddingDday />
-    <div className={classes.top}>
-      <PlanTips />
-      {/* <p className={classes.word}> Wedding Tips</p>
-      <hr className={classes.hr} />
-      <Tipbox /> */}
-      {/* <h1>---🚧🚦🚦🚨개발중👩🏻‍🚒👨🏻‍🚒💨🔨🚬---</h1> */}
-    </div>
+        <WeddingDday />
+      <div className={classes.top}>
+        <PlanTips />
+        {/* <p className={classes.word}> Wedding Tips</p>
+        <hr className={classes.hr} />
+        <Tipbox /> */}
+        {/* <h1>---🚧🚦🚦🚨개발중👩🏻‍🚒👨🏻‍🚒💨🔨🚬---</h1> */}
+      </div>
+      <div>
+        <WeddingFair />
+      </div>
       
     </div>
   );
