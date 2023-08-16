@@ -96,7 +96,7 @@ function MyPage() {
       <Profile isCouple={isCouple} />
       {/* 아이콘 */}
       <AppContainer />
-      <SettingList isChooseDate={isChooseDate} />
+      <SettingList isCouple={isCouple} isChooseDate={isChooseDate} />
     </div>
   );
 }

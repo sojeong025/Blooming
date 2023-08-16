@@ -118,3 +118,20 @@
 }
 /* ============================================== */
 
+.isCoupled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.isCoupled :first-child {
+  font-size: 25px;
+}
+.isCoupled > .subText {
+  font-size: 20px;
+}
+
+.isCoupled img {
+  margin: 30px 0;
+}
