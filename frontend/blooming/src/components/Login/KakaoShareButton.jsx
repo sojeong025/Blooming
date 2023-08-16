@@ -1,7 +1,10 @@
 import { useEffect } from "react";
+import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
+import { userState } from "../../recoil/ProfileAtom";
 
 const KakaoShareButton = ({ code }) => {
+  const user = useRecoilState(userState)
   const url = "https://i9e104.p.ssafy.io/login";
 
   useEffect(() => {
@@ -17,7 +20,7 @@ const KakaoShareButton = ({ code }) => {
           objectType: "feed",
           content: {
             title: "블루밍, 당신만을 위한 모바일 웨딩 플래너",
-            description: "약혼자와 연결하기",
+            description: `${user.name}님과 연결하기 초대코드 ${code}`,
             imageUrl:
               "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
             link: {

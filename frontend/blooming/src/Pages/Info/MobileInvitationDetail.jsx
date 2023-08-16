@@ -51,12 +51,15 @@ function MobileInvitationDetail() {
     const domElement = document.querySelector('.'+classes.container); // 캡쳐할 요소 선택
     try {
       const canvas = await html2canvas(domElement);
-      const image = canvas.toDataURL('image/jpeg');
+      const dataUrl = canvas.toDataURL('image/jpeg');
+
+      const response = await fetch(dataUrl);
+      const blob = await response.blob();
       
       const formData = new FormData();
-      formData.append('image', image);
-      const response = await fileAxios.post('INVITATION', formData);
-      url = response.data.result[0].uploadImageUrl
+      formData.append('image', blob);
+      const res = await fileAxios.post('INVITATION', formData);
+      url = res.data.result[0].uploadImageUrl
 
       createKakaoButton();
 
