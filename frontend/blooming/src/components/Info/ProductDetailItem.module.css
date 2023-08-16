@@ -93,3 +93,59 @@
   flex: 1; 
   padding: 0 8px; 
 }
+
+/* 예약 ================================== */
+.Reservation {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  margin-left: 15px;
+}
+.Reservation span {
+  font-size: 20px;
+  font-weight: 600;
+}
+.ReservationItem {
+  text-align: start;
+  margin-bottom: 10px;
+}
+
+.inputField {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 60vw;
+  padding: 10px;
+  margin: 5px 0 5px;
+  height: 20px;
+  font-size: 18px;
+  font-family: 'SUITE-regular';
+  margin-left: 40px;
+}
+.inputField:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.textField {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 60vw;
+  height: 70px;
+  padding: 10px;
+  margin: 5px 10px;
+  font-family: 'SUITE-Regular';
+  letter-spacing: 2px;
+  font-size: 18px;
+  resize: none;
+  margin-left: 22px;
+  
+}
+.textField:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.upText {
+  display: flex;
+}
+.upText .p {
+  margin-top: 10px;
+}
