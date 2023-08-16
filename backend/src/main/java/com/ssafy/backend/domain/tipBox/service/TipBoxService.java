@@ -23,14 +23,15 @@ public class TipBoxService {
         // leftDay 정제 필요
         List<TipCode> tipCodeList = tipCodeRepository.findAll()
                 .stream()
-                .sorted(Comparator.comparing(TipCode::getLeftDay).reversed())
+                .sorted(Comparator.comparing(TipCode::getLeftDay))
                 .collect(Collectors.toList());
         for(TipCode tipCode : tipCodeList){
-                if(leftDay >= tipCode.getLeftDay()){
+                if(leftDay <= tipCode.getLeftDay()){
                     leftDay = tipCode.getLeftDay();
                     break;
                 }
         }
+        leftDay = Math.min(leftDay, tipCodeList.get(tipCodeList.size()-1).getLeftDay());
         TipCode tipCode = tipCodeRepository.findByLeftDay(leftDay);
         // 팁박스에서 컨텐츠만 뽑아서 리스트 반복안하게 리팩 가능함
         List<TipBox> tipBoxList = tipBoxRepository.findAllByTipCodeId(tipCode.getId());
