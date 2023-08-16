@@ -10,7 +10,7 @@ function WeddingFair() {
       
       if (response.status === 200) {
         console.log(response);
-        setWeddingFairData(response.data);
+        setWeddingFairData(response.data.result[0]);
       }
     } catch (error) {
       console.error(error);
