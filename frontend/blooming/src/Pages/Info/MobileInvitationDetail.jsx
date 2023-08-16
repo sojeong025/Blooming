@@ -84,9 +84,7 @@ function MobileInvitationDetail() {
     <div style={{ backgroundColor: "#fff" }}>
       <div className={classes.actions}>
         <div className={classes.back}>
-          <NavLink to='/mobile-invitation-detail'>
-          <button><AiOutlineLeft/></button>
-          </NavLink>
+          <button onClick={() => navigate('/info/mobile-invitation', { state: { navAction: 'info' } })}><AiOutlineLeft /></button>        
         </div>
 
         <div className={classes.editdel}>
