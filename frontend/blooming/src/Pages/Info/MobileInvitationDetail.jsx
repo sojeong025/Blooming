@@ -48,9 +48,6 @@ function MobileInvitationDetail() {
       if (window.Kakao) {
         // 카카오 스크립트가 로드된 경우 init
         const kakao = window.Kakao;
-        if (!kakao.isInitialized()) {
-          kakao.init("94f660d5b29760bb7ff5e51729ad26be");
-        }
         kakao.Link.createDefaultButton({
           container: "#kakao-link-btn",
           objectType: "feed",
