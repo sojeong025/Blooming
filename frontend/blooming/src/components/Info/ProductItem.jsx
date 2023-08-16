@@ -5,7 +5,9 @@ import { MdLocationOn } from "react-icons/md";
 import { customAxios } from "../../lib/axios";
 
 export default function ProductItem({ product, onClick }) {
-  const address = product.companyAddress.split(" ");
+  const address = product.companyAddress
+    ? product.companyAddress.split(" ")
+    : null;
   const [productHeart, setProductHeart] = useState(product.wish);
 
   const handleCreateWish = async () => {
