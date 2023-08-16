@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { customAxios, fileAxios } from "../../lib/axios";
+import { customAxios } from "../../lib/axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { mobileInvitationState } from "../../recoil/MobileInvitationAtom";
 import Preview from "../../components/MobileInvitation/Preview"
@@ -8,7 +8,7 @@ import { AiOutlineLeft } from "react-icons/ai"
 import { BsTrash } from "react-icons/bs"
 import { PiPencilLineFill } from "react-icons/pi"
 import { useEffect } from "react";
-import html2canvas from "html2canvas";
+import { styled } from "styled-components";
 import { userState } from "../../recoil/ProfileAtom";
 
 function MobileInvitationDetail() {
@@ -19,8 +19,6 @@ function MobileInvitationDetail() {
   const handleGoBack = () => {
     navigate(-1);
   };
-
-  let url = "https://i9e104.p.ssafy.io/login";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,58 +45,41 @@ function MobileInvitationDetail() {
     }
   };
 
-  const captureDOM = async () => {
-    const domElement = document.querySelector('.'+classes.container); // 캡쳐할 요소 선택
-    try {
-      const canvas = await html2canvas(domElement);
-      const dataUrl = canvas.toDataURL('image/jpeg');
-
-      const response = await fetch(dataUrl);
-      const blob = await response.blob();
-      
-      const formData = new FormData();
-      formData.append('image', blob);
-      const res = await fileAxios.post('INVITATION', formData);
-      url = res.data.result[0].uploadImageUrl
-
-      createKakaoButton();
-
-    } catch (error) {
-      console.log('캡쳐 중 오류가 발생했습니다.', error);
-    }
-  }
-  
-  const createKakaoButton = () => {
-    if (window.Kakao) {
-      // 카카오 스크립트가 로드된 경우 init
-      const kakao = window.Kakao;
-      if (!kakao.isInitialized()) {
-        kakao.init("94f660d5b29760bb7ff5e51729ad26be");
-      }
-      kakao.Link.createDefaultButton({
-        container: "#kakao-link-btn",
-        objectType: "feed",
-        content: {
-          title: "블루밍, 모바일 청첩장",
-          description: `${user.name}님의 청첩장`,
-          imageUrl:url,
-          link: {
-            mobileWebUrl: url,
-            webUrl: url,
-          },
-        },
-        buttons: [
-          {
-            title: "웹으로 이동",
+  useEffect(() => {
+    const createKakaoButton = () => {
+      const url = `https://i9e104.p.ssafy.io/mobile-invitation-detail/${invitation.id}`;
+      if (window.Kakao) {
+        // 카카오 스크립트가 로드된 경우 init
+        const kakao = window.Kakao;
+        if (!kakao.isInitialized()) {
+          kakao.init("94f660d5b29760bb7ff5e51729ad26be");
+        }
+        kakao.Link.createDefaultButton({
+          container: "#kakao-link-btn",
+          objectType: "feed",
+          content: {
+            title: "블루밍, 모바일 청첩장",
+            description: `${user.name}님의 청첩장`,
+            imageUrl:url,
             link: {
               mobileWebUrl: url,
               webUrl: url,
             },
           },
-        ],
-      });
-    }
-  };
+          buttons: [
+            {
+              title: "웹으로 이동",
+              link: {
+                mobileWebUrl: url,
+                webUrl: url,
+              },
+            },
+          ],
+        });
+      }
+    };
+    createKakaoButton()
+  }, [invitation])
 
   return(
     <div style={{ backgroundColor: "#fff" }}>
@@ -126,11 +107,33 @@ function MobileInvitationDetail() {
         />
       </div>
 
-      <div className={classes.bottombtn}>
-        <button onClick={captureDOM} >공유하기</button>
-      </div>
+      <KakaoBtn id='kakao-link-btn' type='button'>
+        <img src='/src/assets/kakaoshare.png' alt='카카오톡으로 공유하기' />
+      </KakaoBtn>
     </div>
   )
 }
 
 export default MobileInvitationDetail;
+
+const KakaoBtn = styled.button`
+  border: none;
+  border-radius: 10px;
+  margin: 0 auto;
+  width: 60vw;
+  height: calc(60vw * 193 / 1080); // img 비율이 1080:193이라서
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
