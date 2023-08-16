@@ -58,7 +58,7 @@ const Diary = () => {
             <div key={diary.id} className={classes.diaryItem}>
               <Link key={diary.id} to={`/diary/${diary.id}`}>
                 <img
-                  src={diary.image ? diary.image : 'src/assets/test2.jpg'}
+                  src={diary.image ? diary.image : 'src/assets/Icon/nopicture.png'}
                   alt="image"
                   className={classes.diaryImage}
                 />

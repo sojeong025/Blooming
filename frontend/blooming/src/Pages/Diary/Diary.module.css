@@ -26,6 +26,7 @@
   display: flex;
   overflow-x: scroll;
   margin: 0;
+  margin-bottom: 60px;
 }
 
 .diaryImage {

@@ -115,7 +115,7 @@
 .way1 {
   background-color: #fff;
   width: 80vw;
-  height: 20vh;
+  height: 18vh;
   justify-content: space-around;
   display: flex;
   border-radius: 20px;
@@ -125,7 +125,7 @@
 .way2 {
   background-color: #fff;
   width: 80vw;
-  height: 20vh;
+  height: 18vh;
   display: flex;
   justify-content: space-around;
   border-radius: 20px;
@@ -136,7 +136,7 @@
   margin-bottom: 50px;
   background-color: #fff;
   width: 80vw;
-  height: 20vh;
+  height: 18vh;
   display: flex;
   justify-content: space-around;
   border-radius: 20px;

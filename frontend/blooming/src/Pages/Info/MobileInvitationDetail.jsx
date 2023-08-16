@@ -13,7 +13,6 @@ import { userState } from "../../recoil/ProfileAtom";
 
 function MobileInvitationDetail() {
   const user = useRecoilValue(userState)
-  const navigate = useNavigate();
   const [invitation, setInvitation] = useRecoilState(mobileInvitationState);
   const invitationId = invitation.id
 
@@ -83,7 +82,7 @@ function MobileInvitationDetail() {
     <div style={{ backgroundColor: "#fff" }}>
       <div className={classes.actions}>
         <div className={classes.back}>
-          <NavLink to='/info/mobile-invitation'>
+          <NavLink to='/mobile-invitation-detail'>
           <button><AiOutlineLeft/></button>
           </NavLink>
         </div>
