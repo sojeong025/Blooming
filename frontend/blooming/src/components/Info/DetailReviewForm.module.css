@@ -66,6 +66,11 @@
   word-break: keep-all;
   line-height: 1.5;
 }
+.textarea:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 
 /* 사진 추가 */
 .inputContainer {

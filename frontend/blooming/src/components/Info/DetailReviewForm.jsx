@@ -67,17 +67,6 @@ export default function DetailReviewForm({
     }
   };
 
-  // 입력 초기화 안씀
-  // const handleReset = () => {
-  //   setStarRating(0);
-  //   setComment("");
-  //   setReviewImage(null);
-
-  //   if (fileInputRef.current) {
-  //     fileInputRef.current.value = "";
-  //   }
-  // };
-
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
