@@ -90,7 +90,7 @@ export default function TipMagazine() {
   };
   
   return (
-    <div className={classes.magazineContainer} onClick={handleNavigation(item.id)}>
+    <div className={classes.magazineContainer} onClick={ () => handleNavigation(item.id)}>
       <div className={classes.counter}>{currentSlide + 1}/{tipMagazine.length}</div>
 
       <Slider ref={sliderRef} {...sliderSettings}>
