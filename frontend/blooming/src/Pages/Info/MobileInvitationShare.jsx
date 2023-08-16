@@ -11,7 +11,7 @@ function MobileInvitationShare() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await customAxios.get(`invitation/${invitation.id}`);
+        const response = await customAxios.get(`invitation/share/${invitation.id}`);
         if (response.data.result[0]) {
           setInvitation(response.data.result[0]);
         } else {
