@@ -45,7 +45,6 @@ public class KakaoOAuth2UserInfo extends OAuth2UserInfo {
     @Override
     public String getGender() {
         Map<String, Object> account = (Map<String, Object>) attributes.get("kakao_account");
-
         if (account == null) {
             return null;
         }
@@ -65,6 +64,12 @@ public class KakaoOAuth2UserInfo extends OAuth2UserInfo {
             return null;
         }
 
-        return (String) profile.get("thumbnail_image_url");
+        String url = (String)profile.get("thumbnail_image_url");
+
+        if (url.startsWith("http://")) {
+            return url.replaceFirst("http://", "https://");
+        }
+
+        return url;
     }
 }
