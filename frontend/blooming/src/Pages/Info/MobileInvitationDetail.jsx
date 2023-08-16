@@ -35,6 +35,12 @@ function MobileInvitationDetail() {
     fetchData();
   }, [setInvitation]);
 
+  const handleUpdate = () => {
+    navigate(`/invitation-create`, {
+      state: { id: invitationId },
+    });
+  }
+
   const handleDelete = async () => {
     try {
       await customAxios.delete(`invitation/${invitationId}`);
@@ -88,7 +94,7 @@ function MobileInvitationDetail() {
         </div>
 
         <div className={classes.editdel}>
-          <button><PiPencilLineFill/></button>
+          <button onClick={handleUpdate}><PiPencilLineFill/></button>
           <button onClick={handleDelete}><BsTrash/></button>
         </div>
       </div>
