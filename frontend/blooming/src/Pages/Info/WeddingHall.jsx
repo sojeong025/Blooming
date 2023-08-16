@@ -12,6 +12,9 @@ import ProductItem from "../../components/Info/ProductItem";
 import RecommendItem from "../../components/Info/RecommendItem";
 import LoadingSpinner from "../../components/Common/LoadingSpinner";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 export default function WeddingHall() {
   const [isLoading, setIsLoading] = useState(true);
   // const [showModal, setShowModal] = useState(false);
