@@ -1,15 +1,13 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-// import classes from "./InfoDetail.module.css";
 import classes from "../../components/Info/ProductDetailItem.module.css";
 import { Carousel } from "antd";
 import "../../Pages/Schedule/DatePickerSchedule.css";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import { customAxios } from "../../lib/axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-// import { Carousel } from "react-responsive-carousel";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -33,9 +31,6 @@ export default function InfoDetail() {
   const location = useLocation();
   const id = location.state.id;
   const productType = location.state.productType;
-  // 디자인 용 더미 =======================================================================================================================
-  // const id = 85;
-  // const productType = "DRESS";
 
   const [reviews, setReviews] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -120,65 +115,6 @@ export default function InfoDetail() {
   useEffect(() => {
     fetchProductData();
     fetchReviewData();
-    // 디자인 용 더미 =======================================================================================================================
-    // setProduct({
-    //   id: 29,
-    //   itemName: "[스냅] 신부신랑 헤어메이크업(주중)",
-    //   brief:
-    //     "대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유",
-    //   thumbnail:
-    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/dress/29_thumbnail.jpg",
-    //   company: "브라이덜수지",
-    //   companyTime: "10:00 ~ 20:00",
-    //   companyAddress: "서울 강남구 선릉로148길 48 서울 강남구 선릉로148길 48",
-    //   images: [
-    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/dress/29_image1.jpg",
-    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/dress/29_image2.jpg",
-    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/dress/29_image3.jpg",
-    //   ],
-    //   wish: false,
-    // });
-    // setReviews([
-    //   {
-    //     reviewId: 21555,
-    //     star: 5,
-    //     image:
-    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/REVIEW/%EB%B6%80%EC%9A%B8%EA%B2%BD_1%EB%B0%98_%EA%B5%AC%ED%9D%AC%EC%98%81_f1a5fdb0-46ce-455d-97ec-e1057bb355ee.JPG",
-    //     content:
-    //       "ㄴㅇㅁㅁㅇㄴ대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유대중적인 금액대, 수입 및  자체 디자인 보유자체 디자인 보유자체 디자인 보유",
-    //     likeCnt: 0,
-    //     nickName: "ㅎㅇ",
-    //     email: "lotus0028@kakao.com",
-    //     createdDate: "2023-08-15T03:24:54.970296",
-    //     updatedDate: "2023-08-15T03:24:54.970296",
-    //     liked: false,
-    //   },
-    //   {
-    //     reviewId: 21554,
-    //     star: 5,
-    //     image:
-    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/REVIEW/%ED%99%94%EB%A9%B4%20%EC%BA%A1%EC%B2%98%202023-07-31%20090848_d75370ed-b888-43c7-b7e2-4bbee27cae55.png",
-    //     content: "ㄴㄴㅇㅁㅇㅁㅁㄴ",
-    //     likeCnt: 0,
-    //     nickName: "ㅎㅇ",
-    //     email: "lotus0028@kakao.com",
-    //     createdDate: "2023-08-15T03:24:47.389665",
-    //     updatedDate: "2023-08-15T03:24:47.389665",
-    //     liked: false,
-    //   },
-    //   {
-    //     reviewId: 21553,
-    //     star: 3,
-    //     image: "",
-    //     content: "ㄴㅇ",
-    //     likeCnt: 0,
-    //     nickName: "ㅎㅇ",
-    //     email: "lotus0028@kakao.com",
-    //     createdDate: "2023-08-15T03:24:42.828944",
-    //     updatedDate: "2023-08-15T03:24:42.828944",
-    //     liked: false,
-    //   },
-    // ]);
   }, []);
 
   const handleReserve = async () => {
@@ -270,7 +206,6 @@ export default function InfoDetail() {
     <Wrapper>
       {product && (
         <>
-          {/* 사진 수정할거: 1/3 보이기, 이미지 사이즈 줄이기: 스크롤이 안됨 */}
           {Array.isArray(product.images) && (
             <Carousel waitForAnimate autoplay>
               {product.images.map((item, index) => (
