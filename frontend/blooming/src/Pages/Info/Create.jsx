@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./Create.module.css";
 
 import PreviewModal from "../../components/MobileInvitation/PreviewModal";
@@ -16,6 +16,8 @@ import { useRecoilValue } from "recoil";
 import { mobileInvitationState } from "../../recoil/MobileInvitationAtom";
 
 function Create() {
+  const location = useLocation();
+  const id = location.state?.id;
   const navigate = useNavigate();
 
   const [previewModalVisible, setPreviewModalVisible] = useState(false);
@@ -50,22 +52,32 @@ function Create() {
       date: formData.date,
       time: formData.time,
     };
+    if (id) {
+      await customAxios
+        .put(`invitation/${id}`, finalFormData)
+        .then((response) => {
+          console.log("put 요청 성공했다~");
+          console.log(response.data);
+          navigate("/mobile-invitation-detail");
+        })
+        .catch((error) => {
+          console.log("저장에 실패하였습니다.");
+          console.error(error);
+        });
+    } else {
+      await customAxios
+        .post("invitation", finalFormData)
+        .then((response) => {
+          console.log("post 요청 성공했다~");
+          console.log(response.data);
+          navigate("/mobile-invitation-detail");
+        })
+        .catch((error) => {
+          console.log("저장에 실패하였습니다.");
+          console.error(error);
+        });
 
-    await customAxios
-      .post("invitation", finalFormData)
-      .then((response) => {
-        console.log(finalFormData);
-        console.log("성공했다~");
-        console.log(response.data);
-
-        navigate("/mobile-invitation-detail");
-      })
-      .catch((error) => {
-        console.log("저장에 실패하였습니다.");
-        console.log(finalFormData);
-
-        console.error(error);
-      });
+    }
   }
 
   return (
