@@ -76,18 +76,27 @@ function Home() {
         <PlanTips />
       </div>
 
+      {/* 팁메거진 */}
+      <div className={classes.magazine}>
+        <div className={classes.magazineTitle}>결혼 준비에 필요한 TIP들 여기 집중</div>
+        <TipMagazine />
+      </div>
+
       {/* 웨딩박람회 */}
       <div className={classes.fair}>
-        <div className={classes.fairTitle}>블루밍 개발자들이 선택한 웨딩 박람회 ➤</div>
+        <div className={classes.fairTitle}>블루밍 개발자들이 선택한 웨딩 박람회 ⇲</div>
         <div className={classes.weddingfair}>
           <WeddingFair />
         </div>
       </div>
 
 
+      {/* 최근 본 상품 */}
       <div>
-        <TipMagazine />
+        <LatestSeenProduct />
       </div>
+
+
       <div>
         <div>
           <div onClick={() => handleProductTypeClick('HALL')}>예식장</div>
@@ -96,9 +105,6 @@ function Home() {
           <div onClick={() => handleProductTypeClick('MAKEUP')}>메이크업</div>
         </div>
         <Ranking productType={productType} />
-      </div>
-      <div>
-        <LatestSeenProduct />
       </div>
     </div>
   );
