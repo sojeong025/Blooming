@@ -109,6 +109,53 @@ public class InvitationController {
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
+    @Operation(summary = "모바일 청첩장 하나 가져오기", description = "본인의 모바일 청찹장을 DB에서 가져옵니다.")
+    @GetMapping("/invitation/{invitationId}")
+    public ResponseEntity<BasicResponse> getSharedInvitation(@PathVariable Long invitationId) {
+        Invitation invitation = invitationService.getSharedInvitation(invitationId);
+
+        BasicResponse basicResponse;
+        if (invitation == null) {
+            basicResponse = BasicResponse.builder()
+                    .code(HttpStatus.NO_CONTENT.value())
+                    .httpStatus(HttpStatus.NO_CONTENT)
+                    .message("공유 청첩장 조회 실패")
+                    .count(0).build();
+        } else {
+            InvitationResultDto invitationResultDto = new InvitationResultDto(
+                    invitation.getId(),
+                    invitation.getThumbnail(),
+                    invitation.getGroomFatherName(),
+                    invitation.getGroomFatherPhone(),
+                    invitation.getGroomMotherName(),
+                    invitation.getGroomMotherPhone(),
+                    invitation.getBrideFatherName(),
+                    invitation.getBrideFatherPhone(),
+                    invitation.getBrideMotherName(),
+                    invitation.getBrideMotherPhone(),
+                    invitation.getTitle(),
+                    invitation.getContent(),
+                    invitation.getWeddingHallName(),
+                    invitation.getFloor(),
+                    invitation.getAddress(),
+                    invitation.getDate(),
+                    invitation.getTime(),
+                    invitation.getGroomName(),
+                    invitation.getGroomPhone(),
+                    invitation.getBrideName(),
+                    invitation.getBridePhone()
+            );
+
+            basicResponse = BasicResponse.builder()
+                    .code(HttpStatus.OK.value())
+                    .httpStatus(HttpStatus.OK)
+                    .message("공유 청첩장 조회 성공")
+                    .count(1)
+                    .result(Collections.singletonList(invitationResultDto)).build();
+        }
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
+
     @Operation(summary = "모바일 청첩장 수정하기", description = "모바일 청첩장을 수정합니다.")
     @Parameter(name = "InvitationRegistDto", description = "id 뻬고 전부 변경 가능. 수정하지 않은 것도 전부 보내주세요")
     @PutMapping("/invitation/{invitationId}")

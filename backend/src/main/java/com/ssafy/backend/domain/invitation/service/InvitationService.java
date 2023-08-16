@@ -43,6 +43,11 @@ public class InvitationService {
 				.orElse(null);
 	}
 
+	public Invitation getSharedInvitation(Long invitationId) {
+		return invitationRepository.findById(invitationId)
+				.orElseThrow(() -> new IllegalArgumentException("해당하는 청첩장이 없습니다."));
+	}
+
 	public void modifyInvitation(Long invitationId, InvitationRegistDto invitationRegistDto) {
 		Invitation invitation = invitationRepository.findById(invitationId)
 				.orElseThrow(() -> new IllegalArgumentException("invitationId에 해당하는 청첩장이 없습니다."));
