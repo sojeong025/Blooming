@@ -14,7 +14,7 @@ import { FaStar } from "react-icons/fa";
 
 export default function DetailReviewForm({
   product,
-  fetchReviewData,
+  fetchReviewsData,
   onClose,
 }) {
   // 리뷰쓰는 폼관련된 State
@@ -36,8 +36,8 @@ export default function DetailReviewForm({
     e.preventDefault();
     const createReview = async () => {
       try {
-        await customAxios.post("review", reviewData);
-        await fetchReviewData();
+        const response = await customAxios.post("review", reviewData);
+        await fetchReviewsData(response.data.result[0]);
         onClose();
       } catch (error) {
         console.error(error);
