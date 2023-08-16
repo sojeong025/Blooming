@@ -11,7 +11,7 @@ import { userState } from "../recoil/ProfileAtom";
 function Splash() {
   const navigate = useNavigate();
   const [isRendered, setIsRendered] = useState(false);
-  const url = "https://i9e104.p.ssafy.io/api/auto-login";
+  const url = import.meta.env.VITE_AUTOLOGIN_URL;
   const localRefreshToken = localStorage.getItem("refreshToken");
 
   // 유저 정보를 저장

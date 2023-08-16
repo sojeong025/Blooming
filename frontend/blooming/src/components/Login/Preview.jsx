@@ -75,7 +75,7 @@ function Preview() {
       />
       <div className={classes.buttonContainer}>
         {currentImageIndex === totalImages - 1 ? (
-          <a href='https://i9e104.p.ssafy.io/api/oauth2/authorization/kakao'>
+          <a href={import.meta.env.VITE_KAKAO_LOGIN_URL}>
             <div className={classes.kakaoBtn}>
               <img src='/src/assets/kakao.png' />
             </div>

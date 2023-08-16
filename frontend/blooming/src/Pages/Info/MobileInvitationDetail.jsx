@@ -46,7 +46,7 @@ function MobileInvitationDetail() {
 
   useEffect(() => {
     const createKakaoButton = () => {
-      const url = `https://i9e104.p.ssafy.io/mobile-invitation-detail/${invitation.id}`;
+      const url = `${import.meta.env.VITE_MOBILE_INVITATION_URL}/${invitation.id}`;
       if (window.Kakao) {
         // 카카오 스크립트가 로드된 경우 init
         const kakao = window.Kakao;
