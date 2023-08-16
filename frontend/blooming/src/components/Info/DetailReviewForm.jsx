@@ -37,7 +37,7 @@ export default function DetailReviewForm({
     const createReview = async () => {
       try {
         const response = await customAxios.post("review", reviewData);
-        await fetchReviewsData(response.data.result[0]);
+        fetchReviewsData(response.data.result[0]);
         onClose();
       } catch (error) {
         console.error(error);

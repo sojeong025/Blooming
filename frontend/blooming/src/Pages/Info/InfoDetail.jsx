@@ -303,7 +303,7 @@ export default function InfoDetail() {
               <DetailReviewList
                 reviews={reviews}
                 hasMore={hasMore}
-                fetchReviewData={addMyReviewData}
+                fetchReviewData={fetchReviewData}
                 onLikeClick={handleLikeClick}
               />
             ) : (
@@ -346,8 +346,7 @@ export default function InfoDetail() {
       >
         <DetailReviewForm
           product={product}
-          reviewsData={reviews}
-          setReviewsData={setReviews}
+          fetchReviewsData={addMyReviewData}
           onClose={() => setIsReviewModal(false)}
         />
       </ReviewCreateModal>
