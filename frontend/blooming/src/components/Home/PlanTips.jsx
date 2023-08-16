@@ -27,7 +27,7 @@ const Tips = () => {
   }
 
   useEffect(() => {
-    if (weddingDday) {
+    if (weddingDday !== "") {
       fetchData();
     } else {
       setIsLoading(false)
