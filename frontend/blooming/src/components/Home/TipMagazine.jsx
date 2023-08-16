@@ -93,15 +93,15 @@ export default function TipMagazine() {
     <div className={classes.magazineContainer}>
       <div className={classes.counter}>{currentSlide + 1}/{tipMagazine.length}</div>
 
-      <Slider ref={sliderRef} {...sliderSettings}>
+      <Slider ref={sliderRef} {...sliderSettings} >
         {tipMagazine.map((item, index) => (
-          <div key={item.id} className={classes.card}>
+          <div key={item.id} className={classes.card}  onClick={ () => handleNavigation(tipMagazine.id)}>
             <div className={classes.cardimg}>
               <img src={item.thumbnail} alt="이미지가 없습니다." />
             </div>
             <div>
               <div className={classes.cardtitle}>{item.title}</div>
-              <div className={classes.viewMore} onClick={handleNavigation(item.id)}>View More ﹥</div>
+              <div className={classes.viewMore} >View More ﹥</div>
             </div>
           </div>
         ))}
