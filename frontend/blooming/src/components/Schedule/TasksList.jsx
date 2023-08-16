@@ -11,43 +11,6 @@ import commonIcon from '/src/assets/Icon/common.png'
 
 function TasksList() {
   const tasks = useRecoilValue(ScheduleTaskState);
-  // const tasks = [{
-  //   "id": 23160,
-  //   "title": "희영이랑 만나기",
-  //   "content": "test",
-  //   "scheduleDate": "2023-08-15",
-  //   "scheduleTime": "16:20:00",
-  //   "scheduledBy": "FEMALE",
-  //   "scheduleType": "PRI"
-  //   },
-  //   {
-  //   "id": 23161,
-  //   "title": "웨딩촬영",
-  //   "content": "test",
-  //   "scheduleDate": "2023-08-15",
-  //   "scheduleTime": "17:20:00",
-  //   "scheduledBy": "MALE",
-  //   "scheduleType": "PRI"
-  //   },
-  //   {
-  //   "id": 23162,
-  //   "title": "test",
-  //   "content": "test",
-  //   "scheduleDate": "2023-08-15",
-  //   "scheduleTime": "18:20:00",
-  //   "scheduledBy": "COMMON",
-  //   "scheduleType": "PRI"
-  //   },
-  //   {
-  //   "id": 23163,
-  //   "title": "test",
-  //   "content": "test",
-  //   "scheduleDate": "2023-08-15",
-  //   "scheduleTime": "18:20:00",
-  //   "scheduledBy": "COMMON",
-  //   "scheduleType": "PRI"
-  //   },
-  // ]
 
   const selectedDate = useRecoilValue(ScheduleState)
   const setTodayTask = useSetRecoilState(TodayTaskState)

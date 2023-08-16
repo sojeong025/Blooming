@@ -6,22 +6,11 @@ import { AiOutlineLeft } from "react-icons/ai"
 import { AiOutlineCheck } from "react-icons/ai"
 import { PiPencilLineFill } from 'react-icons/pi'
 import { BsTrash , BsCalendarCheck, BsClock, BsReverseLayoutTextSidebarReverse } from 'react-icons/bs'
-import { ko } from "date-fns/esm/locale";
-
 
 function TaskDetail() {
-  // const task = {
-  //   "id": 23160,
-  //   "title": "희영이랑 만나기",
-  //   "content": "희영이랑 만나기의 내용",
-  //   "scheduleDate": "2023-08-15",
-  //   "scheduleTime": "16:20:00",
-  //   "scheduledBy": "FEMALE",
-  //   "scheduleType": "PRI"
-  //   }
-  const formattedTime = task.scheduleTime.slice(0, 5);
   const { id } = useParams();
   const [task, setTask] = useState();
+  const [formattedTime, setFormattedTime] = useState();
 
   const navigate = useNavigate();
 
@@ -42,6 +31,7 @@ function TaskDetail() {
         
         if (response.status === 200) {
           setTask(response.data.result[0]);
+          setFormattedTime(response.data.result[0].scheduleTime.slice(0, 5));
         }
       } catch (error) {
         console.error(error);
