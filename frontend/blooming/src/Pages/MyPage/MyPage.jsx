@@ -24,11 +24,43 @@ function MyPage() {
   const [isCouple, setIsCouple] = useState(false);
   const [isChooseDate, setIsChooseDate] = useState(true);
 
+  const setThemeState = (gender) => {
+    const rootElement = document.documentElement;
+
+    switch (gender) {
+      case "MALE":
+        rootElement.style.setProperty("--color-point", "var(--color-groom)");
+        rootElement.style.setProperty(
+          "--color-point-text",
+          "var(--color-groom-text)",
+        );
+        rootElement.style.setProperty(
+          "--color-point-opacity",
+          "var(--color-groom-opacity)",
+        );
+        break;
+      case "FEMALE":
+        rootElement.style.setProperty("--color-point", "var(--color-brider)");
+        rootElement.style.setProperty(
+          "--color-point-text",
+          "var(--color-brider-text)",
+        );
+        rootElement.style.setProperty(
+          "--color-point-opacity",
+          "var(--color-brider-opacity)",
+        );
+        break;
+    }
+  };
+
   // 유저 정보 조회
   const fetchUser = async () => {
     try {
       const response = await customAxios.get("profile");
       setUserData(response.data.result[0]);
+      if (response.data.result[0]?.gender) {
+        setThemeState(response.data.result[0].gender);
+      }
     } catch (error) {
       console.error("유저 정보 조회 에러:", error);
       // setErrorModal(true);
