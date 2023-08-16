@@ -45,6 +45,7 @@
   border-radius: 8%;
   background-color: #fff;
   min-height: 220px;
+  width: 150px;
 }
 .listItemImg{
   height: 150px;
@@ -53,9 +54,15 @@
   border-top-right-radius: 8%;
 }
 .Company {
-  padding-left: 5px;
-  padding-top: 10px;
-  word-break: keep-all;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  height: 50px;
+  width: 130px;
+  font-size: 18px;
+  font-weight: 700;
+  overflow-x: hidden;
 }
 .LastWrapper {
   /* width: 220px; */
@@ -75,11 +82,19 @@
 .IconWrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  flex-direction: column;
 }
 .heartIconTrue {
   color: var(--color-heart);
 }
 .heartIconFalse {
   color: var(--color-heart-inactive);
+}
+.LaViewDetail {
+  display: absolute;
+  margin-top: 165px;
+  font-size: 12px;
+  font-style: italic;
+  /* text-decoration: underline; */
 }

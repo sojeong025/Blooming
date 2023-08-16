@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/axios";
 import { useNavigate } from "react-router-dom";
-import { styled } from "styled-components";
-import ProductItem from "../Info/ProductItem";
 import classes from "./WeddingFair.module.css";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { MdLocationOn } from "react-icons/md";
 
 export default function LatestSeenProduct() {
   const navigate = useNavigate();
@@ -89,11 +86,7 @@ export default function LatestSeenProduct() {
                   src={item.thumbnail}
                   alt='이미지 없음'
                 />
-                <div className={`${classes.cardtext} ${classes.LastCompany}`}>
-                  <div className={`${classes.cardtitle} ${classes.Company}`}>
-                    {item.company}
-                  </div>
-                </div>
+                <div className={`${classes.Company}`}>{item.company}</div>
               </div>
               <div
                 className={classes.heart}
@@ -108,6 +101,7 @@ export default function LatestSeenProduct() {
                       className={classes.heartIconFalse}
                     />
                   )}
+                  <div className={classes.LaViewDetail}>View Detail →</div>
                 </div>
               </div>
             </div>
