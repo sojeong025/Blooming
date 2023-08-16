@@ -51,7 +51,7 @@
   font-weight: bold;
   border: none;
   background-color: transparent;
-  color: var(--color-join-point);
+  color: black;
   z-index: 999;
   &:disabled {
     color: gray;
