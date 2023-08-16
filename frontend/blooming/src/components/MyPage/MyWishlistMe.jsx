@@ -19,7 +19,7 @@ function MyWishlistMe({ myWishlist = null, toWishlist }) {
   };
 
   // together
-  if (myWishlist === null && toWishlist === []) {
+  if (myWishlist === null && toWishlist.length === 0) {
     return (
       <Wrapper2>
         <NoContent />
@@ -27,7 +27,7 @@ function MyWishlistMe({ myWishlist = null, toWishlist }) {
     );
   }
 
-  if (myWishlist === "me") {
+  if (myWishlist === null || myWishlist === "me") {
     return (
       <Wrapper>
         <ProductFlex>
@@ -48,7 +48,7 @@ function MyWishlistMe({ myWishlist = null, toWishlist }) {
   // you
   return (
     <Wrapper>
-      {myWishlist.length > 0 ? (
+      {toWishlist.length > 0 ? (
         <ProductFlex>
           {toWishlist.map((wish) => (
             <FlexItem key={wish.productId}>
