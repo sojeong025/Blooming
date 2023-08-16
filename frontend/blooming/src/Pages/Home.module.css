@@ -1,34 +1,16 @@
-
-/* 신부버전 */
-.word {
-  font-family: 'LeferiPoint-SpecialItalicA';
-  font-size: 27px;
-  color: #F25287;
-  margin-bottom: 0;
-}
-
-.hr {
-  border-top: 3px double #F25287;
-  width: 80vw;
-}
-
-/* 신랑버전 */
-.word {
-  font-family: 'LeferiPoint-SpecialItalicA';
-  font-size: 27px;
-  color: #8A92BF;
-  margin-bottom: 0;
-}
-
-.hr {
-  border-top: 3px double #8A92BF;
-  width: 84vw;
-  margin: 0;
-}
-
 .container {
   margin-top: 56px;
 }
 .top {
   margin-top: 50px;
+}
+.fair {
+  margin: 50px 30px 50px;
+}
+.fairTitle {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.weddingfair {
 }

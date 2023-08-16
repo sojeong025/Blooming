@@ -74,13 +74,17 @@ function Home() {
         <WeddingDday />
       <div className={classes.top}>
         <PlanTips />
-        {/* <p className={classes.word}> Wedding Tips</p>
-        <hr className={classes.hr} />
-        <Tipbox /> */}
       </div>
-      <div>
-        <WeddingFair />
+
+      {/* 웨딩박람회 */}
+      <div className={classes.fair}>
+        <div className={classes.fairTitle}>블루밍 개발자들이 선택한 웨딩 박람회 ➤</div>
+        <div className={classes.weddingfair}>
+          <WeddingFair />
+        </div>
       </div>
+
+
       <div>
         <TipMagazine />
       </div>

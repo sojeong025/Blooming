@@ -25,7 +25,7 @@ export default function LatestSeenProduct() {
   }, []);
 
   const handleNavigation = (productType, id) => {
-    navigate(`/product/${productType}/${id}`);
+    navigate(`/${productType}/${id}`);
   };
 
   return (
