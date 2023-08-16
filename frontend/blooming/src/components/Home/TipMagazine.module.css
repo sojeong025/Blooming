@@ -1,37 +1,91 @@
 .magazineContainer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
-
 .card {
   display: flex;
   flex-direction: column;
   justify-content: end;
   align-items: start;
-  padding: 10px;
-  cursor: pointer;
+  position: relative;
+  transition: 0.6s ease;
+}
+.card.slick-active {
+  opacity: 1;
+}
+.card.slick-slide:not(.slick-active) {
+  opacity: 0.5;
 }
 
-.cardimg{
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+.cardimg {
+  position: relative;
 }
-.cardimg img{
-  border-radius: 8px;
+.card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
 }
+
 .cardtitle {
   position: absolute;
-  font-size: 16px;
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-bottom: 15px;
-  font-weight: 600;
   color: #fff;
-  width: 140px;
-  word-break: keep-all;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.901));
-  /* padding: 3px 5px; */
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-  line-height: 24px;
+  font-size: 25px;
+  font-style: italic;
+  padding: 10px;
+  left: 10px;
+  bottom: 60px;
+  font-weight: bold;
+}
+.viewMore {
+  position: absolute;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  margin-top: 30px;
+  cursor: pointer;
+  bottom: 40px; 
+  left: 25px;
+  font-style: italic;
+}
+
+.nextArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  z-index: 900;
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  outline: none;
+  width: 100px;
+  height: 100px;
+}
+.prevArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  z-index: 900;
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  outline: none;
+  width: 100px;
+  height: 100px;
+}
+
+.nextArrow {
+  right:20px;
+}
+
+.prevArrow {
+  left: 20px;
+}
+.counter {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  font-size: 20px;
 }
