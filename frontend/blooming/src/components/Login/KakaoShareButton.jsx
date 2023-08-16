@@ -6,7 +6,7 @@ import { userState } from "../../recoil/ProfileAtom";
 const KakaoShareButton = ({ code }) => {
   const user = useRecoilState(userState)
   const url = "https://i9e104.p.ssafy.io/login";
-  const api_key = import.meta.env.REACT_APP_KAKAO_API_KEY;
+  const api_key = import.meta.env.VITE_KAKAO_API_KEY;
 
   useEffect(() => {
     const createKakaoButton = () => {
