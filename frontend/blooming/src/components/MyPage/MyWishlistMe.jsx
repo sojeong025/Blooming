@@ -35,14 +35,18 @@ function MyWishlistMe({ myWishlist, toWishlist }) {
               {toWishlist.includes(wish) ? (
                 <MyWishlistItem
                   wish={wish}
-                  onClick={handleNavigation}
+                  onClick={() => {
+                    handleNavigation(wish);
+                  }}
                   you='yes'
                 />
               ) : (
                 <MyWishlistItem
                   key={wish.productId}
                   wish={wish}
-                  onClick={handleNavigation}
+                  onClick={() => {
+                    handleNavigation(wish);
+                  }}
                   you='no'
                 />
               )}
