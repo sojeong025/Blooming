@@ -97,7 +97,7 @@ const DiaryDetails = () => {
 
           <div className={classes.imageContainer}>
             <img
-              src={diary.image ? diary.image : '/src/assets/Icon/nopicture.png'}
+              src={diary.image ? diary.image : "/src/assets/Icon/nopicture.png"}
               alt="preview"
             />
           </div>
