@@ -1,6 +1,8 @@
 .container {
   margin-top: 56px;
   margin-bottom: 80px;
+  width: 100%;
+  overflow-x: hidden;
 }
 .top {
   margin-top: 50px;
