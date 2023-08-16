@@ -219,7 +219,6 @@ export default function InfoDetail() {
               ))}
             </Carousel>
           )}
-          {/* =================================================== */}
 
           {/* 타이틀 */}
           <div className={classes.topSticky}>
