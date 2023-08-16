@@ -28,12 +28,14 @@ public class ReviewController {
     @Parameter(name = "ReviewRegistDto", description = "dto를 넘겨주세요")
     @PostMapping("/review")
     public ResponseEntity<BasicResponse> registReview(@RequestBody ReviewRegistDto reviewRegistDto) {
-        reviewService.registReview(reviewRegistDto);
+        ProductReviewDto productReviewDto = reviewService.registReview(reviewRegistDto);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
-                .message("리뷰 등록 성공").build();
+                .message("리뷰 등록 성공. 등록된 리뷰 반환")
+                .count(1)
+                .result(Collections.singletonList(productReviewDto)).build();
 
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }

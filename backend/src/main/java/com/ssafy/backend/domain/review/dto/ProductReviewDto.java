@@ -37,4 +37,17 @@ public class ProductReviewDto {
         this.createdDate = review.getCreatedDate();
         this.updatedDate = review.getUpdatedDate();
     }
+
+    public ProductReviewDto(Long reviewId, int star, String image, String content, int likeCnt, String nickName, String email, boolean isLiked, LocalDateTime createdDate, LocalDateTime updatedDate) {
+        this.reviewId = reviewId;
+        this.star = star;
+        this.image = image;
+        this.content = content;
+        this.likeCnt = likeCnt;
+        this.nickName = nickName;
+        this.email = email;
+        this.isLiked = isLiked;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
 }

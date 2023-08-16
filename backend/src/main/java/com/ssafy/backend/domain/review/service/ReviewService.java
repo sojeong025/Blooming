@@ -1,5 +1,6 @@
 package com.ssafy.backend.domain.review.service;
 
+import com.google.cloud.Timestamp;
 import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.product.repository.ProductRepository;
 import com.ssafy.backend.domain.review.Review;
@@ -28,7 +29,7 @@ public class ReviewService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
-    public void registReview(ReviewRegistDto reviewRegistDto) {
+    public ProductReviewDto registReview(ReviewRegistDto reviewRegistDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
@@ -48,6 +49,22 @@ public class ReviewService {
 
         //리뷰 저장
         reviewRepository.save(review);
+
+        //만들어진 리뷰 내용을 리턴
+        ProductReviewDto productReviewDto = new ProductReviewDto(
+                review.getId(),
+                review.getStar(),
+                review.getImage(),
+                review.getContent(),
+                review.getLikeCnt(),
+                user.getNickname(),
+                user.getEmail(),
+                false,
+                review.getCreatedDate(),
+                review.getUpdatedDate()
+        );
+        return productReviewDto;
+
     }
 
     public Slice<ProductReviewDto> getAllProductReview(Long productId, int page, int size) {
