@@ -18,7 +18,7 @@
   cursor: pointer;
   font: inherit;
   border: none;
-  background-color: var(--color-point);
+  background-color: transparent;
   color: white;
   font-size: 20px;
   padding: 0 25px;
@@ -26,7 +26,7 @@
 }
 /* 일단은 동일하게 해놓기..? */
 .actions button:hover {
-  background-color: var(--color-point);
+  background-color: transparent;
   color: white;
 }
 .actions button[type='button'] {
@@ -53,6 +53,8 @@
 }
 .editdel button{
   padding: 17px !important;
+  width: 16vw;
+  font-size: 20px !important;
 }
 .title {
 	width: 95%;
