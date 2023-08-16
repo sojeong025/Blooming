@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +20,17 @@ public class TipBoxService {
     private final TipCodeRepository tipCodeRepository;
 
     public TipBoxResultDto getTipBox(int leftDay) {
+        // leftDay 정제 필요
+        List<TipCode> tipCodeList = tipCodeRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparing(TipCode::getLeftDay).reversed())
+                .collect(Collectors.toList());
+        for(TipCode tipCode : tipCodeList){
+                if(leftDay >= tipCode.getLeftDay()){
+                    leftDay = tipCode.getLeftDay();
+                    break;
+                }
+        }
         TipCode tipCode = tipCodeRepository.findByLeftDay(leftDay);
         // 팁박스에서 컨텐츠만 뽑아서 리스트 반복안하게 리팩 가능함
         List<TipBox> tipBoxList = tipBoxRepository.findAllByTipCodeId(tipCode.getId());
