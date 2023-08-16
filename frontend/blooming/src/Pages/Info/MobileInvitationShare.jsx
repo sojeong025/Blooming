@@ -3,15 +3,17 @@ import { BsFillTelephoneFill } from 'react-icons/bs'
 import { BiSolidMessageDots } from 'react-icons/bi'
 import classes from "./MobileInvitationShare.module.css"
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 function MobileInvitationShare() {
 
+  const { id } = useParams();
   const [invitation, setInvitation] = useState('')
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await customAxios.get(`invitation/share/${invitation.id}`);
+        const response = await customAxios.get(`invitation/share/${id}`);
         if (response.data.result[0]) {
           setInvitation(response.data.result[0]);
         } else {
