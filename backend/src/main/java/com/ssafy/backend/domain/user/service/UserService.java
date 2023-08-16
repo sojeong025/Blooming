@@ -96,7 +96,8 @@ public class UserService {
         List<Reservation> reservations = findUser.getReservations();
         reservationRepository.deleteAll(reservations);
         wishlistRepository.deleteAllByUserId(findUser.getId());
-        likedRepository.deleteAllByUserId(findUser.getId());
+        likedRepository.deleteAllByUserId(findUser.getId()); // 내가 단 도움돼요 삭제
+        likedRepository.deleteLikeByUser(findUser); // 내 후기에 달린 도움돼요 삭제
         reviewRepository.deleteAllByUserId(findUser.getId());
 
 
