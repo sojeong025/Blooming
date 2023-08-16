@@ -3,6 +3,7 @@ import { ScheduleState } from '../../recoil/ScheduleStateAtom';
 import Calendar from 'react-calendar';
 import './CalendarComponent.css';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function CalendarHeader({ date, onViewChange }) {
   const year = date.getFullYear();
@@ -63,9 +64,11 @@ function CalendarComponent() {
   const today = location.state?.today;
   const [selectedDate, setSelectedDate] = useRecoilState(ScheduleState);
 
-  if (today) {
-    setSelectedDate(today)
-  }
+  useEffect(() => {
+    if (today) {
+      setSelectedDate(today)
+    }
+  }, [])
 
   const formatDate = (date) => {
     const options = { weekday: 'long', year: 'numeric',

@@ -19,11 +19,15 @@ public class ProductRecentDto {
     //찜 정보
     private boolean isWish;
 
-    public ProductRecentDto(Long id, ProductType productType, String itemName, String thumbnail, Wishlist wishlist) {
+    //회사이름
+    private String company;
+
+    public ProductRecentDto(Long id, ProductType productType, String itemName, String thumbnail, Wishlist wishlist, String company) {
         this.productId = id;
         this.productType = productType;
         this.itemName = itemName;
         this.thumbnail = thumbnail;
         this.isWish = (wishlist != null);
+        this.company = company;
     }
 }

@@ -1,7 +1,4 @@
-/* infoDetail ================================= */
-.image-carousel {
-}
-/* 고민중 */ 
+
 .topSticky{
   padding: 0 16px;
 
@@ -9,6 +6,12 @@
   position: sticky;
   background-color: var(--color-bg);
   z-index: 1;
+}
+.CarouselImg {
+  width: 100vw;
+  height: 40vh;
+  object-fit: contain;
+  outline: none;
 }
 
 /* 회사명, 위치 */
@@ -149,3 +152,4 @@
 .upText .p {
   margin-top: 10px;
 }
+

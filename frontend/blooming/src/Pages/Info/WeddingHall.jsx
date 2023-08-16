@@ -53,8 +53,19 @@ export default function WeddingHall() {
     }
   };
 
+  const [ranking, setRanking] = useState();
+  const fetchRanking = async () => {
+    try {
+      const response = await customAxios.get("ranking/HALL");
+      setRanking(response.data.result[0]);
+    } catch (error) {
+      console.log("랭킹", error);
+    }
+  };
+
   useEffect(() => {
     fetchData();
+    fetchRanking();
   }, []);
 
   // 로딩 후 모달 그런데 개발중
@@ -74,25 +85,7 @@ export default function WeddingHall() {
       {/* {isLoading && <LoadingSpinner />} */}
 
       <Wrapper>
-        {/* <ErrorModal
-          buttonText={"다시시도"}
-          show={errorModal}
-          onClose={() => {
-            setErrorModal(false);
-            fetchData();
-          }}
-        >
-          <h2>Error</h2>
-          <p>데이터 수신 오류</p>
-          <button
-            onClick={() => {
-              setErrorModal(false);
-            }}
-          >
-            X
-          </button>
-        </ErrorModal> */}
-        <RecommendItem />
+        <RecommendItem data={ranking} productType={productType} />
         <TitleText>웨딩홀 전체</TitleText>
         <InfiniteScroll
           dataLength={weddingHall.length}
@@ -122,7 +115,7 @@ export default function WeddingHall() {
 }
 
 const Wrapper = styled.div`
-  margin-top: 110px;
+  margin-top: 100px;
   margin-bottom: 60px;
 `;
 

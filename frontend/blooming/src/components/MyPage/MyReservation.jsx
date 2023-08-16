@@ -21,6 +21,8 @@ export default function MyReservation() {
 
   useEffect(() => {
     fetchData();
+
+    return setMyReservation([])
   }, []);
 
   // 일정으로 가야하나?

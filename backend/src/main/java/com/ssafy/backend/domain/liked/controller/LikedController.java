@@ -29,7 +29,7 @@ public class LikedController {
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
-                .message("다이어리 등록 성공")
+                .message("후기 도움돼요 등록 성공")
                 .build();
 
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
@@ -44,7 +44,7 @@ public class LikedController {
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
-                .message("다이어리 삭제 성공").build();
+                .message("후기 도움돼요 삭제 성공").build();
 
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
