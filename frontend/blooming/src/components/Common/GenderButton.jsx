@@ -7,7 +7,7 @@ export const GenderButton = () => {
   // 상태 업데이트 함수
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
   return (
     <div className={classes.GenderContainer}>

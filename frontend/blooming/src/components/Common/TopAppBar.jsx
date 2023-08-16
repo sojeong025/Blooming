@@ -14,7 +14,7 @@ const TopAppBar = () => {
   const [pageTitle, setPageTitle] = useState();
 
   useEffect(() => {
-    console.log(location);
+    // console.log(location);
     if (location.state && location.state.pageTitle) {
       setPageTitle(location.state.pageTitle);
     } else {

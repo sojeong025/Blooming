@@ -54,19 +54,19 @@ function Splash() {
           "Content-Type": "application/json",
           Authorization_refresh: `Bearer ${localRefreshToken}`,
         };
-        console.log("refresh", headers);
+        // console.log("refresh", headers);
         try {
           // 헤더 포함하여 GET 요청 보내기
           const response = await axios.get(url, { headers });
-          console.log(response);
+          // console.log(response);
           if (
             response.headers["authorization"] &&
             response.headers["authorization_refresh"]
           ) {
-            console.log(
-              response.headers["authorization"],
-              response.headers["authorization_refresh"],
-            );
+            // console.log(
+            //   response.headers["authorization"],
+            //   response.headers["authorization_refresh"],
+            // );
             localStorage.setItem(
               "accessToken",
               response.headers["authorization"],

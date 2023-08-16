@@ -12,11 +12,6 @@ const SettingList = ({ isCouple }) => {
     { id: 3, name: "결혼식 날짜 수정", goTo: "choose-wedding" },
     { id: 4, name: "알림 설정", goTo: "setting-notice" },
   ];
-  const isMyCouple = isCouple;
-
-  useEffect(() => {
-    console.log(isMyCouple.toString());
-  });
 
   return (
     <div className={classes.wrapper}>

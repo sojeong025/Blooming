@@ -57,11 +57,9 @@ export default function InfoDetail() {
   const [reservedDate, setReservedDate] = useState(new Date());
   const [reservedTime, setReservedTime] = useState(getCurrentRoundedDate());
   const onDateChange = (date) => {
-    console.log(date);
     setReservedDate(date);
   };
   const onTimeChange = (time) => {
-    console.log(time);
     setReservedTime(time);
   };
   const handleInputChange = (event) => {

@@ -53,7 +53,7 @@ function WeddingFair() {
       const response = await customAxios.get("wedding-fair");
 
       if (response.status === 200) {
-        console.log(response);
+        // console.log(response);
         setWeddingFairData(response.data.result[0]);
       }
     } catch (error) {
