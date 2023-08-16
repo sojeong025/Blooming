@@ -19,7 +19,7 @@ function MyWishlistMe({ myWishlist = null, toWishlist }) {
   };
 
   // together
-  if (myWishlist === null && toWishlist.length === 0) {
+  if (myWishlist === null && toWishlist === []) {
     return (
       <Wrapper2>
         <NoContent />
