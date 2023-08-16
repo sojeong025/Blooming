@@ -3,7 +3,6 @@ import classes from './TaskDetail.module.css';
 import { useEffect, useState } from 'react';
 import { customAxios } from '../../lib/axios';
 import { AiOutlineLeft } from "react-icons/ai"
-import { AiOutlineCheck } from "react-icons/ai"
 import { PiPencilLineFill } from 'react-icons/pi'
 import { BsTrash , BsCalendarCheck, BsClock, BsReverseLayoutTextSidebarReverse } from 'react-icons/bs'
 
@@ -13,6 +12,19 @@ function TaskDetail() {
   const [formattedTime, setFormattedTime] = useState();
 
   const navigate = useNavigate();
+
+  const taskTypeClassName = () => {
+    switch (task.scheduledBy) {
+      case "FEMALE":
+        return classes.mainTitleFemale;
+      case "MALE":
+        return classes.mainTitleMale;
+      case "COMMON":
+        return classes.mainTitleCommon;
+      default:
+        return "";
+    }
+  };
 
   const handleHistory = () => {
     navigate("/schedule");
@@ -69,7 +81,7 @@ function TaskDetail() {
 
 
           {/* ---------제목 입력 부분-------- */}
-          <div className={classes.mainTitle}>
+          <div className={`${classes.mainTitle} ${taskTypeClassName()}`}>
             <div className={classes.title}>{task.title}</div>
           </div>
 

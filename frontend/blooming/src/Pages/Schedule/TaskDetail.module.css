@@ -38,8 +38,18 @@
 	margin: 20px 30px;
 	width: 80%;
 	height: 40px;
-	border-left: 4px solid var(--color-point);
 	padding: 0 10px;
+}
+.mainTitleFemale {
+  border-left: 4px solid var(--color-bride);
+}
+
+.mainTitleMale {
+  border-left: 4px solid var(--color-groom);
+}
+
+.mainTitleCommon {
+  border-left: 4px solid var(--color-common);
 }
 .editdel button{
   padding: 17px !important;
