@@ -73,7 +73,7 @@ export default function WeddingHall() {
       {/* {isLoading && <LoadingSpinner />} */}
 
       <Wrapper>
-        <RecommendItem data={ranking} />
+        <RecommendItem data={ranking} productType={productType} />
 
         <TitleText>메이크업 전체</TitleText>
         <InfiniteScroll
