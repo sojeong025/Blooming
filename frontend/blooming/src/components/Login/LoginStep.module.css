@@ -88,7 +88,6 @@
 .inputName {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   width: 90%;
 }
@@ -98,6 +97,7 @@
 /* ========= gender ========== */
 .GenderSelector {
   padding: 0;
+  margin-bottom: 10px;
 }
 .GenderSelector input[type=radio]{
   display: none;
@@ -105,10 +105,10 @@
 .GenderSelector input[type=radio]+label{
   display: inline-block;
   cursor: pointer;
-  height: 30px;
+  height: 35px;
   width: 80px;
   border: 1px solid #333;
-  line-height: 30px;
+  line-height: 35px;
   text-align: center;
   font-weight:bold;
   font-size:13px;
