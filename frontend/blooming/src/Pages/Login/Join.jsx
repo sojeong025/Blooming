@@ -83,7 +83,7 @@ export default function Join() {
       setCurrentStep(currentStep + 1);
       setTimeout(() => {
         navigate("/home");
-      }, 300);
+      }, 100);
     }
   };
 

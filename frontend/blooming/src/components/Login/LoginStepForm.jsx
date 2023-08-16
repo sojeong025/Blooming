@@ -371,11 +371,6 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
           </form>
         </div>
       )}
-      {step === 5 && (
-        <Container>
-          {/* <img src='src/assets/Logo/logo2.png' alt='Blooming' /> */}
-        </Container>
-      )}
     </>
   );
 };
