@@ -81,7 +81,6 @@ const TopAppBar = () => {
     const fetchNotice = async () => {
       try {
         const response = await customAxios.get("notification/unread-cnt");
-        console.log(1);
         // console.log(response);
         if (response.data.result[0] > 0) {
           setIsNotice(true);
