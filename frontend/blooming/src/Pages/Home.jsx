@@ -4,7 +4,7 @@ import PlanTips from "../components/Home/PlanTips";
 import Bespoke from "../components/Home/Bespoke";
 import Footer from "../components/Home/Footer";
 import { useSetRecoilState, useResetRecoilState, useRecoilState } from "recoil";
-import { userState } from "../recoil/ProfileAtom";
+import { userCoupleState, userState } from "../recoil/ProfileAtom";
 import { customAxios } from "../lib/axios";
 import { useEffect, useState } from "react";
 import classes from "./Home.module.css";
@@ -22,6 +22,7 @@ function Home() {
   const [userData, setUserData] = useRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
   const setWeddingDate = useSetRecoilState(weddingDateState);
+  const setCoupleData = useSetRecoilState(userCoupleState);
 
   const [productType, setProductType] = useState("HALL");
 
@@ -84,6 +85,16 @@ function Home() {
       setWeddingDate(response.data.result[0].weddingDate);
     } catch (error) {
       // console.log("결혼식 날짜 없음");
+    }
+    fetchCouple();
+  };
+
+  const fetchCouple = async () => {
+    try {
+      const response = await customAxios.get("my-fiance");
+      setCoupleData(response.data.result[0]);
+    } catch (error) {
+      // console.log("약혼자 없음");
     }
   };
 
