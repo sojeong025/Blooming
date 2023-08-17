@@ -40,7 +40,7 @@ export default function MyWishlistItem({ wish, onClick, me }) {
   useEffect(() => {
     setProductHeart(me);
     console.log(productHeart);
-  });
+  }, [me]);
 
   return (
     <div className={classes.Wrapper}>
