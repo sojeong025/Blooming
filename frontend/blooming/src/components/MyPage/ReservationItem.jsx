@@ -75,7 +75,7 @@ export default function ReservationItem({ onClick, reservation }) {
         </div>
       </div>
       <div onClick={handleReserveDelete}>
-        <BsTrash style={{position: "relative", top: "50%", transform: "translateY(-50%)"}} size={2}/>
+        <BsTrash style={{position: "relative", top: "50%", transform: "translateY(-50%)"}} size={25}/>
       </div>
     </div>
   );
