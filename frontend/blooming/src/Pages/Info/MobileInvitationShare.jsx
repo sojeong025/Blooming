@@ -104,7 +104,7 @@ function MobileInvitationShare() {
           </div>
 
           <div className={classes.connectParent}>
-          <div className={`${classes.connectParentImg}` `${theme2.connectParentImg4}`}>혼주에게 연락하기</div>
+          <div className={`${classes.connectParentImg} ${theme2.connectParentImg4}`}>혼주에게 연락하기</div>
 
           <div className={classes.connectParentPhone}>
             <div>
