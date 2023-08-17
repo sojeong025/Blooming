@@ -237,7 +237,7 @@ export default function InfoDetail() {
         (review) => review.reviewId === reviewId,
       );
       if (!currentReview) {
-        console.log("리뷰를 찾을 수 없습니다.");
+        // console.log("리뷰를 찾을 수 없습니다.");
         return;
       }
 

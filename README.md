@@ -45,7 +45,8 @@
   # 서비스 화면
 
 <br>
-<img src="gif_files/register.gif" width="200px">
+<img src="gif_files/회원가입 시작.gif" width="200px">
+<img src="gif_files/회원정.gif" width="200px">
 <br>
 
 - 카카오 로그인 성공 시, 서비스에 등록된 회원이 아니라면 회원가입 진행

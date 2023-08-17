@@ -64,7 +64,6 @@ const NoticeSwipeable = () => {
         },
       });
       setNotice(response.data.result[0]);
-      console.log(notice);
       setPage(page + 1);
     } catch (error) {
       // console.log("알림 조회 에러", error);
@@ -86,7 +85,7 @@ const NoticeSwipeable = () => {
     try {
       customAxios.delete(`notification/${id}`);
       setNotice(notice.filter((item) => item.id !== id));
-      console.log("[DELETE]", id);
+      // console.log("[DELETE]", id);
     } catch (error) {
       console.log("알림 삭제 에러", error);
     }
