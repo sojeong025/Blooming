@@ -41,6 +41,10 @@ public class WishlistService {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("Product ID에 해당하는 상품이 없습니다."));
 
+        // 찜 객체를 만들기 전에 user와 product를 가지는 값이 이미 있는 지 검증 -> 없으면 객체 만들기
+        Wishlist findWishList = wishlistRepository.findByProductIdAndUserId(productId, user.getId())
+                .orElseThrow(() -> new IllegalArgumentException("이미 찜이 된 상품입니다."));
+
         Wishlist wishlist = new Wishlist(user, product);
 
         wishlistRepository.save(wishlist);
