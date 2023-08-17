@@ -8,18 +8,18 @@ export default function MyWishlistItem({ wish, onClick, me }) {
   const address = wish.address.split(" ");
   const [productHeart, setProductHeart] = useState(me);
 
-  const handleCreateWish = async (wish) => {
+  const handleCreateWish = async (id) => {
     try {
-      await customAxios.post(`wishlist/${wish.productId}`);
+      await customAxios.post(`wishlist/${id}`);
       setProductHeart(!productHeart);
     } catch (error) {
       console.error("찜하기 에러:", error);
     }
   };
 
-  const handleDeleteWish = async (wish) => {
+  const handleDeleteWish = async (id) => {
     try {
-      await customAxios.delete(`wishlist/${wish.productId}`);
+      await customAxios.delete(`wishlist/${id}`);
       setProductHeart(!productHeart);
     } catch (error) {
       console.error("찜취소 에러:", error);

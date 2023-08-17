@@ -18,7 +18,7 @@ function MyWishlistMe({ myWishlist = null, toWishlist }) {
     });
   };
 
-  // together
+  // no
   if (myWishlist === null && toWishlist.length === 0) {
     return (
       <Wrapper2>
@@ -36,7 +36,9 @@ function MyWishlistMe({ myWishlist = null, toWishlist }) {
               <MyWishlistItem
                 key={wish.productId}
                 wish={wish}
-                onClick={handleNavigation}
+                onClick={() => {
+                  handleNavigation(wish);
+                }}
                 me={true}
               />
             </FlexItem>
@@ -45,6 +47,7 @@ function MyWishlistMe({ myWishlist = null, toWishlist }) {
       </Wrapper>
     );
   }
+
   // you
   return (
     <Wrapper>
