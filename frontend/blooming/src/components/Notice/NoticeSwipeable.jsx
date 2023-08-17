@@ -136,7 +136,7 @@ const NoticeSwipeable = () => {
       <AllDelete onClick={deleteAllNotice}>알림 전체 삭제</AllDelete>
 
       <InfiniteScroll
-        dataLength={notice.length}
+        dataLength={notice?.length}
         next={fetchNotice}
         hasMore={hasMore}
         loader={
@@ -154,7 +154,7 @@ const NoticeSwipeable = () => {
         }
       >
         <SwipeableList fullSwipe={fullSwipe} type={ListType.IOS}>
-          {notice.map(
+          {notice?.map(
             ({
               id,
               readStatus,
