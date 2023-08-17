@@ -86,12 +86,11 @@ const Diary = () => {
           ))
         ) : (
           <div className={classes.none}>
-            <p>내가 작성한 다이어리가 없습니다.</p>
-            <p>다이어리를 작성하여 추억을 공유하세요.</p>
+            내가 작성한 다이어리가 없습니다. <hr /> 다이어리를 작성하여 추억을 공유하세요.
           </div>
         )}
       </div>
-      {fiance ? 
+      {fiance?.name ? 
         <>
           <div>약혼자 다이어리</div>
           <div className={classes.diary}>
@@ -111,15 +110,13 @@ const Diary = () => {
               ))
             ) : (
               <div className={classes.none}>
-                <p>약혼자가 작성한 다이어리가 없습니다.</p>
-                <p>다이어리를 작성하여 추억을 공유하세요.</p>
+                약혼자가 작성한 다이어리가 없습니다. <hr /> 다이어리를 작성하여 추억을 공유하세요.
               </div>
             )}
           </div>
         </> :
           <div className={classes.none}>
-            <p>연결된 약혼자가 없습니다.</p>
-            <p>약혼자를 연결하여 추억을 공유해보는게 어떨까요?</p>
+            연결된 약혼자가 없습니다.<hr /> 약혼자를 연결하여 추억을 공유하세요.
           </div>}
       <div>
         <CreateItem hide={hideModalHandler} visible={modalIsVisible} fetchData={fetchData} />
