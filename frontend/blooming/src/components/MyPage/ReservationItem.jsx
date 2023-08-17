@@ -1,5 +1,7 @@
 import classes from "./ReservationItem.module.css";
-export default function ReservationItem({ reservation }) {
+import { BsTrash } from "react-icons/bs"
+
+export default function ReservationItem({ onClick, reservation }) {
   const DisplayDate = (date) => {
     const parsedDate = new Date(date);
     const year = parsedDate.getFullYear();
@@ -53,6 +55,9 @@ export default function ReservationItem({ reservation }) {
             {DisplayTime(reservation.reservedTime)}
           </p>
         </div>
+      </div>
+      <div>
+        <BsTrash/>
       </div>
     </div>
   );
