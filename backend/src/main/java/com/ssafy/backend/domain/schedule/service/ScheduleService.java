@@ -136,8 +136,10 @@ public class ScheduleService {
                 reservationScheduleRegistDto.getScheduleTime(),
                 reservationScheduleRegistDto.getScheduledBy(),
                 reservationScheduleRegistDto.getScheduleType(),
-                reservationScheduleRegistDto.getReservationId()
+                0L
         );
+
+
 
         //커플도 등록
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
