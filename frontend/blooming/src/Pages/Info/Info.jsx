@@ -1,14 +1,19 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import classes from "./Info.module.css";
 import { useEffect, useState } from "react";
 
 function Info() {
-  const [activePath, setActivePath] = useState("wedding-hall");
+  const location = useLocation();
+  const initialActivePath = location.pathname.split("/")[2] || "wedding-hall";
+  const [activePath, setActivePath] = useState(initialActivePath);
+  const [subNavAction, setSubNavAction] = useState("");
+
   const navigate = useNavigate();
 
   const handleNavClick = (path, state) => {
     setActivePath(path);
+    setSubNavAction(state.subNavAction);
     navigate(`/info/${path}`, { state });
   };
 
@@ -17,19 +22,22 @@ function Info() {
       top: 0,
       behavior: "smooth",
     });
-  })
+  });
 
   return (
     <div>
       <nav className={classes.navContainer}>
         <div
           className={`${classes.navItem} ${
-            activePath === "wedding-hall" ? classes.active : ""
+            activePath === "wedding-hall" || subNavAction === "wedding-hall"
+              ? classes.active
+              : ""
           }`}
           onClick={() =>
             handleNavClick("wedding-hall", {
               productType: "HALL",
               navAction: "info",
+              subNavAction: "wedding-hall",
             })
           }
         >
@@ -37,12 +45,15 @@ function Info() {
         </div>
         <div
           className={`${classes.navItem} ${
-            activePath === "studio" ? classes.active : ""
+            activePath === "studio" || subNavAction === "studio"
+              ? classes.active
+              : ""
           }`}
           onClick={() =>
             handleNavClick("studio", {
               productType: "STUDIO",
               navAction: "info",
+              subNavAction: "studio",
             })
           }
         >
@@ -50,12 +61,15 @@ function Info() {
         </div>
         <div
           className={`${classes.navItem} ${
-            activePath === "dress" ? classes.active : ""
+            activePath === "dress" || subNavAction === "dress"
+              ? classes.active
+              : ""
           }`}
           onClick={() =>
             handleNavClick("dress", {
-              productType: "HALL",
+              productType: "DRESS",
               navAction: "info",
+              subNavAction: "dress",
             })
           }
         >
@@ -63,12 +77,15 @@ function Info() {
         </div>
         <div
           className={`${classes.navItem} ${
-            activePath === "make-up" ? classes.active : ""
+            activePath === "make-up" || subNavAction === "dress"
+              ? classes.active
+              : ""
           }`}
           onClick={() =>
             handleNavClick("make-up", {
-              productType: "HALL",
+              productType: "MAKEUP",
               navAction: "info",
+              subNavAction: "make-up",
             })
           }
         >
@@ -76,12 +93,16 @@ function Info() {
         </div>
         <div
           className={`${classes.navItem} ${
-            activePath === "mobile-invitation" ? classes.active : ""
+            activePath === "mobile-invitation" ||
+            subNavAction === "mobile-invitation"
+              ? classes.active
+              : ""
           }`}
           onClick={() =>
             handleNavClick("mobile-invitation", {
-              productType: "HALL",
+              productType: "mobile-invitation",
               navAction: "info",
+              subNavAction: "mobile-invitation",
             })
           }
         >
