@@ -77,7 +77,7 @@ function Info() {
         </div>
         <div
           className={`${classes.navItem} ${
-            activePath === "make-up" || subNavAction === "dress"
+            activePath === "make-up" || subNavAction === "make-up"
               ? classes.active
               : ""
           }`}
