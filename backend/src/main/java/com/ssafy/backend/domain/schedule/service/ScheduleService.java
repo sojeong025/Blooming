@@ -2,8 +2,6 @@ package com.ssafy.backend.domain.schedule.service;
 
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
-import com.ssafy.backend.domain.reservation.Reservation;
-import com.ssafy.backend.domain.reservation.service.ReservationService;
 import com.ssafy.backend.domain.schedule.Schedule;
 import com.ssafy.backend.domain.schedule.ScheduleType;
 import com.ssafy.backend.domain.schedule.ScheduledBy;
@@ -144,8 +142,6 @@ public class ScheduleService {
                 reservationScheduleRegistDto.getReservationId()
         );
 
-
-
         //커플도 등록
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(authentication.getName()); //이메일
@@ -166,8 +162,8 @@ public class ScheduleService {
     }
 
     public void deleteReservationSchedule(Long reservationId) {
-        //??
-        Schedule schedule = scheduleRepository.findByReservationId(reservationId);
-        scheduleRepository.delete(schedule);
+        // 예약으로 생긴 일정을 삭제한 경우 예외처리
+        // 일정을 먼저 삭제한 후 예약 취소 시에는 동작하지 않도록 변경
+        scheduleRepository.findByReservationId(reservationId).ifPresent(scheduleRepository::delete);
     }
 }
