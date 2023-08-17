@@ -12,15 +12,14 @@ import { ReactComponent as Diary } from "../../assets/Nav/diary_base.svg";
 // import { ReactComponent as MyPage } from "../../assets/Nav/mypage_base.svg";
 
 const BottomNav = () => {
-  // 모든 페이지 다 설정하고 나면
-  // location state에 activeTab을 넣어서 그거 맞춰서 해도 될듯
-  // 그러면 네브 탭 내부로 접근해도 active 유지되나????
-  // 몰겠어 새로고침 안한다고 가정하자
-
-  const [selectedMenu, setSelectedMenu] = useRecoilState(navStateAtom);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const initialSelectedMenu = location.pathname.slice(1) || "home";
+  const [selectedMenu, setSelectedMenu] = useRecoilState(
+    navStateAtom,
+    initialSelectedMenu,
+  );
 
   // 효과 후 페이지 이동
   const handleNavigation = (path, state = null) => {
