@@ -4,6 +4,7 @@ import { BiSolidMessageDots } from 'react-icons/bi'
 import classes from "./MobileInvitationShare.module.css"
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import theme2 from "./MobileInvitationShareTheme.module.css"
 function MobileInvitationShare() {
 
   const { id } = useParams();
@@ -44,8 +45,8 @@ function MobileInvitationShare() {
 
       {/* ---------메인-------- */}
         <div style={{ backgroundColor: "#fff" }}>
-          <div className="theme2.main">
-            <div className="theme2.mainName">{invitation.groomName} <br/>
+          <div className={theme2.main}>
+            <div className={theme2.mainName}>{invitation.groomName} <br/>
               <span style={{fontSize:'15px'}}>그리고</span><br/>
               {invitation.brideName}
             </div>
@@ -54,9 +55,9 @@ function MobileInvitationShare() {
               alt="thumbnail"
             />
 
-            <div className="theme2.weddingDetail">Wedding</div>
+            <div className={theme2.weddingDetail}>Wedding</div>
 
-            <div className="theme2.mainWedding">
+            <div className={theme2.mainWedding}>
               {invitation.date}
               <br />
               {invitation.weddingHallName}
@@ -68,9 +69,14 @@ function MobileInvitationShare() {
 
       {/* --------인사말---------- */}
         <div className={classes.mention}>
-          <p className={classes.mentionTitle}>{invitation.title}</p>
-          <p className={classes.mentionContent}>{invitation.content} </p>
-          <hr className="theme2.mentionHrTheme2" />
+          <p className={classes.mentionTitle}>{invitation.title
+              ? invitation.title
+              ? "초대합니다"
+              : "Invitation"}</p>
+          <p className={classes.mentionContent}>{invitation.content
+              ? invitation.content
+              : "서로가 마주보며 다져온 사랑을 이제 함께 한 곳을 바라보며 걸어갈 수 있는 큰 사랑으로 키우고자 합니다. 저희 두 사람이 사랑의 이름으로 지켜나갈 수 있도록 앞날을 축복해 주시면 감사하겠습니다."}{" "}</p>
+          <hr className={theme2.mentionHrTheme2} />
 
         </div>
 
@@ -81,7 +87,7 @@ function MobileInvitationShare() {
           <div className={classes.connectName}>
             <div>{invitation.groomFatherName} ∘ {invitation.groomMotherName} <span style={{fontSize:'15px'}}>의 아들</span> {invitation.groomName}</div> <br />
             <div>{invitation.brideFatherName} ∘ {invitation.brideMotherName} <span style={{fontSize:'15px'}}>의 딸</span> {invitation.brideName}</div>
-            <div className={classes.connectImg}>
+            <div className={`${classes.connectImg} ${theme2.connectImgTheme2}`}>
               소중한 당신을 초대합니다
             </div>
           </div>
@@ -101,7 +107,7 @@ function MobileInvitationShare() {
           </div>
 
           <div className={classes.connectParent}>
-          <div className={classes.connectParentImg}>혼주에게 연락하기</div>
+          <div className={`${classes.connectParentImg}` `${theme2.connectParentImg4}`}>혼주에게 연락하기</div>
 
           <div className={classes.connectParentPhone}>
             <div>

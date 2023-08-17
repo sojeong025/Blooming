@@ -1,0 +1,75 @@
+.main {
+  margin-top: 30px;
+  text-align: center;
+  width: 370px;
+}
+
+.mainName {
+  letter-spacing: 3px;
+  margin: 20px 40px 40px 0px;
+  font-weight: 700;
+  font-size: 25px;
+  text-align: end;
+  line-height: 40px;
+}
+
+.main Img {
+  width: 369px;
+  height: 230px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.wedding {
+  top: 62%;
+  left: 10px;
+  font-size: 60px;
+  position: absolute;
+  font-family: 'LeferiPoint-SpecialItalicA';
+  font-style: italic;
+}
+
+.weddingDetail {
+  top: 53%;
+  left: 10px;
+  font-size: 60px;
+  position: absolute;
+  font-family: 'LeferiPoint-SpecialItalicA';
+  font-style: italic;
+}
+
+.mainWedding {
+  line-height: 30px;
+  font-size: 20px;
+  margin-top: 80px;
+  margin-right: 40px;
+  margin-bottom: 80px;
+  text-align: end;
+}
+
+.main hr {
+  border: 0.3px solid black;
+  width: 80%;
+}
+
+.mentionHrTheme2 {
+  border: 0.3px solid black !important;
+  margin: 30px 0;
+  width: 80%;
+}
+
+.connectImgTheme2 {
+  background-image: url('/src/assets/Couple/cover3.jpg');
+  background-size: cover;
+}
+
+.connectParentImg4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 368px;
+  height: 50px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #6AAAD7;
+}
