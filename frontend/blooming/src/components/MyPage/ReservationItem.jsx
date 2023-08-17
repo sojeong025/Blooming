@@ -1,7 +1,12 @@
+import { useRecoilState } from "recoil";
+import { customAxios } from "../../lib/axios";
 import classes from "./ReservationItem.module.css";
 import { BsTrash } from "react-icons/bs"
+import { myReservationState } from "../../recoil/ProfileAtom";
 
 export default function ReservationItem({ onClick, reservation }) {
+  const [MyReservations, setMyReservations] = useRecoilState(myReservationState);
+
   const DisplayDate = (date) => {
     const parsedDate = new Date(date);
     const year = parsedDate.getFullYear();
@@ -31,6 +36,18 @@ export default function ReservationItem({ onClick, reservation }) {
     DRESS: "#7e57c2",
   };
 
+  const handleReserveDelete = async () => {
+    try {
+      await customAxios.delete(`reservation/${reservation.reservationId}`)
+      const filteredReservations = MyReservations.filter(myReservation => {
+        return myReservation.reservationId !== reservation.reservationId;
+      });
+      setMyReservations(filteredReservations)
+    } catch (error) {
+      console.log("예약 삭제 요청 실패", error)
+    }
+  }
+
   return (
     <div className={classes.Reservation}>
       <div
@@ -41,9 +58,10 @@ export default function ReservationItem({ onClick, reservation }) {
       <img
         className={classes.ReservationImg}
         src={reservation.thumbnail}
+        onClick={onClick}
         alt='이미지 없음'
       />
-      <div className={classes.Item}>
+      <div className={classes.Item} onClick={onClick}>
         <div className={classes.Company}>
           [{reservation.productType}] {reservation.company}
         </div>
@@ -56,8 +74,8 @@ export default function ReservationItem({ onClick, reservation }) {
           </p>
         </div>
       </div>
-      <div>
-        <BsTrash/>
+      <div onClick={handleReserveDelete}>
+        <BsTrash style={{position: "relative", top: "50%", transform: "translateY(-50%)"}} size={2}/>
       </div>
     </div>
   );
