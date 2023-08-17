@@ -77,30 +77,30 @@ function DiaryHeader(props) {
           );
         }
       }
-      return elements;
     }
+    return elements;
+  }
   
 
-    return (
-      <HTMLFlipBook
-        width={180}
-        height={280}
-        pageFlipDirection="rtl"
-        responsive={true}
-        usePortrait={false}
-        mobileScrollSupport={diaries.length === 0 || fianceDiaries.length === 0 ? false : true}
-        showCover={true}
-        disableFlipByClick={diaries.length === 0 || fianceDiaries.length === 0 ? true : false}
-        drawShadow
-      >
-        {/* 커버 페이지 */}
-        <div className={classes.cover}></div>
+  return (
+    <HTMLFlipBook
+      width={180}
+      height={280}
+      pageFlipDirection="rtl"
+      responsive={true}
+      usePortrait={false}
+      mobileScrollSupport={diaries.length === 0 ? false : true}
+      showCover={true}
+      disableFlipByClick={diaries.length === 0 ? true : false}
+      drawShadow
+    >
+      {/* 커버 페이지 */}
+      <div className={classes.cover}></div>
 
-        {/* 컨텐츠 페이지 */}
-        {createElements()}
-      </HTMLFlipBook>
-    );
-  }
+      {/* 컨텐츠 페이지 */}
+      {createElements()}
+    </HTMLFlipBook>
+  );
 }
 
 export default DiaryHeader;
