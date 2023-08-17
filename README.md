@@ -1,70 +1,281 @@
-# 프로젝트 2주차
+<img src="README_assets/bb0ec503e32c81cec5154bac8093e364ed6a2785.png" title="" alt="ring.png" data-align="center">
 
----
+<img title="" src="README_assets/34cf01b03da6bca188cbf69d95b1e9a6547ab20f.png" alt="text.png" width="334" data-align="center">
 
+# BLOOMING
 
+모바일 웨딩 플래너
 
----
+# 목차
 
+1. [결과물](#결과물)
+2. [서비스 화면](#서비스-화면)
+3. [주요 기능](#주요-기능)
+4. [개발 환경](#개발-환경)
+5. [기술 소개](#기술-소개)
+6. [설계 문서](#설계-문서)
+7. [팀원 소개](#팀원-소개)
 
+# 1. 결과물
 
-# **2주차** 회고록
+- 📽 [UCC](https://youtu.be/9v1aKx9SDYE)
+- 🎤 [중간 발표 PPT](https://drive.google.com/file/d/1mAaGPRllI2iS1Ac5wJBIb7swqCGSx22H/view?usp=share_link)
+- 🎤 [최종 발표 PPT](https://drive.google.com/file/d/14RB6TlOET-WFh-uMFLxWAgyqUoOgS4_n/view?usp=sharing)
 
----
+# 서비스 화면
 
-- **개인 소감**
-  
-  ### 1. 정훈석
-  
-  - 다들 적극적으로 참여하여 의견을 조율하는데 있어서 잡음 없이 기능 명세서와 요구사항 명세서가 잘 나온 것 같아서 좋았다.
-  - 피그마를 사용하는 부분에 있어서 익숙하지 않아서 다루기 힘든 부분이 많았지만 사용하면서 점점 나아지는 것 같다. 다음주까지 목업 마무리하면 좋을 것 같다.
-  - 자동으로 로그인 하는 부분에 있어서 flutter를 고민했었는데 팀원들과 얘기 끝에 웹에서 하는 것으로 결정이 되었음.
-  - React Skeleton Code를 미리 마무리 해서 하면 좋을 것 같다.
-  
-  ### 2. 강동윤
-  
-  - 기술적인 부분(ERD, 로그인, 알람)에서 고민이 많았던 2주차였습니다.
-  - 피그마 목업이 이쁘게 잘 나와서 좋다
-  - 기능 명세가 확실해야 한다고 느꼈다.
-  - CI/CD 구축이 처음인데 큰 문제 없이 잘 되면 좋겠다!
-  
-  ### 3. 구희영
-  
-  - 피그마가 원하는 대로 설계가 되지 않아 어려웠다. 내가 아는 와이어 프레임을 만들 수 없어 힘들었던 것 같다.
-  - 기능 명세를 하나씩 작성하면서 누락된 점이나 디테일을 잡아가는 과정이 생각보다 복잡했지만, 빠른 의견 조율로 해결할 수 있었다.
-  - 한번에 완벽함을 추구하기 보다는 단계적으로 나아가면 남은 기간 개발을 탄탄하게 할 수 있을 것 같다.
-  
-  ### 4. 김성인
-  
-  - 이번주는 기획을 1차 마무리 후 ERD 설계까지 마무리하였다.
-  - 요구사항이 정확해야 협업 프로젝트에서 구현하려는 기능에 대한 고민을 정확하고 깊게 할 수 있다고 느꼈다.
-  - 카톡 소셜 로그인 구현을 위해 OAuth와 JWT, Spring Security에 대해서 공부하고 적용해봐야겠다.
-  
-  ### 5. 김승연
-  
-  - 이번 주에는 기획을 마무리하고 기획 바탕으로 기능 명세서, 피그마, db 설계 등을 작성했다. 피그마나 db를 설계하면서 기능 및 요구사항 명세서가 구체적이면 구체적일 수록 좋다는 것을 느꼈다. 설명이 부족할 땐 기능이 불명확해져서 설계를 하는 데 무리가 있어 다시 얘기하며 조율했다.
-  - sns 로그인을 위해 OAuth, JWT, Spring Security를 공부하면서 프로젝트에 적용 해보았는데 기술 블로그들을 참고하면서 하고 있지만 그대로 해도 조금씩 에러가 나는 부분이 너무 많았다. 카카오에서 정보를 받아오는 것까지는 했지만 아직 JWT를 적용하지 못했다. 좀 더 구체적으로 스스로 정리하면서 해나가야겠다.
-  - 다음 주에는 본격적으로 JPA를 사용하고 알림 기능 구현을 위해서 FCM을 사용 할 것이다. 주말에 JPA 강의를 다 듣고 마스터(?) 할 것이다. !!! 로그인 빨리 해치우고 싶다.
-  - 다른 조들의 발표를 보니 AI 같은 걸 많이 썼더라.. 음 우리도 머 써야 하나? 싶다. 하지만 우리는 상호 연동 및 차별화되는 알림이 있다!! 다음 발표 때 이걸 뿌려서 1등 해야겠따.
-  
-  ### 6. 정소정
-  
-  - 2주차에 들어가면서 자세한 기획과정을 거치는데, 백과 프론트 사이 의견 소통과 합을 맞추면서 진행이 되어 이후 목업 및 ERD를 짜는데 이게 왜? 이런 질문이 나오지 않아서 좋았습니다.
-  - 목업을 제작하는데 있어 피그마 사용법이 부족해 미흡하게 만들어진 점이 아쉽지만 주말 시간을 이용하여 보충한다면 더욱 더 깔끔한 UI / UX를 만들 것 같습니다.
-  - 앞서 개발에 필요한 기술스택 공부를 추가로 해 놓아 이후 설계가 원활하게 될 점을 기대하고 있습니다.
-  - React의 컴포넌트를 프론트 팀원끼리 말을 미리 맞추며 구성을 하여야 할 것 같습니다.
+## ✅회원 가입# 목차
 
-- **KPT**
+1. [결과물](#결과물)
+2. [서비스 화면](#서비스-화면)
+3. [주요 기능](#주요-기능)
+4. [개발 환경](#개발-환경)
+5. [기술 소개](#기술-소개)
+6. [설계 문서](#설계-문서)
+7. [팀원 소개](#팀원-소개)
+
+# 결과물
+
+- 📽 [UCC](https://youtu.be/9v1aKx9SDYE)
+
+- 🎤 [중간 발표 PPT](https://drive.google.com/file/d/1mAaGPRllI2iS1Ac5wJBIb7swqCGSx22H/view?usp=share_link)
+
+- 🎤 [최종 발표 PPT](https://drive.google.com/file/d/14RB6TlOET-WFh-uMFLxWAgyqUoOgS4_n/view?usp=sharing)
   
-  1. **Keep(현재 만족하고 있는 부분, 계속 이어갔으면 하는 부분)**
-     - 여전히 문서화가 **짱짱! 잘 되고 있다.**
-     - 밝고 재밌는 팀 분위기!!
-     - 다들 적극적으로 참여해서 기능명세서와 요구사항명세서가 잘 마무리 된 거 같다.
-  2. **Problem(불편하게 느끼는 부분, 개선이 필요하다고 느끼는 부분)**
-     - 피그마 세부적인 디자인 어려워요…. ㅇㅈㅇㅈ ㅇㅈㅇㅈ
-     - 기능 명세가 조금 더 정확 해야 한다고 생각해요
-     - JWT를 적용을 할 거면 JWT를 잘 사용해야 할 것 같아요
-  3. **TRY(Problem에 대한 해결책, 다음 회고 때 판별 가능한 것, 당장 실행 가능한 것)**
-     - 피그마 관련 도서와 영상을 통해 기능적인 부분을 더 채워나가서 이겨내보자!!
-     - 소통이 잘되는 팀이기 때문에 소통하면 문제없다고 생각해요!
-     - JWT, JPA, FCM 주말 동안 마스터하기 ( 모든 백엔드 팀원 해당 )
+  # 서비스 화면
+
+<br>
+<img src="gif_files/register.gif" width="200px">
+<br>
+
+- 카카오 로그인 성공 시, 서비스에 등록된 회원이 아니라면 회원가입 진행
+- 커플 코드가 있으면 커플 코드를 등록하고 진행
+- 신랑, 신부와 이름을 입력하고 (기본적으로 카카오로그인시 성별과 이름을 가져와서 기본값으로 지정해줌)
+- 이후, 전화번호와 닉네임을 설정
+- 결혼식 날짜가 정해졌으면 남은 D-day에 따른 Tip과 알림 요청 기능 제공
+
+## 🕒메인 페이지
+
+<br>
+<img src="./gif_files/realtime_matching_regist.gif" width="200px">
+<br>
+
+- ## 🏃‍♂️정보 페이지
+
+<br>
+<img src="./gif_files/individual_matching_distance.gif" width="200px">
+<br>
+
+- `현재 위치 기반 0~10km` 까지 거리 설정 가능
+- `일자`, `시간`, `게임 종류`, `게임 시간`, `성별` 필터 제공
+- `시간 순`, `인원 순`, `거리 순`으로 검색된 모임 정렬 가능
+
+## 💭스케쥴 페이지
+
+<br>
+<img src="gif_files/chat.gif" width="200px">
+<br>
+
+- 운동 모임, 또는 팀 채팅방에서 사람들과 채팅 가능
+
+## 📑 다이어리 페이지
+
+<br>
+<img src="gif_files/chat.gif" width="200px">
+<br>
+
+- `자신이 참여한 모든 운동 모임` 확인 가능
+- ">" 버튼 클릭 시 `매칭 상세 정보 확인 가능`
+- `팀 매칭 정보` 확인 가능
+
+## 👨🏼‍🤝‍👨🏼마이 페이지
+
+<br>
+<img src="./gif_files/team_create.gif" width="200px">
+<br>
+
+- 전체 목록의 `팀 생성 탭`, 혹은 `팀 매칭 페이지`에서 팀 생성 가능
+- `운동 종목`을 선택, `친구를 추가`하고 `팀 정보를 입력`하여 팀 생성
+- 팀 생성 시 `팀 채팅방`도 같이 생성됨
+
+# 주요 기능
+
+- ##### 1. 알림 기능
+  
+  - ###### D-day 에 따른 알림
+  - ###### 예약 및 스케쥴에 따른 알림
+  - ###### 다이어리 작성에 따른 알림
+
+<br>
+
+- ##### 2. 다이어리 기능
+  
+  - ###### 내 다이어리
+  
+  - ###### 약혼자 다이어리
+
+<br>
+
+- ##### 3. 모바일 청첩장
+  
+  - ###### 작성 후 카카오톡을 이용한 공유
+
+# 개발 환경
+
+## ⚙ Management Tool
+
+- 형상 관리 : Gitlab
+- 이슈 관리 : Jira
+- 커뮤니케이션 : Mattermost, Webex, Notion, Discord
+- 디자인 : Figma, PowerPoint
+
+## 💻 IDE
+
+- Visual Studio Code `1.18.1`
+- IntelliJ `11.0.19`
+
+## 📱 Frontend
+
+- React `18.2.0`
+- Vite `^4.4.5`
+- Recoil `^0.7.7`
+- React-Router-Dom `6.14.2`
+- Library
+  - antd : `^5.7.3`
+  - antd-mobile : `^5.32.0`
+  - axios : `^1.4.0`
+  - clipboard-copy : `^4.0.1`
+  - dayjs : `^1.11.9`
+  - framer-motion : `^10.13.0`
+  - gsap : `^3.12.2`
+  - qrcode : `^1.5.2`
+  - react-calendar : `^4.5.0`
+  - react-datepicker : `^4.16.0`
+  - react-dom : `^18.2.0`
+  - react-icons : `4.10.1`
+  - react-infinite-scroll-component : `^6.1.0`
+  - react-kakao-link : `^0.1.2`
+  - react-loading-skeleton : `^3.3.1`
+  - react-pageflip : `^2.0.3`
+  - react-rating : `2.0.5`
+  - react-responsice-carousel : `^3.2.23`
+  - react-slick : `^0.29.0`
+  - react-swipeable : `^7.0.1`
+  - react-swipable-list : `^1.8.1`
+  - slick-carousel : `^1.8.1`
+  - styled-components : `^6.0.7`
+- Flutter
+  - library
+    - inapp_webview
+- Android Studio
+
+## 💾 Backend
+
+- Springboot `2.7.13`
+- Lombok
+- Spring Data JPA 
+- Spring Data Redis(lettuce)
+- Spring Web
+- Springdoc-openapi-ui `1.6.11`
+- Oauth2
+- Swagger 3.0.0
+- SSL
+- Oauth2
+- CertBot(CA Certificates)
+- Redis
+- MySql 8.0.34
+
+# 기술 소개
+
+- 웹 기반 하이브리드 어플리케이션
+  
+  - `Flutter`를 활용하여 웹 및 앱 플랫폼 모두 사용 가능
+  - 
+
+- 사용자 알림
+  
+  - `Firebase Cloud Message`를 이용하여 사용자에게 필요한 알림 제공
+
+- 실시간 채팅
+  
+  - `WebSocket`을 통하여 서버/클라이언트 통신 구현
+  - `Stomp` 메세지 브로커를 활용하여 1:N의 관계 구축
+  - `Redis`를 활용하여 채팅방을 유지하고 여러대의 채팅 서버간에 메세지를 주고 받음
+
+- 필터링
+  
+  - 사용자가 원하는 `조건`으로 `검색`하면 원하는 결과를 얻을 수 있도록 함
+
+- 자동 매칭
+  
+  - `ELO알고리즘` 기반 레이팅 시스템을 사용하여 비슷한 수준의 팀끼리 매칭될 수
+    있도록 함
+
+- 카카오 로그인
+  
+  - `OAUTH2` 인증을 이용해 불필요한 개인정보 입력 최소화
+
+- Spring Cloud Gateway
+  
+  - 하나의 주소로 서버에 접속할 수 있도록 `패킷 분배`
+  - 한가한 서버에게 업무를 배정하여 효율성을 증가시킬 수 있도록 `로드밸런싱`
+  - 특정 사용자의 요청을 차단하여 `해킹 공격 방어`
+
+- 해킹 대응
+  
+  - `Docker Hub`에 이미지를 업로드하고 이를 활용하여 재설치 시간을 단축
+  - 해킹 서버를 받은 서버가 작동이 불가능하면 명령어 하나만으로 `자동으로 모든 서비스를 정상화`
+  - Jenkins를 사용하지 않아야 할 때 `명령어 하나만`으로 수동 CI/CD 가능하도록 `Shell script`로 구현
+
+# 설계 문서
+
+## 🎨 와이어프레임
+
+## 📃 기능 명세서
+
+![7.PNG](README_assets/81e14af2401c798e67b35a0a670b9260bb268d45.PNG)
+
+![8.PNG](README_assets/5b00a2242164dd377305361c27344280bcff3f91.PNG)
+
+## 📝 API 명세서
+
+![1.PNG](README_assets/62af38ffc5adc07bbf982905e932f89fb1cde2d2.PNG)
+
+![2.PNG](README_assets/bae47ca24fb0bb348a98fb5e5f5f96ae5ee093bb.PNG)
+
+![3.PNG](README_assets/ff053b7c0450734fc3cd4da63cb50eec8682827d.PNG)
+
+![4.PNG](README_assets/8308685bed8fdbf1e1a7e1c5776bd830c3faef8f.PNG)
+
+![5.PNG](README_assets/a1d905bd7614f156c39e5a2e4e8f3c14442642d1.PNG)
+
+![6.PNG](README_assets/5f2d5013dfb56d63dc8211fc1ae8cf797804d58e.PNG)
+
+## 📏 ERD
+
+## 📐 시스템 아키텍처
+
+![architecture.png](README_assets/1cdf902b533381a38dedc536f451ac3ef56dd738.png)
+
+# 팀원 소개
+
+| **[정훈석](https://github.com/AndreaStudy)**                                                          | **[정소정](https://github.com/sojeong025)**                                                           | **[구희영](https://github.com/hi9900)**                                                               | **[강동윤](https://github.com/yty455)**                                                               | **[김성인](https://github.com/ksi2564)**                                                              | **[김승연](https://github.com/ksy00826)**                                                             |
+|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------:|
+| <img title="" src="README_assets/55ac68fc918d4490436f82f00dd3f3c4164f2749.png" alt="" width="800"> | <img title="" src="README_assets/690a04ad5a318806b42b791fd7bd47d92f653511.png" alt="" width="800"> | <img title="" src="README_assets/d7bb36dcc1e37676036feaa62e09706509decb54.png" alt="" width="800"> | <img title="" src="README_assets/37b1fff8dbfc3003baec1caf3d36a1f30050762e.png" alt="" width="800"> | <img title="" src="README_assets/4d14c09f98a7285f2c6bd6f795f2f45873fd8697.png" alt="" width="800"> | <img title="" src="README_assets/a99f938e62bd81dd32e82d1182de3a048440b6ee.png" alt="" width="800"> |
+| Frontend                                                                                           | Frontend                                                                                           | Frontend                                                                                           | Backend                                                                                            | Backend                                                                                            | Backend                                                                                            |
+
+## 😎 역할 분담
+
+**Frontend**
+
+- 정훈석 : 
+- 정소정 : UX/UI 설계, PPT제작, 영상 제작
+- 구희영 : UX/UI 설계
+
+**Backend**
+
+- 강동윤: 
+
+- 김성인 : 
+
+- 김승연 : 

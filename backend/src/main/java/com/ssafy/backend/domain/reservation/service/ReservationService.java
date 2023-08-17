@@ -80,8 +80,8 @@ public class ReservationService {
                     break;
             }
             Schedule savedSchedule = scheduleService.registReservationSchedule(new ReservationScheduleRegistDto(
+                    product.getCompany() + " 에 방문해주세요.",
                     product.getItemName() + " 예약",
-                    product.getCompany() + " 에 방문해주세요",
                     reservationRegistDto.getReservedDate(),
                     reservationRegistDto.getReservedTime(),
                     ScheduledBy.COMMON,

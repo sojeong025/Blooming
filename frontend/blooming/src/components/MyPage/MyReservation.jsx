@@ -43,9 +43,8 @@ export default function MyReservation() {
         MyReservation.map((reservation) => (
           <div
             key={reservation.reservationId}
-            onClick={() => handleNavigation(reservation)}
           >
-            <ReservationItem reservation={reservation} />
+            <ReservationItem onClick={() => handleNavigation(reservation)} reservation={reservation} />
           </div>
         ))
       ) : (
