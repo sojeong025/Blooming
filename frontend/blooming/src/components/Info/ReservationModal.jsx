@@ -87,7 +87,7 @@ const ModalContent = styled.div`
   left: 0;
   transform: translateY(100%);
   width: 100%;
-  height: 80vh;
+  height: 95vh;
   background-color: #fff;
 
   border-top-right-radius: 30px;

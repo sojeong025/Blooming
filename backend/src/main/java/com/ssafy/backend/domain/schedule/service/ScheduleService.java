@@ -63,9 +63,13 @@ public class ScheduleService {
 
         //새로운 스케쥴 등록 시 본인 + 상대에게 알림
         String title = "새로운 일정이 등록되었습니다.";
-        String content = scheduleRegistDto.getTitle() + " : " + scheduleRegistDto.getContent();
+        String content = scheduleRegistDto.getScheduleDate()+" "+scheduleRegistDto.getTitle();
         for (User userOne : couple.getUsers()){
-            notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
+            if(user.getId() == userOne.getId()){
+                notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
+            }else{
+                notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, user.getName()+"님의 "+title, content));
+            }
         }
     }
 
@@ -132,8 +136,10 @@ public class ScheduleService {
                 reservationScheduleRegistDto.getScheduleTime(),
                 reservationScheduleRegistDto.getScheduledBy(),
                 reservationScheduleRegistDto.getScheduleType(),
-                reservationScheduleRegistDto.getReservationId()
+                0L
         );
+
+
 
         //커플도 등록
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -147,7 +153,7 @@ public class ScheduleService {
 
         //새로운 스케쥴 등록 시 본인 + 상대에게 알림
         String title = "새로운 일정이 등록되었습니다.";
-        String content = reservationScheduleRegistDto.getTitle() + " : " + reservationScheduleRegistDto.getContent();
+        String content = reservationScheduleRegistDto.getTitle() + "\n" + reservationScheduleRegistDto.getContent();
         for (User userOne : couple.getUsers()){
             notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
         }

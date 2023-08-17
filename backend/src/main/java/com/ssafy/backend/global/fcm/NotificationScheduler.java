@@ -56,10 +56,6 @@ public class NotificationScheduler {
     @Autowired
     private CoupleRepository coupleRepository;
 
-
-
-//    private List<TipCode> tipCodeList = tipCodeRepository.findAll();
-
     @PostConstruct
     public void firebaseSetting() throws IOException {
         //내 firebase 콘솔에서 가져온 비공개 키 파일을 통해 백엔드에서 파이어베이스에 접속함
@@ -81,7 +77,6 @@ public class NotificationScheduler {
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
         //나중에 지난 일정은 삭제? 해도 될듯
         //일정 repository에서 day를 매개변수로 넘겨주면서, 30일, 21일, 7일, 1일, 0일 을 인자로 해서 date 비교해서 해당되는거 가져옴. 알림 보내고 테이블에 추가.
-        List<TipCode> tipCodeList = tipCodeRepository.findAll();
         // 일정 알림
         for (int day : new int[]{0, 1, 7, 30}) {
             System.out.println(day + "일 후 알림");
@@ -95,11 +90,10 @@ public class NotificationScheduler {
                 User groom = null;
                 User bride = null;
                 List<User> users = schedule.getCouple().getUsers();
-                for (User user : users){
-                    if (user.getGender().equals("MALE")){
+                for (User user : users) {
+                    if (user.getGender().equals("MALE")) {
                         groom = user;
-                    }
-                    else if(user.getGender().equals("FEMALE")){
+                    } else if (user.getGender().equals("FEMALE")) {
                         bride = user;
                     }
                 }
@@ -114,29 +108,28 @@ public class NotificationScheduler {
                 String brideNickname = (bride != null) ? bride.getNickname() : "예비신부";
 
                 //오늘은 오늘이라고 하기
-                String dayName = "오늘은 ";
-                if (day == 1){
-                    dayName = "내일은 ";
-                }
-                else if (day != 0){
-                    dayName = day + "일 후에는 ";
+                String dayName = "오늘 ";
+                if (day == 1) {
+                    dayName = "내일 ";
+                } else if (day != 0) {
+                    dayName = day + "일 후 ";
                 }
                 if (schedule.getScheduledBy() == null) continue; //예외처리
-                switch(schedule.getScheduledBy()){
+                switch (schedule.getScheduledBy()) {
                     case COMMON:
                         //두 명에게 같은 알림 전송
-                        contentGroom = dayName + "두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = dayName + "두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = dayName + "두 분의 " + schedule.getContent() + "이 있어요.";
+                        contentBride = dayName + "두 분의 " + schedule.getContent() + "이 있어요.";
                         break;
                     case MALE:
                         //신랑 일정.
-                        contentGroom = dayName + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = dayName + groomNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = dayName + "개인 일정이 있어요.";
+                        contentBride = dayName + groomNickname + "님의 개인 일정이 있어요.";
                         break;
                     case FEMALE:
                         //신부 일정.
-                        contentGroom = dayName + brideNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = dayName + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = dayName + brideNickname + "님의 개인 일정이 있어요.";
+                        contentBride = dayName + "개인 일정이 있어요.";
                         break;
                 }
 
@@ -148,7 +141,8 @@ public class NotificationScheduler {
 
 
         // 디데이 체크리스트 알림
-        for (TipCode tipCode : tipCodeList){
+        List<TipCode> tipCodeList = tipCodeRepository.findAll();
+        for (TipCode tipCode : tipCodeList) {
             int day = tipCode.getLeftDay();
             System.out.println("D-Day" + day + "일 후 알림");
 
@@ -161,11 +155,10 @@ public class NotificationScheduler {
                 User groom = null;
                 User bride = null;
                 List<User> users = couple.getUsers();
-                for (User user : users){
-                    if (user.getGender().equals("MALE")){
+                for (User user : users) {
+                    if (user.getGender().equals("MALE")) {
                         groom = user;
-                    }
-                    else if(user.getGender().equals("FEMALE")){
+                    } else if (user.getGender().equals("FEMALE")) {
                         bride = user;
                     }
                 }
@@ -174,20 +167,34 @@ public class NotificationScheduler {
                 String contentGroom = "";
                 String contentBride = "";
 
-                // 체크리스트 타입에 따라 다르게 알림 내용 처리
-                String title = "결혼식 D - "+tipCode.getLeftDay();
-
+                String titleGroom = "";
+                String titleBride = "";
                 //null 참조 방지를 위해 닉네임 미리 받기
                 String groomNickname = (groom != null) ? groom.getNickname() : "예비신랑";
                 String brideNickname = (bride != null) ? bride.getNickname() : "예비신부";
 
-                contentGroom = groomNickname + "님 " + tipCode.getTitle() + " 하셨나요?. 지금쯤 준비하셔야 해요.";
-                contentBride = brideNickname + "님 " + tipCode.getTitle() + " 하셨나요?. 지금쯤 준비하셔야 해요.";
+                // 체크리스트 타입에 따라 다르게 알림 내용 처리
+                if (day == 0) {
+                    titleGroom = groomNickname + "님의 결혼을 축하해요";
+                    titleBride = brideNickname + "님의 결혼을 축하해요";
 
+                } else {
+                    titleGroom = "결혼식까지" + day + "일 남았어요";
+                    titleBride = "결혼식까지" + day + "일 남았어요";
+                }
+
+
+                if (day == 0) {
+                    contentGroom = "두 분의 앞날이 더욱 행복하길 바래요❤";
+                    contentBride = "두 분의 앞날이 더욱 행복하길 바래요❤";
+                } else {
+                    contentGroom = groomNickname + "님 " + tipCode.getTitle() + " 하셔야 해요. 지금 준비하러 가볼까요?";
+                    contentBride = brideNickname + "님 " + tipCode.getTitle() + " 하셔야 해요. 지금 준비하러 가볼까요?";
+                }
 
                 //처리한 내용을 알림 전송(신랑, 신부)
-                log.info(sendNotificationByToken(new FCMNotificationRequestDto(groom, title, contentGroom)));
-                log.info(sendNotificationByToken(new FCMNotificationRequestDto(bride, title, contentBride)));
+                log.info(sendNotificationByToken(new FCMNotificationRequestDto(groom, titleGroom, contentGroom)));
+                log.info(sendNotificationByToken(new FCMNotificationRequestDto(bride, titleBride, contentBride)));
             }
         }
     }

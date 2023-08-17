@@ -42,10 +42,33 @@ public class DiaryController {
 		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
 	}
 
-	@Operation(summary = "다이어리 전체 조회하기", description = "회원의 모든 다이어리를 불러옵니다")
+	@Operation(summary = "나의 다이어리 전체 조회하기", description = "나의 모든 다이어리를 불러옵니다")
 	@GetMapping("/diary")
 	public ResponseEntity<BasicResponse> getAllDiary() {
 		List<DiaryResultDto> diaryList = diaryService.getAllDiary();
+
+		BasicResponse basicResponse;
+		if (diaryList.size() == 0) {
+			basicResponse = BasicResponse.builder()
+					.code(HttpStatus.NO_CONTENT.value())
+					.httpStatus(HttpStatus.NO_CONTENT)
+					.message("작성한 다이어리가 없습니다.")
+					.build();
+		} else {
+			basicResponse = BasicResponse.builder()
+					.code(HttpStatus.OK.value())
+					.httpStatus(HttpStatus.OK)
+					.message("전체 다이어리 조회 성공")
+					.count(diaryList.size())
+					.result(Collections.singletonList(diaryList)).build();
+		}
+		return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+	}
+
+	@Operation(summary = "상대방 다이어리 전체 조회하기", description = "나와 커플인 회원의 모든 다이어리를 불러옵니다")
+	@GetMapping("/your-diary")
+	public ResponseEntity<BasicResponse> getAllFianceDiary() {
+		List<DiaryResultDto> diaryList = diaryService.getAllFianceDiary();
 
 		BasicResponse basicResponse;
 		if (diaryList.size() == 0) {
