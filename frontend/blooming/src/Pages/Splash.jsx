@@ -91,7 +91,7 @@ function Splash() {
               navigate("/login");
             }
           } else {
-            console.log("header에 토큰이 없다?");
+            // console.log("header에 토큰이 없다?");
             navigate("/login");
           }
         } catch (error) {

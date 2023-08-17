@@ -30,7 +30,7 @@ function NewTask() {
   const user = useRecoilValue(userState);
 
   useEffect(() => {
-    console.log(task);
+    // console.log(task);
     if (task) {
       setEnteredTitle(task.title);
       setEnteredBody(task.content);

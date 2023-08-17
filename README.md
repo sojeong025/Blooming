@@ -4,27 +4,9 @@
 
 # BLOOMING
 
-모바일 웨딩 플래너
+- 모바일 웨딩 플래너
 
 # 목차
-
-1. [결과물](#결과물)
-2. [서비스 화면](#서비스-화면)
-3. [주요 기능](#주요-기능)
-4. [개발 환경](#개발-환경)
-5. [기술 소개](#기술-소개)
-6. [설계 문서](#설계-문서)
-7. [팀원 소개](#팀원-소개)
-
-# 1. 결과물
-
-- 📽 [UCC](https://youtu.be/9v1aKx9SDYE)
-- 🎤 [중간 발표 PPT](https://drive.google.com/file/d/1mAaGPRllI2iS1Ac5wJBIb7swqCGSx22H/view?usp=share_link)
-- 🎤 [최종 발표 PPT](https://drive.google.com/file/d/14RB6TlOET-WFh-uMFLxWAgyqUoOgS4_n/view?usp=sharing)
-
-# 서비스 화면
-
-## ✅회원 가입# 목차
 
 1. [결과물](#결과물)
 2. [서비스 화면](#서비스-화면)
@@ -41,11 +23,12 @@
 - 🎤 [중간 발표 PPT](https://drive.google.com/file/d/1mAaGPRllI2iS1Ac5wJBIb7swqCGSx22H/view?usp=share_link)
 
 - 🎤 [최종 발표 PPT](https://drive.google.com/file/d/14RB6TlOET-WFh-uMFLxWAgyqUoOgS4_n/view?usp=sharing)
-  
-  # 서비스 화면
+
+# 서비스 화면
 
 <br>
-<img src="gif_files/register.gif" width="200px">
+<img src="gif_files/00랜딩페이지.gif" width="200px">
+<img src="gif_files/01카카오로그인후추가정보입력후가입.gif" width="200px">
 <br>
 
 - 카카오 로그인 성공 시, 서비스에 등록된 회원이 아니라면 회원가입 진행
@@ -57,46 +40,91 @@
 ## 🕒메인 페이지
 
 <br>
-<img src="./gif_files/realtime_matching_regist.gif" width="200px">
+<img src="./gif_files/02메인페이지.gif" width="200px">
+<img src="./gif_files/03메인페이지웨딩정보.gif" width="200px">
 <br>
 
-- ## 🏃‍♂️정보 페이지
+- 메인페이지에서 Dday에 따른 Tip, 웨딩 박람회, 결혼 준비에 대한 TIP 등 다양한 정보를 얻을 수 있음.
+- 결혼 준비에 대한 TIP에서는 결혼 용어에 대한 특징 등 여러가지에 대한 정보를 얻을 수 있음.
 
 <br>
-<img src="./gif_files/individual_matching_distance.gif" width="200px">
+<img src="./gif_files/04메인페이지웨딩박람회정보.gif" width="200px">
+<img src="./gif_files/05메인페이지최근본상품.gif" width="200px">
 <br>
 
-- `현재 위치 기반 0~10km` 까지 거리 설정 가능
-- `일자`, `시간`, `게임 종류`, `게임 시간`, `성별` 필터 제공
-- `시간 순`, `인원 순`, `거리 순`으로 검색된 모임 정렬 가능
+- 박람회에 대한 정보를 얻을 수 있음.
+- 최근 본 상품에 대한 정보를 얻을 수 있음.
+
+## 🏃‍♂️정보 페이지
+
+<br>
+<img src="./gif_files/06웨딩홀찜담기예약.gif" width="200px">
+<img src="./gif_files/07상품후기쓰고도움돼요버튼누르기.gif" width="200px">
+<br>
+
+- 정보페이지에는 웨딩홀, 스튜디오, 드레스, 메이크업, 모바일 청첩장 페이지가 있음.
+- 모바일 청첩장을 제외한 4개의 페이지는 각각 상품에 대한 찜과 예약하기 기능이 있음.
+- 예약을 하면 자동으로 해당 날짜와 시간에 일정이 생성이 되며 일정 디테일로 이동합니다. 세부적인 내용을 수정을 통해 자세히 적을 수 있습니다.
+- 각각의 상품에는 별점과 함께 후기를 줄 수 있다.
+
+<br>
+<img src="./gif_files/08리뷰댓글도움돼요누르기.gif" width="200px">
+<img src="./gif_files/09청첩장만들기.gif" width="200px">
+<br>
+
+- 적혀진 리뷰에 대해 도움이 돼요 버튼이 존재.
+- 청첩장 만들기를 통해 본인만의 메시지를 담은 모바일 청첩장 페이지가 존재하고 카카오톡 공유하기 버튼을 통해 카카오톡으로 해당 페이지에 대한 공유 가능
 
 ## 💭스케쥴 페이지
 
 <br>
-<img src="gif_files/chat.gif" width="200px">
+<img src="gif_files/10개인일정등록후알림.gif" width="200px">
+<img src="gif_files/11일정등록알림.gif" width="200px">
+<img src="gif_files/12일정리마인드알림.gif" width="200px">
 <br>
 
-- 운동 모임, 또는 팀 채팅방에서 사람들과 채팅 가능
+- 개인일정을 스케쥴 페이지에서 등록이 가능하며, 등록된 약혼자의 일정과 공유하는 일정을 확인할 수 있다.
+- 스케쥴을 등록하면 약혼자에게도 알림을 전달하여 어떤 일정이 등록되었는지 알려준다.
+- 등록된 일정도 30일 7일 1일 당일에 리마인드 알림을 준다.
 
 ## 📑 다이어리 페이지
 
 <br>
-<img src="gif_files/chat.gif" width="200px">
+<img src="./gif_files/13다이어리페이지시작.gif" width="200px">
+<img src="./gif_files/14다이어리메인.gif" width="200px">
 <br>
 
-- `자신이 참여한 모든 운동 모임` 확인 가능
-- ">" 버튼 클릭 시 `매칭 상세 정보 확인 가능`
-- `팀 매칭 정보` 확인 가능
+- 다이어리페이지는 작성에대한 설명과함께 작성페이지로 이동할 수 있음
+- 메인페이지에서는 자신이 작성한 다이어리와 약혼자가 작성한 다이어리를 보여주며 약혼자의 다이어리는 개수를 알 수 있으나 내용을 확인할 수는 없습니다.
+
+<br>
+<img src="./gif_files/15다이어리글작성.gif" width="200px">
+<img src="./gif_files/16커플다이어리결혼식날오픈.gif" width="200px">
+<br>
+
+- 다이어리 작성에는 기본적인 사진과 제목, 내용이 입력가능합니다.
+- 결혼식 당일이 되면 약혼자의 다이어리에 대한 정보 확인할 수 있습니다.
 
 ## 👨🏼‍🤝‍👨🏼마이 페이지
 
 <br>
-<img src="./gif_files/team_create.gif" width="200px">
+<img src="./gif_files/17커플코드연결.gif" width="200px">
+<img src="./gif_files/18커플연결성공후프로필.gif" width="200px">
+<img src="./gif_files/19푸시알림설정.gif" width="200px">
 <br>
 
-- 전체 목록의 `팀 생성 탭`, 혹은 `팀 매칭 페이지`에서 팀 생성 가능
-- `운동 종목`을 선택, `친구를 추가`하고 `팀 정보를 입력`하여 팀 생성
-- 팀 생성 시 `팀 채팅방`도 같이 생성됨
+- 커플코드는 가입할 때 입력을 할 수 있으나, 입력하지 않고 건너갔을 경우에 마이페이지에 있는 상대방과 연결하기를 통해서 이름과 커플코드를 입력하여 확인을 거친 후 연결이 가능(연결은 1명과 가능하며, 이미 연결이 된 사람과의 연결은 불가합니다.)
+- 커플 코드 연결을 성공하면 프로필에 약혼자의 프로필이 꼭 붙어 나타납니다
+- PUSH알림 설정을 통해 푸쉬 설정을 ON / OFF 설정이 가능합니다.
+
+<br>
+<img src="./gif_files/20마이페이지내후기.gif" width="200px">
+<img src="./gif_files/21찜등록내찜목록보기.gif" width="200px">
+<img src="./gif_files/22커플찜확인.gif" width="200px">
+<br>
+
+- 마이페이지 나의 후기를 통해 내가 작성한 모든 후기를 볼 수 있으며, 후기 클릭 시 해당 상품디테일로 이동합니다.
+- 찜에 등록이 된 상품은 마이페이지의 찜목록에 들어가 있으며, 내가 찜한 거와 약혼자가 찜한 거 그리고 동시에 찜한 상품을 확인할 수 있습니다.
 
 # 주요 기능
 
@@ -106,15 +134,11 @@
   - ###### 예약 및 스케쥴에 따른 알림
   - ###### 다이어리 작성에 따른 알림
 
-<br>
-
 - ##### 2. 다이어리 기능
   
   - ###### 내 다이어리
   
   - ###### 약혼자 다이어리
-
-<br>
 
 - ##### 3. 모바일 청첩장
   
@@ -173,7 +197,7 @@
 
 - Springboot `2.7.13`
 - Lombok
-- Spring Data JPA 
+- Spring Data JPA
 - Spring Data Redis(lettuce)
 - Spring Web
 - Springdoc-openapi-ui `1.6.11`
@@ -190,7 +214,6 @@
 - 웹 기반 하이브리드 어플리케이션
   
   - `Flutter`를 활용하여 웹 및 앱 플랫폼 모두 사용 가능
-  - 
 
 - 사용자 알림
   
@@ -231,6 +254,8 @@
 
 ## 🎨 와이어프레임
 
+<img title="" src="README_assets/9005bf0508ad6b1640da37aaf236527847462a4b.jpg" alt="Group 1 (1).jpg" width="702">
+
 ## 📃 기능 명세서
 
 ![7.PNG](README_assets/81e14af2401c798e67b35a0a670b9260bb268d45.PNG)
@@ -268,14 +293,14 @@
 
 **Frontend**
 
-- 정훈석 : 
-- 정소정 : UX/UI 설계, PPT제작, 영상 제작
-- 구희영 : UX/UI 설계
+- 정훈석 : 프론트 Token 처리 / Flutter / 카카오톡 공유하기 / 리액트 베이스 코드 제작 / 에러 수정
+- 정소정 : UX/UI 설계 / PPT제작 / 영상 제작 / 발표 / 모바일 청첩장 페이지 제작
+- 구희영 : UX/UI 설계 / PPT제작 / Route 설정 /회원 정보, 상품 정보, 마이페이지 제작
 
 **Backend**
 
-- 강동윤: 
+- 강동윤: Fluttter / infra 구축 / 다이어리, 찜하기, 도움돼요 API 제작
 
-- 김성인 : 
+- 김성인 : DB설계 및 구축 / 회원(Oauth, JWT) 관련 API / S3 / 커플, 회원 등 API 제작
 
-- 김승연 : 
+- 김승연 : 상품 크롤링 및 기타 API / FCM 알림 / Redis를 이용한 예약 랭킹 및 최근 본 상품 리스트 API 제작

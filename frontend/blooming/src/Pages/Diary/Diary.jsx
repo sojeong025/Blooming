@@ -30,7 +30,7 @@ const Diary = () => {
             if (res.status === 200) {
               setFianceDiaries(res.data.result[0]);
             } else if (res.status === 204) {
-              console.log("약혼자의 다이어리가 없습니다.");
+              // console.log("약혼자의 다이어리가 없습니다.");
             }
           } catch (err) {
             console.log("약혼자 다이어리 받아오기 에러", err);

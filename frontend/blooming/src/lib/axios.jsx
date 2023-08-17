@@ -33,7 +33,7 @@ customAxios.interceptors.request.use(
         const response = await axios.get(`${SERVER_ADDRESS}/profile`, {
           headers,
         });
-        console.log("액세스 및 리프레쉬 토큰 재발급");
+        // console.log("액세스 및 리프레쉬 토큰 재발급");
         localStorage.setItem("accessToken", response.headers["authorization"]);
         localStorage.setItem(
           "refreshToken",
