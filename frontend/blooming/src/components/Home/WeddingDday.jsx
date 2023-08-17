@@ -35,19 +35,6 @@ export const WeddingDday = () => {
 
     updateWeddingDday();
 
-    const timer = setInterval(() => {
-      if (weddingDday === 0 || weddingDday === -1) {
-        clearInterval(timer);
-      } else {
-        // setWeddingDate((prevState) =>
-        //   dayjs(prevState).add(-1, "day").format("YYYY-MM-DD"),
-        // );
-      }
-    }, 500);
-
-    return () => {
-      clearInterval(timer);
-    };
   }, [weddingDate]);
 
   // console.log(weddingDate, weddingDday);
