@@ -45,7 +45,7 @@ export default function InfoDetail() {
   const deleteReview = async (id, email) => {
     if (email === userData.email) {
       try {
-        customAxios.delete(`/review/${id}`);
+        await customAxios.delete(`/review/${id}`);
         setReviews([]);
         fetchReviewData();
       } catch (error) {

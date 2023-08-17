@@ -67,13 +67,16 @@ export default function DetailReviewList({
                       {review.createdDate.slice(0, 10)}
                     </span>
                   </div>
-
-                  <div
-                    onClick={() => deleteReview(review.reviewId, review.email)}
-                    className={`${classes.Grey} ${classes.delete}`}
-                  >
-                    <span>삭제</span>
-                  </div>
+                  {deleteReview && (
+                    <div
+                      onClick={() =>
+                        deleteReview(review.reviewId, review.email)
+                      }
+                      className={`${classes.Grey} ${classes.delete}`}
+                    >
+                      <span>삭제</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className={` ${classes.nameContainer}`}>
