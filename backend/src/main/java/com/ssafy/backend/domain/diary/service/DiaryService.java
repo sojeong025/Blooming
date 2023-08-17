@@ -44,7 +44,7 @@ public class DiaryService {
         Couple couple = user.getCouple();
         for (User userOne : couple.getUsers()){
             if(user.getId() != userOne.getId()){
-                String title = userOne.getName()+"님이 다이어리를 작성 했습니다.";
+                String title = user.getName()+"님이 다이어리를 작성 했습니다.";
                 String content = "오늘 있었던 일을 다이어리에 작성해 보세요.";
                 notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
             }
