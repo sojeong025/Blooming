@@ -48,7 +48,7 @@ const NoticeSwipeable = () => {
 
   useEffect(() => {
     fetchNotice();
-    setNotice();
+    // setNotice();
   }, []);
 
   // 새로고침
@@ -154,34 +154,25 @@ const NoticeSwipeable = () => {
         }
       >
         <SwipeableList fullSwipe={fullSwipe} type={ListType.IOS}>
-          {notice?.map(
-            ({
-              id,
-              readStatus,
-              notificationType,
-              title,
-              content,
-              createdAt,
-            }) => (
-              <SwipeableListItem
-                onClick={() => readNotice({ id, readStatus })}
-                key={id}
-                trailingActions={trailingActions({ id })}
+          {notice?.map(({ id, readStatus, title, content, createdAt }) => (
+            <SwipeableListItem
+              onClick={() => readNotice({ id, readStatus })}
+              key={id}
+              trailingActions={trailingActions({ id })}
+            >
+              <div
+                className={`${classes.ItemBox} ${
+                  readStatus === "UNREAD" ? classes.unread : classes.read
+                }`}
               >
-                <div
-                  className={`${classes.ItemBox} ${
-                    readStatus === "UNREAD" ? classes.unread : classes.read
-                  }`}
-                >
-                  <div className={classes.ItemTitle}>{title}</div>
-                  <div className={classes.ItemContent}>{content}</div>
-                  <div className={classes.ItemTime}>
-                    {getRelativeTime(createdAt)}
-                  </div>
+                <div className={classes.ItemTitle}>{title}</div>
+                <div className={classes.ItemContent}>{content}</div>
+                <div className={classes.ItemTime}>
+                  {getRelativeTime(createdAt)}
                 </div>
-              </SwipeableListItem>
-            ),
-          )}
+              </div>
+            </SwipeableListItem>
+          ))}
         </SwipeableList>
       </InfiniteScroll>
     </>
