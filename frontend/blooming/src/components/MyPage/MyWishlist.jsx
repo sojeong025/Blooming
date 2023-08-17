@@ -114,9 +114,7 @@ export default function MyWishlist() {
         </NavItem>
       </NavContainer>
 
-      {state === "me" && (
-        <MyWishlistMe onWish={onWish(id)} myWishlist={me} toWishlist={me} />
-      )}
+      {state === "me" && <MyWishlistMe myWishlist={me} toWishlist={me} />}
       {state === "you" && (
         <MyWishlistMe myWishlist={duplicatedProducts} toWishlist={you} />
       )}
