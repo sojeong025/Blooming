@@ -24,7 +24,7 @@ const Diary = () => {
       
       if (response.status === 200) {
         setDiaries(response.data.result[0]);
-        if (weddingDday === 0 && fiance) {
+        if (weddingDday === 0 && fiance?.name) {
           try {
             const res = await customAxios.get("your-diary");
             if (res.status === 200) {
