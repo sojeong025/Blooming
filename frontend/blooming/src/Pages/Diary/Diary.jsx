@@ -93,37 +93,30 @@ const Diary = () => {
           <div className={classes.none}>다이어리를 작성해주세요</div>
         )}
       </div>
-      {fianceDiaries !== [] &&
+      {fianceDiaries.length > 0 &&
         <>
           <div className={classes.diaryTitle}>약혼자 다이어리</div>
           <div className={classes.diary}>
-            {fianceDiaries.length > 0 ? (
-              fianceDiaries
-                .slice()
-                .reverse()
-                .map((fianceDiary) => (
-                  <div key={fianceDiary.id} className={classes.diaryItem}>
-                    <Link key={fianceDiary.id} to={`/diary/${fianceDiary.id}`}>
-                      <img
-                        src={
-                          fianceDiary.image
-                            ? fianceDiary.image
-                            : "src/assets/Icon/nopicture.png"
-                        }
-                        alt='image'
-                        className={classes.diaryImage}
-                      />
-                      <p className={classes.title}>{fianceDiary.title}</p>
-                      <p className={classes.date}>{fianceDiary.date}</p>
-                    </Link>
-                  </div>
-                ))
-            ) : (
-              <div className={classes.none}>
-                {/* 약혼자가 작성한 다이어리가 없습니다. <br /> 다이어리를 작성하여
-                추억을 공유하세요. */}
-              </div>
-            )}
+            {fianceDiaries
+              .slice()
+              .reverse()
+              .map((fianceDiary) => (
+                <div key={fianceDiary.id} className={classes.diaryItem}>
+                  <Link key={fianceDiary.id} to={`/diary/${fianceDiary.id}`}>
+                    <img
+                      src={
+                        fianceDiary.image
+                          ? fianceDiary.image
+                          : "src/assets/Icon/nopicture.png"
+                      }
+                      alt='image'
+                      className={classes.diaryImage}
+                    />
+                    <p className={classes.title}>{fianceDiary.title}</p>
+                    <p className={classes.date}>{fianceDiary.date}</p>
+                  </Link>
+                </div>
+              ))}
           </div>
         </>}
       <div>
