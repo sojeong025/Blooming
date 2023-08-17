@@ -16,6 +16,7 @@ export default function DetailReviewList({
   fetchReviewData,
   onLikeClick,
   onReviewClick,
+  deleteReview,
 }) {
   const userData = useRecoilValue(userState);
   const [isModal, setIsModal] = useState(false);
@@ -50,20 +51,29 @@ export default function DetailReviewList({
               }}
             >
               <div className={classes.ReviewWriter}>
-                <div>
-                  <span className={classes.ReviewStar}>
-                    <Rating
-                      readonly
-                      className={classes.rating}
-                      initialRating={review.star}
-                      stop={5}
-                      emptySymbol={<FaStar className={classes.emptyStar} />}
-                      fullSymbol={<FaStar className={classes.fullStar} />}
-                    />
-                  </span>
-                  <span className={`${classes.Grey} ${classes.date}`}>
-                    {review.createdDate.slice(0, 10)}
-                  </span>
+                <div className={classes.Flex}>
+                  <div>
+                    <span className={classes.ReviewStar}>
+                      <Rating
+                        readonly
+                        className={classes.rating}
+                        initialRating={review.star}
+                        stop={5}
+                        emptySymbol={<FaStar className={classes.emptyStar} />}
+                        fullSymbol={<FaStar className={classes.fullStar} />}
+                      />
+                    </span>
+                    <span className={`${classes.Grey} ${classes.date}`}>
+                      {review.createdDate.slice(0, 10)}
+                    </span>
+                  </div>
+
+                  <div
+                    onClick={() => deleteReview(review.reviewId, review.email)}
+                    className={`${classes.Grey} ${classes.delete}`}
+                  >
+                    <span>삭제</span>
+                  </div>
                 </div>
 
                 <div className={` ${classes.nameContainer}`}>

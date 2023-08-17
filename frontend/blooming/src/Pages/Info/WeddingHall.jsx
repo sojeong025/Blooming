@@ -69,6 +69,21 @@ export default function WeddingHall() {
   useEffect(() => {
     fetchData();
     fetchRanking();
+    // setWeddingHall([
+    //   {
+    //     id: 85,
+    //     itemName: "빌라드지디 수서",
+    //     brief:
+    //       "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
+    //     thumbnail:
+    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
+    //     company: "빌라드지디 수서",
+    //     companyTime: "10:00 ~ 19:00",
+    //     companyAddress: "서울 강남구 율현동 68-8",
+    //     starRate: 0,
+    //     wish: false,
+    //   },
+    // ]);
   }, []);
 
   return (
@@ -88,41 +103,44 @@ export default function WeddingHall() {
           }
         >
           <ProductFlex>
-            {isLoading
-              ? Array(8)
-                  .fill()
-                  .map((_, index) => (
-                    <FlexItem key={index}>
-                      <div
-                        style={{
-                          padding: "10px",
-                          textAlign: "center",
-                          boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.1)",
-                          background: "#FFF",
-                          borderRadius: "6px",
-                          overflow: "hidden",
-                          border: "1px solid rgba(0, 0, 0, 0.08)",
-                          marginBottom: "1rem",
-                        }}
-                      >
-                        <Skeleton height={200} />
-                        <Skeleton
-                          width={115}
-                          height={16}
-                          style={{ marginTop: "1rem", marginBottom: "0.5rem" }}
-                        />
-                        <Skeleton width={120} height={16} />
-                      </div>
-                    </FlexItem>
-                  ))
-              : weddingHall.map((product) => (
-                  <FlexItem key={product.id}>
-                    <ProductItem
-                      product={product}
-                      onClick={() => handleNavigation(product)}
-                    />
-                  </FlexItem>
-                ))}
+            {
+              // isLoading
+              // ? Array(8)
+              //     .fill()
+              //     .map((_, index) => (
+              //       <FlexItem key={index}>
+              //         <div
+              //           style={{
+              //             padding: "10px",
+              //             textAlign: "center",
+              //             boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.1)",
+              //             background: "#FFF",
+              //             borderRadius: "6px",
+              //             overflow: "hidden",
+              //             border: "1px solid rgba(0, 0, 0, 0.08)",
+              //             marginBottom: "1rem",
+              //           }}
+              //         >
+              //           <Skeleton height={200} />
+              //           <Skeleton
+              //             width={115}
+              //             height={16}
+              //             style={{ marginTop: "1rem", marginBottom: "0.5rem" }}
+              //           />
+              //           <Skeleton width={120} height={16} />
+              //         </div>
+              //       </FlexItem>
+              //     ))
+              // :
+              weddingHall.map((product) => (
+                <FlexItem key={product.id}>
+                  <ProductItem
+                    product={product}
+                    onClick={() => handleNavigation(product)}
+                  />
+                </FlexItem>
+              ))
+            }
             {weddingHall.map((product) => (
               <FlexItem key={product.id}>
                 <ProductItem

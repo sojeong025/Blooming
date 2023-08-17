@@ -87,3 +87,12 @@
 .ReviewContent {
   word-break: keep-all;
 }
+
+.Flex {
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+}
+.delete {
+  width: 40px;
+}
