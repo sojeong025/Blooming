@@ -68,8 +68,7 @@ function MobileInvitationShare() {
 
       {/* --------인사말---------- */}
         <div className={classes.mention}>
-          <p className={classes.mentionTitle}>{invitation.title}
-          </p>
+          <p className={classes.mentionTitle}>{invitation.title}</p>
           <p className={classes.mentionContent}>{invitation.content} </p>
           <hr className="theme2.mentionHrTheme2" />
 
