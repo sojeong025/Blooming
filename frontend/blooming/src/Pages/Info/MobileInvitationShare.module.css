@@ -17,13 +17,13 @@
 
 .total {
   position: var(--preview-total-position, fixed);
-  width: 370px;
+  width: 410px;
   transform: var(--preview-total-transform, translate(-50%, -50%));
   background-color: white;
   padding: 20px 10px;
   border-radius: 8px;
   z-index: 900;
-  max-height: 85vh;
+  max-height: 105vh;
   overflow: auto;
   overflow-x: hidden;
   text-align: center;
