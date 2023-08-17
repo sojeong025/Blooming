@@ -33,7 +33,7 @@ function DiaryHeader(props) {
           );
         } else {
           elements.push(
-            <div key={`my_${diaries[i].id}`} className={classes.demoPage2}>
+            <div key={`my_${fianceDiaries[i].id}`} className={classes.demoPage2}>
               <div>
                 <HiOutlineLockClosed className={classes.lock} />
               </div>
@@ -63,7 +63,7 @@ function DiaryHeader(props) {
           );
         } else {
           elements.push(
-            <div key={`fiance_${fianceDiaries[i].id}`} className={classes.demoPage2}>
+            <div key={`fiance_${diaries[i].id}`} className={classes.demoPage2}>
               <div>
                 <HiOutlineLockClosed className={classes.lock} />
               </div>
@@ -77,30 +77,30 @@ function DiaryHeader(props) {
           );
         }
       }
-      return elements;
     }
+    return elements;
+  }
   
 
-    return (
-      <HTMLFlipBook
-        width={180}
-        height={280}
-        pageFlipDirection="rtl"
-        responsive={true}
-        usePortrait={false}
-        mobileScrollSupport={diaries.length === 0 || fianceDiaries.length === 0 ? false : true}
-        showCover={true}
-        disableFlipByClick={diaries.length === 0 || fianceDiaries.length === 0 ? true : false}
-        drawShadow
-      >
-        {/* 커버 페이지 */}
-        <div className={classes.cover}></div>
+  return (
+    <HTMLFlipBook
+      width={180}
+      height={280}
+      pageFlipDirection="rtl"
+      responsive={true}
+      usePortrait={false}
+      mobileScrollSupport={diaries.length === 0 ? false : true}
+      showCover={true}
+      disableFlipByClick={diaries.length === 0 ? true : false}
+      drawShadow
+    >
+      {/* 커버 페이지 */}
+      <div className={classes.cover}></div>
 
-        {/* 컨텐츠 페이지 */}
-        {createElements()}
-      </HTMLFlipBook>
-    );
-  }
+      {/* 컨텐츠 페이지 */}
+      {createElements()}
+    </HTMLFlipBook>
+  );
 }
 
 export default DiaryHeader;
