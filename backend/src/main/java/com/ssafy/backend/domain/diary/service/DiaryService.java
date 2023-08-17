@@ -1,5 +1,7 @@
 package com.ssafy.backend.domain.diary.service;
 
+import com.ssafy.backend.domain.couple.Couple;
+import com.ssafy.backend.domain.couple.repository.CoupleRepository;
 import com.ssafy.backend.domain.diary.Diary;
 import com.ssafy.backend.domain.diary.dto.DiaryModifyDto;
 import com.ssafy.backend.domain.diary.dto.DiaryRegistDto;
@@ -7,6 +9,8 @@ import com.ssafy.backend.domain.diary.dto.DiaryResultDto;
 import com.ssafy.backend.domain.diary.repository.DiaryRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
+import com.ssafy.backend.global.fcm.FCMNotificationRequestDto;
+import com.ssafy.backend.global.fcm.NotificationScheduler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +27,8 @@ import java.util.stream.Collectors;
 public class DiaryService {
     private final DiaryRepository diaryRepository;
     private final UserRepository userRepository;
+    private final NotificationScheduler notificationScheduler;
+
 
     public long registDiary(DiaryRegistDto diaryRegistDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -33,6 +39,16 @@ public class DiaryService {
         diary.setUser(user);
 
         Diary savedDiary = diaryRepository.save(diary);
+
+        //다이어리 작성시 상대방에게 알림 보내기
+        Couple couple = user.getCouple();
+        for (User userOne : couple.getUsers()){
+            if(user.getId() != userOne.getId()){
+                String title = userOne.getName()+"님이 다이어리를 작성 했습니다.";
+                String content = "오늘 있었던 일을 다이어리에 작성해 보세요.";
+                notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
+            }
+        }
 
         return savedDiary.getId();
     }

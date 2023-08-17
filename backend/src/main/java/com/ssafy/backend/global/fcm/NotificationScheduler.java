@@ -108,28 +108,28 @@ public class NotificationScheduler {
                 String brideNickname = (bride != null) ? bride.getNickname() : "예비신부";
 
                 //오늘은 오늘이라고 하기
-                String dayName = "오늘은 ";
+                String dayName = "오늘 ";
                 if (day == 1) {
-                    dayName = "내일은 ";
+                    dayName = "내일 ";
                 } else if (day != 0) {
-                    dayName = day + "일 후에는 ";
+                    dayName = day + "일 후 ";
                 }
                 if (schedule.getScheduledBy() == null) continue; //예외처리
                 switch (schedule.getScheduledBy()) {
                     case COMMON:
                         //두 명에게 같은 알림 전송
-                        contentGroom = dayName + "두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = dayName + "두 분이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = dayName + "두 분의 " + schedule.getTitle() + "이 있어요.";
+                        contentBride = dayName + "두 분의 " + schedule.getTitle() + "이 있어요.";
                         break;
                     case MALE:
                         //신랑 일정.
-                        contentGroom = dayName + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = dayName + groomNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = dayName + "개인 일정이 있어요.";
+                        contentBride = dayName + groomNickname + "님의 개인 일정이 있어요.";
                         break;
                     case FEMALE:
                         //신부 일정.
-                        contentGroom = dayName + brideNickname + "님이 " + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
-                        contentBride = dayName + schedule.getContent() + " 하는 날이에요. 클릭해서 팁을 알아보세요!";
+                        contentGroom = dayName + brideNickname + "님의 개인 일정이 있어요.";
+                        contentBride = dayName + "개인 일정이 있어요.";
                         break;
                 }
 
@@ -185,8 +185,8 @@ public class NotificationScheduler {
 
 
                 if (day == 0) {
-                    contentGroom = groomNickname + "두 사람의 앞날이 더욱 행복하길 바래요";
-                    contentBride = brideNickname + "두 사람의 앞날이 더욱 행복하길 바래요";
+                    contentGroom = "두 분의 앞날이 더욱 행복하길 바래요❤";
+                    contentBride = "두 분의 앞날이 더욱 행복하길 바래요❤";
                 } else {
                     contentGroom = groomNickname + "님 " + tipCode.getTitle() + " 하셔야 해요. 지금 준비하러 가볼까요?";
                     contentBride = brideNickname + "님 " + tipCode.getTitle() + " 하셔야 해요. 지금 준비하러 가볼까요?";
