@@ -8,14 +8,14 @@ import { useSetRecoilState } from "recoil";
 
 function MobileInvitation() {
   const setMobileInvitationData = useSetRecoilState(mobileInvitationState);
-  const [count, setCount ] = useState(0)
+  const [count, setCount] = useState(0);
 
   const fetchData = async () => {
     try {
       const response = await customAxios.get("invitation");
-      setCount(response.data.count)
+      setCount(response.data.count);
       if (response.data.result[0]) {
-        setMobileInvitationData(response.data.result[0])
+        setMobileInvitationData(response.data.result[0]);
       }
     } catch (error) {
       console.log(error);
@@ -27,7 +27,6 @@ function MobileInvitation() {
     fetchData();
   }, []);
 
-
   return (
     <div className='mainContainer'>
       <div className={classes.container}>
@@ -36,11 +35,17 @@ function MobileInvitation() {
         </div>
 
         {count ? (
-          <NavLink to='/mobile-invitation-detail'>
+          <NavLink
+            to='/mobile-invitation-detail'
+            state={{ subNavAction: "mobile-invitation" }}
+          >
             <div className={classes.btn}>나의 청첩장 보기</div>
           </NavLink>
         ) : (
-          <NavLink to='/invitation-create'>
+          <NavLink
+            to='/invitation-create'
+            state={{ subNavAction: "mobile-invitation" }}
+          >
             <div className={classes.btn}>제작하기</div>
           </NavLink>
         )}
