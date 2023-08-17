@@ -1,12 +1,29 @@
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalForm {
+  margin-top: 50px;
+}
+
 .total {
   position: var(--preview-total-position, fixed);
-  width: 370px;
+  width: 410px;
   transform: var(--preview-total-transform, translate(-50%, -50%));
   background-color: white;
   padding: 20px 10px;
   border-radius: 8px;
   z-index: 900;
-  max-height: 85vh;
+  max-height: 105vh;
   overflow: auto;
   overflow-x: hidden;
   text-align: center;
