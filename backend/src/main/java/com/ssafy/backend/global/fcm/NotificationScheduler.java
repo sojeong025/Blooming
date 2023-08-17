@@ -118,8 +118,8 @@ public class NotificationScheduler {
                 switch (schedule.getScheduledBy()) {
                     case COMMON:
                         //두 명에게 같은 알림 전송
-                        contentGroom = dayName + "두 분의 " + schedule.getTitle() + "이 있어요.";
-                        contentBride = dayName + "두 분의 " + schedule.getTitle() + "이 있어요.";
+                        contentGroom = dayName + "두 분의 " + schedule.getContent() + "이 있어요.";
+                        contentBride = dayName + "두 분의 " + schedule.getContent() + "이 있어요.";
                         break;
                     case MALE:
                         //신랑 일정.

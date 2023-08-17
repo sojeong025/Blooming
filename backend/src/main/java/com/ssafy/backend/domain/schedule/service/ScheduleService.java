@@ -151,7 +151,7 @@ public class ScheduleService {
 
         //새로운 스케쥴 등록 시 본인 + 상대에게 알림
         String title = "새로운 일정이 등록되었습니다.";
-        String content = reservationScheduleRegistDto.getTitle() + " : " + reservationScheduleRegistDto.getContent();
+        String content = reservationScheduleRegistDto.getTitle() + "\n" + reservationScheduleRegistDto.getContent();
         for (User userOne : couple.getUsers()){
             notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
         }
