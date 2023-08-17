@@ -24,7 +24,7 @@ const Diary = () => {
       
       if (response.status === 200) {
         setDiaries(response.data.result[0]);
-        if (weddingDday === 0 && fiance?.name) {
+        if (weddingDday <= 0 && fiance?.name) {
           try {
             const res = await customAxios.get("your-diary");
             if (res.status === 200) {
@@ -90,7 +90,7 @@ const Diary = () => {
           </div>
         )}
       </div>
-      {fiance?.name ? 
+      {fianceDiaries !== [] &&
         <>
           <div>약혼자 다이어리</div>
           <div className={classes.diary}>
@@ -114,10 +114,7 @@ const Diary = () => {
               </div>
             )}
           </div>
-        </> :
-          <div className={classes.none}>
-            연결된 약혼자가 없습니다.<hr /> 약혼자를 연결하여 추억을 공유하세요.
-          </div>}
+        </>}
       <div>
         <CreateItem hide={hideModalHandler} visible={modalIsVisible} fetchData={fetchData} />
         <button onClick={showModalHandler} className={classes.button}>
