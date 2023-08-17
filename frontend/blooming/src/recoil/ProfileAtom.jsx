@@ -44,7 +44,14 @@ export const userState = atom({
 // 유저의 커플 데이터
 export const userCoupleState = atom({
   key: "userCoupleState",
-  default: null,
+  default: {
+    email: "",
+    name: "",
+    nickname: "",
+    phoneNumber: "",
+    gender: "",
+    profileImage: "",
+  },
 });
 
 // 신랑/신부 자동

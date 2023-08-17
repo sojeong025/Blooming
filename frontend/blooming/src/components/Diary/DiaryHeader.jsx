@@ -33,7 +33,7 @@ function DiaryHeader(props) {
           );
         } else {
           elements.push(
-            <div key={`my_${diaries[i].id}`} className={classes.demoPage2}>
+            <div key={`my_${fianceDiaries[i].id}`} className={classes.demoPage2}>
               <div>
                 <HiOutlineLockClosed className={classes.lock} />
               </div>
@@ -63,7 +63,7 @@ function DiaryHeader(props) {
           );
         } else {
           elements.push(
-            <div key={`fiance_${fianceDiaries[i].id}`} className={classes.demoPage2}>
+            <div key={`fiance_${diaries[i].id}`} className={classes.demoPage2}>
               <div>
                 <HiOutlineLockClosed className={classes.lock} />
               </div>
