@@ -48,7 +48,7 @@ function TaskDetail() {
         await customAxios.delete(`schedule/${task.id}`);
         navigate("/schedule");
       } catch (error) {
-        console.log("스케쥴 삭제 API 에러", error);
+        // console.log("스케쥴 삭제 API 에러", error);
       }
     }
   }
@@ -63,7 +63,7 @@ function TaskDetail() {
           setFormattedTime(response.data.result[0].scheduleTime.slice(0, 5));
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     };
     fetchData();

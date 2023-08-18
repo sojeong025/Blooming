@@ -77,7 +77,7 @@ export default function TipMagazine() {
         setTipMagazine(response.data.result[0]);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

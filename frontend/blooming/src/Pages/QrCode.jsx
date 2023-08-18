@@ -10,7 +10,7 @@ export default function QrCode() {
         imgElement.src = qrCodeDataUrl;
     })
     .catch((error) => {
-        console.error("QR 코드 생성 실패: ", error);
+        // console.error("QR 코드 생성 실패: ", error);
     });
   return (
     <div style={{

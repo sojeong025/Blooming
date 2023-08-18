@@ -50,7 +50,7 @@ export default function WeddingHall() {
         ...response.data.result[0].content,
       ]);
     } catch (error) {
-      console.error("HALL 조회 에러:", error);
+      // console.error("HALL 조회 에러:", error);
       // setIsLoading(true);
       setErrorModal(true);
     }
@@ -62,7 +62,7 @@ export default function WeddingHall() {
       const response = await customAxios.get("ranking/HALL");
       setRanking(response.data.result[0]);
     } catch (error) {
-      console.log("랭킹", error);
+      // console.log("랭킹", error);
     }
   };
 

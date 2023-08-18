@@ -155,7 +155,7 @@ const StepForm = ({ step, handleSubmit, onChangeHandlers, values }) => {
         await handleSubmit(4)(event);
       }
     } catch (error) {
-      console.log("웨딩 정보 POST 에러: ", error);
+      // console.log("웨딩 정보 POST 에러: ", error);
     }
   };
   // 웨딩 날짜 선택 ====================================
