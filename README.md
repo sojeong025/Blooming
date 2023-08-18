@@ -224,19 +224,15 @@
 
 - 사용자 알림
   
-  - `Firebase Cloud Message`를 이용하여 사용자에게 필요한 알림 제공
+  - `Firebase Cloud Message`를 이용하여 사용자에게 필요한 알림 제공, `Redis`를 이용한 FCM Token 관리
 
 - 카카오 로그인
   
   - `OAUTH2` 인증을 이용해 불필요한 개인정보 입력 최소화
 
-- 상품 실시간 예약 랭킹
+- 상품 실시간 예약 랭킹, 최근 본 상품
 
-  - 
-
-- 최근 본 상품
-
- - 
+  - in-memory DB인 `Redis`의 sorted set 자료구조를 이용해 실시간 예약 랭킹과 사용자별 최근 본 상품 정보 제공
 
 # 설계 문서
 
