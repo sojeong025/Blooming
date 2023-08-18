@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { diaryState, fianceDiaryState } from "../../recoil/DiaryStateAtom";
 import CreateItem from "../../components/Diary/ModalItem";
@@ -11,6 +11,9 @@ import { weddingDdayState } from "../../recoil/WeddingDdayAtom";
 import { userCoupleState } from "../../recoil/ProfileAtom";
 
 const Diary = () => {
+
+  const navigate = useNavigate();
+
   const weddingDday = useRecoilValue(weddingDdayState);
   const fiance = useRecoilValue(userCoupleState);
   const [diaries, setDiaries] = useRecoilState(diaryState);
@@ -59,6 +62,12 @@ const Diary = () => {
     setModalIsVisible(true);
   }
 
+  const handleNavigation = (diary, edit=true) => {
+    navigate(`/diary/${diary.id}`, {
+      state: { edit: edit, navAction: "diary" },
+    });
+  };
+
   return (
     <div className={classes.container}>
       <p className={classes.mainText}>Diary Preview</p>
@@ -73,20 +82,18 @@ const Diary = () => {
             .slice()
             .reverse()
             .map((diary) => (
-              <div key={diary.id} className={classes.diaryItem}>
-                <Link key={diary.id} to={`/diary/${diary.id}`}>
-                  <img
-                    src={
-                      diary.image
-                        ? diary.image
-                        : "src/assets/Icon/nopicture.png"
-                    }
-                    alt='image'
-                    className={classes.diaryImage}
-                  />
-                  <p className={classes.title}>{diary.title}</p>
-                  <p className={classes.date}>{diary.date}</p>
-                </Link>
+              <div key={diary.id} className={classes.diaryItem} onClick={handleNavigation(diary)}>
+                <img
+                  src={
+                    diary.image
+                      ? diary.image
+                      : "src/assets/Icon/nopicture.png"
+                  }
+                  alt='image'
+                  className={classes.diaryImage}
+                />
+                <p className={classes.title}>{diary.title}</p>
+                <p className={classes.date}>{diary.date}</p>
               </div>
             ))
         ) : (
@@ -101,20 +108,18 @@ const Diary = () => {
               .slice()
               .reverse()
               .map((fianceDiary) => (
-                <div key={fianceDiary.id} className={classes.diaryItem}>
-                  <Link key={fianceDiary.id} to={`/diary/${fianceDiary.id}`}>
-                    <img
-                      src={
-                        fianceDiary.image
-                          ? fianceDiary.image
-                          : "src/assets/Icon/nopicture.png"
-                      }
-                      alt='image'
-                      className={classes.diaryImage}
-                    />
-                    <p className={classes.title}>{fianceDiary.title}</p>
-                    <p className={classes.date}>{fianceDiary.date}</p>
-                  </Link>
+                <div key={fianceDiary.id} className={classes.diaryItem} onClick={handleNavigation(fianceDiary, false)}>
+                  <img
+                    src={
+                      fianceDiary.image
+                        ? fianceDiary.image
+                        : "src/assets/Icon/nopicture.png"
+                    }
+                    alt='image'
+                    className={classes.diaryImage}
+                  />
+                  <p className={classes.title}>{fianceDiary.title}</p>
+                  <p className={classes.date}>{fianceDiary.date}</p>
                 </div>
               ))}
           </div>

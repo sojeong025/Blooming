@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 import { diaryState } from "../../recoil/DiaryStateAtom";
@@ -19,7 +19,10 @@ const DiaryDetails = () => {
 
   const navigate = useNavigate();
   const { id } = useParams();
-  const [ modalIsVisible, setModalIsVisible ] = useState(false);
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+  
+  const location = useLocation();
+  const edit = location.state?.edit
 
   const fetchData = async () => {
     try {
@@ -88,10 +91,10 @@ const DiaryDetails = () => {
               <div>{diary.date}</div>
             </div>
 
-            <div className={classes.editdel}>
+            {edit && <div className={classes.editdel}>
               <button onClick={showModalHandler}><PiPencilLineFill/></button>
               <button onClick={handleDelete}><BsTrash/></button>
-            </div>
+            </div>}
           </div>
 
 

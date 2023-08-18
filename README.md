@@ -20,7 +20,7 @@
 
 - 📽 [UCC](https://youtu.be/9v1aKx9SDYE)
 
-- 🎤 [중간 발표 PPT](https://drive.google.com/file/d/1mAaGPRllI2iS1Ac5wJBIb7swqCGSx22H/view?usp=share_link)
+- 🎤 [중간 발표 PPT](https://docs.google.com/presentation/d/1ScCrScWdOtp96Koz_G8QV_aSXLtkl8qk/edit?usp=sharing&ouid=116217035030993886773&rtpof=true&sd=true)
 
 - 🎤 [최종 발표 PPT](https://drive.google.com/file/d/14RB6TlOET-WFh-uMFLxWAgyqUoOgS4_n/view?usp=sharing)
 
@@ -277,6 +277,10 @@
 ![6.PNG](README_assets/5f2d5013dfb56d63dc8211fc1ae8cf797804d58e.PNG)
 
 ## 📏 ERD
+
+![image.png](README_assets/73d0eb2c4e0f672b49e231b2767145e6c75e0960.png)
+
+![image (1).png](README_assets/d16a1b6b607ae6111b7be51a15bc703b586b90fb.png)
 
 ## 📐 시스템 아키텍처
 
