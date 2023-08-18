@@ -119,7 +119,6 @@ function Splash() {
       const timer = setTimeout(() => {
         navigate("/login");
       }, 3500);
-
       return () => clearTimeout(timer);
     }
   }, [navigate, isRendered]);
@@ -128,6 +127,7 @@ function Splash() {
     <div className={classes.div}>
       <div className={classes.container}>
         <motion.div
+          className={classes.container}
           initial={{ scale: 1 }}
           animate={{ scale: [1, 1.1, 1] }}
           transition={{
@@ -136,10 +136,20 @@ function Splash() {
             ease: "easeInOut",
           }}
         >
-          <img src='src/assets/Logo/ring.png' alt='' />
+          {/* <img src='src/assets/Logo/ring.png' alt='' /> */}
+          <img
+            className={classes.logoimg}
+            src='src/assets/Logo/ringring.png'
+            alt=''
+          />
         </motion.div>
-        <div style={{ marginTop: "20px" }}>
-          <img src='src/assets/Logo/text.png' alt='' />
+        <div className={classes.logocon}>
+          {/* <img src='src/assets/Logo/text.png' alt='' /> */}
+          <img
+            className={classes.logologo}
+            src='src/assets/Logo/logologo.png'
+            alt=''
+          />
         </div>
       </div>
     </div>
