@@ -41,6 +41,10 @@ const DiaryDetails = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    fetchData();
+  }, [diaries]);
+
   if (loading) {
     return <div>로딩중...</div>;
   }
