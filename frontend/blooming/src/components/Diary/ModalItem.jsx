@@ -94,7 +94,7 @@ function CreateItem({ hide, visible, item }) {
             return diary;
           }),
         );
-        navigate("diary");
+        navigate("/diary");
       } catch (error) {
         console.error(error);
       }
