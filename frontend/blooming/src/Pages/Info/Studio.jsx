@@ -124,14 +124,14 @@ export default function WeddingHall() {
                     />
                   </FlexItem>
                 ))}
-            {studio.map((product) => (
+            {/* {studio.map((product) => (
               <FlexItem key={product.id}>
                 <ProductItem
                   product={product}
                   onClick={() => handleNavigation(product)}
                 />
               </FlexItem>
-            ))}
+            ))} */}
           </ProductFlex>
         </InfiniteScroll>
       </Wrapper>

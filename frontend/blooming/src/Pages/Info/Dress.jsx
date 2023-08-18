@@ -123,14 +123,14 @@ export default function WeddingHall() {
                     />
                   </FlexItem>
                 ))}
-            {dress.map((product) => (
+            {/* {dress.map((product) => (
               <FlexItem key={product.id}>
                 <ProductItem
                   product={product}
                   onClick={() => handleNavigation(product)}
                 />
               </FlexItem>
-            ))}
+            ))} */}
           </ProductFlex>
         </InfiniteScroll>
       </Wrapper>
