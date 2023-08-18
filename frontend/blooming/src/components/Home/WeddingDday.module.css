@@ -1,0 +1,18 @@
+/* D-day 있는곳 */
+.dday{
+  display: flex;
+  justify-content: center;
+  text-align: end;
+  margin-top: 50px;
+  font-weight: 700;
+  font-size: 25px;
+  font-family: 'SUITE-regular';
+}
+
+.btn {
+  color: black;
+}
+
+.active {
+  color: var(--color-point);
+}

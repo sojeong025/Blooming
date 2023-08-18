@@ -1,0 +1,155 @@
+
+.topSticky{
+  padding: 0 16px;
+
+  top: 50px;
+  position: sticky;
+  background-color: var(--color-bg);
+  z-index: 1;
+}
+.CarouselImg {
+  width: 100vw;
+  height: 40vh;
+  object-fit: contain;
+  outline: none;
+}
+
+/* 회사명, 위치 */
+.ProductTitle {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+.companyTitle {
+  font-size: 26px;
+  font-weight: 800;
+}
+.location {
+  display: flex;
+}
+.address {
+  font-size: 16px;
+  color: #666;
+}
+.locationIcon {
+  color: #666;
+  padding-top: 1.2px;
+  padding-right: 3px;
+}
+.hr {
+  opacity: 0.5;
+}
+/* infoDetail ================================= */
+
+/* productDetailItem ===========================*/
+/* 업체 정보 */
+.TabTitle{
+  margin: 15px 0;
+  font-size: 20px;
+  font-weight: 800;
+} 
+.detailContainer {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 15px;
+}
+.companyImg{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+.titleBrief {
+  margin-top: 5px;
+}
+.subTitle{
+  font-size: 20px;
+  font-weight: 800;
+  padding-bottom: 5px;
+}
+.brief {
+  font-size: 16px;
+  word-break: keep-all;
+}
+
+.infoContainer {
+  margin: 0 4px;
+}
+.item {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  line-height: 27px;
+}
+
+.leftText {
+  flex-basis: 18%;
+  font-weight: 600;
+  color: #7a7a7a;
+}
+.rightText{
+  flex: 1; 
+  padding: 0 8px; 
+}
+
+/* 예약 ================================== */
+.Reservation {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  margin-left: 15px;
+}
+.Reservation span {
+  font-size: 20px;
+  font-weight: 600;
+}
+.ReservationItem {
+  text-align: start;
+  margin-bottom: 10px;
+}
+
+.inputField {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 60vw;
+  padding: 10px;
+  margin: 5px 0 5px;
+  height: 20px;
+  font-size: 18px;
+  font-family: 'SUITE-regular';
+  margin-left: 40px;
+}
+.inputField:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.textField {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 60vw;
+  height: 70px;
+  padding: 10px;
+  margin: 5px 10px;
+  font-family: 'SUITE-Regular';
+  letter-spacing: 2px;
+  font-size: 18px;
+  resize: none;
+  margin-left: 22px;
+  
+}
+.textField:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.upText {
+  display: flex;
+}
+.upText .p {
+  margin-top: 10px;
+}
+

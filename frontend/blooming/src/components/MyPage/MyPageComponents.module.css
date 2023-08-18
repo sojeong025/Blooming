@@ -1,0 +1,129 @@
+/* Profile */
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  height: 150px;
+  padding: 1.5rem 0;
+}
+/* 혼자 */
+.Alone .profileImg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.Alone .profileName {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+.Alone .Role {
+  font-size: 20px;
+}
+/* 둘이 */
+.Couple .profileContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.Couple .profileImages {
+  display: flex;
+  align-items: flex-end;
+}
+ .myImg {
+  width: 80px;
+  height: 80px;
+  border-radius:50%;
+  z-index: 2;
+} 
+ .coupleProfile {
+  width: 60px;
+  height: 60px;
+  border-radius:50%;
+  margin-left: -10px;
+} 
+.Couple .profileNames {
+ display: flex;
+  align-items: center;
+  width: 200px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.Couple .profileName {
+  margin-left: 35px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* .Couple .profileName .Role {
+  margin-left: 20px;
+} */
+.Couple .profileCoupleName {
+  position: absolute;
+  margin-left: 125px;
+
+}
+.Couple p {
+  padding: 5px 0;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+.Couple .Role {
+  font-size: 18px;
+  padding-bottom: 0;
+}
+
+/* AppContainer */
+.wrapper {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.appList {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  margin: 1rem 0;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #666;
+}
+.icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.1rem;
+}
+
+/* SettingList */
+.settingList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.settingItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  font-size: 1.2rem;
+  color: #666;
+}
+.settingIcon {
+  margin-right: 0.5rem;
+  margin-top: 0.3rem
+}

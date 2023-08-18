@@ -1,0 +1,6 @@
+.mainContainer{
+  margin-top: 57px;
+  background-color: white;
+  height: calc(100vh - 57px);
+  overflow-y: auto; 
+}

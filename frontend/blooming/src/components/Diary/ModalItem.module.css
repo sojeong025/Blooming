@@ -1,0 +1,147 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #D8D8D8;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  border: none;
+  padding: 0;
+  overflow: hidden;
+  z-index: 910;
+}
+/* ----------------top 자리------------------- */
+.actions {
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 56px;
+  z-index: 955;
+  background-color: #FFFAF4;
+}
+.datePickerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55vw;
+  z-index: 999;
+}
+.actions button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: var(--color-point);
+  color: white;
+  font-size: 20px;
+  padding: 0 25px;
+  height: 56px;
+}
+
+/* 일단은 동일하게 해놓기..? */
+.actions button:hover {
+  background-color: var(--color-point);
+  color: white;
+}
+
+.actions button[type='button'] {
+  background-color: transparent;
+  color: #666;
+}
+
+
+
+
+
+/* --------------사진자리----------- */
+.imageContainer {
+  width: 100vw;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -5;
+}
+.img {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+}
+.imageContainer img {
+  width: 100vw;
+  height: 45vh;
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 2;
+}
+.imageContainer input {
+  width: 200px;
+}
+.label {
+  font-size: 30px;
+  padding: 20px 25px;
+  color: #fff;
+  position: absolute;
+  z-index: 5;
+  font-family: 'SUITE-regular';
+  background-color: #b4b4b459;
+}
+
+
+
+/* --------------내용자리----------- */
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  max-height: 50vh;
+  background-color: white;
+}
+.title {
+  font-family: 'SUITE-regular';
+  display: block;
+  text-align: center;
+  border: none;
+  font-weight: 800;
+  font-size: 20px;
+  width: 80vw;
+  height: 5vh;
+  line-height: 5vh;
+  padding: 20px 0;
+  color: #666;
+  overflow: hidden;
+  resize: none;
+}
+.title:focus {
+  outline: none;
+  resize: none;
+}
+.text hr{
+  width: 80%;
+  color: #D8D8D8;
+}
+.context {
+  font-family: 'SUITE-regular';
+  display: block;
+  text-align: left;
+  border: none;
+  font-size: 18px;
+  height: 45vh;
+  width: 80vw;
+  padding: 20px 0;
+  line-height: 40px;
+  word-break: keep-all;
+  color: #666;
+  resize: none;
+}
+.context:focus{
+  outline: none;
+  resize: none;
+}

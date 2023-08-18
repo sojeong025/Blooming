@@ -1,0 +1,102 @@
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SUITE-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'LeferiPoint-SpecialItalicA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-SpecialItalicA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GowunBatang-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GowunBatang-Bold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+:root {
+  --vh: 100%;
+  /* 배경 */
+  --color-bg: #FFFAF4;
+  /* 신랑 */
+  --color-groom: #6FAEC7;
+  --color-groom-text: #4a8c98;
+  --color-groom-opacity:rgba(111, 174, 199, 0.25);
+
+  /* 신부 */
+  --color-brider: #FFA4A9;
+  --color-brider-text: #F4758C;
+  --color-brider-opacity: rgba(255, 164, 169, 0.25);
+  /* 공통 */
+  --color-common: #bec0c2;
+
+  /* 하트 */
+  --color-heart: #FF6347;
+  --color-heart-inactive:#a9a9a9;
+  /* 별점 */
+  --color-rating-full: gold;
+  --color-rating-empty: grey;
+  /* 삭제 */
+  --color-delete: #DC143C;
+  
+  /* join 포인트 컬러 바꾸기 */
+  /* 텍스트(진한) */
+  --color-join-point: #d98c10;
+  /* 진행(좀 연한) */
+  --color-join-progress:#fda73f;
+  /* default 값 */
+  --color-point: var(--color-brider);
+  --color-point-opacity: var(--color-brider-opacity);
+  --color-point-text: var(--color-brider-text);
+}
+
+.mainContainer {
+  margin: 60px 16px; 
+  /* width: 100%; */
+  /* box-sizing: border-box; */
+} 
+
+body {
+  font-family: 'SUITE-Regular', 'SUITE-SemiBold', 'SUITE-Bold', 'SUITE-ExtraBold', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+
+  min-width: 100vw;
+  background-color: var(--color-bg);
+}
+
+a{
+  text-decoration-line: none;
+}
+
+button {
+  font-family: 'SUITE-Regular';
+}
+input::placeholder{
+  font-family: 'SUITE-Regular';
+}

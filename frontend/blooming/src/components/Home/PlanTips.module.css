@@ -1,0 +1,45 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainImg {
+  width: 100%;
+  height: auto;
+  margin: 30px 0 30px;
+}
+
+.tipContainer {  
+  /* background: var(--color-point);  */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 8px, rgba(255, 255, 255, 0.6) 0px -2px 5px inset;
+  border: 2px solid var(--color-point);
+  border-radius: 8px;
+  margin: 0px;
+  width: 90%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.textBold {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  word-break: keep-all;
+  padding: 10px 0;
+}
+.tip{
+  text-align: center;
+  height: 120px;
+  width: 80%;
+  font-size: 18px;
+  line-height: 30px;
+  word-break: keep-all;
+}

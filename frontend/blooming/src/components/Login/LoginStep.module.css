@@ -1,0 +1,160 @@
+.JoinContainer {
+  margin: 50px 0;
+}
+.JoinContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titleText {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+
+}
+.subText{
+  color:grey;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.passCode {
+  margin-top: 50px;
+  font-size: 16px;
+  color: grey;
+}
+.coupledNo {
+  height: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: slateblue;
+}
+
+/* ========= input ========= */
+.wrapper {
+  width: 80vw;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  margin-top: 25px;
+  display: inline-block;
+}
+.codeContainer {
+  padding-bottom: 10px;
+  height: 70px;
+}
+
+/* .codeContainer .errorMessage {
+  margin-bottom: 20px;
+} */
+
+.errorMessage {
+  padding-top: 5px;
+  margin-left: 3px;
+  font-size: 13px;
+  color: red;
+}
+
+.inputBox {
+  display: block;
+  width: 100%;
+  height: 20px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  transition: border-radius 250ms ease;
+}
+.inputBox:focus {
+  outline: none;
+  border: 1px solid steelblue;
+}
+.inputError {
+  border: 1px solid red;
+}
+
+.inputFilled {
+  border: 1px solid steelblue; 
+}
+/* ============================================== */
+
+.inputName {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+}
+.inputName > div {
+  width: 200px;
+}
+/* ========= gender ========== */
+.GenderSelector {
+  padding: 0;
+  margin-bottom: 10px;
+}
+.GenderSelector input[type=radio]{
+  display: none;
+}
+.GenderSelector input[type=radio]+label{
+  display: inline-block;
+  cursor: pointer;
+  height: 35px;
+  width: 80px;
+  border: 1px solid #333;
+  line-height: 35px;
+  text-align: center;
+  font-weight:bold;
+  font-size:13px;
+  transition: background-color 0.3s, color 0.3s, font-size 0.3s, border-color 0.3s;
+}
+.GenderSelector input[type=radio]:checked+.male{
+  background-color: var(--color-groom);
+  color: #fff;
+  font-size: 15px;
+  border: 1px solid var(--color-groom);
+}
+.GenderSelector input[type=radio]:checked+.female{
+  background-color: var(--color-brider);
+  color: #fff;
+  font-size: 15px;
+  border: 1px solid var(--color-brider);
+}
+
+
+/* weddingDate */
+.datePick {
+  border: 1px var(--color-join-point) solid;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  margin-top: 30px;
+  height: 120px;
+}
+.codeBtn {
+  font-size: 18px;
+  height: 40px;
+  width: 80vw;
+  border: 1.5px solid var(--color-join-point);
+  color: var(--color-join-point);
+  border-radius: 20px;
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  margin-top: 50px;
+}

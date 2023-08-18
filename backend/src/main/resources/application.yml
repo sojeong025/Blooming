@@ -1,18 +1,38 @@
 spring:
-    datasource:
-        url: jdbc:h2:tcp://localhost/~/ssafy
-        username: sa
-        password:
-        driver-class-name: org.h2.Driver
+  logging.level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace # ??? ?? 2.x, hibernate5
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: 'false'
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
 
-    jpa:
-        hibernate:
-            ddl-auto: create
-        properties:
-            hibernate:
-                show_sql: true
-                format_sql: true
+springdoc:
+  packages-to-scan: com.ssafy.backend.domain, com.ssafy.backend.global.s3
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: /swagger-ui
+    disable-swagger-default-url: true
+    display-request-duration: true
+    operations-sorter: alpha
 
-    logging.level:
-        org.hibernate.SQL: debug
-        org.hibernate.type: trace # ??? ?? 2.x, hibernate5
+project:
+  properties:
+    firebase-create-scoped: "https://www.googleapis.com/auth/firebase.messaging"
+    firebase-topic: "diet_record_notification"
+
+---
+
+spring:
+  profiles:
+    active: jwt, oauth, prod
+
+---
+
+spring:
+  profiles:
+    active: jwt, oauth, local

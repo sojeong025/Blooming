@@ -1,0 +1,115 @@
+.react-calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  margin: 0 20px;
+  /* width: 90%; */
+  /* border: 1px solid black; */
+}
+.react-calendar__navigation {
+  width: 100vw;
+  text-align: center;
+}
+.react-calendar__navigation button {
+  min-width: 60px;
+  margin: 10px 2px;
+  background: none;
+  font-size: 30px;
+  font-weight:400;
+  font-family: 'SUITE-regular';
+  border-style: none;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  border-radius: 20px;
+  /* background-color: #000; */
+}
+
+/* 요일 보여주는 곳 */
+abbr[title] {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: #090909;
+  padding: 10px 0px;
+  border-bottom: solid 1px #666;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  margin-bottom: 5px;
+}
+
+/* 캘린더 안에 일 표시 */
+.react-calendar__tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  text-align: left;
+  border: none;
+  font-size: 17px;
+  height: 52px;
+  font-family: 'SUITE-Regular';
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #cfcfcf;
+}
+
+/* 오늘날짜 */
+.react-calendar__tile--now {
+  border: 2px solid #D8D8D8;
+  /* background-color: #D8D8D8; */
+  border-radius: 50%;
+}
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+/* 선택된 날짜 */
+.selected-day {
+  background-color: var(--color-point);
+  border: none;
+  color: white;
+  border-radius: 50%;
+}
+
+.selected-day:enabled:hover,
+.selected-day:enabled:focus {
+  background-color: var(--color-point);
+  color: white;
+}
+
+.react-calendar__navigation__label{
+  font-size: 40px;
+}
+.react-calendar__navigation__label__labelText {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: 'SUITE-regular';
+}
+.weekend-day {
+  border-radius: 50%;
+}
+.weekend-day:enabled:hover,
+.weekend-day:enabled:focus {
+  background-color: var(--color-point);
+  color: white;
+}

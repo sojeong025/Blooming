@@ -1,0 +1,7 @@
+.posts {
+  list-style: none;
+  margin: 10px 0 90px;
+  padding: 0;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 30%);
+}

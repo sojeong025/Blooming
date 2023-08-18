@@ -1,0 +1,78 @@
+.container {
+  margin: 56px 20px 0;
+  display: flex;
+  flex-direction: column;
+  
+}
+.button {
+  position: fixed;
+  bottom: 90px;
+  right: 30px;
+  color: white;
+  background-color: var(--color-point);
+  border-radius: 50%;
+  padding: 12px 15px;
+  border: none;
+  font-size: 30px;
+  z-index: 500;
+}
+.mainText {
+  margin-top: 50px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.diary {
+  display: flex;
+  overflow-x: scroll;
+  margin: 0;
+  margin-bottom: 60px;
+}
+
+.diaryImage {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  /* border: 1px solid black; */
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;}
+
+.diary a {
+  color:black;
+}
+.diaryItem {
+  padding-right: 30px;
+  min-width: 200px;
+  min-height: 300px;
+  /* border: 1px solid black; */
+}
+.title {
+  font-size: 20px;
+  padding-top: 10px;
+  font-weight: 600;
+  margin: 0;
+}
+.date {
+  margin-top: 10px;
+}
+.preDiary {
+  padding-top: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+  min-height: 290px;
+  min-width: 370px;
+  margin-bottom: 40px;
+  background-color: var(--color-point);
+}
+
+.none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 20px;
+  width: 100%;
+}
+.diaryTitle {
+  font-size: 16px;
+  margin-bottom: 10px;
+}

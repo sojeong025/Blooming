@@ -1,0 +1,100 @@
+.container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  padding-right: 20px;
+  
+}
+.img {
+  /* width: 300px;
+  height: 180px; */
+  width: 80vw;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.cardtext{
+  margin-left: 10px;
+}
+.cardtitle{
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.carddate{
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+.cardplace{
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* 최근본 */
+.lastItemContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  box-sizing: border-box;
+  border: 1px solid gba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8%;
+  background-color: #fff;
+  min-height: 220px;
+  width: 150px;
+}
+.listItemImg{
+  height: 150px;
+  object-fit: contain;
+  border-top-left-radius: 8%;
+  border-top-right-radius: 8%;
+}
+.Company {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  height: 50px;
+  width: 130px;
+  font-size: 18px;
+  font-weight: 700;
+  overflow-x: hidden;
+}
+.LastWrapper {
+  /* width: 220px; */
+  /* height: 150px; */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  position: relative;
+}
+.heart {
+  position: absolute;
+  top: 5%;
+  right: 8%;
+  z-index: 1;
+}
+.IconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+}
+.heartIconTrue {
+  color: var(--color-heart);
+}
+.heartIconFalse {
+  color: var(--color-heart-inactive);
+}
+.LaViewDetail {
+  display: absolute;
+  margin-top: 165px;
+  font-size: 12px;
+  font-style: italic;
+  /* text-decoration: underline; */
+}

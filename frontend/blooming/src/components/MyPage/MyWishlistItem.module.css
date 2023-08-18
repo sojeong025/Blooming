@@ -1,0 +1,89 @@
+.ItemContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  margin-bottom: 10px;
+
+  box-sizing: border-box;
+  border: 1px solid gba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8%;
+
+  background-color: #fff;
+}
+
+.itemImg {
+  width: 100%;
+  object-fit: contain;
+  /* margin: 0 auto; */
+
+  border-top-left-radius: 8%;
+  border-top-right-radius: 8%;
+}
+
+.textContainer {
+  padding-top: 10px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin: 0 10px;
+}
+
+.location {
+  display: flex;
+}
+
+.address {
+  font-size: 16px;
+  color: #666;
+}
+
+.locationIcon {
+  color: #666;
+  padding-top: 1.2px;
+  padding-right: 3px;
+}
+
+.company {
+  font-weight: bold;
+  ;
+  font-size: 20px;
+}
+
+/* 하트 용 relative */
+.Wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+
+}
+
+.IconWrapper {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heartIconTrue {
+  color: #FF647C;
+  z-index: 5;
+}
+
+.heartIconFalse {
+  color: #FF647C;
+}

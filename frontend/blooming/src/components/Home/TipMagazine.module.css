@@ -1,0 +1,97 @@
+.magazineContainer {
+  display: flex;
+  flex-direction: column;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: start;
+  position: relative;
+  transition: 0.6s ease;
+}
+.card.slick-active {
+  opacity: 1;
+}
+.card.slick-slide:not(.slick-active) {
+  opacity: 0.5;
+}
+
+.cardimg {
+  position: relative;
+}
+.card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.cardtitle {
+  position: absolute;
+  color: #fff;
+  font-size: 25px;
+  font-style: italic;
+  padding: 10px;
+  left: 10px;
+  bottom: 60px;
+  font-weight: bold;
+}
+.viewMore {
+  position: absolute;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  margin-top: 30px;
+  cursor: pointer;
+  bottom: 40px; 
+  left: 25px;
+  font-style: italic;
+  border-bottom: 1px solid #fff;
+}
+
+.nextArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  z-index: 900;
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  outline: none;
+  width: 100px;
+  height: 100px;
+}
+.prevArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  z-index: 900;
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  outline: none;
+  width: 100px;
+  height: 100px;
+}
+
+.nextArrow {
+  right:20px;
+}
+
+.prevArrow {
+  left: 20px;
+}
+.counter {
+  position: absolute;
+  /* top: 1010px; */
+  /* right: 20px; */
+  margin-top: 10px;
+  margin-left: 360px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  z-index: 2;
+}

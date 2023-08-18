@@ -1,0 +1,47 @@
+.container {
+  margin-top: 56px;
+  margin-bottom: 80px;
+  width: 100%;
+  overflow-x: hidden;
+}
+.top {
+  margin-top: 50px;
+}
+
+/* 팁 메거진 */
+.magazine {
+  margin: 0;
+  margin-bottom: 50px;
+}
+.magazineTitle {
+  margin: 50px 30px 50px;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+/* 웨딩박람회 */
+.fairbox {
+  /* background-color: var(--color-common); */
+  /* padding-top: px; */
+}
+.fair {
+  margin: 50px 30px 50px;
+}
+.fairTitle {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+/* 비스포크 */
+.bespoke {
+  margin: 0
+}
+.bespokeTitle {
+  margin: 50px 30px 50px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}

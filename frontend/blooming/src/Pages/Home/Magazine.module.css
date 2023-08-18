@@ -1,0 +1,46 @@
+.container {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hr {
+  margin: 20px 20px 30px;
+  border: 1px solid #dfdfdf;
+}
+.mainTitle {
+  margin: 30px 20px 10px;
+  font-size: 25px;
+  font-weight: 800;
+}
+.intro {
+  margin: 10px 20px 30px;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.title {
+  margin: 30px 20px 20px;
+  font-size: 25px;
+  font-weight: 700;
+  color: steelblue;
+  border-left: 3px solid black;
+  padding-left: 10px;
+}
+.content {
+  margin: 10px 20px 30px;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.outro {
+  font-size: 18px;
+  margin: 30px 20px 50px;
+  line-height: 30px;
+
+}
+.bottom {
+  margin: 0;
+  height: 20px;
+  background-color: var(--color-common);
+}

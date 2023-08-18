@@ -1,0 +1,88 @@
+/* go-join */
+.goJoinContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 60px auto;
+}
+.titleText {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  word-break: keep-all;
+}
+.titleText p {
+  margin: 0;
+  padding-bottom: 10px;
+}
+.titleText span {
+  color: var(--color-join-point);
+  font-weight: bold;
+}
+.subTitle {
+  font-size: 20px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  margin-top: 30px;
+  height: 120px;
+}
+.codeBtn {
+  font-size: 18px;
+  height: 40px;
+  width: 80vw;
+  border: 1.5px solid var(--color-join-point);
+  color: var(--color-join-point);
+  border-radius: 20px;
+  display : flex;
+  justify-content : center;
+  align-items : center;
+}
+
+
+/* chooseDate */
+.subText{
+  color:grey;
+  font-size: 16px;
+  margin-top: 5px;
+}
+.chooseDateContainer {
+  margin: 100px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.datePick {
+  border: 1px var(--color-point) solid;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.SubmitBtn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-right: 16px;
+  height: 60px;
+  width: 60px;
+  font-size: 17px;
+  font-weight: 600;
+  border: none;
+  background-color: transparent;
+  color: black;
+  z-index: 990;
+  &:disabled {
+    color: gray;
+  }
+}

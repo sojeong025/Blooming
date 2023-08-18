@@ -1,0 +1,137 @@
+.JoinContainer {
+  margin: 100px 0;
+}
+.JoinContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 40px;
+}
+.copyContainer {
+  margin-top: 30px;
+}
+.titleText {
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+  font-weight: bold;
+}
+.copyContainer .titleText {
+  font-weight: normal;
+}
+.copyContainer .subText{
+  font-weight: 600;
+}
+.titleText span {
+  font-weight: 600;
+}
+.subText{
+  color:grey;
+  font-size: 16px;
+  margin-top: 5px;
+}
+.copyText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 80px;
+  text-decoration: underline;
+}
+
+.SubmitBtn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-right: 16px;
+  height: 60px;
+  width: 60px;
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  color: black;
+  z-index: 999;
+  &:disabled {
+    color: gray;
+  }
+}
+
+.passCode {
+  margin-top: 50px;
+  font-size: 16px;
+  color: grey;
+}
+.coupledNo {
+  height: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: slateblue;
+}
+
+/* ========= input ========= */
+.wrapper {
+  width: 80vw;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: hidden;
+  margin-top: 25px;
+  display: inline-block;
+}
+.codeContainer {
+  padding-bottom: 10px;
+  height: 70px;
+}
+.errorMessage {
+  padding-top: 5px;
+  margin-left: 3px;
+  font-size: 13px;
+  color: red;
+}
+
+.inputBox {
+  display: block;
+  width: 100%;
+  height: 20px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #aaa;
+  border-radius: 12px;
+  transition: border-radius 250ms ease;
+}
+.inputBox:focus {
+  outline: none;
+  border: 1px solid steelblue;
+}
+.inputError {
+  border: 1px solid red;
+}
+
+.inputFilled {
+  border: 1px solid steelblue; 
+}
+/* ============================================== */
+
+.isCoupled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.isCoupled :first-child {
+  font-size: 25px;
+}
+.isCoupled > .subText {
+  font-size: 20px;
+}
+
+.isCoupled img {
+  margin: 30px 0;
+}

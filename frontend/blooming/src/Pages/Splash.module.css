@@ -1,0 +1,33 @@
+.div{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  justify-content: center;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 300px; 
+  margin-left: 30px;
+  /* margin-top: 40vh; */
+}
+
+.logoimg{
+  width: 250px;
+}
+.logologo {
+  width: 270px;
+  margin: 0;
+  margin-left: 1vw;
+  padding: 0;
+  object-fit: scale-down;
+}
+.logocon {
+  display: flex;
+  width: 100%;
+  margin-top: -50px;
+}

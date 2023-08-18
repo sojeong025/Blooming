@@ -1,0 +1,95 @@
+.div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10vh;
+  height: 80vh;
+
+}
+.image-carousel {
+  min-width: 100%;
+  margin-bottom: 10px;
+  /* border: 1px solid #666; */
+  align-items: center;
+}
+
+.pageIndicator {
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+.img {
+  height: 60vh;
+  object-fit: contain;
+}
+
+/* 
+.image-carousel .slider-wrapper {
+  max-width: 300px;
+  max-height: 500px;
+} 
+.image-carousel .slider {
+  max-width: 300px;
+  max-height: 300px;
+}
+.image-carousel .slider .slide {
+  max-width: 300px;
+  max-height: 300px;
+}
+.image-carousel .slider .slide img {
+  width: 100%;
+  height: 100%;
+}
+.image-carousel .carousel .control-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+*/
+
+.buttonContainer{
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+  height: 45px;
+  bottom: 0;
+  align-items: center;
+}
+.btn {
+  font-size: 18px;
+}
+.pre {
+  color: rgb(139, 136, 136);
+  text-align: center;
+}
+.next {
+  color: var(--color-join-point);
+  font-weight: bold;
+  text-align: center;
+}
+
+.kakaoBtn {
+  /* margin-bottom: 5vh; */
+  width: 80vw;
+  height: 45px;
+  background-color: #FEE500;
+  text-align: center;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  justify-content: space-evenly
+}
+.kakaoBtn * {
+  color: #000000;
+}
+.caption {
+  display: none;
+  margin-bottom: 50px;
+  font-size: 25px;
+  font-weight: 600;
+  color: #666;
+}
+
+.activeCaption {
+  display: block;
+}

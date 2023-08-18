@@ -1,0 +1,32 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+}
+.concept {
+  margin-top: 70px;
+}
+.container p {
+  width: 80%;
+  text-align: center;
+  font-size: 20px;
+  word-break: keep-all;
+  line-height: 30px;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 70vw;
+  height: 30px;
+  background-color: var(--color-point); 
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
