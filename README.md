@@ -202,18 +202,19 @@
 - Springdoc-openapi-ui `1.6.11`
 - Oauth2
 - Swagger 3.0.0
-- SSL
 - Oauth2
-- CertBot(CA Certificates)
 - Redis
 - MySql 8.0.34
 
 ## Infra
-- Docker 20.10.12
-- Nginx 1.18.0
-- Ubuntu 20.04.6 LTS
-- AWS EC2
 - AWS S3
+- AWS EC2
+- Nginx 1.18.0
+- Docker 20.10.12
+- Ubuntu 20.04.6 LTS
+- CertBot(CA Certificates)
+- SSL
+
 
 # 기술 소개
 
