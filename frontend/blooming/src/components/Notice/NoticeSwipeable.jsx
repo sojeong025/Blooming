@@ -87,7 +87,7 @@ const NoticeSwipeable = () => {
       setNotice(notice.filter((item) => item.id !== id));
       // console.log("[DELETE]", id);
     } catch (error) {
-      console.log("알림 삭제 에러", error);
+      // console.log("알림 삭제 에러", error);
     }
   };
   const trailingActions = ({ id }) => (
@@ -114,7 +114,7 @@ const NoticeSwipeable = () => {
         );
       }
     } catch (error) {
-      console.log("읽음 처리 에러", error);
+      // console.log("읽음 처리 에러", error);
     }
   };
 

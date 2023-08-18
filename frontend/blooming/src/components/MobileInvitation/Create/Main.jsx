@@ -39,7 +39,7 @@ function Main({ onThemeSelected }) {
           return updatedInvitation;
         });
       } catch (error) {
-        console.error("모바일청첩장 이미지 api 오류", error);
+        // console.error("모바일청첩장 이미지 api 오류", error);
       }
     }
   };

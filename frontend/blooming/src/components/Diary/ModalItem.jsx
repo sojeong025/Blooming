@@ -46,7 +46,7 @@ function CreateItem({ hide, visible, item }) {
         // console.log('다이어리 이미지 Url', imageURL)
         setImageURL(response.data.result[0].uploadImageUrl);
       } catch (error) {
-        console.error("이미지 api 오류", error);
+        // console.error("이미지 api 오류", error);
       }
     }
   };
@@ -69,7 +69,7 @@ function CreateItem({ hide, visible, item }) {
         const response = await customAxios.post("diary", ItemData);
         navigate(`/diary/${response.data.result[0]}`);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     };
 
@@ -96,7 +96,7 @@ function CreateItem({ hide, visible, item }) {
         );
         navigate("/diary");
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
       hide();
     };

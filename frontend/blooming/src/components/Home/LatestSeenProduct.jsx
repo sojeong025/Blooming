@@ -17,7 +17,7 @@ export default function LatestSeenProduct() {
         setLatest(response.data.result[0]);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 
@@ -42,7 +42,7 @@ export default function LatestSeenProduct() {
       });
       setLatest(updatedLatest);
     } catch (error) {
-      console.error("찜하기 에러:", error);
+      // console.error("찜하기 에러:", error);
     }
   };
   const handleDeleteWish = async (id) => {
@@ -56,7 +56,7 @@ export default function LatestSeenProduct() {
       });
       setLatest(updatedLatest);
     } catch (error) {
-      console.error("찜취소 에러:", error);
+      // console.error("찜취소 에러:", error);
     }
   };
   const onWish = (id, wishStatus) => {

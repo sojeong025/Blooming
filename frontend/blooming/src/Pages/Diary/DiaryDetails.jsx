@@ -32,7 +32,7 @@ const DiaryDetails = () => {
         setDiary(response.data.result[0]);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
     setLoading(false)
   },[]);
@@ -74,7 +74,7 @@ const DiaryDetails = () => {
       }
       navigate('/diary')
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
 

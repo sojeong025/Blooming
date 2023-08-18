@@ -61,8 +61,8 @@ function Create() {
           navigate("/mobile-invitation-detail");
         })
         .catch((error) => {
-          console.log("저장에 실패하였습니다.");
-          console.error(error);
+          // console.log("저장에 실패하였습니다.");
+          // console.error(error);
         });
     } else {
       await customAxios
@@ -73,8 +73,8 @@ function Create() {
           navigate("/mobile-invitation-detail");
         })
         .catch((error) => {
-          console.log("저장에 실패하였습니다.");
-          console.error(error);
+          // console.log("저장에 실패하였습니다.");
+          // console.error(error);
         });
     }
   }

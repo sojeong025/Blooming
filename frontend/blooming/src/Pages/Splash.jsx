@@ -86,7 +86,7 @@ function Splash() {
             } catch (error) {
               // 유저 정보 초기화
               resetUserState();
-              console.error("유저 정보 API 요청 에러: 추가 정보 미입력", error);
+              // console.error("유저 정보 API 요청 에러: 추가 정보 미입력", error);
               // 추가정보 페이지로 이동
               navigate("/login");
             }

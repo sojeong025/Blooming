@@ -13,7 +13,7 @@ export default function MyWishlistItem({ wish, onClick, me }) {
       await customAxios.post(`wishlist/${id}`);
       setProductHeart(!productHeart);
     } catch (error) {
-      console.error("찜하기 에러:", error);
+      // console.error("찜하기 에러:", error);
     }
   };
 
@@ -22,7 +22,7 @@ export default function MyWishlistItem({ wish, onClick, me }) {
       await customAxios.delete(`wishlist/${id}`);
       setProductHeart(!productHeart);
     } catch (error) {
-      console.error("찜취소 에러:", error);
+      // console.error("찜취소 에러:", error);
     }
   };
 

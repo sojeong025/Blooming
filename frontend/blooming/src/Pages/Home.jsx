@@ -73,7 +73,7 @@ function Home() {
     } catch (error) {
       // 유저 정보 초기화
       resetUserState();
-      console.error("유저 정보 API 요청 에러", error);
+      // console.error("유저 정보 API 요청 에러", error);
       // navigate("/");
     }
   };
