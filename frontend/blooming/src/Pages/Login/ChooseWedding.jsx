@@ -56,7 +56,7 @@ export default function ChooseWedding() {
         ...weddingDatePick,
       });
       setWeddingDate(updateDate);
-      console.log(weddingDate);
+      // console.log(weddingDate);
       navigate("/my-page");
     } catch (error) {
       console.log("웨딩 정보 POST 에러: ", error);

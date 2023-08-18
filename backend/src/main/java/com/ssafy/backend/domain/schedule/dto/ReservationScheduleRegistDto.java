@@ -22,4 +22,8 @@ public class ReservationScheduleRegistDto {
     private ScheduleType scheduleType;
 
     private Long reservationId;
+
+    public void privateScheduleReservationId() {
+        this.reservationId = 0L;
+    }
 }

@@ -2,9 +2,8 @@ package com.ssafy.backend.domain.schedule.service;
 
 import com.ssafy.backend.domain.couple.Couple;
 import com.ssafy.backend.domain.couple.repository.CoupleRepository;
-import com.ssafy.backend.domain.reservation.Reservation;
-import com.ssafy.backend.domain.reservation.service.ReservationService;
 import com.ssafy.backend.domain.schedule.Schedule;
+import com.ssafy.backend.domain.schedule.ScheduleType;
 import com.ssafy.backend.domain.schedule.ScheduledBy;
 import com.ssafy.backend.domain.schedule.dto.ReservationScheduleRegistDto;
 import com.ssafy.backend.domain.schedule.dto.ScheduleModifyDto;
@@ -63,9 +62,13 @@ public class ScheduleService {
 
         //새로운 스케쥴 등록 시 본인 + 상대에게 알림
         String title = "새로운 일정이 등록되었습니다.";
-        String content = scheduleRegistDto.getTitle() + " : " + scheduleRegistDto.getContent();
+        String content = scheduleRegistDto.getScheduleDate()+" "+scheduleRegistDto.getTitle();
         for (User userOne : couple.getUsers()){
-            notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
+            if(user.getId() == userOne.getId()){
+                notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
+            }else{
+                notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, user.getName()+"님의 "+title, content));
+            }
         }
     }
 
@@ -125,6 +128,10 @@ public class ScheduleService {
     }
 
     public Schedule registReservationSchedule(ReservationScheduleRegistDto reservationScheduleRegistDto) {
+        if(ScheduleType.PRI == reservationScheduleRegistDto.getScheduleType()){
+            reservationScheduleRegistDto.privateScheduleReservationId();
+        }
+
         Schedule schedule = new Schedule(
                 reservationScheduleRegistDto.getTitle(),
                 reservationScheduleRegistDto.getContent(),
@@ -147,7 +154,7 @@ public class ScheduleService {
 
         //새로운 스케쥴 등록 시 본인 + 상대에게 알림
         String title = "새로운 일정이 등록되었습니다.";
-        String content = reservationScheduleRegistDto.getTitle() + " : " + reservationScheduleRegistDto.getContent();
+        String content = reservationScheduleRegistDto.getTitle() + "\n" + reservationScheduleRegistDto.getContent();
         for (User userOne : couple.getUsers()){
             notificationScheduler.sendNotificationByToken(new FCMNotificationRequestDto(userOne, title, content));
         }
@@ -155,8 +162,8 @@ public class ScheduleService {
     }
 
     public void deleteReservationSchedule(Long reservationId) {
-        //??
-        Schedule schedule = scheduleRepository.findByReservationId(reservationId);
-        scheduleRepository.delete(schedule);
+        // 예약으로 생긴 일정을 삭제한 경우 예외처리
+        // 일정을 먼저 삭제한 후 예약 취소 시에는 동작하지 않도록 변경
+        scheduleRepository.findByReservationId(reservationId).ifPresent(scheduleRepository::delete);
     }
 }
