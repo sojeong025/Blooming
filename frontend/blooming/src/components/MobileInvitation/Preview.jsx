@@ -386,8 +386,8 @@ function Preview({
                 <div className={classes.parent}>
                   아버지{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {invitationData.bridedFatherName
-                      ? invitationData.bridedFatherName
+                    {invitationData.brideFatherName
+                      ? invitationData.brideFatherName
                       : "신부아버지"}
                   </span>
                 </div>
@@ -402,8 +402,8 @@ function Preview({
                 <div className={classes.parent}>
                   어머니{" "}
                   <span style={{ fontWeight: "bold" }}>
-                    {invitationData.bridedMotherName
-                      ? invitationData.bridedMotherName
+                    {invitationData.brideMotherName
+                      ? invitationData.brideMotherName
                       : "신부어머니"}{" "}
                   </span>
                 </div>
