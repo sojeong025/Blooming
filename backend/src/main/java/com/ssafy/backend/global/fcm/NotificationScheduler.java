@@ -70,8 +70,8 @@ public class NotificationScheduler {
 
     //시간에 맞게 푸시 알림을 스케줄링하는 코드
 //    @Scheduled(cron = "* * 1 * * ?")
-   @Scheduled(cron = "0 0 9 * * ?")
-    // @Scheduled(fixedDelay = 60000)
+//    @Scheduled(cron = "0 0 9 * * ?")
+    @Scheduled(fixedDelay = 60000)
     public void pushMorningDietAlarm() {
 
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
