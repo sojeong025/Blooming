@@ -82,18 +82,20 @@ const Diary = () => {
             .slice()
             .reverse()
             .map((diary) => (
-              <div key={diary.id} className={classes.diaryItem} onClick={handleNavigation(diary)}>
-                <img
-                  src={
-                    diary.image
-                      ? diary.image
-                      : "src/assets/Icon/nopicture.png"
-                  }
-                  alt='image'
-                  className={classes.diaryImage}
-                />
-                <p className={classes.title}>{diary.title}</p>
-                <p className={classes.date}>{diary.date}</p>
+              <div key={diary.id} className={classes.diaryItem}>
+                <div onClick={() => handleNavigation(diary)}>
+                  <img
+                    src={
+                      diary.image
+                        ? diary.image
+                        : "src/assets/Icon/nopicture.png"
+                    }
+                    alt='image'
+                    className={classes.diaryImage}
+                  />
+                  <p className={classes.title}>{diary.title}</p>
+                  <p className={classes.date}>{diary.date}</p>
+                  </div>
               </div>
             ))
         ) : (
@@ -108,18 +110,20 @@ const Diary = () => {
               .slice()
               .reverse()
               .map((fianceDiary) => (
-                <div key={fianceDiary.id} className={classes.diaryItem} onClick={handleNavigation(fianceDiary, false)}>
-                  <img
-                    src={
-                      fianceDiary.image
-                        ? fianceDiary.image
-                        : "src/assets/Icon/nopicture.png"
-                    }
-                    alt='image'
-                    className={classes.diaryImage}
-                  />
-                  <p className={classes.title}>{fianceDiary.title}</p>
-                  <p className={classes.date}>{fianceDiary.date}</p>
+                <div key={fianceDiary.id} className={classes.diaryItem}>
+                  <div onClick={() => handleNavigation(fianceDiary, false)}>
+                    <img
+                      src={
+                        fianceDiary.image
+                          ? fianceDiary.image
+                          : "src/assets/Icon/nopicture.png"
+                      }
+                      alt='image'
+                      className={classes.diaryImage}
+                    />
+                    <p className={classes.title}>{fianceDiary.title}</p>
+                    <p className={classes.date}>{fianceDiary.date}</p>
+                  </div>
                 </div>
               ))}
           </div>
