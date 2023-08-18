@@ -41,10 +41,6 @@ const DiaryDetails = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, [diaries]);
-
   if (loading) {
     return <div>로딩중...</div>;
   }
@@ -82,9 +78,13 @@ const DiaryDetails = () => {
     }
   }
 
+  const updateHandler = () => {
+    fetchData();
+  }
+
   return (
     <motion.div initial="initial" animate="visible" variants={pageTransition} style={{marginTop:"56px"}}>
-      {modalIsVisible ? <CreateItem hide={hideModalHandler} visible={modalIsVisible} item={diary} /> :
+      {modalIsVisible ? <CreateItem hide={hideModalHandler} visible={modalIsVisible} item={diary} fetchData={updateHandler} /> :
         <div className={classes.form}>
           <div className={classes.actions}>
             <div className={classes.back}>

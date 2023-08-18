@@ -10,7 +10,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { ko } from "date-fns/esm/locale";
 
-function CreateItem({ hide, visible, item }) {
+function CreateItem({ hide, visible, item, updateHandler }) {
   const navigate = useNavigate();
 
   const [diaries, setDiaries] = useRecoilState(diaryState);
@@ -109,6 +109,9 @@ function CreateItem({ hide, visible, item }) {
     };
 
     await postHandling();
+    if (updateHandler) {
+      updateHandler();
+    }
   }
 
   return (
