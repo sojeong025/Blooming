@@ -2,7 +2,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 import { diaryState } from "../../recoil/DiaryStateAtom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CreateItem from "../../components/Diary/ModalItem";
 import { customAxios } from "../../lib/axios";
 import { AiOutlineLeft } from "react-icons/ai"
@@ -24,7 +24,7 @@ const DiaryDetails = () => {
   const location = useLocation();
   const edit = location.state?.edit
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const response = await customAxios.get(`diary/${id}`);
       
@@ -35,11 +35,11 @@ const DiaryDetails = () => {
       console.error(error);
     }
     setLoading(false)
-  };
+  },[]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   if (loading) {
     return <div>로딩중...</div>;
