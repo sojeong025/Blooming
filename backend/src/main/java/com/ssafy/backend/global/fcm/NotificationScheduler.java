@@ -20,6 +20,7 @@ import com.ssafy.backend.domain.tipBox.repository.TipCodeRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.redis.fcm.FcmToken;
 import com.ssafy.backend.domain.redis.fcm.FcmTokenRepository;
+import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,6 +56,9 @@ public class NotificationScheduler {
     private TipCodeRepository tipCodeRepository;
     @Autowired
     private CoupleRepository coupleRepository;
+    @Autowired
+    private UserRepository userRepository;
+
 
     @PostConstruct
     public void firebaseSetting() throws IOException {
@@ -216,17 +220,24 @@ public class NotificationScheduler {
             // 시간 측정
             long startTime = 0L;
             long endTime = 0L;
+            Long fcmUserId = user.getId();
 
             // FCM 시간 측정
             startTime = System.currentTimeMillis();
-            String sqlToken = user.getFcmToken();
+            User fcmUser = userRepository.findById(fcmUserId)
+                    .orElse(null);
+            String sqlFcmToken = fcmUser.getFcmToken();
             endTime = System.currentTimeMillis();
+            System.out.println("MySQL 시작 : "+startTime);
+            System.out.println("MySQL 종료 : "+endTime);
             System.out.println("MySQL FCM Token 응답시간 : "+(endTime-startTime));
             //user id를 통해 redis에서 받아오자 : 일단 테스트는 보류
             startTime = System.currentTimeMillis();
-            FcmToken fcmToken = fcmTokenRepository.findById(String.valueOf(user.getId()))
+            FcmToken fcmToken = fcmTokenRepository.findById(String.valueOf(fcmUserId))
                     .orElse(null);
             endTime = System.currentTimeMillis();
+            System.out.println("REDIS 시작 : "+startTime);
+            System.out.println("REDIS 종료 : "+endTime);
             System.out.println("REDIS FCM Token 응답시간 : "+(endTime-startTime));
 
             if (fcmToken != null && user.getNotificationSetting().equals("agree")) {
