@@ -109,8 +109,8 @@ public class LatestSeenProductController {
             System.out.println("****************************************************************************");
             System.out.println("****************************************************************************");
             System.out.println("최근 본 상품 조회 100번 실행 시 소요시간");
-            System.out.println("SQL 사용 시 : "+sqlSec+"초, 평균 :"+sqlAvg+"ms");
-            System.out.println("SQL 사용 시 : "+redSec+"초, 평균 :"+redAvg+"ms");
+            System.out.println("SQL   사용 시 : "+sqlSec+"초, 평균 :"+sqlAvg+"ms");
+            System.out.println("Redis 사용 시 : "+redSec+"초, 평균 :"+redAvg+"ms");
             System.out.println("****************************************************************************");
             System.out.println("****************************************************************************");
             System.out.println("****************************************************************************");
