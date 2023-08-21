@@ -130,18 +130,9 @@ export default function InfoDetail() {
     setReviews((prevreview) => [review, ...prevreview]);
   };
 
-  const [isLoading, handleData] = useLoading(fetchData);
-  const fetchData = async () => {
-    try {
-      await fetchProductData();
-      await fetchReviewData();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
-    handleData();
+    fetchProductData();
+    fetchReviewData();
   }, []);
 
   const handleReserve = async () => {
@@ -233,10 +224,9 @@ export default function InfoDetail() {
 
   return (
     <Wrapper>
+      {/* {isLoading && <LoadingSpinner />} */}
       {product && (
         <>
-          {isLoading && <LoadingSpinner />}
-
           {Array.isArray(product.images) && (
             <Carousel waitForAnimate autoplay>
               {product.images.map((item, index) => (
