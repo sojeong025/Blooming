@@ -90,31 +90,30 @@ public class ReservationService {
             ));
 
             //예약 시 랭킹 보드에 추가 ranking - productId
-            try {
-                System.out.println("=============redis: ranking");
-                String key = "ranking:" + product.getProductType();
-                String value = String.valueOf(product.getId());
-                Long score = 1L;
-                //랭킹 키로 해당 value 1 증가해보기
-                try {
-                    //일단 증가시켜보기
-                    redisTemplate.opsForZSet().incrementScore(key, value, score);
-                } catch (Exception e) {
-                    //에러나면 없는 것이므로 추가하기
-                    System.out.println("===처음 추가함===");
-                    redisTemplate.opsForZSet().add(key, value, score);
-                }
-                System.out.println("저장 완료");
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("저장 실패");
-            } finally {
-                System.out.println("=============redis");
-            }
+            updateProductRanking(product);
+
+            // 예약시 product 객체의 reservation_cnt 올리기
+            product.addReservationCount();
 
             return new ReservationScheduleResultDto(savedSchedule.getId());
         } else {
             throw new IllegalArgumentException("예약 가능한 시간이 아닙니다. 업체 운영 시간 내에 30분 단위의 예약만 가능합니다.");
+        }
+    }
+
+    private void updateProductRanking(Product product) {
+        String key = "ranking:" + product.getProductType();
+        String value = String.valueOf(product.getId());
+        long score = 1L;
+        //랭킹 키로 해당 value 1 증가해보기
+        try {
+            //일단 증가시켜보기
+            if (redisTemplate.opsForZSet().incrementScore(key, value, score) == null) {
+                redisTemplate.opsForZSet().add(key, value, score);
+            }
+            // redisTemplate.opsForZSet().incrementScore(key, value, score);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
