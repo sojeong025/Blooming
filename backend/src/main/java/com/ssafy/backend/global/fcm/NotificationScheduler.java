@@ -212,12 +212,22 @@ public class NotificationScheduler {
                     fcmDto.getBody(),
                     fcmDto.getUser().getId()
             ));
-            //토큰 받아오는 걸로 수정
-//            String token = "eKbKoD7ETfqRiIKFF_4Zom:APA91bHbzIq11sl8_qbv1yE7-RFqjXnywPVo5u13FMC9kqIjJTrHkXIfqWODhBYvTS3EOGlOLQzlXUvJNwXn4EFbgoAC_WZzylV9yo5KOGLj96agM68p8qPc8bCPODgRk9aP_TNeKiLn";
-//            String token = user.getFcmToken();
+
+            // 시간 측정
+            long startTime = 0L;
+            long endTime = 0L;
+
+            // FCM 시간 측정
+            startTime = System.currentTimeMillis();
+            String sqlToken = user.getFcmToken();
+            endTime = System.currentTimeMillis();
+            System.out.println("MySQL FCM Token 응답시간 : "+(endTime-startTime));
             //user id를 통해 redis에서 받아오자 : 일단 테스트는 보류
+            startTime = System.currentTimeMillis();
             FcmToken fcmToken = fcmTokenRepository.findById(String.valueOf(user.getId()))
                     .orElse(null);
+            endTime = System.currentTimeMillis();
+            System.out.println("REDIS FCM Token 응답시간 : "+(endTime-startTime));
 
             if (fcmToken != null && user.getNotificationSetting().equals("agree")) {
                 String token = fcmToken.getValue(); //redis에서 토큰 읽어온거

@@ -53,6 +53,9 @@ public class ProductService {
 				.map(ProductImage::getImage)
 				.collect(Collectors.toList());
 
+		// mysql 시간 비교 위해 추가
+
+
 		//redis: 상품 상세조회 후 최근 상품 보기 리스트에 추가
 		try{
 			System.out.println("=============redis");
