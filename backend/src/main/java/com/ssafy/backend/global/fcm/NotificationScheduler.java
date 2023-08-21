@@ -78,7 +78,7 @@ public class NotificationScheduler {
     //시간에 맞게 푸시 알림을 스케줄링하는 코드
 //    @Scheduled(cron = "* * 1 * * ?")
 //    @Scheduled(cron = "0 0 9 * * ?")
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 20000)
     public void pushMorningDietAlarm() {
 
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
@@ -235,6 +235,7 @@ public class NotificationScheduler {
             System.out.println("MySQL 종료 : "+endTime);
             System.out.println("MySQL FCM Token 응답시간 : "+(endTime-startTime));
             sqlTimeList.add(endTime-startTime);
+            System.out.println("SIZE = "+sqlTimeList.size());
             //user id를 통해 redis에서 받아오자 : 일단 테스트는 보류
             startTime = System.currentTimeMillis();
             FcmToken fcmToken = fcmTokenRepository.findById(String.valueOf(fcmUserId))
