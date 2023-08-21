@@ -37,6 +37,8 @@ public class LatestSeenProductController {
     private final ProductRepository productRepository;
     private final SeenProductRepository seenProductRepository;
     private final WishlistRepository wishlistRepository;
+    private static List<Long> sqlList = new ArrayList<>();
+    private static List<Long> redList = new ArrayList<>();
 
     @Operation(description = "로그인 한 유저의 최근 본 상품 목록 10개 조회")
     @GetMapping("/latestSeenProduct")
@@ -65,6 +67,7 @@ public class LatestSeenProductController {
 
         endTime = System.currentTimeMillis();
         System.out.println("SQL 최근 본 상품 조회 소요시간 : "+(endTime - startTime)+"ms");
+        sqlList.add((endTime - startTime));
 
 
         //로그인 한 유저가 본 상품 목록 검색 : redis
@@ -85,8 +88,35 @@ public class LatestSeenProductController {
 
         endTime = System.currentTimeMillis();
         System.out.println("Redis 최근 본 상품 조회 소요시간 : "+(endTime - startTime)+"ms");
+        redList.add((endTime - startTime));
 
+        System.out.println("TIME LIST SIZE = "+redList.size());
+        if(redList.size()==100){
+            Long sqlSum = 0L;
+            Long redSum = 0L;
+            for(Long l : sqlList)
+                sqlSum+=l;
+            for(Long l : redList)
+                redSum+=l;
+            float sqlAvg = (float) sqlSum /100;
+            float redAvg = (float) redSum /100;
+            float sqlSec = (float) sqlSum/1000;
+            float redSec = (float) redSum/1000;
 
+            System.out.println("****************************************************************************");
+            System.out.println("****************************************************************************");
+            System.out.println("****************************************************************************");
+            System.out.println("****************************************************************************");
+            System.out.println("****************************************************************************");
+            System.out.println("최근 본 상품 조회 100번 실행 시 소요시간");
+            System.out.println("SQL 사용 시 : "+sqlSec+"초, 평균 :"+sqlAvg+"ms");
+            System.out.println("SQL 사용 시 : "+redSec+"초, 평균 :"+redAvg+"ms");
+            System.out.println("****************************************************************************");
+            System.out.println("****************************************************************************");
+            System.out.println("****************************************************************************");
+            System.out.println("****************************************************************************");
+            System.out.println("****************************************************************************");
+        }
 
         BasicResponse basicResponse;
         basicResponse = BasicResponse.builder()
