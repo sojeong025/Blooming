@@ -1,10 +1,15 @@
 package com.ssafy.backend.domain.redis.LatestSeenProduct;
 
 import com.ssafy.backend.domain.common.BasicResponse;
+import com.ssafy.backend.domain.product.Product;
+import com.ssafy.backend.domain.product.SeenProduct;
 import com.ssafy.backend.domain.product.dto.ProductRecentDto;
 import com.ssafy.backend.domain.product.repository.ProductRepository;
+import com.ssafy.backend.domain.product.repository.SeenProductRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
+import com.ssafy.backend.domain.wishlist.Wishlist;
+import com.ssafy.backend.domain.wishlist.repository.WishlistRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +35,8 @@ public class LatestSeenProductController {
     private final UserRepository userRepository;
     private final RedisTemplate redisTemplate;
     private final ProductRepository productRepository;
+    private final SeenProductRepository seenProductRepository;
+    private final WishlistRepository wishlistRepository;
 
     @Operation(description = "로그인 한 유저의 최근 본 상품 목록 10개 조회")
     @GetMapping("/latestSeenProduct")
@@ -39,13 +46,18 @@ public class LatestSeenProductController {
         User user = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(() -> new IllegalArgumentException("JWT token: 회원 이메일에 해당하는 회원이 없습니다."));
 
+        // 시간 측정
+        long startTime = 0L;
+        long endTime = 0L;
+
         //로그인 한 유저가 본 상품 목록 검색 : redis
+        startTime = System.currentTimeMillis();
         String key = "latest-seen-products:" + Long.valueOf(user.getId());
         ZSetOperations<String, String> stringStringZSetOperations = redisTemplate.opsForZSet();
         Set<ZSetOperations.TypedTuple<String>> typedTuples = stringStringZSetOperations.reverseRangeWithScores(key, 0, 9);
 
         //형태를 보기 위해 일단 출력
-        System.out.println(typedTuples);
+//        System.out.println(typedTuples);
 
         //상품 정보를 리턴 : productId, 썸네일 사진, 제품명, productType, 찜정보 + company
 
@@ -55,6 +67,19 @@ public class LatestSeenProductController {
             productRecentDtoList.add(productRepository.getProductRecentInfo(Long.valueOf(tuple.getValue()), user));
         }
 
+        endTime = System.currentTimeMillis();
+        System.out.println("Redis 최근 본 상품 조회 소요시간 : "+(endTime - startTime)+"ms");
+
+        // SQL로 최근 본 상품 조회
+        startTime = System.currentTimeMillis();
+        List<SeenProduct> seenProductList = seenProductRepository.findAllByUserIdOrderByCreatedDateDesc(user.getId());
+        List<ProductRecentDto> productRecentDtos = new ArrayList<>();
+        for(int idx=0;idx<10;idx++){
+            SeenProduct seenProduct= seenProductList.get(idx);
+            Product product = seenProduct.getProduct();
+            Wishlist wishlist = wishlistRepository.f
+            productRecentDtos.add(new ProductRecentDto(product.getId(), product.getProductType(), product.getItemName(),product.getThumbnail(),));
+        }
         basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)

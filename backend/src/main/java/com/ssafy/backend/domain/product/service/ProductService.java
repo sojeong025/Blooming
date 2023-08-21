@@ -2,10 +2,12 @@ package com.ssafy.backend.domain.product.service;
 
 import com.ssafy.backend.domain.product.ProductImage;
 import com.ssafy.backend.domain.product.ProductType;
+import com.ssafy.backend.domain.product.SeenProduct;
 import com.ssafy.backend.domain.product.dto.ProductDetailDto;
 import com.ssafy.backend.domain.product.dto.ProductDetailResult;
 import com.ssafy.backend.domain.product.dto.ProductResultDto;
 import com.ssafy.backend.domain.product.repository.ProductRepository;
+import com.ssafy.backend.domain.product.repository.SeenProductRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +34,7 @@ public class ProductService {
 	private final ProductRepository productRepository;
 	private final UserRepository userRepository;
 	private final RedisTemplate redisTemplate;
+	private final SeenProductRepository seenProductRepository;
 
 	public Slice<ProductResultDto> getTypeProduct(ProductType productType, int page, int size) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,7 +57,7 @@ public class ProductService {
 				.collect(Collectors.toList());
 
 		// mysql 시간 비교 위해 추가
-
+		seenProductRepository.save(new SeenProduct(user.getId(), productDetailResult.getProduct()));
 
 		//redis: 상품 상세조회 후 최근 상품 보기 리스트에 추가
 		try{
