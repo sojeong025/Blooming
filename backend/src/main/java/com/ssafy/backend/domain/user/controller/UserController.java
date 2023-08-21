@@ -174,6 +174,19 @@ public class UserController {
         return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
     }
 
+    @Hidden
+    @GetMapping("/logout")
+    public ResponseEntity<BasicResponse> logout() {
+
+        BasicResponse basicResponse = BasicResponse.builder()
+                .code(HttpStatus.OK.value())
+                .httpStatus(HttpStatus.OK)
+                .message("로그아웃 성공")
+                .build();
+
+        return new ResponseEntity<>(basicResponse, basicResponse.getHttpStatus());
+    }
+
     @Operation(summary = "내 약혼자 확인", description = "나와 커플 관계인 약혼자를 확인합니다.")
     @GetMapping("/my-fiance")
     public ResponseEntity<BasicResponse> getMyFiance() {
