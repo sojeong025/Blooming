@@ -26,6 +26,9 @@ import GotoTop from "../../components/Common/GoToTopButton";
 import { userState } from "../../recoil/ProfileAtom";
 import { useRecoilValue } from "recoil";
 
+import useLoading from "../../hooks/useLoading";
+import LoadingSpinner from "../../components/Common/LoadingSpinner";
+
 export default function InfoDetail() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -127,52 +130,18 @@ export default function InfoDetail() {
     setReviews((prevreview) => [review, ...prevreview]);
   };
 
+  const [isLoading, handleData] = useLoading(fetchData);
+  const fetchData = async () => {
+    try {
+      await fetchProductData();
+      await fetchReviewData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    fetchProductData();
-    fetchReviewData();
-    // setProduct({
-    //   id: 85,
-    //   itemName: "빌라드지디 수서",
-    //   brief:
-    //     "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
-    //   thumbnail:
-    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
-    //   company: "빌라드지디 수서",
-    //   companyTime: "10:00 ~ 19:00",
-    //   companyAddress: "서울 강남구 율현동 68-8",
-    //   images: [
-    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_image1.jpg",
-    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_image2.jpg",
-    //     "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_image3.jpg",
-    //   ],
-    //   wish: false,
-    // });
-    // setReviews([
-    //   {
-    //     reviewId: 48304,
-    //     star: 0,
-    //     image: "",
-    //     content: "ㅇㅇㅇ",
-    //     likeCnt: 0,
-    //     nickName: "희영",
-    //     email: "lotus0028@kakao.com",
-    //     createdDate: "2023-08-17T08:53:46.92773",
-    //     updatedDate: "2023-08-17T08:53:46.92773",
-    //     liked: false,
-    //   },
-    //   {
-    //     reviewId: 48304,
-    //     star: 0,
-    //     image: "",
-    //     content: "ㅇㅇㅇ",
-    //     likeCnt: 0,
-    //     nickName: "희영",
-    //     email: "이메일@kakao.com",
-    //     createdDate: "2023-08-17T08:53:46.92773",
-    //     updatedDate: "2023-08-17T08:53:46.92773",
-    //     liked: false,
-    //   },
-    // ]);
+    handleData();
   }, []);
 
   const handleReserve = async () => {
@@ -266,6 +235,8 @@ export default function InfoDetail() {
     <Wrapper>
       {product && (
         <>
+          {isLoading && <LoadingSpinner />}
+
           {Array.isArray(product.images) && (
             <Carousel waitForAnimate autoplay>
               {product.images.map((item, index) => (
