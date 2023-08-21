@@ -1,8 +1,8 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useRecoilState } from "recoil";
 import { diaryState } from "../../recoil/DiaryStateAtom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CreateItem from "../../components/Diary/ModalItem";
 import { customAxios } from "../../lib/axios";
 import { AiOutlineLeft } from "react-icons/ai"
@@ -19,9 +19,12 @@ const DiaryDetails = () => {
 
   const navigate = useNavigate();
   const { id } = useParams();
-  const [ modalIsVisible, setModalIsVisible ] = useState(false);
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+  
+  const location = useLocation();
+  const edit = location.state?.edit
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const response = await customAxios.get(`diary/${id}`);
       
@@ -29,14 +32,14 @@ const DiaryDetails = () => {
         setDiary(response.data.result[0]);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
     setLoading(false)
-  };
+  },[]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   if (loading) {
     return <div>로딩중...</div>;
@@ -71,13 +74,13 @@ const DiaryDetails = () => {
       }
       navigate('/diary')
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
 
   return (
     <motion.div initial="initial" animate="visible" variants={pageTransition} style={{marginTop:"56px"}}>
-      {modalIsVisible ? <CreateItem hide={hideModalHandler} visible={modalIsVisible} item={diary} /> :
+      {modalIsVisible ? <CreateItem hide={hideModalHandler} visible={modalIsVisible} item={diary}/> :
         <div className={classes.form}>
           <div className={classes.actions}>
             <div className={classes.back}>
@@ -88,10 +91,10 @@ const DiaryDetails = () => {
               <div>{diary.date}</div>
             </div>
 
-            <div className={classes.editdel}>
+            {edit && <div className={classes.editdel}>
               <button onClick={showModalHandler}><PiPencilLineFill/></button>
               <button onClick={handleDelete}><BsTrash/></button>
-            </div>
+            </div>}
           </div>
 
 

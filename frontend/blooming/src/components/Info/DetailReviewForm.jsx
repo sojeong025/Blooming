@@ -40,7 +40,7 @@ export default function DetailReviewForm({
         fetchReviewsData(response.data.result[0]);
         onClose();
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     };
     createReview();
@@ -57,7 +57,7 @@ export default function DetailReviewForm({
         const response = await fileAxios.post("REVIEW", formData);
         setImgFile(response.data.result[0].uploadImageUrl);
       } catch (error) {
-        console.error("이미지 api 오류", error);
+        // console.error("이미지 api 오류", error);
       }
       const reader = new FileReader();
       reader.onloadend = () => {

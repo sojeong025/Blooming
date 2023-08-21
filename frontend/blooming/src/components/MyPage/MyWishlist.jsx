@@ -77,7 +77,7 @@ export default function MyWishlist() {
         findDuplicatedProducts(response.data.result[0]);
       }
     } catch (error) {
-      console.error("예약 정보 조회 에러:", error);
+      // console.error("예약 정보 조회 에러:", error);
     }
   };
 

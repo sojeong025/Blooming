@@ -20,8 +20,8 @@ const Tips = () => {
       const response = await customAxios.get(`/tipbox/${weddingDday}`)
       setNextPlan(response.data.result[0])
     } catch (error) {
-      console.log("Tipbox fetch error")
-      console.log(error)
+      // console.log("Tipbox fetch error")
+      // console.log(error)
     }
     setIsLoading(false)
   }

@@ -20,7 +20,7 @@ export default function Share() {
       const response = await customAxios.get("profile");
       setUserData(response.data.result[0]);
     } catch (error) {
-      console.error("유저 정보 API 에러", error);
+      // console.error("유저 정보 API 에러", error);
     }
   };
   useEffect(() => {
@@ -89,7 +89,7 @@ export default function Share() {
         description: `${validCoupleData.name}님과 연결이 가능합니다.`,
       });
     } catch (error) {
-      console.log("추가 정보 POST 에러:", error);
+      // console.log("추가 정보 POST 에러:", error);
       setCoupled({
         isCoupled: false,
         description: error.response.data.message,
@@ -104,7 +104,7 @@ export default function Share() {
       await customAxios.put("couple", formData);
       navigate("/my-page");
     } catch (error) {
-      console.log("상대방 연결 에러:", error);
+      // console.log("상대방 연결 에러:", error);
     }
   };
 

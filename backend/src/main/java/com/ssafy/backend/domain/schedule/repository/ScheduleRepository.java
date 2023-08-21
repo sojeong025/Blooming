@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
@@ -13,7 +14,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     List<Schedule> findAllByCoupleId(Long coupleId);
 
-    Schedule findByReservationId(Long reservationId);
+    Optional<Schedule> findByReservationId(Long reservationId);
 
 
 }

@@ -30,7 +30,7 @@ export default function MyReview() {
         ...response.data.result[0].content,
       ]);
     } catch (error) {
-      console.error("예약 정보 조회 에러:", error);
+      // console.error("예약 정보 조회 에러:", error);
     }
   };
 

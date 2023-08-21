@@ -71,7 +71,7 @@ const EditProfile = () => {
       setUserData({ ...formData });
       navigate("/my-page");
     } catch (error) {
-      console.log("정보수정 에러", error);
+      // console.log("정보수정 에러", error);
     }
   };
   const submitUpdate = async (event) => {
@@ -96,7 +96,7 @@ const EditProfile = () => {
           profileImage: response.data.result[0].uploadImageUrl,
         });
       } catch (error) {
-        console.error("이미지 api 오류", error);
+        // console.error("이미지 api 오류", error);
       }
     }
   };

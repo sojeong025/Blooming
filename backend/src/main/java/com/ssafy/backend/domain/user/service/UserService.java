@@ -136,6 +136,14 @@ public class UserService {
     }
 
     public void certificationCouple(CoupleCodeDto coupleCodeDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication.getName() == null) {
+            throw new RuntimeException("Security Context에 인증 정보가 없습니다.");
+        }
+
+        User user = userRepository.findByEmail(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
+
         Couple couple = coupleRepository.findByCoupleCode(coupleCodeDto.getCoupleCode())
             .orElseThrow(() -> new IllegalArgumentException("입력한 커플 코드에 맞는 커플이 없습니다."));
 
@@ -144,6 +152,10 @@ public class UserService {
         }
 
         User findUser = couple.getUsers().get(0);
+        // 찾은 유저가 내 성별과 같다면 예외처리
+        if (findUser.getGender().equals(user.getGender())) {
+            throw new IllegalArgumentException("성별이 같은 사용자와는 연결할 수 없습니다.");
+        }
         // 찾은 유저가 내 약혼자 이름과 다르다면 예외처리
         if (!(findUser.getName().equals(coupleCodeDto.getName()))) {
             throw new IllegalArgumentException("커플 연결할 수 없는 코드입니다.");

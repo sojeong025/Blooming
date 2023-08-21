@@ -50,7 +50,7 @@ export default function WeddingHall() {
         ...response.data.result[0].content,
       ]);
     } catch (error) {
-      console.error("HALL 조회 에러:", error);
+      // console.error("HALL 조회 에러:", error);
       // setIsLoading(true);
       setErrorModal(true);
     }
@@ -62,7 +62,7 @@ export default function WeddingHall() {
       const response = await customAxios.get("ranking/HALL");
       setRanking(response.data.result[0]);
     } catch (error) {
-      console.log("랭킹", error);
+      // console.log("랭킹", error);
     }
   };
 
@@ -103,44 +103,6 @@ export default function WeddingHall() {
           }
         >
           <ProductFlex>
-            {
-              // isLoading
-              // ? Array(8)
-              //     .fill()
-              //     .map((_, index) => (
-              //       <FlexItem key={index}>
-              //         <div
-              //           style={{
-              //             padding: "10px",
-              //             textAlign: "center",
-              //             boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.1)",
-              //             background: "#FFF",
-              //             borderRadius: "6px",
-              //             overflow: "hidden",
-              //             border: "1px solid rgba(0, 0, 0, 0.08)",
-              //             marginBottom: "1rem",
-              //           }}
-              //         >
-              //           <Skeleton height={200} />
-              //           <Skeleton
-              //             width={115}
-              //             height={16}
-              //             style={{ marginTop: "1rem", marginBottom: "0.5rem" }}
-              //           />
-              //           <Skeleton width={120} height={16} />
-              //         </div>
-              //       </FlexItem>
-              //     ))
-              // :
-              weddingHall.map((product) => (
-                <FlexItem key={product.id}>
-                  <ProductItem
-                    product={product}
-                    onClick={() => handleNavigation(product)}
-                  />
-                </FlexItem>
-              ))
-            }
             {weddingHall.map((product) => (
               <FlexItem key={product.id}>
                 <ProductItem

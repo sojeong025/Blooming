@@ -18,7 +18,7 @@ export default function Magazine() {
         // console.log(Magazine)
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
     setIsLoading(false);
   };

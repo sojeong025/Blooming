@@ -17,7 +17,7 @@ export default function MyReservation() {
       const response = await customAxios.get("reservation");
       setMyReservation(response.data.result[0]);
     } catch (error) {
-      console.error("예약 정보 조회 에러:", error);
+      // console.error("예약 정보 조회 에러:", error);
     }
   };
 
@@ -43,9 +43,8 @@ export default function MyReservation() {
         MyReservation.map((reservation) => (
           <div
             key={reservation.reservationId}
-            onClick={() => handleNavigation(reservation)}
           >
-            <ReservationItem reservation={reservation} />
+            <ReservationItem onClick={() => handleNavigation(reservation)} reservation={reservation} />
           </div>
         ))
       ) : (
