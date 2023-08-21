@@ -99,23 +99,27 @@ function Home() {
     }
   };
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-    handleData();
-  }, []);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     try {
       await updateUser();
     } catch (error) {
       console.error(error);
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
     }
   };
 
-  const [isLoading, handleData] = useLoading(fetchData);
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+    fetchData();
+  }, []);
 
   return (
     <div className={classes.container}>
