@@ -82,9 +82,9 @@ public class RankingProductController {
         //         .collect(Collectors.toList());
 
         long endTime = System.currentTimeMillis();
-        System.out.println("REDIS 시작 : "+startTime);
-        System.out.println("REDIS 종료 : "+endTime);
-        System.out.println("REDIS 사용 시"+(endTime-startTime));
+        System.out.println("MYSQL 시작 : "+startTime);
+        System.out.println("MYSQL 종료 : "+endTime);
+        System.out.println("MYSQL 사용 시"+(endTime-startTime));
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
