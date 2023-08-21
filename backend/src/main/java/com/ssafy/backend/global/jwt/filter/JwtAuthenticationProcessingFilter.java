@@ -49,12 +49,15 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
         }
 
         if (request.getRequestURI().equals(LOGOUT_URL)) {
+            System.out.println("여기 들어오나?1");
             jwtService.extractAccessToken(request)
                     .filter(jwtService::isTokenValid)
                     .ifPresent(accessToken -> {
+                        System.out.println("여기 들어오나?2");
                         // redis에서 access token 확인
                         String isLogout = (String) redisTemplate.opsForValue().get(accessToken);
                         if (ObjectUtils.isEmpty(isLogout)) {
+                            System.out.println("여기 들어오나?3");
                             DecodedJWT jwt = JWT.decode(accessToken);
                             Date expiresDate = jwt.getExpiresAt();
 
@@ -63,6 +66,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
                             long expirationMillis = expiresDate.getTime();
                             long remainingMillis = expirationMillis - nowMillis;
                             redisTemplate.opsForValue().set(accessToken, "logout", remainingMillis, TimeUnit.MILLISECONDS);
+                            System.out.println("레디스 저장되나?");
                         }
                     });
 
