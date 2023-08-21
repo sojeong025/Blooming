@@ -56,7 +56,7 @@ function MyPage() {
         setThemeState(response.data.result[0].gender);
       }
     } catch (error) {
-      console.error("유저 정보 조회 에러:", error);
+      // console.error("유저 정보 조회 에러:", error);
       // setErrorModal(true);
     }
   };

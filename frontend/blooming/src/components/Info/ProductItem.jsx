@@ -15,7 +15,7 @@ export default function ProductItem({ product, onClick }) {
       await customAxios.post(`wishlist/${product.id}`);
       setProductHeart(!productHeart);
     } catch (error) {
-      console.error("찜하기 에러:", error);
+      // console.error("찜하기 에러:", error);
     }
   };
   const handleDeleteWish = async () => {
@@ -23,7 +23,7 @@ export default function ProductItem({ product, onClick }) {
       await customAxios.delete(`wishlist/${product.id}`);
       setProductHeart(!productHeart);
     } catch (error) {
-      console.error("찜취소 에러:", error);
+      // console.error("찜취소 에러:", error);
     }
   };
   const onWish = () => {

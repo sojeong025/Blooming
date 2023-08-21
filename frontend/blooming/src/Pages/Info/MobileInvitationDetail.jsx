@@ -28,7 +28,7 @@ function MobileInvitationDetail() {
           setInvitation(null);
         }
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fetchData();
@@ -45,7 +45,7 @@ function MobileInvitationDetail() {
       await customAxios.delete(`invitation/${invitationId}`);
       navigate("/info/mobile-invitation");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

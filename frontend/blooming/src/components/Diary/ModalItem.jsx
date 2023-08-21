@@ -10,7 +10,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { ko } from "date-fns/esm/locale";
 
-function CreateItem({ hide, visible, item, updateHandler }) {
+function CreateItem({ hide, visible, item }) {
   const navigate = useNavigate();
 
   const [diaries, setDiaries] = useRecoilState(diaryState);
@@ -46,7 +46,7 @@ function CreateItem({ hide, visible, item, updateHandler }) {
         // console.log('다이어리 이미지 Url', imageURL)
         setImageURL(response.data.result[0].uploadImageUrl);
       } catch (error) {
-        console.error("이미지 api 오류", error);
+        // console.error("이미지 api 오류", error);
       }
     }
   };
@@ -69,7 +69,7 @@ function CreateItem({ hide, visible, item, updateHandler }) {
         const response = await customAxios.post("diary", ItemData);
         navigate(`/diary/${response.data.result[0]}`);
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     };
 
@@ -94,8 +94,9 @@ function CreateItem({ hide, visible, item, updateHandler }) {
             return diary;
           }),
         );
+        navigate("/diary");
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
       hide();
     };
@@ -109,9 +110,6 @@ function CreateItem({ hide, visible, item, updateHandler }) {
     };
 
     await postHandling();
-    if (updateHandler) {
-      updateHandler();
-    }
   }
 
   return (

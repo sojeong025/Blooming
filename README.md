@@ -18,11 +18,11 @@
 
 # 결과물
 
-- 📽 [UCC](https://youtu.be/9v1aKx9SDYE)
+- 📽 [UCC](https://youtu.be/o2EBLNdY8w4)
 
-- 🎤 [중간 발표 PPT](https://docs.google.com/presentation/d/1ScCrScWdOtp96Koz_G8QV_aSXLtkl8qk/edit?usp=sharing&ouid=116217035030993886773&rtpof=true&sd=true)
+- 🎤 [중간 발표 자료](https://docs.google.com/presentation/d/1ScCrScWdOtp96Koz_G8QV_aSXLtkl8qk/edit?usp=sharing&ouid=116217035030993886773&rtpof=true&sd=true)
 
-- 🎤 [최종 발표 PPT](https://drive.google.com/file/d/14RB6TlOET-WFh-uMFLxWAgyqUoOgS4_n/view?usp=sharing)
+- 🎤 [최종발표 자료](https://drive.google.com/file/d/1Zd7H1pnseM33wLsKeWNzw6r47Dtfco3s/view?usp=sharing)
 
 # 서비스 화면
 
@@ -147,7 +147,6 @@
 # 개발 환경
 
 ## ⚙ Management Tool
-
 - 형상 관리 : Gitlab
 - 이슈 관리 : Jira
 - 커뮤니케이션 : Mattermost, Webex, Notion, Discord
@@ -203,11 +202,19 @@
 - Springdoc-openapi-ui `1.6.11`
 - Oauth2
 - Swagger 3.0.0
-- SSL
 - Oauth2
-- CertBot(CA Certificates)
 - Redis
 - MySql 8.0.34
+
+## Infra
+- AWS S3
+- AWS EC2
+- Nginx 1.18.0
+- Docker 20.10.12
+- Ubuntu 20.04.6 LTS
+- CertBot(CA Certificates)
+- SSL
+
 
 # 기술 소개
 
@@ -217,38 +224,15 @@
 
 - 사용자 알림
   
-  - `Firebase Cloud Message`를 이용하여 사용자에게 필요한 알림 제공
-
-- 실시간 채팅
-  
-  - `WebSocket`을 통하여 서버/클라이언트 통신 구현
-  - `Stomp` 메세지 브로커를 활용하여 1:N의 관계 구축
-  - `Redis`를 활용하여 채팅방을 유지하고 여러대의 채팅 서버간에 메세지를 주고 받음
-
-- 필터링
-  
-  - 사용자가 원하는 `조건`으로 `검색`하면 원하는 결과를 얻을 수 있도록 함
-
-- 자동 매칭
-  
-  - `ELO알고리즘` 기반 레이팅 시스템을 사용하여 비슷한 수준의 팀끼리 매칭될 수
-    있도록 함
+  - `Firebase Cloud Message`를 이용하여 사용자에게 필요한 알림 제공, `Redis`를 이용한 FCM Token 관리
 
 - 카카오 로그인
   
   - `OAUTH2` 인증을 이용해 불필요한 개인정보 입력 최소화
 
-- Spring Cloud Gateway
-  
-  - 하나의 주소로 서버에 접속할 수 있도록 `패킷 분배`
-  - 한가한 서버에게 업무를 배정하여 효율성을 증가시킬 수 있도록 `로드밸런싱`
-  - 특정 사용자의 요청을 차단하여 `해킹 공격 방어`
+- 상품 실시간 예약 랭킹, 최근 본 상품
 
-- 해킹 대응
-  
-  - `Docker Hub`에 이미지를 업로드하고 이를 활용하여 재설치 시간을 단축
-  - 해킹 서버를 받은 서버가 작동이 불가능하면 명령어 하나만으로 `자동으로 모든 서비스를 정상화`
-  - Jenkins를 사용하지 않아야 할 때 `명령어 하나만`으로 수동 CI/CD 가능하도록 `Shell script`로 구현
+  - in-memory DB인 `Redis`의 sorted set 자료구조를 이용해 실시간 예약 랭킹과 사용자별 최근 본 상품 정보 제공
 
 # 설계 문서
 

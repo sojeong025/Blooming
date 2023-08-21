@@ -57,7 +57,7 @@ function WeddingFair() {
         setWeddingFairData(response.data.result[0]);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   };
 

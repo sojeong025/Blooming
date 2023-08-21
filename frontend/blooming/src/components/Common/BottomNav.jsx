@@ -6,6 +6,9 @@ import { useRecoilState } from "recoil";
 import { navStateAtom } from "../../recoil/NavAtom";
 
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
+import { BsBagHeart, BsCalendarPlus } from "react-icons/bs";
+import { FiBookOpen } from "react-icons/fi";
+
 import { ReactComponent as Info } from "../../assets/Nav/info_base.svg";
 import { ReactComponent as Schedule } from "../../assets/Nav/schedule_base.svg";
 import { ReactComponent as Diary } from "../../assets/Nav/diary_base.svg";
@@ -59,7 +62,15 @@ const BottomNav = () => {
           onClick={() => handleNavigation("/home")}
         >
           <span>
-            <AiOutlineHome />
+            <AiOutlineHome
+              className={`${
+                selectedMenu === "home" ||
+                location.pathname.slice(1) === "home" ||
+                (location.state && location.state.navAction === "home")
+                  ? classes.colorWhite
+                  : ""
+              }`}
+            />
           </span>
         </label>
 
@@ -82,7 +93,15 @@ const BottomNav = () => {
           }
         >
           <span>
-            <Info />
+            <BsBagHeart
+              className={`${
+                selectedMenu === "info" ||
+                location.pathname.split("/").includes("info") ||
+                (location.state && location.state.navAction === "info")
+                  ? classes.colorWhite
+                  : ""
+              }`}
+            />
           </span>
         </label>
 
@@ -103,7 +122,15 @@ const BottomNav = () => {
           onClick={() => handleNavigation("/schedule", { today: new Date() })}
         >
           <span>
-            <Schedule />
+            <BsCalendarPlus
+              className={`${
+                selectedMenu === "schedule" ||
+                location.pathname.slice(1) === "schedule" ||
+                (location.state && location.state.navAction === "schedule")
+                  ? classes.colorWhite
+                  : ""
+              }`}
+            />
           </span>
         </label>
 
@@ -124,7 +151,16 @@ const BottomNav = () => {
           onClick={() => handleNavigation("/diary-explain")}
         >
           <span>
-            <Diary />
+            <FiBookOpen
+              className={`${
+                selectedMenu === "diary" ||
+                location.pathname.slice(1) === "diary-explain" ||
+                location.pathname.slice(1) === "diary" ||
+                (location.state && location.state.navAction === "diary")
+                  ? classes.colorWhite
+                  : ""
+              }`}
+            />
           </span>
         </label>
 
@@ -145,7 +181,15 @@ const BottomNav = () => {
           onClick={() => handleNavigation("/my-page")}
         >
           <span>
-            <AiOutlineUser />
+            <AiOutlineUser
+              className={`${
+                selectedMenu === "my-page" ||
+                location.pathname.slice(1) === "my-page" ||
+                (location.state && location.state.navAction === "my-page")
+                  ? classes.colorWhite
+                  : ""
+              }`}
+            />
           </span>
         </label>
 

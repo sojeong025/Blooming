@@ -36,12 +36,12 @@ const Diary = () => {
               // console.log("약혼자의 다이어리가 없습니다.");
             }
           } catch (err) {
-            console.log("약혼자 다이어리 받아오기 에러", err);
+            // console.log("약혼자 다이어리 받아오기 에러", err);
           }
         }
       }
     } catch (error) {
-      console.error("나의 다이어리 받아오기 에러", error);
+      // console.error("나의 다이어리 받아오기 에러", error);
     }
     setLoading(false);
   };

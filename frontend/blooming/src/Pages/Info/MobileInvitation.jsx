@@ -18,8 +18,8 @@ function MobileInvitation() {
         setMobileInvitationData(response.data.result[0]);
       }
     } catch (error) {
-      console.log(error);
-      console.log("가져오기 실패!");
+      // console.log(error);
+      // console.log("가져오기 실패!");
     }
   };
 

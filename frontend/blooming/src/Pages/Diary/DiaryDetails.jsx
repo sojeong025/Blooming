@@ -32,7 +32,7 @@ const DiaryDetails = () => {
         setDiary(response.data.result[0]);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
     setLoading(false)
   },[]);
@@ -74,17 +74,13 @@ const DiaryDetails = () => {
       }
       navigate('/diary')
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
-  }
-
-  const updateHandler = () => {
-    fetchData();
   }
 
   return (
     <motion.div initial="initial" animate="visible" variants={pageTransition} style={{marginTop:"56px"}}>
-      {modalIsVisible ? <CreateItem hide={hideModalHandler} visible={modalIsVisible} item={diary} fetchData={updateHandler} /> :
+      {modalIsVisible ? <CreateItem hide={hideModalHandler} visible={modalIsVisible} item={diary}/> :
         <div className={classes.form}>
           <div className={classes.actions}>
             <div className={classes.back}>

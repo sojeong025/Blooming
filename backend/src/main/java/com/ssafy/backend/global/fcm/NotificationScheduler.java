@@ -20,6 +20,7 @@ import com.ssafy.backend.domain.tipBox.repository.TipCodeRepository;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.redis.fcm.FcmToken;
 import com.ssafy.backend.domain.redis.fcm.FcmTokenRepository;
+import com.ssafy.backend.domain.user.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -55,6 +56,12 @@ public class NotificationScheduler {
     private TipCodeRepository tipCodeRepository;
     @Autowired
     private CoupleRepository coupleRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    private static List<Long> sqlTimeList = new ArrayList<>();
+    private static List<Long> redTimeList = new ArrayList<>();
+
 
     @PostConstruct
     public void firebaseSetting() throws IOException {
@@ -70,8 +77,8 @@ public class NotificationScheduler {
 
     //시간에 맞게 푸시 알림을 스케줄링하는 코드
 //    @Scheduled(cron = "* * 1 * * ?")
-//    @Scheduled(cron = "0 0 1 * * ?")
-    @Scheduled(fixedDelay = 60000)
+//    @Scheduled(cron = "0 0 9 * * ?")
+    @Scheduled(fixedDelay = 600000)
     public void pushMorningDietAlarm() {
 
         //여기서 일정 DB를 읽고 일정이 한 달, 삼 주, 일주일, 하루 전, 당일이면 알림을 보냄.
@@ -212,12 +219,55 @@ public class NotificationScheduler {
                     fcmDto.getBody(),
                     fcmDto.getUser().getId()
             ));
-            //토큰 받아오는 걸로 수정
-//            String token = "eKbKoD7ETfqRiIKFF_4Zom:APA91bHbzIq11sl8_qbv1yE7-RFqjXnywPVo5u13FMC9kqIjJTrHkXIfqWODhBYvTS3EOGlOLQzlXUvJNwXn4EFbgoAC_WZzylV9yo5KOGLj96agM68p8qPc8bCPODgRk9aP_TNeKiLn";
-//            String token = user.getFcmToken();
-            //user id를 통해 redis에서 받아오자 : 일단 테스트는 보류
-            FcmToken fcmToken = fcmTokenRepository.findById(String.valueOf(user.getId()))
+
+            // 시간 측정
+            long startTime = 0L;
+            long endTime = 0L;
+            Long fcmUserId = user.getId();
+
+            // FCM 시간 측정
+            startTime = System.currentTimeMillis();
+            User fcmUser = userRepository.findById(fcmUserId)
                     .orElse(null);
+            String sqlFcmToken = fcmUser.getFcmToken();
+            endTime = System.currentTimeMillis();
+            System.out.println("MySQL 시작 : "+startTime);
+            System.out.println("MySQL 종료 : "+endTime);
+            System.out.println("MySQL FCM Token 응답시간 : "+(endTime-startTime));
+            sqlTimeList.add(endTime-startTime);
+            System.out.println("SIZE = "+sqlTimeList.size());
+            //user id를 통해 redis에서 받아오자 : 일단 테스트는 보류
+            startTime = System.currentTimeMillis();
+            FcmToken fcmToken = fcmTokenRepository.findById(String.valueOf(fcmUserId))
+                    .orElse(null);
+            endTime = System.currentTimeMillis();
+            System.out.println("REDIS 시작 : "+startTime);
+            System.out.println("REDIS 종료 : "+endTime);
+            System.out.println("REDIS FCM Token 응답시간 : "+(endTime-startTime));
+            redTimeList.add(endTime-startTime);
+
+            if(sqlTimeList.size()%100 == 0) {
+                System.out.println("********************************************************");
+                System.out.println("SQL FCM SIZE : "+sqlTimeList.size());
+                System.out.println("********************************************************");
+            }
+
+            // 타임 리스트 사이즈 1000, 5000, 10000 평균 내기
+            if(sqlTimeList.size()==1000 || sqlTimeList.size()==5000 || sqlTimeList.size()==10000){
+                Long sqlSum = 0L;
+                Long redSum = 0L;
+                for(Long l : sqlTimeList)
+                    sqlSum+=l;
+                for(Long l : redTimeList)
+                    redSum+=l;
+
+                System.out.println("************************************************************");
+                System.out.println("알림 "+sqlTimeList.size()+"번 전송시 MySQL, Redis FCM TOKEN 조회 평균 시간");
+                System.out.println("MySQL FCM Token 응답시간 : "+(sqlSum/sqlTimeList.size()));
+                System.out.println("REDIS FCM Token 응답시간 : "+(redSum/redTimeList.size()));
+                System.out.println("************************************************************");
+
+            }
 
             if (fcmToken != null && user.getNotificationSetting().equals("agree")) {
                 String token = fcmToken.getValue(); //redis에서 토큰 읽어온거

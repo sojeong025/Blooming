@@ -9,6 +9,13 @@
   animation: scaleanim 200ms ease;
 }
 
+.colorWhite {
+  color: white;
+}
+/* .colorWhite p{
+  display: none;
+} */
+
 .navBar {
   display: flex;
   justify-content: space-around;
@@ -43,7 +50,7 @@
   content: "";
   z-index: -1;
   position: absolute;
-  background: var(--color-common);
+  background: var(--color-point);
   border-radius: 100%;
   width: 100%;
   height: 100%;

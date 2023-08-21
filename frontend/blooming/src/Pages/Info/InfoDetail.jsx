@@ -49,7 +49,7 @@ export default function InfoDetail() {
         setReviews([]);
         fetchReviewData();
       } catch (error) {
-        console.log("리뷰 삭제", error);
+        // console.log("리뷰 삭제", error);
       }
     } else {
       alert("삭제 권한이 없습니다.");
@@ -93,7 +93,7 @@ export default function InfoDetail() {
       const response = await customAxios.get(`product/${productType}/${id}`);
       setProduct(response.data.result[0]);
     } catch (error) {
-      console.error("이미지 정보 조회 에러:", error);
+      // console.error("이미지 정보 조회 에러:", error);
     }
   };
   // 상품 리뷰 가져오기
@@ -119,7 +119,7 @@ export default function InfoDetail() {
         setCurrentPage(currentPage + 1);
       }
     } catch (error) {
-      console.error("리뷰 정보 조회 에러:", error);
+      // console.error("리뷰 정보 조회 에러:", error);
     }
   };
 
@@ -211,7 +211,7 @@ export default function InfoDetail() {
       await customAxios.post(`wishlist/${product.id}`);
       setProduct({ ...product, wish: true });
     } catch (error) {
-      console.error("찜하기 에러:", error);
+      // console.error("찜하기 에러:", error);
     }
   };
   const handleDeleteWish = async () => {
@@ -219,7 +219,7 @@ export default function InfoDetail() {
       await customAxios.delete(`wishlist/${product.id}`);
       setProduct({ ...product, wish: false });
     } catch (error) {
-      console.error("찜취소 에러:", error);
+      // console.error("찜취소 에러:", error);
     }
   };
   const onWish = () => {
@@ -258,7 +258,7 @@ export default function InfoDetail() {
 
       setReviews(updatedReviews);
     } catch (error) {
-      console.log("좋아요 에러", error);
+      // console.log("좋아요 에러", error);
     }
   };
 

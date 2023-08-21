@@ -100,14 +100,14 @@ function NewTask() {
         await customAxios.put("schedule", updateTaskData);
         navigate(`/schedule/${task.id}`);
       } catch (error) {
-        console.log("스케쥴 수정 API 에러", error);
+        // console.log("스케쥴 수정 API 에러", error);
       }
     } else {
       try {
         await customAxios.post("schedule", taskData);
         navigate("/schedule");
       } catch (error) {
-        console.log("스케쥴 등록 API 에러", error);
+        // console.log("스케쥴 등록 API 에러", error);
       }
     }
   }
@@ -118,7 +118,7 @@ function NewTask() {
         await customAxios.delete(`schedule/${task.id}`);
         navigate("/schedule");
       } catch (error) {
-        console.log("스케쥴 삭제 API 에러", error);
+        // console.log("스케쥴 삭제 API 에러", error);
       }
     }
   }

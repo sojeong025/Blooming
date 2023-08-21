@@ -44,7 +44,7 @@ export default function ReservationItem({ onClick, reservation }) {
       });
       setMyReservations(filteredReservations)
     } catch (error) {
-      console.log("예약 삭제 요청 실패", error)
+      // console.log("예약 삭제 요청 실패", error)
     }
   }
 
