@@ -67,12 +67,16 @@ public class RankingProductController {
     @GetMapping("/ranking/mysql/{productType}")
     public ResponseEntity<BasicResponse> getMysqlRanking(@PathVariable ProductType productType){
         long startTime = System.currentTimeMillis();
-        List<Product> productList = productRepository.findTop10ByProductTypeOrderByReservationCountDesc(productType);
 
-        List<ProductRankingDto> productRankingDtoList = productList.stream()
-                .map(product -> new ProductRankingDto(product.getId(), product.getItemName(), product.getProductType(),
-                        product.getBrief(), product.getCompany(), product.getThumbnail()))
-                .collect(Collectors.toList());
+        List<Long> productIds = productRepository.findIdByProductTypeOrderByReservationCountDesc(productType);
+        List<ProductRankingDto> productRankingDtoList = productRepository.getProductRankingInfo(productIds);
+
+        // List<Product> productList = productRepository.findTop10ByProductTypeOrderByReservationCountDesc(productType);
+
+        // List<ProductRankingDto> productRankingDtoList = productList.stream()
+        //         .map(product -> new ProductRankingDto(product.getId(), product.getItemName(), product.getProductType(),
+        //                 product.getBrief(), product.getCompany(), product.getThumbnail()))
+        //         .collect(Collectors.toList());
 
         long endTime = System.currentTimeMillis();
         System.out.println("REDIS 시작 : "+startTime);
