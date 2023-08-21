@@ -50,6 +50,23 @@ public class LatestSeenProductController {
         long startTime = 0L;
         long endTime = 0L;
 
+
+        // SQL로 최근 본 상품 조회
+        startTime = System.currentTimeMillis();
+        List<SeenProduct> seenProductList = seenProductRepository.findAllByUserIdOrderByCreatedDateDesc(user.getId());
+        List<ProductRecentDto> productRecentDtos = new ArrayList<>();
+        for(int idx=0;idx<10;idx++){
+            SeenProduct seenProduct= seenProductList.get(idx);
+            Product product = seenProduct.getProduct();
+            Wishlist wishlist = wishlistRepository.findByProductIdAndUserId(product.getId(), user.getId())
+                    .orElse(null);
+            productRecentDtos.add(new ProductRecentDto(product.getId(), product.getProductType(), product.getItemName(),product.getThumbnail(),wishlist,product.getCompany()));
+        }
+
+        endTime = System.currentTimeMillis();
+        System.out.println("SQL 최근 본 상품 조회 소요시간 : "+(endTime - startTime)+"ms");
+
+
         //로그인 한 유저가 본 상품 목록 검색 : redis
         startTime = System.currentTimeMillis();
         String key = "latest-seen-products:" + Long.valueOf(user.getId());
@@ -61,7 +78,6 @@ public class LatestSeenProductController {
 
         //상품 정보를 리턴 : productId, 썸네일 사진, 제품명, productType, 찜정보 + company
 
-        BasicResponse basicResponse;
         List<ProductRecentDto> productRecentDtoList = new ArrayList<>();
         for (ZSetOperations.TypedTuple<String> tuple : typedTuples){
             productRecentDtoList.add(productRepository.getProductRecentInfo(Long.valueOf(tuple.getValue()), user));
@@ -70,16 +86,9 @@ public class LatestSeenProductController {
         endTime = System.currentTimeMillis();
         System.out.println("Redis 최근 본 상품 조회 소요시간 : "+(endTime - startTime)+"ms");
 
-        // SQL로 최근 본 상품 조회
-//        startTime = System.currentTimeMillis();
-//        List<SeenProduct> seenProductList = seenProductRepository.findAllByUserIdOrderByCreatedDateDesc(user.getId());
-//        List<ProductRecentDto> productRecentDtos = new ArrayList<>();
-//        for(int idx=0;idx<10;idx++){
-//            SeenProduct seenProduct= seenProductList.get(idx);
-//            Product product = seenProduct.getProduct();
-//            Wishlist wishlist = wishlistRepository.f
-//            productRecentDtos.add(new ProductRecentDto(product.getId(), product.getProductType(), product.getItemName(),product.getThumbnail(),));
-//        }
+
+
+        BasicResponse basicResponse;
         basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)
