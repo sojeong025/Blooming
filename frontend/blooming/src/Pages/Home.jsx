@@ -16,9 +16,10 @@ import LatestSeenProduct from "../components/Home/LatestSeenProduct";
 // import ReactAudioPlayer from 'react-audio-player';
 // import audioFile from "../assets/wedding.mp3";
 
+import useLoading from "../hooks/useLoading";
+import LoadingSpinner from "../components/Common/LoadingSpinner";
 
 function Home() {
-  
   const [userData, setUserData] = useRecoilState(userState);
   const resetUserState = useResetRecoilState(userState);
   const setWeddingDate = useSetRecoilState(weddingDateState);
@@ -103,11 +104,22 @@ function Home() {
       top: 0,
       behavior: "smooth",
     });
-    updateUser();
+    handleData();
   }, []);
+
+  const fetchData = async () => {
+    try {
+      await updateUser();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const [isLoading, handleData] = useLoading(fetchData);
 
   return (
     <div className={classes.container}>
+      {isLoading && <LoadingSpinner />}
       {/* <ReactAudioPlayer src={audioFile} autoPlay controls /> */}
       <WeddingDday />
       <div className={classes.top}>
@@ -117,7 +129,9 @@ function Home() {
       {/* 웨딩박람회 */}
       <div className={classes.fairbox}>
         <div className={classes.fair}>
-          <div className={classes.fairTitle}>❏ 블루밍 개발자들이 선택한 웨딩 박람회 </div>
+          <div className={classes.fairTitle}>
+            ❏ 블루밍 개발자들이 선택한 웨딩 박람회{" "}
+          </div>
           <div className={classes.weddingfair}>
             <WeddingFair />
           </div>
@@ -127,7 +141,7 @@ function Home() {
       {/* 최근 본 상품 */}
       <div className={classes.fair}>
         <div className={classes.fairTitle}>
-        ❏ {userData.nickname}님의 최근 본 상품 
+          ❏ {userData.nickname}님의 최근 본 상품
         </div>
         <LatestSeenProduct />
       </div>
@@ -140,11 +154,14 @@ function Home() {
 
       {/* 광고 줘봄 */}
       <div className={classes.bespoke}>
-        <div className={classes.bespokeTitle}>❏ 신혼 살림 <span style={{color:'#0C4DA2'}}>SAMSUNG</span> 비스포크와 함께 </div>
+        <div className={classes.bespokeTitle}>
+          ❏ 신혼 살림 <span style={{ color: "#0C4DA2" }}>SAMSUNG</span>{" "}
+          비스포크와 함께{" "}
+        </div>
         <Bespoke />
       </div>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }

@@ -12,8 +12,10 @@ import ProductItem from "../../components/Info/ProductItem";
 import RecommendItem from "../../components/Info/RecommendItem";
 import LoadingSpinner from "../../components/Common/LoadingSpinner";
 
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+// import Skeleton from "react-loading-skeleton";
+// import "react-loading-skeleton/dist/skeleton.css";
+
+import classes from "../../components/Info/ProductItem.module.css";
 
 export default function WeddingHall() {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +28,7 @@ export default function WeddingHall() {
   const navigate = useNavigate();
   const location = useLocation();
   const productType = location.state.productType;
-
+  const [additionalLoading, setAdditionalLoading] = useState(false);
   const handleNavigation = (product) => {
     navigate(`/${productType}/${product.id}`, {
       state: { id: product.id, productType, navAction: "info" },
@@ -38,13 +40,13 @@ export default function WeddingHall() {
       const response = await customAxios.get("product/HALL", {
         params: { page: currentPage, size: 8 },
       });
-
+      // 마지막 페이지 호출
       if (response.data.result[0].last) {
         setHasMore(false);
       } else {
-        setCurrentPage(currentPage + 1);
         setIsLoading(false);
       }
+      setCurrentPage(currentPage + 1);
       setWeddingHall((prevProducts) => [
         ...prevProducts,
         ...response.data.result[0].content,
@@ -53,6 +55,8 @@ export default function WeddingHall() {
       // console.error("HALL 조회 에러:", error);
       // setIsLoading(true);
       setErrorModal(true);
+    } finally {
+      setAdditionalLoading(false);
     }
   };
 
@@ -69,21 +73,6 @@ export default function WeddingHall() {
   useEffect(() => {
     fetchData();
     fetchRanking();
-    // setWeddingHall([
-    //   {
-    //     id: 85,
-    //     itemName: "빌라드지디 수서",
-    //     brief:
-    //       "2019년 9월, 하우스웨딩의 대명사인 더그레이스켈리 강남점에 이어 2호점 오픈! 빌라드지디 수서!",
-    //     thumbnail:
-    //       "https://blooming-image-bucket.s3.ap-northeast-2.amazonaws.com/product/hall/85_thumbnail.jpg",
-    //     company: "빌라드지디 수서",
-    //     companyTime: "10:00 ~ 19:00",
-    //     companyAddress: "서울 강남구 율현동 68-8",
-    //     starRate: 0,
-    //     wish: false,
-    //   },
-    // ]);
   }, []);
 
   return (
@@ -95,7 +84,6 @@ export default function WeddingHall() {
           dataLength={weddingHall.length}
           next={fetchData}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>모든 상품을 불러왔습니다.</b>
@@ -103,14 +91,70 @@ export default function WeddingHall() {
           }
         >
           <ProductFlex>
-            {weddingHall.map((product) => (
-              <FlexItem key={product.id}>
-                <ProductItem
-                  product={product}
-                  onClick={() => handleNavigation(product)}
-                />
-              </FlexItem>
-            ))}
+            {additionalLoading
+              ? Array(8)
+                  .fill()
+                  .map((_, index) => (
+                    <FlexItem key={index}>
+                      <div className={classes.Wrapper}>
+                        <div className={classes.loader}></div>
+                      </div>
+                    </FlexItem>
+                  ))
+              : isLoading
+              ? Array(8)
+                  .fill()
+                  .map((_, index) => (
+                    <FlexItem key={index}>
+                      <div className={classes.Wrapper}>
+                        <div className={classes.loader}></div>
+                      </div>
+                    </FlexItem>
+                  ))
+              : weddingHall.map((product) => (
+                  <FlexItem key={product.id}>
+                    <ProductItem
+                      product={product}
+                      onClick={() => handleNavigation(product)}
+                    />
+                  </FlexItem>
+                ))}
+
+            {/* {isLoading
+              ? Array(8)
+                  .fill()
+                  .map((_, index) => (
+                    <FlexItem key={index}>
+                      <div
+                        style={{
+                          padding: "10px",
+                          textAlign: "center",
+                          boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.1)",
+                          background: "#FFF",
+                          borderRadius: "6px",
+                          overflow: "hidden",
+                          border: "1px solid rgba(0, 0, 0, 0.08)",
+                          marginBottom: "1rem",
+                        }}
+                      >
+                        <Skeleton height={200} />
+                        <Skeleton
+                          width={115}
+                          height={16}
+                          style={{ marginTop: "1rem", marginBottom: "0.5rem" }}
+                        />
+                        <Skeleton width={120} height={16} />
+                      </div>
+                    </FlexItem>
+                  ))
+              : weddingHall.map((product) => (
+                  <FlexItem key={product.id}>
+                    <ProductItem
+                      product={product}
+                      onClick={() => handleNavigation(product)}
+                    />
+                  </FlexItem>
+                ))} */}
           </ProductFlex>
         </InfiniteScroll>
       </Wrapper>

@@ -15,6 +15,8 @@ import LoadingSpinner from "../../components/Common/LoadingSpinner";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
+import classes from "../../components/Info/ProductItem.module.css";
+
 export default function WeddingHall() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorModal, setErrorModal] = useRecoilState(errorState);
@@ -43,9 +45,9 @@ export default function WeddingHall() {
       if (response.data.result[0].last) {
         setHasMore(false);
       } else {
-        setCurrentPage(currentPage + 1);
         setIsLoading(false);
       }
+      setCurrentPage(currentPage + 1);
       setStudio((prevProducts) => [
         ...prevProducts,
         ...response.data.result[0].content,
@@ -73,7 +75,6 @@ export default function WeddingHall() {
 
   return (
     <>
-      {/* {isLoading && <LoadingSpinner />} */}
       <Wrapper>
         <RecommendItem data={ranking} productType={productType} />
         <TitleText>스튜디오 전체</TitleText>
@@ -81,7 +82,6 @@ export default function WeddingHall() {
           dataLength={studio.length}
           next={fetchData}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>모든 상품을 불러왔습니다.</b>
@@ -94,7 +94,10 @@ export default function WeddingHall() {
                   .fill()
                   .map((_, index) => (
                     <FlexItem key={index}>
-                      <div
+                      <div className={classes.Wrapper}>
+                        <div className={classes.loader}></div>
+                      </div>
+                      {/* <div
                         style={{
                           padding: "10px",
                           textAlign: "center",
@@ -113,7 +116,7 @@ export default function WeddingHall() {
                           style={{ marginTop: "1rem", marginBottom: "0.5rem" }}
                         />
                         <Skeleton width={120} height={16} />
-                      </div>
+                      </div> */}
                     </FlexItem>
                   ))
               : studio.map((product) => (

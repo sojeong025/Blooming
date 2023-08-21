@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { RecoilRoot } from "recoil";
 import {
   BrowserRouter as Router,
@@ -6,6 +6,8 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
+
+import Modal from "./components/Error/Modal";
 
 // Pages
 import Splash from "./Pages/Splash";
@@ -59,9 +61,18 @@ import Error from "./Pages/Error";
 import QrCode from "./Pages/QrCode";
 
 function App() {
-
   // TopNav를 숨길 페이지 path
-  const hiddenTopPaths = ["/", "/kakaologin", "/login", "/go-join", "/join", "/mobile-invitation-detail", "/schedule/new-task", "/qrcode", "/mobile-invitation-detail/:id"];
+  const hiddenTopPaths = [
+    "/",
+    "/kakaologin",
+    "/login",
+    "/go-join",
+    "/join",
+    "/mobile-invitation-detail",
+    "/schedule/new-task",
+    "/qrcode",
+    "/mobile-invitation-detail/:id",
+  ];
   // BottomNav를 숨길 페이지 path
   const hiddenBottomPaths = [
     "/",
@@ -78,7 +89,7 @@ function App() {
     "/mobile-invitation-detail",
     "/schedule/new-task",
     "/qrcode",
-    "/mobile-invitation-detail/:id"
+    "/mobile-invitation-detail/:id",
   ];
 
   // 동적 경로
@@ -121,13 +132,12 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/kakaologin' element={<KakaoLogin />} />
           <Route path='/go-join' element={<GoJoin />} />
-          <Route path='/join-code' element={<JoinCode />} />
+          {/* <Route path='/join-code' element={<JoinCode />} /> */}
           <Route path='/join' element={<Join />} />
-          <Route path='/question' element={<Question />} />
-          <Route path='/decide-wedding' element={<DecideWedding />} />
+          {/* <Route path='/question' element={<Question />} /> */}
+          {/* <Route path='/decide-wedding' element={<DecideWedding />} /> */}
           <Route path='/choose-wedding' element={<ChooseWedding />} />
           <Route path='/share' element={<Share />} />
-
           {/* 웨딩정보 */}
           <Route path='/info' element={<Info />}>
             <Route path='wedding-hall' element={<WeddingHall />} />
@@ -170,7 +180,6 @@ function App() {
           {/* NotFound */}
           <Route path='*' element={<Error />} />
         </Routes>
-
         {!shouldHiddenBottom && <BottomNav />}
       </>
     );

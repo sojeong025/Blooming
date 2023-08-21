@@ -73,3 +73,25 @@
 .heartIconFalse {
   color: var(--color-heart-inactive);
 }
+
+
+.loader {
+  width: 45vw;
+  height: 280px;
+  background:
+      linear-gradient(0.25turn, transparent, #FFF, transparent),
+      linear-gradient(#DDD, #DDD),
+      linear-gradient(#DDD, #DDD),
+      linear-gradient(#DDD, #DDD);
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: 215px 220px, 100% 130px, 100px 15px, 150px 15px;
+  background-position: -215px 0, 0 0, 15px 150px, 15px 180px;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+to {
+  background-position: 215px 0, 0 0, 15px 150px, 15px 180px;
+}
+}

@@ -89,7 +89,11 @@ const BottomNav = () => {
           className={classes.label}
           htmlFor='item-2'
           onClick={() =>
-            handleNavigation("/info/wedding-hall", { productType: "HALL" })
+            handleNavigation("/info/wedding-hall", {
+              productType: "HALL",
+              navAction: "info",
+              subNavAction: "wedding-hall",
+            })
           }
         >
           <span>
