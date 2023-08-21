@@ -68,7 +68,10 @@ public class RankingProductController {
     public ResponseEntity<BasicResponse> getMysqlRanking(@PathVariable ProductType productType){
         long startTime = System.currentTimeMillis();
 
-        List<Long> productIds = productRepository.findIdByProductTypeOrderByReservationCountDesc(productType);
+        List<Product> products = productRepository.findIdByProductTypeOrderByReservationCountDesc(productType);
+        List<Long> productIds = products.stream()
+                .map(Product::getId)
+                .collect(Collectors.toList());
         List<ProductRankingDto> productRankingDtoList = productRepository.getProductRankingInfo(productIds);
 
         // List<Product> productList = productRepository.findTop10ByProductTypeOrderByReservationCountDesc(productType);
