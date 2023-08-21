@@ -175,7 +175,7 @@ public class UserController {
     }
 
     @Hidden
-    @GetMapping("/logout")
+    @GetMapping("/user-logout")
     public ResponseEntity<BasicResponse> logout() {
 
         BasicResponse basicResponse = BasicResponse.builder()
