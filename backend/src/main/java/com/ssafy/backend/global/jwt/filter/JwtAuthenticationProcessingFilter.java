@@ -1,17 +1,21 @@
 package com.ssafy.backend.global.jwt.filter;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ssafy.backend.domain.user.User;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import com.ssafy.backend.global.jwt.service.JwtService;
 import com.ssafy.backend.global.jwt.util.PasswordUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -19,6 +23,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,9 +33,11 @@ import java.util.regex.Pattern;
 public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
     private static final String NO_CHECK_URL = "/auto-login"; // "login"으로 들어오는 요청은 Filter 작동 X
+    private static final String LOGOUT_URL = "/logout";
 
     private final JwtService jwtService;
     private final UserRepository userRepository;
+    private final RedisTemplate redisTemplate;
 
     private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
 
@@ -38,6 +46,28 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
         if (request.getRequestURI().equals(NO_CHECK_URL)) {
             filterChain.doFilter(request, response); // "/login" 요청이 들어오면, 다음 필터 호출
             return; // return으로 이후 현재 필터 진행 막기 (안해주면 아래로 내려가서 계속 필터 진행시킴)
+        }
+
+        if (request.getRequestURI().equals(LOGOUT_URL)) {
+            jwtService.extractAccessToken(request)
+                    .filter(jwtService::isTokenValid)
+                    .ifPresent(accessToken -> {
+                        // redis에서 access token 확인
+                        String isLogout = (String) redisTemplate.opsForValue().get(accessToken);
+                        if (ObjectUtils.isEmpty(isLogout)) {
+                            DecodedJWT jwt = JWT.decode(accessToken);
+                            Date expiresDate = jwt.getExpiresAt();
+
+                            // 현재 시간과 만료 시간 사이의 시간 차이 계산
+                            long nowMillis = System.currentTimeMillis();
+                            long expirationMillis = expiresDate.getTime();
+                            long remainingMillis = expirationMillis - nowMillis;
+                            redisTemplate.opsForValue().set(accessToken, "logout", remainingMillis, TimeUnit.MILLISECONDS);
+                        }
+                    });
+
+            filterChain.doFilter(request, response);
+            return;
         }
 
         Pattern pattern = Pattern.compile("/invitation/share/(\\d+)");
@@ -116,9 +146,15 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
         log.info("checkAccessTokenAndAuthentication() 호출");
         jwtService.extractAccessToken(request)
                 .filter(jwtService::isTokenValid)
-                .ifPresent(accessToken -> jwtService.extractEmail(accessToken)
-                        .ifPresent(email -> userRepository.findByEmail(email)
-                                .ifPresent(this::saveAuthentication)));
+                .ifPresent(accessToken -> {
+                    // redis에서 access token blacklist 확인
+                    String isLogout = (String) redisTemplate.opsForValue().get(accessToken);
+                    if (ObjectUtils.isEmpty(isLogout)) {
+                        jwtService.extractEmail(accessToken)
+                                .ifPresent(email -> userRepository.findByEmail(email)
+                                        .ifPresent(this::saveAuthentication));
+                    }
+                });
 
         filterChain.doFilter(request, response);
     }

@@ -71,15 +71,15 @@ public class LatestSeenProductController {
         System.out.println("Redis 최근 본 상품 조회 소요시간 : "+(endTime - startTime)+"ms");
 
         // SQL로 최근 본 상품 조회
-        startTime = System.currentTimeMillis();
-        List<SeenProduct> seenProductList = seenProductRepository.findAllByUserIdOrderByCreatedDateDesc(user.getId());
-        List<ProductRecentDto> productRecentDtos = new ArrayList<>();
-        for(int idx=0;idx<10;idx++){
-            SeenProduct seenProduct= seenProductList.get(idx);
-            Product product = seenProduct.getProduct();
-            Wishlist wishlist = wishlistRepository.f
-            productRecentDtos.add(new ProductRecentDto(product.getId(), product.getProductType(), product.getItemName(),product.getThumbnail(),));
-        }
+//        startTime = System.currentTimeMillis();
+//        List<SeenProduct> seenProductList = seenProductRepository.findAllByUserIdOrderByCreatedDateDesc(user.getId());
+//        List<ProductRecentDto> productRecentDtos = new ArrayList<>();
+//        for(int idx=0;idx<10;idx++){
+//            SeenProduct seenProduct= seenProductList.get(idx);
+//            Product product = seenProduct.getProduct();
+//            Wishlist wishlist = wishlistRepository.f
+//            productRecentDtos.add(new ProductRecentDto(product.getId(), product.getProductType(), product.getItemName(),product.getThumbnail(),));
+//        }
         basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
                 .httpStatus(HttpStatus.OK)

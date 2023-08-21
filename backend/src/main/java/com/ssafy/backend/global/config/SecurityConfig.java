@@ -2,6 +2,7 @@ package com.ssafy.backend.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,7 +15,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ssafy.backend.domain.user.repository.UserRepository;
 import com.ssafy.backend.global.jwt.filter.JwtAuthenticationProcessingFilter;
 import com.ssafy.backend.global.jwt.service.JwtService;
@@ -36,10 +36,10 @@ public class SecurityConfig {
 	//    private final LoginService loginService;
 	private final JwtService jwtService;
 	private final UserRepository userRepository;
-	private final ObjectMapper objectMapper;
 	private final OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 	private final OAuth2LoginFailureHandler oAuth2LoginFailureHandler;
 	private final CustomOAuth2UserService customOAuth2UserService;
+	private final RedisTemplate redisTemplate;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -163,6 +163,6 @@ public class SecurityConfig {
 
 	@Bean
 	public JwtAuthenticationProcessingFilter jwtAuthenticationProcessingFilter() {
-		return new JwtAuthenticationProcessingFilter(jwtService, userRepository);
+		return new JwtAuthenticationProcessingFilter(jwtService, userRepository, redisTemplate);
 	}
 }
