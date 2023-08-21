@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.http.HttpStatus;
@@ -57,7 +59,8 @@ public class RankingProductController {
     @GetMapping("/ranking/mysql/{productType}")
     public ResponseEntity<BasicResponse> getMysqlRanking(@PathVariable ProductType productType){
 
-        List<ProductRankingDto> productRankingDtoList = productRepository.getProductRankingInfoDb(productType);
+        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "reservationCount"));
+        List<ProductRankingDto> productRankingDtoList = productRepository.getProductRankingInfoDb(productType, pageRequest);
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
