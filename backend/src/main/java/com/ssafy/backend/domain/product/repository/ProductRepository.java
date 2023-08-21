@@ -30,7 +30,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select new com.ssafy.backend.domain.product.dto.ProductRankingDto(p.id, p.itemName, p.productType, p.brief, p.company, p.thumbnail) from Product p where p.id in :productIds")
     List<ProductRankingDto> getProductRankingInfo(@Param("productIds") List<Long> productIds);
 
-    @Query("select new com.ssafy.backend.domain.product.dto.ProductRankingDto(p.id, p.itemName, p.productType, p.brief, p.company, p.thumbnail) from Product p where p.productType = :productType order by p.reservationCount DESC")
-    List<ProductRankingDto> getProductRankingInfoDb(@Param("productIds") ProductType productType, Pageable pageable);
+    // @Query("select new com.ssafy.backend.domain.product.dto.ProductRankingDto(p.id, p.itemName, p.productType, p.brief, p.company, p.thumbnail) from Product p where p.productType = :productType order by p.reservationCount DESC")
+    // List<ProductRankingDto> getProductRankingInfoDb(@Param("productIds") ProductType productType, Pageable pageable);
+    List<Product> findTop10ByProductTypeOrderByReservationCountDesc(ProductType productType);
 
 }

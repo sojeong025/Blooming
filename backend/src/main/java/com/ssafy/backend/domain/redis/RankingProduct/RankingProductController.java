@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.backend.domain.common.BasicResponse;
+import com.ssafy.backend.domain.product.Product;
 import com.ssafy.backend.domain.product.ProductType;
 import com.ssafy.backend.domain.product.dto.ProductRankingDto;
 import com.ssafy.backend.domain.product.repository.ProductRepository;
@@ -58,9 +59,12 @@ public class RankingProductController {
     @Operation(description = "mysql 버전 예약 랭킹 상위 10개의 상품 조회")
     @GetMapping("/ranking/mysql/{productType}")
     public ResponseEntity<BasicResponse> getMysqlRanking(@PathVariable ProductType productType){
+        List<Product> productList = productRepository.findTop10ByProductTypeOrderByReservationCountDesc(productType);
 
-        PageRequest pageRequest = PageRequest.of(0, 10, Sort.by(Sort.Direction.DESC, "reservationCount"));
-        List<ProductRankingDto> productRankingDtoList = productRepository.getProductRankingInfoDb(productType, pageRequest);
+        List<ProductRankingDto> productRankingDtoList = productList.stream()
+                .map(product -> new ProductRankingDto(product.getId(), product.getItemName(), product.getProductType(),
+                        product.getBrief(), product.getCompany(), product.getThumbnail()))
+                .collect(Collectors.toList());
 
         BasicResponse basicResponse = BasicResponse.builder()
                 .code(HttpStatus.OK.value())
