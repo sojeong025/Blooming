@@ -39,6 +39,9 @@ public class CoupleService {
         for (TipCode tipCode : tipCodeList) {
             int day = tipCode.getLeftDay();
             System.out.println("D-Day" + day + "일 후 알림");
+            System.out.println("커플 WEDDING DATE = "+couple.getWeddingDate());
+            System.out.println("TIPCODE WEDDIMG DATE = "+LocalDate.now().plusDays(day));
+            System.out.println(" IF 결과"+(couple.getWeddingDate().isEqual(LocalDate.now().plusDays(day))));
 
             //day일 후 체크리스트 일단 읽어옴 -> 푸시 알림 보내기 + 알림 로그 테이블에 저장
             if(couple.getWeddingDate().isEqual(LocalDate.now().plusDays(day))){
