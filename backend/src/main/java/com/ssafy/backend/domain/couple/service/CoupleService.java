@@ -41,7 +41,7 @@ public class CoupleService {
             System.out.println("D-Day" + day + "일 후 알림");
 
             //day일 후 체크리스트 일단 읽어옴 -> 푸시 알림 보내기 + 알림 로그 테이블에 저장
-            if(couple.getWeddingDate() == LocalDate.now().plusDays(day)){
+            if(couple.getWeddingDate().isEqual(LocalDate.now().plusDays(day))){
                 //커플 아이디에 해당하는 유저 두 명을 찾는다. 남자는 신랑, 여자는 신부로 매핑한다.
                 User groom = null;
                 User bride = null;
