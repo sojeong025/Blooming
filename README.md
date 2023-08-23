@@ -1,6 +1,4 @@
-<img src="README_assets/bb0ec503e32c81cec5154bac8093e364ed6a2785.png" title="" alt="ring.png" data-align="center">
-
-<img title="" src="README_assets/34cf01b03da6bca188cbf69d95b1e9a6547ab20f.png" alt="text.png" width="334" data-align="center">
+<img title="" src="README_assets/df44f536b80d0d6e4948a3a76fefff95dc535d88.PNG" alt="123.PNG" width="349" data-align="center">
 
 # BLOOMING
 
@@ -20,7 +18,7 @@
 
 - 📽 [UCC](https://youtu.be/o2EBLNdY8w4)
 
-- 🎤 [중간 발표 자료](https://docs.google.com/presentation/d/1ScCrScWdOtp96Koz_G8QV_aSXLtkl8qk/edit?usp=sharing&ouid=116217035030993886773&rtpof=true&sd=true)
+- 🎤 [중간 발표 자료]([Blooming 중간발표.pdf - Google Drive](https://drive.google.com/file/d/1COA8hVxKce2ITqUMMZi81D2oJvRxbZyO/view?usp=sharing))
 
 - 🎤 [최종발표 자료](https://drive.google.com/file/d/1Zd7H1pnseM33wLsKeWNzw6r47Dtfco3s/view?usp=sharing)
 
@@ -147,6 +145,7 @@
 # 개발 환경
 
 ## ⚙ Management Tool
+
 - 형상 관리 : Gitlab
 - 이슈 관리 : Jira
 - 커뮤니케이션 : Mattermost, Webex, Notion, Discord
@@ -207,6 +206,7 @@
 - MySql 8.0.34
 
 ## Infra
+
 - AWS S3
 - AWS EC2
 - Nginx 1.18.0
@@ -214,7 +214,6 @@
 - Ubuntu 20.04.6 LTS
 - CertBot(CA Certificates)
 - SSL
-
 
 # 기술 소개
 
@@ -231,7 +230,7 @@
   - `OAUTH2` 인증을 이용해 불필요한 개인정보 입력 최소화
 
 - 상품 실시간 예약 랭킹, 최근 본 상품
-
+  
   - in-memory DB인 `Redis`의 sorted set 자료구조를 이용해 실시간 예약 랭킹과 사용자별 최근 본 상품 정보 제공
 
 # 설계 문서
