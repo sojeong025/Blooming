@@ -18,7 +18,7 @@
 
 - 📽 [UCC](https://youtu.be/o2EBLNdY8w4)
 
-- 🎤 [Blooming 중간발표.pdf - Google Drive](https://drive.google.com/file/d/1COA8hVxKce2ITqUMMZi81D2oJvRxbZyO/view?usp=sharing)
+- 🎤 [중간발표 자료](https://drive.google.com/file/d/1COA8hVxKce2ITqUMMZi81D2oJvRxbZyO/view?usp=sharing)
 
 - 🎤 [최종발표 자료](https://drive.google.com/file/d/1Zd7H1pnseM33wLsKeWNzw6r47Dtfco3s/view?usp=sharing)
 
