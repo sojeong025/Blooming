@@ -247,7 +247,7 @@
 
 ## 📝 API 명세서
 
-![1.PNG](README_assets/62af38ffc5adc07bbf982905e932f89fb1cde2d2.PNG)
+![1.PNG](README_assets/3674abed7430e2ab4655ee9ac516111d316a6b66.PNG)
 
 ![2.PNG](README_assets/bae47ca24fb0bb348a98fb5e5f5f96ae5ee093bb.PNG)
 
