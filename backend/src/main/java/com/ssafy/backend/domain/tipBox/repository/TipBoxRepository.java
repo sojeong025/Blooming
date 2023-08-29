@@ -10,7 +10,7 @@ import java.util.List;
 public interface TipBoxRepository extends JpaRepository<TipBox, Long> {
     List<TipBox> findAllByTipCodeId(long tipCodeId);
 
-    @Query("select tb.content from TipBox tb join TipCode tc where tc.leftDay = :leftday")
+    @Query("select tb.content from TipBox tb join TipCode tc on tc.id = tb.tipCode.id where tc.leftDay = :leftday")
     List<String> findContentByTipCode(@Param("leftday") int leftday);
 
 }
