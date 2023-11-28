@@ -1,4 +1,5 @@
-<img title="" src="README_assets/df44f536b80d0d6e4948a3a76fefff95dc535d88.PNG" alt="123.PNG" width="349" data-align="center">
+![메인](https://github.com/sojeong025/Blooming/assets/122499632/b82f8e0d-eb0b-4632-8eb5-0c05965fc040)
+
 
 # BLOOMING
 
