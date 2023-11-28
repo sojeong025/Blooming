@@ -6,9 +6,9 @@
 
 ## 목차
 1. [개요](#개요)
-2. [서비스 화면](#서비스-화면)
-3. [주요 기능](#주요-기능)
-4. [개발 환경](#개발-환경)
+2. [개발 환경](#개발-환경)
+3. [서비스 화면](#서비스-화면)
+4. [주요 기능](#주요-기능)
 5. [기술 소개](#기술-소개)
 6. [설계 문서](#설계-문서)
 7. [팀원 소개](#팀원-소개)
@@ -19,6 +19,26 @@
 > <b>프로젝트 기간</b> : 2023/07/10 ~ 2023/08/18 <br>
 > <b>참고자료 </b> : 🎞 [UCC](https://youtu.be/o2EBLNdY8w4)
 📃 [최종발표 PPT](https://drive.google.com/file/d/1Zd7H1pnseM33wLsKeWNzw6r47Dtfco3s/view?usp=sharing)
+<br>
+
+## 개발 환경
+#### ⚙ Management Tool
+<img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white"> <img src="https://img.shields.io/badge/GitLab-FC6D26?style=for-the-badge&logo=GitLab&logoColor=white"> <img src="https://img.shields.io/badge/mattermost-0058CC?style=for-the-badge&logo=mattermost&logoColor=white"> <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+
+#### 💻 IDE
+<img title="" src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/intellij-000000?style=for-the-badge&logo=intellijidea&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/android studio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white" alt="">
+
+#### 🌌Infra
+<img title="" src="https://img.shields.io/badge/amazon aws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/amazon s3-569A31?style=for-the-badge&logo=amazons3&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="">
+
+#### 📱 Frontend
+<img src="https://img.shields.io/badge/HTML5-E34F26?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS-1572b6?&style=for-the-badge&logo=css3&logoColor=white"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?&style=for-the-badge&logo=JavaScript&logoColor=white"/>
+<img title="" src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/recoil-3578E5?style=for-the-badge&logo=recoil&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="">
+
+#### 💾 Backend
+![Java](https://img.shields.io/badge/java-23ED8B00?style=for-the-badge&logo=openjdk&logoColor=white) <img title="" src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/Spring JPA-6DB33F?style=for-the-badge&logo=Spring&logoColor=white" alt=""> ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens) <img title="" src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=swagger&logoColor=white" alt=""> <img title="" src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="">
+
 <br>
 
 ## 서비스 화면
@@ -112,80 +132,9 @@
 - 찜에 등록이 된 상품은 마이페이지의 찜목록에 들어가 있으며, 내가 찜한 거와 약혼자가 찜한 거 그리고 동시에 찜한 상품을 확인할 수 있습니다.
 
 
+<br>
 
-## 개발 환경
-## ⚙ Management Tool
-
-- 형상 관리 : Gitlab
-- 이슈 관리 : Jira
-- 커뮤니케이션 : Mattermost, Webex, Notion, Discord
-- 디자인 : Figma, PowerPoint
-
-## 💻 IDE
-
-- Visual Studio Code `1.18.1`
-- IntelliJ `11.0.19`
-
-## 📱 Frontend
-
-- React `18.2.0`
-- Vite `^4.4.5`
-- Recoil `^0.7.7`
-- React-Router-Dom `6.14.2`
-- Library
-  - antd : `^5.7.3`
-  - antd-mobile : `^5.32.0`
-  - axios : `^1.4.0`
-  - clipboard-copy : `^4.0.1`
-  - dayjs : `^1.11.9`
-  - framer-motion : `^10.13.0`
-  - gsap : `^3.12.2`
-  - qrcode : `^1.5.2`
-  - react-calendar : `^4.5.0`
-  - react-datepicker : `^4.16.0`
-  - react-dom : `^18.2.0`
-  - react-icons : `4.10.1`
-  - react-infinite-scroll-component : `^6.1.0`
-  - react-kakao-link : `^0.1.2`
-  - react-loading-skeleton : `^3.3.1`
-  - react-pageflip : `^2.0.3`
-  - react-rating : `2.0.5`
-  - react-responsice-carousel : `^3.2.23`
-  - react-slick : `^0.29.0`
-  - react-swipeable : `^7.0.1`
-  - react-swipable-list : `^1.8.1`
-  - slick-carousel : `^1.8.1`
-  - styled-components : `^6.0.7`
-- Flutter
-  - library
-    - inapp_webview
-- Android Studio
-
-## 💾 Backend
-
-- Springboot `2.7.13`
-- Lombok
-- Spring Data JPA
-- Spring Data Redis(lettuce)
-- Spring Web
-- Springdoc-openapi-ui `1.6.11`
-- Oauth2
-- Swagger 3.0.0
-- Oauth2
-- Redis
-- MySql 8.0.34
-
-## Infra
-
-- AWS S3
-- AWS EC2
-- Nginx 1.18.0
-- Docker 20.10.12
-- Ubuntu 20.04.6 LTS
-- CertBot(CA Certificates)
-- SSL
-
-# 기술 소개
+## 기술 소개
 
 - 웹 기반 하이브리드 어플리케이션
   
@@ -202,6 +151,8 @@
 - 상품 실시간 예약 랭킹, 최근 본 상품
   
   - in-memory DB인 `Redis`의 sorted set 자료구조를 이용해 실시간 예약 랭킹과 사용자별 최근 본 상품 정보 제공
+
+<br>
 
 ## 설계 문서
 
